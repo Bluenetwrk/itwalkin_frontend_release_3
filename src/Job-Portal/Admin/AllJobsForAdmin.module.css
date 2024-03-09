@@ -1,0 +1,208 @@
+
+
+
+.searchButton{
+    background-color: rgb(40, 4, 99);
+    color: white;
+    font-weight: bold;
+    height: 40px;
+    border:1px solid rgb(40, 4, 99);
+    margin-left: 10%;
+    border-radius: 5px;
+    cursor: pointer;
+    width:80px;
+    margin-top: 50px;
+    display: inline;
+
+}
+.searchBoth{
+    margin-left: 3%;
+    margin-top: 15px;
+
+    display: flex;
+}
+.p{
+    font-weight: bold;
+    margin-top: 20px;
+    margin-left: 10%;
+    opacity: 0.8;
+}
+.inputboxsearch{
+    display: inline-flex;
+    height : 35px;
+    margin-top: 13px;
+    margin-left: 2%;
+    width: 50%;
+    border-radius:5px;
+    border : 1.5px solid rgb(9, 247, 247);
+}
+
+.h3{
+    color: blue;
+    margin-left: 4%;
+}
+.ul {
+    display: flex;
+    margin: 0px;
+    margin-left: -30px;
+
+}
+
+.li {
+    display: inline-block;
+    padding-top: 0.5%;
+    padding-bottom: 0.5%;
+    width: 8%;
+    border: 1px solid rgb(9, 247, 247);
+    text-align: center;
+}
+.CompanyName{
+    width:13%
+}
+
+.liDescription {
+    width: 20%;
+}
+
+.Jtitle {
+    width: 9%
+}
+.JobType {
+    width: 7.5%
+}
+.Package {
+    width: 5%
+}
+.Pdate{
+    width:6.5%
+}
+.experiance {
+    width: 4%;
+}
+
+.Location {
+    width: 8%;
+}
+.Qualif {
+    width: 7%
+}
+.DeleteAction{
+    width:80px
+}
+
+.DeleteButton {
+    /* background-color: rgb(40, 4, 99); */
+    background-color: red;
+    border:1px solid red;
+    color: white;
+    width:78%;
+    height: 25px;
+    font-weight: bold;
+
+}
+.Status{
+    width:10%;
+}
+
+/* ......Cards.................cards Css... */
+
+#JobCardWrapper {
+    /* display: flex; */
+    /* flex-wrap: wrap; */
+    padding: 10px;
+    /* background-color: rgb(204, 103, 103); */
+    border-radius: 10px;
+    /* margin-left: 40px;     */
+    width:90%
+}
+
+.JobCard {
+    /* display: flex; */
+    /* background-color: aqua;    */
+    margin-left: 8px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    /* height: 250px; */
+    width: 100%;
+    border-radius: 10px;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    box-shadow: 2px 2px 2px 2px #999999;
+    padding-bottom: 7px;
+    padding-top: 6px;
+}
+
+.logo{
+    width:30px;
+    height:20px;
+    margin-left: 15px;
+    margin-top: 3px;
+}
+.companyName{
+    margin-left: 10px;
+    margin-top: 4px;
+    font-weight: 500;
+}
+.jobLocation{
+    font-weight: 500;
+    font-size: small;
+    margin-left: 5px;
+    margin-top: 4px;
+
+
+}
+.jobLocationImage{
+    width:12px;
+    height:12px;
+    margin-left: 15px;
+
+}
+.jobTitle{
+    margin-left: 15px;
+    font-weight: 500;
+
+}
+.jobtypeAndDate{
+    font-size: small;
+    margin-left: 15px;
+    font-weight: 500;
+}
+.qualificationAndExperiance{
+    font-size: small;
+    margin-left: 15px;
+    font-weight: 500;
+}
+.skillWrapper{
+    margin-left: 15px;
+
+}
+.skillsHeading{
+    font-weight: 600;
+    font-size: small;
+    /* margin-left: 15px; */
+}
+.skills{
+    
+    font-weight: 600;
+    font-size: small;
+}
+
+.jobDescriptionHeading{
+    margin-left: 15px;
+    font-weight: 600;
+    margin-top: 5px;
+}
+.jobDescription{
+    margin-top: -15px;
+    margin-left: 15px;
+    width:94%;
+    font-size: medium;
+}
+
+.salaryRange{
+    font-weight: bold;
+    margin-left: 18px;
+    /* margin-top: 24px; */
+
+}
+

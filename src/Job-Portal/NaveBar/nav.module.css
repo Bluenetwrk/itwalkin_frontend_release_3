@@ -1,0 +1,869 @@
+.fullnavewrapper {
+    display: flex;
+    background-color: rgb(40, 4, 99);
+    width: 100%;
+    height: 60px;
+    align-items: center;
+}
+/* for mobile only fullNave */
+.MobilEmployeeFullnavewrapper{
+    display: flex;
+    background-color: rgb(40, 4, 99);
+    width: 100%;
+    height: 60px;
+    align-items: center;
+}
+
+.logoWrapper {
+    width: 14%;
+    margin-left: 2%;
+    margin-top: 5px;
+
+}
+
+.logo {
+    width: 100%;
+
+}
+
+.linkWrapper {
+
+    display: flex;
+    flex-wrap: nowrap;
+    margin-left: 5%;
+    width: 79%;
+    /* background-color: rgb(45, 48, 224); */
+    height: 60px;
+    align-items: center;
+    /* background-color: aqua; */
+
+}
+
+.link {
+    /* background-color: aqua; */
+    margin: 2%;
+    text-decoration: none;
+    color: white;
+    font-size: medium;
+    font-weight: 540;
+    width:14%;
+    text-wrap: nowrap;
+}
+.Hlink{
+    /* background-color: aqua; */
+    margin-left: 2%;
+    text-decoration: none;
+    color: white;
+    font-size: medium;
+    font-weight: 540;
+    width:18%    
+}
+
+.link:hover {
+    color: red;
+}
+
+.Loginlink:hover {
+    color: red;
+}
+.IconeWrapper {
+    display: flex;
+    width: 30%;
+    margin-left: 10%;
+}
+.profileIcon {
+    width: 35px;
+    height: 35px;
+    margin-left: 60%;
+    margin-top: 5px;
+    cursor: pointer;
+}
+
+.notificationIcon {
+    margin-top: 8px;
+    /* background-color: blue; */
+}
+.Loginlinkwrapper {
+
+    align-items: center;
+    text-align: right;
+    display: flex;
+    flex-wrap: nowrap;
+    height: 30px;
+    width: 90%;
+    margin-left: 8%;
+    /* background-color: aqua; */
+}
+
+.Loginlink {
+    display: flex;
+    flex-wrap: nowrap;
+    text-decoration: none;
+    color: white;
+    font-size: medium;
+    font-weight: 540;
+    margin-left: 8%;
+
+}
+.StuLogin{
+    margin-left: 18%;
+}
+
+.dropdownwrapper {
+    position: absolute;
+    /* right : 1.5rem; */
+    left: 86.2%;
+    padding-right: 15px;
+    padding-left: 15px;
+    padding-bottom: 0px;
+    border-radius: 8px;
+    background-color: white;
+    border: 1px solid rgb(202, 202, 202);
+    cursor: pointer;
+}
+
+.dropdownwrapper::after {
+    content: "";
+    position: absolute;
+    top: -0.7rem;
+    right: 1rem;
+    width: 20px;
+    height: 20px;
+    transform: rotate(45deg);
+    background-color: white;
+    border-left: 1px solid grey;
+    border-top: 1px solid grey;
+
+}
+
+.text {
+
+    width: 100%;
+}
+
+/* ........For Mobile  nave...... */
+
+.MovileNavOptions-{
+    background-color: rgb(40, 4, 99); 
+     color:white;
+    font-size: medium;
+    padding-left: 8px;
+    padding-left: 8px;
+    font-weight: 500;
+    padding-right:5px;
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+    border-top-right-radius: 5px;
+    border-top-left-radius: 5px;
+    position:absolute;
+    /* margin-top:450px;   */
+    /* margin-left:-320px; */
+    /* width:0px */
+}
+    /* ,,,......... */
+    .MovileNavOptions{
+        /* background-color: rgb(40, 4, 99);  */
+        /* color:white; */
+        background-color: white;
+    /* color: rgb(40, 4, 99);  */
+font-weight: bold;
+    white-space:wrap;
+    width: 200px;
+    /* border-radius: 10px; */
+    /* border-top-left-radius: 10px; */
+    border-bottom-right-radius: 10px;
+    border-top-right-radius: 10px;
+    box-shadow: 1px 1px 3px 3px #999999;
+    padding-bottom: 7px;
+    padding-top: 6px;    
+    width:50%;
+    height: 600px;
+    position:fixed;
+    /* transition: 5s; */
+    margin-top: -16.1%;
+
+}
+.p{
+    /* background-color: aqua; */
+    /* padding:15px; */
+    padding-top: 15px;
+    padding-bottom: 15px;
+    margin-left: 15px;
+}
+.MovileNavOptions-::after {
+    content: "";
+    position: absolute;
+    top: -0.7rem;
+    left: 2.8rem;
+    width: 20px;
+    height: 20px;
+    transform: rotate(45deg);
+    background-color: rgb(40, 4, 99);
+    border-left: 1px solid grey;
+    border-top: 1px solid grey;
+
+}
+
+.Moblogo{
+    width: 100%;
+    height:30px;
+
+}
+
+/* .AllJobs{
+    margin-left: 500%;
+} */
+
+.Moblink{
+    margin: 2%;
+    text-decoration: none;
+    color: white;
+    font-size: medium;
+    font-weight: 540;
+    width:14%;
+    white-space:nowrap;
+}
+.PostedJobs{
+    margin-left: -0%;
+
+}
+.PostJob{
+    margin-left: 25%;
+}
+.MobileIconeWrapper{
+    display: flex;
+    width: 30%;
+    margin-left: 10%;
+}
+.EmpMobileProfileIcon{
+    width: 35px;
+    height: 35px;
+    margin-left: 44%;
+    margin-top: 5px;
+    cursor: pointer;
+}
+.MobJobseekerProfileIcon{
+    width: 35px;
+    height: 35px;
+    margin-left: 150%;
+    margin-top: 5px;
+    cursor: pointer;
+    /* background-color: aqua; */
+}
+.JobMobileProfileIcon{
+    width: 35px;
+    height: 33px;
+    margin-left: 55%;
+    margin-top: 4px;
+    cursor: pointer;
+}
+
+
+
+/*......... Home Nave....... */
+/* .MobHomelogoWrapper {
+    width: 14%;
+    margin-left: 10%;
+    margin-top: 10px;
+} */
+.MobHomelogo{
+    width: 70px;
+    margin-left: 65%;
+    margin-top: 10px;
+   height:30px;
+}
+.loginLogo{
+    width:30px;
+   height:30px;
+   margin-left: 22%;
+   margin-top: 5px;
+
+}
+.NavIcon{
+    width:28px;
+    height:27px;
+   margin-left: 5%;
+   margin-top: 5px;
+}
+.HomeIcon{
+    height:28px;
+    width:45px;
+    margin-top: 4px;
+    margin-left: 32%;
+}
+
+/* 
+@media(min-width:449px){
+    .MobHomeDropdownwrapper {
+        position: absolute;
+        width:120px;
+        margin-left: 50%;
+        margin-top: 150px;
+        padding-right: 5px;
+        padding-left: 5px;
+        padding-bottom: 0px;
+        border-radius: 8px;
+        background-color: white;
+        border: 1px solid rgb(202, 202, 202);
+        cursor: pointer;
+    }
+    }
+*/
+
+@media(max-width:760px){
+    .MobHomeDropdownwrapper {
+        position: absolute;
+        width:120px;
+        margin-left: 255px;
+        margin-top: 150px;
+        padding-right: 5px;
+        padding-left: 5px;
+        padding-bottom: 0px;
+        border-radius: 8px;
+        background-color: white;
+        border: 1px solid rgb(202, 202, 202);
+        cursor: pointer;
+    }
+    }
+
+
+@media(max-width:720px){
+    .MobHomeDropdownwrapper {
+        position: absolute;
+        width:120px;
+        margin-left: 255px;
+        margin-top: 150px;
+        padding-right: 5px;
+        padding-left: 5px;
+        padding-bottom: 0px;
+        border-radius: 8px;
+        background-color: white;
+        border: 1px solid rgb(202, 202, 202);
+        cursor: pointer;
+    }
+    }
+
+@media(max-width:680px){
+    .MobHomeDropdownwrapper {
+        position: absolute;
+        width:120px;
+        margin-left: 225px;
+        margin-top: 150px;
+        padding-right: 5px;
+        padding-left: 5px;
+        padding-bottom: 0px;
+        border-radius: 8px;
+        background-color: white;
+        border: 1px solid rgb(202, 202, 202);
+        cursor: pointer;
+    }
+    }
+
+@media(max-width:640px){
+    .MobHomeDropdownwrapper {
+        position: absolute;
+        width:120px;
+        margin-left: 200px;
+        margin-top: 150px;
+        padding-right: 5px;
+        padding-left: 5px;
+        padding-bottom: 0px;
+        border-radius: 8px;
+        background-color: white;
+        border: 1px solid rgb(202, 202, 202);
+        cursor: pointer;
+    }
+    }
+
+
+@media(max-width:590px){
+    .MobHomeDropdownwrapper {
+        position: absolute;
+        width:120px;
+        margin-left: 175px;
+        margin-top: 150px;
+        padding-right: 5px;
+        padding-left: 5px;
+        padding-bottom: 0px;
+        border-radius: 8px;
+        background-color: white;
+        border: 1px solid rgb(202, 202, 202);
+        cursor: pointer;
+    }
+    }
+
+@media(max-width:550px){
+    .MobHomeDropdownwrapper {
+        position: absolute;
+        width:120px;
+        margin-left: 165px;
+        margin-top: 150px;
+        padding-right: 5px;
+        padding-left: 5px;
+        padding-bottom: 0px;
+        border-radius: 8px;
+        background-color: white;
+        border: 1px solid rgb(202, 202, 202);
+        cursor: pointer;
+    }
+    }
+
+
+@media(max-width:500px){
+    .MobHomeDropdownwrapper {
+        position: absolute;
+        width:120px;
+        margin-left: 145px;
+        margin-top: 150px;
+        padding-right: 5px;
+        padding-left: 5px;
+        padding-bottom: 0px;
+        border-radius: 8px;
+        background-color: white;
+        border: 1px solid rgb(202, 202, 202);
+        cursor: pointer;
+    }
+    }
+@media(max-width:460px){
+    .MobHomeDropdownwrapper {
+        position: absolute;
+        width:120px;
+        margin-left: 125px;
+        margin-top: 150px;
+        padding-right: 5px;
+        padding-left: 5px;
+        padding-bottom: 0px;
+        border-radius: 8px;
+        background-color: white;
+        border: 1px solid rgb(202, 202, 202);
+        cursor: pointer;
+    }
+    }
+
+@media(max-width:420px){
+    .MobHomeDropdownwrapper {
+        position: absolute;
+        width:120px;
+        margin-left: 100px;
+        margin-top: 150px;
+        padding-right: 5px;
+        padding-left: 5px;
+        padding-bottom: 0px;
+        border-radius: 8px;
+        background-color: white;
+        border: 1px solid rgb(202, 202, 202);
+        cursor: pointer;
+    }
+    }
+
+
+@media(max-width:370px){
+    .MobHomeDropdownwrapper {
+        position: absolute;
+        width:120px;
+        margin-left: 80px;
+        margin-top: 150px;
+        padding-right: 5px;
+        padding-left: 5px;
+        padding-bottom: 0px;
+        border-radius: 8px;
+        background-color: white;
+        border: 1px solid rgb(202, 202, 202);
+        cursor: pointer;
+    }
+    }
+
+
+
+@media(max-width:330px){
+    .MobHomeDropdownwrapper {
+        position: absolute;
+        width:120px;
+        margin-left: 55px;
+        margin-top: 150px;
+        padding-right: 5px;
+        padding-left: 5px;
+        padding-bottom: 0px;
+        border-radius: 8px;
+        background-color: white;
+        border: 1px solid rgb(202, 202, 202);
+        cursor: pointer;
+    }
+    } 
+
+    @media(max-width:280px){
+        .MobHomeDropdownwrapper {
+            position: absolute;
+            width:120px;
+            margin-left: 33px;
+            margin-top: 150px;
+            padding-right: 5px;
+            padding-left: 5px;
+            padding-bottom: 0px;
+            border-radius: 8px;
+            background-color: white;
+            border: 1px solid rgb(202, 202, 202);
+            cursor: pointer;
+        }
+        }
+
+
+
+@media(max-width:250px){
+.MobHomeDropdownwrapper {
+    position: absolute;
+    /* right : 1.5rem; */
+    width:120px;
+    margin-left: 0px;
+    margin-top: 150px;
+    padding-right: 5px;
+    padding-left: 5px;
+    padding-bottom: 0px;
+    border-radius: 8px;
+    background-color: white;
+    border: 1px solid rgb(202, 202, 202);
+    cursor: pointer;
+}
+}
+
+.MobHomeDropdownwrapper::after {
+    content: "";
+    position: absolute;
+    top: -0.7rem;
+    right: 1rem;
+    width: 20px;
+    height: 20px;
+    transform: rotate(45deg);
+    background-color: white;
+    border-left: 1px solid grey;
+    border-top: 1px solid grey;
+
+}
+
+
+/* Emp  dropdown */
+
+.EmpMobDropdownwrapper{
+    position: absolute;
+    /* right : 1.5rem; */
+    left: 70.2%;
+    padding-right: 5px;
+    padding-left: 5px;
+    padding-bottom: 0px;
+    border-radius: 8px;
+    background-color: white;
+    border: 1px solid rgb(202, 202, 202);
+    cursor: pointer;
+    width:102px;
+
+    /* width:26%; */
+    /* background-color: red; */
+}
+.EmpMobDropdownwrapper::after {
+    content: "";
+    position: absolute;
+    top: -0.7rem;
+    right: 1rem;
+    width: 20px;
+    height: 20px;
+    transform: rotate(45deg);
+    background-color: white;
+    border-left: 1px solid grey;
+    border-top: 1px solid grey;
+
+}
+
+@media (max-width :330px){
+    .EmpMobDropdownwrapper{
+        position: absolute;
+        /* right : 1.5rem; */
+        left: 61%;
+        padding-right: 5px;
+        padding-left: 5px;
+        padding-bottom: 0px;
+        border-radius: 8px;
+        background-color: white;
+        border: 1px solid rgb(202, 202, 202);
+        cursor: pointer;
+        /* width:26%; */
+    }
+    
+}
+@media (min-width :331px){
+    .EmpMobDropdownwrapper{
+        position: absolute;
+        /* right : 1.5rem; */
+        left: 66%;
+        padding-right: 5px;
+        padding-left: 5px;
+        padding-bottom: 0px;
+        border-radius: 8px;
+        background-color: white;
+        border: 1px solid rgb(202, 202, 202);
+        cursor: pointer;
+        /* width:26%; */
+    }
+    
+}
+@media (min-width :400px){
+    .EmpMobDropdownwrapper{
+        position: absolute;
+        /* right : 1.5rem; */
+        left: 68.5%;
+        padding-right: 5px;
+        padding-left: 5px;
+        padding-bottom: 0px;
+        border-radius: 8px;
+        background-color: white;
+        border: 1px solid rgb(202, 202, 202);
+        cursor: pointer;
+        /* width:26%; */
+    }
+    
+}
+
+@media (min-width :465px){
+    .EmpMobDropdownwrapper{
+        position: absolute;
+        /* right : 1.5rem; */
+        left: 71%;
+        padding-right: 5px;
+        padding-left: 5px;
+        padding-bottom: 0px;
+        border-radius: 8px;
+        background-color: white;
+        border: 1px solid rgb(202, 202, 202);
+        cursor: pointer;
+        /* width:26%; */
+    }
+    
+}
+@media (min-width :575px){
+    .EmpMobDropdownwrapper{
+        position: absolute;
+        /* right : 1.5rem; */
+        left: 73.5%;
+        padding-right: 5px;
+        padding-left: 5px;
+        padding-bottom: 0px;
+        border-radius: 8px;
+        background-color: white;
+        border: 1px solid rgb(202, 202, 202);
+        cursor: pointer;
+        /* width:26%; */
+    }
+    
+}
+@media (min-width :660px){
+    .EmpMobDropdownwrapper{
+        position: absolute;
+        /* right : 1.5rem; */
+        left: 75%;
+        padding-right: 5px;
+        padding-left: 5px;
+        padding-bottom: 0px;
+        border-radius: 8px;
+        background-color: white;
+        border: 1px solid rgb(202, 202, 202);
+        cursor: pointer;
+        /* width:26%; */
+    }    
+}
+/* Job Seeker */
+
+
+.MobJobseekerDropdownwrapper{
+    position: absolute;
+    /* right : 1.5rem; */
+    margin-left: 62%;
+    padding-right: 5px;
+    padding-left: 5px;
+    padding-bottom: 0px;
+    border-radius: 8px;
+    background-color: white;
+    border: 1px solid rgb(202, 202, 202);
+    cursor: pointer;
+    width:102px;    
+}
+.MobJobseekerDropdownwrapper::after {
+    content: "";
+    position: absolute;
+    top: -0.7rem;
+    right: 1rem;
+    width: 20px;
+    height: 20px;
+    transform: rotate(45deg);
+    background-color: white;
+    border-left: 1px solid grey;
+    border-top: 1px solid grey;
+
+}
+@media (max-width :360px){
+    .MobJobseekerDropdownwrapper{
+        position: absolute;
+        /* right : 1.5rem; */
+        margin-left: 59%;
+        padding-right: 5px;
+        padding-left: 5px;
+        padding-bottom: 0px;
+        border-radius: 8px;
+        background-color: white;
+        border: 1px solid rgb(202, 202, 202);
+        cursor: pointer;
+        /* width:26%; */
+    }
+    
+}
+@media (min-width :460px){
+    .MobJobseekerDropdownwrapper{
+        position: absolute;
+        /* right : 1.5rem; */
+        margin-left: 65%;
+        padding-right: 5px;
+        padding-left: 5px;
+        padding-bottom: 0px;
+        border-radius: 8px;
+        background-color: white;
+        border: 1px solid rgb(202, 202, 202);
+        cursor: pointer;
+        /* width:26%; */
+    }
+    
+}
+@media (min-width :560px){
+    .MobJobseekerDropdownwrapper{
+        position: absolute;
+        /* right : 1.5rem; */
+        margin-left: 67.5%;
+        padding-right: 5px;
+        padding-left: 5px;
+        padding-bottom: 0px;
+        border-radius: 8px;
+        background-color: white;
+        border: 1px solid rgb(202, 202, 202);
+        cursor: pointer;
+        /* width:26%; */
+    }
+    
+}
+@media (min-width :660px){
+    .MobJobseekerDropdownwrapper{
+        position: absolute;
+        /* right : 1.5rem; */
+        margin-left: 69%;
+        padding-right: 5px;
+        padding-left: 5px;
+        padding-bottom: 0px;
+        border-radius: 8px;
+        background-color: white;
+        border: 1px solid rgb(202, 202, 202);
+        cursor: pointer;
+        /* width:26%; */
+    }
+    
+}
+
+     
+/* ....Admin.......Nave....... */
+.All{
+    margin-left: -5px;
+    font-size:small;
+    font-weight:bold;
+}
+.AllJobs{
+    font-weight:bold;
+    margin-left: -14px;
+    white-space: nowrap;
+    font-size:small;
+}
+.AllEmploy{
+    font-weight:bold;
+    margin-left: 13px;
+
+    font-size:small;
+}
+.AllJobseeker{
+    font-weight:bold;
+    font-size:small;
+
+    margin-left: 25px;
+
+}
+.AdminUser{
+width:10px;
+/* margin-left: 30px; */
+margin-left: 10%;
+
+
+}
+
+.Admindropdownwrapper {
+    position: absolute;
+    /* right : 1.5rem; */
+    left: 71%;
+    padding-right: 5px;
+    padding-left: 5px;
+    padding-bottom: 0px;
+    border-radius: 8px;
+    background-color: white;
+    border: 1px solid rgb(202, 202, 202);
+    cursor: pointer;
+}
+
+.Admindropdownwrapper::after {
+    content: "";
+    position: absolute;
+    top: -0.7rem;
+    right: 1rem;
+    width: 20px;
+    height: 20px;
+    transform: rotate(45deg);
+    background-color: white;
+    border-left: 1px solid grey;
+    border-top: 1px solid grey;
+
+}
+@media(max-width:330px){
+    .Admindropdownwrapper {
+        position: absolute;
+        /* right : 1.5rem; */
+        left: 85.2%;
+        padding-right: 5px;
+        padding-left: 5px;
+        padding-bottom: 0px;
+        border-radius: 8px;
+        background-color: white;
+        border: 1px solid rgb(202, 202, 202);
+        cursor: pointer;
+    }
+}
+@media(min-width:500px){
+    .Admindropdownwrapper {
+        position: absolute;
+        /* right : 1.5rem; */
+        left: 73.6%;
+        padding-right: 5px;
+        padding-left: 5px;
+        padding-bottom: 0px;
+        border-radius: 8px;
+        background-color: white;
+        border: 1px solid rgb(202, 202, 202);
+        cursor: pointer;
+    }
+}
+@media(min-width:600px){
+    .Admindropdownwrapper {
+        position: absolute;
+        /* right : 1.5rem; */
+        left: 75.2%;
+        padding-right: 5px;
+        padding-left: 5px;
+        padding-bottom: 0px;
+        border-radius: 8px;
+        background-color: white;
+        border: 1px solid rgb(202, 202, 202);
+        cursor: pointer;
+    }
+}
+
+/* ........................................................... */

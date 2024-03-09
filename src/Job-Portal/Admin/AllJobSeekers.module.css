@@ -1,0 +1,194 @@
+.searchBoth{
+    margin-left: 4%;
+    margin-top: 15px;
+
+    display: flex;
+}
+.p{
+    font-weight: bold;
+    margin-top: 20px;
+    margin-left: 5%;
+    opacity: 0.8;
+
+
+}
+.inputboxsearch{
+    display: inline-flex;
+    height : 35px;
+    margin-top: 13px;
+    margin-left: 2%;
+    width: 55%;
+    border-radius:5px;
+    border : 1.5px solid rgb(9, 247, 247);
+}
+.ul{
+    display: flex;
+    margin: 0;
+    margin-left: -35px;
+
+}
+
+.li{
+    display: inline-block;
+    border: 1px solid aqua;
+    width:8%;
+    overflow-wrap: break-word;
+
+    text-align: center;
+    padding-top: 0.5%;
+    padding-bottom: 0.5%;
+}
+.name{
+    width:12%;
+    overflow-wrap: break-word
+
+}
+.phoneNumber{
+    width:10%;
+    overflow-wrap: break-word
+
+    }
+
+.age{
+    width:6%
+}
+.Aadhar{
+    width:11%;
+    overflow-wrap: break-word
+
+}
+.Qualification{
+    width:7%   
+}
+.Skills{
+    width:14%
+}
+
+.Action{
+    width:8%
+}
+.DeleteButton{
+    border : 1px solid red;
+    background-color: red;
+    color: white;
+    width:58px;
+    font-weight: bold;
+    height: 24px;
+
+}
+
+.Message{
+    width: 22%;
+    overflow-wrap: break-word    
+}
+
+.Approval{
+    width:9%
+}
+
+.Approved{
+    background-color: green;
+    color: white;
+    font-weight: bold;
+    width:80%;
+    border: 1px solid green;
+    height: 23px;
+}
+
+.Rejected{
+    background-color: red;
+    color: white;
+    font-weight: bold;
+    width:82px;
+    border: 1px solid green;
+    height: 23px;
+    margin-top:3px;
+}
+.OnHold{
+    background-color: blue;
+    color: white;
+    font-weight: bold;
+    width:82px;
+    border: 1px solid green;
+    height: 23px;
+    margin-top:3px;
+}
+
+.Approve{
+    background-color: rgb(40, 4, 99);
+    height: 23px;
+    color: white;
+    font-weight: bold;
+    width:80%;
+
+    border: 1px solid green;
+}
+
+/* .....For Mobile....... */
+
+#JobCardWrapper {
+    /* display: flex; */
+    /* flex-wrap: wrap; */
+    padding: 10px;
+    /* background-color: rgb(204, 103, 103); */
+    border-radius: 10px;
+    /* margin-left: 40px;     */
+    width: 90%;
+
+}
+
+.JobCard {
+    /* display: flex; */
+    /* background-color: aqua;    */
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-left: 8px;
+    /* height: 250px; */
+    width: 100%;
+    border-radius: 10px;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    box-shadow: 2px 2px 2px 2px #999999;
+    padding-bottom: 6px;
+}
+.LeftTable{
+    margin-left: 7px;
+    margin-top: 20px;
+    /* background-color: blue; */
+    /* width:200%; */
+}
+.RightTable{
+    margin-top: 20px;
+    margin-left: 5px;
+    width:60%;
+
+overflow:hidden;
+
+    /* background-color: aqua; */
+}
+.span{
+    font-weight: 500;
+    font-size: small;
+}
+.Down{
+    margin-left: 10px;
+    overflow-wrap: break-word;
+
+
+}
+
+.MoApproved{
+    background-color: green;
+    color: white;
+    font-weight: bold;
+    border: 1px solid green;
+    height: 23px;
+}
+.MoApprove{
+    background-color: rgb(40, 4, 99);
+    height: 23px;
+    color: white;
+    font-weight: bold;
+
+    border: 1px solid green;
+}
