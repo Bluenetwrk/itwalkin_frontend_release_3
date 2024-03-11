@@ -59,15 +59,21 @@ getContact()
           <div style={{fontSize:"x-large", fontWeight:"bold"}}>Get in touch with Us by below contact details</div>
         <p>
           Phone No:<br></br>
-           +912205577951
+           +918792090021
           
         </p>
         <p>
           mail address:<br></br>
-           itwalkinsupport@gmal.com
+           admin@itwalkin.com
         </p>
         <p>
-        Contact us at Gandhi Nagar Bangalore
+        Contact us:
+        BLUENETWORKS 
+        Shop no: 3-37, 3rd floor,
+        6th main road,
+        Grand Majestic Mall,
+        Gandhinagar,
+        BENGALURU-560009
         </p>
         </div>
     </>

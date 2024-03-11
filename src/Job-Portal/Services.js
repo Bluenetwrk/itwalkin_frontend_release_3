@@ -57,9 +57,9 @@ getServices()
         <div style={{marginLeft:"20px"}}>
           <h2 >Our Services</h2>
         <p>
-        The ItWalin Platform (including any mobile based applications, website and web applications) is provided by ItWalin Inc. ("ItWalin Time") either directly or through its affiliates including but not limited to ItWalintime Tech Private Limited ("ItWalin India"). Through the ItWalin Platform any person with a verified account can post jobs ("Job Poster") to the ItWalin Platform, access and participate in the services provided by ItWalin. By using ItWalin Platform, you consent to the terms of the Terms of Service in addition to our Privacy Policy.
+        The ITwalkin Platform (including any mobile based applications, website and web applications) is provided by ITwalkin is either directly or through its affiliates including but not limited to Bluenetworks. Through the ITwalkin Platform any person with a verified account can post jobs ("Job Poster") to the ITwalkin Platform, access and participate in the services provided by ITwalkin. By using ITwalkin Platform, your consent to the terms of the Terms of Service in addition to our Privacy Policy.
 
-A Job Poster accessing the ItWalin Platform shall be bound by these Terms of Service, and all other rules, regulations and terms of use referred to herein or provided by ItWalin in relation to any services provided via the ItWalin Platform ("ItWalin Services")
+Any Employer accessing the ITwalkin Platform shall be bound by these Terms of Service, and all other rules, regulations and terms of use referred to herein or provided by ITwalkin in relation to any services provided via the ITwalkin Platform.
         </p>
         </div>
     </>
