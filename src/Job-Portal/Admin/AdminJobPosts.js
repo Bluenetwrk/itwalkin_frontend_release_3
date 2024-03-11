@@ -46,7 +46,7 @@ function AdminPostJobs() {
     let navigate= useNavigate()
 
     // async function getProfile() {
-    //     await axios.get(`http://ec2-15-206-28-178.ap-south-1.compute.amazonaws.com:8080/EmpProfile/getProfile/${empId}`)
+    //     await axios.get(`https://itwalkin-backend.onrender.com/EmpProfile/getProfile/${empId}`)
     //         .then((res) => {
     //             let result = res.data.result
     //             let companyName = res.data.result.CompanyName
@@ -62,7 +62,7 @@ function AdminPostJobs() {
     // }, [])
 
     // async function getLogo() {
-    //     await axios.get(`http://ec2-15-206-28-178.ap-south-1.compute.amazonaws.com:8080/EmpProfile/getLogo/${empId}`)
+    //     await axios.get(`https://itwalkin-backend.onrender.com/EmpProfile/getLogo/${empId}`)
     //         .then((res) => {
     //             let result = res.data
     //             setLogo(result)
@@ -90,7 +90,7 @@ function AdminPostJobs() {
        let jobTitle = jobtitle.toLowerCase()
        let jobLocation = joblocation.toLowerCase()
        console.log(SourceCompanyLink)
-        await axios.post("http://ec2-15-206-28-178.ap-south-1.compute.amazonaws.com:8080/jobpost/jobpost/", { Logo, SourceLink, Source, SourceCompanyLink, adminLogin, jobTitle, companyName, jobDescription, jobtype, salaryRange, jobLocation, qualification, experiance, skills })
+        await axios.post("https://itwalkin-backend.onrender.com/jobpost/jobpost/", { Logo, SourceLink, Source, SourceCompanyLink, adminLogin, jobTitle, companyName, jobDescription, jobtype, salaryRange, jobLocation, qualification, experiance, skills })
             .then((res) => {
                 let result = (res.data)
                 if (result == "success") {

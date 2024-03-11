@@ -27,12 +27,12 @@ const screenSize = useScreenSize();
     async function getAppliedUserIds(OId) {
         setPageLoader(true)
 
-        await axios.get(`http://ec2-15-206-28-178.ap-south-1.compute.amazonaws.com:8080/jobpost/getAppliedUserIds/${OId}`)
+        await axios.get(`https://itwalkin-backend.onrender.com/jobpost/getAppliedUserIds/${OId}`)
             .then(async (res) => {
                 let appliedUserIds = res.data.jobSeekerId
 
                 setOperationalAppliedUser([res.data])
-                await axios.get(`http://ec2-15-206-28-178.ap-south-1.compute.amazonaws.com:8080/StudentProfile/getAppliedProfileByIds/${appliedUserIds}`)
+                await axios.get(`https://itwalkin-backend.onrender.com/StudentProfile/getAppliedProfileByIds/${appliedUserIds}`)
                     .then((res) => {
                         setAppliedUser(res.data)
                         setPageLoader(false)
@@ -55,7 +55,7 @@ const screenSize = useScreenSize();
 
     async function Select(id, status) {
         let slectedJobseker = id
-        await axios.put(`http://ec2-15-206-28-178.ap-south-1.compute.amazonaws.com:8080/jobpost/status/${JobId}`, { slectedJobseker })
+        await axios.put(`https://itwalkin-backend.onrender.com/jobpost/status/${JobId}`, { slectedJobseker })
             .then((res) => {
                 getAppliedUserIds(JobId)
 
@@ -65,7 +65,7 @@ const screenSize = useScreenSize();
     }
     async function Reject(id, status) {
         let rejectedJobseker = id
-        await axios.put(`http://ec2-15-206-28-178.ap-south-1.compute.amazonaws.com:8080/jobpost/status/${JobId}`, { rejectedJobseker })
+        await axios.put(`https://itwalkin-backend.onrender.com/jobpost/status/${JobId}`, { rejectedJobseker })
             .then((res) => {
                 getAppliedUserIds(JobId)
 
@@ -75,7 +75,7 @@ const screenSize = useScreenSize();
     }
     async function onHold(id, status) {
         let onHoldJobseker = id
-        await axios.put(`http://ec2-15-206-28-178.ap-south-1.compute.amazonaws.com:8080/jobpost/status/${JobId}`, { onHoldJobseker })
+        await axios.put(`https://itwalkin-backend.onrender.com/jobpost/status/${JobId}`, { onHoldJobseker })
             .then((res) => {
                 getAppliedUserIds(JobId)
 
@@ -87,7 +87,7 @@ const screenSize = useScreenSize();
     async function UndoSelect(id) {
         let slectedJobseker = id
 
-        await axios.put(`http://ec2-15-206-28-178.ap-south-1.compute.amazonaws.com:8080/jobpost/updatforUndoJobApplied/${JobId}`, { slectedJobseker })
+        await axios.put(`https://itwalkin-backend.onrender.com/jobpost/updatforUndoJobApplied/${JobId}`, { slectedJobseker })
             .then((res) => {
                 getAppliedUserIds(JobId)
             }).catch((err) => {
@@ -100,7 +100,7 @@ const screenSize = useScreenSize();
     async function UndoReject(id) {
         let rejectedJobseker = id
 
-        await axios.put(`http://ec2-15-206-28-178.ap-south-1.compute.amazonaws.com:8080/jobpost/updatforUndoJobApplied/${JobId}`, { rejectedJobseker })
+        await axios.put(`https://itwalkin-backend.onrender.com/jobpost/updatforUndoJobApplied/${JobId}`, { rejectedJobseker })
             .then((res) => {
                 getAppliedUserIds(JobId)
             }).catch((err) => {
@@ -113,7 +113,7 @@ const screenSize = useScreenSize();
     async function UndoOnHold(id) {
         let onHoldJobseker = id
 
-        await axios.put(`http://ec2-15-206-28-178.ap-south-1.compute.amazonaws.com:8080/jobpost/updatforUndoJobApplied/${JobId}`, { onHoldJobseker })
+        await axios.put(`https://itwalkin-backend.onrender.com/jobpost/updatforUndoJobApplied/${JobId}`, { onHoldJobseker })
             .then((res) => {
                 getAppliedUserIds(JobId)
             }).catch((err) => {

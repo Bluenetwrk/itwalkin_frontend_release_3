@@ -33,7 +33,7 @@ const [currentBox, setcurrentBox] = useState("")
 const [message, setmessage] = useState("")
     
 async function sendMessage(id){
-  await axios.put(`http://ec2-15-206-28-178.ap-south-1.compute.amazonaws.com:8080/EmpProfile/sendMessage/${id}`, {message})
+  await axios.put(`https://itwalkin-backend.onrender.com/EmpProfile/sendMessage/${id}`, {message})
   .then((res)=>{
     if(res.data){
     alert("Message Sent Successfully")
@@ -46,7 +46,7 @@ async function sendMessage(id){
 
 
   async function getEmployees() {
-    await axios.get("http://ec2-15-206-28-178.ap-south-1.compute.amazonaws.com:8080/EmpProfile/getAllEmployees")
+    await axios.get("https://itwalkin-backend.onrender.com/EmpProfile/getAllEmployees")
       .then((res) => {
         let result = (res.data)
         // console.log(result.message)
@@ -78,7 +78,7 @@ async function sendMessage(id){
       showCancelButton:true
     }).then( async (res)=>{
       if(res.isConfirmed){
-        await axios.put(`http://ec2-15-206-28-178.ap-south-1.compute.amazonaws.com:8080/EmpProfile/isOnhold/${Empid}`,{isOnhold})
+        await axios.put(`https://itwalkin-backend.onrender.com/EmpProfile/isOnhold/${Empid}`,{isOnhold})
         .then((res)=>{
           getEmployees()
 
@@ -105,7 +105,7 @@ async function sendMessage(id){
       showCancelButton:true
     }).then( async (res)=>{
       if(res.isConfirmed){
-        await axios.put(`http://ec2-15-206-28-178.ap-south-1.compute.amazonaws.com:8080/EmpProfile/isOnhold/${Empid}`,{isOnhold})
+        await axios.put(`https://itwalkin-backend.onrender.com/EmpProfile/isOnhold/${Empid}`,{isOnhold})
         .then((res)=>{
 
     getEmployees()
@@ -132,7 +132,7 @@ async function sendMessage(id){
       showCancelButton:true
     }).then( async (res)=>{
       if(res.isConfirmed){
-        await axios.put(`http://ec2-15-206-28-178.ap-south-1.compute.amazonaws.com:8080/EmpProfile/isReject/${Empid}`,{isReject})
+        await axios.put(`https://itwalkin-backend.onrender.com/EmpProfile/isReject/${Empid}`,{isReject})
         .then((res)=>{
           getEmployees()
 
@@ -159,7 +159,7 @@ async function sendMessage(id){
       showCancelButton:true
     }).then( async (res)=>{
       if(res.isConfirmed){
-        await axios.put(`http://ec2-15-206-28-178.ap-south-1.compute.amazonaws.com:8080/EmpProfile/isReject/${Empid}`,{isReject})
+        await axios.put(`https://itwalkin-backend.onrender.com/EmpProfile/isReject/${Empid}`,{isReject})
         .then((res)=>{
 
     getEmployees()
@@ -186,7 +186,7 @@ async function sendMessage(id){
       showCancelButton:true
     }).then( async (res)=>{
       if(res.isConfirmed){
-        await axios.put(`http://ec2-15-206-28-178.ap-south-1.compute.amazonaws.com:8080/EmpProfile/setApproval/${Empid}`,{isApproved})
+        await axios.put(`https://itwalkin-backend.onrender.com/EmpProfile/setApproval/${Empid}`,{isApproved})
         .then((res)=>{
     getEmployees()
 
@@ -213,7 +213,7 @@ async function sendMessage(id){
       showCancelButton:true
     }).then( async (res)=>{
       if(res.isConfirmed){
-        await axios.put(`http://ec2-15-206-28-178.ap-south-1.compute.amazonaws.com:8080/EmpProfile/setApproval/${Empid}`,{isApproved})
+        await axios.put(`https://itwalkin-backend.onrender.com/EmpProfile/setApproval/${Empid}`,{isApproved})
         .then((res)=>{
     getEmployees()
 
@@ -237,7 +237,7 @@ async function sendMessage(id){
       confirmButtonText: 'delete!'
     }).then((result) => {
       if (result.isConfirmed) {
-        axios.delete(`http://ec2-15-206-28-178.ap-south-1.compute.amazonaws.com:8080/EmpProfile/deleteEmployee/${id}`)
+        axios.delete(`https://itwalkin-backend.onrender.com/EmpProfile/deleteEmployee/${id}`)
           .then((res) => {           
             getEmployees()
 
@@ -250,7 +250,7 @@ async function sendMessage(id){
   }
 
   async function AllEmployeesApANdDis() {
-    await axios.get("http://ec2-15-206-28-178.ap-south-1.compute.amazonaws.com:8080/EmpProfile/getAllEmployees")
+    await axios.get("https://itwalkin-backend.onrender.com/EmpProfile/getAllEmployees")
       .then((res) => {
         let result = (res.data)
         let sortedate = result.sort(function (a, b) {
@@ -264,7 +264,7 @@ async function sendMessage(id){
 
   async function checkAllApproved(e){
     if(e.target.checked){
-    await axios.get("http://ec2-15-206-28-178.ap-south-1.compute.amazonaws.com:8080/EmpProfile/getApprovedEmp")
+    await axios.get("https://itwalkin-backend.onrender.com/EmpProfile/getApprovedEmp")
     .then((res) => {
       let result = (res.data)
       setAllEmployees(result)  
@@ -278,7 +278,7 @@ async function sendMessage(id){
   }
   async function checkAllNotApproved(e){
     if(e.target.checked){
-    await axios.get("http://ec2-15-206-28-178.ap-south-1.compute.amazonaws.com:8080/EmpProfile/getNotApprovedEmp")
+    await axios.get("https://itwalkin-backend.onrender.com/EmpProfile/getNotApprovedEmp")
 
     .then((res) => {
       let result = (res.data)

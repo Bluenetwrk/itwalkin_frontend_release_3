@@ -16,7 +16,7 @@ function AdminUpdate() {
   const [TermsAndCondition, setTermsAndCondition] = useState("")
 
   async function update(){
-    await axios.put("http://ec2-15-206-28-178.ap-south-1.compute.amazonaws.com:8080/admin/UpdateWebsite", {AboutUs, Services, Contact, TermsAndCondition } )
+    await axios.put("https://itwalkin-backend.onrender.com/admin/UpdateWebsite", {AboutUs, Services, Contact, TermsAndCondition } )
     .then((res)=>{
         if(res.data){
         alert("Updated successfully")
@@ -28,7 +28,7 @@ function AdminUpdate() {
   }
 
   async function getWebsiteDetails(){
-    await axios.get("http://ec2-15-206-28-178.ap-south-1.compute.amazonaws.com:8080/admin/getWebsiteDetails")
+    await axios.get("https://itwalkin-backend.onrender.com/admin/getWebsiteDetails")
     .then((res)=>{
              
 let result = res.data.result[0]

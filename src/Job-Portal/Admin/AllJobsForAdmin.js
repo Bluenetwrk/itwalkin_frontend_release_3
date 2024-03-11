@@ -26,7 +26,7 @@ const screenSize = useScreenSize();
 
       
     async function getjobs() {
-      await axios.get("http://ec2-15-206-28-178.ap-south-1.compute.amazonaws.com:8080/jobpost/getjobs")
+      await axios.get("https://itwalkin-backend.onrender.com/jobpost/getjobs")
       .then((res) => {
         let result = (res.data)
        
@@ -53,7 +53,7 @@ const screenSize = useScreenSize();
       }).then((result) => {
         if (result.isConfirmed) {
       
-       axios.delete(`http://ec2-15-206-28-178.ap-south-1.compute.amazonaws.com:8080/jobpost/deleteJob/${id}`)
+       axios.delete(`https://itwalkin-backend.onrender.com/jobpost/deleteJob/${id}`)
       .then((res)=>{
         
       getjobs()

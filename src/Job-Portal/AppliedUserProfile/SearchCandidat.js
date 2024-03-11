@@ -29,7 +29,7 @@ const screenSize = useScreenSize();
     // let jobSeekerId = JSON.parse(localStorage.getItem("StudId"))
 
     async function getAllJobSeekers() {
-        await axios.get("http://ec2-15-206-28-178.ap-south-1.compute.amazonaws.com:8080/StudentProfile/getAllJobseekers")
+        await axios.get("https://itwalkin-backend.onrender.com/StudentProfile/getAllJobseekers")
                         
             .then((res) => {
                 let result = (res.data)
@@ -64,7 +64,7 @@ const screenSize = useScreenSize();
 
     // async function search(e) {
     //     let key = e.target.value
-    //     await axios.get(`http://ec2-15-206-28-178.ap-south-1.compute.amazonaws.com:8080/StudentProfile/getJobSeeker/${key}`)
+    //     await axios.get(`https://itwalkin-backend.onrender.com/StudentProfile/getJobSeeker/${key}`)
     //         .then((res) => {
     //             console.log(res.data)
 

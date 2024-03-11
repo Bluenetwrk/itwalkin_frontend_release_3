@@ -37,7 +37,7 @@ const [currentBox, setcurrentBox] = useState("")
   }
     
 async function sendMessage(id){
-  await axios.put(`http://ec2-15-206-28-178.ap-south-1.compute.amazonaws.com:8080/StudentProfile/sendMessage/${id}`, {message})
+  await axios.put(`https://itwalkin-backend.onrender.com/StudentProfile/sendMessage/${id}`, {message})
   .then((res)=>{
     if(res.data){
     alert("Message Sent Successfully")
@@ -52,7 +52,7 @@ async function sendMessage(id){
   // let jobSeekerId = JSON.parse(localStorage.getItem("StudId"))
       
   async function getAllJobSeekers() {
-    await axios.get("http://ec2-15-206-28-178.ap-south-1.compute.amazonaws.com:8080/StudentProfile/getAllJobseekers")
+    await axios.get("https://itwalkin-backend.onrender.com/StudentProfile/getAllJobseekers")
       .then((res) => {
         let result = (res.data)
     
@@ -83,7 +83,7 @@ async function sendMessage(id){
       showCancelButton:true
     }).then( async (res)=>{
       if(res.isConfirmed){
-        await axios.put(`http://ec2-15-206-28-178.ap-south-1.compute.amazonaws.com:8080/StudentProfile/isOnhold/${Empid}`,{isOnhold})
+        await axios.put(`https://itwalkin-backend.onrender.com/StudentProfile/isOnhold/${Empid}`,{isOnhold})
         .then((res)=>{
     getAllJobSeekers()
 
@@ -111,7 +111,7 @@ async function sendMessage(id){
       showCancelButton:true
     }).then( async (res)=>{
       if(res.isConfirmed){
-        await axios.put(`http://ec2-15-206-28-178.ap-south-1.compute.amazonaws.com:8080/StudentProfile/isOnhold/${Empid}`,{isOnhold})
+        await axios.put(`https://itwalkin-backend.onrender.com/StudentProfile/isOnhold/${Empid}`,{isOnhold})
         .then((res)=>{
           getAllJobSeekers()
 
@@ -138,7 +138,7 @@ async function sendMessage(id){
       showCancelButton:true
     }).then( async (res)=>{
       if(res.isConfirmed){
-        await axios.put(`http://ec2-15-206-28-178.ap-south-1.compute.amazonaws.com:8080/StudentProfile/isReject/${Empid}`,{isReject})
+        await axios.put(`https://itwalkin-backend.onrender.com/StudentProfile/isReject/${Empid}`,{isReject})
         .then((res)=>{
 
     getAllJobSeekers()
@@ -165,7 +165,7 @@ async function sendMessage(id){
       showCancelButton:true
     }).then( async (res)=>{
       if(res.isConfirmed){
-        await axios.put(`http://ec2-15-206-28-178.ap-south-1.compute.amazonaws.com:8080/StudentProfile/isReject/${Empid}`,{isReject})
+        await axios.put(`https://itwalkin-backend.onrender.com/StudentProfile/isReject/${Empid}`,{isReject})
         .then((res)=>{
           getAllJobSeekers()
 
@@ -194,7 +194,7 @@ async function sendMessage(id){
       showCancelButton:true
     }).then( async (res)=>{
       if(res.isConfirmed){
-        await axios.put(`http://ec2-15-206-28-178.ap-south-1.compute.amazonaws.com:8080/StudentProfile/setApproval/${Empid}`,{isApproved})
+        await axios.put(`https://itwalkin-backend.onrender.com/StudentProfile/setApproval/${Empid}`,{isApproved})
         .then((res)=>{
     getAllJobSeekers()
     
@@ -222,7 +222,7 @@ async function sendMessage(id){
       showCancelButton:true
     }).then( async (res)=>{
       if(res.isConfirmed){
-        await axios.put(`http://ec2-15-206-28-178.ap-south-1.compute.amazonaws.com:8080/StudentProfile/setApproval/${Empid}`,{isApproved})
+        await axios.put(`https://itwalkin-backend.onrender.com/StudentProfile/setApproval/${Empid}`,{isApproved})
         .then((res)=>{
     getAllJobSeekers()
 
@@ -244,7 +244,7 @@ async function sendMessage(id){
         confirmButtonText: 'Yes, delete it!'
       }).then((result) => {
         if (result.isConfirmed) {      
-       axios.delete(`http://ec2-15-206-28-178.ap-south-1.compute.amazonaws.com:8080/StudentProfile/deleteProfile/${id}`)
+       axios.delete(`https://itwalkin-backend.onrender.com/StudentProfile/deleteProfile/${id}`)
       .then((res)=>{
         
         getAllJobSeekers()
@@ -259,7 +259,7 @@ async function sendMessage(id){
     
   
 async function AllJoseekerApANdDis() {
-  await axios.get("http://ec2-15-206-28-178.ap-south-1.compute.amazonaws.com:8080/StudentProfile/getAllJobseekers")
+  await axios.get("https://itwalkin-backend.onrender.com/StudentProfile/getAllJobseekers")
 
     .then((res) => {
       let result = (res.data)
@@ -272,7 +272,7 @@ async function AllJoseekerApANdDis() {
 }
 
 async function Approvedjobseekers() {
-  await axios.get("http://ec2-15-206-28-178.ap-south-1.compute.amazonaws.com:8080/StudentProfile/getApprovedStu")
+  await axios.get("https://itwalkin-backend.onrender.com/StudentProfile/getApprovedStu")
     .then((res) => {
       let result = (res.data)
 
@@ -285,7 +285,7 @@ async function Approvedjobseekers() {
 
 
 async function NotApprovedjobseekers() {
-  await axios.get("http://ec2-15-206-28-178.ap-south-1.compute.amazonaws.com:8080/StudentProfile/getNotApprovedStu")
+  await axios.get("https://itwalkin-backend.onrender.com/StudentProfile/getNotApprovedStu")
     .then((res) => {
       let result = (res.data)
       // console.log(result)        

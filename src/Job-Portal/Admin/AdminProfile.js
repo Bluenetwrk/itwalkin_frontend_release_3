@@ -33,7 +33,7 @@ function AdminProfile() {
     },[])
 
     async function getAlljobs() {
-      await axios.get("http://ec2-15-206-28-178.ap-south-1.compute.amazonaws.com:8080/jobpost/getjobs")
+      await axios.get("https://itwalkin-backend.onrender.com/jobpost/getjobs")
         .then((res) => {
           let result = (res.data)
           let sortedate = result.sort(function (a, b) {
@@ -51,7 +51,7 @@ function AdminProfile() {
     }, [])
 
     async function toDayPostedJobs() {
-      await axios.get(`http://ec2-15-206-28-178.ap-south-1.compute.amazonaws.com:8080/jobpost/getTodayPostedJobs`)
+      await axios.get(`https://itwalkin-backend.onrender.com/jobpost/getTodayPostedJobs`)
         .then((res) => {
           let result = (res.data)
           // console.log("todays date ",result)
@@ -67,7 +67,7 @@ function AdminProfile() {
     }, [])
 
     async function getAllEmployees() {
-      await axios.get("http://ec2-15-206-28-178.ap-south-1.compute.amazonaws.com:8080/EmpProfile/getAllEmployees")
+      await axios.get("https://itwalkin-backend.onrender.com/EmpProfile/getAllEmployees")
         .then((res) => {
           let result = (res.data)
           let sortedate = result.sort(function (a, b) {
@@ -86,7 +86,7 @@ function AdminProfile() {
 
 
     async function ApprovedEmployees() {
-      await axios.get("http://ec2-15-206-28-178.ap-south-1.compute.amazonaws.com:8080/EmpProfile/getApprovedEmp")
+      await axios.get("https://itwalkin-backend.onrender.com/EmpProfile/getApprovedEmp")
         .then((res) => {
           let result = (res.data)        
           setApprovedemployees(result)  
@@ -102,7 +102,7 @@ function AdminProfile() {
 
     
     async function NotApprovedEmployees() {
-      await axios.get("http://ec2-15-206-28-178.ap-south-1.compute.amazonaws.com:8080/EmpProfile/getNotApprovedEmp")
+      await axios.get("https://itwalkin-backend.onrender.com/EmpProfile/getNotApprovedEmp")
         .then((res) => {
           let result = (res.data)
         
@@ -118,7 +118,7 @@ function AdminProfile() {
     }, [])
 
     async function toDayRegEmployees() {
-      await axios.get(`http://ec2-15-206-28-178.ap-south-1.compute.amazonaws.com:8080/EmpProfile/getTodaysEmpProfile`)
+      await axios.get(`https://itwalkin-backend.onrender.com/EmpProfile/getTodaysEmpProfile`)
         .then((res) => {
           let result = (res.data)
           // console.log("todays date ",result)
@@ -135,7 +135,7 @@ function AdminProfile() {
 
     async function getFirmOrganisation() {
       
-      await axios.get(`http://ec2-15-206-28-178.ap-south-1.compute.amazonaws.com:8080/EmpProfile/getFirmOrganisation`)
+      await axios.get(`https://itwalkin-backend.onrender.com/EmpProfile/getFirmOrganisation`)
         .then((res) => {
           let result = (res.data)
           // console.log("todays date ",result)
@@ -151,7 +151,7 @@ function AdminProfile() {
     }, [])
 
     async function getPvtLtdOrganisation() {
-      await axios.get(`http://ec2-15-206-28-178.ap-south-1.compute.amazonaws.com:8080/EmpProfile/getPvt.Ltd.Organisation`)
+      await axios.get(`https://itwalkin-backend.onrender.com/EmpProfile/getPvt.Ltd.Organisation`)
         .then((res) => {
           let result = (res.data)
           // console.log("todays date ",result)
@@ -167,7 +167,7 @@ function AdminProfile() {
     }, [])
 
     async function getConsultancyOrganisation() {
-      await axios.get(`http://ec2-15-206-28-178.ap-south-1.compute.amazonaws.com:8080/EmpProfile/getConsultancyOrganisation`)
+      await axios.get(`https://itwalkin-backend.onrender.com/EmpProfile/getConsultancyOrganisation`)
         .then((res) => {
           let result = (res.data)
           // console.log("todays date ",result)
@@ -185,7 +185,7 @@ function AdminProfile() {
 // Job Seekers.....Job Seekers.....Job Seekers.....
 
     async function getAllJobSeekers() {
-      await axios.get("http://ec2-15-206-28-178.ap-south-1.compute.amazonaws.com:8080/StudentProfile/getAllJobseekers")
+      await axios.get("https://itwalkin-backend.onrender.com/StudentProfile/getAllJobseekers")
         .then((res) => {
           let result = (res.data)
           let sortedate = result.sort(function (a, b) {
@@ -203,7 +203,7 @@ function AdminProfile() {
     }, [])
 
     async function Approvedjobseekers() {
-      await axios.get("http://ec2-15-206-28-178.ap-south-1.compute.amazonaws.com:8080/StudentProfile/getApprovedStu")
+      await axios.get("https://itwalkin-backend.onrender.com/StudentProfile/getApprovedStu")
         .then((res) => {
           let result = (res.data)
         
@@ -220,7 +220,7 @@ function AdminProfile() {
 
     
     async function NotApprovedjobseekers() {
-      await axios.get("http://ec2-15-206-28-178.ap-south-1.compute.amazonaws.com:8080/StudentProfile/getNotApprovedStu")
+      await axios.get("https://itwalkin-backend.onrender.com/StudentProfile/getNotApprovedStu")
         .then((res) => {
           let result = (res.data)
           // console.log(result)        
@@ -236,7 +236,7 @@ function AdminProfile() {
     }, [])
 
     async function todayRegisteredJobSeeker() {
-      await axios.get("http://ec2-15-206-28-178.ap-south-1.compute.amazonaws.com:8080/StudentProfile/getTodayStuProfile")
+      await axios.get("https://itwalkin-backend.onrender.com/StudentProfile/getTodayStuProfile")
         .then((res) => {
           let result = (res.data)
           // console.log(result)        
@@ -252,7 +252,7 @@ function AdminProfile() {
     }, [])
     
     async function JobSeekerNoticePeriod() {
-      await axios.get("http://ec2-15-206-28-178.ap-south-1.compute.amazonaws.com:8080/StudentProfile/getNoticePeriod")
+      await axios.get("https://itwalkin-backend.onrender.com/StudentProfile/getNoticePeriod")
         .then((res) => {
           let result = (res.data)
           // console.log(result)        
