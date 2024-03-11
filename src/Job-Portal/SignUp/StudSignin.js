@@ -31,7 +31,7 @@ function StudSignIn() {
 
   async function signIn(){
     console.log(name , password, confirmPassword, email)
-await axios.post("http://localhost:8080/user/Register/",{name , password, confirmPassword, email})
+await axios.post("https://itwalkin-backend.onrender.com/user/Register/",{name , password, confirmPassword, email})
 .then((response)=>{
     console.log(response.data)
     let result = response.data
@@ -54,7 +54,7 @@ await axios.post("http://localhost:8080/user/Register/",{name , password, confir
 
 function googSignIn(){
   window.open(
-    `http://localhost:8080/user/auth/google/callback`,
+    `https://itwalkin-backend.onrender.com/user/auth/google/callback`,
     "_self"    
   );
 }

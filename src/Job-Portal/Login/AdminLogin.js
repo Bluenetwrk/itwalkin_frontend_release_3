@@ -34,7 +34,7 @@ function Admin() {
   },[])
   
   async function Adminlogin(){
-    await axios.post("http://localhost:8080/admin/adminLogin",{email, password})
+    await axios.post("https://itwalkin-backend.onrender.com/admin/adminLogin",{email, password})
     .then((res)=>{
       let result = res.data
       console.log(result)
