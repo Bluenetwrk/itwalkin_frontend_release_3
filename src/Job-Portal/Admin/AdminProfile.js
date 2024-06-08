@@ -33,7 +33,7 @@ function AdminProfile() {
     },[])
 
     async function getAlljobs() {
-      await axios.get("https://itwalkin-backend.onrender.com/jobpost/getjobs")
+      await axios.get("/jobpost/getjobs")
         .then((res) => {
           let result = (res.data)
           let sortedate = result.sort(function (a, b) {
@@ -51,7 +51,7 @@ function AdminProfile() {
     }, [])
 
     async function toDayPostedJobs() {
-      await axios.get(`https://itwalkin-backend.onrender.com/jobpost/getTodayPostedJobs`)
+      await axios.get(`/jobpost/getTodayPostedJobs`)
         .then((res) => {
           let result = (res.data)
           // console.log("todays date ",result)
@@ -67,7 +67,7 @@ function AdminProfile() {
     }, [])
 
     async function getAllEmployees() {
-      await axios.get("https://itwalkin-backend.onrender.com/EmpProfile/getAllEmployees")
+      await axios.get("/EmpProfile/getAllEmployees")
         .then((res) => {
           let result = (res.data)
           let sortedate = result.sort(function (a, b) {
@@ -86,7 +86,7 @@ function AdminProfile() {
 
 
     async function ApprovedEmployees() {
-      await axios.get("https://itwalkin-backend.onrender.com/EmpProfile/getApprovedEmp")
+      await axios.get("/EmpProfile/getApprovedEmp")
         .then((res) => {
           let result = (res.data)        
           setApprovedemployees(result)  
@@ -102,7 +102,7 @@ function AdminProfile() {
 
     
     async function NotApprovedEmployees() {
-      await axios.get("https://itwalkin-backend.onrender.com/EmpProfile/getNotApprovedEmp")
+      await axios.get("/EmpProfile/getNotApprovedEmp")
         .then((res) => {
           let result = (res.data)
         
@@ -118,7 +118,7 @@ function AdminProfile() {
     }, [])
 
     async function toDayRegEmployees() {
-      await axios.get(`https://itwalkin-backend.onrender.com/EmpProfile/getTodaysEmpProfile`)
+      await axios.get(`/EmpProfile/getTodaysEmpProfile`)
         .then((res) => {
           let result = (res.data)
           // console.log("todays date ",result)
@@ -135,7 +135,7 @@ function AdminProfile() {
 
     async function getFirmOrganisation() {
       
-      await axios.get(`https://itwalkin-backend.onrender.com/EmpProfile/getFirmOrganisation`)
+      await axios.get(`/EmpProfile/getFirmOrganisation`)
         .then((res) => {
           let result = (res.data)
           // console.log("todays date ",result)
@@ -151,7 +151,7 @@ function AdminProfile() {
     }, [])
 
     async function getPvtLtdOrganisation() {
-      await axios.get(`https://itwalkin-backend.onrender.com/EmpProfile/getPvt.Ltd.Organisation`)
+      await axios.get(`/EmpProfile/getPvt.Ltd.Organisation`)
         .then((res) => {
           let result = (res.data)
           // console.log("todays date ",result)
@@ -167,7 +167,7 @@ function AdminProfile() {
     }, [])
 
     async function getConsultancyOrganisation() {
-      await axios.get(`https://itwalkin-backend.onrender.com/EmpProfile/getConsultancyOrganisation`)
+      await axios.get(`/EmpProfile/getConsultancyOrganisation`)
         .then((res) => {
           let result = (res.data)
           // console.log("todays date ",result)
@@ -185,7 +185,7 @@ function AdminProfile() {
 // Job Seekers.....Job Seekers.....Job Seekers.....
 
     async function getAllJobSeekers() {
-      await axios.get("https://itwalkin-backend.onrender.com/StudentProfile/getAllJobseekers")
+      await axios.get("/StudentProfile/getAllJobseekers")
         .then((res) => {
           let result = (res.data)
           let sortedate = result.sort(function (a, b) {
@@ -203,7 +203,7 @@ function AdminProfile() {
     }, [])
 
     async function Approvedjobseekers() {
-      await axios.get("https://itwalkin-backend.onrender.com/StudentProfile/getApprovedStu")
+      await axios.get("/StudentProfile/getApprovedStu")
         .then((res) => {
           let result = (res.data)
         
@@ -220,7 +220,7 @@ function AdminProfile() {
 
     
     async function NotApprovedjobseekers() {
-      await axios.get("https://itwalkin-backend.onrender.com/StudentProfile/getNotApprovedStu")
+      await axios.get("/StudentProfile/getNotApprovedStu")
         .then((res) => {
           let result = (res.data)
           // console.log(result)        
@@ -236,7 +236,7 @@ function AdminProfile() {
     }, [])
 
     async function todayRegisteredJobSeeker() {
-      await axios.get("https://itwalkin-backend.onrender.com/StudentProfile/getTodayStuProfile")
+      await axios.get("/StudentProfile/getTodayStuProfile")
         .then((res) => {
           let result = (res.data)
           // console.log(result)        
@@ -252,7 +252,7 @@ function AdminProfile() {
     }, [])
     
     async function JobSeekerNoticePeriod() {
-      await axios.get("https://itwalkin-backend.onrender.com/StudentProfile/getNoticePeriod")
+      await axios.get("/StudentProfile/getNoticePeriod")
         .then((res) => {
           let result = (res.data)
           // console.log(result)        

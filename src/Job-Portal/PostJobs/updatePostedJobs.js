@@ -30,7 +30,7 @@ function UpdatePostedJobs() {
     const[successMessage, setSuccessMessage] = useState("")
 
     async function getPostedJobs(){
-       await axios.get(`https://itwalkin-backend.onrender.com/jobpost/getJobForUpdate/${Jobid}`)
+       await axios.get(`/jobpost/getJobForUpdate/${Jobid}`)
        .then((res)=>{
         let result=res.data
         if(result){
@@ -56,7 +56,7 @@ function UpdatePostedJobs() {
     async function updateJob(){
         let jobTitle = jobtitle.toLowerCase()
         let jobLocation = joblocation.toLowerCase()
-    await axios.put(`https://itwalkin-backend.onrender.com/jobpost/updatPostedJob/${Jobid}`,{ jobTitle, SourceLink, Source, companyName, jobDescription, jobtype, salaryRange, jobLocation, qualification, experiance, skills})
+    await axios.put(`/jobpost/updatPostedJob/${Jobid}`,{ jobTitle, SourceLink, Source, companyName, jobDescription, jobtype, salaryRange, jobLocation, qualification, experiance, skills})
     .then((res)=>{
         let result = (res.data)
         if(result=="success"){

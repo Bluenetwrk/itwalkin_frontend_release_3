@@ -16,7 +16,7 @@ function AdminUpdate() {
   const [TermsAndCondition, setTermsAndCondition] = useState("")
 
   async function update(){
-    await axios.put("https://itwalkin-backend.onrender.com/admin/UpdateWebsite", {AboutUs, Services, Contact, TermsAndCondition } )
+    await axios.put("/admin/UpdateWebsite", {AboutUs, Services, Contact, TermsAndCondition } )
     .then((res)=>{
         if(res.data){
         alert("Updated successfully")
@@ -28,7 +28,7 @@ function AdminUpdate() {
   }
 
   async function getWebsiteDetails(){
-    await axios.get("https://itwalkin-backend.onrender.com/admin/getWebsiteDetails")
+    await axios.get("/admin/getWebsiteDetails")
     .then((res)=>{
              
 let result = res.data.result[0]

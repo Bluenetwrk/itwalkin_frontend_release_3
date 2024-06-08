@@ -21,7 +21,7 @@ const screenSize = useScreenSize();
 
     async function getProfile() {
         setPageLoader(true)
-        await axios.get(`https://itwalkin-backend.onrender.com/StudentProfile/getProfile/${params.CP}`)
+        await axios.get(`/StudentProfile/getProfile/${params.CP}`)
             .then((res) => {
                 let result = res.data.result
                 setProfileData([result])

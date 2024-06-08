@@ -20,7 +20,7 @@ let navigate = useNavigate()
 
     async function getProfile() {
         setPageLoader(true)
-        await axios.get(`https://itwalkin-backend.onrender.com/EmpProfile/getProfile/${empId}`)
+        await axios.get(`/EmpProfile/getProfile/${empId}`)
             .then((res) => {
                 let result = res.data.result
                 setProfileData([result])

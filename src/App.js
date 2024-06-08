@@ -1,10 +1,10 @@
 import React from "react";
+import axios from "axios";
+
 import { useState, createContext } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom"
 import { GoogleLogin } from '@react-oauth/google';
 import jwt_decode from "jwt-decode";
-
-
 // .......importing components......//
 // import  from "./SidebarNav"
 
@@ -32,6 +32,9 @@ import CheckStudentProfiel from "./Job-Portal/Profile/CheckStudentProfiel";
 import CheckEmpHalfProfile from "./Job-Portal/Profile/CheckEmpHalfProf";
 // admin
 import AdminLogin from "./Job-Portal/Login/AdminLogin"
+// import SearchParams from "./Job-Portal/Login/SearchParams";
+import SearchParams from "./Job-Portal/Login/SearchParams ";
+import SearchParamsDub from "./Job-Portal/Login/SearchParamsDup";
 import AdminProfile from "./Job-Portal/Admin/AdminProfile"
 import AllJobsForAdmin from "./Job-Portal/Admin/AllJobsForAdmin"
 import AllJobSeekers from "./Job-Portal/Admin/AllJobSeekers"
@@ -50,11 +53,9 @@ import TermsAndCondition from "./Job-Portal/TermsAndConditions"
 import Footer from "./Job-Portal/Footer/Footer";
 
 import Payment from "./Job-Portal/Payment"
-
+// axios.defaults.baseURL = "http://localhost:8080";
+axios.defaults.baseURL = "https://itwalkin-backend.onrender.com";
 const App = () => {
-
-  const AppContext = createContext()
-
   return (
     <>
       <BrowserRouter>
@@ -84,6 +85,8 @@ const App = () => {
           </Route>
 
           <Route path="/BIAdd@Logg" element={<AdminLogin />} />
+          <Route path="/BIAdd@Gmail" element={<SearchParams/>} />
+          <Route path="/BIAdd@Gmaill?" element={<SearchParamsDub/>} />
           <Route path="/BIAddmin@Profile" element={<AdminProfile />} />
           <Route path="/BIAddmin@AllJobs" element={<AllJobsForAdmin />} />
           <Route path="/BIAddmin@AllJobSeekers" element={<AllJobSeekers />} />
@@ -112,8 +115,7 @@ const App = () => {
 
         </Routes>
 
-        <Footer />
-        
+        <Footer />        
 
       </BrowserRouter>
     </>
@@ -121,5 +123,4 @@ const App = () => {
 }
 
 export default App
-// export {AppContext}
 

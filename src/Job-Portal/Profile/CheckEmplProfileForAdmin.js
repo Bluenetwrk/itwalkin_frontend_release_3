@@ -27,7 +27,7 @@ const screenSize = useScreenSize();
 const [message, setmessage] = useState("")
     
     async function sendMessage(id){
-      await axios.put(`https://itwalkin-backend.onrender.com/EmpProfile/sendMessage/${id}`, {message})
+      await axios.put(`/EmpProfile/sendMessage/${id}`, {message})
       .then((res)=>{
         if(res.data){
         alert("Message Sent Successfully")
@@ -45,7 +45,7 @@ const [message, setmessage] = useState("")
     async function getProfile() {
   setPageLoader(true)
 
-        await axios.get(`https://itwalkin-backend.onrender.com/EmpProfile/getProfile/${params.CP}`)
+        await axios.get(`/EmpProfile/getProfile/${params.CP}`)
             .then((res) => {
                 let result = res.data.result
                 
@@ -75,7 +75,7 @@ const [message, setmessage] = useState("")
         showCancelButton:true
       }).then( async (res)=>{
         if(res.isConfirmed){
-          await axios.put(`https://itwalkin-backend.onrender.com/EmpProfile/isReject/${Empid}`,{isReject})
+          await axios.put(`/EmpProfile/isReject/${Empid}`,{isReject})
           .then((res)=>{
               getProfile()
   
@@ -100,7 +100,7 @@ const [message, setmessage] = useState("")
         showCancelButton:true
       }).then( async (res)=>{
         if(res.isConfirmed){
-          await axios.put(`https://itwalkin-backend.onrender.com/EmpProfile/isReject/${Empid}`,{isReject})
+          await axios.put(`/EmpProfile/isReject/${Empid}`,{isReject})
           .then((res)=>{
               getProfile()
   
@@ -124,7 +124,7 @@ const [message, setmessage] = useState("")
           showCancelButton:true
         }).then( async (res)=>{
           if(res.isConfirmed){
-            await axios.put(`https://itwalkin-backend.onrender.com/EmpProfile/setApproval/${Empid}`,{isApproved})
+            await axios.put(`/EmpProfile/setApproval/${Empid}`,{isApproved})
             .then((res)=>{
                 getProfile()
     
@@ -149,7 +149,7 @@ const [message, setmessage] = useState("")
           showCancelButton:true
         }).then( async (res)=>{
           if(res.isConfirmed){
-            await axios.put(`https://itwalkin-backend.onrender.com/EmpProfile/setApproval/${Empid}`,{isApproved})
+            await axios.put(`/EmpProfile/setApproval/${Empid}`,{isApproved})
             .then((res)=>{
                 getProfile()
     
@@ -170,7 +170,7 @@ const [message, setmessage] = useState("")
           confirmButtonText: 'Yes, delete it!'
         }).then((result) => {
           if (result.isConfirmed) {
-            axios.delete(`https://itwalkin-backend.onrender.com/EmpProfile/deleteEmployee/${id}`)
+            axios.delete(`/EmpProfile/deleteEmployee/${id}`)
               .then((res) => {
                 
                 navigate("/BIAddmin@AllEmployees")

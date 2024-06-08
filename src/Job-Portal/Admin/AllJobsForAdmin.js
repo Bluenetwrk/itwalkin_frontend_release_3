@@ -26,7 +26,7 @@ const screenSize = useScreenSize();
 
       
     async function getjobs() {
-      await axios.get("https://itwalkin-backend.onrender.com/jobpost/getjobs")
+      await axios.get("/jobpost/getjobs")
       .then((res) => {
         let result = (res.data)
        
@@ -53,7 +53,7 @@ const screenSize = useScreenSize();
       }).then((result) => {
         if (result.isConfirmed) {
       
-       axios.delete(`https://itwalkin-backend.onrender.com/jobpost/deleteJob/${id}`)
+       axios.delete(`/jobpost/deleteJob/${id}`)
       .then((res)=>{
         
       getjobs()

@@ -9,7 +9,7 @@ function TermsAndCondition() {
     const [TermsAndCondition, setTermsAndCondition]= useState([])
 
    async function getAboutUs(){
-    await axios.get("https://itwalkin-backend.onrender.com/admin/getWebsiteDetails")
+    await axios.get("/admin/getWebsiteDetails")
     .then((res)=>{
         let result = res.data.result
         // console.log(result[0].AboutUs)

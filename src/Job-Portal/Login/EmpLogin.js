@@ -62,7 +62,7 @@ useEffect(() => {
         // console.log("decoded name :", gemail)
         // console.log(" decoded id :", gname)
 
-          await axios.post("https://itwalkin-backend.onrender.com/EmpProfile/Glogin",{ipAddress, userId, email, name, gtoken, isApproved })
+          await axios.post("/EmpProfile/Glogin",{ipAddress, userId, email, name, gtoken, isApproved })
             .then((response) => {
               let result = response.data  
               let token =result.token
@@ -152,7 +152,7 @@ useEffect(() => {
   //   );
   // }
   async function sendOtp() {
-    await axios.post("https://itwalkin-backend.onrender.com/EmpProfile/otpSignUp", { PhoneNumber })
+    await axios.post("/EmpProfile/otpSignUp", { PhoneNumber })
       .then((res) => {
         if (res.data == "otp sent") {
           setshowotp(true)
@@ -165,7 +165,7 @@ useEffect(() => {
     setLoader(true)
     setTimeout( async () => {     
 
-    await axios.post("https://itwalkin-backend.onrender.com/EmpProfile/verifyOtp", {ipAddress, otp , isApproved})
+    await axios.post("/EmpProfile/verifyOtp", {ipAddress, otp , isApproved})
       .then((res) => {
         let result = res.data
         console.log(res.data)

@@ -34,10 +34,9 @@ function Admin() {
   },[])
   
   async function Adminlogin(){
-    await axios.post("https://itwalkin-backend.onrender.com/admin/adminLogin",{email, password})
+    await axios.post("/admin/adminLogin",{email, password})
     .then((res)=>{
       let result = res.data
-      console.log(result)
       if(result.status=="success"){
         localStorage.setItem("AdMLog", JSON.stringify(result.token))
         navigate("/BIAddmin@Profile")
@@ -54,7 +53,7 @@ function Admin() {
   }
   
   async function AdminRegister(){
-    await axios.post("https://itwalkin-backend.onrender.com/admin/adminRegister",{email, password})
+    await axios.post("/admin/adminRegister",{email, password})
     .then((res)=>{
       console.log(res)
     })

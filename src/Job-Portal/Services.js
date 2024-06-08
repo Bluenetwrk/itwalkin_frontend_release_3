@@ -7,7 +7,7 @@ function Services() {
     const [Services, setServices]= useState([])
 
    async function getServices(){
-    await axios.get("https://itwalkin-backend.onrender.com/admin/getWebsiteDetails")
+    await axios.get("/admin/getWebsiteDetails")
     .then((res)=>{
         // console.log(res.data)
         let result = res.data.result

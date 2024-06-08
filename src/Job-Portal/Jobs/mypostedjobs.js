@@ -32,7 +32,7 @@ function JoppostedByEmp() {
   async function getjobs() {
     setPageLoader(true)
     setTimeout(async () => {
-      await axios.get(`https://itwalkin-backend.onrender.com/jobpost/getPostedjobs/${empId}`)
+      await axios.get(`/jobpost/getPostedjobs/${empId}`)
         .then((res) => {
           let result = (res.data)
           let sortedate = result.sort(function (a, b) {
@@ -69,7 +69,7 @@ function JoppostedByEmp() {
       confirmButtonText: 'delete!'
     }).then((result) => {
       if (result.isConfirmed) {
-        axios.delete(`https://itwalkin-backend.onrender.com/jobpost/deleteProduct/${deleteid}`)
+        axios.delete(`/jobpost/deleteProduct/${deleteid}`)
           .then((res) => {
             getjobs()
           })

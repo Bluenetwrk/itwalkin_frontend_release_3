@@ -34,7 +34,7 @@ const [Loader, setLoader] = useState(false)
   let params = useParams();
 
   async function getjobs() {
-    await axios.get(`https://itwalkin-backend.onrender.com/jobpost/getjobs/${params.id}`)
+    await axios.get(`/jobpost/getjobs/${params.id}`)
       .then((res) => {
         let result = (res.data)
         setJobs(result)
@@ -73,7 +73,7 @@ const [Loader, setLoader] = useState(false)
       confirmButtonText: 'delete!'
     }).then((result) => {
       if (result.isConfirmed) {
-        axios.delete(`https://itwalkin-backend.onrender.com/jobpost/deleteProduct/${deleteid}`)
+        axios.delete(`/jobpost/deleteProduct/${deleteid}`)
           .then((res) => {
             navigate("/postedjobs")
             // getjobs()
@@ -94,7 +94,7 @@ const [Loader, setLoader] = useState(false)
     setLoader(true)
     setTimeout(async () => {
 
-      await axios.put(`https://itwalkin-backend.onrender.com/jobpost/updatforJobApply/${jobId}`, { jobSeekerId })
+      await axios.put(`/jobpost/updatforJobApply/${jobId}`, { jobSeekerId })
         .then((res) => {
           setLoader(false)
           getjobs()

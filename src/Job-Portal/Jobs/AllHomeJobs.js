@@ -60,7 +60,7 @@ function Home() {
   // })
   async function getjobs() {
     setPageLoader(true)
-    await axios.get("https://itwalkin-backend.onrender.com/jobpost/getjobs")
+    await axios.get("/jobpost/getjobs")
       .then((res) => {
 
         let result = (res.data)
@@ -225,7 +225,7 @@ return user
   // const [getJobTitle, setgetJobTitle] = useState(true)
 
   async function getjobTitleAll(all) {
-    await axios.get("https://itwalkin-backend.onrender.com/jobpost/getjobs")
+    await axios.get("/jobpost/getjobs")
       .then((res) => {
         let result = (res.data)
         let sortedate = result.sort((a, b) => {
@@ -236,7 +236,7 @@ return user
       })
   }
   async function getjobsAllLoc(all) {
-    await axios.get("https://itwalkin-backend.onrender.com/jobpost/getjobs")
+    await axios.get("/jobpost/getjobs")
       .then((res) => {
         let result = (res.data)
         let sortedate = result.sort((a, b) => {
@@ -248,7 +248,7 @@ return user
   }
 
   async function JobtitleFilter(jobTitle) {
-    await axios.get(`https://itwalkin-backend.onrender.com/jobpost/getjobTitle/${jobTitle}`)
+    await axios.get(`/jobpost/getjobTitle/${jobTitle}`)
       .then((res) => {
         let result = (res.data)
         let sortedate = result.sort(function (a, b) {
@@ -262,7 +262,7 @@ return user
   }
 
   async function getLocation(jobLocation) {
-    await axios.get(`https://itwalkin-backend.onrender.com/jobpost/getjobLocation/${jobLocation}`)
+    await axios.get(`/jobpost/getjobLocation/${jobLocation}`)
       .then((res) => {
         let result = (res.data)
         console.log(result)
@@ -278,7 +278,7 @@ return user
 
   async function getBothFiltered(jobTitle) {
 
-    await axios.post(`https://itwalkin-backend.onrender.com/jobpost/getBothjobFilter/${jobLocation}`, { jobTitle })
+    await axios.post(`/jobpost/getBothjobFilter/${jobLocation}`, { jobTitle })
       .then((res) => {
         let result = (res.data)
         console.log(result)

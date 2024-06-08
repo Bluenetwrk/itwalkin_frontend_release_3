@@ -62,7 +62,7 @@ useEffect(() => {
         // console.log("decoded name :", gemail)
         // console.log(" decoded id :", gname)
 
-        await axios.post("https://itwalkin-backend.onrender.com/StudentProfile/Glogin", {ipAddress, userId, email, name, gtoken, isApproved })
+        await axios.post("/StudentProfile/Glogin", {ipAddress, userId, email, name, gtoken, isApproved })
           .then((response) => {
             let result = response.data
             let token = result.token
@@ -70,8 +70,7 @@ useEffect(() => {
             if (result.status == "success") {
               localStorage.setItem("StudLog", JSON.stringify(token))
               navigate("/alljobs", {state:{name:result.name}})
-              localStorage.setItem("StudId", JSON.stringify(Id))
-             
+              localStorage.setItem("StudId", JSON.stringify(Id))             
             }
           }).catch((err) => {
             alert("server issue occured")
@@ -147,7 +146,7 @@ useEffect(() => {
   // }
 
   async function sendOtp() {
-    await axios.post("https://itwalkin-backend.onrender.com/StudentProfile/otpSignUp", { PhoneNumber })
+    await axios.post("/StudentProfile/otpSignUp", { PhoneNumber })
       .then((res) => {
         if (res.data == "otp sent") {
           setshowotp(true)
@@ -160,7 +159,7 @@ useEffect(() => {
     setLoader(true)
     setTimeout( async () => {     
 
-    await axios.post("https://itwalkin-backend.onrender.com/StudentProfile/verifyOtp", { ipAddress, otp , isApproved})
+    await axios.post("/StudentProfile/verifyOtp", { ipAddress, otp , isApproved})
       .then((res) => {
         //  console.log(res.data)
         let result = res.data

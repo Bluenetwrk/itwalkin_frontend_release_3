@@ -40,7 +40,7 @@ const screenSize = useScreenSize();
 
   async function getUser() {
 
-    await axios.get(`https://itwalkin-backend.onrender.com/StudentProfile/getProfile/${studId}`)
+    await axios.get(`/StudentProfile/getProfile/${studId}`)
       .then((res) => {
         let result = res.data.result
         if (result) {
@@ -73,7 +73,7 @@ const screenSize = useScreenSize();
     formdata.append('image', image)
     
     // console.log(formdata)
-    await axios.put(`https://itwalkin-backend.onrender.com/StudentProfile/uploadImage/${studId}`, formdata)
+    await axios.put(`/StudentProfile/uploadImage/${studId}`, formdata)
       .then((res) => {
     window.location.reload()
 
@@ -83,7 +83,7 @@ const screenSize = useScreenSize();
   }
   async function saveUpdate(e) {
     // e.preventDefault()
-    await axios.put(`https://itwalkin-backend.onrender.com/StudentProfile/updatProfile/${studId}`, { name, email, phoneNumber, Aadhar, panCard, NoticePeriod, ExpectedSalary, currentCTC, age, Qualification, Skills, Experiance })
+    await axios.put(`/StudentProfile/updatProfile/${studId}`, { name, email, phoneNumber, Aadhar, panCard, NoticePeriod, ExpectedSalary, currentCTC, age, Qualification, Skills, Experiance })
       .then( async (res) => {
         let result = res.data
         if (result == "success") {
@@ -122,7 +122,7 @@ const screenSize = useScreenSize();
   }
   }
 async function deletePic(){
-  await axios.put(`https://itwalkin-backend.onrender.com/StudentProfile/deleteImage/${studId}`,{image})
+  await axios.put(`/StudentProfile/deleteImage/${studId}`,{image})
   .then((res) => {
     window.location.reload()
   }).catch((err)=>{

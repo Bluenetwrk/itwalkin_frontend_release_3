@@ -42,7 +42,7 @@ const screenSize = useScreenSize();
 
   async function getUser() {
 
-    await axios.get(`https://itwalkin-backend.onrender.com/EmpProfile/getProfile/${empId}`)
+    await axios.get(`/EmpProfile/getProfile/${empId}`)
       .then((res) => {
         let result = res.data.result
         console.log(result)
@@ -77,7 +77,7 @@ const screenSize = useScreenSize();
     //   name, email, phoneNumber, Aadhar, panCard,CompanyName,CompanyContact, CompanyGSTIN, CompanyWebsite, CompanyAddress,
     //   CompanyEmail, TypeofOrganisation 
     // )
-    await axios.put(`https://itwalkin-backend.onrender.com/EmpProfile/updatProfile/${empId}`, {
+    await axios.put(`/EmpProfile/updatProfile/${empId}`, {
       name, email, phoneNumber, Aadhar, panCard, CompanyName, CompanyContact, CompanyGSTIN, CompanyWebsite,
       CompanyAddress, CompanyEmail, TypeofOrganisation
 
@@ -107,7 +107,7 @@ const screenSize = useScreenSize();
     formdata.append('image', image)
 
     // console.log(formdata)
-    await axios.put(`https://itwalkin-backend.onrender.com/EmpProfile/uploadImage/${empId}`, formdata)
+    await axios.put(`/EmpProfile/uploadImage/${empId}`, formdata)
       .then((res) => {
         window.location.reload()
       }).catch((err) => {
@@ -133,7 +133,7 @@ const screenSize = useScreenSize();
     }
   }
   async function deletePic() {
-    await axios.put(`https://itwalkin-backend.onrender.com/EmpProfile/deleteImage/${empId}`, { image })
+    await axios.put(`/EmpProfile/deleteImage/${empId}`, { image })
       .then((res) => {
         window.location.reload()
       }).catch((err) => {

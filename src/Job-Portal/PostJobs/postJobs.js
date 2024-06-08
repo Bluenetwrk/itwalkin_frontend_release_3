@@ -36,7 +36,7 @@ function PostJobs() {
     let navigate= useNavigate()
 
     async function getProfile() {
-        await axios.get(`https://itwalkin-backend.onrender.com/EmpProfile/getProfile/${empId}`)
+        await axios.get(`/EmpProfile/getProfile/${empId}`)
             .then((res) => {
                 let result = res.data.result
                 let companyName = res.data.result.CompanyName
@@ -52,7 +52,7 @@ function PostJobs() {
     }, [])
 
     async function getLogo() {
-        await axios.get(`https://itwalkin-backend.onrender.com/EmpProfile/getLogo/${empId}`)
+        await axios.get(`/EmpProfile/getLogo/${empId}`)
             .then((res) => {
                 let result = res.data
                 setLogo(result)
@@ -78,7 +78,7 @@ function PostJobs() {
     async function postJob() {
        let jobTitle = jobtitle.toLowerCase()
        let jobLocation = joblocation.toLowerCase()
-        await axios.post("https://itwalkin-backend.onrender.com/jobpost/jobpost/", { Logo, SourceLink, Source, empId, jobTitle, companyName, jobDescription, jobtype, salaryRange, jobLocation, qualification, experiance, skills })
+        await axios.post("/jobpost/jobpost/", { Logo, SourceLink, Source, empId, jobTitle, companyName, jobDescription, jobtype, salaryRange, jobLocation, qualification, experiance, skills })
             .then((res) => {
                 let result = (res.data)
                 if (result == "success") {

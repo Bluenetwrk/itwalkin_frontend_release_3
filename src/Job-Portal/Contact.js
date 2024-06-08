@@ -7,7 +7,7 @@ function Contact() {
     const [Contact, setContact]= useState([])
 
    async function getContact(){
-    await axios.get("https://itwalkin-backend.onrender.com/admin/getWebsiteDetails")
+    await axios.get("/admin/getWebsiteDetails")
     .then((res)=>{
         let result = res.data.result
         // console.log(result[0].AboutUs)

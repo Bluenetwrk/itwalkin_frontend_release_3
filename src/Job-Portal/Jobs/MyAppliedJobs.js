@@ -45,7 +45,7 @@ const screenSize = useScreenSize();
     setPageLoader(true)
     setTimeout(async () => {
 
-      await axios.get(`https://itwalkin-backend.onrender.com/jobpost/getMyAppliedjobs/${jobSeekerId}`)
+      await axios.get(`/jobpost/getMyAppliedjobs/${jobSeekerId}`)
         .then((res) => {
           let result = (res.data)
           let sortedate = result.sort(function (a, b) {
@@ -87,7 +87,7 @@ const screenSize = useScreenSize();
     }).then((result) => {
       if (result.isConfirmed) {
 
-        axios.put(`https://itwalkin-backend.onrender.com/jobpost/updatforUndoJobApplied/${id}`, { jobSeekerId })
+        axios.put(`/jobpost/updatforUndoJobApplied/${id}`, { jobSeekerId })
           .then((res) => {
             getjobs()
           }).catch((err) => {

@@ -33,7 +33,7 @@ const [currentBox, setcurrentBox] = useState("")
 const [message, setmessage] = useState("")
     
 async function sendMessage(id){
-  await axios.put(`https://itwalkin-backend.onrender.com/EmpProfile/sendMessage/${id}`, {message})
+  await axios.put(`/EmpProfile/sendMessage/${id}`, {message})
   .then((res)=>{
     if(res.data){
     alert("Message Sent Successfully")
@@ -46,7 +46,7 @@ async function sendMessage(id){
 
 
   async function getEmployees() {
-    await axios.get("https://itwalkin-backend.onrender.com/EmpProfile/getAllEmployees")
+    await axios.get("/EmpProfile/getAllEmployees")
       .then((res) => {
         let result = (res.data)
         // console.log(result.message)
@@ -78,7 +78,7 @@ async function sendMessage(id){
       showCancelButton:true
     }).then( async (res)=>{
       if(res.isConfirmed){
-        await axios.put(`https://itwalkin-backend.onrender.com/EmpProfile/isOnhold/${Empid}`,{isOnhold})
+        await axios.put(`/EmpProfile/isOnhold/${Empid}`,{isOnhold})
         .then((res)=>{
           getEmployees()
 
@@ -105,7 +105,7 @@ async function sendMessage(id){
       showCancelButton:true
     }).then( async (res)=>{
       if(res.isConfirmed){
-        await axios.put(`https://itwalkin-backend.onrender.com/EmpProfile/isOnhold/${Empid}`,{isOnhold})
+        await axios.put(`/EmpProfile/isOnhold/${Empid}`,{isOnhold})
         .then((res)=>{
 
     getEmployees()
@@ -132,7 +132,7 @@ async function sendMessage(id){
       showCancelButton:true
     }).then( async (res)=>{
       if(res.isConfirmed){
-        await axios.put(`https://itwalkin-backend.onrender.com/EmpProfile/isReject/${Empid}`,{isReject})
+        await axios.put(`/EmpProfile/isReject/${Empid}`,{isReject})
         .then((res)=>{
           getEmployees()
 
@@ -159,7 +159,7 @@ async function sendMessage(id){
       showCancelButton:true
     }).then( async (res)=>{
       if(res.isConfirmed){
-        await axios.put(`https://itwalkin-backend.onrender.com/EmpProfile/isReject/${Empid}`,{isReject})
+        await axios.put(`/EmpProfile/isReject/${Empid}`,{isReject})
         .then((res)=>{
 
     getEmployees()
@@ -186,7 +186,7 @@ async function sendMessage(id){
       showCancelButton:true
     }).then( async (res)=>{
       if(res.isConfirmed){
-        await axios.put(`https://itwalkin-backend.onrender.com/EmpProfile/setApproval/${Empid}`,{isApproved})
+        await axios.put(`/EmpProfile/setApproval/${Empid}`,{isApproved})
         .then((res)=>{
     getEmployees()
 
@@ -213,7 +213,7 @@ async function sendMessage(id){
       showCancelButton:true
     }).then( async (res)=>{
       if(res.isConfirmed){
-        await axios.put(`https://itwalkin-backend.onrender.com/EmpProfile/setApproval/${Empid}`,{isApproved})
+        await axios.put(`/EmpProfile/setApproval/${Empid}`,{isApproved})
         .then((res)=>{
     getEmployees()
 
@@ -237,7 +237,7 @@ async function sendMessage(id){
       confirmButtonText: 'delete!'
     }).then((result) => {
       if (result.isConfirmed) {
-        axios.delete(`https://itwalkin-backend.onrender.com/EmpProfile/deleteEmployee/${id}`)
+        axios.delete(`/EmpProfile/deleteEmployee/${id}`)
           .then((res) => {           
             getEmployees()
 
@@ -250,7 +250,7 @@ async function sendMessage(id){
   }
 
   async function AllEmployeesApANdDis() {
-    await axios.get("https://itwalkin-backend.onrender.com/EmpProfile/getAllEmployees")
+    await axios.get("/EmpProfile/getAllEmployees")
       .then((res) => {
         let result = (res.data)
         let sortedate = result.sort(function (a, b) {
@@ -264,7 +264,7 @@ async function sendMessage(id){
 
   async function checkAllApproved(e){
     if(e.target.checked){
-    await axios.get("https://itwalkin-backend.onrender.com/EmpProfile/getApprovedEmp")
+    await axios.get("/EmpProfile/getApprovedEmp")
     .then((res) => {
       let result = (res.data)
       setAllEmployees(result)  
@@ -278,7 +278,7 @@ async function sendMessage(id){
   }
   async function checkAllNotApproved(e){
     if(e.target.checked){
-    await axios.get("https://itwalkin-backend.onrender.com/EmpProfile/getNotApprovedEmp")
+    await axios.get("/EmpProfile/getNotApprovedEmp")
 
     .then((res) => {
       let result = (res.data)
