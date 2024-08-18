@@ -39,8 +39,9 @@ const screenSize = useScreenSize();
   const [topMessage, settopMessage] = useState("")
 
   async function getUser() {
-
-    await axios.get(`/StudentProfile/getProfile/${studId}`)
+    let userid = JSON.parse(localStorage.getItem("StudId"))
+    const headers = { authorization: userid +" "+ atob(JSON.parse(localStorage.getItem("StudLog"))) };
+    await axios.get(`/StudentProfile/getProfile/${studId}`, {headers})
       .then((res) => {
         let result = res.data.result
         if (result) {
@@ -82,8 +83,11 @@ const screenSize = useScreenSize();
       })
   }
   async function saveUpdate(e) {
+    let userid = JSON.parse(localStorage.getItem("StudId"))
+    const headers = { authorization: userid +" "+ atob(JSON.parse(localStorage.getItem("StudLog"))) };
     // e.preventDefault()
-    await axios.put(`/StudentProfile/updatProfile/${studId}`, { name, email, phoneNumber, Aadhar, panCard, NoticePeriod, ExpectedSalary, currentCTC, age, Qualification, Skills, Experiance })
+    await axios.put(`/StudentProfile/updatProfile/${studId}`, { name, email, phoneNumber, Aadhar, panCard, 
+      NoticePeriod, ExpectedSalary, currentCTC, age, Qualification, Skills, Experiance }, {headers})
       .then( async (res) => {
         let result = res.data
         if (result == "success") {

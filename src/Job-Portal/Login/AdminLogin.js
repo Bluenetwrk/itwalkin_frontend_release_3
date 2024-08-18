@@ -6,8 +6,8 @@ import axios from 'axios'
 
 
 function Admin() {
-  const [email, setEmail ] = useState("")
-  const [ password , setPassword ] = useState("")
+  const [email, setEmail ] = useState("Impulse@Admin321")
+  const [ password , setPassword ] = useState("Impulse@Admin123")
   const [ Error , setError ] = useState("")
   let navigate = useNavigate()
   const [ showPassword , setshowPassword ] = useState(false)
@@ -38,7 +38,8 @@ function Admin() {
     .then((res)=>{
       let result = res.data
       if(result.status=="success"){
-        localStorage.setItem("AdMLog", JSON.stringify(result.token))
+        localStorage.setItem("AdMLog", JSON.stringify(btoa(result.token)))
+        localStorage.setItem("IdLog", JSON.stringify(btoa(result.id)))
         navigate("/BIAddmin@Profile")
       }else if(result=="no user found"){
         setError("No user found")

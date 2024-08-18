@@ -26,7 +26,9 @@ const screenSize = useScreenSize();
 
       
     async function getjobs() {
-      await axios.get("/jobpost/getjobs")
+      let userid = atob(JSON.parse(localStorage.getItem("IdLog")))
+      const headers = { authorization: userid +" "+ atob(JSON.parse(localStorage.getItem("AdMLog"))) };
+      await axios.get("/jobpost/getjobs", {headers})
       .then((res) => {
         let result = (res.data)
        

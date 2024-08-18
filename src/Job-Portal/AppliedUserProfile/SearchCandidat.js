@@ -23,14 +23,12 @@ function SearchCandidate() {
     const [Result, setResult] = useState(false)
 const screenSize = useScreenSize();
 
-
-
-
     // let jobSeekerId = JSON.parse(localStorage.getItem("StudId"))
 
     async function getAllJobSeekers() {
-        await axios.get("https://itwalkin-backend.onrender.com/StudentProfile/getAllJobseekers")
-                        
+        let userid = JSON.parse(localStorage.getItem("EmpIdG"))
+        const headers = { authorization: userid +" "+ atob(JSON.parse(localStorage.getItem("EmpLog"))) };
+        await axios.get("StudentProfile/getAllJobseekers", {headers})                        
             .then((res) => {
                 let result = (res.data)
                 let sortedate = result.sort(function (a, b) {
@@ -127,13 +125,10 @@ const screenSize = useScreenSize();
                                 <>
 
                                     <ul className={styles.ul} key={i}>
-{Applieduser.premier?
                                         <li className={`${styles.li} ${styles.name} ${styles.onclick}`} onClick={() => { CheckProfile(Applieduser._id) }} >
                                             {Applieduser.name ? <a className={styles.namelink} title="Click to check the Contact Details">
                                                 {Applieduser.name}</a> : <li className={styles.Nli}>not updated</li>} </li>
-                                               :
-                                               <li className={`${styles.li} ${styles.name} ${styles.onclick}`}>you are not premier</li>
-                                                }
+                                               
                                         <li className={`${styles.li} ${styles.NoticePeriod}`}> {Applieduser.NoticePeriod ?
                                             Applieduser.NoticePeriod : <li className={styles.Nli}>not updated</li>} </li>
                                         <li className={`${styles.li} ${styles.age}`}> {Applieduser.age ?

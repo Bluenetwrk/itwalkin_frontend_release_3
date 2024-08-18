@@ -33,7 +33,9 @@ function AdminProfile() {
     },[])
 
     async function getAlljobs() {
-      await axios.get("/jobpost/getjobs")
+      let userid = atob(JSON.parse(localStorage.getItem("IdLog")))
+      const headers = { authorization: userid +" "+ atob(JSON.parse(localStorage.getItem("AdMLog"))) };
+      await axios.get("/jobpost/getjobs",{headers})
         .then((res) => {
           let result = (res.data)
           let sortedate = result.sort(function (a, b) {
@@ -51,7 +53,9 @@ function AdminProfile() {
     }, [])
 
     async function toDayPostedJobs() {
-      await axios.get(`/jobpost/getTodayPostedJobs`)
+      let userid = atob(JSON.parse(localStorage.getItem("IdLog")))
+      const headers = { authorization: userid +" "+ atob(JSON.parse(localStorage.getItem("AdMLog"))) };
+      await axios.get(`/jobpost/getTodayPostedJobs`, {headers})
         .then((res) => {
           let result = (res.data)
           // console.log("todays date ",result)
@@ -67,7 +71,9 @@ function AdminProfile() {
     }, [])
 
     async function getAllEmployees() {
-      await axios.get("/EmpProfile/getAllEmployees")
+      let userid = atob(JSON.parse(localStorage.getItem("IdLog")))
+      const headers = { authorization: userid +" "+ atob(JSON.parse(localStorage.getItem("AdMLog"))) };
+      await axios.get("/EmpProfile/getAllEmployees",{headers})
         .then((res) => {
           let result = (res.data)
           let sortedate = result.sort(function (a, b) {
@@ -86,7 +92,10 @@ function AdminProfile() {
 
 
     async function ApprovedEmployees() {
-      await axios.get("/EmpProfile/getApprovedEmp")
+      let userid = atob(JSON.parse(localStorage.getItem("IdLog")))
+      const headers = { authorization: userid +" "+ atob(JSON.parse(localStorage.getItem("AdMLog"))) };
+      
+      await axios.get("/EmpProfile/getApprovedEmp", {headers})
         .then((res) => {
           let result = (res.data)        
           setApprovedemployees(result)  
@@ -102,7 +111,9 @@ function AdminProfile() {
 
     
     async function NotApprovedEmployees() {
-      await axios.get("/EmpProfile/getNotApprovedEmp")
+      let userid = atob(JSON.parse(localStorage.getItem("IdLog")))
+      const headers = { authorization: userid +" "+ atob(JSON.parse(localStorage.getItem("AdMLog"))) };
+      await axios.get("/EmpProfile/getNotApprovedEmp", {headers})
         .then((res) => {
           let result = (res.data)
         
@@ -118,7 +129,9 @@ function AdminProfile() {
     }, [])
 
     async function toDayRegEmployees() {
-      await axios.get(`/EmpProfile/getTodaysEmpProfile`)
+      let userid = atob(JSON.parse(localStorage.getItem("IdLog")))
+      const headers = { authorization: userid +" "+ atob(JSON.parse(localStorage.getItem("AdMLog"))) };
+      await axios.get(`/EmpProfile/getTodaysEmpProfile`, {headers})
         .then((res) => {
           let result = (res.data)
           // console.log("todays date ",result)
@@ -134,8 +147,10 @@ function AdminProfile() {
     }, [])
 
     async function getFirmOrganisation() {
+      let userid = atob(JSON.parse(localStorage.getItem("IdLog")))
+      const headers = { authorization: userid +" "+ atob(JSON.parse(localStorage.getItem("AdMLog"))) };
       
-      await axios.get(`/EmpProfile/getFirmOrganisation`)
+      await axios.get(`/EmpProfile/getFirmOrganisation`, {headers})
         .then((res) => {
           let result = (res.data)
           // console.log("todays date ",result)
@@ -151,7 +166,9 @@ function AdminProfile() {
     }, [])
 
     async function getPvtLtdOrganisation() {
-      await axios.get(`/EmpProfile/getPvt.Ltd.Organisation`)
+      let userid = atob(JSON.parse(localStorage.getItem("IdLog")))
+      const headers = { authorization: userid +" "+ atob(JSON.parse(localStorage.getItem("AdMLog"))) };
+      await axios.get(`/EmpProfile/getPvt.Ltd.Organisation`, {headers})
         .then((res) => {
           let result = (res.data)
           // console.log("todays date ",result)
@@ -167,7 +184,9 @@ function AdminProfile() {
     }, [])
 
     async function getConsultancyOrganisation() {
-      await axios.get(`/EmpProfile/getConsultancyOrganisation`)
+      let userid = atob(JSON.parse(localStorage.getItem("IdLog")))
+      const headers = { authorization: userid +" "+ atob(JSON.parse(localStorage.getItem("AdMLog"))) };
+      await axios.get(`/EmpProfile/getConsultancyOrganisation`,{headers})
         .then((res) => {
           let result = (res.data)
           // console.log("todays date ",result)
@@ -185,7 +204,9 @@ function AdminProfile() {
 // Job Seekers.....Job Seekers.....Job Seekers.....
 
     async function getAllJobSeekers() {
-      await axios.get("/StudentProfile/getAllJobseekers")
+      let userid = atob(JSON.parse(localStorage.getItem("IdLog")))
+      const headers = { authorization: userid +" "+ atob(JSON.parse(localStorage.getItem("AdMLog"))) };
+      await axios.get("/StudentProfile/getAllJobseekers", {headers})
         .then((res) => {
           let result = (res.data)
           let sortedate = result.sort(function (a, b) {
@@ -220,7 +241,9 @@ function AdminProfile() {
 
     
     async function NotApprovedjobseekers() {
-      await axios.get("/StudentProfile/getNotApprovedStu")
+      let userid = atob(JSON.parse(localStorage.getItem("IdLog")))
+      const headers = { authorization: userid +" "+ atob(JSON.parse(localStorage.getItem("AdMLog"))) };
+      await axios.get("/StudentProfile/getNotApprovedStu", [headers])
         .then((res) => {
           let result = (res.data)
           // console.log(result)        
@@ -236,7 +259,9 @@ function AdminProfile() {
     }, [])
 
     async function todayRegisteredJobSeeker() {
-      await axios.get("/StudentProfile/getTodayStuProfile")
+      let userid = atob(JSON.parse(localStorage.getItem("IdLog")))
+      const headers = { authorization: userid +" "+ atob(JSON.parse(localStorage.getItem("AdMLog"))) };
+      await axios.get("/StudentProfile/getTodayStuProfile", {headers})
         .then((res) => {
           let result = (res.data)
           // console.log(result)        
@@ -252,7 +277,9 @@ function AdminProfile() {
     }, [])
     
     async function JobSeekerNoticePeriod() {
-      await axios.get("/StudentProfile/getNoticePeriod")
+      let userid = atob(JSON.parse(localStorage.getItem("IdLog")))
+      const headers = { authorization: userid +" "+ atob(JSON.parse(localStorage.getItem("AdMLog"))) };
+      await axios.get("/StudentProfile/getNoticePeriod", {headers})
         .then((res) => {
           let result = (res.data)
           // console.log(result)        

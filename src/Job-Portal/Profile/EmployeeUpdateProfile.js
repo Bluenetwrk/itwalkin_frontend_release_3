@@ -41,8 +41,9 @@ const screenSize = useScreenSize();
   const [topMessage, settopMessage] = useState("")
 
   async function getUser() {
-
-    await axios.get(`/EmpProfile/getProfile/${empId}`)
+    let userid = JSON.parse(localStorage.getItem("EmpIdG"))
+    const headers = { authorization: userid +" "+ atob(JSON.parse(localStorage.getItem("EmpLog"))) };
+    await axios.get(`/EmpProfile/getProfile/${empId}`, {headers})
       .then((res) => {
         let result = res.data.result
         console.log(result)
@@ -72,6 +73,8 @@ const screenSize = useScreenSize();
   }, [])
 
   async function saveUpdate(e) {
+    let userid = JSON.parse(localStorage.getItem("EmpIdG"))
+    const headers = { authorization: userid +" "+ atob(JSON.parse(localStorage.getItem("EmpLog"))) };
     // e.preventDefault()
     // console.log("before saving", empId,
     //   name, email, phoneNumber, Aadhar, panCard,CompanyName,CompanyContact, CompanyGSTIN, CompanyWebsite, CompanyAddress,
@@ -79,9 +82,7 @@ const screenSize = useScreenSize();
     // )
     await axios.put(`/EmpProfile/updatProfile/${empId}`, {
       name, email, phoneNumber, Aadhar, panCard, CompanyName, CompanyContact, CompanyGSTIN, CompanyWebsite,
-      CompanyAddress, CompanyEmail, TypeofOrganisation
-
-    })
+      CompanyAddress, CompanyEmail, TypeofOrganisation}, {headers})
       .then(async (res) => {
         let result = res.data
         if (result == "success") {

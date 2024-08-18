@@ -68,7 +68,7 @@ useEffect(() => {
               let token =result.token
               let GuserId=result.id
               if (result.status=="success"){  
-                localStorage.setItem("EmpLog", JSON.stringify(token))
+                localStorage.setItem("EmpLog", JSON.stringify(btoa(token)))
                 localStorage.setItem("EmpIdG", JSON.stringify(GuserId))
                 navigate("/postedjobs",{state: {gserid : GuserId}})    
               }

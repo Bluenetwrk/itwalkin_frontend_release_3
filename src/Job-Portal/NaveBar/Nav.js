@@ -4,6 +4,7 @@ import Styles from "./nav.module.css"
 import logo from "../img/Blue.jpg"
 import logIn from "../img/user_3177440.png"
 import NavIcon from "../img/icons8-menu-50.png"
+import Cancel from "../img/icons8-cross-50.png"
 import HomeIcon from "../img/icons8-home-30.png"
 import EmpNotification from "../img/icons8-notification-33.png"
 import JobseekerNotification from "../img/icons8-notification-30.png"
@@ -84,9 +85,6 @@ function Nav(props) {
   function EmployeeProfile() {
     navigate("/MyProfile")
   }
-
- 
-
 
   return (
     <>
@@ -209,7 +207,7 @@ function Nav(props) {
                     </div>
                     <div className={Styles.linkWrapper}>
                       <NavLink to="/" className={Styles.Hlink} style={navLinkStyles}> Home</NavLink>
-                      <NavLink to="/AboutUs" className={Styles.Hlink} style={navLinkStyles} style={{ marginLeft: "-2px" }}>About Us</NavLink>
+                      <NavLink to="/AboutUs" className={`${Styles.Hlink} ${Styles.Aboutus}`} style={navLinkStyles} >About Us</NavLink>
                       <NavLink to="/Services" className={Styles.Hlink} style={navLinkStyles}>Services</NavLink>
                       <NavLink to="/Contact" className={Styles.Hlink} style={navLinkStyles}>Contact</NavLink>
                       {/* <NavLink to="/BIAdd@Logg" className={Styles.Hlink}>AdminLogin</NavLink> */}
@@ -345,13 +343,13 @@ function Nav(props) {
                 // ............................................Home Nave....................................................      
                 :
 
-
                 <>
 
                   <div className={Styles.fullnavewrapper}>
-
-                    <img className={`${Styles.NavIcon} `} src={NavIcon} ref={SimgRef} onClick={() => { setShowSideNave((prev) => !prev) }} />
-
+{ShowSideNave?
+    <img className={`${Styles.NavIcon} `} src={Cancel} ref={SimgRef} onClick={() => { setShowSideNave((prev) => !prev) }} />
+    :<img className={`${Styles.NavIcon} `} src={NavIcon} ref={SimgRef} onClick={() => { setShowSideNave((prev) => !prev) }} />
+}
                     <NavLink to="/" > <img className={Styles.MobHomelogo} src={logo} /> </NavLink>
                     <div className={Styles.linkWrapper}>
                       <NavLink to="/" className={`${Styles.Hlink} ${Styles.HomeIcon}`}>  <img src={HomeIcon} /></NavLink>
@@ -364,18 +362,13 @@ function Nav(props) {
                         : ""}
                     </div>
                     </div>
-                    <div ref={SmenuRef} > 
-                    {ShowSideNave?
+                    {/* {ShowSideNave? */}
+                    <div ref={SmenuRef} className={`${Styles.MovileNavOptions} `} 
+                    style={ShowSideNave?{marginLeft:"0px" }: {marginLeft:"-380px"}}
+                    > 
                      <SidebarNav setShowSideNaveProps={setShowSideNave} /> 
-//                     <div className={`${Styles.MovileNavOptions} `} style={ShowSideNave? {height:"500px"}: {height:"-0px"} } >
-// <p onClick={()=>{navigate("/")}} className={`${Styles.p} `}>Home</p>
-// <p onClick={()=>{navigate("/AboutUs")}} className={`${Styles.p} `}>About Us</p>
-// <p onClick={()=>{navigate("/Services")}} className={`${Styles.p} `}>Services</p>
-// <p onClick={()=>{navigate("/Contact")}} className={`${Styles.p} `}>Contact</p>
-// <p onClick={()=>{navigate("/TermsAndCondition")}} className={`${Styles.p} `}>Terms & Conditions</p>
-// </div>
-                 :"" }  
 </div>
+                 {/* :"" }   */}
                   
 
                 </>

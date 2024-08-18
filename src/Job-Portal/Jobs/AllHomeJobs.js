@@ -49,7 +49,6 @@ function Home() {
   }, [])
 
 
-
   // let menuRef = useRef();
   // let imgRef = useRef();
 
@@ -60,7 +59,9 @@ function Home() {
   // })
   async function getjobs() {
     setPageLoader(true)
-    await axios.get("/jobpost/getjobs")
+    const headers = { authorization: 'BlueItImpulseWalkinIn'};
+
+    await axios.get("/jobpost/getHomejobs", {headers})
       .then((res) => {
 
         let result = (res.data)
@@ -479,8 +480,7 @@ return user
 
                   </a>
 
-                }
-                    
+                }                  
                     
                     
                       {items.Source ?

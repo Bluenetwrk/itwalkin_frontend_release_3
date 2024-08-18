@@ -30,9 +30,11 @@ function JoppostedByEmp() {
   let empId = JSON.parse(localStorage.getItem("EmpIdG"))
 
   async function getjobs() {
+    let userid = JSON.parse(localStorage.getItem("EmpIdG"))
+    const headers = { authorization: userid +" "+ atob(JSON.parse(localStorage.getItem("EmpLog"))) };
     setPageLoader(true)
     setTimeout(async () => {
-      await axios.get(`/jobpost/getPostedjobs/${empId}`)
+      await axios.get(`/jobpost/getPostedjobs/${empId}`, {headers})
         .then((res) => {
           let result = (res.data)
           let sortedate = result.sort(function (a, b) {
@@ -40,7 +42,7 @@ function JoppostedByEmp() {
           });
           setMyjobs(sortedate)
           setmyjobsforFilter(sortedate)
-          setPageLoader(false)
+    setPageLoader(false)
           if (res.data.length == 0) {
             setNoJobFound("You have not posted any job")
           }
@@ -49,12 +51,15 @@ function JoppostedByEmp() {
           alert("back error occured")
         })
     }, 1000)
+
   }
   useEffect(() => {
     getjobs()
   }, [])
   // .................delete function............
   async function deletejob(deleteid) {
+    let userid = JSON.parse(localStorage.getItem("EmpIdG"))
+    const headers = { authorization: userid +" "+ atob(JSON.parse(localStorage.getItem("EmpLog"))) };
     Swal.fire({
       title: 'Are you sure?',
       // icon: 'warning',
@@ -69,7 +74,7 @@ function JoppostedByEmp() {
       confirmButtonText: 'delete!'
     }).then((result) => {
       if (result.isConfirmed) {
-        axios.delete(`/jobpost/deleteProduct/${deleteid}`)
+        axios.delete(`/jobpost/deleteProduct/${deleteid}`, {headers})
           .then((res) => {
             getjobs()
           })
@@ -235,24 +240,14 @@ function JoppostedByEmp() {
 
                       }
                     </li>
-
-
-
-
                   </ul>
                 )
               })
               // :""
-              : <p style={{ marginLeft: "48%", color: "red" }}>No Jobs Found</p>
+              : <p style={{ marginLeft: "44%", color: "red" }}>You have not posted any jobs yet</p>
           }
 
-
-
         </div>
-
-
-
-
       </>
       :
       <> 
@@ -379,7 +374,7 @@ myjobs.map((job, i) => {
     </>
   )
 })
-: <p style={{ marginLeft: "40%", color: "red" }}> No Jobs Found</p>
+: <p style={{ marginLeft: "39%", color: "red" }}> No Jobs Found</p>
 }
 
 </div>

@@ -18,9 +18,7 @@ function AllJobSeekersAdmin() {
         if(!adminLogin){
             navigate("/")
         }
-    },[])
-
-    
+    },[])    
 
   const [jobSeekers , setjobSeekers] = useState([])
   const [Result , setResult] = useState(false)
@@ -48,11 +46,11 @@ async function sendMessage(id){
 }
 
 
-
-  // let jobSeekerId = JSON.parse(localStorage.getItem("StudId"))
       
   async function getAllJobSeekers() {
-    await axios.get("/StudentProfile/getAllJobseekers")
+    let userid = atob(JSON.parse(localStorage.getItem("IdLog")))
+    const headers = { authorization: userid +" "+ atob(JSON.parse(localStorage.getItem("AdMLog"))) };
+    await axios.get("/StudentProfile/getAllJobseekers", {headers})
       .then((res) => {
         let result = (res.data)
     
@@ -70,6 +68,8 @@ async function sendMessage(id){
 
   
   function  Hold(Empid , status){
+    let userid = atob(JSON.parse(localStorage.getItem("IdLog")))
+    const headers = { authorization: userid +" "+ atob(JSON.parse(localStorage.getItem("AdMLog"))) };
     const isOnhold=status
     Swal.fire({
       title: "Are You sure?",
@@ -83,7 +83,7 @@ async function sendMessage(id){
       showCancelButton:true
     }).then( async (res)=>{
       if(res.isConfirmed){
-        await axios.put(`/StudentProfile/isOnhold/${Empid}`,{isOnhold})
+        await axios.put(`/StudentProfile/isOnhold/${Empid}`,{isOnhold}, {headers})
         .then((res)=>{
     getAllJobSeekers()
 
@@ -98,20 +98,20 @@ async function sendMessage(id){
 
   function  unHold(Empid , status){
     const isOnhold=status
-
+    let userid = atob(JSON.parse(localStorage.getItem("IdLog")))
+    const headers = { authorization: userid +" "+ atob(JSON.parse(localStorage.getItem("AdMLog"))) };
     Swal.fire({
       title: "Are You sure?",
       // icon:"question",
     // position:"top",
     width:"260",
-
     customClass:{
       popup:"alertIcon"
     },
       showCancelButton:true
     }).then( async (res)=>{
       if(res.isConfirmed){
-        await axios.put(`/StudentProfile/isOnhold/${Empid}`,{isOnhold})
+        await axios.put(`/StudentProfile/isOnhold/${Empid}`,{isOnhold}, {headers})
         .then((res)=>{
           getAllJobSeekers()
 
@@ -121,10 +121,10 @@ async function sendMessage(id){
       }
     })
   }
-
-
   
   function Reject(Empid , status){
+    let userid = atob(JSON.parse(localStorage.getItem("IdLog")))
+    const headers = { authorization: userid +" "+ atob(JSON.parse(localStorage.getItem("AdMLog"))) };
     const isReject=status
     Swal.fire({
       title: "Are You sure?",
@@ -138,7 +138,7 @@ async function sendMessage(id){
       showCancelButton:true
     }).then( async (res)=>{
       if(res.isConfirmed){
-        await axios.put(`/StudentProfile/isReject/${Empid}`,{isReject})
+        await axios.put(`/StudentProfile/isReject/${Empid}`,{isReject}, {headers})
         .then((res)=>{
 
     getAllJobSeekers()
@@ -152,6 +152,8 @@ async function sendMessage(id){
 
   function unReject(Empid , status){
     const isReject=status
+    let userid = atob(JSON.parse(localStorage.getItem("IdLog")))
+    const headers = { authorization: userid +" "+ atob(JSON.parse(localStorage.getItem("AdMLog"))) };
 
     Swal.fire({
       title: "Are You sure?",
@@ -165,7 +167,7 @@ async function sendMessage(id){
       showCancelButton:true
     }).then( async (res)=>{
       if(res.isConfirmed){
-        await axios.put(`/StudentProfile/isReject/${Empid}`,{isReject})
+        await axios.put(`/StudentProfile/isReject/${Empid}`,{isReject}, {headers})
         .then((res)=>{
           getAllJobSeekers()
 
@@ -175,13 +177,9 @@ async function sendMessage(id){
       }
     })
   }
-
-
-
-
-
-
   function Approve(Empid , status){
+    let userid = atob(JSON.parse(localStorage.getItem("IdLog")))
+    const headers = { authorization: userid +" "+ atob(JSON.parse(localStorage.getItem("AdMLog"))) };
     const isApproved = status
     Swal.fire({
       title: "Are You sure?",
@@ -194,10 +192,9 @@ async function sendMessage(id){
       showCancelButton:true
     }).then( async (res)=>{
       if(res.isConfirmed){
-        await axios.put(`/StudentProfile/setApproval/${Empid}`,{isApproved})
+        await axios.put(`/StudentProfile/setApproval/${Empid}`,{isApproved}, {headers})
         .then((res)=>{
-    getAllJobSeekers()
-    
+    getAllJobSeekers()   
 
         }).catch((err)=>{
           alert("backend error occured")
@@ -208,6 +205,8 @@ async function sendMessage(id){
   }
 
   function DisApprove(Empid , status){
+    let userid = atob(JSON.parse(localStorage.getItem("IdLog")))
+    const headers = { authorization: userid +" "+ atob(JSON.parse(localStorage.getItem("AdMLog"))) };
     const isApproved = status
     Swal.fire({
       title: "Are You sure?",
@@ -222,7 +221,7 @@ async function sendMessage(id){
       showCancelButton:true
     }).then( async (res)=>{
       if(res.isConfirmed){
-        await axios.put(`/StudentProfile/setApproval/${Empid}`,{isApproved})
+        await axios.put(`/StudentProfile/setApproval/${Empid}`,{isApproved}, {headers})
         .then((res)=>{
     getAllJobSeekers()
 
@@ -259,7 +258,9 @@ async function sendMessage(id){
     
   
 async function AllJoseekerApANdDis() {
-  await axios.get("/StudentProfile/getAllJobseekers")
+  let userid = atob(JSON.parse(localStorage.getItem("IdLog")))
+  const headers = { authorization: userid +" "+ atob(JSON.parse(localStorage.getItem("AdMLog"))) };
+  await axios.get("/StudentProfile/getAllJobseekers", {headers})
 
     .then((res) => {
       let result = (res.data)
@@ -272,7 +273,9 @@ async function AllJoseekerApANdDis() {
 }
 
 async function Approvedjobseekers() {
-  await axios.get("/StudentProfile/getApprovedStu")
+  let userid = atob(JSON.parse(localStorage.getItem("IdLog")))
+  const headers = { authorization: userid +" "+ atob(JSON.parse(localStorage.getItem("AdMLog"))) };
+  await axios.get("/StudentProfile/getApprovedStu", {headers})
     .then((res) => {
       let result = (res.data)
 
@@ -285,7 +288,9 @@ async function Approvedjobseekers() {
 
 
 async function NotApprovedjobseekers() {
-  await axios.get("/StudentProfile/getNotApprovedStu")
+  let userid = atob(JSON.parse(localStorage.getItem("IdLog")))
+  const headers = { authorization: userid +" "+ atob(JSON.parse(localStorage.getItem("AdMLog"))) };
+  await axios.get("/StudentProfile/getNotApprovedStu", {headers})
     .then((res) => {
       let result = (res.data)
       // console.log(result)        

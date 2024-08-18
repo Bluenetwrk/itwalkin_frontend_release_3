@@ -7,12 +7,10 @@ import { useNavigate } from 'react-router-dom'
 import { Editor } from 'react-draft-wysiwyg';
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css"; 
 
-
 import Style from "./postJobs.module.css"
 
 function PostJobs() {
     let empId = JSON.parse(localStorage.getItem("EmpIdG"))
-
     const [jobtitle, setJobTitle] = useState("")
     const [Source, setSource] = useState("")
     const [SourceLink, setSourceLink] = useState("")
@@ -36,10 +34,14 @@ function PostJobs() {
     let navigate= useNavigate()
 
     async function getProfile() {
-        await axios.get(`/EmpProfile/getProfile/${empId}`)
+        let userid = JSON.parse(localStorage.getItem("EmpIdG"))
+        const headers = { authorization: userid +" "+ atob(JSON.parse(localStorage.getItem("EmpLog"))) };
+        await axios.get(`/EmpProfile/getProfile/${empId}` , {headers})
             .then((res) => {
                 let result = res.data.result
                 let companyName = res.data.result.CompanyName
+    console.log(companyName)
+
                 setProfileData([result])
                 setCompanyName(companyName)
             }).catch((err) => {
@@ -52,7 +54,9 @@ function PostJobs() {
     }, [])
 
     async function getLogo() {
-        await axios.get(`/EmpProfile/getLogo/${empId}`)
+        let userid = JSON.parse(localStorage.getItem("EmpIdG"))
+        const headers = { authorization: userid +" "+ atob(JSON.parse(localStorage.getItem("EmpLog"))) };
+        await axios.get(`/EmpProfile/getLogo/${empId}`,{headers})
             .then((res) => {
                 let result = res.data
                 setLogo(result)
@@ -65,22 +69,18 @@ function PostJobs() {
         getLogo()
     }, [])
 
-    // useEffect(()=>{
-
-    // },[successMessage])
-
-    // useEffect(()=>{
-
-    // },[errorMessage])
-
-
 
     async function postJob() {
+        let userid = JSON.parse(localStorage.getItem("EmpIdG"))
+        const headers = { authorization: userid +" "+ atob(JSON.parse(localStorage.getItem("EmpLog"))) };
+
        let jobTitle = jobtitle.toLowerCase()
        let jobLocation = joblocation.toLowerCase()
-        await axios.post("/jobpost/jobpost/", { Logo, SourceLink, Source, empId, jobTitle, companyName, jobDescription, jobtype, salaryRange, jobLocation, qualification, experiance, skills })
+        await axios.post("/jobpost/jobpost/", { Logo, SourceLink, Source, empId, jobTitle, companyName, 
+            jobDescription, jobtype, salaryRange, jobLocation, qualification, experiance, skills },{headers})
             .then((res) => {
                 let result = (res.data)
+                console.log(result)
                 if (result == "success") {
                     setJobTitle("")
                     setJobDescription("")
@@ -93,7 +93,7 @@ function PostJobs() {
                     setSuccessMessage("Success! job successfully posted")
                 }
                 else if (result == "field are missing") {
-                    setSuccessMessage("Alert!... JobTitle, CompanyName JobDescription, Experiance, JobLocation and Skills must be filled")
+    setSuccessMessage("Alert!... JobTitle, CompanyName JobDescription, Experiance, JobLocation and Skills must be filled")
                 }
             }).catch((err) => {
                 alert("server issue occured", err)
@@ -139,7 +139,7 @@ window.addEventListener('keypress', function(event){
                         
                             <div key={i}>
                                               <button className={Style.searchButton} onClick={()=>{
-        navigate("/Search-Candidate")}}>Search Candidate</button>
+                    navigate("/Search-Candidate")}}>Search Candidate</button>
                                 {Logo ? <img className={Style.logo} src={Logo} /> :
                                     <p style={{ color: "red", marginLeft: "5%", fontStyle: "italic" }}> Alert! You have not updated the Company logo, please update the Company Logo</p>}
                                 {/* <h3 style={{ color: "blue", marginLeft: "15%" }}>Welcome to Post job Page, Post a Job and get Connected with Job Seekers</h3> */}
@@ -148,7 +148,8 @@ window.addEventListener('keypress', function(event){
 
 
                                     <div className={Style.postJobWrapper}>
-                                        <p className={Style.successmessage}>{successMessage} </p>
+                                        <p className={successMessage==="Alert!... JobTitle, CompanyName JobDescription, Experiance, JobLocation and Skills must be filled"?
+                                        Style.errormessage: Style.successmessage}>{successMessage} </p>
                                         {/* <p className={Style.errormessage}>{errorMessage} </p> */}
 
 
@@ -169,8 +170,8 @@ window.addEventListener('keypress', function(event){
                                </>
                                 :""
                                     } */}
-                                        <h4 className={Style.jobHeadline}>Company Name** &nbsp;<span className={Style.hint}>(Update Company Name from your Profile)</span></h4>
-                                        <input maxLength="30" className={Style.inputbox} type="text" value={companyName} />
+                                        <h4 className={Style.jobHeadline}>Company Name** &nbsp;<span  className={Style.hint}>(Update Company Name from your Profile)</span></h4>
+                                        <input maxLength="30" className={Style.inputbox} type="text" value={companyName} disabled />
 
 
                                         <h4 className={Style.jobHeadline}>Job Description**</h4>

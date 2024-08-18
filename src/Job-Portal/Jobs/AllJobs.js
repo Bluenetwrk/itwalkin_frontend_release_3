@@ -47,10 +47,11 @@ const [Loader, setLoader] = useState(false)
   const navigate = useNavigate()
   const Location = useLocation()
 
-
   async function getjobs() {
     setPageLoader(true)
-    await axios.get("/jobpost/getjobs")
+  let userid = JSON.parse(localStorage.getItem("StudId"))
+    const headers = { authorization: userid +" "+ atob(JSON.parse(localStorage.getItem("StudLog"))) };
+    await axios.get("/jobpost/getjobs", {headers})
       .then((res) => {
         let result = (res.data)
         let sortedate = result.sort((a, b) => {
@@ -72,14 +73,14 @@ const [Loader, setLoader] = useState(false)
     window.open(`${Link}`)
   }
 
-
   async function applyforJob(jobId) {
-
+    let userid = JSON.parse(localStorage.getItem("StudId"))
+    const headers = { authorization: userid +" "+ atob(JSON.parse(localStorage.getItem("StudLog"))) };
     setclickedJobId(jobId)
     setLoader(true)
     setTimeout(async () => {
 
-      await axios.put(`/jobpost/updatforJobApply/${jobId}`, { jobSeekerId })
+      await axios.put(`/jobpost/updatforJobApply/${jobId}`, { jobSeekerId }, {headers})
         .then((res) => {
           setLoader(false)
           getjobs()
@@ -87,7 +88,7 @@ const [Loader, setLoader] = useState(false)
         }).catch((err) => {
           alert("server issue occured", err)
         })
-    }, 1000)
+    }, 700)
   }
 
   // async function search(e) {

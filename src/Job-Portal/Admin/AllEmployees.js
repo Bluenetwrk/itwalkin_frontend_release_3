@@ -33,7 +33,9 @@ const [currentBox, setcurrentBox] = useState("")
 const [message, setmessage] = useState("")
     
 async function sendMessage(id){
-  await axios.put(`/EmpProfile/sendMessage/${id}`, {message})
+  let userid = atob(JSON.parse(localStorage.getItem("IdLog")))
+  const headers = { authorization: userid +" "+ atob(JSON.parse(localStorage.getItem("AdMLog"))) };
+  await axios.put(`/EmpProfile/sendMessage/${id}`, {message}, {headers})
   .then((res)=>{
     if(res.data){
     alert("Message Sent Successfully")
@@ -46,7 +48,9 @@ async function sendMessage(id){
 
 
   async function getEmployees() {
-    await axios.get("/EmpProfile/getAllEmployees")
+    let userid = atob(JSON.parse(localStorage.getItem("IdLog")))
+    const headers = { authorization: userid +" "+ atob(JSON.parse(localStorage.getItem("AdMLog"))) };
+    await axios.get("/EmpProfile/getAllEmployees",{headers})
       .then((res) => {
         let result = (res.data)
         // console.log(result.message)
@@ -65,6 +69,8 @@ async function sendMessage(id){
 
 
   function  Hold(Empid , status){
+    let userid = atob(JSON.parse(localStorage.getItem("IdLog")))
+    const headers = { authorization: userid +" "+ atob(JSON.parse(localStorage.getItem("AdMLog"))) };
     const isOnhold=status
     Swal.fire({
       title: "Are You sure?",
@@ -78,7 +84,7 @@ async function sendMessage(id){
       showCancelButton:true
     }).then( async (res)=>{
       if(res.isConfirmed){
-        await axios.put(`/EmpProfile/isOnhold/${Empid}`,{isOnhold})
+        await axios.put(`/EmpProfile/isOnhold/${Empid}`,{isOnhold}, {headers})
         .then((res)=>{
           getEmployees()
 
@@ -91,8 +97,9 @@ async function sendMessage(id){
   }    
 
   function  unHold(Empid , status){
+    let userid = atob(JSON.parse(localStorage.getItem("IdLog")))
+    const headers = { authorization: userid +" "+ atob(JSON.parse(localStorage.getItem("AdMLog"))) };
     const isOnhold=status
-
     Swal.fire({
       title: "Are You sure?",
       // icon:"question",
@@ -105,7 +112,7 @@ async function sendMessage(id){
       showCancelButton:true
     }).then( async (res)=>{
       if(res.isConfirmed){
-        await axios.put(`/EmpProfile/isOnhold/${Empid}`,{isOnhold})
+        await axios.put(`/EmpProfile/isOnhold/${Empid}`,{isOnhold},{headers})
         .then((res)=>{
 
     getEmployees()
@@ -119,6 +126,8 @@ async function sendMessage(id){
 
   
   function Reject(Empid , status){
+    let userid = atob(JSON.parse(localStorage.getItem("IdLog")))
+    const headers = { authorization: userid +" "+ atob(JSON.parse(localStorage.getItem("AdMLog"))) };
     const isReject=status
     Swal.fire({
       title: "Are You sure?",
@@ -132,7 +141,7 @@ async function sendMessage(id){
       showCancelButton:true
     }).then( async (res)=>{
       if(res.isConfirmed){
-        await axios.put(`/EmpProfile/isReject/${Empid}`,{isReject})
+        await axios.put(`/EmpProfile/isReject/${Empid}`,{isReject}, {headers})
         .then((res)=>{
           getEmployees()
 
@@ -146,7 +155,8 @@ async function sendMessage(id){
 
   function unReject(Empid , status){
     const isReject=status
-
+    let userid = atob(JSON.parse(localStorage.getItem("IdLog")))
+    const headers = { authorization: userid +" "+ atob(JSON.parse(localStorage.getItem("AdMLog"))) };
     Swal.fire({
       title: "Are You sure?",
       // icon:"question",
@@ -159,7 +169,7 @@ async function sendMessage(id){
       showCancelButton:true
     }).then( async (res)=>{
       if(res.isConfirmed){
-        await axios.put(`/EmpProfile/isReject/${Empid}`,{isReject})
+        await axios.put(`/EmpProfile/isReject/${Empid}`,{isReject}, {headers})
         .then((res)=>{
 
     getEmployees()
@@ -173,6 +183,8 @@ async function sendMessage(id){
 
 
    function Approve(Empid , status){
+    let userid = atob(JSON.parse(localStorage.getItem("IdLog")))
+    const headers = { authorization: userid +" "+ atob(JSON.parse(localStorage.getItem("AdMLog"))) };
     const isApproved=status
     Swal.fire({
       title: "Are You sure ?",
@@ -186,7 +198,7 @@ async function sendMessage(id){
       showCancelButton:true
     }).then( async (res)=>{
       if(res.isConfirmed){
-        await axios.put(`/EmpProfile/setApproval/${Empid}`,{isApproved})
+        await axios.put(`/EmpProfile/setApproval/${Empid}`,{isApproved}, {headers})
         .then((res)=>{
     getEmployees()
 
@@ -200,7 +212,8 @@ async function sendMessage(id){
 
   function DisApprove(Empid , status){
     const isApproved=status
-
+    let userid = atob(JSON.parse(localStorage.getItem("IdLog")))
+    const headers = { authorization: userid +" "+ atob(JSON.parse(localStorage.getItem("AdMLog"))) };
     Swal.fire({
       title: "Are You sure?",
       // position:"top",
@@ -213,7 +226,7 @@ async function sendMessage(id){
       showCancelButton:true
     }).then( async (res)=>{
       if(res.isConfirmed){
-        await axios.put(`/EmpProfile/setApproval/${Empid}`,{isApproved})
+        await axios.put(`/EmpProfile/setApproval/${Empid}`,{isApproved}, {headers})
         .then((res)=>{
     getEmployees()
 
@@ -250,7 +263,9 @@ async function sendMessage(id){
   }
 
   async function AllEmployeesApANdDis() {
-    await axios.get("/EmpProfile/getAllEmployees")
+    let userid = atob(JSON.parse(localStorage.getItem("IdLog")))
+    const headers = { authorization: userid +" "+ atob(JSON.parse(localStorage.getItem("AdMLog"))) };
+    await axios.get("/EmpProfile/getAllEmployees", {headers})
       .then((res) => {
         let result = (res.data)
         let sortedate = result.sort(function (a, b) {
@@ -263,8 +278,10 @@ async function sendMessage(id){
 
 
   async function checkAllApproved(e){
+    let userid = atob(JSON.parse(localStorage.getItem("IdLog")))
+    const headers = { authorization: userid +" "+ atob(JSON.parse(localStorage.getItem("AdMLog"))) };
     if(e.target.checked){
-    await axios.get("/EmpProfile/getApprovedEmp")
+    await axios.get("/EmpProfile/getApprovedEmp", {headers})
     .then((res) => {
       let result = (res.data)
       setAllEmployees(result)  
@@ -277,8 +294,10 @@ async function sendMessage(id){
     }  
   }
   async function checkAllNotApproved(e){
+    let userid = atob(JSON.parse(localStorage.getItem("IdLog")))
+    const headers = { authorization: userid +" "+ atob(JSON.parse(localStorage.getItem("AdMLog"))) };
     if(e.target.checked){
-    await axios.get("/EmpProfile/getNotApprovedEmp")
+    await axios.get("/EmpProfile/getNotApprovedEmp", {headers})
 
     .then((res) => {
       let result = (res.data)
@@ -312,8 +331,7 @@ async function search(e) {
   }
 
   return (
-    <>
-      
+    <>     
 
       <h4 style={{marginLeft:"20px", marginTop:"10px"}}>All Employees for admin</h4>
       <div className={styles.searchBoth}>

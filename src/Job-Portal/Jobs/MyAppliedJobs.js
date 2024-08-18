@@ -42,10 +42,12 @@ const screenSize = useScreenSize();
 
 
   async function getjobs() {
+    let userid = JSON.parse(localStorage.getItem("StudId"))
+    const headers = { authorization: userid +" "+ atob(JSON.parse(localStorage.getItem("StudLog"))) };
     setPageLoader(true)
     setTimeout(async () => {
 
-      await axios.get(`/jobpost/getMyAppliedjobs/${jobSeekerId}`)
+      await axios.get(`/jobpost/getMyAppliedjobs/${jobSeekerId}`,{headers})
         .then((res) => {
           let result = (res.data)
           let sortedate = result.sort(function (a, b) {
@@ -68,12 +70,12 @@ const screenSize = useScreenSize();
   }, [])
 
   async function UndoApply(id) {
+    let userid = JSON.parse(localStorage.getItem("StudId"))
+    const headers = { authorization: userid +" "+ atob(JSON.parse(localStorage.getItem("StudLog"))) };
     Swal.fire({
       title: 'Are you sure?',
-      // icon: 'warning',
-      
+      // icon: 'warning',      
     width:"260",
-
       // position:"top",
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
@@ -86,8 +88,7 @@ const screenSize = useScreenSize();
       }
     }).then((result) => {
       if (result.isConfirmed) {
-
-        axios.put(`/jobpost/updatforUndoJobApplied/${id}`, { jobSeekerId })
+        axios.put(`/jobpost/updatforUndoJobApplied/${id}`, { jobSeekerId },{headers})
           .then((res) => {
             getjobs()
           }).catch((err) => {

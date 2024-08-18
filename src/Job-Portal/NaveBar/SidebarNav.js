@@ -8,9 +8,9 @@ function SidebarNav(props) {
   return (
   <>
   
-      <div className={`${Styles.MovileNavOptions} `} ref ={props.refrence}>
-      <p style={{marginLeft:"80%"}} onClick={()=>{props.setShowSideNaveProps((prev)=>!prev)}}> &#10005;</p>
-      <div style={{ marginTop:"-40px"}}>
+      <div  ref ={props.refrence} >
+      {/* <p style={{marginLeft:"80%"}} onClick={()=>{props.setShowSideNaveProps((prev)=>!prev)}}> &#10005;</p> */}
+      <div style={{ marginTop:"-15px"}}>
         <p onClick={()=>{navigate("/")}} className={`${Styles.p} `}>Home </p>
         <p onClick={()=>{navigate("/AboutUs")}} className={`${Styles.p} `}>About Us</p>
         <p onClick={()=>{navigate("/Services")}} className={`${Styles.p} `}>Services</p>

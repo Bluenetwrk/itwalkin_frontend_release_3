@@ -53,8 +53,8 @@ import TermsAndCondition from "./Job-Portal/TermsAndConditions"
 import Footer from "./Job-Portal/Footer/Footer";
 
 import Payment from "./Job-Portal/Payment"
-// axios.defaults.baseURL = "http://localhost:8080";
-axios.defaults.baseURL = "https://itwalkin-backend.onrender.com";
+axios.defaults.baseURL = "http://localhost:8080";
+// axios.defaults.baseURL = "https://itwalkin-backend.onrender.com";
 const App = () => {
   return (
     <>
@@ -86,7 +86,7 @@ const App = () => {
 
           <Route path="/BIAdd@Logg" element={<AdminLogin />} />
           <Route path="/BIAdd@Gmail" element={<SearchParams/>} />
-          <Route path="/BIAdd@Gmaill?" element={<SearchParamsDub/>} />
+          <Route path="/BIAdd@Gmaill" element={<SearchParamsDub/>} />
           <Route path="/BIAddmin@Profile" element={<AdminProfile />} />
           <Route path="/BIAddmin@AllJobs" element={<AllJobsForAdmin />} />
           <Route path="/BIAddmin@AllJobSeekers" element={<AllJobSeekers />} />

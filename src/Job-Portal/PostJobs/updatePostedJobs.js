@@ -30,7 +30,9 @@ function UpdatePostedJobs() {
     const[successMessage, setSuccessMessage] = useState("")
 
     async function getPostedJobs(){
-       await axios.get(`/jobpost/getJobForUpdate/${Jobid}`)
+        let userid = JSON.parse(localStorage.getItem("EmpIdG"))
+        const headers = { authorization: userid +" "+ atob(JSON.parse(localStorage.getItem("EmpLog"))) };
+       await axios.get(`/jobpost/getJobForUpdate/${Jobid}`, {headers})
        .then((res)=>{
         let result=res.data
         if(result){
@@ -102,21 +104,15 @@ window.addEventListener('keypress', function(event){
 
     return (
         <>
-            <h1>update posted jobs</h1>
+
             <div className={Style.postJobPageWrapper}>
 
                 <div className={Style.postJobWrapper}>
                 <p className={Style.successmessage}>{successMessage} </p>
                 <p className={Style.errormessage}>{errorMessage} </p>
 
-                    <h4 className={Style.jobHeadline}>Job title</h4>
-                    <input maxLength="30" className={Style.inputbox} type="text" value={jobtitle} onChange={(e) => { setJobTitle(e.target.value) }} />
-
-                    <h4 className={Style.jobHeadline}  >Source &nbsp;<span className={Style.hint}>(e.g Linkedin, Noukri, indeed etc.)</span></h4>
-                                        <input maxLength="20" className={Style.inputbox} type="text" value={Source} onChange={(e) => { setSource(e.target.value) }} />
-
-                                        <h4 className={Style.jobHeadline}  >Source Link</h4>
-                                        <input  className={Style.inputbox} type="text" value={SourceLink} onChange={(e) => { setSourceLink(e.target.value) }} />
+     <h4 className={Style.jobHeadline}>Job title</h4>
+    <input maxLength="30" className={Style.inputbox} type="text" value={jobtitle} onChange={(e) => { setJobTitle(e.target.value) }} />
 
 
                     <h4 className={Style.jobHeadline}>Company Name**</h4>

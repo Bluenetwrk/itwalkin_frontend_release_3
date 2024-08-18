@@ -16,7 +16,9 @@
     padding-top: 0.5%;
     padding-bottom: 0.5%;
     width: 8%;
-    border: 1px solid rgb(9, 247, 247);
+    /* border: 1px solid rgb(9, 247, 247); */
+    border : 1px solid rgb(238,241,242);
+
     text-align: center;
     overflow-wrap:break-word
 

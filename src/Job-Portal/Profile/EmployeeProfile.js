@@ -6,6 +6,7 @@ import Companylogo from "../img/logo.png"
 import { Puff } from  'react-loader-spinner'
 import { useNavigate } from 'react-router-dom'
 import useScreenSize from '../SizeHook';
+import image from '../img/icons8-arrow-button-24.png'
 
 
 function EmployeeProfile() {
@@ -19,8 +20,10 @@ let navigate = useNavigate()
   let empId = JSON.parse(localStorage.getItem("EmpIdG"))
 
     async function getProfile() {
+        let userid = JSON.parse(localStorage.getItem("EmpIdG"))
+        const headers = { authorization: userid +" "+ atob(JSON.parse(localStorage.getItem("EmpLog"))) };
         setPageLoader(true)
-        await axios.get(`/EmpProfile/getProfile/${empId}`)
+        await axios.get(`/EmpProfile/getProfile/${empId}`, {headers})
             .then((res) => {
                 let result = res.data.result
                 setProfileData([result])
@@ -35,11 +38,12 @@ let navigate = useNavigate()
         getProfile()
     }, [])
 
+
     return (
         <>
         <div style={{display:"flex"}}>
         <button style={{ height:"25px", color:"grey", marginTop:"20px", marginLeft:"40px", cursor:"pointer", width:"50px"}} onClick={()=>{
-            navigate(-1)}} >back</button>
+            navigate(-1)}} >Back</button>
         <h3 style={{color:"rgb(40, 4, 99)", marginLeft:"40%"}}>My Profile</h3>
         </div>
 
