@@ -6,8 +6,8 @@ import axios from 'axios'
 
 
 function Admin() {
-  const [email, setEmail ] = useState("")
-  const [ password , setPassword ] = useState("")
+  const [email, setEmail ] = useState("Impulse@Admin321")  //Impulse@Admin321
+  const [ password , setPassword ] = useState("Impulse@Admin123") //Impulse@Admin123
   const [ Error , setError ] = useState("")
   let navigate = useNavigate()
   const [ showPassword , setshowPassword ] = useState(false)

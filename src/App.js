@@ -44,6 +44,7 @@ import CheckStudentProfileForAdmin from "./Job-Portal/Profile/CheckStuForAdmin";
 import SearchCandidate from "./Job-Portal/AppliedUserProfile/SearchCandidat";
 import AdminUpdate from "./Job-Portal/Admin/AdminUpdate"
 import AdminPostJobs from "./Job-Portal/Admin/AdminJobPosts";
+import AllIds from "./Job-Portal/Admin/Allid's";
 
 
 import AboutUs from "./Job-Portal/AboutUs"
@@ -53,8 +54,7 @@ import TermsAndCondition from "./Job-Portal/TermsAndConditions"
 import Footer from "./Job-Portal/Footer/Footer";
 
 import Payment from "./Job-Portal/Payment"
-axios.defaults.baseURL = "http://localhost:8080";
-// axios.defaults.baseURL = "https://itwalkin-backend.onrender.com";
+axios.defaults.baseURL = "http://localhost:8080" ||  "https://itwalkin-backend.onrender.com";
 const App = () => {
   return (
     <>
@@ -95,6 +95,7 @@ const App = () => {
           <Route path="/BIAddmin@CheckStudentProfile/:CP" element={<CheckStudentProfileForAdmin />} />
           <Route path="/BIAddmin@AdminUpdate" element ={<AdminUpdate/>} />
           <Route path="/BIAddmin@PostJob" element={<AdminPostJobs/>} />
+          <Route path="/BIAddmin@AllIds" element={<AllIds/>} />
 
           <Route path="/JobSeekerLogin" element={<StudentLogin />} />
           <Route path="/EmployeeLogin" element={<EmployeeLogin />} />

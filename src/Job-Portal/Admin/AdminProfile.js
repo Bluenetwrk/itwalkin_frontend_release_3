@@ -293,12 +293,10 @@ function AdminProfile() {
     useEffect(() => {
       JobSeekerNoticePeriod()
     }, [])
-
-
     
-
   return (
     <>
+
     <h2>Admin Profile</h2>
     {screenSize.width>850?
 
