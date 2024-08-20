@@ -20,8 +20,10 @@ const screenSize = useScreenSize();
     let params =useParams()
 
     async function getProfile() {
+        let userid = JSON.parse(localStorage.getItem("EmpIdG"))
+        const headers = { authorization: userid +" "+ atob(JSON.parse(localStorage.getItem("EmpLog"))) };
         setPageLoader(true)
-        await axios.get(`/StudentProfile/getProfile/${params.CP}`)
+        await axios.get(`/StudentProfile/getProfile/${params.CP}`,{headers})
             .then((res) => {
                 let result = res.data.result
                 setProfileData([result])
