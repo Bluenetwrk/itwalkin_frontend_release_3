@@ -41,8 +41,8 @@ const screenSize = useScreenSize();
   const [topMessage, settopMessage] = useState("")
 
   async function getUser() {
-    let userid = JSON.parse(localStorage.getItem("EmpIdG"))
-    const headers = { authorization: userid +" "+ atob(JSON.parse(localStorage.getItem("EmpLog"))) };
+    const headers = { authorization: 'BlueItImpulseWalkinIn'};
+
     await axios.get(`/EmpProfile/getProfile/${empId}`, {headers})
       .then((res) => {
         let result = res.data.result

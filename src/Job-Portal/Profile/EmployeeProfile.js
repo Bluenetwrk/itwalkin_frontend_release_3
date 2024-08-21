@@ -20,8 +20,7 @@ let navigate = useNavigate()
   let empId = JSON.parse(localStorage.getItem("EmpIdG"))
 
     async function getProfile() {
-        let userid = JSON.parse(localStorage.getItem("EmpIdG"))
-        const headers = { authorization: userid +" "+ atob(JSON.parse(localStorage.getItem("EmpLog"))) };
+        const headers = { authorization: 'BlueItImpulseWalkinIn'};
         setPageLoader(true)
         await axios.get(`/EmpProfile/getProfile/${empId}`, {headers})
             .then((res) => {
