@@ -66,8 +66,6 @@ useEffect(() => {
           .then((response) => {
             let result = response.data
             let token = result.token
-            console.log(token)
-            console.log(result)
             let Id = result.id
             if (result.status == "success") {
               localStorage.setItem("StudLog", JSON.stringify(btoa(token)))

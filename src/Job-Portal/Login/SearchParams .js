@@ -41,35 +41,11 @@ function SearchParams() {
 function adminloginkey(){
   console.log()
 }
-    // await axios.post("/StudentProfile/loginforAdmin",{email})
-    // .then((res)=>{      
-    //   console.log(res.data)
-    //   let result =res.data  
-    //   let token = result.token
-    //    let Id = result.id 
-    //    if (result.status == "success") {
-    //     localStorage.setItem("StudLog", JSON.stringify(token))
-    //     navigate("/alljobs", {state:{name:result.name}})
-    //     localStorage.setItem("StudId", JSON.stringify(Id))             
-    //   }else if(result=="invalid email"){
-    //     alert("invalid email")        
-    //   } else if(result=="user not registered"){
-    //     alert("user not registerd")
-    //   }
-       
-    // }).catch((err)=>{
-    //     alert("some thing went wrong")
-    // })
-
-  }
-  // useEffect(()=>{
-  //   Adminlogin()
-  // },[email])
-  
+}
   return (
     <>
-    <div id={styles.inputWrapper}>
-        <div  style={{marginTop:"90px", marginLeft:"43%" }}>
+    
+    <div className={styles.BothsignUpWrapper}>
 
           <input className={styles.inputs} type="mail" placeholder='enter email id'
             value={email} autoComplete="on" onChange={(e) => { setEmail(e.target.value); setseachParams({q:e.target.value}) }} />
@@ -82,7 +58,6 @@ function adminloginkey(){
 
           <button className={`${styles.button} ${styles.inputs}`} onClick={Adminlogin}  >Login</button>
           {/* <button className={`${styles.button} ${styles.inputs}`} onClick={AdminRegister}>Register</button> */}
-        </div>
       </div>
     </>
   )

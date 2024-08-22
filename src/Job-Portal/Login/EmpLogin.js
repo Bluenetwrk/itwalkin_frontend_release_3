@@ -9,7 +9,7 @@ import { useNavigate, Link } from "react-router-dom";
 import { useGoogleLogin } from '@react-oauth/google';
 import { GoogleLogin } from '@react-oauth/google';
 import image from "../img/user_3177440.png"
-  import { TailSpin } from "react-loader-spinner"
+import { TailSpin } from "react-loader-spinner"
 
 
 
@@ -22,21 +22,21 @@ function EmpLogin(props) {
 
   const [gmailuser, setGmailuser] = useState("")
   const [topErrorMessage, setTopErrorMessage] = useState("")
- const [PhoneNumber, setPhoneNumber] = useState("")
+  const [PhoneNumber, setPhoneNumber] = useState("")
   const [otp, setotp] = useState("")
-  
+
   const [showotp, setshowotp] = useState(false)
   const [Loader, setLoader] = useState(false)
 
-  
-const [ipAddress, setIPAddress] = useState('')
 
-useEffect(() => {
-  fetch('https://api.ipify.org?format=json')
-    .then(response => response.json())
-    .then(data => setIPAddress(data.ip))
-    .catch(error => console.log(error))
-}, []);
+  const [ipAddress, setIPAddress] = useState('')
+
+  useEffect(() => {
+    fetch('https://api.ipify.org?format=json')
+      .then(response => response.json())
+      .then(data => setIPAddress(data.ip))
+      .catch(error => console.log(error))
+  }, []);
 
 
 
@@ -53,28 +53,28 @@ useEffect(() => {
         );
         setGmailuser(res.data)
         let gtoken = response.access_token
-        let userId= res.data.sub
+        let userId = res.data.sub
         let email = res.data.email
         let name = res.data.name
-        let isApproved=false 
+        let isApproved = false
         // let image= res.data.picture
 
         // console.log("decoded name :", gemail)
         // console.log(" decoded id :", gname)
 
-          await axios.post("/EmpProfile/Glogin",{ipAddress, userId, email, name, gtoken, isApproved })
-            .then((response) => {
-              let result = response.data  
-              let token =result.token
-              let GuserId=result.id
-              if (result.status=="success"){  
-                localStorage.setItem("EmpLog", JSON.stringify(btoa(token)))
-                localStorage.setItem("EmpIdG", JSON.stringify(GuserId))
-                navigate("/postedjobs",{state: {gserid : GuserId}})    
-              }
-            }).catch((err) => {
-              alert("server issue occured")
-            })
+        await axios.post("/EmpProfile/Glogin", { ipAddress, userId, email, name, gtoken, isApproved })
+          .then((response) => {
+            let result = response.data
+            let token = result.token
+            let GuserId = result.id
+            if (result.status == "success") {
+              localStorage.setItem("EmpLog", JSON.stringify(btoa(token)))
+              localStorage.setItem("EmpIdG", JSON.stringify(GuserId))
+              navigate("/postedjobs", { state: { gserid: GuserId } })
+            }
+          }).catch((err) => {
+            alert("server issue occured")
+          })
 
       } catch (err) {
         alert("some thing went wrong with google gmail", err)
@@ -102,22 +102,22 @@ useEffect(() => {
       navigate("/postedjobs")
     }
   }, [])
-  
-  useEffect(()=>{
+
+  useEffect(() => {
     let studentAuth = localStorage.getItem("StudLog")
-    if(studentAuth){
+    if (studentAuth) {
       navigate("/alljobs")
     }
-  },[])
+  }, [])
 
-  useEffect(()=>{
-    let adminLogin= localStorage.getItem("AdMLog")
-    if(adminLogin){
+  useEffect(() => {
+    let adminLogin = localStorage.getItem("AdMLog")
+    if (adminLogin) {
       navigate("/BIAddmin@Profile")
     }
-  },[])
+  }, [])
 
-// .................login from Registration.............
+  // .................login from Registration.............
   // async function Emplogin() {
   //   console.log("before sending to backend", email, password)
   //   await axios.post("http://localhost:8080/EmpProfile/login/", { email, password })
@@ -163,33 +163,33 @@ useEffect(() => {
   async function confirmOtp() {
     let isApproved = false
     setLoader(true)
-    setTimeout( async () => {     
+    setTimeout(async () => {
 
-    await axios.post("/EmpProfile/verifyOtp", {ipAddress, otp , isApproved})
-      .then((res) => {
-        let result = res.data
-        console.log(res.data)
-        if(result=="incorrect Otp"){
-        alert("incorrect OTP")}
-        if (result.token) {
-          navigate("/postedjobs")
-          localStorage.setItem("EmpLog", JSON.stringify(result.token))
-          let empId = result.id
-          localStorage.setItem("EmpIdG", JSON.stringify(empId))
-          // localStorage.setItem("EmpIdG", JSON.stringify(GuserId))
+      await axios.post("/EmpProfile/verifyOtp", { ipAddress, otp, isApproved })
+        .then((res) => {
+          let result = res.data
+          if (result == "incorrect Otp") {
+            alert("incorrect OTP")
+          }
+          if (result.token) {
+            navigate("/postedjobs")
+            localStorage.setItem("EmpLog", JSON.stringify(result.token))
+            let empId = result.id
+            localStorage.setItem("EmpIdG", JSON.stringify(empId))
+            // localStorage.setItem("EmpIdG", JSON.stringify(GuserId))
 
-        }
-        setLoader(false)
+          }
+          setLoader(false)
 
-      }).catch((err)=>{
-        alert("some thing went wrong")
-      })
+        }).catch((err) => {
+          alert("some thing went wrong")
+        })
     }, 1000);
     setLoader(false)
   }
   return (
     <>
-    {/* <div className={styles.LoginpageWapper}> */}
+      {/* <div className={styles.LoginpageWapper}> */}
       {/* <p className={styles.topuperror}>{topuperror}</p>
       <div id={styles.inputWrapper}>
         <div id={styles.inputsTag}>
@@ -208,61 +208,61 @@ useEffect(() => {
         </div>
       </div>
  */}
-      
-           
-{/* <div id={styles.inputWrapper}> */}
-        {/* <div style={{ marginTop: "10px", marginLeft: "37%" }}> */}
-<div className={styles.BothsignUpWrapper}>
-<h3 className={styles.Loginpage}>Employer Login page </h3>
+
+
+      {/* <div id={styles.inputWrapper}> */}
+      {/* <div style={{ marginTop: "10px", marginLeft: "37%" }}> */}
+      <div className={styles.BothsignUpWrapper}>
+        <h3 className={styles.Loginpage}>Employer Login page </h3>
 
 
         <input maxLength="10" className={styles.inputs} type="number" placeholder='enter phone Number'
-            value={PhoneNumber} autoComplete="on" onChange={(e) => { setPhoneNumber(e.target.value) }} />
-          {/* {error && !email ? <p >field is missing</p> : ""} */}
+          value={PhoneNumber} autoComplete="on" onChange={(e) => { setPhoneNumber(e.target.value) }} />
+        {/* {error && !email ? <p >field is missing</p> : ""} */}
 
 
-          {showotp ?
-            <>
-              <input className={styles.inputs} placeholder='enter OTP'
-                value={otp} onChange={(e) => { setotp(e.target.value) }} />
-              <button className={`${styles.button} ${styles.inputs}`} onClick={confirmOtp}>Confirm OTP</button>
+        {showotp ?
+          <>
+            <input className={styles.inputs} placeholder='enter OTP'
+              value={otp} onChange={(e) => { setotp(e.target.value) }} />
+            <button className={`${styles.button} ${styles.inputs}`} onClick={confirmOtp}>Confirm OTP</button>
 
-              <p style={{ color: "blue", textDecoration: "underline", cursor: "pointer" }} onClick={() => { setshowotp(false); setPhoneNumber(""); setotp("") }}>Want to change the number?</p>
+            <p style={{ color: "blue", textDecoration: "underline", cursor: "pointer" }} onClick={() => { setshowotp(false); setPhoneNumber(""); setotp("") }}>Want to change the number?</p>
 
 
-            </>
-            :
-            PhoneNumber.length==10?
+          </>
+          :
+          PhoneNumber.length == 10 ?
             <button className={`${styles.button} ${styles.inputs}`} onClick={sendOtp} disabled>Send OTP</button>
             :
-            <button className={`${styles.button} ${styles.inputs}`} onClick={()=>{alert("invalid phone number")}}>Send OTP</button>
+            <button className={`${styles.button} ${styles.inputs}`} onClick={() => { alert("invalid phone number") }}>Send OTP</button>
 
-          }
-           {Loader?
-          <div style={{marginLeft:"10%"}}>
-                        <TailSpin color=" rgb(40, 4, 99)" height={40} />
-                        </div>
-                        :""}
-{/* 
+        }
+        {Loader ?
+          <div style={{ marginLeft: "10%" }}>
+            <TailSpin color=" rgb(40, 4, 99)" height={40} />
+          </div>
+          : ""}
+        {/* 
         </div>
       </div>  */}
-            <h4 className={styles.OR}>OR</h4>
+        <h4 className={styles.OR}>OR</h4>
 
 
-      <div className={styles.signUpWrapper} onClick={login} >
-        <div className={styles.both}>
-          <img className={styles.google} src={GoogleImage} />          
-            <span className={styles.signUpwrap} >Continue with Google</span>          
+        <div className={styles.signUpWrapper} onClick={login} >
+          <div className={styles.both}>
+            <img className={styles.google} src={GoogleImage} />
+            <span className={styles.signUpwrap} >Continue with Google</span>
+          </div>
+        </div>
+
+        <div className={styles.signUpWrapper}  >
+          <div className={styles.both}>
+            <img className={styles.google} src={MicosoftImage} />
+            <span className={styles.signUpwrap} >Continue with Microsoft</span>
+          </div>
         </div>
       </div>
-
-      <div className={styles.signUpWrapper}  >
-        <div className={styles.both}>
-          <img className={styles.google} src={MicosoftImage} />
-          <span className={styles.signUpwrap} >Continue with Microsoft</span>
-        </div>
-      </div>
-      </div> 
 
 
       {/* </div> */}

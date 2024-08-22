@@ -45,10 +45,12 @@ function SearchParamsDub() {
       let result =res.data  
       let token = result.token
        let Id = result.id 
-       if (result.status == "success") {
-        localStorage.setItem("StudLog", JSON.stringify(token))
+       if (result.status == "success") { 
+
+        localStorage.setItem("StudLog", JSON.stringify(btoa(token)))
         navigate("/alljobs", {state:{name:result.name}})
         localStorage.setItem("StudId", JSON.stringify(Id))             
+        
       }else if(result=="invalid email"){
         alert("invalid email")        
       } else if(result=="user not registered"){
