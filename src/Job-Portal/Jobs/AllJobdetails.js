@@ -35,7 +35,6 @@ const [Loader, setLoader] = useState(false)
 
   async function getjobs() {
     const headers = { authorization: 'BlueItImpulseWalkinIn'};
-
     await axios.get(`/jobpost/getjobs/${params.id}`, {headers})
       .then((res) => {
         let result = (res.data)

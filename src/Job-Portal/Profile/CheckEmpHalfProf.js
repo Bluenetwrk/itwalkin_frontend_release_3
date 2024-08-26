@@ -39,10 +39,10 @@ const [message, setmessage] = useState("")
     async function getProfile() {
   setPageLoader(true)
   const headers = { authorization: 'BlueItImpulseWalkinIn'};
-
         await axios.get(`/EmpProfile/getProfile/${params.empId}`, {headers})
             .then((res) => {
-                let result = res.data.result                
+                let result = res.data.result  
+                console.log(res)              
                 setProfileData([result])
   setPageLoader(false)
 

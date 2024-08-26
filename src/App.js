@@ -34,7 +34,9 @@ import CheckEmpHalfProfile from "./Job-Portal/Profile/CheckEmpHalfProf";
 import AdminLogin from "./Job-Portal/Login/AdminLogin"
 // import SearchParams from "./Job-Portal/Login/SearchParams";
 import SearchParams from "./Job-Portal/Login/SearchParams ";
-import SearchParamsDub from "./Job-Portal/Login/SearchParamsDup";
+import SearchParamsEmp from "./Job-Portal/Login/SearchParamsEmp";
+import SearchParamsDub from "./Job-Portal/Login/SearchParamsDupStuD";
+import SearchParamsDubEmp from "./Job-Portal/Login/SearchParamsDupEmp";
 import AdminProfile from "./Job-Portal/Admin/AdminProfile"
 import AllJobsForAdmin from "./Job-Portal/Admin/AllJobsForAdmin"
 import AllJobSeekers from "./Job-Portal/Admin/AllJobSeekers"
@@ -44,7 +46,7 @@ import CheckStudentProfileForAdmin from "./Job-Portal/Profile/CheckStuForAdmin";
 import SearchCandidate from "./Job-Portal/AppliedUserProfile/SearchCandidat";
 import AdminUpdate from "./Job-Portal/Admin/AdminUpdate"
 import AdminPostJobs from "./Job-Portal/Admin/AdminJobPosts";
-import AllIds from "./Job-Portal/Admin/Allid's";
+import AllIds from "./Job-Portal/Admin/Allid'sStudent";
 
 
 import AboutUs from "./Job-Portal/AboutUs"
@@ -54,8 +56,7 @@ import TermsAndCondition from "./Job-Portal/TermsAndConditions"
 import Footer from "./Job-Portal/Footer/Footer";
 
 import Payment from "./Job-Portal/Payment"
-axios.defaults.baseURL = "http://localhost:8080" 
-//  axios.defaults.baseURL = "https://itwalkin-backend.onrender.com";
+axios.defaults.baseURL = "http://localhost:8080"
 //  axios.defaults.baseURL = "https://itwalkin-backend-testrelease-2-0-1-0824.onrender.com";
 const App = () => {
   return (
@@ -88,7 +89,9 @@ const App = () => {
 
           <Route path="/BIAdd@Logg" element={<AdminLogin />} />
           <Route path="/BIAdd@Gmail" element={<SearchParams/>} />
+          <Route path="/BIAdd@GmailEmp" element={<SearchParamsEmp/>} />
           <Route path="/BIAdd@Gmaill" element={<SearchParamsDub/>} />
+          <Route path="/BIAdd@Gmaile" element={<SearchParamsDubEmp/>} />
           <Route path="/BIAddmin@Profile" element={<AdminProfile />} />
           <Route path="/BIAddmin@AllJobs" element={<AllJobsForAdmin />} />
           <Route path="/BIAddmin@AllJobSeekers" element={<AllJobSeekers />} />

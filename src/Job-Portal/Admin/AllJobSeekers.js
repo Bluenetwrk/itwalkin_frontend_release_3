@@ -317,6 +317,23 @@ async function search(e) {
   }
 }
 
+function TopToBottonOnline(){
+  const newAllEmployees=[...jobSeekers]
+  let sortresult = newAllEmployees.sort((a,b)=>{
+    return new Date(b.LogedInTime) - new Date(a.LogedInTime);
+  
+  })
+  setjobSeekers(sortresult)
+    }
+    function BottonToTopOnline(){
+      const newAllEmployees=[...jobSeekers]
+      let sortresult = newAllEmployees.sort((a,b)=>{
+        return new Date(a.LogedInTime) - new Date(b.LogedInTime);
+      
+      })
+      setjobSeekers(sortresult)
+        }
+
   return (
     <>
 
@@ -345,7 +362,10 @@ async function search(e) {
                 <li className={`${styles.li} ${styles.age}`}><b>Age</b></li>
 
                 <li className={`${styles.li} ${styles.Aadhar}`}><b>Aadhar</b></li>
-                <li className={`${styles.li} ${styles.Pdate}`}><b>Registered Date</b></li>
+                <li className={`${styles.li} ${styles.Pdate}`}><b>Reg. Date</b></li>
+                <li className={`${styles.li} ${styles.Pdate}`}><b>Last Log</b>
+                <span style={{display:"block"}}><span onClick={TopToBottonOnline} style={{ fontSize:"20px", cursor:"pointer", marginRight:"20px"}}>&darr;</span>
+                                                            <span style={{ fontSize:"20px", cursor:"pointer"}} onClick={BottonToTopOnline}>&uarr;</span></span></li>
                 <li className={`${styles.li} ${styles.Qualification}`}><b>Qualif.</b></li>
                 <li className={`${styles.li} ${styles.Skills}`}><b>Skills </b></li>
                 <li className={`${styles.li} ${styles.Approval}`}><b>Approval </b></li>
@@ -376,6 +396,20 @@ async function search(e) {
                           }
                         )}
                       </li>
+
+                      <li className={`${styles.li} ${styles.Pdate}`}>
+      {      items.LogedInTime?    new Date(items.LogedInTime).toLocaleString('en-US', {
+        year: 'numeric',
+        month: 'short',
+        day: '2-digit',
+        hour: '2-digit',
+    minute: '2-digit',
+    second: '2-digit'
+    })
+    :"Only Reg. Yet"
+  }
+                  </li>
+
                       <li className={`${styles.li} ${styles.Qualification}`}>{items.Qualification}</li>
                       <li className={`${styles.li} ${styles.Skills}`}>{items.Skills}</li>
                       <li className={`${styles.li} ${styles.Approval}`}>

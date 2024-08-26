@@ -18,6 +18,7 @@ const screenSize = useScreenSize();
 
 
   const [image, setimage] = useState()
+  const [immage, setimmage] = useState()
 
   const [name, setname] = useState("")
   const [email, setemail] = useState("")

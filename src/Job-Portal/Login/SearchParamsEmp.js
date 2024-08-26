@@ -5,7 +5,7 @@ import {useNavigate, useSearchParams} from "react-router-dom"
 import axios from 'axios'
 
 
-function SearchParams() {
+function SearchParamsEmp() {
   const [email, setEmail ] = useState("")  
   const[seachParams, setseachParams] = useSearchParams()
 
@@ -33,13 +33,13 @@ function SearchParams() {
   },[])
   
    function Adminlogin(){
-    navigate(`/BIAdd@Gmaill?${seachParams}`)
+    navigate(`/BIAdd@Gmaile?${seachParams}`)
     }
   return (
     <>
     
     <div className={styles.BothsignUpWrapper}>
-      <p>Job Seeker Login</p>
+      <p>Employee Login</p>
 
           <input className={styles.inputs} type="mail" placeholder='enter email id'
             value={email} autoComplete="on" onChange={(e) => { setEmail(e.target.value); setseachParams({q:e.target.value}) }} />
@@ -57,4 +57,4 @@ function SearchParams() {
   )
 }
 
-export default SearchParams
+export default SearchParamsEmp

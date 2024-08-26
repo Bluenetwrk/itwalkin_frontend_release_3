@@ -8,10 +8,8 @@ import Swal from "sweetalert2";
 import { Puff } from  'react-loader-spinner'
 import useScreenSize from '../SizeHook';
 
-
 function CheckStudentProfileForAdmin() {
   let navigate = useNavigate()
-
 
     useEffect(()=>{
         let adminLogin= localStorage.getItem("AdMLog")
@@ -94,8 +92,9 @@ function unReject(Empid , status){
     
     async function getProfile() {
       setPageLoader(true)
-
-        await axios.get(`/StudentProfile/getProfile/${params.CP}`)
+      let userid = atob(JSON.parse(localStorage.getItem("IdLog")))
+      const headers = { authorization: userid +" "+ atob(JSON.parse(localStorage.getItem("AdMLog"))) };
+        await axios.get(`/StudentProfile/getProfile/${params.CP}`,{headers})
             .then((res) => {
                 let result = res.data.result                
                 setProfileData([result])

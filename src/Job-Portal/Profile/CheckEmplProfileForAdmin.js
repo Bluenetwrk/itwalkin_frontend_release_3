@@ -8,8 +8,6 @@ import Swal from "sweetalert2";
 import { Puff } from  'react-loader-spinner'
 import useScreenSize from '../SizeHook';
 
-
-
 function CheckEmpProfileForAdmin() {
     useEffect(()=>{
         let adminLogin= localStorage.getItem("AdMLog")
@@ -22,8 +20,6 @@ function CheckEmpProfileForAdmin() {
     const [profileData, setProfileData] = useState([])
 const [PageLoader, setPageLoader] = useState(false)
 const screenSize = useScreenSize();
-
-
 const [message, setmessage] = useState("")
     
     async function sendMessage(id){
@@ -37,15 +33,13 @@ const [message, setmessage] = useState("")
       })
     }
 
-
-
     let studId = JSON.parse(localStorage.getItem("StudId"))
     let params =useParams()
 
     async function getProfile() {
   setPageLoader(true)
-
-        await axios.get(`/EmpProfile/getProfile/${params.CP}`)
+  const headers = { authorization: 'BlueItImpulseWalkinIn'};
+        await axios.get(`/EmpProfile/getProfile/${params.CP}`,{headers})
             .then((res) => {
                 let result = res.data.result
                 

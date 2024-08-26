@@ -276,7 +276,6 @@ async function sendMessage(id){
   }
 
 
-
   async function checkAllApproved(e){
     let userid = atob(JSON.parse(localStorage.getItem("IdLog")))
     const headers = { authorization: userid +" "+ atob(JSON.parse(localStorage.getItem("AdMLog"))) };
@@ -311,8 +310,6 @@ async function sendMessage(id){
     }  
   }
 
-
-
 async function search(e) {
     let key = e.target.value
     if (key) {
@@ -330,6 +327,23 @@ async function search(e) {
     }
   }
 
+  function TopToBottonOnline(){
+const newAllEmployees=[...AllEmployees]
+let sortresult = newAllEmployees.sort((a,b)=>{
+  return new Date(b.LogedInTime) - new Date(a.LogedInTime);
+
+})
+setAllEmployees(sortresult)
+  }
+  function BottonToTopOnline(){
+    const newAllEmployees=[...AllEmployees]
+    let sortresult = newAllEmployees.sort((a,b)=>{
+      return new Date(a.LogedInTime) - new Date(b.LogedInTime);
+    
+    })
+    setAllEmployees(sortresult)
+      }
+
   return (
     <>     
 
@@ -342,8 +356,6 @@ async function search(e) {
             <h4 style={{marginLeft:"14%", marginTop:"10px"}}> {AllEmployees.length} matching Result Found  </h4>
             :""
 }
-
-
 
 <div style={{marginLeft:"10px"}}>
       <label><input id="checkApproved" name="checkApproved" type="radio" onChange={(e)=>{AllEmployeesApANdDis(e)}} /><span>All Employers</span></label><br></br>
@@ -359,7 +371,9 @@ async function search(e) {
 
           <li className={`${styles.li} ${styles.CompanyName}`}><b>Company Name</b></li>
           <li className={`${styles.li} ${styles.CompanyAddress}`}><b>Company Address</b></li>
-          <li className={`${styles.li} ${styles.Date}`}><b>Date</b></li>
+          <li className={`${styles.li} ${styles.Date}`}><b>RegDate</b></li>
+          <li className={`${styles.li} ${styles.Date}`} ><b >Last Log</b><span style={{display:"block"}}><span onClick={TopToBottonOnline} style={{ fontSize:"20px", cursor:"pointer", marginRight:"20px"}}>&darr;</span>
+                                                            <span style={{ fontSize:"20px", cursor:"pointer"}} onClick={BottonToTopOnline}>&uarr;</span></span></li>
           <li className={`${styles.li} ${styles.CompanyWebsite}`}><b>Company Website </b></li>
           <li className={`${styles.li} ${styles.Approval}`} ><b>Approval</b></li>
           <li className={`${styles.li} ${styles.Message}`} ><b>Message</b></li>
@@ -382,8 +396,24 @@ async function search(e) {
                         month: "short",
                         day: "2-digit",
                         year: "numeric",
+                        
+        hour: '2-digit',
+    minute: '2-digit',
+    second: '2-digit'
                       }
                     )}
+                  </li>
+                  <li className={`${styles.li} ${styles.Date}`}>
+      {      items.LogedInTime?    new Date(items.LogedInTime).toLocaleString('en-US', {
+        year: 'numeric',
+        month: 'short',
+        day: '2-digit',
+        hour: '2-digit',
+    minute: '2-digit',
+    second: '2-digit'
+    })
+    :"Only Reg. Yet"
+  }
                   </li>
 
                   <li className={`${styles.li} ${styles.CompanyWebsite}`}>{items.CompanyWebsite}</li>

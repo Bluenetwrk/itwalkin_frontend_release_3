@@ -165,7 +165,7 @@
     width: 50%;
     border-radius:5px;
     /* border : 1.5px solid rgb(9, 247, 247); */
-    border : 1px solid rgb(238,241,242);
+    border : 1px solid rgb(204, 209, 211);
 
 }
 
@@ -196,7 +196,7 @@
     padding-bottom: 0.5%;
     width : 8%;
     /* border : 1px solid rgb(9, 247, 247); */
-    border : 1px solid rgb(238,241,242);
+    border : 1px solid rgb(215, 223, 226);
     text-align: center;
     overflow-wrap:break-word;
 

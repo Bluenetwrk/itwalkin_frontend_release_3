@@ -24,7 +24,7 @@
 .ul{
     display: flex;
     margin: 0;
-    margin-left: -35px;
+    margin-left: -42px;
 
 }
 
@@ -50,7 +50,10 @@
     }
 
 .age{
-    width:6%
+    width:5%
+}
+.Pdate{
+    width:5%
 }
 .Aadhar{
     width:11%;
