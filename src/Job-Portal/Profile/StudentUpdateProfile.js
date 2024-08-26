@@ -14,10 +14,8 @@ function StudentUpdateProfile() {
   const [file, setFile] = useState()
   const [uploaded, setUploaded] = useState()
 const screenSize = useScreenSize();
-
-
   const [image, setimage] = useState()
-
+  const [immage, setimmage] = useState()
   const [name, setname] = useState("")
   const [email, setemail] = useState("")
   const [phoneNumber, setphoneNumber] = useState("")
@@ -48,6 +46,7 @@ const screenSize = useScreenSize();
           setname(result.name)
           setemail(result.email)
           setimage(result.image)
+          setimmage(result.image)
           setphoneNumber(result.phoneNumber)
           setAadhar(result.Aadhar)
           setpanCard(result.panCard)
@@ -190,7 +189,7 @@ window.addEventListener('keypress', function(event){
           </div>
           <div className={styles.saveDelete}>
           {file?<button className={styles.saveImage} onClick={uploadImage}>Save</button>:""}
-         {image?<button className={styles.DeleteImage} onClick={deletePic}>Delete</button>:""}
+         {immage?<button className={styles.DeleteImage} onClick={deletePic}>Delete</button>:""}
           </div>
 
           <p style={{ fontStyle: "italic", color: "green" }}>{topMessage}</p>

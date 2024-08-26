@@ -16,10 +16,9 @@ function EmployeeUpdateProfile() {
   const [uploaded, setUploaded] = useState()
 const screenSize = useScreenSize();
 
-
-  const [image, setimage] = useState()
-  const [immage, setimmage] = useState()
-
+const [image, setimage] = useState()
+const [immage, setimmage] = useState()
+console.log(immage)
   const [name, setname] = useState("")
   const [email, setemail] = useState("")
   const [phoneNumber, setphoneNumber] = useState("")
@@ -47,13 +46,12 @@ const screenSize = useScreenSize();
     await axios.get(`/EmpProfile/getProfile/${empId}`, {headers})
       .then((res) => {
         let result = res.data.result
-        console.log(result)
-        console.log(res.data)
         if (result) {
           setname(result.name)
           setemail(result.email)
           // result.image? setimage(result.image):setimage(Companylogo)
           setimage(result.image)
+          setimmage(result.image)
           setphoneNumber(result.phoneNumber)
           setAadhar(result.Aadhar)
           setpanCard(result.panCard)
@@ -101,7 +99,6 @@ const screenSize = useScreenSize();
       }).catch((err) => {
       })
   }
-
 
   // ...............upload Image.....................
   async function uploadImage() {
@@ -201,7 +198,7 @@ window.addEventListener('keypress', function(event){
           </div>
           <div className={styles.saveDelete}>
             {file ? <button className={styles.EmpsaveImage} onClick={uploadImage}>Save</button> : ""}
-            {image ? <button className={styles.EmpDeleteImage} onClick={deletePic}>Delete</button> : ""}
+            {immage ? <button className={styles.EmpDeleteImage} onClick={deletePic}>Delete</button> : ""}
           </div>
 
           <p style={{ fontStyle: "italic", color: "green" }}>{topMessage}</p>

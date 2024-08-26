@@ -94,16 +94,14 @@
     border: 1px solid white;
     background-color: rgb(40, 4, 99);
     color : white;
-    margin-left: 2%;
+    margin-left: 4%;
     font-size:small;
     font-weight:500;
-
 }
 
 .DeleteImage {
     height: 30px;
-    /* margin: 2%; */
-    margin-left: 40px;
+    margin-left: 4%;
     width: 60px;
     border-radius: 5px;
     border: 1px solid white;
@@ -111,7 +109,6 @@
     background-color: red;
     font-size:small;
     font-weight:500;
-    /* font-weight: bold; */
 }
 
 .inputWrapper {
