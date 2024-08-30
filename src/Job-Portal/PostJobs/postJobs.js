@@ -10,6 +10,15 @@ import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import Style from "./postJobs.module.css"
 
 function PostJobs() {
+
+    let jobTags = ['java', 'Mern Stack', 'React Js', 'Python', 'C', 'C++', 'Javascript', 'Node js', 'Angular js','Vue js', 
+        'Next.Js', 'Backend', 'Frontend'
+    ]
+    let Jtags =[]
+    function updateTags(e){
+        Jtags=e.target.value
+    }
+
     let empId = JSON.parse(localStorage.getItem("EmpIdG"))
     const [jobtitle, setJobTitle] = useState("")
     const [Source, setSource] = useState("")
@@ -131,7 +140,6 @@ window.addEventListener('keypress', function(event){
 <button className={Style.GoBackButton} onClick={() => {
     navigate(-1)
 }}>Go Back</button>
-
             {
                 profileData.map((items,i) => {
                     return (
@@ -145,15 +153,10 @@ window.addEventListener('keypress', function(event){
                                 {/* <h3 style={{ color: "blue", marginLeft: "15%" }}>Welcome to Post job Page, Post a Job and get Connected with Job Seekers</h3> */}
 
                                 <div className={Style.postJobPageWrapper} >
-
-
                                     <div className={Style.postJobWrapper}>
                                         <p className={successMessage==="Alert!... JobTitle, CompanyName JobDescription, Experiance, JobLocation and Skills must be filled"?
                                         Style.errormessage: Style.successmessage}>{successMessage} </p>
                                         {/* <p className={Style.errormessage}>{errorMessage} </p> */}
-
-
-
                                         <h4 className={Style.jobHeadline}  >Job title**</h4>
                                         <input maxLength="30" className={Style.inputbox} type="text" value={jobtitle} onChange={(e) => { setJobTitle(e.target.value) }} />
 {/* <div className={Style.jobHeadline}>
@@ -184,6 +187,16 @@ window.addEventListener('keypress', function(event){
          className={Style.inputbox}
          onChange={(e)=>{ setJobDescription(e.blocks) }}
       />
+                                        <h4 className={Style.jobHeadline}>Tags</h4>
+                                        <p>Tage is {Jtags}</p>
+                                        <select className={Style.inputbox} onClick={(e)=>updateTags(e)}>
+                                                {jobTags.map((tags)=>{
+                                                    return(
+                                            <option value={tags}>{tags}</option>
+                                                    )
+                                                })}
+                                        </select>
+
                                         <h4 className={Style.jobHeadline}>Job Type</h4>
                                         {/* <select className={Style.inputbox} onChange={(e) => { setJobtype(e.target.value) }}>
                         <option value="" >Select Job Type</option>

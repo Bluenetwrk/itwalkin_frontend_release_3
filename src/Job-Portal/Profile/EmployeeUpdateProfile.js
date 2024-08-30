@@ -18,7 +18,6 @@ const screenSize = useScreenSize();
 
 const [image, setimage] = useState()
 const [immage, setimmage] = useState()
-console.log(immage)
   const [name, setname] = useState("")
   const [email, setemail] = useState("")
   const [phoneNumber, setphoneNumber] = useState("")
@@ -115,6 +114,7 @@ console.log(immage)
 
   async function prevewImage(e) {
     setLoader(true)
+    setimmage("")
     setFile(URL.createObjectURL(e.target.files[0]))
     // setimage(e.target.files[0])
     const imageFile = e.target.files[0];
@@ -125,8 +125,8 @@ console.log(immage)
     }
     try {
       const compressedFile = await imageCompression(imageFile, options);
-      setimage(compressedFile)
       setLoader(false)
+      setimage(compressedFile)
 
     } catch (error) {
     }
@@ -197,7 +197,7 @@ window.addEventListener('keypress', function(event){
 
           </div>
           <div className={styles.saveDelete}>
-            {file ? <button className={styles.EmpsaveImage} onClick={uploadImage}>Save</button> : ""}
+            {file && !loader ? <button className={styles.EmpsaveImage} onClick={uploadImage}>Save</button> : ""}
             {immage ? <button className={styles.EmpDeleteImage} onClick={deletePic}>Delete</button> : ""}
           </div>
 

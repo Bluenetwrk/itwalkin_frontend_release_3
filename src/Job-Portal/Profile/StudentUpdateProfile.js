@@ -76,8 +76,6 @@ const screenSize = useScreenSize();
     await axios.put(`/StudentProfile/uploadImage/${studId}`, formdata)
       .then((res) => {
     window.location.reload()
-
-
       }).catch((err) => {
       })
   }
