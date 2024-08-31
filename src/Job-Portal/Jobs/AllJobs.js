@@ -360,7 +360,7 @@ async function getBothFiltered(jobTitle){
 <br></br>
 
  <div className={styles.JobtitleFilterWrapper}>
- <label><input type="radio" name="jobtitle"  className={styles.JobtitleFilter_} onClick={()=>{getjobTitleAll('all');setjobTitle("all")}} />All</label>            
+ <label><input type="radio" name="jobtitle"  className={styles.JobtitleFilter_} onClick={()=>{getjobs()}} />All</label>            
  <label><input type="radio" name="jobtitle" className={styles.JobtitleFilter_} onClick={()=>{{jobLocation!=="AllL" ?getBothFiltered ('java'): JobtitleFilter('java')} }} />Java developer</label> 
  <label><input type="radio" name="jobtitle" className={styles.JobtitleFilter_} onClick={()=>{{jobLocation!=="AllL" ?getBothFiltered('full') : JobtitleFilter('full')} }} />Full Stack Developer</label> 
  <label><input type="radio" name="jobtitle" className={styles.JobtitleFilter_} onClick={()=>{{jobLocation!=="AllL" ?getBothFiltered('front') : JobtitleFilter('front')} }} />Frontend Developer</label>

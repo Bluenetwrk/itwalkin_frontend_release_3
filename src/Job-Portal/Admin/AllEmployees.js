@@ -335,13 +335,23 @@ let sortresult = newAllEmployees.sort((a,b)=>{
 })
 setAllEmployees(sortresult)
   }
-  function BottonToTopOnline(){
-    const newAllEmployees=[...AllEmployees]
-    let sortresult = newAllEmployees.sort((a,b)=>{
-      return new Date(a.LogedInTime) - new Date(b.LogedInTime);
-    
+  async function RecentLogin(e){
+    let userid = atob(JSON.parse(localStorage.getItem("IdLog")))
+    const headers = { authorization: userid +" "+ atob(JSON.parse(localStorage.getItem("AdMLog"))) };
+    if(e.target.checked){
+    await axios.get("/EmpProfile/RecentLogin", {headers})
+
+    .then((res) => {
+      let result = (res.data)
+      console.log(result)
+      setAllEmployees(result)  
     })
-    setAllEmployees(sortresult)
+    .catch((err) => {
+      alert("server issue occured")
+    })
+  }else{
+      getEmployees()
+    }  
       }
 
   return (
@@ -361,6 +371,7 @@ setAllEmployees(sortresult)
       <label><input id="checkApproved" name="checkApproved" type="radio" onChange={(e)=>{AllEmployeesApANdDis(e)}} /><span>All Employers</span></label><br></br>
       <label><input id="checkApproved" name="checkApproved" type="radio" onChange={(e)=>{checkAllApproved(e)}} /><span>Approved Employers</span></label><br></br>
       <label><input id="checkApproved" name="checkApproved" type="radio" onChange={(e)=>{checkAllNotApproved(e)}} /><span> Employers who are yet to be approved</span></label><br></br>
+      {/* <label><input id="checkApproved" name="checkApproved" type="radio" onChange={(e)=>{TopToBottonOnline(e)}} /><span> Recent Login</span></label><br></br> */}
       </div>
       {screenSize.width>850?
 
@@ -372,8 +383,10 @@ setAllEmployees(sortresult)
           <li className={`${styles.li} ${styles.CompanyName}`}><b>Company Name</b></li>
           <li className={`${styles.li} ${styles.CompanyAddress}`}><b>Company Address</b></li>
           <li className={`${styles.li} ${styles.Date}`}><b>RegDate</b></li>
-          <li className={`${styles.li} ${styles.Date}`} ><b >Last Log</b><span style={{display:"block"}}><span onClick={TopToBottonOnline} style={{ fontSize:"20px", cursor:"pointer", marginRight:"20px"}}>&darr;</span>
-                                                            <span style={{ fontSize:"20px", cursor:"pointer"}} onClick={BottonToTopOnline}>&uarr;</span></span></li>
+          <li className={`${styles.li} ${styles.Date}`} ><b >Last Log</b>
+          {/* <span style={{display:"block"}}><span onClick={TopToBottonOnline} style={{ fontSize:"20px", cursor:"pointer", marginRight:"20px"}}>&darr;</span>
+                                                            <span style={{ fontSize:"20px", cursor:"pointer"}} onClick={BottonToTopOnline}>&uarr;</span></span> */}
+                                                            </li>
           <li className={`${styles.li} ${styles.CompanyWebsite}`}><b>Company Website </b></li>
           <li className={`${styles.li} ${styles.Approval}`} ><b>Approval</b></li>
           <li className={`${styles.li} ${styles.Message}`} ><b>Message</b></li>

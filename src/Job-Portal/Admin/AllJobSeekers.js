@@ -328,8 +328,7 @@ function TopToBottonOnline(){
     function BottonToTopOnline(){
       const newAllEmployees=[...jobSeekers]
       let sortresult = newAllEmployees.sort((a,b)=>{
-        return new Date(a.LogedInTime) - new Date(b.LogedInTime);
-      
+        return new Date(a.LogedInTime) - new Date(b.LogedInTime);      
       })
       setjobSeekers(sortresult)
         }
@@ -351,6 +350,7 @@ function TopToBottonOnline(){
       <label><input id="checkApproved" name="checkApproved" type="radio" onChange={(e)=>{AllJoseekerApANdDis(e)}} /><span>All Joseeker</span></label><br></br>
       <label><input id="checkApproved" name="checkApproved" type="radio" onChange={(e)=>{Approvedjobseekers(e)}} /><span>Approved Joseeker</span></label><br></br>
       <label><input id="checkApproved" name="checkApproved" type="radio" onChange={(e)=>{NotApprovedjobseekers(e)}} /><span>Joseeker who are yet to be approved</span></label><br></br>
+      <label><input id="checkApproved" name="checkApproved" type="radio" onChange={BottonToTopOnline} /><span>Recent Login</span></label><br></br>
       </div>
 
     {screenSize.width>850?
