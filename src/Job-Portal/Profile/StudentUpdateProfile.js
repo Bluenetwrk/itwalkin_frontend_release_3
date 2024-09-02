@@ -194,7 +194,7 @@ window.addEventListener('keypress', function(event){
 
           </div>
           <div className={styles.saveDelete}>
-          {file?<button className={styles.saveImage} onClick={uploadImage}>Save</button>:""}
+          {file && !loader?<button className={styles.saveImage} onClick={uploadImage}>Save</button>:""}
          {immage?<button className={styles.DeleteImage} onClick={deletePic}>Delete</button>:""}
           </div>
 
