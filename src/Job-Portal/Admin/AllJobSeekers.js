@@ -313,25 +313,43 @@ async function search(e) {
   } else {
     getAllJobSeekers()
     setResult(false)
-
   }
 }
 
-function TopToBottonOnline(){
-  const newAllEmployees=[...jobSeekers]
-  let sortresult = newAllEmployees.sort((a,b)=>{
-    return new Date(b.LogedInTime) - new Date(a.LogedInTime);
-  
+async function RecentLogin(e){
+  let userid = atob(JSON.parse(localStorage.getItem("IdLog")))
+  const headers = { authorization: userid +" "+ atob(JSON.parse(localStorage.getItem("AdMLog"))) };
+  if(e.target.checked){
+  await axios.get("/StudentProfile/RecentLogin", {headers})
+  .then((res) => {
+    let result = (res.data)
+    let sortresult = result.sort((a,b)=>{
+      return new Date(b.LogedInTime) - new Date(a.LogedInTime);      
+    })
+        setjobSeekers(sortresult)
   })
-  setjobSeekers(sortresult)
+  .catch((err) => {
+    alert("server issue occured")
+  })
+}else{
+    getAllJobSeekers()
+
+  }  
     }
-    function BottonToTopOnline(){
-      const newAllEmployees=[...jobSeekers]
-      let sortresult = newAllEmployees.sort((a,b)=>{
-        return new Date(a.LogedInTime) - new Date(b.LogedInTime);      
-      })
-      setjobSeekers(sortresult)
-        }
+
+    async function checkOnline() {
+      let userid = atob(JSON.parse(localStorage.getItem("IdLog")))
+      const headers = { authorization: userid +" "+ atob(JSON.parse(localStorage.getItem("AdMLog"))) };
+      await axios.get("/StudentProfile/checkOnline", {headers})
+        .then((res) => {
+          let result = (res.data)
+          console.log(result)        
+          setjobSeekers(result)
+        })
+        .catch((err) => {
+          alert("server issue occured")
+        })
+    }
 
   return (
     <>
@@ -350,7 +368,8 @@ function TopToBottonOnline(){
       <label><input id="checkApproved" name="checkApproved" type="radio" onChange={(e)=>{AllJoseekerApANdDis(e)}} /><span>All Joseeker</span></label><br></br>
       <label><input id="checkApproved" name="checkApproved" type="radio" onChange={(e)=>{Approvedjobseekers(e)}} /><span>Approved Joseeker</span></label><br></br>
       <label><input id="checkApproved" name="checkApproved" type="radio" onChange={(e)=>{NotApprovedjobseekers(e)}} /><span>Joseeker who are yet to be approved</span></label><br></br>
-      <label><input id="checkApproved" name="checkApproved" type="radio" onChange={BottonToTopOnline} /><span>Recent Login</span></label><br></br>
+      <label><input id="checkApproved" name="checkApproved" type="radio" onChange={RecentLogin} /><span>Recent Login</span></label><br></br>
+      <label><input id="checkApproved" name="checkApproved" type="radio" onChange={checkOnline} /><span>check Online</span></label><br></br>
       </div>
 
     {screenSize.width>850?
@@ -364,8 +383,9 @@ function TopToBottonOnline(){
                 <li className={`${styles.li} ${styles.Aadhar}`}><b>Aadhar</b></li>
                 <li className={`${styles.li} ${styles.Pdate}`}><b>Reg. Date</b></li>
                 <li className={`${styles.li} ${styles.Pdate}`}><b>Last Log</b>
-                <span style={{display:"block"}}><span onClick={TopToBottonOnline} style={{ fontSize:"20px", cursor:"pointer", marginRight:"20px"}}>&darr;</span>
-                                                            <span style={{ fontSize:"20px", cursor:"pointer"}} onClick={BottonToTopOnline}>&uarr;</span></span></li>
+                {/* <span style={{display:"block"}}><span onClick={TopToBottonOnline} style={{ fontSize:"20px", cursor:"pointer", marginRight:"20px"}}>&darr;</span>
+                                                            <span style={{ fontSize:"20px", cursor:"pointer"}} onClick={BottonToTopOnline}>&uarr;</span></span> */}
+                                                            </li>
                 <li className={`${styles.li} ${styles.Qualification}`}><b>Qualif.</b></li>
                 <li className={`${styles.li} ${styles.Skills}`}><b>Skills </b></li>
                 <li className={`${styles.li} ${styles.Approval}`}><b>Approval </b></li>
@@ -381,7 +401,10 @@ function TopToBottonOnline(){
 
                     <ul className={styles.ul}>
 
-                      <li className={`${styles.li} ${styles.name}`} onClick={()=>{navigate(`/BIAddmin@CheckStudentProfile/${items._id}`)}}><Link style={{color:"blue"}}>{items.name}</Link></li>
+                      <li className={`${styles.li} ${styles.name}`} 
+    onClick={()=>{navigate(`/BIAddmin@CheckStudentProfile/${items._id}`)}}><Link style={{color:"blue"}}>
+     {items.online ? <span className={styles.dot}></span> :""} {items.name}
+      </Link></li>
                 <li className={`${styles.li} ${styles.phoneNumber}`}>{items.phoneNumber}</li>
                 <li className={`${styles.li} ${styles.age}`}>{items.age}</li>
 

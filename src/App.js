@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useEffect } from "react";
 import axios from "axios";
-
 import { useState, createContext } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom"
 import { GoogleLogin } from '@react-oauth/google';
 import jwt_decode from "jwt-decode";
+
+
 // .......importing components......//
 // import  from "./SidebarNav"
 
@@ -54,11 +55,21 @@ import Contact from "./Job-Portal/Contact"
 import Services from "./Job-Portal/Services"
 import TermsAndCondition from "./Job-Portal/TermsAndConditions"
 import Footer from "./Job-Portal/Footer/Footer";
-
 import Payment from "./Job-Portal/Payment"
+import socketIO from 'socket.io-client';
+
 // axios.defaults.baseURL = "http://localhost:8080"
- axios.defaults.baseURL = "https://itwalkin-backend-testrelease-2-0-1-0824.onrender.com";
+// vercel Test
+axios.defaults.baseURL = " https://itwalkin-backend-testrelease-2-0-1-0824-ns0g.onrender.com"
+// Vercel Main Live 
+//  axios.defaults.baseURL = "https://itwalkin-backend-testrelease-2-0-1-0824.onrender.com";
+
 const App = () => {
+  
+
+  // let jobSeekerId = JSON.parse(localStorage.getItem("StudId"))
+  // let empId = JSON.parse(localStorage.getItem("EmpIdG"))
+
   return (
     <>
       <BrowserRouter>
@@ -68,23 +79,22 @@ const App = () => {
 
           {/* ..........Employee Private component i,e can not search in URL......... */}
           <Route element={<EmpPrivate />} >
-            <Route path="/PostJobs" element={<PostJobs />} />
-            <Route path="/postedjobs" element={<PostedJobsbyEmp />} />
-            <Route path="/Updatepostedjobs" element={<UpdatePostedJobs />} />
-            <Route path="/Applied-User-Profile/:jid" element={<AppliedUserProfile />} />
-            <Route path="/Check-Profile/:CP" element={<CheckStudentProfiel />} />
-            <Route path="/UpdateProfile" element={<EmployeeUpdateProfile />} />
-            <Route path="/MyProfile" element={<EmployeeProfile />} />
-            <Route path="Search-Candidate" element={<SearchCandidate />} />
+            <Route path="/PostJobs" element={<PostJobs url= {axios.defaults.baseURL} />} />
+            <Route path="/postedjobs" element={<PostedJobsbyEmp url= {axios.defaults.baseURL} />} />
+            <Route path="/Updatepostedjobs" element={<UpdatePostedJobs url= {axios.defaults.baseURL} />} />
+            <Route path="/Applied-User-Profile/:jid" element={<AppliedUserProfile url= {axios.defaults.baseURL} />} />
+            <Route path="/Check-Profile/:CP" element={<CheckStudentProfiel url= {axios.defaults.baseURL} />} />
+            <Route path="/UpdateProfile" element={<EmployeeUpdateProfile url= {axios.defaults.baseURL} />} />
+            <Route path="/MyProfile" element={<EmployeeProfile url= {axios.defaults.baseURL} />} />
+            <Route path="Search-Candidate" element={<SearchCandidate url= {axios.defaults.baseURL} />} />
 
           </Route>
           {/* ..........Jobseeker Private component i,e can not search in URL......... */}
           <Route element={<StudPrivate />} >
-            <Route path="/alljobs" element={<Jobs />} />
-            <Route path="/Update-Profile" element={<StudentUpdateProfile />} />
-            <Route path="/My-Profile" element={<StudentProfile />} />
-            <Route path="/My-Applied-Jobs" element={<MyAppliedJobs />} />
-
+            <Route path="/alljobs" element={<Jobs url={axios.defaults.baseURL} />} />
+            <Route path="/Update-Profile" element={<StudentUpdateProfile url= {axios.defaults.baseURL} />} />
+            <Route path="/My-Profile" element={<StudentProfile url= {axios.defaults.baseURL} />} />
+            <Route path="/My-Applied-Jobs" element={<MyAppliedJobs url= {axios.defaults.baseURL} />} />
           </Route>
 
           <Route path="/BIAdd@Logg" element={<AdminLogin />} />
@@ -101,12 +111,10 @@ const App = () => {
           <Route path="/BIAddmin@AdminUpdate" element ={<AdminUpdate/>} />
           <Route path="/BIAddmin@PostJob" element={<AdminPostJobs/>} />
           <Route path="/BIAddmin@AllIds" element={<AllIds/>} />
-
           <Route path="/JobSeekerLogin" element={<StudentLogin />} />
           <Route path="/EmployeeLogin" element={<EmployeeLogin />} />
           <Route path="/JobSeekerSignUp" element={<StudentSignUp />} />
           <Route path="/EmployeeSignUp" element={<EmployeeSignUp />} />
-
           <Route path="/JobDetails/:id" element={<Jobdetails />} />
           <Route path="/CheckEmpHalfProfile/:empId" element={<CheckEmpHalfProfile />} />
 

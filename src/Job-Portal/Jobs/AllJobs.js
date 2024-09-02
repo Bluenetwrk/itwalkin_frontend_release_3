@@ -8,11 +8,18 @@ import location from "../img/icons8-location-20.png"
 import graduation from "../img/icons8-graduation-cap-40.png"
 
 import useScreenSize from '../SizeHook';
-
+import socketIO from 'socket.io-client';
 
 // import { Bars } from  'react-loader-spinner'
-
 function AllJobs(props) {
+  useEffect( ()=>{    
+    const socket = socketIO.connect(props.url,{
+      auth:{
+        token: JSON.parse(localStorage.getItem("StudId"))
+      }
+    });
+  },[])
+
 
   const [jobs, setJobs] = useState([])
   const [isReadMore, setIsReadMore] = useState(true)
@@ -368,9 +375,8 @@ async function getBothFiltered(jobTitle){
   <label><input type="radio" name="jobtitle" className={styles.JobtitleFilter_} onClick={()=>{{jobLocation!=="AllL" ?getBothFiltered('python') : JobtitleFilter('python')} }}  />Python Developer</label> 
     </div>
       
-      <div className={styles.AllHeadingSortWrapper}>
+      {/* <div className={styles.AllHeadingSortWrapper}>
 
-              {/* <div className={styles.AllradioWrapper} > */}
                 <p className={`${styles.FilterHeading} ${styles.JobSorting}`} onClick={() => { setshowJobs((prev) => !prev) }}  ><b>Job Posted Date <i className={`${styles.arrow} ${styles.down}`}></i></b></p>
 
                 {showJobs ?
@@ -408,8 +414,7 @@ async function getBothFiltered(jobTitle){
                   </>
                   : ""
                 }
-              {/* </div> */}
-            </div>
+            </div> */}
 
       <div className={styles.Uiwarpper}>
         <ul className={styles.ul}>
@@ -418,11 +423,22 @@ async function getBothFiltered(jobTitle){
           <li className={`${styles.li} ${styles.Source}`}><b>Source</b></li>
           <li className={`${styles.li} ${styles.Jtitle}`}><b>Job Title</b></li>
           <li className={`${styles.li} ${styles.JobType}`}><b>JobType</b></li>
-          <li className={`${styles.li} ${styles.HliDescription}`}><b>Job description</b></li>
-          <li className={`${styles.li} ${styles.date}`}><b>Posted Date</b> </li>
+          {/* <li className={`${styles.li} ${styles.HliDescription}`}><b>Job description</b></li> */}
+          <li className={`${styles.li} ${styles.date}`}><b>Posted Date</b>
+         <span> <i onClick={sortbyNewjobs} className={`${styles.arrow} ${styles.up}`}> </i>
+          <i onClick={sortbyOldjobs} className={`${styles.arrow} ${styles.down}`}></i></span>
+           </li>
+
           <li className={`${styles.li} ${styles.Location}`}><b>Location</b></li>
-          <li className={`${styles.li} ${styles.Package}`}><b>Package </b> </li>
-          <li className={`${styles.li} ${styles.experiance}`}><b>Exp</b></li>
+          <li className={`${styles.li} ${styles.Package}`}><b>Package</b><br></br>
+          <i onClick={SdescendingOrder} className={`${styles.arrow} ${styles.up}`}> </i>
+          <i onClick={SascendingOrder} className={`${styles.arrow} ${styles.down}`}></i>          
+            </li>
+
+          <li className={`${styles.li} ${styles.experiance}`}><b>Exp</b><br></br>
+          <i onClick={EdescendingOrder} className={`${styles.arrow} ${styles.up}`}> </i>
+          <i onClick={EascendingOrder} className={`${styles.arrow} ${styles.down}`}></i>          
+            </li>
           <li className={`${styles.li} ${styles.qualification}`}><b>Qualif</b></li>
           <li className={`${styles.li} ${styles.Skills}`}><b>Skills Required</b></li>
           <li className={`${styles.li} ${styles.Status}`}><b>Status</b></li>
@@ -467,38 +483,16 @@ async function getBothFiltered(jobTitle){
 
                        }
 
-                <li className={`${styles.li} ${styles.Jtitle}`}>{items.jobTitle.toUpperCase()}</li>
+                <li className={`${styles.li} ${styles.Jtitle}`} onClick={() => navigate(`/Jobdetails/${items._id}`)} style={{cursor:"pointer", textDecoration:"underline", color:"blue"}}>{items.jobTitle.toUpperCase()}</li>
                 <li className={`${styles.li} ${styles.JobType}`}>{items.jobtype}</li>
 
-                <li className={`${styles.li} ${styles.liDescription}`}>
+                {/* <li className={`${styles.li} ${styles.liDescription}`}>
                    
                    {
                     items.jobDescription.map((descrip, di) => {
                       return (
                         <>
-                          {
-                          //   descrip.type == "unordered-list-item" ?
-            
-                          //     <ul style={{ listStyleType: "disc" }}>
-                          //       <li>
-                          //         {descrip.text}
-            
-                          //       </li>
-                          //     </ul>
-            
-                          //     : descrip.type == "ordered-list-item" ?
-            
-                          //       <ol >
-                          //         {/* <li> */}
-                          //           {descrip.text}
-            
-                          //         {/* </li> */}
-                          //       </ol>
-                          //       :
-                          //       <>
-                          //         {descrip.text}
-                          //         <br></br>
-                          //       </>
+                          {                         
                                   descrip.text.slice(0,50)
 
             
@@ -511,7 +505,7 @@ async function getBothFiltered(jobTitle){
                   <span onClick={() => navigate(`/Jobdetails/${items._id}`)} className={styles.seeMore}>
                     ...read more
                   </span>
-                </li>
+                </li> */}
                 <li className={`${styles.li} ${styles.date}`}>
                   {new Date(items.createdAt).toLocaleString(
                     "en-US",
@@ -595,41 +589,18 @@ async function getBothFiltered(jobTitle){
 
                        }
 
-                <li className={`${styles.li} ${styles.Jtitle}`}>{items.jobTitle.toUpperCase()}</li>
+                <li className={`${styles.li} ${styles.Jtitle}`} onClick={() => navigate(`/Jobdetails/${items._id}`)} style={{cursor:"pointer", textDecoration:"underline", color:"blue"}}>{items.jobTitle.toUpperCase()}</li>
                 <li className={`${styles.li} ${styles.JobType}`}>{items.jobtype}</li>
 
-                <li className={`${styles.li} ${styles.liDescription}`}>
+                {/* <li className={`${styles.li} ${styles.liDescription}`}>
                    
                    {
                     items.jobDescription.map((descrip, di) => {
                       return (
                         <>
                           {
-                          //   descrip.type == "unordered-list-item" ?
-            
-                          //     <ul style={{ listStyleType: "disc" }}>
-                          //       <li>
-                          //         {descrip.text}
-            
-                          //       </li>
-                          //     </ul>
-            
-                          //     : descrip.type == "ordered-list-item" ?
-            
-                          //       <ol >
-                          //         {/* <li> */}
-                          //           {descrip.text}
-            
-                          //         {/* </li> */}
-                          //       </ol>
-                          //       :
-                          //       <>
-                          //         {descrip.text}
-                          //         <br></br>
-                          //       </>
-                                  descrip.text.slice(0,50)
-
-            
+  
+                                  descrip.text.slice(0,50)            
                           }
                         </>
                       )
@@ -639,7 +610,7 @@ async function getBothFiltered(jobTitle){
                   <span onClick={() => navigate(`/Jobdetails/${items._id}`)} className={styles.seeMore}>
                     ...read more
                   </span>
-                </li>
+                </li> */}
                 <li className={`${styles.li} ${styles.date}`}>
                   {new Date(items.createdAt).toLocaleString(
                     "en-US",
@@ -697,9 +668,8 @@ async function getBothFiltered(jobTitle){
 
     </>
     :
-    <>
-
-    
+    // Mobile View
+    <>    
      
 <div style={{display : "flex",marginLeft:"18px"}}>
         <div className={styles.JobtitleFilterWrapper_} style={{ width:"120px"}}>
@@ -760,8 +730,7 @@ Filterjobs.map((job, i) => {
  :
 //  <> <span className={styles.companyName} onClick={()=>{checkEmpHalf(job.empId)}} >{job.companyName} </span><br></br></>
 <> <a className={`${styles.companyName}`} href={job.SourceLink} target="_blank">{job.Source}</a><br></br> </>
-}
-        
+}        
         </div>
                         
         <  img className={styles.jobLocationImage} src={location}  /> 
@@ -956,30 +925,7 @@ jobs.map((job, i) => {
                 return (
                   <>
                     {
-                      // descrip.type == "unordered-list-item" ?
-            
-                      // <ul style={{ listStyleType: "disc" }}>
-                      //   <li style={{marginTop:"-12px", marginLeft:"-20px"}}>
-                      //     {descrip.text}
-    
-                      //   </li>
-                      // </ul>
-    
-                      // : descrip.type == "ordered-list-item" ?
-    
-                      //   <ul style={{ listStyleType: "disc" }} >
-                      //   <li style={{marginTop:"-12px", marginLeft:"-20px"}}>
 
-                      //       {descrip.text}
-    
-                      //     </li>
-                      //   </ul>
-
-                      //     :
-                      //     <>
-                      //      <p className={styles.jobDescription}> {descrip.text}</p>
-                      //       <br></br>
-                      //     </>
                       descrip.text.slice(0,50)
       
                     }
@@ -993,9 +939,7 @@ jobs.map((job, i) => {
   })
   navigate(`/Jobdetails/${job._id}`)}} className={styles.seeMore}>
                           ...read more
-                        </span>
-             
-            
+                        </span>                     
                </p>         
       </div>
     </>

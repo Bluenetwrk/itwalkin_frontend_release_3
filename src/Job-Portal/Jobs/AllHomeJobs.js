@@ -352,15 +352,12 @@ return user
           </select>
           <p>Jobs shown from <b>{from + 1}</b> to <b>{to}</b></p>
         </div>
-
-
-
       {screenSize.width > 850 ?
         <>
           <div className={styles.JobtitleFilterWrapper}>
 
             <label> <input type="radio" name="location" checked={jobLocation === 'AllL'} className={styles.JobtitleFilter_} onClick={() => { getjobsAllLoc(); setjobLocation("AllL") }} />All</label>
-            <label> <input type="radio" name="location" checked={jobLocation === 'banglore'} className={styles.JobtitleFilter_} onClick={() => { getLocation("banglore"); setjobLocation('banglore') }} />Banglore</label>
+            <label> <input type="radio" name="location" checked={jobLocation === 'banglore'} className={styles.JobtitleFilter_} onClick={() => { getLocation("banglore"); setjobLocation('banglore') }} />Bangalore</label>
             <label> <input type="radio" name="location" disabled checked={jobLocation === 'chennai'} className={styles.JobtitleFilter_} onClick={() => { getLocation("chennai"); setjobLocation('chennai') }} />Chennai</label>
             <label> <input type="radio" name="location" disabled checked={jobLocation === 'hyderabad'} className={styles.JobtitleFilter_} onClick={() => { getLocation("hyderabad"); setjobLocation('hyderabad') }} />Hyderabad</label>
             <label> <input type="radio" name="location" disabled checked={jobLocation === 'mumbai'} className={styles.JobtitleFilter_} onClick={() => { getLocation("mumbai"); setjobLocation('mumbai') }} />Mumbai</label>
@@ -377,12 +374,8 @@ return user
             <label><input type="radio" name="jobtitle" className={styles.JobtitleFilter_} onClick={() => { { jobLocation !== "AllL" ? getBothFiltered('python') : JobtitleFilter('python') } }} />Python Developer</label>
           </div>
 
-          {/* rgb(55, 16, 92) */}
+          {/* <div className={styles.AllHeadingSortWrapper}>
 
-
-          <div className={styles.AllHeadingSortWrapper}>
-
-            {/* <div className={styles.AllradioWrapper} > */}
             <p className={`${styles.FilterHeading} ${styles.JobSorting}`} onClick={() => { setshowJobs((prev) => !prev) }}  ><b>Job Posted Date <i className={`${styles.arrow} ${styles.down}`}></i></b></p>
 
             {showJobs ?
@@ -420,27 +413,32 @@ return user
               </>
               : ""
             }
-            {/* </div> */}
-          </div>
+          </div> */}
 
 
           <div className={styles.Uiwarpper}>
-            <ul className={styles.ul}>
+            <ul className={styles.ul} style={{backgroundColor:"lightgrey",}}>
               <li className={`${styles.li} ${styles.CompanyName}`}><b>Company Name</b></li>
               <li className={`${styles.li} ${styles.Source}`}><b>Source</b></li>
               <li className={`${styles.li} ${styles.Jtitle}`}><b>Job Title</b></li>
               <li className={`${styles.li} ${styles.JobType}`}><b>JobType</b></li>
-
-              <li className={`${styles.li} ${styles.HliDescription}`}><b>Job description</b></li>
+             
+              {/* <li className={`${styles.li} ${styles.HliDescription}`}><b>Job description</b></li> */}
               <li className={`${styles.li} ${styles.date}`}><b>Posted Date</b>
-
+             <span> <i onClick={sortbyNewjobs} className={`${styles.arrow} ${styles.up}`} ></i>
+              <i onClick={sortbyOldjobs} className={`${styles.arrow} ${styles.down}`}></i></span>
               </li>
-
+              {/* style={{ position:"absolute", display:"block"}} */}
               <li className={`${styles.li} ${styles.Location}`}><b>Location</b></li>
-              <li className={`${styles.li} ${styles.Package}`}><b>Package </b>
 
+              <li className={`${styles.li} ${styles.Package}`}><b>Package</b><br></br>
+              <i onClick={SdescendingOrder} className={`${styles.arrow} ${styles.up}`}> </i>
+              <i onClick={SascendingOrder} className={`${styles.arrow} ${styles.down}`}></i>
               </li>
-              <li className={`${styles.li} ${styles.experiance}`}><b>Exp</b>
+
+              <li className={`${styles.li} ${styles.experiance}`}><b>Exp</b><br></br>
+              <i onClick={EdescendingOrder} className={`${styles.arrow} ${styles.up}`}> </i>
+              <i onClick={EascendingOrder} className={`${styles.arrow} ${styles.down}`}></i>
 
               </li>
               <li className={`${styles.li} ${styles.qualification}`}><b>Qualif</b></li>
@@ -477,9 +475,7 @@ return user
               {items.Source}
 
                   </a>
-
-                }                  
-                    
+                }             
                     
                       {items.Source ?
                         <a className={`${styles.li} ${styles.Source}`} href={items.SourceCompanyLink} target="_blank">{items.Source}</a>
@@ -488,48 +484,23 @@ return user
 
                       }
 
-                      <li className={`${styles.li} ${styles.Jtitle}`}>{items.jobTitle}</li>
-                      <li className={`${styles.li} ${styles.JobType}`}>{items.jobtype}</li>
+  <li className={`${styles.li} ${styles.Jtitle}`} onClick={() => navigate(`/Jobdetails/${items._id}`)} style={{cursor:"pointer", textDecoration:"underline", color:"blue"}}>{items.jobTitle}</li>
+  <li className={`${styles.li} ${styles.JobType}`}>{items.jobtype}</li>
 
-                      <li className={`${styles.li} ${styles.liDescription}`}>
+                      {/* <li className={`${styles.li} ${styles.liDescription}`}>
                         {
                           items.jobDescription.map((descrip, di) => {
                             return (
                               <>
-                                {
-                                  // descrip.type == "unordered-list-item" ?
-
-                                  //   <ul style={{ listStyleType: "disc" }}>
-                                  //     <li>
-                                  //       {descrip.text}
-
-                                  //     </li>
-                                  //   </ul>
-
-                                  //   : descrip.type == "ordered-list-item" ?
-
-                                  //     <ol >
-                                  //       {/* <li> */}
-                                  //       {descrip.text}
-
-                                  //       {/* </li> */}
-                                  //     </ol>
-                                  //     :
-                                  //     <>
-                                  //       {descrip.text}
-                                  //       <br></br>
-                                  //     </>
-                                  descrip.text.slice(0,50)
-                                }
+                                { descrip.text.slice(0,50)}
                               </>
                             )
                           }).slice(0, 1)
                         }
-
                         <span onClick={() => navigate(`/Jobdetails/${items._id}`)} className={styles.seeMore}>
                           ...read more
                         </span>
-                      </li>
+                      </li> */}
                       <li className={`${styles.li} ${styles.date}`}>
                         {new Date(items.createdAt).toLocaleString(
                           "en-US",
@@ -553,13 +524,8 @@ return user
                           }}>Apply</button>
                           :
                           <button className={styles.Applybutton} onClick={() => { applyforJob(items._id) }}>Apply</button>
-
                         }
-
                       </li>
-
-
-
                     </ul>
                   )
                 }).slice(from, to)
@@ -588,9 +554,7 @@ return user
   
                     </a>
   
-                  }
-                      
-                      
+                  }                       
                       
                         {items.Source ?
                           <a className={`${styles.li} ${styles.Source}`} href={items.SourceCompanyLink} target="_blank">{items.Source}</a>
@@ -599,37 +563,15 @@ return user
   
                         }
   
-                        <li className={`${styles.li} ${styles.Jtitle}`}>{items.jobTitle}</li>
-                        <li className={`${styles.li} ${styles.JobType}`}>{items.jobtype}</li>
+<li className={`${styles.li} ${styles.Jtitle}`} onClick={() => navigate(`/Jobdetails/${items._id}`)} style={{cursor:"pointer", textDecoration:"underline", color:"blue"}}>{items.jobTitle}</li>
+<li className={`${styles.li} ${styles.JobType}`}>{items.jobtype}</li>
   
-                        <li className={`${styles.li} ${styles.liDescription}`}>
+                        {/* <li className={`${styles.li} ${styles.liDescription}`}>
                           {
                             items.jobDescription.map((descrip, di) => {
                               return (
                                 <>
                                   {
-                                    // descrip.type == "unordered-list-item" ?
-  
-                                    //   <ul style={{ listStyleType: "disc" }}>
-                                    //     <li>
-                                    //       {descrip.text}
-  
-                                    //     </li>
-                                    //   </ul>
-  
-                                    //   : descrip.type == "ordered-list-item" ?
-  
-                                    //     <ol >
-                                    //       {/* <li> */}
-                                    //       {descrip.text}
-  
-                                    //       {/* </li> */}
-                                    //     </ol>
-                                    //     :
-                                    //     <>
-                                    //       {descrip.text}
-                                    //       <br></br>
-                                    //     </>
                                     descrip.text.slice(0,50)
                                   }
                                 </>
@@ -640,7 +582,7 @@ return user
                           <span onClick={() => navigate(`/Jobdetails/${items._id}`)} className={styles.seeMore}>
                             ...read more
                           </span>
-                        </li>
+                        </li> */}
                         <li className={`${styles.li} ${styles.date}`}>
                           {new Date(items.createdAt).toLocaleString(
                             "en-US",

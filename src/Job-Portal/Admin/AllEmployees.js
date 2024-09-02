@@ -297,7 +297,6 @@ async function sendMessage(id){
     const headers = { authorization: userid +" "+ atob(JSON.parse(localStorage.getItem("AdMLog"))) };
     if(e.target.checked){
     await axios.get("/EmpProfile/getNotApprovedEmp", {headers})
-
     .then((res) => {
       let result = (res.data)
       setAllEmployees(result)  
@@ -327,24 +326,17 @@ async function search(e) {
     }
   }
 
-  function TopToBottonOnline(){
-const newAllEmployees=[...AllEmployees]
-let sortresult = newAllEmployees.sort((a,b)=>{
-  return new Date(b.LogedInTime) - new Date(a.LogedInTime);
-
-})
-setAllEmployees(sortresult)
-  }
   async function RecentLogin(e){
     let userid = atob(JSON.parse(localStorage.getItem("IdLog")))
     const headers = { authorization: userid +" "+ atob(JSON.parse(localStorage.getItem("AdMLog"))) };
     if(e.target.checked){
     await axios.get("/EmpProfile/RecentLogin", {headers})
-
     .then((res) => {
       let result = (res.data)
-      console.log(result)
-      setAllEmployees(result)  
+      let sortresult = result.sort((a,b)=>{
+        return new Date(b.LogedInTime) - new Date(a.LogedInTime);      
+      })
+      setAllEmployees(sortresult)  
     })
     .catch((err) => {
       alert("server issue occured")
@@ -352,6 +344,23 @@ setAllEmployees(sortresult)
   }else{
       getEmployees()
     }  
+      }
+
+      async function checkOnline(e){
+        let userid = atob(JSON.parse(localStorage.getItem("IdLog")))
+        const headers = { authorization: userid +" "+ atob(JSON.parse(localStorage.getItem("AdMLog"))) };
+        if(e.target.checked){
+        await axios.get("/EmpProfile/checkOnline", {headers})
+        .then((res) => {
+          let result = (res.data)
+          setAllEmployees(result)  
+        })
+        .catch((err) => {
+          alert("server issue occured")
+        })
+      }else{
+          getEmployees()
+        }  
       }
 
   return (
@@ -371,7 +380,8 @@ setAllEmployees(sortresult)
       <label><input id="checkApproved" name="checkApproved" type="radio" onChange={(e)=>{AllEmployeesApANdDis(e)}} /><span>All Employers</span></label><br></br>
       <label><input id="checkApproved" name="checkApproved" type="radio" onChange={(e)=>{checkAllApproved(e)}} /><span>Approved Employers</span></label><br></br>
       <label><input id="checkApproved" name="checkApproved" type="radio" onChange={(e)=>{checkAllNotApproved(e)}} /><span> Employers who are yet to be approved</span></label><br></br>
-      {/* <label><input id="checkApproved" name="checkApproved" type="radio" onChange={(e)=>{TopToBottonOnline(e)}} /><span> Recent Login</span></label><br></br> */}
+      <label><input id="checkApproved" name="checkApproved" type="radio" onChange={(e)=>{RecentLogin(e)}} /><span> Recent Login</span></label><br></br>
+      <label><input id="checkApproved" name="checkApproved" type="radio" onChange={(e)=>{checkOnline(e)}} /><span>check Online</span></label><br></br>
       </div>
       {screenSize.width>850?
 
@@ -397,7 +407,8 @@ setAllEmployees(sortresult)
               return (
                 <ul className={styles.ul}>
                   <li className={`${styles.li} ${styles.Name}`} title='Click to Check the Full Profile' onClick={() => navigate(`/BIAddmin@CheckEmpProfile/${items._id}`)}>
-                    <Link style={{ color: "blue" }}>{items.name}</Link></li>
+                    <Link style={{ color: "blue" }}>
+                    {items.online ? <span className={styles.dot}></span> :""} {items.name}</Link></li>
                   <li className={`${styles.li} ${styles.phoneNumber}`}>{items.phoneNumber}</li>
 
                   <li className={`${styles.li} ${styles.CompanyName}`}>{items.CompanyName}</li>

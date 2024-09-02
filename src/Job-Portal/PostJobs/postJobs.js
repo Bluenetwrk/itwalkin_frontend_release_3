@@ -6,10 +6,18 @@ import { useNavigate } from 'react-router-dom'
 
 import { Editor } from 'react-draft-wysiwyg';
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css"; 
-
 import Style from "./postJobs.module.css"
+import socketIO from 'socket.io-client';
 
-function PostJobs() {
+function PostJobs(props) {
+
+    useEffect( ()=>{    
+        const socket = socketIO.connect(props.url,{
+          auth:{
+            token: JSON.parse(localStorage.getItem("EmpIdG"))
+          }
+        });
+      },[])
 
     let jobTags = ['java', 'Mern Stack', 'React Js', 'Python', 'C', 'C++', 'Javascript', 'Node js', 'Angular js','Vue js', 
         'Next.Js', 'Backend', 'Frontend'

@@ -8,11 +8,9 @@ import location from "../img/icons8-location-20.png"
 import Swal from "sweetalert2";
 import Styles from "./myPostedjobs.module.css"
 import graduation from "../img/icons8-graduation-cap-40.png"
-
-
-
-
 import useScreenSize from '../SizeHook';
+import Arrowimage from '../img/icons8-arrow-left-48.png'
+
 
 function Jobdetails() {
   const [jobs, setJobs] = useState([])
@@ -108,6 +106,12 @@ const [Loader, setLoader] = useState(false)
 
   return (
     <>
+    <div style={{display:"flex"}}>
+                            <img style={{ height:"25px", color:"grey", marginTop:"20px", marginLeft:"8%", cursor:"pointer",
+             width:"28px"}} onClick={()=>{navigate(-1)}}  src={Arrowimage} />
+    <p style={{marginLeft:"30%"}}><b>Full Job Description</b></p>
+    </div>
+
       {screenSize.width>850 ?
 
         <>

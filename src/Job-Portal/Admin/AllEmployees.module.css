@@ -34,6 +34,14 @@
     margin-left: -35px;
 
 }
+.dot{
+    height: 8px;
+  width: 8px;
+  background-color:rgb(7, 252, 7);
+
+  border-radius: 50%;
+  display: inline-block;
+}
 
 .li {
     display: inline-block;

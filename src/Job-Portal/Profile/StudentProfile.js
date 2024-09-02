@@ -6,10 +6,19 @@ import profileDp from "../img/user_3177440.png"
 import { Puff } from  'react-loader-spinner'
 import { useNavigate } from 'react-router-dom'
 import useScreenSize from '../SizeHook';
+import Arrowimage from '../img/icons8-arrow-left-48.png'
+import socketIO from 'socket.io-client';
 
- 
 
-function StudentProfile() {
+function StudentProfile(props) {
+
+    useEffect( ()=>{    
+        const socket = socketIO.connect(props.url,{
+          auth:{
+            token: JSON.parse(localStorage.getItem("StudId"))
+          }
+        });
+      },[])
 
     const [profileData, setProfileData] = useState([])
 const [PageLoader, setPageLoader] = useState(false)
@@ -42,8 +51,12 @@ let navigate = useNavigate()
     return (
         <>
         <div style={{display:"flex"}}>
-        <button style={{ height:"25px", color:"grey", marginTop:"20px", marginLeft:"40px", cursor:"pointer", width:"50px"}} onClick={()=>{
-            navigate(-1)}} >back</button>
+        {/* <button style={{ height:"25px", color:"grey", marginTop:"20px", marginLeft:"40px", cursor:"pointer", width:"50px"}} onClick={()=>{
+            navigate(-1)}} >back</button> */}
+            
+                        <img style={{ height:"25px", color:"grey", marginTop:"20px", marginLeft:"8%", cursor:"pointer",
+             width:"28px"}} onClick={()=>{navigate(-1)}}  src={Arrowimage} />
+
         <h3 style={{color:"rgb(40, 4, 99)", marginLeft:"40%"}}>My Profile</h3>
         </div>
         

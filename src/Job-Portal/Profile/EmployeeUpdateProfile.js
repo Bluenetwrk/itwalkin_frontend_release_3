@@ -9,9 +9,17 @@ import delet from "../img/icons8-delete-48.png"
 import { TailSpin } from "react-loader-spinner"
 import Companylogo from "../img/logo.png"
 import useScreenSize from '../SizeHook';
+import socketIO from 'socket.io-client';
 
 
-function EmployeeUpdateProfile() {
+function EmployeeUpdateProfile(props) {
+  useEffect( ()=>{    
+    const socket = socketIO.connect(props.url,{
+      auth:{
+        token: JSON.parse(localStorage.getItem("EmpIdG"))
+      }
+    });
+  },[])
   const [file, setFile] = useState()
   const [uploaded, setUploaded] = useState()
 const screenSize = useScreenSize();

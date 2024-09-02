@@ -8,9 +8,17 @@ import profileDp from "../img/user_3177440.png"
 import delet from "../img/icons8-delete-48.png"
 import { TailSpin } from "react-loader-spinner"
 import useScreenSize from '../SizeHook';
+import socketIO from 'socket.io-client';
 
 
-function StudentUpdateProfile() {
+function StudentUpdateProfile(props) {
+useEffect( ()=>{    
+        const socket = socketIO.connect(props.url,{
+          auth:{
+            token: JSON.parse(localStorage.getItem("StudId"))
+          }
+        });
+      },[])
   const [file, setFile] = useState()
   const [uploaded, setUploaded] = useState()
 const screenSize = useScreenSize();
@@ -208,7 +216,7 @@ window.addEventListener('keypress', function(event){
 
             <label className={styles.inputName}>
               <h4>Age:</h4>
-              <input maxLength="3" className={styles.input} value={age} onChange={(e) => { setage(e.target.value) }} type="text" />
+              <input maxLength="3" className={styles.input} value={age} onChange={(e) => { setage(e.target.value) }} type="number" />
             </label>
 
             <label className={styles.inputName}>

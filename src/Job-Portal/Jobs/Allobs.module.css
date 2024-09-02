@@ -64,7 +64,9 @@
 } */
 
 /* ..............UL......LI............. */
-
+.arrowwrapper{
+    /* background-color: red; */
+}
 .arrow {
     border: solid black;
     border-width: 0 2px 2px 0;
@@ -73,11 +75,26 @@
     padding: 3px;
   }
   
-  .down {
-    transform: rotate(45deg);
-    -webkit-transform: rotate(45deg);
+  .up {
+    transform: rotate(-135deg);
+    -webkit-transform: rotate(-135deg);
+    /* background-color: blue; */
+    position: absolute;
+    margin-top: 2px;
   }
-
+  .down {
+    transform: rotate(90deg);
+    -webkit-transform: rotate(45deg);
+    /* background-color: red; */
+    /* position: absolute; */
+  }
+  .arrow:hover{
+    border: solid grey;
+    border-width: 0 2px 2px 0;
+    display: inline-block;
+    /* margin-top: 100px; */
+    padding: 3px;
+  }
 /* .HeadingSort{
     display: flex;
     margin-left: 40px;
@@ -175,21 +192,24 @@
 
 }
 .Uiwarpper{
-    /* margin-top: 20px; */
-    margin-left: -2%;
+    margin-top: 20px;
+    margin-left: -2.5%;
+    margin-right: -0.5%;
     /* background-color: bisque; */
 }
 .ul{
     display: flex;
     margin: 0px;
     margin-left: -.2%;
-   
+    /* background-color: blue;    */
 }
-/* .ul:hover{
-    border : 1px solid rgb(210, 212, 212);
 
-} */
-
+.ul:nth-child(even) {
+    /* background:rgb(247, 246, 246) */
+  }
+  .ul:nth-child(odd) {
+    background:rgb(242, 244, 245)
+  }
 .li{
     display: inline-block;
     padding-top: 0.5%;
@@ -199,18 +219,15 @@
     border : 1px solid rgb(215, 223, 226);
     text-align: center;
     overflow-wrap:break-word;
-
-
 }
 .CompanyName{
-    width:10%;
+    width:12%;
     overflow-wrap:break-word
 
 }
 .Source{
-    width:6%;
+    width:7%;
     overflow-wrap:break-word
-
 
 }
 .liDescription{
@@ -225,47 +242,49 @@
     text-align:center ;
 }
 .JobType{
-    width:6%;
-    overflow-wrap:break-word
-
-}
-.date{
-    width:6%;
-    overflow-wrap:break-word
-
-}
-.qualification{
     width:6.5%;
     overflow-wrap:break-word
 
 }
 .Jtitle{
-    width:8%;
-    overflow-wrap:break-word
+    width:13%;
+    overflow-wrap:break-word;
+}
+.date{
+    width:6%;
+    overflow-wrap:break-word;
+    padding-left: 10px;
+    padding-right: 10px;
 
 }
-.Package{
+.qualification{
     width:7%;
     overflow-wrap:break-word
 
 }
+
+.Package{
+    width:6%;
+    overflow-wrap:break-word
+
+}
 .experiance{
-    width:4%;
+    width:5%;
     overflow-wrap:break-word
 
 }
 .Location{
-    width:7.5%;
+    width:8%;
     overflow-wrap:break-word
 
 }
 .Skills{
-    width:12%;
+    width:19%;
     overflow-wrap:break-word
 
 }
 .Apply{
-    width:85px
+    width:92px
 }
 .Status{
     width:90px
@@ -356,6 +375,7 @@ border-left: none;
 
 .showLess{
     color:rgb(109, 52, 201);
+    cursor: pointer;
 }
 .JobtitleFilterWrapper-{
     margin-left: 20%;
