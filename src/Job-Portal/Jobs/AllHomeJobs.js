@@ -342,6 +342,11 @@ function next(){
 function last(){
     setCurrentPage(npage)
 }
+function handleRecordchange(e){
+  setrecordsPerPage(e.target.value)
+  setCurrentPage(1)
+
+}
 
   return (
     <>
@@ -492,15 +497,18 @@ function last(){
               {/* style={{ position:"absolute", display:"block"}} */}
               <li className={`${styles.li} ${styles.Location}`}><b>Location</b></li>
 
-              <li className={`${styles.li} ${styles.Package}`}><b>Package</b><br></br>
+              <li className={`${styles.li} ${styles.Package}`}><b>Package</b>
+              <p style={{display:"inline", marginLeft:"5px"}}>
                 <i onClick={SdescendingOrder} className={`${styles.arrow} ${styles.up}`}> </i>
                 <i onClick={SascendingOrder} className={`${styles.arrow} ${styles.down}`}></i>
+                </p>
               </li>
 
-              <li className={`${styles.li} ${styles.experiance}`}><b>Exp</b><br></br>
+              <li className={`${styles.li} ${styles.experiance}`}><b>Exp</b>
+              <p style={{display:"inline", marginLeft:"5px"}}>
                 <i onClick={EdescendingOrder} className={`${styles.arrow} ${styles.up}`}> </i>
                 <i onClick={EascendingOrder} className={`${styles.arrow} ${styles.down}`}></i>
-
+                </p>
               </li>
               <li className={`${styles.li} ${styles.qualification}`}><b>Qualif</b></li>
 
@@ -597,8 +605,9 @@ function last(){
                 : <p style={{ marginLeft: "47%", color: "red" }}>No Record Found</p>
             }
           </div>
+          
           <div>
-            Show  <select onChange={(e)=>{setrecordsPerPage(e.target.value)}}>
+            Show  <select onChange={(e)=>{handleRecordchange(e)}}>
               <option value={10}>10</option>              
               <option value={25}>25</option>              
               <option value={50}>50</option>              

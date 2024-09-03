@@ -305,12 +305,9 @@ function AllJobs(props) {
     console.log(e.target.value)
     setto(e.target.value)
   }
-
-
     
   const [currentPage, setCurrentPage] = useState(1)
   const [recordsPerPage, setrecordsPerPage] = useState(10)
-  console.log(recordsPerPage)
   const lastIndex = currentPage * recordsPerPage //10
   const firstIndex = lastIndex - recordsPerPage //5
   const records = jobs.slice(firstIndex, lastIndex)//0,5
@@ -336,6 +333,11 @@ function next(){
 }
 function last(){
     setCurrentPage(npage)
+}
+function handleRecordchange(e){
+  setrecordsPerPage(e.target.value)
+  setCurrentPage(1)
+
 }
 
 
@@ -477,14 +479,18 @@ function last(){
               </li>
 
               <li className={`${styles.li} ${styles.Location}`}><b>Location</b></li>
-              <li className={`${styles.li} ${styles.Package}`}><b>Package</b><br></br>
+              <li className={`${styles.li} ${styles.Package}`}><b>Package</b>
+              <p style={{display:"inline", marginLeft:"5px"}}>
                 <i onClick={SdescendingOrder} className={`${styles.arrow} ${styles.up}`}> </i>
                 <i onClick={SascendingOrder} className={`${styles.arrow} ${styles.down}`}></i>
+                </p>
               </li>
 
-              <li className={`${styles.li} ${styles.experiance}`}><b>Exp</b><br></br>
+              <li className={`${styles.li} ${styles.experiance}`}><b>Exp</b>
+              <p style={{display:"inline", marginLeft:"5px"}}>
                 <i onClick={EdescendingOrder} className={`${styles.arrow} ${styles.up}`}> </i>
                 <i onClick={EascendingOrder} className={`${styles.arrow} ${styles.down}`}></i>
+                </p>
               </li>
               <li className={`${styles.li} ${styles.qualification}`}><b>Qualif</b></li>
               <li className={`${styles.li} ${styles.Skills}`}><b>Skills Required</b></li>
@@ -598,15 +604,15 @@ function last(){
                 : <p style={{ marginLeft: "47%", color: "red" }}>No Record Found</p>
             }
           </div>
-          <div>
-            Show  <select onChange={(e)=>{setrecordsPerPage(e.target.value)}}>
-              <option value={5}>5</option>              
+
+          {/* <div>
+            Show  <select onChange={(e)=>{handleRecordchange(e)}}>
               <option value={10}>10</option>              
               <option value={25}>25</option>              
               <option value={50}>50</option>              
               <option value={100}>100</option>              
             </select>  jobs per page
-          </div>
+          </div> */}
 
         </>
         :
