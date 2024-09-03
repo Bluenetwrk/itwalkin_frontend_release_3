@@ -6,6 +6,8 @@ import axios from "axios";
 import { Link, useNavigate, useLocation, useParams } from "react-router-dom";
 import useScreenSize from '../SizeHook';
 import profileDp from "../img/user_3177440.png"
+import Arrowimage from '../img/icons8-arrow-left-48.png'
+
 
 
 // import { useSnapCarousel } from 'react-snap-carousel';
@@ -89,12 +91,14 @@ const screenSize = useScreenSize();
     }
     return (
         <>        
-            <button className={styles.GoBackButton} onClick={() => {
+            {/* <button className={styles.GoBackButton} onClick={() => {
                 navigate(-1)
-            }}>Go Back</button>
+            }}>Go Back</button> */}
+                            <img style={{ height:"25px", color:"grey", marginTop:"20px", marginLeft:"8%", cursor:"pointer",
+             width:"28px"}} onClick={()=>{navigate("/postedjobs")}}  src={Arrowimage} />
             <>
-<h3 style={{marginLeft:"6%", opacity:0.6, width:"220px"}}>Looking for candidates?</h3>
-<h3 style={{marginLeft:"6%", opacity:0.6, width:"85%" }} >Search candidate's Skills, Notice period, Education, Experience, Expected CTC and get in touch with the Candidate directly</h3>
+<p style={{marginLeft:"6%", opacity:0.6, width:"220px"}}>Looking for candidates?</p>
+<p style={{marginLeft:"6%", opacity:0.6, width:"85%" }} >Search candidate's Skills, Notice period, Education, Experience, Expected CTC and get in touch with the Candidate directly</p>
 </>
             <div className={styles.searchBoth}>
                 <p className={styles.p}>Search </p>

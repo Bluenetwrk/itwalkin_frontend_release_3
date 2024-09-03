@@ -6,6 +6,8 @@ import { Link, useNavigate, useLocation, useParams } from "react-router-dom";
 import profileDp from "../img/user_3177440.png"
 import { Puff } from  'react-loader-spinner'
 import useScreenSize from '../SizeHook';
+import Arrowimage from '../img/icons8-arrow-left-48.png'
+
 
 function CheckStudentProfile() {
 
@@ -13,6 +15,7 @@ function CheckStudentProfile() {
 const [PageLoader, setPageLoader] = useState(false)
 const screenSize = useScreenSize();
 
+let navigate = useNavigate()
 
 
     let studId = JSON.parse(localStorage.getItem("StudId"))
@@ -40,6 +43,11 @@ const screenSize = useScreenSize();
 
     return (
         <>
+<div style={{display:"flex"}}>
+                            <img style={{ height:"25px", color:"grey", marginTop:"20px", marginLeft:"8%", cursor:"pointer",
+             width:"28px"}} onClick={()=>{navigate("/postedjobs")}}  src={Arrowimage} />
+    <p style={{marginLeft:"30%"}}><b>Student Profile </b></p>
+    </div>
  {
 profileData.map((item, i) => {
     return (

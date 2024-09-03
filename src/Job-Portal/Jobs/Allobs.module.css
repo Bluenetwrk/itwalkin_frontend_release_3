@@ -68,7 +68,7 @@
     /* background-color: red; */
 }
 .arrow {
-    border: solid black;
+    border: solid white;
     border-width: 0 2px 2px 0;
     display: inline-block;
     /* margin-top: 100px; */
@@ -185,6 +185,17 @@
     border : 1px solid rgb(204, 209, 211);
 
 }
+.navigationWrapper{
+    text-align:right;
+    margin:10px;
+     color:rgb(58, 57, 57);
+}
+.navigation{
+    background-color:rgb(240, 237, 237);
+    /* padding:5px; */
+    padding-left:7px;
+    padding-right:7px;
+}
 
 .seeMore{
  color: blue;
@@ -192,11 +203,12 @@
 
 }
 .Uiwarpper{
-    margin-top: 20px;
+    /* margin-top: 10px; */
     margin-left: -2.5%;
     margin-right: -0.5%;
     /* background-color: bisque; */
 }
+
 .ul{
     display: flex;
     margin: 0px;

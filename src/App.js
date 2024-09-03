@@ -49,7 +49,6 @@ import AdminUpdate from "./Job-Portal/Admin/AdminUpdate"
 import AdminPostJobs from "./Job-Portal/Admin/AdminJobPosts";
 import AllIds from "./Job-Portal/Admin/Allid'sStudent";
 
-
 import AboutUs from "./Job-Portal/AboutUs"
 import Contact from "./Job-Portal/Contact"
 import Services from "./Job-Portal/Services"
@@ -65,8 +64,6 @@ axios.defaults.baseURL = " https://itwalkin-backend-testrelease-2-0-1-0824-ns0g.
 //  axios.defaults.baseURL = "https://itwalkin-backend-testrelease-2-0-1-0824.onrender.com";
 
 const App = () => {
-  
-
   // let jobSeekerId = JSON.parse(localStorage.getItem("StudId"))
   // let empId = JSON.parse(localStorage.getItem("EmpIdG"))
 
