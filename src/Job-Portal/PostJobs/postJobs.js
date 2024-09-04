@@ -8,8 +8,8 @@ import { Editor } from 'react-draft-wysiwyg';
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css"; 
 import Style from "./postJobs.module.css"
 import socketIO from 'socket.io-client';
-import Select from "react-select"
-import CreatableSelect  from 'react-select/creatable';
+import CreatableSelect  from "react-select/creatable"
+// import CreatableSelect  from 'react-select/creatable';
 
 
 function PostJobs(props) {
@@ -216,7 +216,7 @@ window.addEventListener('keypress', function(event){
                          onChange={handleChange}
                          isMulti={true}
                          /> */}
-                          <CreatableSelect
+                          <CreatableSelect  
       isMulti={true}
       options={jobTags}
       value={tag}
