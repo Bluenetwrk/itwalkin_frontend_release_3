@@ -514,7 +514,7 @@ async function filterByJobTitle(key){
           <button >Next</button>  */}
 
           <div className={styles.Uiwarpper}>
-            <ul className={styles.ul} style={{backgroundColor:"rgb(40, 4, 99)", color:'white', fontWeight:"500" }}>
+            <ul className={styles.ul} style={{backgroundColor:"rgb(40, 4, 99)", color:'white', fontWeight:"bold" }}>
               <li className={`${styles.li} ${styles.CompanyName}`}>Company Name</li>
               <li className={`${styles.li} ${styles.Source}`}>Source</li>
               <li className={`${styles.li} ${styles.Jtitle}`}>Job Title</li>
@@ -563,9 +563,10 @@ async function filterByJobTitle(key){
 
                           <li style={{ cursor: "pointer", textDecoration: "underline" }} className={`${styles.li} ${styles.CompanyName}`}
                             onClick={() => { navigate(`/CheckEmpHalfProfile/${items.empId}`) }}  >
-                            {items.Logo ?
+                            {/* {items.Logo ?
                               < img style={{ width: "38px", height: "38px" }} src={items.Logo} />
-                              : ""}<br></br>
+                              : ""} */}
+                              <br></br>
                             {items.companyName}</li>
                           :
                           <a style={{ cursor: "pointer", textDecoration: "underline" }} className={`${styles.li} ${styles.CompanyName}`} href={items.SourceLink} target="_blank" >
