@@ -496,35 +496,35 @@ async function filterByJobTitle(key){
      </div>
 
           <div className={styles.Uiwarpper}>
-            <ul className={styles.ul} style={{backgroundColor:"rgb(40, 4, 99)", color:'white' }}>
+            <ul className={styles.ul} style={{backgroundColor:"rgb(40, 4, 99)", color:'white',fontWeight:"500" }}>
 
-              <li className={`${styles.li} ${styles.CompanyName}`}><b>Company Name</b></li>
-              <li className={`${styles.li} ${styles.Source}`}><b>Source</b></li>
-              <li className={`${styles.li} ${styles.Jtitle}`}><b>Job Title</b></li>
-              <li className={`${styles.li} ${styles.JobType}`}><b>JobType</b></li>
+              <li className={`${styles.li} ${styles.CompanyName}`}>Company Name</li>
+              <li className={`${styles.li} ${styles.Source}`}>Source</li>
+              <li className={`${styles.li} ${styles.Jtitle}`}>Job Title</li>
+              <li className={`${styles.li} ${styles.JobType}`}>JobType</li>
               {/* <li className={`${styles.li} ${styles.HliDescription}`}><b>Job description</b></li> */}
-              <li className={`${styles.li} ${styles.date}`}><b>Posted Date</b>
+              <li className={`${styles.li} ${styles.date}`}>Posted Date
                 <p style={{display:"inline", marginLeft:"6px"}} > <i onClick={sortbyNewjobs} className={`${styles.arrow} ${styles.up}`}> </i>
                   <i onClick={sortbyOldjobs} className={`${styles.arrow} ${styles.down}`}></i></p >
               </li>
 
-              <li className={`${styles.li} ${styles.Location}`}><b>Location</b></li>
-              <li className={`${styles.li} ${styles.Package}`}><b>CTC</b>
+              <li className={`${styles.li} ${styles.Location}`}>Location</li>
+              <li className={`${styles.li} ${styles.Package}`}>CTC
               <p style={{display:"inline", marginLeft:"10px"}}>
                 <i onClick={SdescendingOrder} className={`${styles.arrow} ${styles.up}`}> </i>
                 <i onClick={SascendingOrder} className={`${styles.arrow} ${styles.down}`}></i>
                 </p>
               </li>
 
-              <li className={`${styles.li} ${styles.experiance}`}><b>Exp</b>
+              <li className={`${styles.li} ${styles.experiance}`}>Exp
               <p style={{display:"inline", marginLeft:"10px"}}>
                 <i onClick={EdescendingOrder} className={`${styles.arrow} ${styles.up}`}> </i>
                 <i onClick={EascendingOrder} className={`${styles.arrow} ${styles.down}`}></i>
                 </p>
               </li>
-              <li className={`${styles.li} ${styles.qualification}`}><b>Qualif</b></li>
-              <li className={`${styles.li} ${styles.Skills}`}><b>Skills Required</b></li>
-              <li className={`${styles.li} ${styles.Status}`}><b>Status</b></li>
+              <li className={`${styles.li} ${styles.qualification}`}>Qualif</li>
+              <li className={`${styles.li} ${styles.Skills}`}>Skills Required</li>
+              <li className={`${styles.li} ${styles.Status}`}>Status</li>
 
             </ul>
             {PageLoader ?
