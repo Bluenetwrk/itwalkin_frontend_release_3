@@ -504,20 +504,20 @@ async function filterByJobTitle(key){
               <li className={`${styles.li} ${styles.JobType}`}><b>JobType</b></li>
               {/* <li className={`${styles.li} ${styles.HliDescription}`}><b>Job description</b></li> */}
               <li className={`${styles.li} ${styles.date}`}><b>Posted Date</b>
-                <p style={{display:"inline", marginLeft:"3px"}} > <i onClick={sortbyNewjobs} className={`${styles.arrow} ${styles.up}`}> </i>
+                <p style={{display:"inline", marginLeft:"6px"}} > <i onClick={sortbyNewjobs} className={`${styles.arrow} ${styles.up}`}> </i>
                   <i onClick={sortbyOldjobs} className={`${styles.arrow} ${styles.down}`}></i></p >
               </li>
 
               <li className={`${styles.li} ${styles.Location}`}><b>Location</b></li>
-              <li className={`${styles.li} ${styles.Package}`}><b>Package</b>
-              <p style={{display:"inline", marginLeft:"8px"}}>
+              <li className={`${styles.li} ${styles.Package}`}><b>CTC</b>
+              <p style={{display:"inline", marginLeft:"10px"}}>
                 <i onClick={SdescendingOrder} className={`${styles.arrow} ${styles.up}`}> </i>
                 <i onClick={SascendingOrder} className={`${styles.arrow} ${styles.down}`}></i>
                 </p>
               </li>
 
               <li className={`${styles.li} ${styles.experiance}`}><b>Exp</b>
-              <p style={{display:"inline", marginLeft:"9px"}}>
+              <p style={{display:"inline", marginLeft:"10px"}}>
                 <i onClick={EdescendingOrder} className={`${styles.arrow} ${styles.up}`}> </i>
                 <i onClick={EascendingOrder} className={`${styles.arrow} ${styles.down}`}></i>
                 </p>

@@ -211,7 +211,7 @@
 .ul{
     display: flex;
     margin: 0px;
-    margin-left: -.2%;
+    margin-left: -5px;
     /* background-color: blue;    */
 }
 
@@ -232,12 +232,12 @@
     overflow-wrap:break-word;
 }
 .CompanyName{
-    width:11.5%;
+    width:12%;
     overflow-wrap:break-word
 
 }
 .Source{
-    width:6.5%;
+    width:7%;
     overflow-wrap:break-word
 
 }
@@ -276,12 +276,12 @@
 }
 
 .Package{
-    width:7%;
+    width:6%;
     overflow-wrap:break-word
 
 }
 .experiance{
-    width:7%;
+    width:6%;
     overflow-wrap:break-word
 
 }
