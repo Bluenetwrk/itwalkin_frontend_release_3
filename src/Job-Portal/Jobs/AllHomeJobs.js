@@ -35,6 +35,16 @@ function Home() {
   const [Result, setResult] = useState(false)
   const [NotFound, setNotFound] = useState("")
   const screenSize = useScreenSize();
+
+  let jobTags = [
+    {value:'java', label: 'java'},{value:'Mern Stack', label:'Mern Stack' },{value:'ReactJs', label: 'ReactJs'},
+    {value:'Python', label: 'Python'},{value:'C', label: 'C' }, {value:'C++',label:'C++' },
+    {value: 'Javascript', label: "Javascript" }, {value:'Node js',label: 'Node js' }, 
+    {value:'Angular js',label: 'Angular js' },{value:'Vue js', label: 'Vue js'}, {value:'NextJs', label: 'NextJs'},
+    {value: 'Backend', label: 'Backend'},{value:'Frontend', label:'Frontend'},
+    {value: 'HTML', label: 'HTML'},{value:'CSS', label:'CSS'}
+
+    ]
   
   let navigate = useNavigate()
 
@@ -347,6 +357,17 @@ function handleRecordchange(e){
   setCurrentPage(1)
 
 }
+async function filterByJobTitle(key){
+  await axios.get(`/jobpost/getTagsJobs/${key}`)
+  .then((res) => {
+    let result = (res.data)
+    let sortedate = result.sort((a, b) => {
+      return new Date(b.createdAt) - new Date(a.createdAt);
+    });
+    console.log(sortedate)
+    setJobs(sortedate)
+  })
+}
 
   return (
     <>
@@ -398,7 +419,7 @@ function handleRecordchange(e){
         <>
           <div className={styles.JobtitleFilterWrapper}>
 
-            <label> <input type="radio" name="location" checked={jobLocation === 'AllL'} className={styles.JobtitleFilter_} onClick={() => { getjobsAllLoc(); setjobLocation("AllL") }} />All</label>
+            <label> <input type="radio" name="location" checked={jobLocation === 'AllL'} className={styles.JobtitleFilter_} onClick={() => { getjobs(); setjobLocation("AllL") }} />All</label>
             <label> <input type="radio" name="location" checked={jobLocation === 'banglore'} className={styles.JobtitleFilter_} onClick={() => { getLocation("banglore"); setjobLocation('banglore') }} />Bangalore</label>
             <label> <input type="radio" name="location" disabled checked={jobLocation === 'chennai'} className={styles.JobtitleFilter_} onClick={() => { getLocation("chennai"); setjobLocation('chennai') }} />Chennai</label>
             <label> <input type="radio" name="location" disabled checked={jobLocation === 'hyderabad'} className={styles.JobtitleFilter_} onClick={() => { getLocation("hyderabad"); setjobLocation('hyderabad') }} />Hyderabad</label>
@@ -407,13 +428,23 @@ function handleRecordchange(e){
           </div>
           <br></br>
 
-          <div className={styles.JobtitleFilterWrapper}>
+          {/* <div className={styles.JobtitleFilterWrapper}>
             <label><input type="radio" name="jobtitle" className={styles.JobtitleFilter_} onClick={() => { getjobs() }} />All</label>
             <label><input type="radio" name="jobtitle" className={styles.JobtitleFilter_} onClick={() => { { jobLocation !== "AllL" ? getBothFiltered('java') : JobtitleFilter('java') } }} />Java developer</label>
             <label><input type="radio" name="jobtitle" className={styles.JobtitleFilter_} onClick={() => { { jobLocation !== "AllL" ? getBothFiltered('full') : JobtitleFilter('full') } }} />Full Stack Developer</label>
             <label><input type="radio" name="jobtitle" className={styles.JobtitleFilter_} onClick={() => { { jobLocation !== "AllL" ? getBothFiltered('front') : JobtitleFilter('front') } }} />Frontend Developer</label>
             <label><input type="radio" name="jobtitle" className={styles.JobtitleFilter_} onClick={() => { { jobLocation !== "AllL" ? getBothFiltered('back') : JobtitleFilter('back') } }} />Backend developer</label>
             <label><input type="radio" name="jobtitle" className={styles.JobtitleFilter_} onClick={() => { { jobLocation !== "AllL" ? getBothFiltered('python') : JobtitleFilter('python') } }} />Python Developer</label>
+          </div> */}
+          <div style={{display:"flex", justifyContent:"space-between"}}>
+            <label><input type="radio" name="jobtitle" className={styles.JobtitleFilter_} onClick={() => { getjobs() }} />All</label>
+          {
+            jobTags.map((tags, i)=>{
+              return(
+                <label><input type="radio" name = "jobtitle" onClick={() => {filterByJobTitle(tags.value)}}/>{tags.value}</label>
+              )
+            })
+          }
           </div>
 
           {/* <div className={styles.AllHeadingSortWrapper}>
@@ -483,7 +514,7 @@ function handleRecordchange(e){
           <button >Next</button>  */}
 
           <div className={styles.Uiwarpper}>
-            <ul className={styles.ul} style={{backgroundColor:"rgb(50, 58, 53)", color:'white' }}>
+            <ul className={styles.ul} style={{backgroundColor:"rgb(40, 4, 99)", color:'white' }}>
               <li className={`${styles.li} ${styles.CompanyName}`}><b>Company Name</b></li>
               <li className={`${styles.li} ${styles.Source}`}><b>Source</b></li>
               <li className={`${styles.li} ${styles.Jtitle}`}><b>Job Title</b></li>
@@ -498,14 +529,14 @@ function handleRecordchange(e){
               <li className={`${styles.li} ${styles.Location}`}><b>Location</b></li>
 
               <li className={`${styles.li} ${styles.Package}`}><b>Package</b>
-              <p style={{display:"inline", marginLeft:"5px"}}>
+              <p style={{display:"inline", marginLeft:"8px"}}>
                 <i onClick={SdescendingOrder} className={`${styles.arrow} ${styles.up}`}> </i>
                 <i onClick={SascendingOrder} className={`${styles.arrow} ${styles.down}`}></i>
                 </p>
               </li>
 
               <li className={`${styles.li} ${styles.experiance}`}><b>Exp</b>
-              <p style={{display:"inline", marginLeft:"5px"}}>
+              <p style={{display:"inline", marginLeft:"9px"}}>
                 <i onClick={EdescendingOrder} className={`${styles.arrow} ${styles.up}`}> </i>
                 <i onClick={EascendingOrder} className={`${styles.arrow} ${styles.down}`}></i>
                 </p>

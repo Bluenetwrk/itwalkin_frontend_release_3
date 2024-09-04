@@ -101,9 +101,11 @@ function JoppostedByEmp(props) {
       setResult(true)
       let dubmyjobs = [...myjobsforFilter]
 
-      const filteredItems = dubmyjobs.filter((user) =>
-        JSON.stringify(user).toLowerCase().includes(key.toLowerCase())
-      )
+      const filteredItems = dubmyjobs.filter((user) =>{
+        if(JSON.stringify(user).toLowerCase().includes(key.toLowerCase())){
+          return user
+        }
+    })
       setMyjobs(filteredItems)
     } else {
       getjobs()

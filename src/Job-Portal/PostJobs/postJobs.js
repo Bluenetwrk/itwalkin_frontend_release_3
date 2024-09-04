@@ -8,6 +8,9 @@ import { Editor } from 'react-draft-wysiwyg';
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css"; 
 import Style from "./postJobs.module.css"
 import socketIO from 'socket.io-client';
+import Select from "react-select"
+import CreatableSelect  from 'react-select/creatable';
+
 
 function PostJobs(props) {
 
@@ -19,13 +22,15 @@ function PostJobs(props) {
         });
       },[])
 
-    let jobTags = ['java', 'Mern Stack', 'React Js', 'Python', 'C', 'C++', 'Javascript', 'Node js', 'Angular js','Vue js', 
-        'Next.Js', 'Backend', 'Frontend'
+    let jobTags = [
+    {value:'java', label: 'java'},{value:'Mern Stack', label:'Mern Stack' },{value:'ReactJs', label: 'ReactJs'},
+    {value:'Python', label: 'Python'},{value:'C', label: 'C' }, {value:'C++',label:'C++' },
+    {value: 'Javascript', label: "Javascript" }, {value:'Node js',label: 'Node js' }, 
+    {value:'Angular js',label: 'Angular js' },{value:'Vue js', label: 'Vue js'}, {value:'NextJs', label: 'NextJs'},
+    {value: 'Backend', label: 'Backend'},{value:'Frontend', label:'Frontend'},
+    {value: 'HTML', label: 'HTML'},{value:'CSS', label:'CSS'}
     ]
-    let Jtags =[]
-    function updateTags(e){
-        Jtags=e.target.value
-    }
+    
 
     let empId = JSON.parse(localStorage.getItem("EmpIdG"))
     const [jobtitle, setJobTitle] = useState("")
@@ -47,6 +52,16 @@ function PostJobs(props) {
     const [otherJobLocation, setotherJobLocation] = useState(false)
 
     const [profileData, setProfileData] = useState([])
+    const [tag, setTag] = useState([])
+    const Tags=tag.map((tag,i)=>{
+        return(
+            tag.value
+        )
+    })
+
+    function handleChange(tag){
+        setTag(tag)
+    }
 
     let navigate= useNavigate()
 
@@ -57,8 +72,6 @@ function PostJobs(props) {
             .then((res) => {
                 let result = res.data.result
                 let companyName = res.data.result.CompanyName
-    console.log(companyName)
-
                 setProfileData([result])
                 setCompanyName(companyName)
             }).catch((err) => {
@@ -94,10 +107,9 @@ function PostJobs(props) {
        let jobTitle = jobtitle.toLowerCase()
        let jobLocation = joblocation.toLowerCase()
         await axios.post("/jobpost/jobpost/", { Logo, SourceLink, Source, empId, jobTitle, companyName, 
-            jobDescription, jobtype, salaryRange, jobLocation, qualification, experiance, skills },{headers})
+            jobDescription, jobtype, salaryRange, jobLocation, qualification, experiance, skills, Tags },{headers})
             .then((res) => {
                 let result = (res.data)
-                console.log(result)
                 if (result == "success") {
                     setJobTitle("")
                     setJobDescription("")
@@ -145,9 +157,9 @@ window.addEventListener('keypress', function(event){
     return (
         <>
  
-<button className={Style.GoBackButton} onClick={() => {
+{/* <button className={Style.GoBackButton} onClick={() => {
     navigate(-1)
-}}>Go Back</button>
+}}>Go Back</button> */}
             {
                 profileData.map((items,i) => {
                     return (
@@ -195,17 +207,25 @@ window.addEventListener('keypress', function(event){
          className={Style.inputbox}
          onChange={(e)=>{ setJobDescription(e.blocks) }}
       />
-                                        <h4 className={Style.jobHeadline}>Tags</h4>
-                                        <p>Tage is {Jtags}</p>
-                                        <select className={Style.inputbox} onClick={(e)=>updateTags(e)}>
-                                                {jobTags.map((tags)=>{
-                                                    return(
-                                            <option value={tags}>{tags}</option>
-                                                    )
-                                                })}
-                                        </select>
 
-                                        <h4 className={Style.jobHeadline}>Job Type</h4>
+                         <h4 className={Style.jobHeadline}>Tags</h4>
+                         <div>
+                         {/* <Select
+                         options={jobTags}
+                         value={tag}
+                         onChange={handleChange}
+                         isMulti={true}
+                         /> */}
+                          <CreatableSelect
+      isMulti={true}
+      options={jobTags}
+      value={tag}
+      onChange={handleChange}
+
+     
+    />
+                         </div>
+                         <h4 className={Style.jobHeadline}>Job Type</h4>
                                         {/* <select className={Style.inputbox} onChange={(e) => { setJobtype(e.target.value) }}>
                         <option value="" >Select Job Type</option>
                         <option value="Full Time" >Full Time</option>

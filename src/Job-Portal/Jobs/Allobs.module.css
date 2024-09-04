@@ -185,7 +185,7 @@
 
 }
 .navigationWrapper{
-    text-align:right;
+    /* text-align:right; */
     margin:10px;
      color:rgb(58, 57, 57);
 }
@@ -232,14 +232,18 @@
     overflow-wrap:break-word;
 }
 .CompanyName{
-    width:12%;
+    width:11.5%;
     overflow-wrap:break-word
 
 }
 .Source{
-    width:7%;
+    width:6.5%;
     overflow-wrap:break-word
 
+}
+.Jtitle{
+    width:12.5%;
+    overflow-wrap:break-word;
 }
 .liDescription{
     width : 17%;
@@ -257,10 +261,7 @@
     overflow-wrap:break-word
 
 }
-.Jtitle{
-    width:13%;
-    overflow-wrap:break-word;
-}
+
 .date{
     width:6%;
     overflow-wrap:break-word;
@@ -275,12 +276,12 @@
 }
 
 .Package{
-    width:6%;
+    width:7%;
     overflow-wrap:break-word
 
 }
 .experiance{
-    width:5%;
+    width:7%;
     overflow-wrap:break-word
 
 }
@@ -290,7 +291,7 @@
 
 }
 .Skills{
-    width:19%;
+    width:17.5%;
     overflow-wrap:break-word
 
 }
