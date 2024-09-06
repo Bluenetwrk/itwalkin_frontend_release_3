@@ -9,6 +9,15 @@ import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 
 
 function AdminUpdate() {
+  let navigate = useNavigate()
+
+
+  useEffect(()=>{
+    let adminLogin= localStorage.getItem("SuperAdminLogin")
+        if(!adminLogin){
+            navigate("/")
+        }
+    },[])
 
   const [AboutUs,  setAboutUs  ] = useState("")
   const [Services, setServices ] = useState("")

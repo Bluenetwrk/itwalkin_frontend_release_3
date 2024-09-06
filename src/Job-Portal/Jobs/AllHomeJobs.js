@@ -25,6 +25,9 @@ import Next from "../img/icons8-next-24.png"
 function Home() {
 
   const [jobs, setJobs] = useState([])
+const [nopageFilter, setNoPageFilter]=useState(false)
+const [Filtereredjobs, setFiltereredjobs] = useState([])
+
   const [Filterjobs, setFilterjobs] = useState([])
 
   const [isReadMore, setIsReadMore] = useState(true)
@@ -42,8 +45,11 @@ function Home() {
     {value: 'Javascript', label: "Javascript" }, {value:'Node js',label: 'Node js' }, 
     {value:'Angular js',label: 'Angular js' },{value:'Vue js', label: 'Vue js'}, {value:'NextJs', label: 'NextJs'},
     {value: 'Backend', label: 'Backend'},{value:'Frontend', label:'Frontend'},
-    {value: 'HTML', label: 'HTML'},{value:'CSS', label:'CSS'}
-
+    {value: 'HTML-CSS', label: 'HTML-CSS'},
+    {value: 'MongoDB', label: 'MongoDB'}, 
+    {value: 'MySql', label: 'MySql'},
+    {value: 'React Native', label: 'React Native'},
+    {value: 'Flutter', label: 'Flutter'},
     ]
   
   let navigate = useNavigate()
@@ -80,8 +86,8 @@ function Home() {
   // })
   async function getjobs() {
     setPageLoader(true)
+    setNoPageFilter(false)
     const headers = { authorization: 'BlueItImpulseWalkinIn' };
-
     await axios.get("/jobpost/getHomejobs", { headers })
       .then((res) => {
 
@@ -128,7 +134,10 @@ function Home() {
   const [keyV, setkeyV] = useState('')
   // const [jobs, setJobs] = useState([])  
   async function search(e) {
+  setNoPageFilter(true)  
     let key = e.target.value
+  setFiltereredjobs(key)
+
     if (key) {
       setResult(true)
       let dubmyjobs = [...Filterjobs]
@@ -311,28 +320,16 @@ function Home() {
       })
   }
 
-  const [from, setfrom] = useState(0)
-  const [to, setto] = useState(10)
-
-  function changefrom(e) {
-    console.log(e.target.value - 1)
-    setfrom(e.target.value - 1)
-  }
-  function changeTo(e) {
-    console.log(e.target.value)
-    setto(e.target.value)
-  }
-
   
   const [currentPage, setCurrentPage] = useState(1)
   const [recordsPerPage, setrecordsPerPage] = useState(10)
-  const lastIndex = currentPage * recordsPerPage //10
-  const firstIndex = lastIndex - recordsPerPage //5
+  let lastIndex = currentPage * recordsPerPage //10
+  let firstIndex = lastIndex - recordsPerPage //5
   const records = jobs.slice(firstIndex, lastIndex)//0,5
   const npage = Math.ceil(jobs.length / recordsPerPage) // last page
   const number = [...Array(npage + 1).keys()].slice(1)
 
-  function firstPage(id){
+  function firstPage(){
     setCurrentPage(1)
   }
 
@@ -355,16 +352,17 @@ function last(){
 function handleRecordchange(e){
   setrecordsPerPage(e.target.value)
   setCurrentPage(1)
-
 }
-async function filterByJobTitle(key){
+
+async function filterByJobTitle(key){  
+  setNoPageFilter(true)
+  setFiltereredjobs(key)
   await axios.get(`/jobpost/getTagsJobs/${key}`)
   .then((res) => {
     let result = (res.data)
     let sortedate = result.sort((a, b) => {
       return new Date(b.createdAt) - new Date(a.createdAt);
     });
-    console.log(sortedate)
     setJobs(sortedate)
   })
 }
@@ -488,7 +486,11 @@ async function filterByJobTitle(key){
             }
           </div> */}
           <div style={{display:"flex", justifyContent:"space-between"}}>
-            <p style={{fontWeight:500, marginLeft:"10px"}}>showing {firstIndex+1} to {lastIndex} latest jobs</p>
+{        nopageFilter?
+    <p style={{fontWeight:400, marginLeft:"10px"}}>Displaying <span style={{color:"blue"}}>{Filtereredjobs}</span> from All Jobs</p>
+    :
+    <p style={{fontWeight:400, marginLeft:"10px"}}>showing {firstIndex+1} to {lastIndex} latest jobs</p>
+    }
 <div className={styles.navigationWrapper}>
   <p style={{display:"inline", margin:"5px"}} className={styles.navigation} onClick={firstPage}>
   <i class='fas fa-step-backward' disabled={currentPage===1}></i>
@@ -514,47 +516,47 @@ async function filterByJobTitle(key){
           <button >Next</button>  */}
 
           <div className={styles.Uiwarpper}>
-            <ul className={styles.ul} style={{backgroundColor:"rgb(40, 4, 99)", color:'white', fontWeight:"bold" }}>
-              <li className={`${styles.li} ${styles.CompanyName}`}>Company Name</li>
-              <li className={`${styles.li} ${styles.Source}`}>Source</li>
-              <li className={`${styles.li} ${styles.Jtitle}`}>Job Title</li>
-              <li className={`${styles.li} ${styles.JobType}`}>JobType</li>
+            <ul className={styles.ul} style={{ color:'white', fontWeight:"bold" }}>
+              <li style={{backgroundColor:" rgb(40, 4, 99)"}} className={`${styles.li} ${styles.CompanyName}`}>Company Name</li>
+              <li style={{backgroundColor:" rgb(40, 4, 99)"}} className={`${styles.li} ${styles.Source}`}>Source</li>
+              <li style={{backgroundColor:" rgb(40, 4, 99)"}} className={`${styles.li} ${styles.Jtitle}`}>Job Title</li>
+              <li style={{backgroundColor:" rgb(40, 4, 99)"}} className={`${styles.li} ${styles.JobType}`}>JobType</li>
 
               {/* <li className={`${styles.li} ${styles.HliDescription}`}><b>Job description</b></li> */}
-              <li className={`${styles.li} ${styles.date}`}>Posted Date
+              <li style={{backgroundColor:" rgb(40, 4, 99)"}} className={`${styles.li} ${styles.date}`}>Posted Date
                 <p style={{display:"inline", marginLeft:"6px"}}> <i onClick={sortbyNewjobs} className={`${styles.arrow} ${styles.up}`} ></i>
                   <i onClick={sortbyOldjobs} className={`${styles.arrow} ${styles.down}`}></i></p>
               </li>
               {/* style={{ position:"absolute", display:"block"}} */}
-              <li className={`${styles.li} ${styles.Location}`}>Location</li>
+              <li style={{backgroundColor:" rgb(40, 4, 99)"}} className={`${styles.li} ${styles.Location}`}>Location</li>
 
-              <li className={`${styles.li} ${styles.Package}`}>CTC
+              <li style={{backgroundColor:" rgb(40, 4, 99)"}} className={`${styles.li} ${styles.Package}`}>CTC
               <p style={{display:"inline", marginLeft:"10px"}}>
                 <i onClick={SdescendingOrder} className={`${styles.arrow} ${styles.up}`}> </i>
                 <i onClick={SascendingOrder} className={`${styles.arrow} ${styles.down}`}></i>
                 </p>
               </li>
 
-              <li className={`${styles.li} ${styles.experiance}`}>Exp
+              <li style={{backgroundColor:" rgb(40, 4, 99)"}} className={`${styles.li} ${styles.experiance}`}>Exp
               <p style={{display:"inline", marginLeft:"10px"}}>
                 <i onClick={EdescendingOrder} className={`${styles.arrow} ${styles.up}`}> </i>
                 <i onClick={EascendingOrder} className={`${styles.arrow} ${styles.down}`}></i>
                 </p>
               </li>
-              <li className={`${styles.li} ${styles.qualification}`}>Qualif</li>
+              <li style={{backgroundColor:" rgb(40, 4, 99)"}} className={`${styles.li} ${styles.qualification}`}>Qualif</li>
 
 
-              <li className={`${styles.li} ${styles.Skills}`}>Skills Required</li>
-              <li className={`${styles.li} ${styles.Apply}`}>Apply</li>
+              <li style={{backgroundColor:" rgb(40, 4, 99)"}} className={`${styles.li} ${styles.Skills}`}>Skills Required</li>
+              <li style={{backgroundColor:" rgb(40, 4, 99)"}} className={`${styles.li} ${styles.Apply}`}>Apply</li>
 
             </ul>
             {PageLoader ?
               <Puff height="80" width="80" color="#4fa94d" ariaLabel="bars-loading" wrapperStyle={{ marginLeft: "49%", marginTop: "50px" }} />
               : ""
             }
-            {
+            {!nopageFilter?
               records.length > 0 ?
-              records.map((items, i) => {
+               records.map((items, i) => {
                   return (
 
                     <ul className={styles.ul} key={i}>
@@ -565,8 +567,93 @@ async function filterByJobTitle(key){
                             onClick={() => { navigate(`/CheckEmpHalfProfile/${items.empId}`) }}  >
                             {/* {items.Logo ?
                               < img style={{ width: "38px", height: "38px" }} src={items.Logo} />
-                              : ""} */}
+                              : ""} 
                               <br></br>
+                              */}
+                            {items.companyName}</li>
+                          :
+                          <a style={{ cursor: "pointer", textDecoration: "underline" }} className={`${styles.li} ${styles.CompanyName}`} href={items.SourceLink} target="_blank" >
+                            {/* {items.Logo ?
+                              < img style={{ width: "38px", height: "38px" }} src={items.Logo} />
+                              : ""}<br></br> */}
+                            {items.Source}
+
+                          </a>
+
+                      }
+
+                      {items.Source ?
+                        <a className={`${styles.li} ${styles.Source}`} href={items.SourceCompanyLink} target="_blank">{items.Source}</a>
+                        :
+                        <li className={`${styles.li} ${styles.Source}`} >Itwalkin</li>
+
+                      }
+
+                      <li className={`${styles.li} ${styles.Jtitle}`} onClick={() => navigate(`/Jobdetails/${items._id}`)} style={{ cursor: "pointer", textDecoration: "underline", color: "blue" }}>{items.jobTitle}</li>
+                      <li className={`${styles.li} ${styles.JobType}`}>{items.jobtype}</li>
+
+                      {/* <li className={`${styles.li} ${styles.liDescription}`}>
+                          {
+                            items.jobDescription.map((descrip, di) => {
+                              return (
+                                <>
+                                  {
+                                    descrip.text.slice(0,50)
+                                  }
+                                </>
+                              )
+                            }).slice(0, 1)
+                          }
+  
+                          <span onClick={() => navigate(`/Jobdetails/${items._id}`)} className={styles.seeMore}>
+                            ...read more
+                          </span>
+                        </li> */}
+                      <li className={`${styles.li} ${styles.date}`}>
+                        {new Date(items.createdAt).toLocaleString(
+                          "en-US",
+                          {
+                            month: "short",
+                            day: "2-digit",
+                            year: "numeric",
+                          }
+                        )}
+                      </li>
+                      <li className={`${styles.li} ${styles.Location}`}>{items.jobLocation.toUpperCase()}</li>
+                      <li className={`${styles.li} ${styles.Package}`}>{items.salaryRange}</li>
+                      <li className={`${styles.li} ${styles.experiance}`}>{items.experiance}</li>
+                      <li className={`${styles.li} ${styles.qualification}`}>{items.qualification}</li>
+                      <li className={`${styles.li} ${styles.Skills}`}>{items.skills}</li>
+
+                      <li className={`${styles.li} ${styles.Apply}`}>
+                        {items.SourceLink ?
+                          <button title='this will take to Source page' className={styles.Applybutton} onClick={() => {
+                            applyforOtherJob(items.SourceLink)
+                          }}>Apply</button>
+                          :
+                          <button className={styles.Applybutton} onClick={() => { applyforJob(items._id) }}>Apply</button>
+                        }
+                      </li>
+                    </ul>
+                  )
+                })
+                : <p style={{ marginLeft: "47%", color: "red" }}>No Record Found</p>
+              :
+              jobs.length > 0 ?
+               jobs.map((items, i) => {
+                  return (
+
+                    <ul className={styles.ul} key={i}>
+                      {
+                        !items.Source ?
+
+                          <li style={{ cursor: "pointer", textDecoration: "underline" }} className={`${styles.li} ${styles.CompanyName}`}
+                            onClick={() => { navigate(`/CheckEmpHalfProfile/${items.empId}`) }}  >
+                            {/* {items.Logo ?
+                              < img style={{ width: "38px", height: "38px" }} src={items.Logo} />
+                              : ""} 
+                              <br></br>
+                              */}
                             {items.companyName}</li>
                           :
                           <a style={{ cursor: "pointer", textDecoration: "underline" }} className={`${styles.li} ${styles.CompanyName}`} href={items.SourceLink} target="_blank" >

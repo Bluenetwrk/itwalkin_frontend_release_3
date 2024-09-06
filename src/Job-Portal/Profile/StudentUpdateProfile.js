@@ -9,6 +9,8 @@ import delet from "../img/icons8-delete-48.png"
 import { TailSpin } from "react-loader-spinner"
 import useScreenSize from '../SizeHook';
 import socketIO from 'socket.io-client';
+import CreatableSelect  from "react-select/creatable"
+
 
 
 function StudentUpdateProfile(props) {
@@ -38,6 +40,33 @@ function StudentUpdateProfile(props) {
   const [Experiance, setExperiance] = useState("")
   const [loader, setLoader] = useState(false)
 
+  let jobTags = [
+    {value:'java', label: 'java'},{value:'Mern Stack', label:'Mern Stack' },{value:'ReactJs', label: 'ReactJs'},
+    {value:'Python', label: 'Python'},{value:'C', label: 'C' }, {value:'C++',label:'C++' },
+    {value: 'Javascript', label: "Javascript" }, {value:'Node js',label: 'Node js' }, 
+    {value:'Angular js',label: 'Angular js' },{value:'Vue js', label: 'Vue js'}, {value:'NextJs', label: 'NextJs'},
+    {value: 'Backend', label: 'Backend'},{value:'Frontend', label:'Frontend'},
+    {value: 'HTML-CSS', label: 'HTML-CSS'}, 
+    {value: 'MongoDB', label: 'MongoDB'}, 
+    {value: 'MySql', label: 'MySql'},
+    {value: 'React Native', label: 'React Native'},
+    {value: 'Flutter', label: 'Flutter'},
+
+    ]
+  const [tag, setTag] = useState([])
+  const [Resulttag, setResulttagTag] = useState()
+
+    function handleChange(tag){
+      setTag(tag)
+      
+  }
+  const Tags=tag.map((tag,i)=>{
+    return(
+        tag.value            
+      )
+    })        
+    
+
   let navigate = useNavigate()
 
   let studId = JSON.parse(localStorage.getItem("StudId"))
@@ -51,6 +80,7 @@ function StudentUpdateProfile(props) {
       .then((res) => {
         let result = res.data.result
         if (result) {
+          setResulttagTag(result.Tags)
           setname(result.name)
           setemail(result.email)
           setimage(result.image)
@@ -93,7 +123,7 @@ function StudentUpdateProfile(props) {
     // e.preventDefault()
     await axios.put(`/StudentProfile/updatProfile/${studId}`, {
       name, email, phoneNumber, Aadhar, panCard,
-      NoticePeriod, ExpectedSalary, currentCTC, age, Qualification, Skills, Experiance
+      NoticePeriod, ExpectedSalary, currentCTC, age, Qualification, Skills, Experiance, Tags
     }, { headers })
       .then(async (res) => {
         let result = res.data
@@ -267,6 +297,23 @@ function StudentUpdateProfile(props) {
                 <input maxLength="5" className={styles.input} value={Experiance} onChange={(e) => { setExperiance(e.target.value) }} type="text" />
               </label>
 
+              <label className={styles.inputName}>
+                <h4>Skill Tags:</h4>
+                <div style={{marginTop:"-7px", width:"81%", marginLeft:"18px"}}>
+                           <CreatableSelect  
+                          isMulti={true}
+                          options={jobTags}
+                          value={tag}
+                          onChange={handleChange}     
+                        />
+                         </div>
+              </label>
+
+              <label className={styles.inputName}>
+                <h4>College</h4>
+                <input maxLength="5" className={styles.input} value={Experiance} onChange={(e) => { setExperiance(e.target.value) }} type="text" />
+              </label>
+
               <button className={styles.Save} onClick={(e) => { saveUpdate(e) }}>Save</button>
               <button className={styles.cancel} onClick={() => { navigate(-1) }} >cancel</button>
 
@@ -330,8 +377,26 @@ function StudentUpdateProfile(props) {
               </label>
 
               <label className={styles.MobileinputName}>
-                <h4 className={styles.MobileName}>Experience:</h4>
+                <h4 className={styles.MobileName}>Experience: </h4>
                 <input maxLength="5" className={styles.Mobileinput} value={Experiance} onChange={(e) => { setExperiance(e.target.value) }} type="text" />
+              </label>
+               <label className={styles.inputName}>
+                <h4 className={styles.MobileName}>Skill Tags:</h4>
+                <div style={{ width:"88%", marginLeft:"10px"}}>
+                           <CreatableSelect  
+                          isMulti={true}
+                          options={jobTags}
+                          value={tag}
+                          onChange={handleChange}     
+                        />
+                         </div>
+              </label>
+
+
+
+              <label className={styles.MobileinputName}>
+                <h4 className={styles.MobileName}>School:</h4>
+                <input maxLength="5" className={styles.Mobileinput} value={Experiance}  type="text" />
               </label>
 
               <button className={styles.MobileSave} onClick={(e) => { saveUpdate(e) }}>Save</button>

@@ -29,7 +29,9 @@
     margin-left: 1%;
     width: 60%;
     border-radius: 5px;
-    border: 1.5px solid rgb(11, 12, 12);
+    /* border: 1.5px solid rgb(11, 12, 12); */
+    border : 1px solid rgb(204, 209, 211);
+
 }
 
 .AllUiWrapper{
@@ -41,12 +43,20 @@
 .ul{
     display: flex;
     margin: 0px;
-
 }
+.ul:nth-child(odd) {
+    background:rgb(242, 244, 245);
+  }
+  .ul:nth-child(1) {
+    /* background: rgb(40, 4, 99); */
+    color:white
+  }
 
 .li{
     display: block;
-    border: 1px solid aqua;
+    /* border: 1px solid aqua; */
+    border : 1px solid rgb(215, 223, 226);
+
     padding-top: 0.5%;
     padding-bottom: 0.5%;
     padding-right: 0.3%;
@@ -76,28 +86,35 @@
   width:  7%
 }
 .Qualification{
-  width:  9%
+  width:  8%
 }
 .Experiance{
-   width: 8.5%
+   width: 8%
 }
 .Skills{
-    width:22%
+    width:25%
 }
 .currentCTC{
-   width: 7.5%
+   width: 7%
 }
 .ExpectedSalary{
-   width: 7.5%
+   width: 7%
 }
 .checkProfile{
    width: 7%
 }
 .NoticePeriod{
-   width: 7%
+   width: 8%
 }
 .Status{
     width: 100px
+}
+.LastActive{
+    width:8%
+}
+/* ........................Home (without Login */
+.nameHome{
+    width:7%;
 
 }
 /* .ViewProfile{
@@ -143,9 +160,9 @@ text-wrap: nowrap;
     width:35%;
 }
 .MobileimageView{
-    height:30px;
+    height:35px;
     width:40px;
-    margin-left: 1%;
+    margin-left: 5%;
     margin-top: 15px;
 }
 .RightTable{

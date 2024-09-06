@@ -37,10 +37,15 @@ function Admin() {
     await axios.post("/admin/adminLogin",{email, password})
     .then((res)=>{
       let result = res.data
-      if(result.status=="success"){
+      if(result.auth===true){
+        localStorage.setItem("SupAdMLog", JSON.stringify(btoa(result.token)))
         localStorage.setItem("AdMLog", JSON.stringify(btoa(result.token)))
         localStorage.setItem("IdLog", JSON.stringify(btoa(result.id)))
         navigate("/BIAddmin@Profile")
+      }else if(result.auth===false){
+          localStorage.setItem("AdMLog", JSON.stringify(btoa(result.token)))
+          localStorage.setItem("IdLog", JSON.stringify(btoa(result.id)))
+          navigate("/BIAddmin@Profile")
       }else if(result=="no user found"){
         setError("No user found")
       }else if(result=="incorrect password"){
@@ -56,10 +61,13 @@ function Admin() {
   async function AdminRegister(){
     await axios.post("/admin/adminRegister",{email, password})
     .then((res)=>{
-      console.log(res)
+      if(res.data==="success"){
+        alert("User registered successfully")
+      }
     })
     .catch((err)=>{
-      console.log(err)
+      alert("some thing went wrong")
+
     })
   }
 

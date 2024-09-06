@@ -14,11 +14,11 @@ function AllJobSeekersAdmin() {
   let navigate = useNavigate()
 
   useEffect(()=>{
-    let adminLogin= localStorage.getItem("AdMLog")
+    let adminLogin= localStorage.getItem("SuperAdminLogin")
         if(!adminLogin){
             navigate("/")
         }
-    },[])    
+    },[])
 
   const [jobSeekers , setjobSeekers] = useState([])
   const [Result , setResult] = useState(false)
@@ -48,9 +48,11 @@ async function sendMessage(id){
 
       
   async function getAllJobSeekers() {
-    let userid = atob(JSON.parse(localStorage.getItem("IdLog")))
-    const headers = { authorization: userid +" "+ atob(JSON.parse(localStorage.getItem("AdMLog"))) };
+    // let userid = atob(JSON.parse(localStorage.getItem("IdLog")))
+    // const headers = { authorization: userid +" "+ atob(JSON.parse(localStorage.getItem("AdMLog"))) };
+    const headers = { authorization: 'BlueItImpulseWalkinIn' };
     await axios.get("/StudentProfile/getAllJobseekers", {headers})
+
       .then((res) => {
         let result = (res.data)
     
@@ -255,22 +257,6 @@ async function sendMessage(id){
   })
     }
 
-    
-  
-async function AllJoseekerApANdDis() {
-  let userid = atob(JSON.parse(localStorage.getItem("IdLog")))
-  const headers = { authorization: userid +" "+ atob(JSON.parse(localStorage.getItem("AdMLog"))) };
-  await axios.get("/StudentProfile/getAllJobseekers", {headers})
-
-    .then((res) => {
-      let result = (res.data)
-      console.log(result)
-      let sortedate = result.sort(function (a, b) {
-        return new Date(a.updatedAt) - new Date(b.updatedAt);
-      });
-      setjobSeekers(sortedate)
-    })
-}
 
 async function Approvedjobseekers() {
   let userid = atob(JSON.parse(localStorage.getItem("IdLog")))
@@ -365,7 +351,7 @@ async function RecentLogin(e){
             :""
 }
             <div style={{marginLeft:"10px"}}>
-      <label><input id="checkApproved" name="checkApproved" type="radio" onChange={(e)=>{AllJoseekerApANdDis(e)}} /><span>All Joseeker</span></label><br></br>
+      <label><input id="checkApproved" name="checkApproved" type="radio" onChange={(e)=>{getAllJobSeekers(e)}} /><span>All Joseeker</span></label><br></br>
       <label><input id="checkApproved" name="checkApproved" type="radio" onChange={(e)=>{Approvedjobseekers(e)}} /><span>Approved Joseeker</span></label><br></br>
       <label><input id="checkApproved" name="checkApproved" type="radio" onChange={(e)=>{NotApprovedjobseekers(e)}} /><span>Joseeker who are yet to be approved</span></label><br></br>
       <label><input id="checkApproved" name="checkApproved" type="radio" onChange={RecentLogin} /><span>Recent Login</span></label><br></br>

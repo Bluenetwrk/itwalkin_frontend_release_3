@@ -28,7 +28,11 @@ function PostJobs(props) {
     {value: 'Javascript', label: "Javascript" }, {value:'Node js',label: 'Node js' }, 
     {value:'Angular js',label: 'Angular js' },{value:'Vue js', label: 'Vue js'}, {value:'NextJs', label: 'NextJs'},
     {value: 'Backend', label: 'Backend'},{value:'Frontend', label:'Frontend'},
-    {value: 'HTML', label: 'HTML'},{value:'CSS', label:'CSS'}
+    {value: 'HTML-CSS', label: 'HTML-CSS'},
+    {value: 'MongoDB', label: 'MongoDB'}, 
+    {value: 'MySql', label: 'MySql'},
+    {value: 'React Native', label: 'React Native'},
+    {value: 'Flutter', label: 'Flutter'},
     ]
     
 
@@ -114,6 +118,9 @@ function PostJobs(props) {
                     setJobTitle("")
                     setJobDescription("")
                     // setCompanyName("")
+                    setJobtype("")
+                    setJobLocation("")
+                    setQualification("")
                     setSalaryRange("")
                     setJobLocation("")
                     setExperiance("")
@@ -132,10 +139,8 @@ function PostJobs(props) {
             behavior: "smooth"
         });
     }
-
     
-window.addEventListener('keypress', function(event){
-    
+window.addEventListener('keypress', function(event){    
     // Get the key code
     let keycode = event.which || event.keyCode;
     
@@ -207,24 +212,6 @@ window.addEventListener('keypress', function(event){
          className={Style.inputbox}
          onChange={(e)=>{ setJobDescription(e.blocks) }}
       />
-
-                         <h4 className={Style.jobHeadline}>Tags</h4>
-                         <div>
-                         {/* <Select
-                         options={jobTags}
-                         value={tag}
-                         onChange={handleChange}
-                         isMulti={true}
-                         /> */}
-                          <CreatableSelect  
-      isMulti={true}
-      options={jobTags}
-      value={tag}
-      onChange={handleChange}
-
-     
-    />
-                         </div>
                          <h4 className={Style.jobHeadline}>Job Type</h4>
                                         {/* <select className={Style.inputbox} onChange={(e) => { setJobtype(e.target.value) }}>
                         <option value="" >Select Job Type</option>
@@ -233,10 +220,10 @@ window.addEventListener('keypress', function(event){
                         <option value="Internship">Internship</option>
                         <option value="Contract">Contract</option>
                     </select> */}
-                                        <label><input name="Job-Type" type="radio" value="Full Time " onChange={(e) => { setJobtype(e.target.value) }} />Full Time  </label>
-                                        <label><input name="Job-Type" type="radio" value="Part Time" onChange={(e) => { setJobtype(e.target.value) }} />Part Time  </label>
-                                        <label><input name="Job-Type" type="radio" value="Internship" onChange={(e) => { setJobtype(e.target.value) }} />Internship </label>
-                                        <label><input name="Job-Type" type="radio" value="Contract" onChange={(e) => { setJobtype(e.target.value) }} />Contract   </label>
+                                        <label><input name="Job-Type" type="radio" checked={jobtype==="Full Time"} value="Full Time" onChange={(e) => { setJobtype(e.target.value) }} />Full Time  </label>
+                                        <label><input name="Job-Type" type="radio" checked={jobtype==="Part Time"} value="Part Time" onChange={(e) => { setJobtype(e.target.value) }} />Part Time  </label>
+                                        <label><input name="Job-Type" type="radio" checked={jobtype==="Internship"} value="Internship" onChange={(e) => { setJobtype(e.target.value) }} />Internship </label>
+                                        <label><input name="Job-Type" type="radio" checked={jobtype==="Contract"} value="Contract" onChange={(e) => { setJobtype(e.target.value) }} />Contract   </label>
 
 
                                         <h4 className={Style.jobHeadline}>Salary Per Annum in Lakhs** &nbsp;<span className={Style.hint}>(e.g 5L or 10L)</span></h4>
@@ -244,11 +231,11 @@ window.addEventListener('keypress', function(event){
 
                                         <h4 className={Style.jobHeadline}>Job Location**</h4>
                                         <div style={{marginTop:"-10px"}}>
-                                        <label><input name="Location" type="radio" value="Banglore" onChange={(e) => { setJobLocation(e.target.value) }} />Banglore </label>
-                                        <label><input name="Location" type="radio" value="Hyderabad" onChange={(e) => { setJobLocation(e.target.value) }} />Hyderabad </label>
-                                        <label><input name="Location" type="radio" value="Chennai" onChange={(e) => { setJobLocation(e.target.value) }} />Chennai </label>
-                                        <label><input name="Location" type="radio" value="Mumbai" onChange={(e) => { setJobLocation(e.target.value) }} />Mumbai </label>
-                                        <label><input name="Location" type="radio" value="Delhi" onChange={(e) => { setJobLocation(e.target.value) }} />Delhi </label>
+                                        <label><input name="Location" type="radio" checked={joblocation==="Bangalore"} value="Bangalore" onChange={(e) => { setJobLocation(e.target.value) }} />Banglore </label>
+                                        <label><input name="Location" type="radio" checked={joblocation==="Hyderabad"} value="Hyderabad" onChange={(e) => { setJobLocation(e.target.value) }} />Hyderabad </label>
+                                        <label><input name="Location" type="radio" checked={joblocation==="Chennai"} value="Chennai" onChange={(e) => { setJobLocation(e.target.value) }} />Chennai </label>
+                                        <label><input name="Location" type="radio" checked={joblocation==="Mumbai"} value="Mumbai" onChange={(e) => { setJobLocation(e.target.value) }} />Mumbai </label>
+                                        <label><input name="Location" type="radio" checked={joblocation==="Delhi"} value="Delhi" onChange={(e) => { setJobLocation(e.target.value) }} />Delhi </label>
                                         <label><input name="Location" type="radio" value="others" onClick={(e) => { setotherJobLocation((prev)=>!prev) }} />others </label>
                                         </div>
                                         {
@@ -261,12 +248,12 @@ window.addEventListener('keypress', function(event){
                                         <h4 className={Style.jobHeadline}>Qualification Needed**</h4>
 
                                         <div style={{marginTop:"-10px"}}>
-                                        <label><input name="Qualification" type="radio" value="B.E/CSE" onChange={(e) => { setQualification(e.target.value) }} />B.E/CSE </label>
-                                        <label><input name="Qualification" type="radio" value="B.E/Civil" onChange={(e) => { setQualification(e.target.value) }} />B.E/Civil </label>
-                                        <label><input name="Qualification" type="radio" value="B.E/Mech" onChange={(e) => { setQualification(e.target.value) }} />B.E/Mech </label>
-                                        <label><input name="Qualification" type="radio" value="B.E/ECE" onChange={(e) => { setQualification(e.target.value) }} />B.E/ECE </label>
-                                        <label><input name="Qualification" type="radio" value="B.E/IT" onChange={(e) => { setQualification(e.target.value) }} />B.E/IT </label>
-                                        <label><input name="Qualification" type="radio" value="others" onClick={(e) => { setOthers((prev)=>!prev) }} />others </label>
+                                        <label><input name="Qualification" type="radio" checked={qualification==="B.E/CSE"} value="B.E/CSE" onChange={(e) => { setQualification(e.target.value) }} />B.E/CSE </label>
+                                        <label><input name="Qualification" type="radio" checked={qualification==="B.E/Civil"} value="B.E/Civil" onChange={(e) => { setQualification(e.target.value) }} />B.E/Civil </label>
+                                        <label><input name="Qualification" type="radio" checked={qualification==="B.E/Mech"} value="B.E/Mech" onChange={(e) => { setQualification(e.target.value) }} />B.E/Mech </label>
+                                        <label><input name="Qualification" type="radio" checked={qualification==="B.E/ECE"} value="B.E/ECE" onChange={(e) => { setQualification(e.target.value) }} />B.E/ECE </label>
+                                        <label><input name="Qualification" type="radio" checked={qualification==="B.E/IT"} value="B.E/IT" onChange={(e) => { setQualification(e.target.value) }} />B.E/IT </label>
+                                        <label><input name="Qualification" type="radio"  value="others" onClick={(e) => { setOthers((prev)=>!prev) }} />others </label>
                                         </div>
                                         {
                                             others ?
@@ -281,7 +268,19 @@ window.addEventListener('keypress', function(event){
                                         <input maxLength="3" className={Style.inputbox} type="text" value={experiance} onChange={(e) => { setExperiance(e.target.value) }} />
 
                                         <h4 className={Style.jobHeadline}>Skills Needed**</h4>
+                                      
                                         <input maxLength="100" className={Style.inputbox} type="text" value={skills} onChange={(e) => { setSkills(e.target.value) }} />
+                                       
+                                        <h4 className={Style.jobHeadline}>Tags</h4>
+                         <div>
+                           <CreatableSelect  
+                          isMulti={true}
+                          options={jobTags}
+                          value={tag}
+                          onChange={handleChange}     
+                        />
+                         </div>
+
                                         {Logo ? <p ><span style={{ color: "blue" }}>Note** :</span> Logo will also be posted with the Job</p> : ""}
 
                                         <button className={Style.button} onClick={postJob}>Post Job</button>

@@ -18,22 +18,7 @@ function CheckEmpHalfProfile() {
 const [PageLoader, setPageLoader] = useState(false)
 const screenSize = useScreenSize();
 
-
-const [message, setmessage] = useState("")
     
-    async function sendMessage(id){
-      await axios.put(`/EmpProfile/sendMessage/${id}`, {message})
-      .then((res)=>{
-        if(res.data){
-        alert("Message Sent Successfully")
-        }
-      }).catch((err)=>{
-        alert("some thing went wrong")
-      })
-    }
-
-
-
     let studId = JSON.parse(localStorage.getItem("StudId"))
     let params =useParams()
 
@@ -56,134 +41,10 @@ const [message, setmessage] = useState("")
         getProfile()
     }, [])
 
-    
-    function Reject(Empid , status){
-      const isReject=status
-      Swal.fire({
-        title: "Are You sure?",
-        width:"245",
-      position:"top",
-      customClass:{
-        popup:"alertIcon"
-      },
-        icon:"question",
-        showCancelButton:true
-      }).then( async (res)=>{
-        if(res.isConfirmed){
-          await axios.put(`/EmpProfile/isReject/${Empid}`,{isReject})
-          .then((res)=>{
-              getProfile()
-  
-          }).catch((err)=>{
-            alert("backend error occured")
-          })
-        }
-      })
-    }    
-  
-    function unReject(Empid , status){
-      const isReject=status
-  
-      Swal.fire({
-        title: "Are You sure?",
-        // icon:"question",
-        width:"245",
-      position:"top",
-      customClass:{
-        popup:"alertIcon"
-      },
-        showCancelButton:true
-      }).then( async (res)=>{
-        if(res.isConfirmed){
-          await axios.put(`/EmpProfile/isReject/${Empid}`,{isReject})
-          .then((res)=>{
-              getProfile()
-  
-          }).catch((err)=>{
-            alert("backend error occured")
-          })
-        }
-      })
-    }
-
-    function Approve(Empid , status){
-        const isApproved=status
-        Swal.fire({
-          title: "Are You sure ?",
-          // icon:"question",
-          width:"245",
-      position:"top",
-      customClass:{
-        popup:"alertIcon"
-      },
-          showCancelButton:true
-        }).then( async (res)=>{
-          if(res.isConfirmed){
-            await axios.put(`/EmpProfile/setApproval/${Empid}`,{isApproved})
-            .then((res)=>{
-                getProfile()
-    
-            }).catch((err)=>{
-              alert("backend error occured")
-            })
-          }
-        })
-      }    
-    
-      function DisApprove(Empid , status){
-        const isApproved=status
-    
-        Swal.fire({
-          title: "Are You sure?",
-          width:"245",
-      position:"top",
-      customClass:{
-        popup:"alertIcon"
-      },
-          // icon:"question",
-          showCancelButton:true
-        }).then( async (res)=>{
-          if(res.isConfirmed){
-            await axios.put(`/EmpProfile/setApproval/${Empid}`,{isApproved})
-            .then((res)=>{
-                getProfile()
-    
-            }).catch((err)=>{
-              alert("backend error occured")
-            })
-          }
-        })
-      }
-    
-      async function DeleteEmpProfile(id) {
-        Swal.fire({
-          title: 'Are you sure to Delete this Account?',
-          icon: 'warning',
-          showCancelButton: true,
-          confirmButtonColor: '#3085d6',
-          cancelButtonColor: '#d33',
-          confirmButtonText: 'Yes, delete it!'
-        }).then((result) => {
-          if (result.isConfirmed) {
-            axios.delete(`/EmpProfile/deleteEmployee/${id}`)
-              .then((res) => {
-                
-                navigate("/BIAddmin@AllEmployees")
-              }).catch((err) => {
-            
-    
-                alert("server error occured")
-              })
-          }
-        })
-    
-      }
-
-
     return (
         <>
         <div style={{display:"flex"}}>
-                            <img style={{ height:"25px", color:"grey", marginTop:"20px", marginLeft:"8%", cursor:"pointer",
+          <img style={{ height:"25px", color:"grey", marginTop:"20px", marginLeft:"8%", cursor:"pointer",
              width:"28px"}} onClick={()=>{navigate(-1)}}  src={Arrowimage} />
     <p style={{marginLeft:"30%"}}><b>Company Deatils </b></p>
     </div>

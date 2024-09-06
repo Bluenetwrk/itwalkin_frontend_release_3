@@ -1,3 +1,18 @@
+
+.Supfullnavewrapper {
+    display: flex;
+    background-color: rgb(124, 119, 119);
+    width: 60%;
+    height: 60px;
+    align-items: center;
+    border-radius: 30px;
+    margin-left: 20%;
+    margin-top: 10px;
+    /* position:sticky;
+    top:0px */
+}
+
+
 .fullnavewrapper {
     display: flex;
     background-color: rgb(40, 4, 99);
@@ -6,6 +21,18 @@
     align-items: center;
     /* position:sticky;
     top:0px */
+}
+.linkWrapper {
+
+    display: flex;
+    flex-wrap: nowrap;
+    margin-left: 5%;
+    width: 79%;
+    /* background-color: rgb(45, 48, 224); */
+    height: 60px;
+    align-items: center;
+    /* background-color: aqua; */
+
 }
 /* for mobile only fullNave */
 .MobilEmployeeFullnavewrapper{
@@ -28,18 +55,6 @@
 
 }
 
-.linkWrapper {
-
-    display: flex;
-    flex-wrap: nowrap;
-    margin-left: 5%;
-    width: 79%;
-    /* background-color: rgb(45, 48, 224); */
-    height: 60px;
-    align-items: center;
-    /* background-color: aqua; */
-
-}
 
 .link {
     /* background-color: aqua; */

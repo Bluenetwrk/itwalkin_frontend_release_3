@@ -1,13 +1,24 @@
 import React from 'react'
 import { useEffect, useState } from 'react'
 import axios from "axios"
+import { Link, useNavigate, BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
+
 
 function AllidEmp() {
   const [ids , setids] = useState([])
+  let navigate = useNavigate()
+
 
   const allIds= ids.map((ids, i)=>{
     return ids.email
 })
+
+useEffect(()=>{
+  let adminLogin= localStorage.getItem("SuperAdminLogin")
+      if(!adminLogin){
+          navigate("/")
+      }
+  },[])
 
     async function JobSeekerNoticePeriod() {
         let userid = atob(JSON.parse(localStorage.getItem("IdLog")))

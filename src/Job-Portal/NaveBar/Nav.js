@@ -25,6 +25,7 @@ function Nav(props) {
   let StudentAuth = localStorage.getItem("StudLog")
   let EmployeeAuth = localStorage.getItem("EmpLog")
   let adminLogin = localStorage.getItem("AdMLog")
+  let SuperAdminLogin = localStorage.getItem("SupAdMLog")
   const screenSize = useScreenSize();
 
   const StudlogOut = () => {
@@ -49,15 +50,15 @@ function Nav(props) {
   window.addEventListener("click", (e) => {
     if (e.target !== menuRef.current && e.target !== imgRef.current) {
       setShowprofile(false)
-    
-  }
-})
+
+    }
+  })
 
   window.addEventListener("click", (e) => {
     if (e.target !== SmenuRef.current && e.target !== SimgRef.current) {
-      setShowSideNave(false)   
-    
-  }
+      setShowSideNave(false)
+
+    }
 
   })
 
@@ -162,7 +163,7 @@ function Nav(props) {
                   </div>
                   : ""}
               </>
-              // ............Admin Login......................
+              // ............Admin Login...................... SuperAdminLogin
               :
               (adminLogin) ?
                 <>
@@ -172,34 +173,41 @@ function Nav(props) {
                     </div>
                     <div className={Styles.linkWrapper}>
                       <NavLink to="/BIAddmin@Profile" className={Styles.link} style={navLinkStyles}>All </NavLink>
-                      <NavLink to="/BIAddmin@AllJobs" style={navLinkStyles} className={Styles.link}>All Jobs </NavLink>
-                      <NavLink to="BIAddmin@AllEmployees" className={Styles.link} style={navLinkStyles}> Employers</NavLink>
-                      <NavLink to="BIAddmin@AllJobSeekers" className={Styles.link} style={navLinkStyles}> Jobseekers</NavLink>
+
+                      <NavLink to="/AboutUs" className={`${Styles.Hlink} ${Styles.Aboutus}`} style={navLinkStyles} >About Us</NavLink>
+                      <NavLink to="/Services" className={Styles.Hlink} style={navLinkStyles}>Services</NavLink>
                       <NavLink to="/BIAddmin@PostJob" className={Styles.link} style={navLinkStyles}> Post Job</NavLink>
-                      <NavLink to="BIAddmin@AdminUpdate" className={Styles.link} style={navLinkStyles}> UpdateWebsite</NavLink>
-                      <NavLink to="BIAddmin@AllIds" className={Styles.link} style={navLinkStyles}> All Email Id's</NavLink>
-                      {/* <NavLink to="BIAddmin@AllIds" className={Styles.link} style={navLinkStyles}> All Emplyee Email Id's</NavLink> */}
+
                       <div className={`${Styles.link} ${Styles.IconeWrapper}`}>
-
                         <img className={`${Styles.Icon} ${Styles.profileIcon}`} src={loginuser} ref={imgRef} onClick={() => setShowprofile((prev) => !prev)} />
-
                       </div >
-
                     </div>
                   </div>
                   {/* .....................drop down............ */}
                   {showprofile ?
                     <div style={{ marginLeft: "-2%" }} className={Styles.dropdownwrapper} ref={menuRef} >
                       <p className={Styles.text} ref={menuRef} >My profile</p>
-
                       <p className={Styles.text} ref={menuRef} >Update profile</p>
-
                       <p className={Styles.text} ref={menuRef} onClick={AdminlogOut}>Logout</p>
 
                     </div>
                     : ""}
+                  {/* .........only for Super Admin */}
+{SuperAdminLogin?
+                  <div className={Styles.Supfullnavewrapper}>                    
+                    <div className={Styles.linkWrapper}>
+                      <NavLink to="/BIAddmin@AllJobs" style={navLinkStyles} className={Styles.link}>All Jobs </NavLink>
+                      <NavLink to="BIAddmin@AllEmployees" className={Styles.link} style={navLinkStyles}> Employers</NavLink>
+                      <NavLink to="BIAddmin@AllJobSeekers" className={Styles.link} style={navLinkStyles}> Jobseekers</NavLink>
+                      <NavLink to="BIAddmin@AdminUpdate" className={Styles.link} style={navLinkStyles}> UpdateWebsite</NavLink>
+                      <NavLink to="BIAddmin@AllIds" className={Styles.link} style={navLinkStyles}> All Email Id's</NavLink>
+                      {/* <NavLink to="BIAddmin@AllIds" className={Styles.link} style={navLinkStyles}> All Emplyee Email Id's</NavLink> */}
+                    </div>
+                  </div>
+                  :""}
+                  
                 </>
-
+                // Mobile 
                 // ............................................Home Nave....................................................      
                 :
                 <>
@@ -214,9 +222,9 @@ function Nav(props) {
                       <NavLink to="/Contact" className={Styles.Hlink} style={navLinkStyles}>Contact</NavLink>
                       {/* <NavLink to="/BIAdd@Logg" className={Styles.Hlink}>AdminLogin</NavLink> */}
                       <div className={`${Styles.Hlink} ${Styles.Loginlinkwrapper}`}>
-                        {/* <img className={`${Styles.Icon} ${Styles.profileIcon}`} src={loginuser} ref={imgRef} onClick={() => setShowprofile((prev) => !prev)} /> */}
-                        <NavLink to="/EmployeeLogin" className={`${Styles.Loginlink} ${Styles.EmpLogin}`} style={navLinkStyles}>Employer Login </NavLink>
-                        <NavLink to="/JobSeekerLogin" className={`${Styles.Loginlink} ${Styles.StuLogin}`} style={navLinkStyles}>Job Seeker Login</NavLink>
+                        <NavLink to="/Search-Candidate-Home" className={`${Styles.Loginlink} ${Styles.EmpLogin}`} style={navLinkStyles}>Employee </NavLink>
+                        <img className={`${Styles.Icon} ${Styles.profileIcon}`} src={loginuser} ref={imgRef} onClick={() => setShowprofile((prev) => !prev)} />
+                        {/* <NavLink to="/JobSeekerLogin" className={`${Styles.Loginlink} ${Styles.StuLogin}`} style={navLinkStyles}>Job Seeker Login</NavLink> */}
 
                         {/* <div className={Styles.Loginlinkwrapper}> */}
                         {/* </div> */}
@@ -224,13 +232,9 @@ function Nav(props) {
                     </div>
                   </div>
                   {showprofile ?
-                    <div style={{ marginLeft: "-2%" }} className={Styles.dropdownwrapper} ref={menuRef} >
-                      <p>Employee Login </p>
-                      <p>Job Seeker Login</p>
-
-
-                      <p className={Styles.text} ref={menuRef} onClick={AdminlogOut}>Logout</p>
-
+                    <div style={{ marginLeft: "-18px" }} className={Styles.dropdownwrapper} ref={menuRef} >
+                      <p onClick={() => { navigate("/EmployeeLogin") }}>Employee Login </p>
+                      <p onClick={() => { navigate("/JobSeekerLogin") }}>Job Seeker Login</p>
                     </div>
                     : ""}
 
@@ -322,10 +326,9 @@ function Nav(props) {
                       <NavLink to="/BIAddmin@AllJobs" style={navLinkStyles} className={`${Styles.AllJobs} ${Styles.link}`}>AllJobs </NavLink>
                       <NavLink to="BIAddmin@AllEmployees" className={`${Styles.link} ${Styles.AllEmploy}`} style={navLinkStyles}> Employer</NavLink>
                       <NavLink to="BIAddmin@AllJobSeekers" className={`${Styles.link} ${Styles.AllJobseeker}`} style={navLinkStyles}> Jobseekers</NavLink>
+                   
                       <div className={`${Styles.link} ${Styles.IconeWrapper} ${Styles.AdminUser}`}>
-
                         <img className={`${Styles.Icon} ${Styles.profileIcon}`} src={loginuser} ref={imgRef} onClick={() => setShowprofile((prev) => !prev)} />
-
                       </div >
 
                     </div>
@@ -333,10 +336,8 @@ function Nav(props) {
                   {/* .....................drop down............ */}
                   {showprofile ?
                     <div style={{ marginLeft: "-2%" }} className={Styles.Admindropdownwrapper} ref={menuRef} >
-                      <p className={Styles.text} ref={menuRef} >My profile</p>
-
-                      <p className={Styles.text} ref={menuRef} >Update profile</p>
-
+                      {/* <p className={Styles.text} ref={menuRef} >My profile</p> */}
+                      {/* <p className={Styles.text} ref={menuRef} >Update profile</p> */}
                       <p className={Styles.text} ref={menuRef} onClick={AdminlogOut}>Logout</p>
 
                     </div>
@@ -348,10 +349,10 @@ function Nav(props) {
                 <>
 
                   <div className={Styles.fullnavewrapper}>
-{ShowSideNave?
-    <img className={`${Styles.NavIcon} `} src={Cancel} ref={SimgRef} onClick={() => { setShowSideNave((prev) => !prev) }} />
-    :<img className={`${Styles.NavIcon} `} src={NavIcon} ref={SimgRef} onClick={() => { setShowSideNave((prev) => !prev) }} />
-}
+                    {ShowSideNave ?
+                      <img className={`${Styles.NavIcon} `} src={Cancel} ref={SimgRef} onClick={() => { setShowSideNave((prev) => !prev) }} />
+                      : <img className={`${Styles.NavIcon} `} src={NavIcon} ref={SimgRef} onClick={() => { setShowSideNave((prev) => !prev) }} />
+                    }
                     <NavLink to="/" > <img className={Styles.MobHomelogo} src={logo} /> </NavLink>
                     <div className={Styles.linkWrapper}>
                       <NavLink to="/" className={`${Styles.Hlink} ${Styles.HomeIcon}`}>  <img src={HomeIcon} /></NavLink>
@@ -363,15 +364,15 @@ function Nav(props) {
                         </div>
                         : ""}
                     </div>
-                    </div>
-                    {/* {ShowSideNave? */}
-                    <div ref={SmenuRef} className={`${Styles.MovileNavOptions} `} 
-                    style={ShowSideNave?{marginLeft:"0px" }: {marginLeft:"-380px"}}
-                    > 
-                     <SidebarNav setShowSideNaveProps={setShowSideNave} /> 
-</div>
-                 {/* :"" }   */}
-                  
+                  </div>
+                  {/* {ShowSideNave? */}
+                  <div ref={SmenuRef} className={`${Styles.MovileNavOptions} `}
+                    style={ShowSideNave ? { marginLeft: "0px" } : { marginLeft: "-380px" }}
+                  >
+                    <SidebarNav setShowSideNaveProps={setShowSideNave} />
+                  </div>
+                  {/* :"" }   */}
+
 
                 </>
 

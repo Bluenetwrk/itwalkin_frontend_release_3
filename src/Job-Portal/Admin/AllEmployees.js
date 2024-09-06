@@ -10,7 +10,7 @@ function AllEmployeesForadmin() {
   let navigate = useNavigate()
   
   useEffect(()=>{
-    let adminLogin= localStorage.getItem("AdMLog")
+    let adminLogin= localStorage.getItem("SuperAdminLogin")
         if(!adminLogin){
             navigate("/")
         }

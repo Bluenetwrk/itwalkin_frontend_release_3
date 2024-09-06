@@ -125,20 +125,20 @@ const screenSize = useScreenSize();
 
     return (
         <>
-        <h4 style={{marginTop:"10px", marginLeft:"6%"}}>Total {AppliedUser.length} Profiles</h4>
+        <h4 style={{marginTop:"10px", marginLeft:"6%"}}>Total {AppliedUser.length} Job Seekers have Applied</h4>
         {screenSize.width>850?
             <div className={styles.AllUiWrapper}>
                 <ul className={styles.ul} >
-                    <li className={`${styles.li} ${styles.name}`}><b>Name</b>  </li>
-                    <li className={`${styles.li} ${styles.NoticePeriod}`}><b>Notice Period</b>  </li>
-                    <li className={`${styles.li} ${styles.age}`}> <b>Age</b> </li>
-                    <li className={`${styles.li} ${styles.Qualification}`}>  <b>Qualif</b> </li>
-                    <li className={`${styles.li} ${styles.Experiance}`}><b>Experience</b>  </li>
-                    <li className={`${styles.li} ${styles.Skills}`}> <b>Skills</b> </li>
-                    <li className={`${styles.li} ${styles.currentCTC}`}> <b>Current CTC</b> </li>
-                    <li className={`${styles.li} ${styles.ExpectedSalary}`}><b>Expected CTC</b> </li>
+                    <li style={{backgroundColor:" rgb(40, 4, 99)"}} className={`${styles.li} ${styles.name}`}><b>Name</b>  </li>
+                    <li style={{backgroundColor:" rgb(40, 4, 99)"}} className={`${styles.li} ${styles.NoticePeriod}`}><b>Notice Period</b>  </li>
+                    <li style={{backgroundColor:" rgb(40, 4, 99)"}} className={`${styles.li} ${styles.age}`}> <b>Age</b> </li>
+                    <li style={{backgroundColor:" rgb(40, 4, 99)"}} className={`${styles.li} ${styles.Qualification}`}>  <b>Qualif</b> </li>
+                    <li style={{backgroundColor:" rgb(40, 4, 99)"}} className={`${styles.li} ${styles.Experiance}`}><b>Experience</b>  </li>
+                    <li style={{backgroundColor:" rgb(40, 4, 99)"}} className={`${styles.li} ${styles.Skills}`}> <b>Skills</b> </li>
+                    <li style={{backgroundColor:" rgb(40, 4, 99)"}} className={`${styles.li} ${styles.currentCTC}`}> <b>Curr. CTC</b> </li>
+                    <li style={{backgroundColor:" rgb(40, 4, 99)"}} className={`${styles.li} ${styles.ExpectedSalary}`}><b>Exp. CTC</b> </li>
                     {/* <li className={`${styles.li} ${styles.checkProfile}`}><b>View Profile</b> </li> */}
-                    <li className={`${styles.li} ${styles.Status}`}><b>Status</b> </li>
+                    <li style={{backgroundColor:" rgb(40, 4, 99)"}} className={`${styles.li} ${styles.Status}`}><b>Status</b> </li>
 
                 </ul>
                 {PageLoader ?
@@ -153,21 +153,21 @@ const screenSize = useScreenSize();
 
                                 <li className={`${styles.li} ${styles.name} ${styles.onclick}`} onClick={() => { CheckProfile(Applieduser._id) }} >
                                     {Applieduser.name ? <a className={styles.namelink} title="Click to check the Contact Details">
-                                        {Applieduser.name}</a> : <li className={styles.Nli}>not updated</li>} </li>
+                                        {Applieduser.name}</a> : <li className={styles.Nli}>N/A</li>} </li>
                                 <li className={`${styles.li} ${styles.NoticePeriod}`}> {Applieduser.NoticePeriod ?
-                                    Applieduser.NoticePeriod : <li className={styles.Nli}>not updated</li>} </li>
+                                    Applieduser.NoticePeriod : <li className={styles.Nli}>N/A</li>} </li>
                                 <li className={`${styles.li} ${styles.age}`}> {Applieduser.age ?
-                                    Applieduser.age : <li className={styles.Nli}>not updated</li>} </li>
+                                    Applieduser.age : <li className={styles.Nli}>N/A</li>} </li>
                                 <li className={`${styles.li} ${styles.Qualification}`}> {Applieduser.Qualification ?
-                                    Applieduser.Qualification : <li className={styles.Nli}>not updated</li>} </li>
+                                    Applieduser.Qualification : <li className={styles.Nli}>N/A</li>} </li>
                                 <li className={`${styles.li} ${styles.Experiance}`}> {Applieduser.Experiance ?
-                                    Applieduser.Experiance : <li className={styles.Nli}>not updated</li>} </li>
+                                    Applieduser.Experiance : <li className={styles.Nli}>N/A</li>} </li>
                                 <li className={`${styles.li} ${styles.Skills}`}> {Applieduser.Skills ?
-                                    Applieduser.Skills : <li className={styles.Nli}>not updated</li>} </li>
+                                    Applieduser.Skills : <li className={styles.Nli}>N/A</li>} </li>
                                 <li className={`${styles.li} ${styles.currentCTC}`}> {Applieduser.currentCTC ?
-                                    Applieduser.currentCTC : <li className={styles.Nli}>not updated</li>} </li>
+                                    Applieduser.currentCTC : <li className={styles.Nli}>N/A</li>} </li>
                                 <li className={`${styles.li} ${styles.ExpectedSalary}`}> {Applieduser.ExpectedSalary ?
-                                    Applieduser.ExpectedSalary : <li className={styles.Nli}>not updated</li>} </li>
+                                    Applieduser.ExpectedSalary : <li className={styles.Nli}>N/A</li>} </li>
                                 {/* <li  className={`${styles.li} ${styles.checkProfile}`}><button onClick={()=>{CheckProfile(Applieduser._id)}} className={`${styles.ViewProfile}`}>{Applieduser.name}</button> </li> */}
                                 <li className={`${styles.li} ${styles.Status}`}>
                                     <div style={{ marginLeft: "-3%" }}>
@@ -291,19 +291,19 @@ const screenSize = useScreenSize();
     
             <div className={styles.RightTable}>
             <span className={styles.span}><span style={{color:"blue", textDecoration:"underline"}} onClick={() => { CheckProfile(job._id) }}  >{job.name} </span></span><br></br>      
-            <span className={styles.span}>{job.age? <span style={{ color: "blue" }}>{job.age} </span>:<span style={{color:"red"}}>Not updated</span> }</span><br></br>
-            <span className={styles.span}> {job.NoticePeriod?<span style={{ color: "blue" }}>{job.NoticePeriod} </span>: <span style={{color:"red"}}>Not updated</span>}</span><br></br>
-            <span className={styles.span}> {job.Qualification?<span style={{ color: "blue" }}>{job.Qualification} </span>:<span style={{color:"red"}}>Not updated</span>}</span><br></br>
-            <span className={styles.span}> {job.Experiance?<span style={{ color: "blue" }}>{job.Experiance} </span>:<span style={{color:"red"}}>Not updated</span>}   </span><br></br>
-            <span className={styles.span}>{job.currentCTC?<span style={{ color: "blue" }}>{job.currentCTC} </span>:<span style={{color:"red"}}>Not updated</span>} </span><br></br>
-            <span className={styles.span}> {job.ExpectedSalary?<span style={{ color: "blue" }}>{job.ExpectedSalary} </span>:<span style={{color:"red"}}>Not updated</span>}</span><br></br>          
+            <span className={styles.span}>{job.age? <span style={{ color: "blue" }}>{job.age} </span>:<span style={{color:"red"}}>N/A</span> }</span><br></br>
+            <span className={styles.span}> {job.NoticePeriod?<span style={{ color: "blue" }}>{job.NoticePeriod} </span>: <span style={{color:"red"}}>N/A</span>}</span><br></br>
+            <span className={styles.span}> {job.Qualification?<span style={{ color: "blue" }}>{job.Qualification} </span>:<span style={{color:"red"}}>N/A</span>}</span><br></br>
+            <span className={styles.span}> {job.Experiance?<span style={{ color: "blue" }}>{job.Experiance} </span>:<span style={{color:"red"}}>N/A</span>}   </span><br></br>
+            <span className={styles.span}>{job.currentCTC?<span style={{ color: "blue" }}>{job.currentCTC} </span>:<span style={{color:"red"}}>N/A</span>} </span><br></br>
+            <span className={styles.span}> {job.ExpectedSalary?<span style={{ color: "blue" }}>{job.ExpectedSalary} </span>:<span style={{color:"red"}}>N/A</span>}</span><br></br>          
             </div>
             <img className={styles.MobileimageView} src={job.image?job.image : profileDp}/>
     
           </div>
 
           <div className={styles.Down}>
-          <span className={styles.span}> Skills : {job.Skills?<span style={{ color: "blue" }}>{job.Skills} </span>:<span style={{color:"red"}}>Not updated</span>}</span><br></br>
+          <span className={styles.span}> Skills : {job.Skills?<span style={{ color: "blue" }}>{job.Skills} </span>:<span style={{color:"red"}}>N/A</span>}</span><br></br>
          </div>
 
         {

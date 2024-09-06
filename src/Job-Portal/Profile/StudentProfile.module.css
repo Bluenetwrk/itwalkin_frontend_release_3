@@ -22,7 +22,10 @@
 .Hli{    
     display: flex;
     flex-wrap: nowrap;
-    border: 1px solid aqua;
+    /* border: 1px solid aqua; */
+    border : 1px solid rgb(215, 223, 226);
+
+
     border-left: none;
     width:350%;
     text-align: center;
@@ -32,7 +35,8 @@
 .li{
     display: flex;
     flex-wrap: nowrap;
-    border: 1px solid aqua;
+    border : 1px solid rgb(215, 223, 226);
+
     width:120%;
     text-align: center;
     display: inline-block;

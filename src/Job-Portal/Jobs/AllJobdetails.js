@@ -10,6 +10,8 @@ import Styles from "./myPostedjobs.module.css"
 import graduation from "../img/icons8-graduation-cap-40.png"
 import useScreenSize from '../SizeHook';
 import Arrowimage from '../img/icons8-arrow-left-48.png'
+import profileDp from "../img/user_3177440.png"
+
 
 
 function Jobdetails() {
@@ -37,8 +39,6 @@ const [Loader, setLoader] = useState(false)
       .then((res) => {
         let result = (res.data)
         setJobs(result)
-        // console.log("result are in ", result)
-
         setjobdescription(result.jobDescription)
         setjobSeekerId(result.jobSeekerId)
       })
@@ -115,6 +115,10 @@ const [Loader, setLoader] = useState(false)
       {screenSize.width>850 ?
 
         <>
+        <div>
+        <img className={styles.imageV} src={jobs.Logo?jobs.Logo : profileDp}/>
+        
+        </div>
           <div className={styles.dUiwarpper}>
             <ul className={styles.Hul}>
               <li className={styles.Hli}><b>Company Name</b></li>

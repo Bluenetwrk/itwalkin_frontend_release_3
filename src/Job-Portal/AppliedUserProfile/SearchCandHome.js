@@ -25,6 +25,7 @@ function SearchCandidate() {
     const [NotFound, setNotFound] = useState("")
     const [Result, setResult] = useState(false)
 const screenSize = useScreenSize();
+
 let jobTags = [
     {value:'java', label: 'java'},{value:'Mern Stack', label:'Mern Stack' },{value:'ReactJs', label: 'ReactJs'},
     {value:'Python', label: 'Python'},{value:'C', label: 'C' }, {value:'C++',label:'C++' },
@@ -78,28 +79,19 @@ let jobTags = [
         }
       }
 
-    // async function search(e) {
-    //     let key = e.target.value
-    //     await axios.get(`https://itwalkin-backend.onrender.com/StudentProfile/getJobSeeker/${key}`)
-    //         .then((res) => {
-    //             console.log(res.data)
 
-    //              if (key) {
-    //                 setCandidate(res.data)
-    //             } else if (!key) {
-    //                 setCandidate([])
-    //             }
-    //             if(res.data.length==0){
-    //                 setNotFound("No Record found")
-    //             }
-    //             if(!key){
-    //     getAllJobSeekers()
-    //             }
-    //         })
-    //         .catch((err) => {
-    //             alert("server issue occured", err)
-    //         })
-    // }
+    async function filterByJobTitle(key){
+        await axios.get(`/StudentProfile/getSkillTags/${key}`)
+        .then((res) => {
+          let result = (res.data)
+          console.log(result)
+          let sortedate = result.sort((a, b) => {
+            return new Date(b.createdAt) - new Date(a.createdAt);
+          });
+          setCandidate(sortedate)
+        })
+      }
+
 
     function CheckProfile(StudID) {
         // navigate(`/Check-Profile/${StudID}`)
@@ -125,15 +117,26 @@ let jobTags = [
             :""
 }
             {screenSize.width>850?
+            <>
+             <div style={{display:"flex", justifyContent:"space-between"}}>
+            <label><input type="radio" name="jobtitle" className={styles.JobtitleFilter_} onClick={() => { getAllJobSeekers() }} />All</label>
+          {
+            jobTags.map((tags, i)=>{
+              return(
+                <label><input type="radio" name = "jobtitle" onClick={() => {filterByJobTitle(tags.value)}}/>{tags.value}</label>
+              )
+            })
+          }
+          </div>
             <div className={styles.AllUiWrapper}>
                 <ul className={styles.ul} >
-                    <li style={{backgroundColor:" rgb(40, 4, 99)"}} className={`${styles.li} ${styles.name}`}><b>Name</b>  </li>
+                    <li style={{backgroundColor:" rgb(40, 4, 99)"}} className={`${styles.li} ${styles.nameHome}`}><b>Name</b>  </li>
                     <li style={{backgroundColor:" rgb(40, 4, 99)"}} className={`${styles.li} ${styles.NoticePeriod}`}><b>Notice Period</b>  </li>
                     <li style={{backgroundColor:" rgb(40, 4, 99)"}} className={`${styles.li} ${styles.age}`}> <b>Age</b> </li>
                     <li style={{backgroundColor:" rgb(40, 4, 99)"}} className={`${styles.li} ${styles.Qualification}`}>  <b>Qualif</b> </li>
                     <li style={{backgroundColor:" rgb(40, 4, 99)"}} className={`${styles.li} ${styles.Experiance}`}><b>Experience</b>  </li>
                     <li style={{backgroundColor:" rgb(40, 4, 99)"}} className={`${styles.li} ${styles.Skills}`}> <b>Skills</b> </li>
-                    <li style={{backgroundColor:" rgb(40, 4, 99)"}} className={`${styles.li} ${styles.currentCTC}`}> <b>Curr. CTC</b> </li>
+                    <li style={{backgroundColor:" rgb(40, 4, 99)"}} className={`${styles.li} ${styles.currentCTC}`}> <b>Cur. CTC</b> </li>
                     <li style={{backgroundColor:" rgb(40, 4, 99)"}} className={`${styles.li} ${styles.ExpectedSalary}`}><b>Exp. CTC</b> </li>
                     <li style={{backgroundColor:" rgb(40, 4, 99)"}} className={`${styles.li} ${styles.LastActive}`}><b>Last Active</b> </li>
 
@@ -146,9 +149,7 @@ let jobTags = [
                                 <>
 
                                     <ul className={styles.ul} key={i}>
-                                        <li className={`${styles.li} ${styles.name} ${styles.onclick}`} onClick={() => { CheckProfile(Applieduser._id) }} >
-                                            {Applieduser.name ? <a className={styles.namelink} title="Click to check the Contact Details">
-                                                {Applieduser.name}</a> : <li className={styles.Nli}>N/A</li>} </li>
+                                        <li className={`${styles.li} ${styles.nameHome}`}>######</li>
                                                
                                         <li className={`${styles.li} ${styles.NoticePeriod}`}> {Applieduser.NoticePeriod ?
                                             Applieduser.NoticePeriod : <li className={styles.Nli}>N/A</li>} </li>
@@ -164,7 +165,7 @@ let jobTags = [
                                             Applieduser.currentCTC : <li className={styles.Nli}>N/A</li>} </li>
                                         <li className={`${styles.li} ${styles.ExpectedSalary}`}> {Applieduser.ExpectedSalary ?
                                             Applieduser.ExpectedSalary : <li className={styles.Nli}>N/A</li>} </li>
-                                             <li className={`${styles.li} ${styles.LastActive}`}>
+                                        <li className={`${styles.li} ${styles.LastActive}`}>
                                         {new Date(Applieduser.updatedAt).toLocaleString(
                                                 "en-US",
                                                 {
@@ -184,6 +185,7 @@ let jobTags = [
                         <p style={{ marginLeft: "45%", color:"red" }}>No Record found</p>
                 }
             </div >
+            </>
             :
             <>
             <div id={styles.JobCardWrapper} >
@@ -197,6 +199,7 @@ let jobTags = [
 <div className={styles.LeftTable}>
                 <span className={styles.span}>Name :  </span> <br></br>
                 <span className={styles.span}><u>Last Active :  </u></span> <br></br>
+
                 <span className={styles.span}>Age :</span><br></br>
                 <span className={styles.span}> Notice Period :</span><br></br>
                 <span className={styles.span}>Qualification :</span><br></br>
@@ -206,7 +209,7 @@ let jobTags = [
             </div>
     
             <div className={styles.RightTable}>
-            <span className={styles.span}><span style={{color:"blue", textDecoration:"underline"}} onClick={() => { CheckProfile(job._id) }} >{job.name}</span></span><br></br>  
+            <span className={styles.span}>######</span><br></br>      
             <span className={styles.span}> <u>{new Date(job.updatedAt).toLocaleString(
                                                 "en-US",
                                                 {
@@ -214,7 +217,7 @@ let jobTags = [
                                                   day: "2-digit",
                                                   year: "numeric",
                                                 }
-                                              )}</u></span><br></br>    
+                                              )}</u></span><br></br> 
             <span className={styles.span}>{job.age? <span style={{ color: "blue" }}>{job.age} </span>:<span style={{color:"red"}}>Not updated</span> }</span><br></br>
             <span className={styles.span}> {job.NoticePeriod?<span style={{ color: "blue" }}>{job.NoticePeriod} </span>: <span style={{color:"red"}}>Not updated</span>}</span><br></br>
             <span className={styles.span}> {job.Qualification?<span style={{ color: "blue" }}>{job.Qualification} </span>:<span style={{color:"red"}}>Not updated</span>}</span><br></br>
@@ -222,8 +225,9 @@ let jobTags = [
             <span className={styles.span}>{job.currentCTC?<span style={{ color: "blue" }}>{job.currentCTC} </span>:<span style={{color:"red"}}>Not updated</span>} </span><br></br>
             <span className={styles.span}> {job.ExpectedSalary?<span style={{ color: "blue" }}>{job.ExpectedSalary} </span>:<span style={{color:"red"}}>Not updated</span>}</span><br></br>          
             </div>
-            <img className={styles.MobileimageView} src={job.image?job.image : profileDp}/>
-    
+                  
+            {/* <img className={styles.MobileimageView} src={job.image?job.image : profileDp}/><br></br> */}
+                
           </div>
 
           <div className={styles.Down}>

@@ -45,6 +45,7 @@ import AllEmployees from "./Job-Portal/Admin/AllEmployees"
 import CheckEmpProfileForAdmin from "./Job-Portal/Profile/CheckEmplProfileForAdmin";
 import CheckStudentProfileForAdmin from "./Job-Portal/Profile/CheckStuForAdmin";
 import SearchCandidate from "./Job-Portal/AppliedUserProfile/SearchCandidat";
+import SearchCandHome from "./Job-Portal/AppliedUserProfile/SearchCandHome";
 import AdminUpdate from "./Job-Portal/Admin/AdminUpdate"
 import AdminPostJobs from "./Job-Portal/Admin/AdminJobPosts";
 import AllIds from "./Job-Portal/Admin/Allid'sStudent";
@@ -114,6 +115,9 @@ const App = () => {
           <Route path="/EmployeeSignUp" element={<EmployeeSignUp />} />
           <Route path="/JobDetails/:id" element={<Jobdetails />} />
           <Route path="/CheckEmpHalfProfile/:empId" element={<CheckEmpHalfProfile />} />
+
+          <Route path="Search-Candidate-Home" element={<SearchCandHome url= {axios.defaults.baseURL} />} />
+
 
 <Route path="/payment" element ={<Payment/>} />
 

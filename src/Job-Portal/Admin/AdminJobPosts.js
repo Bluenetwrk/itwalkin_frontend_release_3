@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom'
 
 import { Editor } from 'react-draft-wysiwyg';
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css"; 
+import CreatableSelect  from "react-select/creatable"
 
 
 import Style from "../PostJobs/postJobs.module.css"
@@ -45,6 +46,29 @@ function AdminPostJobs() {
     const [profileData, setProfileData] = useState([])
     let navigate= useNavigate()
 
+    let jobTags = [
+        {value:'java', label: 'java'},{value:'Mern Stack', label:'Mern Stack' },{value:'ReactJs', label: 'ReactJs'},
+        {value:'Python', label: 'Python'},{value:'C', label: 'C' }, {value:'C++',label:'C++' },
+        {value: 'Javascript', label: "Javascript" }, {value:'Node js',label: 'Node js' }, 
+        {value:'Angular js',label: 'Angular js' },{value:'Vue js', label: 'Vue js'}, {value:'NextJs', label: 'NextJs'},
+        {value: 'Backend', label: 'Backend'},{value:'Frontend', label:'Frontend'},
+        {value: 'HTML-CSS', label: 'HTML-CSS'},
+        {value: 'MongoDB', label: 'MongoDB'}, 
+        {value: 'MySql', label: 'MySql'},
+        {value: 'React Native', label: 'React Native'},
+        {value: 'Flutter', label: 'Flutter'},
+        ]
+
+        const [tag, setTag] = useState([])
+    const Tags=tag.map((tag,i)=>{
+        return(
+            tag.value
+        )
+    })
+
+    function handleChange(tag){
+        setTag(tag)
+    }
     // async function getProfile() {
     //     await axios.get(`/EmpProfile/getProfile/${empId}`)
     //         .then((res) => {
@@ -92,17 +116,20 @@ function AdminPostJobs() {
        let jobTitle = jobtitle.toLowerCase()
        let jobLocation = joblocation.toLowerCase()
         await axios.post("/jobpost/jobpost/", { Logo, SourceLink, Source, SourceCompanyLink, adminLogin, jobTitle,
-    companyName, jobDescription, jobtype, salaryRange, jobLocation, qualification, experiance, skills }, {headers})
+    companyName, jobDescription, jobtype, salaryRange, jobLocation, qualification, experiance, skills, Tags }, {headers})
             .then((res) => {
                 let result = (res.data)
                 if (result == "success") {
                     setJobTitle("")
                     setJobDescription("")
-                    // setCompanyName("")
+                    setCompanyName("")
                     setSalaryRange("")
                     setJobLocation("")
                     setExperiance("")
                     setExperiance("")
+                    setJobtype("")
+                    setJobLocation("")
+                    setQualification("")
                     setSkills("")
                     setSuccessMessage("Success! job successfully posted")
                 }
@@ -160,7 +187,9 @@ window.addEventListener('keypress', function(event){
 
 
                                     <div className={Style.postJobWrapper}>
-                                        <p className={Style.successmessage}>{successMessage} </p>
+                                        {/* <p className={Style.successmessage}>{successMessage} </p> */}
+                                        <p className={successMessage==="Alert!... JobTitle, CompanyName JobDescription, Experiance, JobLocation and Skills must be filled"?
+                                        Style.errormessage: Style.successmessage}>{successMessage} </p>
                                         {/* <p className={Style.errormessage}>{errorMessage} </p> */}
 
 
@@ -168,11 +197,11 @@ window.addEventListener('keypress', function(event){
                                         <h4 className={Style.jobHeadline}  >Job title**</h4>
                                         <input maxLength="30" className={Style.inputbox} type="text" value={jobtitle} onChange={(e) => { setJobTitle(e.target.value) }} />
 <div className={Style.jobHeadline}>
-                                        <label><input name="Job-Type" type="radio" value={other}  onClick={(e) => { setother((prev)=>!prev)} } />Select, if Job Source is from other Job Portal Site </label>
+                                        {/* <label><input name="Job-Type" type="radio" value={other}  onClick={(e) => { setother((prev)=>!prev)} } />Select, if Job Source is from other Job Portal Site </label> */}
 </div>
     
-                               { other?
-                               <>
+                               {/* { other?
+                               <> */}
                                <hr style={{marginTop:"50px"}}></hr>
                                        <h4 className={Style.jobHeadline}  >Job Post Source &nbsp;<span className={Style.hint}>(e.g Linkedin, Noukri, indeed etc.)</span></h4>
                                         <input maxLength="20" className={Style.inputbox} type="text" value={Source} onChange={(e) => { setSource(e.target.value) }} />
@@ -180,15 +209,15 @@ window.addEventListener('keypress', function(event){
                                         <h4 className={Style.jobHeadline}  > Job Post Source Link</h4>
                                         <input className={Style.inputbox} type="text" value={SourceLink} onChange={(e) => { setSourceLink(e.target.value) }} />
                                        
-                                        <h4 className={Style.jobHeadline}  >Source Company Link</h4>
-                                        <input className={Style.inputbox} type="text" value={SourceCompanyLink} onChange={(e) => { setSourceCompanyLink(e.target.value) }} />
+                                        <h4 className={Style.jobHeadline}  >Source Company Name </h4>
+                                        <input className={Style.inputbox} type="text" value={companyName} onChange={(e) => { setCompanyName(e.target.value) }} />
                                        
                                         <hr style={{marginBottom:"50px", marginTop:"30px"}}></hr>
                               
-                               </>
+                               {/* </>
 
                                 :""
-                                    }
+                                    } */}
                                         {/* <h4 className={Style.jobHeadline}>Company Name** &nbsp;<span className={Style.hint}>(Update Company Name from your Profile)</span></h4>
                                         <input maxLength="30" className={Style.inputbox} type="text" value={companyName} onChange={(e) => { setCompanyName(e.target.value) }} /> */}
 
@@ -211,23 +240,24 @@ window.addEventListener('keypress', function(event){
                         <option value="Internship">Internship</option>
                         <option value="Contract">Contract</option>
                     </select> */}
-                                        <label><input name="Job-Type" type="radio" value="Full Time " onChange={(e) => { setJobtype(e.target.value) }} />Full Time  </label>
-                                        <label><input name="Job-Type" type="radio" value="Part Time" onChange={(e) => { setJobtype(e.target.value) }} />Part Time  </label>
-                                        <label><input name="Job-Type" type="radio" value="Internship" onChange={(e) => { setJobtype(e.target.value) }} />Internship </label>
-                                        <label><input name="Job-Type" type="radio" value="Contract" onChange={(e) => { setJobtype(e.target.value) }} />Contract   </label>
+                                        <label><input name="Job-Type" checked={jobtype==="Full Time"} type="radio" value="Full Time" onChange={(e) => { setJobtype(e.target.value) }} />Full Time  </label>
+                                        <label><input name="Job-Type" checked={jobtype==="Part Time"} type="radio" value="Part Time" onChange={(e) => { setJobtype(e.target.value) }} />Part Time  </label>
+                                        <label><input name="Job-Type" checked={jobtype==="Internship"} type="radio" value="Internship" onChange={(e) => { setJobtype(e.target.value) }} />Internship </label>
+                                        <label><input name="Job-Type" checked={jobtype==="Contract"} type="radio" value="Contract" onChange={(e) => { setJobtype(e.target.value) }} />Contract   </label>
 
 
                                         <h4 className={Style.jobHeadline}>Salary Per Annum in Lakhs** &nbsp;<span className={Style.hint}>(e.g 5L or 10L)</span></h4>
                                         <input maxLength="3" className={Style.inputbox} type="text" value={salaryRange} onChange={(e) => { setSalaryRange(e.target.value) }} />
 
-                                        <h4 className={Style.jobHeadline}>Job Location**</h4>
+                                        <h4 className={Style.jobHeadline}>Job Location**</h4> 
+                                        
                                         <div style={{marginTop:"-10px"}}>
-                                        <label><input name="Location" type="radio" value="Banglore" onChange={(e) => { setJobLocation(e.target.value) }} />Banglore </label>
-                                        <label><input name="Location" type="radio" value="Hyderabad" onChange={(e) => { setJobLocation(e.target.value) }} />Hyderabad </label>
-                                        <label><input name="Location" type="radio" value="Chennai" onChange={(e) => { setJobLocation(e.target.value) }} />Chennai </label>
-                                        <label><input name="Location" type="radio" value="Mumbai" onChange={(e) => { setJobLocation(e.target.value) }} />Mumbai </label>
-                                        <label><input name="Location" type="radio" value="Delhi" onChange={(e) => { setJobLocation(e.target.value) }} />Delhi </label>
-                                        <label><input name="Location" type="radio" value="others" onClick={(e) => { setotherJobLocation((prev)=>!prev) }} />others </label>
+                                        <label><input name="Location" type="radio" checked={joblocation==="Bangalore"} value="Bangalore" onChange={(e) => { setJobLocation(e.target.value) }} />Bangalore </label>
+                                        <label><input name="Location" type="radio" checked={joblocation==="Hyderabad"} value="Hyderabad" onChange={(e) => { setJobLocation(e.target.value) }} />Hyderabad </label>
+                                        <label><input name="Location" type="radio" checked={joblocation==="Chennai"} value="Chennai" onChange={(e) => { setJobLocation(e.target.value) }} />Chennai </label>
+                                        <label><input name="Location" type="radio" checked={joblocation==="Mumbai"} value="Mumbai" onChange={(e) => { setJobLocation(e.target.value) }} />Mumbai </label>
+                                        <label><input name="Location" type="radio" checked={joblocation==="Delhi"} value="Delhi" onChange={(e) => { setJobLocation(e.target.value) }} />Delhi </label>
+                                        <label><input name="Location" type="radio"  value="others" onClick={(e) => { setotherJobLocation((prev)=>!prev) }} />others </label>
                                         </div>
                                         {
                                             otherJobLocation?
@@ -239,11 +269,11 @@ window.addEventListener('keypress', function(event){
                                         <h4 className={Style.jobHeadline}>Qualification Needed**</h4>
 
                                         <div style={{marginTop:"-10px"}}>
-                                        <label><input name="Qualification" type="radio" value="B.E/CSE" onChange={(e) => { setQualification(e.target.value) }} />B.E/CSE </label>
-                                        <label><input name="Qualification" type="radio" value="B.E/Civil" onChange={(e) => { setQualification(e.target.value) }} />B.E/Civil </label>
-                                        <label><input name="Qualification" type="radio" value="B.E/Mech" onChange={(e) => { setQualification(e.target.value) }} />B.E/Mech </label>
-                                        <label><input name="Qualification" type="radio" value="B.E/ECE" onChange={(e) => { setQualification(e.target.value) }} />B.E/ECE </label>
-                                        <label><input name="Qualification" type="radio" value="B.E/IT" onChange={(e) => { setQualification(e.target.value) }} />B.E/IT </label>
+                                        <label><input name="Qualification" type="radio" checked={qualification==="B.E/CSE"} value="B.E/CSE" onChange={(e) => { setQualification(e.target.value) }} />B.E/CSE </label>
+                                        <label><input name="Qualification" type="radio" checked={qualification==="B.E/Civil"} value="B.E/Civil" onChange={(e) => { setQualification(e.target.value) }} />B.E/Civil </label>
+                                        <label><input name="Qualification" type="radio" checked={qualification==="B.E/Mech"} value="B.E/Mech" onChange={(e) => { setQualification(e.target.value) }} />B.E/Mech </label>
+                                        <label><input name="Qualification" type="radio" checked={qualification==="B.E/ECE"} value="B.E/ECE" onChange={(e) => { setQualification(e.target.value) }} />B.E/ECE </label>
+                                        <label><input name="Qualification" type="radio" checked={qualification==="B.E/IT"} value="B.E/IT" onChange={(e) => { setQualification(e.target.value) }} />B.E/IT </label>
                                         <label><input name="Qualification" type="radio" value="others" onClick={(e) => { setOthers((prev)=>!prev) }} />others </label>
                                         </div>
                                         {
@@ -260,6 +290,17 @@ window.addEventListener('keypress', function(event){
 
                                         <h4 className={Style.jobHeadline}>Skills Needed**</h4>
                                         <input maxLength="100" className={Style.inputbox} type="text" value={skills} onChange={(e) => { setSkills(e.target.value) }} />
+                                       
+                                        <h4 className={Style.jobHeadline}>Tags</h4>
+                         <div>
+                           <CreatableSelect  
+                          isMulti={true}
+                          options={jobTags}
+                          value={tag}
+                          onChange={handleChange}     
+                        />
+                         </div>
+
                                         {Logo ? <p ><span style={{ color: "blue" }}>Note** :</span> Logo will also be posted with the Job</p> : ""}
 
                                         <button className={Style.button} onClick={postJob}>Post Job</button>

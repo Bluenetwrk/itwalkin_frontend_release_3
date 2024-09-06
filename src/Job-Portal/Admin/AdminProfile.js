@@ -204,8 +204,10 @@ function AdminProfile() {
 // Job Seekers.....Job Seekers.....Job Seekers.....
 
     async function getAllJobSeekers() {
-      let userid = atob(JSON.parse(localStorage.getItem("IdLog")))
-      const headers = { authorization: userid +" "+ atob(JSON.parse(localStorage.getItem("AdMLog"))) };
+      // let userid = atob(JSON.parse(localStorage.getItem("IdLog")))
+      // const headers = { authorization: userid +" "+ atob(JSON.parse(localStorage.getItem("AdMLog"))) };
+    const headers = { authorization: 'BlueItImpulseWalkinIn' };
+
       await axios.get("/StudentProfile/getAllJobseekers", {headers})
         .then((res) => {
           let result = (res.data)

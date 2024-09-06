@@ -159,6 +159,7 @@ h4 {
     font-weight: 550;
     font-size: small;
     white-space: nowrap;
+    margin-left: 15px;
 
 }
 
@@ -277,6 +278,7 @@ h4 {
 .MobileName{
     margin-top: 10px;
     margin-bottom: 5px;
+    margin-left: 10px;
 }
 
 .Mobileinput{
@@ -284,7 +286,7 @@ h4 {
      height: 32px;
    border-radius: 5px;
      border: 1px solid rgb(40, 4, 99);
-    margin-left: 18px; 
+    margin-left: 10px; 
     margin-bottom: 5px;    
 }
 
