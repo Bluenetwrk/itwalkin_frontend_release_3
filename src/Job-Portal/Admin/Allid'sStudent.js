@@ -11,9 +11,9 @@ function Allid() {
     return ids.email
   })
 
-  const navigate=useNavigate
+  const navigate=useNavigate()
   useEffect(()=>{
-    let adminLogin= localStorage.getItem("SuperAdminLogin")
+    let adminLogin= localStorage.getItem("SupAdMLog")
         if(!adminLogin){
             navigate("/")
         }
@@ -32,6 +32,7 @@ function Allid() {
         alert("server issue occured")
       })
   }
+
   useEffect(() => {
     JobSeekerNoticePeriod()
   }, [])

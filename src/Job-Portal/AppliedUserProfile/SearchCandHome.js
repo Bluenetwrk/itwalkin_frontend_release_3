@@ -26,6 +26,12 @@ function SearchCandidate() {
     const [Result, setResult] = useState(false)
 const screenSize = useScreenSize();
 
+const [jobLocation, setjobLocation] = useState("AllL")
+
+const Location=['Bangalore',   'Chennai' ,
+  'Hyderabad',   'Delhi',    'Mumbai' ]
+
+
 let jobTags = [
     {value:'java', label: 'java'},{value:'Mern Stack', label:'Mern Stack' },{value:'ReactJs', label: 'ReactJs'},
     {value:'Python', label: 'Python'},{value:'C', label: 'C' }, {value:'C++',label:'C++' },
@@ -79,12 +85,58 @@ let jobTags = [
         }
       }
 
+      async function getLocation(jobLocation) {
+        await axios.get(`/StudentProfile/getStuLocation/${jobLocation}`)
+          .then((res) => {
+            let result = (res.data)
+            let sortedate = result.sort(function (a, b) {
+              return new Date(b.createdAt) - new Date(a.createdAt);
+            });
+            setCandidate(sortedate)
+            // setPageLoader(false)
+          }).catch((err) => {
+            alert("some thing went wrong")
+          })
+      }
+
+      const [currentPage, setCurrentPage] = useState(1)
+      const [recordsPerPage, setrecordsPerPage] = useState(10)
+      const lastIndex = currentPage * recordsPerPage //10
+      const firstIndex = lastIndex - recordsPerPage //5
+      const records = Candidate.slice(firstIndex, lastIndex)//0,5
+      const npage = Math.ceil(Candidate.length / recordsPerPage) // last page
+      const number = [...Array(npage + 1).keys()].slice(1)
+    
+      function firstPage(){
+        setCurrentPage(1)
+      }
+    
+    function previous(){
+      if(currentPage !==1){
+        setCurrentPage(currentPage-1)
+      }  
+    }
+    function changeCurrent(id){
+      setCurrentPage(id)
+    }
+    function next(){
+      if(currentPage !==npage){
+        setCurrentPage(currentPage+1)
+      }
+    }
+    function last(){
+        setCurrentPage(npage)
+    }
+    function handleRecordchange(e){
+      setrecordsPerPage(e.target.value)
+      setCurrentPage(1)
+    }
 
     async function filterByJobTitle(key){
+      
         await axios.get(`/StudentProfile/getSkillTags/${key}`)
         .then((res) => {
           let result = (res.data)
-          console.log(result)
           let sortedate = result.sort((a, b) => {
             return new Date(b.createdAt) - new Date(a.createdAt);
           });
@@ -104,10 +156,7 @@ let jobTags = [
             }}>Go Back</button> */}
                             <img style={{ height:"25px", color:"grey", marginTop:"20px", marginLeft:"8%", cursor:"pointer",
              width:"28px"}} onClick={()=>{navigate("/postedjobs")}}  src={Arrowimage} />
-            <>
-<p style={{marginLeft:"6%", opacity:0.6, width:"220px"}}>Looking for candidates?</p>
-<p style={{marginLeft:"6%", opacity:0.6, width:"85%" }} >Search candidate's Skills, Notice period, Education, Experience, Expected CTC and get in touch with the Candidate directly</p>
-</>
+   
             <div className={styles.searchBoth}>
                 <p className={styles.p}>Search </p>
                 <input className={styles.inputboxsearch} type="text" placeholder="candidate's/skills/experience/qualification/noticeperiod" onChange={(e) => { search(e) }} />
@@ -118,16 +167,71 @@ let jobTags = [
 }
             {screenSize.width>850?
             <>
-             <div style={{display:"flex", justifyContent:"space-between"}}>
-            <label><input type="radio" name="jobtitle" className={styles.JobtitleFilter_} onClick={() => { getAllJobSeekers() }} />All</label>
-          {
-            jobTags.map((tags, i)=>{
+          <div className={styles.FilterWrapper}>
+            <label><input className={styles.JobtitleFilter} type="radio" name="jobtitle"  onClick={() => { getAllJobSeekers() }} />All</label>
+            {
+
+              Location.map((location,i)=>{
+                return(
+                  <label><input className={styles.JobtitleFilter} type="radio" name = "location"
+                 onClick={() => { getLocation(location)}}/>{location}</label>
+                )
+              })
+            }
+            </div><br></br>
+            {/* <div className={styles.LocationFilterWrapper}>
+            <label> <input className={styles.JobtitleFilter} type="radio" name="location" checked={jobLocation === 'AllL'}  onClick={() => { getAllJobSeekers(); setjobLocation("AllL") }} />All</label>
+            <label> <input className={styles.JobtitleFilter} type="radio" name="location" checked={jobLocation === 'banglore'}  onClick={() => { getLocation("banglore"); setjobLocation('banglore') }} />Bangalore</label>
+            <label> <input className={styles.JobtitleFilter} type="radio" name="location" disabled checked={jobLocation === 'chennai'}  onClick={() => { getLocation("chennai"); setjobLocation('chennai') }} />Chennai</label>
+            <label> <input className={styles.JobtitleFilter} type="radio" name="location" disabled checked={jobLocation === 'hyderabad'}  onClick={() => { getLocation("hyderabad"); setjobLocation('hyderabad') }} />Hyderabad</label>
+            <label> <input className={styles.JobtitleFilter} type="radio" name="location" disabled checked={jobLocation === 'mumbai'}  onClick={() => { getLocation("mumbai"); setjobLocation('mumbai') }} />Mumbai</label>
+            <label> <input className={styles.JobtitleFilter} type="radio" name="location" disabled checked={jobLocation === 'delhi'}  onClick={() => { getLocation("delhi"); setjobLocation('delhi') }} />Delhi</label>
+          </div>
+          <br></br> */}
+
+          <div className={styles.FilterWrapper}>
+            <label><input className={styles.JobtitleFilter} type="radio" name="jobtitle"  onClick={() => { getAllJobSeekers() }} />All</label>
+                      {
+                         jobTags.map((tags, i)=>{
               return(
-                <label><input type="radio" name = "jobtitle" onClick={() => {filterByJobTitle(tags.value)}}/>{tags.value}</label>
+                <label><input className={styles.JobtitleFilter} type="radio" name = "jobtitle"
+                 onClick={() => {filterByJobTitle(tags.value)}}/>{tags.value}</label>
               )
-            })
+            }).slice(0,12)
+            }
+          </div>
+          <br></br>
+
+            <div className={styles.FilterWrapper}>
+           {jobTags.map((tags, i)=>{
+              return(
+                <label><input className={styles.JobtitleFilter} type="radio" name = "jobtitle"
+                 onClick={() => {filterByJobTitle(tags.value)}}/>{tags.value}</label>
+              )
+            }).slice(12,30)
           }
           </div>
+
+          {/* <div style={{display:"flex", justifyContent:"space-between"}}>
+
+<div className={styles.navigationWrapper}>
+  <p style={{display:"inline", margin:"5px"}} className={styles.navigation} onClick={firstPage}>
+  <i class='fas fa-step-backward' disabled={currentPage===1}></i>
+  </p>
+  <p style={{display:"inline", margin:"5px"}} className={styles.navigation} onClick={previous}>
+  <i class='fas fa-caret-square-left'></i>
+  </p>
+  <span>{currentPage}</span>
+  <p style={{display:"inline", margin:"5px"}} className={styles.navigation} onClick={next}>
+  <i class='fas fa-caret-square-right'></i>
+  </p>
+  <p style={{display:"inline", margin:"5px"}} className={styles.navigation} onClick={last}>
+  <i class='fas fa-step-forward'></i>
+  </p>
+     </div>
+     </div> */}
+
+
             <div className={styles.AllUiWrapper}>
                 <ul className={styles.ul} >
                     <li style={{backgroundColor:" rgb(40, 4, 99)"}} className={`${styles.li} ${styles.nameHome}`}><b>Name</b>  </li>
@@ -143,13 +247,13 @@ let jobTags = [
                 </ul>
 
                 {
-                    Candidate.length > 0 ?
-                        Candidate.map((Applieduser, i) => {
+                    records.length > 0 ?
+                        records.map((Applieduser, i) => {
                             return (
                                 <>
 
                                     <ul className={styles.ul} key={i}>
-                                        <li className={`${styles.li} ${styles.nameHome}`}>######</li>
+                                        <li className={`${styles.li} ${styles.nameHome}`}><s>Locked</s></li>
                                                
                                         <li className={`${styles.li} ${styles.NoticePeriod}`}> {Applieduser.NoticePeriod ?
                                             Applieduser.NoticePeriod : <li className={styles.Nli}>N/A</li>} </li>

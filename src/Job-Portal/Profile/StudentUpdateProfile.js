@@ -51,21 +51,28 @@ function StudentUpdateProfile(props) {
     {value: 'MySql', label: 'MySql'},
     {value: 'React Native', label: 'React Native'},
     {value: 'Flutter', label: 'Flutter'},
-
     ]
   const [tag, setTag] = useState([])
   const [Resulttag, setResulttagTag] = useState()
-
     function handleChange(tag){
-      setTag(tag)
-      
+      setTag(tag)      
   }
   const Tags=tag.map((tag,i)=>{
     return(
         tag.value            
       )
-    })        
+    })   
+    // ......City....
+    const [citytag, setcityTag] = useState()
+    const [city, setcity] = useState()
+
+    const CTags=[{value:'Bangalore', label: 'Bangalore'},{value:'Chennai', label:'Chennai' },
+      {value:'Hyderabad', label: 'Hyderabad'}, {value:'Delhi', label: 'Delhi'},{value:'Mumbai', label: 'Mumbai' }]
     
+      function handleChangeCityTag(tag){
+      setcityTag(tag)      
+      setcity(tag.value)      
+  }    
 
   let navigate = useNavigate()
 
@@ -88,6 +95,8 @@ function StudentUpdateProfile(props) {
           setphoneNumber(result.phoneNumber)
           setAadhar(result.Aadhar)
           setpanCard(result.panCard)
+          setcityTag(result.city)
+          setcity(result.city)          
           setNoticePeriod(result.NoticePeriod)
           setExpectedSalary(result.ExpectedSalary)
           setcurrentCTC(result.currentCTC)
@@ -122,8 +131,8 @@ function StudentUpdateProfile(props) {
     const headers = { authorization: userid + " " + atob(JSON.parse(localStorage.getItem("StudLog"))) };
     // e.preventDefault()
     await axios.put(`/StudentProfile/updatProfile/${studId}`, {
-      name, email, phoneNumber, Aadhar, panCard,
-      NoticePeriod, ExpectedSalary, currentCTC, age, Qualification, Skills, Experiance, Tags
+      name, email, phoneNumber, Aadhar, panCard, city, NoticePeriod, 
+      ExpectedSalary, currentCTC, age, Qualification, Skills, Experiance, Tags
     }, { headers })
       .then(async (res) => {
         let result = res.data
@@ -246,6 +255,18 @@ function StudentUpdateProfile(props) {
                 <h4>Email Address:</h4>
                 <input maxLength="25" className={styles.input} value={email} onChange={(e) => { setemail(e.target.value) }} type="text" />
               </label>
+              <label className={styles.inputName}>
+                <h4>City: <span>{city}</span></h4>
+                {/* <input maxLength="15" className={styles.input} value={city} onChange={(e) => { setCity(e.target.value) }} type="text" /> */}
+                <div style={{marginTop:"-7px", width:"81%", marginLeft:"18px"}}>
+                           <CreatableSelect                          
+                          options={CTags}
+                          value={citytag}
+                          onChange={handleChangeCityTag}     
+                        />
+                         </div>
+            
+              </label>
 
               <label className={styles.inputName}>
                 <h4>Age:</h4>
@@ -288,11 +309,6 @@ function StudentUpdateProfile(props) {
               </label>
 
               <label className={styles.inputName}>
-                <h4>Skills:</h4>
-                <input maxLength="100" className={styles.input} value={Skills} onChange={(e) => { setSkills(e.target.value) }} type="text" />
-              </label>
-
-              <label className={styles.inputName}>
                 <h4>Experience:</h4>
                 <input maxLength="5" className={styles.input} value={Experiance} onChange={(e) => { setExperiance(e.target.value) }} type="text" />
               </label>
@@ -310,8 +326,8 @@ function StudentUpdateProfile(props) {
               </label>
 
               <label className={styles.inputName}>
-                <h4>College</h4>
-                <input maxLength="5" className={styles.input} value={Experiance} onChange={(e) => { setExperiance(e.target.value) }} type="text" />
+                <h4>Skills:</h4>
+                <input maxLength="100" className={styles.input} value={Skills} onChange={(e) => { setSkills(e.target.value) }} type="text" />
               </label>
 
               <button className={styles.Save} onClick={(e) => { saveUpdate(e) }}>Save</button>
@@ -329,6 +345,15 @@ function StudentUpdateProfile(props) {
               <label className={styles.MobileinputName}>
                 <h4 className={styles.MobileName}>Email Address:</h4>
                 <input maxLength="25" className={styles.Mobileinput} value={email} onChange={(e) => { setemail(e.target.value) }} type="text" />
+              </label>
+
+              <label className={styles.MobileinputName}>
+                <h4>City <span>{city}</span></h4>
+                <CreatableSelect                          
+                          options={CTags}
+                          value={citytag}
+                          onChange={handleChangeCityTag}     
+                        />
               </label>
 
               <label className={styles.MobileinputName}>

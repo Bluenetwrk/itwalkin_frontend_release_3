@@ -33,6 +33,7 @@ import CheckStudentProfiel from "./Job-Portal/Profile/CheckStudentProfiel";
 import CheckEmpHalfProfile from "./Job-Portal/Profile/CheckEmpHalfProf";
 // admin
 import AdminLogin from "./Job-Portal/Login/AdminLogin"
+import AdminAccess from "./Job-Portal/Admin/AdminAccess"
 // import SearchParams from "./Job-Portal/Login/SearchParams";
 import SearchParams from "./Job-Portal/Login/SearchParams ";
 import SearchParamsEmp from "./Job-Portal/Login/SearchParamsEmp";
@@ -96,6 +97,7 @@ const App = () => {
           </Route>
 
           <Route path="/BIAdd@Logg" element={<AdminLogin />} />
+          <Route path="/BIAddAdminAccess" element={<AdminAccess />} />
           <Route path="/BIAdd@Gmail" element={<SearchParams/>} />
           <Route path="/BIAdd@GmailEmp" element={<SearchParamsEmp/>} />
           <Route path="/BIAdd@Gmaill" element={<SearchParamsDub/>} />

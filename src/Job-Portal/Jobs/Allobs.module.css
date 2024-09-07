@@ -64,9 +64,18 @@
 } */
 
 /* ..............UL......LI............. */
-.arrowwrapper{
-    /* background-color: red; */
+
+
+
+
+
+.JobtitleFilter{
+    margin-left: 25px;
 }
+.FilterWrapper2ndLine{
+}
+
+
 .imageV{
     height:100px;
     width:100px;
@@ -403,31 +412,8 @@ border-left: none;
     color:rgb(109, 52, 201);
     cursor: pointer;
 }
-.JobtitleFilterWrapper-{
-    margin-left: 20%;
-
-}
 
 
-.JobtitleFilter{
-    margin-left: 1%;
-    margin-top: 10px;
-    padding-left: 10px;
-    padding-right: 10px;
-    border: 1px solid rgb(40, 4, 99);
-    background-color: rgb(40, 4, 99);
-    color:white;
-    font-size: small;
-    font-weight: bold;
-    height: 30px;
-    border-radius: 5px;
-}
-
-
-
-.MobJobtitleFilterWrapper{
-    margin-left: 2%;
-}
 /* 
 .MobJobtitleFilter{
     margin-left: 1%;

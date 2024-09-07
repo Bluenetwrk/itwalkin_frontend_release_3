@@ -313,18 +313,6 @@ const [Filtereredjobs, setFiltereredjobs] = useState([])
   // function checkEmpHalf(empId) {
   //   navigate(`CheckEmpHalfProfile/${empId}`)
   // }
-
-  const [from, setfrom] = useState(0)
-  const [to, setto] = useState(10)
-
-  function changefrom(e) {
-    console.log(e.target.value - 1)
-    setfrom(e.target.value - 1)
-  }
-  function changeTo(e) {
-    console.log(e.target.value)
-    setto(e.target.value)
-  }
     
   const [currentPage, setCurrentPage] = useState(1)
   const [recordsPerPage, setrecordsPerPage] = useState(10)
@@ -354,10 +342,9 @@ function next(){
 function last(){
     setCurrentPage(npage)
 }
-function handleRecordchange(e){
-  setrecordsPerPage(e.target.value)
+function handleRecordchange(e){  
+  setrecordsPerPage(e.target.value)  
   setCurrentPage(1)
-
 }
 
 async function filterByJobTitle(key){
@@ -418,33 +405,37 @@ async function filterByJobTitle(key){
 
       {screenSize.width > 850 ?
         <>
-          <div className={styles.JobtitleFilterWrapper}>
-
-            <label> <input type="radio" name="location" checked={jobLocation === 'AllL'} className={styles.JobtitleFilter_} onClick={() => { getjobsAllLoc(); setjobLocation("AllL") }} />All</label>
-            <label> <input type="radio" name="location" checked={jobLocation === 'banglore'} className={styles.JobtitleFilter_} onClick={() => { getLocation("banglore"); setjobLocation('banglore') }} />Banglore</label>
-            <label> <input type="radio" name="location" disabled checked={jobLocation === 'chennai'} className={styles.JobtitleFilter_} onClick={() => { getLocation("chennai"); setjobLocation('chennai') }} />Chennai</label>
-            <label> <input type="radio" name="location" disabled checked={jobLocation === 'hyderabad'} className={styles.JobtitleFilter_} onClick={() => { getLocation("hyderabad"); setjobLocation('hyderabad') }} />Hyderabad</label>
-            <label> <input type="radio" name="location" disabled checked={jobLocation === 'mumbai'} className={styles.JobtitleFilter_} onClick={() => { getLocation("mumbai"); setjobLocation('mumbai') }} />Mumbai</label>
-            <label> <input type="radio" name="location" disabled checked={jobLocation === 'delhi'} className={styles.JobtitleFilter_} onClick={() => { getLocation("delhi"); setjobLocation('delhi') }} />Delhi</label>
+        
+          <div className={styles.LocationFilterWrapper}>
+            <label> <input className={styles.JobtitleFilter} type="radio" name="location" checked={jobLocation === 'AllL'} onClick={() => { getjobsAllLoc(); setjobLocation("AllL") }} />All</label>
+            <label> <input className={styles.JobtitleFilter} type="radio" name="location" checked={jobLocation === 'banglore'} onClick={() => { getLocation("banglore"); setjobLocation('banglore') }} />Banglore</label>
+            <label> <input className={styles.JobtitleFilter} type="radio" name="location" disabled checked={jobLocation === 'chennai'} onClick={() => { getLocation("chennai"); setjobLocation('chennai') }} />Chennai</label>
+            <label> <input className={styles.JobtitleFilter} type="radio" name="location" disabled checked={jobLocation === 'hyderabad'} onClick={() => { getLocation("hyderabad"); setjobLocation('hyderabad') }} />Hyderabad</label>
+            <label> <input className={styles.JobtitleFilter} type="radio" name="location" disabled checked={jobLocation === 'mumbai'} onClick={() => { getLocation("mumbai"); setjobLocation('mumbai') }} />Mumbai</label>
+            <label> <input className={styles.JobtitleFilter} type="radio" name="location" disabled checked={jobLocation === 'delhi'} onClick={() => { getLocation("delhi"); setjobLocation('delhi') }} />Delhi</label>
           </div>
           <br></br>
 
-          {/* <div className={styles.JobtitleFilterWrapper}>
-            <label><input type="radio" name="jobtitle" className={styles.JobtitleFilter_} onClick={() => { getjobs() }} />All</label>
-            <label><input type="radio" name="jobtitle" className={styles.JobtitleFilter_} onClick={() => { { jobLocation !== "AllL" ? getBothFiltered('java') : JobtitleFilter('java') } }} />Java developer</label>
-            <label><input type="radio" name="jobtitle" className={styles.JobtitleFilter_} onClick={() => { { jobLocation !== "AllL" ? getBothFiltered('full') : JobtitleFilter('full') } }} />Full Stack Developer</label>
-            <label><input type="radio" name="jobtitle" className={styles.JobtitleFilter_} onClick={() => { { jobLocation !== "AllL" ? getBothFiltered('front') : JobtitleFilter('front') } }} />Frontend Developer</label>
-            <label><input type="radio" name="jobtitle" className={styles.JobtitleFilter_} onClick={() => { { jobLocation !== "AllL" ? getBothFiltered('back') : JobtitleFilter('back') } }} />Backend developer</label>
-            <label><input type="radio" name="jobtitle" className={styles.JobtitleFilter_} onClick={() => { { jobLocation !== "AllL" ? getBothFiltered('python') : JobtitleFilter('python') } }} />Python Developer</label>
-          </div> */}
-          <div style={{display:"flex", justifyContent:"space-between"}}>
-            <label><input type="radio" name="jobtitle" className={styles.JobtitleFilter_} onClick={() => { getjobs() }} />All</label>
-          {
-            jobTags.map((tags, i)=>{
+          <div className={styles.FilterWrapper}>
+            <label><input className={styles.JobtitleFilter} type="radio" name="jobtitle"  onClick={() => { getjobs() }} />All</label>
+                      {
+                         jobTags.map((tags, i)=>{
               return(
-                <label><input type="radio" name = "jobtitle" onClick={() => {filterByJobTitle(tags.value)}}/>{tags.value}</label>
+                <label><input className={styles.JobtitleFilter} type="radio" name = "jobtitle"
+                 onClick={() => {filterByJobTitle(tags.value)}}/>{tags.value}</label>
               )
-            })
+            }).slice(0,12)
+            }
+          </div>
+          <br></br>
+
+            <div className={styles.FilterWrapper}>
+           {jobTags.map((tags, i)=>{
+              return(
+                <label><input className={styles.JobtitleFilter} type="radio" name = "jobtitle"
+                 onClick={() => {filterByJobTitle(tags.value)}}/>{tags.value}</label>
+              )
+            }).slice(12,30)
           }
           </div>
 
@@ -578,12 +569,12 @@ async function filterByJobTitle(key){
 
                       }
 
-                      {items.Source ?
+                      {/* {items.Source ?
                         <a className={`${styles.li} ${styles.Source}`} href={items.SourceLink} target="_blank">{items.Source}</a>
-                        :
+                        : */}
                         <li className={`${styles.li} ${styles.Source}`} >Itwalkin</li>
 
-                      }
+                      {/* } */}
 
                       <li className={`${styles.li} ${styles.Jtitle}`} onClick={() => navigate(`/Jobdetails/${items._id}`)} style={{ cursor: "pointer", textDecoration: "underline", color: "blue" }}>{items.jobTitle.toUpperCase()}</li>
                       <li className={`${styles.li} ${styles.JobType}`}>{items.jobtype}</li>
@@ -649,7 +640,7 @@ async function filterByJobTitle(key){
                       </li>
                     </ul>
                   )
-                }).slice(from, to)
+                })
                 : <p style={{ marginLeft: "47%", color: "red" }}>No Record Found</p>
                 :
                 jobs.length > 0 ?
@@ -671,21 +662,21 @@ async function filterByJobTitle(key){
                             {items.companyName}</li>
                           :
                           <a style={{ cursor: "pointer", textDecoration: "underline" }} className={`${styles.li} ${styles.CompanyName}`} href={items.SourceLink} target="_blank" >
-                            {items.Logo ?
+                            {/* {items.Logo ?
                               < img style={{ width: "38px", height: "38px" }} src={items.Logo} />
-                              : ""}<br></br>
+                              : ""}<br></br> */}
                             {items.Source}
 
                           </a>
 
                       }
 
-                      {items.Source ?
+                      {/* {items.Source ?
                         <a className={`${styles.li} ${styles.Source}`} href={items.SourceLink} target="_blank">{items.Source}</a>
-                        :
+                        : */}
                         <li className={`${styles.li} ${styles.Source}`} >Itwalkin</li>
 
-                      }
+                      {/* } */}
 
                       <li className={`${styles.li} ${styles.Jtitle}`} onClick={() => navigate(`/Jobdetails/${items._id}`)} style={{ cursor: "pointer", textDecoration: "underline", color: "blue" }}>{items.jobTitle.toUpperCase()}</li>
                       <li className={`${styles.li} ${styles.JobType}`}>{items.jobtype}</li>
@@ -751,19 +742,19 @@ async function filterByJobTitle(key){
                       </li>
                     </ul>
                   )
-                }).slice(from, to)
+                })
                 : <p style={{ marginLeft: "47%", color: "red" }}>No Record Found</p>
             }
           </div>
 
-          {/* <div>
+          <div>
             Show  <select onChange={(e)=>{handleRecordchange(e)}}>
               <option value={10}>10</option>              
               <option value={25}>25</option>              
               <option value={50}>50</option>              
               <option value={100}>100</option>              
             </select>  jobs per page
-          </div> */}
+          </div>
 
         </>
         :
@@ -771,24 +762,24 @@ async function filterByJobTitle(key){
         <>
 
           <div style={{ display: "flex", marginLeft: "18px" }}>
-            <div className={styles.JobtitleFilterWrapper_} style={{ width: "120px" }}>
+            <div>
 
-              <label> <input type="radio" name="location" checked={jobLocation === 'AllL'} className={styles.JobtitleFilter_} onClick={() => { getjobsAllLoc(); setjobLocation("AllL") }} />All</label><br></br>
-              <label> <input type="radio" name="location" checked={jobLocation === 'banglore'} className={styles.JobtitleFilter_} onClick={() => { getLocation("banglore"); setjobLocation('banglore') }} />Banglore</label><br></br>
-              <label> <input type="radio" name="location" disabled checked={jobLocation === 'chennai'} className={styles.JobtitleFilter_} onClick={() => { getLocation("chennai"); setjobLocation('chennai') }} />Chennai</label><br></br>
-              <label> <input type="radio" name="location" disabled checked={jobLocation === 'hyderabad'} className={styles.JobtitleFilter_} onClick={() => { getLocation("hyderabad"); setjobLocation('hyderabad') }} />Hyderabad</label><br></br>
-              <label> <input type="radio" name="location" disabled checked={jobLocation === 'mumbai'} className={styles.JobtitleFilter_} onClick={() => { getLocation("mumbai"); setjobLocation('mumbai') }} />Mumbai</label><br></br>
-              <label> <input type="radio" name="location" disabled checked={jobLocation === 'delhi'} className={styles.JobtitleFilter_} onClick={() => { getLocation("delhi"); setjobLocation('delhi') }} />Delhi</label>
+              <label> <input type="radio" name="location" checked={jobLocation === 'AllL'} onClick={() => { getjobsAllLoc(); setjobLocation("AllL") }} />All</label><br></br>
+              <label> <input type="radio" name="location" checked={jobLocation === 'banglore'} onClick={() => { getLocation("banglore"); setjobLocation('banglore') }} />Banglore</label><br></br>
+              <label> <input type="radio" name="location" disabled checked={jobLocation === 'chennai'} onClick={() => { getLocation("chennai"); setjobLocation('chennai') }} />Chennai</label><br></br>
+              <label> <input type="radio" name="location" disabled checked={jobLocation === 'hyderabad'} onClick={() => { getLocation("hyderabad"); setjobLocation('hyderabad') }} />Hyderabad</label><br></br>
+              <label> <input type="radio" name="location" disabled checked={jobLocation === 'mumbai'} onClick={() => { getLocation("mumbai"); setjobLocation('mumbai') }} />Mumbai</label><br></br>
+              <label> <input type="radio" name="location" disabled checked={jobLocation === 'delhi'} onClick={() => { getLocation("delhi"); setjobLocation('delhi') }} />Delhi</label>
             </div>
             <br></br>
 
-            <div className={styles.JobtitleFilterWrapper_} style={{ width: "200px", marginLeft: "1px" }}>
-              <label><input type="radio" name="jobtitle" className={styles.JobtitleFilter_} onClick={() => { getjobTitleAll('all'); setjobTitle("all") }} />All</label>            <br></br>
-              <label><input type="radio" name="jobtitle" className={styles.JobtitleFilter_} onClick={() => { { jobLocation !== "AllL" ? getBothFiltered('java') : JobtitleFilter('java') } }} />Java developer</label> <br></br>
-              <label><input type="radio" name="jobtitle" className={styles.JobtitleFilter_} onClick={() => { { jobLocation !== "AllL" ? getBothFiltered('full') : JobtitleFilter('full') } }} />Full Stack Developer</label> <br></br>
-              <label><input type="radio" name="jobtitle" className={styles.JobtitleFilter_} onClick={() => { { jobLocation !== "AllL" ? getBothFiltered('front') : JobtitleFilter('front') } }} />Frontend Developer</label><br></br>
-              <label><input type="radio" name="jobtitle" className={styles.JobtitleFilter_} onClick={() => { { jobLocation !== "AllL" ? getBothFiltered('back') : JobtitleFilter('back') } }} />Backend developer</label> <br></br>
-              <label><input type="radio" name="jobtitle" className={styles.JobtitleFilter_} onClick={() => { { jobLocation !== "AllL" ? getBothFiltered('python') : JobtitleFilter('python') } }} />Python Developer</label>
+            <div>
+              <label><input type="radio" name="jobtitle" onClick={() => { getjobTitleAll('all'); setjobTitle("all") }} />All</label>            <br></br>
+              <label><input type="radio" name="jobtitle" onClick={() => { { jobLocation !== "AllL" ? getBothFiltered('java') : JobtitleFilter('java') } }} />Java developer</label> <br></br>
+              <label><input type="radio" name="jobtitle" onClick={() => { { jobLocation !== "AllL" ? getBothFiltered('full') : JobtitleFilter('full') } }} />Full Stack Developer</label> <br></br>
+              <label><input type="radio" name="jobtitle" onClick={() => { { jobLocation !== "AllL" ? getBothFiltered('front') : JobtitleFilter('front') } }} />Frontend Developer</label><br></br>
+              <label><input type="radio" name="jobtitle" onClick={() => { { jobLocation !== "AllL" ? getBothFiltered('back') : JobtitleFilter('back') } }} />Backend developer</label> <br></br>
+              <label><input type="radio" name="jobtitle" onClick={() => { { jobLocation !== "AllL" ? getBothFiltered('python') : JobtitleFilter('python') } }} />Python Developer</label>
             </div>
           </div>
 
@@ -844,11 +835,11 @@ async function filterByJobTitle(key){
                         </span><br></br>
                         <span className={styles.jobtypeAndDate}>Source</span> :
 
-                        {job.Source ?
+                        {/* {job.Source ?
                           <> <a className={`${styles.skills}`} href={job.SourceLink} target="_blank">{job.Source}</a><br></br> </>
-                          :
+                          : */}
                           <> <span className={styles.skills}>ItWalkin</span><br></br></>
-                        }
+                         {/* } */}
 
                         {/* </div> */}
                         {/* <div> */}
@@ -911,7 +902,7 @@ async function filterByJobTitle(key){
                       </div>
                     </>
                   )
-                }).slice(from, to)
+                })
                 : <p style={{ marginLeft: "35%", color: "red" }}>No Record Found</p>
 
             }

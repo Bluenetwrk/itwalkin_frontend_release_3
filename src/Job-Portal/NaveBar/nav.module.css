@@ -1,12 +1,12 @@
 
 .Supfullnavewrapper {
     display: flex;
-    background-color: rgb(124, 119, 119);
-    width: 60%;
+    background-color: rgb(40, 4, 99);
+    width: 90%;
     height: 60px;
     align-items: center;
     border-radius: 30px;
-    margin-left: 20%;
+    margin-left: 5%;
     margin-top: 10px;
     /* position:sticky;
     top:0px */

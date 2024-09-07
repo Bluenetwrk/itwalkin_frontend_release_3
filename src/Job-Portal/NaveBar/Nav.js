@@ -201,7 +201,7 @@ function Nav(props) {
                       <NavLink to="BIAddmin@AllJobSeekers" className={Styles.link} style={navLinkStyles}> Jobseekers</NavLink>
                       <NavLink to="BIAddmin@AdminUpdate" className={Styles.link} style={navLinkStyles}> UpdateWebsite</NavLink>
                       <NavLink to="BIAddmin@AllIds" className={Styles.link} style={navLinkStyles}> All Email Id's</NavLink>
-                      {/* <NavLink to="BIAddmin@AllIds" className={Styles.link} style={navLinkStyles}> All Emplyee Email Id's</NavLink> */}
+                      <NavLink to="BIAddAdminAccess" className={Styles.link} style={navLinkStyles}> Admin Access</NavLink>
                     </div>
                   </div>
                   :""}
@@ -222,7 +222,7 @@ function Nav(props) {
                       <NavLink to="/Contact" className={Styles.Hlink} style={navLinkStyles}>Contact</NavLink>
                       {/* <NavLink to="/BIAdd@Logg" className={Styles.Hlink}>AdminLogin</NavLink> */}
                       <div className={`${Styles.Hlink} ${Styles.Loginlinkwrapper}`}>
-                        <NavLink to="/Search-Candidate-Home" className={`${Styles.Loginlink} ${Styles.EmpLogin}`} style={navLinkStyles}>Employee </NavLink>
+                        <NavLink to="/Search-Candidate-Home" className={`${Styles.Loginlink} ${Styles.EmpLogin}`} style={navLinkStyles}>Employer </NavLink>
                         <img className={`${Styles.Icon} ${Styles.profileIcon}`} src={loginuser} ref={imgRef} onClick={() => setShowprofile((prev) => !prev)} />
                         {/* <NavLink to="/JobSeekerLogin" className={`${Styles.Loginlink} ${Styles.StuLogin}`} style={navLinkStyles}>Job Seeker Login</NavLink> */}
 

@@ -29,7 +29,7 @@ function AdminPostJobs() {
     const [SourceCompanyLink, setSourceCompanyLink] = useState("")
 
 
-    const [companyName, setCompanyName] = useState("")
+    const [companyName, setCompanyName] = useState("Itwalkin")
     const [jobDescription, setJobDescription] = useState("")
     const [jobtype, setJobtype] = useState("")
     const [salaryRange, setSalaryRange] = useState("")
@@ -122,7 +122,9 @@ function AdminPostJobs() {
                 if (result == "success") {
                     setJobTitle("")
                     setJobDescription("")
-                    setCompanyName("")
+                    // setCompanyName("")
+                    setSourceLink("")
+                    setSourceCompanyLink("")
                     setSalaryRange("")
                     setJobLocation("")
                     setExperiance("")
@@ -210,7 +212,7 @@ window.addEventListener('keypress', function(event){
                                         <input className={Style.inputbox} type="text" value={SourceLink} onChange={(e) => { setSourceLink(e.target.value) }} />
                                        
                                         <h4 className={Style.jobHeadline}  >Source Company Name </h4>
-                                        <input className={Style.inputbox} type="text" value={companyName} onChange={(e) => { setCompanyName(e.target.value) }} />
+                                        <input className={Style.inputbox} type="text" value={companyName} disabled/>
                                        
                                         <hr style={{marginBottom:"50px", marginTop:"30px"}}></hr>
                               

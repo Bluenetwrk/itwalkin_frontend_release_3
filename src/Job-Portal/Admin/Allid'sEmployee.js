@@ -6,15 +6,15 @@ import { Link, useNavigate, BrowserRouter, Routes, Route, useLocation } from "re
 
 function AllidEmp() {
   const [ids , setids] = useState([])
-  let navigate = useNavigate()
 
+  let navigate = useNavigate()
 
   const allIds= ids.map((ids, i)=>{
     return ids.email
 })
 
 useEffect(()=>{
-  let adminLogin= localStorage.getItem("SuperAdminLogin")
+  let adminLogin= localStorage.getItem("SupAdMLog")
       if(!adminLogin){
           navigate("/")
       }
