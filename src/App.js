@@ -120,7 +120,6 @@ const App = () => {
 
           <Route path="Search-Candidate-Home" element={<SearchCandHome url= {axios.defaults.baseURL} />} />
 
-
 <Route path="/payment" element ={<Payment/>} />
 
 <Route path ="/AboutUs" element = {<AboutUs/>} />

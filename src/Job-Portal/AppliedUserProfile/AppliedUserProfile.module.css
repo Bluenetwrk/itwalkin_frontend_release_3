@@ -1,13 +1,25 @@
 
-.searchBoth {
-    margin-left: 15%;
-    display: flex;
+.searchBothForNavWrapper{
+    width:40%;
+    margin-left: 34%;
+    margin-top: -47.5px;
+    background-color: white;
+    border-radius: 3px;
+
 }
 
-.p {
-    font-weight: bold;
-    margin-top: 20px;
-}
+.inputboxsearchNav{
+    padding: 10px;
+    /* margin-left: 2%; */
+    width: 86%;
+    border : 1px solid rgb(204, 209, 211);
+    /* background-color: red; */
+    border: 0px white;
+    border-radius: 3px;
+
+} 
+
+
 .GoBackButton{
     background-color: rgb(40, 4, 99);
     color: white;
@@ -21,6 +33,34 @@
     cursor: pointer;
 }
 
+.arrow {
+    border: solid white;
+    border-width: 0 2px 2px 0;
+    display: inline-block;
+    padding: 3px;
+  }
+  
+  .up {
+    transform: rotate(-135deg);
+    -webkit-transform: rotate(-135deg);
+    /* background-color: blue; */
+    position: absolute;
+    margin-top: 2px;
+  }
+  .down {
+    transform: rotate(90deg);
+    -webkit-transform: rotate(45deg);
+    /* background-color: red; */
+    /* position: absolute; */
+  }
+  .arrow:hover{
+    border: solid grey;
+    border-width: 0 2px 2px 0;
+    display: inline-block;
+    /* margin-top: 100px; */
+    padding: 3px;
+  }
+
 .navigationWrapper{
     /* text-align:right; */
     margin:10px;
@@ -33,26 +73,13 @@
     padding-right:7px;
 }
 
-
-.inputboxsearch {
-    display: inline-flex;
-    height: 35px;
-    margin-top: 10px;
-    margin-left: 1%;
-    width: 60%;
-    border-radius: 5px;
-    /* border: 1.5px solid rgb(11, 12, 12); */
-    border : 1px solid rgb(204, 209, 211);
-
-}
-
 .JobtitleFilter{
     margin-left: 25px;
 }
 
 .AllUiWrapper{
     margin-left: -30px;
-    margin-top: 2%;
+    /* margin-top: 2%; */
 }
 
 
@@ -85,7 +112,7 @@
 }
 
 .name {
-    width:15%;
+    width:14%;
     display: block;
     
 }
@@ -99,28 +126,28 @@
     cursor: pointer;
 }
 .age{
-  width:  7%
+  width:  6%
 }
 .Qualification{
-  width:  8%
+  width:  6%
 }
 .Experiance{
    width: 8%
 }
 .Skills{
-    width:25%
+    width:23%
 }
 .currentCTC{
-   width: 7%
+   width: 8%
 }
 .ExpectedSalary{
-   width: 7%
+   width: 8%
 }
 .checkProfile{
    width: 7%
 }
 .NoticePeriod{
-   width: 8%
+   width: 10%
 }
 .Status{
     width: 100px
@@ -142,6 +169,27 @@
 } */
 
 /* .....For Mobile....... */
+
+
+.searchBoth {
+    margin-left: 15%;
+    display: flex;
+}
+.inputboxsearch {
+    display: inline-flex;
+    height: 35px;
+    margin-top: 10px;
+    margin-left: 1%;
+    width: 60%;
+    border-radius: 5px;
+    /* border: 1.5px solid rgb(11, 12, 12); */
+    border : 1px solid rgb(204, 209, 211);
+
+}
+.p {
+    font-weight: bold;
+    margin-top: 20px;
+}
 
 #JobCardWrapper {
     /* display: flex; */

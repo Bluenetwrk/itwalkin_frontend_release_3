@@ -1,4 +1,26 @@
 
+.searchBothForNavWrapper{
+    width:40%;
+    margin-left: 34%;
+    margin-top: -47.5px;
+    background-color: white;
+    border-radius: 3px;
+
+}
+
+.inputboxsearchNav{
+    padding: 10px;
+    /* margin-left: 2%; */
+    width: 86%;
+    border : 1px solid rgb(204, 209, 211);
+    /* background-color: red; */
+    border: 0px white;
+    border-radius: 3px;
+    /* background-color: red; */
+} 
+
+
+
 .searchButton{
     background-color: rgb(40, 4, 99);
     color: white;
@@ -101,28 +123,7 @@
 
 /* ...................................Li......................... */
 
-.searchBoth {
-    margin-left: 15%;
-    display: flex;
-}
 
-.p {
-    font-weight: bold;
-    margin-top: 20px;
-}
-
-.inputboxsearch {
-    display: inline-flex;
-
-    height: 35px;
-    margin-top: 10px;
-    margin-left: 2%;
-    width: 55%;
-    border-radius: 5px;
-    /* border: 1.5px solid rgb(9, 247, 247); */
-    border : 1px solid rgb(190, 191, 192);
-
-}
 
 .seeMore {
     color: blue;
@@ -233,6 +234,25 @@
 }
 
 /* For mobile View  */
+
+.searchBoth {
+    margin-left: 15%;
+    display: flex;
+}
+
+.p {
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+.inputboxsearch {
+    display: inline-flex;
+    height: 35px;
+    margin-left: 2%;
+    width: 55%;
+    border-radius: 5px;
+    border : 1px solid rgb(190, 191, 192);
+}
 
 #JobCardWrapper {
     /* display: flex; */

@@ -162,7 +162,8 @@ const [Loader, setLoader] = useState(false)
                       )
                     })} 
                    
-                  <span className={styles.showLess} onClick={showless}>...show less</span></li>
+                  {/* <span className={styles.showLess} onClick={showless}>...show less</span> */}
+                  </li>
               </ul>
             </ul>
 

@@ -45,6 +45,7 @@ function PostJobs(props) {
     const [jobtype, setJobtype] = useState("")
     const [salaryRange, setSalaryRange] = useState("")
     const [joblocation, setJobLocation] = useState("")
+    console.log(joblocation)
     const [qualification, setQualification] = useState("")
     const [experiance, setExperiance] = useState("")
     const [skills, setSkills] = useState("")
@@ -161,10 +162,7 @@ window.addEventListener('keypress', function(event){
 
     return (
         <>
- 
-{/* <button className={Style.GoBackButton} onClick={() => {
-    navigate(-1)
-}}>Go Back</button> */}
+            
             {
                 profileData.map((items,i) => {
                     return (
@@ -231,7 +229,7 @@ window.addEventListener('keypress', function(event){
 
                                         <h4 className={Style.jobHeadline}>Job Location**</h4>
                                         <div style={{marginTop:"-10px"}}>
-                                        <label><input name="Location" type="radio" checked={joblocation==="Bangalore"} value="Bangalore" onChange={(e) => { setJobLocation(e.target.value) }} />Banglore </label>
+                                        <label><input name="Location" type="radio" checked={joblocation==="Bangalore"} value="Bangalore" onChange={(e) => { setJobLocation(e.target.value) }} />Bangalore </label>
                                         <label><input name="Location" type="radio" checked={joblocation==="Hyderabad"} value="Hyderabad" onChange={(e) => { setJobLocation(e.target.value) }} />Hyderabad </label>
                                         <label><input name="Location" type="radio" checked={joblocation==="Chennai"} value="Chennai" onChange={(e) => { setJobLocation(e.target.value) }} />Chennai </label>
                                         <label><input name="Location" type="radio" checked={joblocation==="Mumbai"} value="Mumbai" onChange={(e) => { setJobLocation(e.target.value) }} />Mumbai </label>

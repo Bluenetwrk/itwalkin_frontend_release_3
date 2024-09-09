@@ -20,6 +20,8 @@ function SearchCandidate() {
 
     const [Candidate, setCandidate] = useState([])
     const [FilCandidate, setFilCandidate] = useState([])
+    const [nopageFilter, setNoPageFilter] = useState(false)
+    const [Filtereredjobs, setFiltereredjobs] = useState([])
 
     const [jobSeekers, setjobSeekers] = useState([])
     const [NotFound, setNotFound] = useState("")
@@ -37,6 +39,9 @@ let jobTags = [
     {value: 'React Native', label: 'React Native'},
     {value: 'Flutter', label: 'Flutter'},
     ]
+
+    const Location = ['Bangalore', 'Chennai',
+        'Hyderabad', 'Delhi', 'Mumbai']
 
     // let jobSeekerId = JSON.parse(localStorage.getItem("StudId"))
 
@@ -60,9 +65,29 @@ let jobTags = [
         getAllJobSeekers()
     }, [])
 
+    const [searchKey, setsearchKey] = useState()
+
+    async function searchIcon(key) {
+      setFiltereredjobs(key)
+      if (key) {
+        setResult(true)
+        let dubmyjobs = [...FilCandidate]
+        const filteredItems = dubmyjobs.filter((user) =>
+          JSON.stringify(user).toLowerCase().includes(key.toLowerCase())
+        )
+        setCandidate(filteredItems)
+      } else {
+        getAllJobSeekers()
+        setResult(false)
+      }
+    }
+
     // const [status, setstatus] = useState({select})
     async function search(e) {
         let key = e.target.value
+  setsearchKey(key)
+    setFiltereredjobs(key)
+
         if (key) {
             setResult(true)
           let dubmyjobs = [...FilCandidate]
@@ -78,70 +103,331 @@ let jobTags = [
         }
       }
 
-    // async function search(e) {
-    //     let key = e.target.value
-    //     await axios.get(`https://itwalkin-backend.onrender.com/StudentProfile/getJobSeeker/${key}`)
-    //         .then((res) => {
-    //             console.log(res.data)
-
-    //              if (key) {
-    //                 setCandidate(res.data)
-    //             } else if (!key) {
-    //                 setCandidate([])
-    //             }
-    //             if(res.data.length==0){
-    //                 setNotFound("No Record found")
-    //             }
-    //             if(!key){
-    //     getAllJobSeekers()
-    //             }
-    //         })
-    //         .catch((err) => {
-    //             alert("server issue occured", err)
-    //         })
-    // }
-
     function CheckProfile(StudID) {
         // navigate(`/Check-Profile/${StudID}`)
         window.open(`/Check-Profile/${StudID}`, '_blank')
     }
+
+    function handleRecordchange(e){  
+        setrecordsPerPage(e.target.value)  
+        setCurrentPage(1)
+      }
+    
+  async function getLocation(jobLocation) {
+    await axios.get(`/StudentProfile/getStuLocation/${jobLocation}`)
+      .then((res) => {
+        let result = (res.data)
+        let sortedate = result.sort(function (a, b) {
+          return new Date(b.createdAt) - new Date(a.createdAt);
+        });
+        setCandidate(sortedate)
+        // setPageLoader(false)
+      }).catch((err) => {
+        alert("some thing went wrong")
+      })
+  }
+
+  const [currentPage, setCurrentPage] = useState(1)
+  const [recordsPerPage, setrecordsPerPage] = useState(10)
+  const lastIndex = currentPage * recordsPerPage //10
+  const firstIndex = lastIndex - recordsPerPage //5
+  const records = Candidate.slice(firstIndex, lastIndex)//0,5
+  const npage = Math.ceil(Candidate.length / recordsPerPage) // last page
+  const number = [...Array(npage + 1).keys()].slice(1)
+
+  function firstPage() {
+    setCurrentPage(1)
+  }
+
+  function previous() {
+    if (currentPage !== 1) {
+      setCurrentPage(currentPage - 1)
+    }
+  }
+  function changeCurrent(id) {
+    setCurrentPage(id)
+  }
+  function next() {
+    if (currentPage !== npage) {
+      setCurrentPage(currentPage + 1)
+    }
+  }
+  function last() {
+    setCurrentPage(npage)
+  }
+  
+  async function filterByJobTitle(key) {
+    setNoPageFilter(true)
+    setFiltereredjobs(key)
+    await axios.get(`/StudentProfile/getSkillTags/${key}`)
+      .then((res) => {
+        let result = (res.data)
+        let sortedate = result.sort((a, b) => {
+          return new Date(b.createdAt) - new Date(a.createdAt);
+        });
+        setCandidate(sortedate)
+      })
+  }
+// .........Notice Period sorting....
+  function NoticeAscendingOrder (){
+    let newjob = [...FilCandidate]
+    // const descend = newjob.sort(function (a, b) {
+    //   return (
+    //     b.experiance - a.experiance
+    //   )
+    // })
+    const collator = new Intl.Collator(undefined, {
+      numeric: true,
+      sensitivity: 'base'
+    });
+    const sorted = newjob.sort((a, b) => {
+      return collator.compare(b.NoticePeriod, a.NoticePeriod)
+    })
+    setCandidate(sorted)
+  }
+  
+
+  function NoticeDescendingOrder (){
+    let newjob = [...FilCandidate]
+    const collator = new Intl.Collator(undefined, {
+      numeric: true,
+      sensitivity: 'base'
+    });
+    const sorted = newjob.sort((a, b) => {
+      return collator.compare(a.NoticePeriod, b.NoticePeriod)
+    })
+    setCandidate(sorted)
+  }
+  
+  // .......age Sorting.......
+  function AgeDescendingOrder (){
+    let newjob = [...FilCandidate]
+    const collator = new Intl.Collator(undefined, {
+      numeric: true,
+      sensitivity: 'base'
+    });
+    const sorted = newjob.sort((a, b) => {
+      return collator.compare(a.age, b.age)
+    })
+    setCandidate(sorted)
+  }
+  function AgeAscendingOrder (){
+    let newjob = [...FilCandidate]
+    const collator = new Intl.Collator(undefined, {
+      numeric: true,
+      sensitivity: 'base'
+    });
+    const sorted = newjob.sort((a, b) => {
+      return collator.compare(b.age, a.age)
+    })
+    setCandidate(sorted)
+  }
+  
+  
+  // .......Experiance Sorting.......
+  function ExpDescendingOrder (){
+    let newjob = [...FilCandidate]
+    const collator = new Intl.Collator(undefined, {
+      numeric: true,
+      sensitivity: 'base'
+    });
+    const sorted = newjob.sort((a, b) => {
+      return collator.compare(a.Experiance, b.Experiance)
+    })
+    setCandidate(sorted)
+  }
+  function ExpAscendingOrder (){
+    let newjob = [...FilCandidate]
+    const collator = new Intl.Collator(undefined, {
+      numeric: true,
+      sensitivity: 'base'
+    });
+    const sorted = newjob.sort((a, b) => {
+      return collator.compare(b.Experiance, a.Experiance)
+    })
+    setCandidate(sorted)
+  }
+    
+  // .......Curent CTC Sorting.......
+  function CurrCTCDescendingOrder (){
+    let newjob = [...FilCandidate]
+    const collator = new Intl.Collator(undefined, {
+      numeric: true,
+      sensitivity: 'base'
+    });
+    const sorted = newjob.sort((a, b) => {
+      return collator.compare(a.currentCTC, b.currentCTC)
+    })
+    setCandidate(sorted)
+  }
+  function CurrCTCAscendingOrder (){
+    let newjob = [...FilCandidate]
+    const collator = new Intl.Collator(undefined, {
+      numeric: true,
+      sensitivity: 'base'
+    });
+    const sorted = newjob.sort((a, b) => {
+      return collator.compare(b.currentCTC, a.currentCTC)
+    })
+    setCandidate(sorted)
+  }
+  
+
+    
+  // .......Expected CTC Sorting.......
+  function ExpCTCDescendingOrder (){
+    let newjob = [...FilCandidate]
+    const collator = new Intl.Collator(undefined, {
+      numeric: true,
+      sensitivity: 'base'
+    });
+    const sorted = newjob.sort((a, b) => {
+      return collator.compare(a.ExpectedSalary, b.ExpectedSalary)
+    })
+    setCandidate(sorted)
+  }
+  function ExpCTCAscendingOrder (){
+    let newjob = [...FilCandidate]
+    const collator = new Intl.Collator(undefined, {
+      numeric: true,
+      sensitivity: 'base'
+    });
+    const sorted = newjob.sort((a, b) => {
+      return collator.compare(b.ExpectedSalary, a.ExpectedSalary)
+    })
+    setCandidate(sorted)
+  }
+
+
     return (
-        <>        
-            {/* <button className={styles.GoBackButton} onClick={() => {
-                navigate(-1)
-            }}>Go Back</button> */}
-                            <img style={{ height:"25px", color:"grey", marginTop:"20px", marginLeft:"8%", cursor:"pointer",
-             width:"28px"}} onClick={()=>{navigate("/postedjobs")}}  src={Arrowimage} />
-            <>
-<p style={{marginLeft:"6%", opacity:0.6, width:"220px"}}>Looking for candidates?</p>
-<p style={{marginLeft:"6%", opacity:0.6, width:"85%" }} >Search candidate's Skills, Notice period, Education, Experience, Expected CTC and get in touch with the Candidate directly</p>
-</>
-            <div className={styles.searchBoth}>
-                <p className={styles.p}>Search </p>
-                <input className={styles.inputboxsearch} type="text" placeholder="candidate's/skills/experience/qualification/noticeperiod" onChange={(e) => { search(e) }} />
+        <>    
+        {screenSize.width > 850 ?
+        <>
+          <div className={styles.searchBothForNavWrapper}>
+            <input className={styles.inputboxsearchNav} type="text" placeholder='Search for a Job / Skills / Location / Experiance' onChange={(e) => { search(e) }} />
+
+            <i style={{ color: "rgb(40, 4, 99)", fontSize: "18px", paddingLeft: "8px", cursor: "pointer" }} onClick={() => { searchIcon(searchKey) }}
+              class="fa fa-search" ></i>
+          </div>
+          {Result ?
+            <h4 style={{ marginLeft: "40%", marginTop: "20px" }}> {Candidate.length} matching Result Found  </h4>
+            : ""
+          }
+        </>
+        : ""
+      }              
+        
+                  {screenSize.width>850?
+                  <>
+        <div style={{marginTop:"30px"}}></div>
+
+<div className={styles.FilterWrapper}>
+            <label><input className={styles.JobtitleFilter} type="radio" name="filter" onClick={() => { getAllJobSeekers() }} />All</label>
+            {
+
+              Location.map((location, i) => {
+                return (
+                  <label><input className={styles.JobtitleFilter} type="radio" name="filter"
+                  disabled={location=="Chennai" || location== "Hyderabad" || location=="Mumbai" || location=="Delhi"}  onClick={() => { getLocation(location) }} />{location}</label>
+                )
+              })
+            }
+          </div><br></br>
+
+          <div className={styles.FilterWrapper}>
+            <label><input className={styles.JobtitleFilter} type="radio" name="filter" onClick={() => { getAllJobSeekers() }} />All</label>
+            {
+              jobTags.map((tags, i) => {
+                return (
+                  <label><input className={styles.JobtitleFilter} type="radio" name="filter"
+                    onClick={() => { filterByJobTitle(tags.value) }} />{tags.value}</label>
+                )
+              }).slice(0, 12)
+            }
+          </div>
+          <br></br>
+
+          <div className={styles.FilterWrapper}>
+            {jobTags.map((tags, i) => {
+              return (
+                <label><input className={styles.JobtitleFilter} type="radio" name="filter"
+                  onClick={() => { filterByJobTitle(tags.value) }} />{tags.value}</label>
+              )
+            }).slice(12, 30)
+            }
+          </div>
+
+          <div style={{ display: "flex", justifyContent: "space-between" }}>
+            {nopageFilter ?
+              <p style={{ fontWeight: 400, marginLeft: "10px" }}>Displaying <span style={{ color: "blue" }}>{Filtereredjobs}</span> from All Jobs</p>
+              :
+              <p style={{ fontWeight: 400, marginLeft: "10px" }}>showing {firstIndex + 1} to {lastIndex} latest jobs</p>
+            }
+            <div className={styles.navigationWrapper}>
+              <p style={{ display: "inline", margin: "5px" }} className={styles.navigation} onClick={firstPage}>
+                <i class='fas fa-step-backward' disabled={currentPage === 1}></i>
+              </p>
+              <p style={{ display: "inline", margin: "5px" }} className={styles.navigation} onClick={previous}>
+                <i class='fas fa-caret-square-left'></i>
+              </p>
+              <span>{currentPage}</span>
+              <p style={{ display: "inline", margin: "5px" }} className={styles.navigation} onClick={next}>
+                <i class='fas fa-caret-square-right'></i>
+              </p>
+              <p style={{ display: "inline", margin: "5px" }} className={styles.navigation} onClick={last}>
+                <i class='fas fa-step-forward'></i>
+              </p>
             </div>
-            {Result?
-            <h4 style={{marginLeft:"19%", marginTop:"10px"}}> {Candidate.length} matching Result Found  </h4>
-            :""
-}
-            {screenSize.width>850?
-            <div className={styles.AllUiWrapper}>
+          </div>
+
+          <div className={styles.AllUiWrapper}>  
                 <ul className={styles.ul} >
-                    <li style={{backgroundColor:" rgb(40, 4, 99)"}} className={`${styles.li} ${styles.name}`}><b>Name</b>  </li>
-                    <li style={{backgroundColor:" rgb(40, 4, 99)"}} className={`${styles.li} ${styles.NoticePeriod}`}><b>Notice Period</b>  </li>
-                    <li style={{backgroundColor:" rgb(40, 4, 99)"}} className={`${styles.li} ${styles.age}`}> <b>Age</b> </li>
-                    <li style={{backgroundColor:" rgb(40, 4, 99)"}} className={`${styles.li} ${styles.Qualification}`}>  <b>Qualif</b> </li>
-                    <li style={{backgroundColor:" rgb(40, 4, 99)"}} className={`${styles.li} ${styles.Experiance}`}><b>Experience</b>  </li>
+                    <li style={{backgroundColor:" rgb(40, 4, 99)"}} className={`${styles.li} ${styles.name}`}><b>Name</b>  
+                    </li>
+                    <li style={{backgroundColor:" rgb(40, 4, 99)"}} className={`${styles.li} ${styles.NoticePeriod}`}><b>Notice Period</b>
+                    <p style={{ display: "inline", marginLeft: "10px" }}>
+                  <i onClick={NoticeAscendingOrder} className={`${styles.arrow} ${styles.up}`}> </i>
+                  <i onClick={NoticeDescendingOrder} className={`${styles.arrow} ${styles.down}`}></i>
+                </p>  
+                    </li>
+                    <li style={{backgroundColor:" rgb(40, 4, 99)"}} className={`${styles.li} ${styles.age}`}> <b>Age</b>
+                    <p style={{ display: "inline", marginLeft: "10px" }}>
+                  <i onClick={AgeAscendingOrder} className={`${styles.arrow} ${styles.up}`}> </i>
+                  <i onClick={AgeDescendingOrder} className={`${styles.arrow} ${styles.down}`}></i>
+                </p>
+                     </li>
+                    <li style={{backgroundColor:" rgb(40, 4, 99)"}} className={`${styles.li} ${styles.Qualification}`}>  <b>Qualif</b> 
+                    </li>
+                    <li style={{backgroundColor:" rgb(40, 4, 99)"}} className={`${styles.li} ${styles.Experiance}`}><b>Experience</b>  
+                    <p style={{ display: "inline", marginLeft: "10px" }}>
+                  <i onClick={ExpAscendingOrder} className={`${styles.arrow} ${styles.up}`}> </i>
+                  <i onClick={ExpDescendingOrder} className={`${styles.arrow} ${styles.down}`}></i>
+                </p> 
+                    </li>
                     <li style={{backgroundColor:" rgb(40, 4, 99)"}} className={`${styles.li} ${styles.Skills}`}> <b>Skills</b> </li>
-                    <li style={{backgroundColor:" rgb(40, 4, 99)"}} className={`${styles.li} ${styles.currentCTC}`}> <b>Curr. CTC</b> </li>
-                    <li style={{backgroundColor:" rgb(40, 4, 99)"}} className={`${styles.li} ${styles.ExpectedSalary}`}><b>Exp. CTC</b> </li>
-                    <li style={{backgroundColor:" rgb(40, 4, 99)"}} className={`${styles.li} ${styles.LastActive}`}><b>Last Active</b> </li>
+                    <li style={{backgroundColor:" rgb(40, 4, 99)"}} className={`${styles.li} ${styles.currentCTC}`}> <b>Curr. CTC</b> 
+                    <p style={{ display: "inline", marginLeft: "10px" }}>
+                  <i onClick={CurrCTCAscendingOrder} className={`${styles.arrow} ${styles.up}`}> </i>
+                  <i onClick={CurrCTCDescendingOrder} className={`${styles.arrow} ${styles.down}`}></i>
+                </p> 
+                    </li>
+                    <li style={{backgroundColor:" rgb(40, 4, 99)"}} className={`${styles.li} ${styles.ExpectedSalary}`}><b>Exp. CTC</b> 
+                    <p style={{ display: "inline", marginLeft: "10px" }}>
+                  <i onClick={ExpCTCAscendingOrder} className={`${styles.arrow} ${styles.up}`}> </i>
+                  <i onClick={ExpCTCDescendingOrder} className={`${styles.arrow} ${styles.down}`}></i>
+                </p>
+                    </li>
+                    <li style={{backgroundColor:" rgb(40, 4, 99)"}} className={`${styles.li} ${styles.LastActive}`}><b>Last Active</b> 
+                    </li>
+
 
                 </ul>
 
                 {
-                    Candidate.length > 0 ?
-                        Candidate.map((Applieduser, i) => {
+                    !nopageFilter ?
+                    
+                    records.length > 0 ?
+                        records.map((Applieduser, i) => {
                             return (
                                 <>
 
@@ -182,10 +468,76 @@ let jobTags = [
                         })
                         :
                         <p style={{ marginLeft: "45%", color:"red" }}>No Record found</p>
-                }
-            </div >
+                        :
+                        Candidate.length > 0 ?
+                        Candidate.map((Applieduser, i) => {
+                            return (
+                                <>
+
+                                    <ul className={styles.ul} key={i}>
+                                        <li className={`${styles.li} ${styles.name} ${styles.onclick}`} onClick={() => { CheckProfile(Applieduser._id) }} >
+                                            {Applieduser.name ? <a className={styles.namelink} title="Click to check the Contact Details">
+                                                {Applieduser.name}</a> : <li className={styles.Nli}>N/A</li>} </li>
+                                               
+                                        <li className={`${styles.li} ${styles.NoticePeriod}`}> {Applieduser.NoticePeriod ?
+                                            Applieduser.NoticePeriod : <li className={styles.Nli}>N/A</li>} </li>
+                                        <li className={`${styles.li} ${styles.age}`}> {Applieduser.age ?
+                                            Applieduser.age : <li className={styles.Nli}>N/A</li>} </li>
+                                        <li className={`${styles.li} ${styles.Qualification}`}> {Applieduser.Qualification ?
+                                            Applieduser.Qualification : <li className={styles.Nli}>N/A</li>} </li>
+                                        <li className={`${styles.li} ${styles.Experiance}`}> {Applieduser.Experiance ?
+                                            Applieduser.Experiance : <li className={styles.Nli}>N/A</li>} </li>
+                                        <li className={`${styles.li} ${styles.Skills}`}> {Applieduser.Skills ?
+                                            Applieduser.Skills : <li className={styles.Nli}>N/A</li>} </li>
+                                        <li className={`${styles.li} ${styles.currentCTC}`}> {Applieduser.currentCTC ?
+                                            Applieduser.currentCTC : <li className={styles.Nli}>N/A</li>} </li>
+                                        <li className={`${styles.li} ${styles.ExpectedSalary}`}> {Applieduser.ExpectedSalary ?
+                                            Applieduser.ExpectedSalary : <li className={styles.Nli}>N/A</li>} </li>
+                                            
+                                             <li className={`${styles.li} ${styles.LastActive}`}>
+                                        {new Date(Applieduser.updatedAt).toLocaleString(
+                                                "en-US",
+                                                {
+                                                  month: "short",
+                                                  day: "2-digit",
+                                                  year: "numeric",
+                                                }
+                                              )} 
+                                            </li>
+                                           
+                                    </ul>
+                                </>
+
+                            )
+                        })
+                        :
+                        <p style={{ marginLeft: "45%", color:"red" }}>No Record found</p>
+               
+               }
+               <div>
+               </div>
+               </div >
+          <div>
+            Show  <select onChange={(e)=>{handleRecordchange(e)}}>
+              <option value={10}>10</option>              
+              <option value={25}>25</option>              
+              <option value={50}>50</option>              
+              <option value={100}>100</option>              
+            </select>  jobs per page
+          </div>
+          </>
+          
+            
             :
             <>
+                       <div className={styles.searchBoth}>
+                <p className={styles.p}>Search </p>
+                <input className={styles.inputboxsearch} type="text" placeholder="candidate's/skills/experience/qualification/noticeperiod" onChange={(e) => { search(e) }} />
+            </div>
+            {Result?
+            <h4 style={{marginLeft:"19%", marginTop:"10px"}}> {Candidate.length} matching Result Found  </h4>
+            :""
+}
             <div id={styles.JobCardWrapper} >
 
 {Candidate.map((job, i) => {
@@ -208,13 +560,13 @@ let jobTags = [
             <div className={styles.RightTable}>
             <span className={styles.span}><span style={{color:"blue", textDecoration:"underline"}} onClick={() => { CheckProfile(job._id) }} >{job.name}</span></span><br></br>  
             <span className={styles.span}> <u>{new Date(job.updatedAt).toLocaleString(
-                                                "en-US",
-                                                {
-                                                  month: "short",
-                                                  day: "2-digit",
-                                                  year: "numeric",
-                                                }
-                                              )}</u></span><br></br>    
+                          "en-US",
+                          {
+                            month: "short",
+                            day: "2-digit",
+                            year: "numeric",
+                          }
+                        )}</u></span><br></br>    
             <span className={styles.span}>{job.age? <span style={{ color: "blue" }}>{job.age} </span>:<span style={{color:"red"}}>Not updated</span> }</span><br></br>
             <span className={styles.span}> {job.NoticePeriod?<span style={{ color: "blue" }}>{job.NoticePeriod} </span>: <span style={{color:"red"}}>Not updated</span>}</span><br></br>
             <span className={styles.span}> {job.Qualification?<span style={{ color: "blue" }}>{job.Qualification} </span>:<span style={{color:"red"}}>Not updated</span>}</span><br></br>

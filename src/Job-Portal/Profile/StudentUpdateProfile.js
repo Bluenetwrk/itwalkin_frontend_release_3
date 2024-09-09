@@ -52,16 +52,16 @@ function StudentUpdateProfile(props) {
     {value: 'React Native', label: 'React Native'},
     {value: 'Flutter', label: 'Flutter'},
     ]
-  const [tag, setTag] = useState([])
+  const [Tags, setTag] = useState([])
   const [Resulttag, setResulttagTag] = useState()
     function handleChange(tag){
       setTag(tag)      
   }
-  const Tags=tag.map((tag,i)=>{
-    return(
-        tag.value            
-      )
-    })   
+  // const Tags=tag.map((tag,i)=>{
+  //   return(
+  //       tag.value            
+  //     )
+  //   })   
     // ......City....
     const [citytag, setcityTag] = useState()
     const [city, setcity] = useState()
@@ -104,6 +104,7 @@ function StudentUpdateProfile(props) {
           setSkills(result.Skills)
           setExperiance(result.Experiance)
           setage(result.age)
+          setTag(result.Tags)
         }
       }).catch((err) => {
         alert("server issue occured", err)
@@ -256,7 +257,7 @@ function StudentUpdateProfile(props) {
                 <input maxLength="25" className={styles.input} value={email} onChange={(e) => { setemail(e.target.value) }} type="text" />
               </label>
               <label className={styles.inputName}>
-                <h4>City: <span>{city}</span></h4>
+                <h4>City: <span style={{color:"blue"}}>{city}</span></h4>
                 {/* <input maxLength="15" className={styles.input} value={city} onChange={(e) => { setCity(e.target.value) }} type="text" /> */}
                 <div style={{marginTop:"-7px", width:"81%", marginLeft:"18px"}}>
                            <CreatableSelect                          
@@ -319,8 +320,9 @@ function StudentUpdateProfile(props) {
                            <CreatableSelect  
                           isMulti={true}
                           options={jobTags}
-                          value={tag}
-                          onChange={handleChange}     
+                          value={Tags}
+                          onChange={handleChange} 
+  
                         />
                          </div>
               </label>
@@ -348,7 +350,7 @@ function StudentUpdateProfile(props) {
               </label>
 
               <label className={styles.MobileinputName}>
-                <h4>City <span>{city}</span></h4>
+                <h4>City: <span style={{color:"blue"}}>{city}</span></h4>
                 <CreatableSelect                          
                           options={CTags}
                           value={citytag}
@@ -411,7 +413,7 @@ function StudentUpdateProfile(props) {
                            <CreatableSelect  
                           isMulti={true}
                           options={jobTags}
-                          value={tag}
+                          value={Tags}
                           onChange={handleChange}     
                         />
                          </div>

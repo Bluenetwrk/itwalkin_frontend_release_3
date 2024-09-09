@@ -6,45 +6,55 @@
     margin-top: 10px;
     /* background-color: aqua; */
 }
-
+.uiwrapper{
+    display: flex;
+}
 
 .ul{
     text-decoration: none;
     margin-left: 2%;
     width:20%;
 
+
 }
 .ulR{
     text-decoration: none;
-    margin-left: -6.7%;
+    margin-left: -4%;
     width:20%;
+}
+
+.li{
+    display: flex;
+    flex-wrap: nowrap;
+    border : 1px solid rgb(215, 223, 226);
+    width:120%;
+    text-align: center;
+    display: inline-block;
+    padding: 2%;
+    margin-left: -10px;
+
 }
 .Hli{    
     display: flex;
     flex-wrap: nowrap;
     /* border: 1px solid aqua; */
     border : 1px solid rgb(215, 223, 226);
-
-
     border-left: none;
     width:350%;
     text-align: center;
     display: inline-block;
     padding: 2%;
 }
-.li{
-    display: flex;
-    flex-wrap: nowrap;
-    border : 1px solid rgb(215, 223, 226);
 
-    width:120%;
-    text-align: center;
-    display: inline-block;
-    padding: 2%;
+.li:nth-child(odd){
+    background:rgb(242, 244, 245)
 
 }
-.uiwrapper{
-    display: flex;
+
+.Hli:nth-child(odd){
+    /* background-color: aqua; */
+    background:rgb(242, 244, 245)
+
 }
 .Nli{
     display: block;

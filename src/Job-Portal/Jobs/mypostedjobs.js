@@ -94,9 +94,9 @@ function JoppostedByEmp(props) {
   }
 
   // ........search ........................search...........................
+  const [searchKey, setsearchKey] = useState()
 
-  async function search(e) {
-    let key = e.target.value
+  async function searchIcon(key) {
     if (key) {
       setResult(true)
       let dubmyjobs = [...myjobsforFilter]
@@ -110,20 +110,27 @@ function JoppostedByEmp(props) {
     } else {
       getjobs()
       setResult(false)
-
     }
+  }
 
-    // console.log(key)
 
-    // await axios.get(`http://localhost:8080/jobpost/searchJob/${key}`)
-    //   .then((res) => {
-    //     if (key) {
-    //       setMyjobs(res.data)
-    //     } else {
-    //       getjobs()
+  async function search(e) {
+    let key = e.target.value
+    setsearchKey(key)
+    if (key) {
+      setResult(true)
+      let dubmyjobs = [...myjobsforFilter]
 
-    //     }
-    //   })
+      const filteredItems = dubmyjobs.filter((user) =>{
+        if(JSON.stringify(user).toLowerCase().includes(key.toLowerCase())){
+          return user
+        }
+    })
+      setMyjobs(filteredItems)
+    } else {
+      getjobs()
+      setResult(false)
+    }
 
   }
 
@@ -133,16 +140,30 @@ function JoppostedByEmp(props) {
 
   return (
     <>
+ {/* <p>My Posted Jobs</p> */}
+ 
+ {screenSize.width > 850 ?
+        <>
+          <div className={styles.searchBothForNavWrapper}>
+            <input className={styles.inputboxsearchNav} type="text" placeholder='Search for a Job / Skills / Location / Experiance' onChange={(e) => { search(e) }} />
+
+            <i style={{ color: "rgb(40, 4, 99)", fontSize: "18px", paddingLeft: "8px", cursor: "pointer" }} onClick={() => { searchIcon(searchKey) }}
+              class="fa fa-search" ></i>
+          </div>
+          {Result ?
+            <h4 style={{ marginLeft: "40%", marginTop: "20px" }}> {myjobs.length} matching Result Found  </h4>
+            : ""
+          }
+        </>
+        : ""
+      }      
+
      {screenSize.width>850?
        <>
     <button className={styles.searchButton} onClick={() => {
           navigate("/Search-Candidate")
         }}>Search Candidate</button>
 
-        <div className={styles.searchBoth}>
-          <p className={styles.p}>Search </p>
-          <input className={styles.inputboxsearch} type="text" placeholder='search for a posted job' onChange={(e) => { search(e) }} />
-        </div>
         {Result?
             <h4 style={{marginLeft:"20%", marginTop:"10px"}}> {myjobs.length} matching Result Found  </h4>
             :""
@@ -176,9 +197,11 @@ function JoppostedByEmp(props) {
                   <ul className={styles.ul} key={i}>
 
 
-                    <li className={styles.li}>{items.Logo ?
-                      < img style={{ width: "40%", height: "40px" }} src={items.Logo} />
-                      : ""}<br></br>{items.companyName}</li>
+                    <li className={styles.li}>
+                     {/* {items.Logo ?  < img style={{ width: "40%", height: "40px" }} src={items.Logo} />
+                       : ""}<br></br> */}
+                      {items.companyName}
+                      </li>
 
                     <li className={`${styles.li} ${styles.Jtitle}`}>{items.jobTitle.toUpperCase()}</li>
                     <li className={`${styles.li} ${styles.liDescription}`}> 
@@ -266,14 +289,11 @@ function JoppostedByEmp(props) {
           navigate("/Search-Candidate")
         }}>Search Candidate</button>
 
-        <h3 style={{ marginLeft: "4%", color: "blue" }}> Total {myjobs.length} jobs</h3>
+<p style={{ marginLeft: "4%", color: "blue", fontWeight:"bold" }}> Total {myjobs.length} jobs</p>
         <div className={styles.searchBoth}>
           <p className={styles.p}>Search </p>
           <input className={styles.inputboxsearch} type="text" placeholder='search for a posted job' onChange={(e) => { search(e) }} />
         </div>
-
-
-
       <div id={styles.JobCardWrapper} >
 
 {myjobs.length>0?
