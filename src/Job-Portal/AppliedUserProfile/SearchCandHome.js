@@ -386,7 +386,12 @@ function SearchCandidate() {
           <div className={styles.AllUiWrapper}>
             <ul className={styles.ul} >
               <li style={{ backgroundColor: " rgb(40, 4, 99)" }} className={`${styles.li} ${styles.nameHome}`}><b>Name</b>  </li>
-              <li style={{ backgroundColor: " rgb(40, 4, 99)" }} className={`${styles.li} ${styles.NoticePeriod}`}><b>Notice Period</b>  </li>
+              <li style={{ backgroundColor: " rgb(40, 4, 99)" }} className={`${styles.li} ${styles.NoticePeriod}`}><b>Notice Period</b> 
+              <p style={{ display: "inline", marginLeft: "10px" }}>
+                  <i onClick={NoticeAscendingOrder} className={`${styles.arrow} ${styles.up}`}> </i>
+                  <i onClick={NoticeDescendingOrder} className={`${styles.arrow} ${styles.down}`}></i>
+                </p> 
+               </li>
               <li style={{ backgroundColor: " rgb(40, 4, 99)" }} className={`${styles.li} ${styles.age}`}> <b>Age</b>
               <p style={{ display: "inline", marginLeft: "10px" }}>
                   <i onClick={AgeAscendingOrder} className={`${styles.arrow} ${styles.up}`}> </i>
