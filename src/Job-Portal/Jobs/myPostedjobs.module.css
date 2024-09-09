@@ -206,6 +206,7 @@
     background-color: rgb(40, 4, 99);
     color: white;
     width:230%;
+    cursor: pointer;
 
 }
 .delete {
@@ -213,6 +214,8 @@
     color: white;
     margin-left: 4%;
     width:230%;
+    cursor: pointer;
+
 
 }
 
@@ -227,6 +230,7 @@
     font-size: medium;
     width:40%;
     border:1px solid rgb(40, 4, 99);
+    cursor: pointer;
 }
 
 .text {

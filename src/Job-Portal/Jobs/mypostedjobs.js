@@ -140,7 +140,6 @@ function JoppostedByEmp(props) {
 
   return (
     <>
- {/* <p>My Posted Jobs</p> */}
  
  {screenSize.width > 850 ?
         <>
@@ -157,17 +156,14 @@ function JoppostedByEmp(props) {
         </>
         : ""
       }      
+ {/* <p>My Posted Jobs</p> */}
 
      {screenSize.width>850?
        <>
     <button className={styles.searchButton} onClick={() => {
           navigate("/Search-Candidate")
         }}>Search Candidate</button>
-
-        {Result?
-            <h4 style={{marginLeft:"20%", marginTop:"10px"}}> {myjobs.length} matching Result Found  </h4>
-            :""
-}           
+      
    <div className={styles.Uiwarpper}>
           <ul className={styles.ul}>
             <li className={styles.li}><b>Company Name</b></li>
@@ -294,6 +290,10 @@ function JoppostedByEmp(props) {
           <p className={styles.p}>Search </p>
           <input className={styles.inputboxsearch} type="text" placeholder='search for a posted job' onChange={(e) => { search(e) }} />
         </div>
+        {Result ?
+            <h4 style={{ marginLeft: "34%", marginTop: "0px"}}> {myjobs.length} matching Result Found  </h4>
+            : ""
+          }
       <div id={styles.JobCardWrapper} >
 
 {myjobs.length>0?

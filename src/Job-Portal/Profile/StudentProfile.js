@@ -78,6 +78,7 @@ profileData.map((item, i) => {
             <ul className={styles.ul}>
                 <li className={styles.li}><b>Name </b></li>
                 <li className={styles.li}><b>Email Address</b></li>
+                <li className={styles.li}><b>City</b></li>
                 <li className={styles.li}><b>Phone Number</b></li>
                 <li className={styles.li}><b>Aadhar Id</b></li>
                 <li className={styles.li}><b>Pan Card Id</b></li>
@@ -105,6 +106,7 @@ profileData.map((item, i) => {
                             <li className={`${styles.Hli}`}>{item.email}</li> */}
                       {item.name?         <li className={` ${styles.Hli}`}>{item.name}</li>: <li className={` ${styles.Hli} ${styles.Nli}`}>you have not updated your phone Name yet</li>}
                       {item.email?         <li className={` ${styles.Hli}`}>{item.email}</li>: <li className={` ${styles.Hli} ${styles.Nli}`}>you have not updated your Email yet</li>}
+                      {item.city?         <li className={` ${styles.Hli}`}>{item.city}</li>: <li className={` ${styles.Hli} ${styles.Nli}`}>you have not updated your City yet</li>}
                       {item.phoneNumber?         <li className={` ${styles.Hli}`}>{item.phoneNumber}</li>: <li className={` ${styles.Hli} ${styles.Nli}`}>you have not updated your phone Number yet</li>}
                          {item.Aadhar?           <li className={` ${styles.Hli}`}>{item.Aadhar}</li>: <li className={` ${styles.Hli} ${styles.Nli}`}>you have not updated your Aadhar Id yet</li>}
                          {item.panCard?          <li className={` ${styles.Hli}`}>{item.panCard}</li>: <li className={` ${styles.Hli} ${styles.Nli}`}>you have not updated your pan Id yet</li>}
