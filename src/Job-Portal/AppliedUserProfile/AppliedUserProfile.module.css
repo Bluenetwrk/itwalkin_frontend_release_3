@@ -80,20 +80,24 @@
 }
 
 .AllUiWrapper{
-    margin-left: -30px;
+    margin-left: -38px;
     /* margin-top: 2%; */
+    width:99%
 }
 
 
 .ul{
     display: flex;
     margin: 0px;
+    /* background-color: red; */
+    width:100%;
+
+
 }
 .ul:nth-child(odd) {
     background:rgb(242, 244, 245);
   }
   .ul:nth-child(1) {
-    /* background: rgb(40, 4, 99); */
     color:white;
   }
 
@@ -134,28 +138,28 @@
   width:  6%
 }
 .Experiance{
-   width: 8%
+   width: 10%
 }
 .Skills{
     width:23%
 }
 .currentCTC{
-   width: 8%
+   width: 9%
 }
 .ExpectedSalary{
-   width: 8%
+   width: 9%
 }
 .checkProfile{
    width: 7%
 }
 .NoticePeriod{
-   width: 10%
+   width: 12%
 }
 .Status{
     width: 100px
 }
 .LastActive{
-    width:8%
+    width:10%
 }
 /* ........................Home (without Login */
 .nameHome{
@@ -164,13 +168,11 @@
 .getContact{
     border: 1px solid rgb(40, 4, 99);
     background-color: rgb(40, 4, 99);
-    display: flex;
+    /* display: flex; */
     color: white;
     font-weight: bold;
     height: 25px;
     align-items: center;
-    text-align: center;
-    margin-left: 6%;
     cursor:pointer;
 }
 .getContactMob{

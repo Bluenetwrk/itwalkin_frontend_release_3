@@ -172,6 +172,7 @@ function SearchCandidate() {
     // navigate(`/Check-Profile/${StudID}`)
     window.open(`/Check-Profile/${StudID}`, '_blank')
   }
+  //  notice period sort
 
   function NoticeAscendingOrder (){
     let newjob = [...FilCandidate]
@@ -542,8 +543,10 @@ function SearchCandidate() {
                               }
                             )}
                           </li>
-                          <li style={{cursor:"pointer"}}
-                           className={`${styles.li} ${styles.currentCTC}`} onClick={()=>{navigate("/EmployeeLogin")}}> Get Contact </li>
+                          <li style={{cursor:"pointer"}}>
+                            <button className={styles.getContact}  onClick={()=>{navigate("/EmployeeLogin")}}> Get Contact</button>
+
+                           </li>
 
 
                         </ul>

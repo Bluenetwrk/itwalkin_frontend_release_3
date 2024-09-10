@@ -39,6 +39,7 @@ function Home() {
   const [PageLoader, setPageLoader] = useState(false)
   const [Result, setResult] = useState(false)
   const [NotFound, setNotFound] = useState("")
+  const [Active, setActive] = useState("")
   const screenSize = useScreenSize();
 
   let jobTags = [
@@ -183,7 +184,6 @@ function Home() {
       return new Date(a.createdAt) - new Date(b.createdAt);
     })
     setJobs(oldjobSort)
-
   }
 
   function sortbyNewjobs() {
@@ -193,7 +193,6 @@ function Home() {
     })
 
     setJobs(newjobSort)
-
   }
 
 
@@ -363,6 +362,7 @@ function Home() {
   }
 
   async function filterByJobTitle(key) {
+    setActive(key)
     setNoPageFilter(true)
     setFiltereredjobs(key)
     await axios.get(`/jobpost/getTagsJobs/${key}`)
@@ -419,11 +419,11 @@ function Home() {
         <>
 
           <div className={styles.LocationFilterWrapper}>
-            <label> <input className={styles.JobtitleFilter} type="radio" name="filter" onClick={() => { getjobs() }} />All</label>
+            <label> <input className={styles.JobLocationFilter} type="radio" name="filter" onClick={() => { getjobs(); setActive("") }} />All</label>
             {
               JobLocationTags.map((location, i) => {
                 return (
-                  <label> <input className={styles.JobtitleFilter} type="radio" disabled={location == "Chennai" || location == "Hyderabad" || location == "Mumbai" || location == "Delhi"} name="filter" onClick={() => { getLocation(location.toLowerCase()) }} />{location}</label>
+                  <label> <input className={styles.JobLocationFilter} type="radio" disabled={location == "Chennai" || location == "Hyderabad" || location == "Mumbai" || location == "Delhi"} name="filter" onClick={() => { getLocation(location.toLowerCase()); setActive("") }} />{location}</label>
 
                 )
               })
@@ -432,12 +432,17 @@ function Home() {
           <br></br>
 
           <div className={styles.FilterWrapper}>
-            <label><input className={styles.JobtitleFilter} type="radio" name="filter" onClick={() => { getjobs() }} />All</label>
+            {/* <label><input className={ Active==="All" ? styles.active : styles.JobtitleFilter} type="radio" name="filter" onClick={() => { getjobs() }} />All</label> */}
+    
+    <buton className={Active==="All" ? styles.active : styles.JobtitleFilter} onClick={() => { getjobs(); setActive("All")}}>All</buton>
+           
             {
               jobTags.map((tags, i) => {
                 return (
-                  <label><input className={styles.JobtitleFilter} type="radio" name="filter"
-                    onClick={() => { filterByJobTitle(tags.value) }} />{tags.value}</label>
+                  // <label><input className={styles.JobtitleFilter} type="radio" name="filter"
+                    // onClick={() => { filterByJobTitle(tags.value) }} />{tags.value}</label> Active
+                  <buton className={Active===tags.value ? styles.active : styles.JobtitleFilter} onClick={() => { filterByJobTitle(tags.value) }}>{tags.value} </buton>
+                    
                 )
               }).slice(0, 12)
             }
@@ -447,8 +452,10 @@ function Home() {
           <div className={styles.FilterWrapper}>
             {jobTags.map((tags, i) => {
               return (
-                <label><input className={styles.JobtitleFilter} type="radio" name="filter"
-                  onClick={() => { filterByJobTitle(tags.value) }} />{tags.value}</label>
+                // <label><input className={styles.JobtitleFilter} type="radio" name="filter"
+                //   onClick={() => { filterByJobTitle(tags.value) }} />{tags.value}</label>
+                  <buton className={Active===tags.value ? styles.active : styles.JobtitleFilter} onClick={() => { filterByJobTitle(tags.value) }}>{tags.value} </buton>
+
               )
             }).slice(12, 30)
             }
@@ -534,7 +541,8 @@ function Home() {
               {/* <li className={`${styles.li} ${styles.HliDescription}`}><b>Job description</b></li> */}
               <li style={{ backgroundColor: " rgb(40, 4, 99)" }} className={`${styles.li} ${styles.date}`}>Posted Date
                 <p style={{ display: "inline", marginLeft: "6px" }}> <i onClick={sortbyNewjobs} className={`${styles.arrow} ${styles.up}`} ></i>
-                  <i onClick={sortbyOldjobs} className={`${styles.arrow} ${styles.down}`}></i></p>
+                  <i onClick={sortbyOldjobs} className={`${styles.arrow} ${styles.down}`}></i>
+                  </p>
               </li>
               {/* style={{ position:"absolute", display:"block"}} */}
               <li style={{ backgroundColor: " rgb(40, 4, 99)" }} className={`${styles.li} ${styles.Location}`}>Location</li>
@@ -546,7 +554,7 @@ function Home() {
                 </p>
               </li>
 
-              <li style={{ backgroundColor: " rgb(40, 4, 99)" }} className={`${styles.li} ${styles.experiance}`}>Exp
+              <li style={{ backgroundColor: " rgb(40, 4, 99)" }} className={`${styles.li} ${styles.experiance}`}>Exper.
                 <p style={{ display: "inline", marginLeft: "10px" }}>
                   <i onClick={EdescendingOrder} className={`${styles.arrow} ${styles.up}`}> </i>
                   <i onClick={EascendingOrder} className={`${styles.arrow} ${styles.down}`}></i>

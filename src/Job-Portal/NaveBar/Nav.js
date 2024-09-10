@@ -92,11 +92,14 @@ function Nav(props) {
 
   return (
     <>
-      {
-        screenSize.width > 750 ?
+      
+
+          {
           //  ............................................Jobseeker Login...............................................   
+        screenSize.width > 750 ?
           StudentAuth ?
             <>
+               
               <div className={Styles.fullnavewrapper}>
                 <div className={Styles.logoWrapper}>
                   <NavLink to="/" > <img className={Styles.logo} src={logo} /> </NavLink>
@@ -366,8 +369,7 @@ function Nav(props) {
                   </div>
                   {/* {ShowSideNave? */}
                   <div ref={SmenuRef} className={`${Styles.MovileNavOptions} `}
-                    style={ShowSideNave ? { marginLeft: "0px" } : { marginLeft: "-380px" }}
-                  >
+                    style={ShowSideNave ? { marginLeft: "0px" } : { marginLeft: "-380px" }} >
                     <SidebarNav setShowSideNaveProps={setShowSideNave} />
                   </div>
                   {/* :"" }   */}

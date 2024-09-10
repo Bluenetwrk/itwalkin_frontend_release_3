@@ -138,6 +138,92 @@ function JoppostedByEmp(props) {
     window.open(`/Applied-User-Profile/${id}`, '_blank')
   }
 
+  // ..........Sorting.......
+
+  function sortbyOldjobs() {
+    let newjob = [...myjobs]
+    let oldjobSort = newjob.sort(function (a, b) {
+      return new Date(a.createdAt) - new Date(b.createdAt);
+    })
+    setMyjobs(oldjobSort)
+  }
+
+  function sortbyNewjobs() {
+    let newjob = [...myjobs]
+    let newjobSort = newjob.sort(function (a, b) {
+      return new Date(b.createdAt) - new Date(a.createdAt);
+    })
+
+    setMyjobs(newjobSort)
+  }
+
+  
+  function SdescendingOrder() {
+    let newJobs = [...myjobs]
+    // const desendSort = newJobs.sort(function (a, b) {
+    //   return (
+    //     b.salaryRange - a.salaryRange
+    //   )
+    // })
+    const collator = new Intl.Collator(undefined, {
+      numeric: true,
+      sensitivity: 'base'
+    });
+    const sorted = newJobs.sort((a, b) => {
+      return collator.compare(b.salaryRange, a.salaryRange)
+    })
+    setMyjobs(sorted)
+  }
+
+  function SascendingOrder() {
+    let newJObs = [...myjobs]
+    // const AscendSort = newJObs.sort(function (a, b) {
+    //   return (
+    //     a.salaryRange - b.salaryRange
+    //   )
+    // })
+    const collator = new Intl.Collator(undefined, {
+      numeric: true,
+      sensitivity: 'base'
+    });
+    const sorted = newJObs.sort((a, b) => {
+      return collator.compare(a.salaryRange, b.salaryRange)
+    })
+    setMyjobs(sorted)
+  }
+
+  function EdescendingOrder() {
+    let newjob = [...myjobs]
+    // const descend = newjob.sort(function (a, b) {
+    //   return (
+    //     b.experiance - a.experiance
+    //   )
+    // })
+    const collator = new Intl.Collator(undefined, {
+      numeric: true,
+      sensitivity: 'base'
+    });
+    const sorted = newjob.sort((a, b) => {
+      return collator.compare(b.experiance, a.experiance)
+    })
+    setMyjobs(sorted)
+
+  }
+
+  function EascendingOrder() {
+    let newjob = [...myjobs]
+
+    const collator = new Intl.Collator(undefined, {
+      numeric: true,
+      sensitivity: 'base'
+    });
+    const sorted = newjob.sort((a, b) => {
+      return collator.compare(a.experiance, b.experiance)
+    })
+    setMyjobs(sorted)
+  }
+
+
   return (
     <>
  
@@ -169,10 +255,24 @@ function JoppostedByEmp(props) {
             <li className={styles.li}><b>Company Name</b></li>
             <li className={`${styles.li} ${styles.Jtitle}`}><b>Job Title</b></li>
             <li className={`${styles.li} ${styles.liDescription}`}><b>Job description</b></li>
-            <li className={`${styles.li} ${styles.Pdate}`}><b>Posted Date</b></li>
+            <li className={`${styles.li} ${styles.Pdate}`}><b>Posted Date</b>
+            <p style={{ display: "inline", marginLeft: "6px" }}> <i onClick={sortbyNewjobs} className={`${styles.arrow} ${styles.up}`} ></i>
+                  <i onClick={sortbyOldjobs} className={`${styles.arrow} ${styles.down}`}></i>
+                  </p>
+            </li>
             <li className={`${styles.li} ${styles.Location}`}><b>Location</b></li>
-            <li className={`${styles.li} ${styles.Package}`}><b>Package </b></li>
-            <li className={`${styles.li} ${styles.experiance}`}><b>Exp </b></li>
+            <li className={`${styles.li} ${styles.Package}`}><b>CTC </b>
+            <p style={{ display: "inline", marginLeft: "10px" }}>
+                  <i onClick={SdescendingOrder} className={`${styles.arrow} ${styles.up}`}> </i>
+                  <i onClick={SascendingOrder} className={`${styles.arrow} ${styles.down}`}></i>
+                </p>
+            </li>
+            <li className={`${styles.li} ${styles.experiance}`}><b>Exper. </b>
+            <p style={{ display: "inline", marginLeft: "10px" }}>
+                  <i onClick={EdescendingOrder} className={`${styles.arrow} ${styles.up}`}> </i>
+                  <i onClick={EascendingOrder} className={`${styles.arrow} ${styles.down}`}></i>
+                </p>
+            </li>
             <li className={`${styles.li} ${styles.Skills}`}><b>Skills Required</b></li>
             <li className={`${styles.li} ${styles.Action}`}><b>Action</b></li>
             <li className={`${styles.li} ${styles.NuApplied}`}><b>No of JobSeeker Applied</b></li>

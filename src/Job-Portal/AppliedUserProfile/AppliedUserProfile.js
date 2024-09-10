@@ -120,8 +120,140 @@ const screenSize = useScreenSize();
 
                 alert("server error occured")
             })
-
     }
+    // Noice Period sort
+    // const [AppliedUser, setAppliedUser] = useState([])
+
+  function NoticeAscendingOrder (){
+    let newjob = [...AppliedUser]
+    // const descend = newjob.sort(function (a, b) {
+    //   return (
+    //     b.experiance - a.experiance
+    //   )
+    // })
+    const collator = new Intl.Collator(undefined, {
+      numeric: true,
+      sensitivity: 'base'
+    });
+    const sorted = newjob.sort((a, b) => {
+      return collator.compare(b.NoticePeriod, a.NoticePeriod)
+    })
+    setAppliedUser(sorted)
+  }
+  
+
+  function NoticeDescendingOrder (){
+    let newjob = [...AppliedUser]
+    const collator = new Intl.Collator(undefined, {
+      numeric: true,
+      sensitivity: 'base'
+    });
+    const sorted = newjob.sort((a, b) => {
+      return collator.compare(a.NoticePeriod, b.NoticePeriod)
+    })
+    setAppliedUser(sorted)
+  }
+  
+  // .......age Sorting.......
+  function AgeDescendingOrder (){
+    let newjob = [...AppliedUser]
+    const collator = new Intl.Collator(undefined, {
+      numeric: true,
+      sensitivity: 'base'
+    });
+    const sorted = newjob.sort((a, b) => {
+      return collator.compare(a.age, b.age)
+    })
+    setAppliedUser(sorted)
+  }
+  function AgeAscendingOrder (){
+    let newjob = [...AppliedUser]
+    const collator = new Intl.Collator(undefined, {
+      numeric: true,
+      sensitivity: 'base'
+    });
+    const sorted = newjob.sort((a, b) => {
+      return collator.compare(b.age, a.age)
+    })
+    setAppliedUser(sorted)
+  }
+  
+  
+  // .......Experiance Sorting.......
+  function ExpDescendingOrder (){
+    let newjob = [...AppliedUser]
+    const collator = new Intl.Collator(undefined, {
+      numeric: true,
+      sensitivity: 'base'
+    });
+    const sorted = newjob.sort((a, b) => {
+      return collator.compare(a.Experiance, b.Experiance)
+    })
+    setAppliedUser(sorted)
+  }
+  function ExpAscendingOrder (){
+    let newjob = [...AppliedUser]
+    const collator = new Intl.Collator(undefined, {
+      numeric: true,
+      sensitivity: 'base'
+    });
+    const sorted = newjob.sort((a, b) => {
+      return collator.compare(b.Experiance, a.Experiance)
+    })
+    setAppliedUser(sorted)
+  }
+    
+  // .......Curent CTC Sorting.......
+  function CurrCTCDescendingOrder (){
+    let newjob = [...AppliedUser]
+    const collator = new Intl.Collator(undefined, {
+      numeric: true,
+      sensitivity: 'base'
+    });
+    const sorted = newjob.sort((a, b) => {
+      return collator.compare(a.currentCTC, b.currentCTC)
+    })
+    setAppliedUser(sorted)
+  }
+  function CurrCTCAscendingOrder (){
+    let newjob = [...AppliedUser]
+    const collator = new Intl.Collator(undefined, {
+      numeric: true,
+      sensitivity: 'base'
+    });
+    const sorted = newjob.sort((a, b) => {
+      return collator.compare(b.currentCTC, a.currentCTC)
+    })
+    setAppliedUser(sorted)
+  }
+  
+
+    
+  // .......Expected CTC Sorting.......
+  function ExpCTCDescendingOrder (){
+    let newjob = [...AppliedUser]
+    const collator = new Intl.Collator(undefined, {
+      numeric: true,
+      sensitivity: 'base'
+    });
+    const sorted = newjob.sort((a, b) => {
+      return collator.compare(a.ExpectedSalary, b.ExpectedSalary)
+    })
+    setAppliedUser(sorted)
+  }
+  function ExpCTCAscendingOrder (){
+    let newjob = [...AppliedUser]
+    const collator = new Intl.Collator(undefined, {
+      numeric: true,
+      sensitivity: 'base'
+    });
+    const sorted = newjob.sort((a, b) => {
+      return collator.compare(b.ExpectedSalary, a.ExpectedSalary)
+    })
+    setAppliedUser(sorted)
+  }
+
+
 
     return (
         <>
@@ -130,13 +262,38 @@ const screenSize = useScreenSize();
             <div className={styles.AllUiWrapper}>
                 <ul className={styles.ul} >
                     <li style={{backgroundColor:" rgb(40, 4, 99)"}} className={`${styles.li} ${styles.name}`}><b>Name</b>  </li>
-                    <li style={{backgroundColor:" rgb(40, 4, 99)"}} className={`${styles.li} ${styles.NoticePeriod}`}><b>Notice Period</b>  </li>
-                    <li style={{backgroundColor:" rgb(40, 4, 99)"}} className={`${styles.li} ${styles.age}`}> <b>Age</b> </li>
+                    <li style={{backgroundColor:" rgb(40, 4, 99)"}} className={`${styles.li} ${styles.NoticePeriod}`}><b>Notice Period</b>
+                    <p style={{ display: "inline", marginLeft: "10px" }}>
+                  <i onClick={NoticeAscendingOrder} className={`${styles.arrow} ${styles.up}`}> </i>
+                  <i onClick={NoticeDescendingOrder} className={`${styles.arrow} ${styles.down}`}></i>
+                </p>
+                      </li>
+                    <li style={{backgroundColor:" rgb(40, 4, 99)"}} className={`${styles.li} ${styles.age}`}> <b>Age</b> 
+                    <p style={{ display: "inline", marginLeft: "10px" }}>
+                  <i onClick={AgeAscendingOrder} className={`${styles.arrow} ${styles.up}`}> </i>
+                  <i onClick={AgeDescendingOrder} className={`${styles.arrow} ${styles.down}`}></i>
+                </p>
+                    </li>
                     <li style={{backgroundColor:" rgb(40, 4, 99)"}} className={`${styles.li} ${styles.Qualification}`}>  <b>Qualif</b> </li>
-                    <li style={{backgroundColor:" rgb(40, 4, 99)"}} className={`${styles.li} ${styles.Experiance}`}><b>Experience</b>  </li>
+                    <li style={{backgroundColor:" rgb(40, 4, 99)"}} className={`${styles.li} ${styles.Experiance}`}><b>Experience</b> 
+                    <p style={{ display: "inline", marginLeft: "10px" }}>
+                  <i onClick={ExpAscendingOrder} className={`${styles.arrow} ${styles.up}`}> </i>
+                  <i onClick={ExpDescendingOrder} className={`${styles.arrow} ${styles.down}`}></i>
+                </p>
+                     </li>
                     <li style={{backgroundColor:" rgb(40, 4, 99)"}} className={`${styles.li} ${styles.Skills}`}> <b>Skills</b> </li>
-                    <li style={{backgroundColor:" rgb(40, 4, 99)"}} className={`${styles.li} ${styles.currentCTC}`}> <b>Curr. CTC</b> </li>
-                    <li style={{backgroundColor:" rgb(40, 4, 99)"}} className={`${styles.li} ${styles.ExpectedSalary}`}><b>Exp. CTC</b> </li>
+                    <li style={{backgroundColor:" rgb(40, 4, 99)"}} className={`${styles.li} ${styles.currentCTC}`}> <b>Curr. CTC</b> 
+                    <p style={{ display: "inline", marginLeft: "10px" }}>
+                  <i onClick={CurrCTCAscendingOrder} className={`${styles.arrow} ${styles.up}`}> </i>
+                  <i onClick={CurrCTCDescendingOrder} className={`${styles.arrow} ${styles.down}`}></i>
+                </p>
+                    </li>
+                    <li style={{backgroundColor:" rgb(40, 4, 99)"}} className={`${styles.li} ${styles.ExpectedSalary}`}><b>Exp. CTC</b>
+                    <p style={{ display: "inline", marginLeft: "10px" }}>
+                  <i onClick={ExpCTCAscendingOrder} className={`${styles.arrow} ${styles.up}`}> </i>
+                  <i onClick={ExpCTCDescendingOrder} className={`${styles.arrow} ${styles.down}`}></i>
+                </p> 
+                     </li>
                     {/* <li className={`${styles.li} ${styles.checkProfile}`}><b>View Profile</b> </li> */}
                     <li style={{backgroundColor:" rgb(40, 4, 99)"}} className={`${styles.li} ${styles.Status}`}><b>Status</b> </li>
 

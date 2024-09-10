@@ -122,6 +122,33 @@
 } */
 
 /* ...................................Li......................... */
+.arrow {
+    border: solid white;
+    border-width: 0 2px 2px 0;
+    display: inline-block;
+    padding: 3px;
+  }
+  
+  .up {
+    transform: rotate(-135deg);
+    -webkit-transform: rotate(-135deg);
+    /* background-color: blue; */
+    position: absolute;
+    margin-top: 2px;
+  }
+  .down {
+    transform: rotate(90deg);
+    -webkit-transform: rotate(45deg);
+    /* background-color: red; */
+    /* position: absolute; */
+  }
+  .arrow:hover{
+    border: solid grey;
+    border-width: 0 2px 2px 0;
+    display: inline-block;
+    /* margin-top: 100px; */
+    padding: 3px;
+  }
 
 
 
@@ -131,23 +158,30 @@
 
 .Uiwarpper {
     margin-top: 10px;
-    margin-left: -30px;
+    margin-left: -37px;
+    width:102%
 }
 
 .ul {
     display: flex;
     margin: 0px;
 }
+.ul:nth-child(1){
+    background-color: rgb(40, 4, 99);    
+    color:white
+
+}
 
 .li {
     display: inline-block;
 
-    padding: 0.5%;
-    width: 8%;
+    padding: 0.3%;
+    width: 12%;
     /* border: 1px solid rgb(9, 247, 247); */
     border : 1px solid rgb(238,241,242);
 
     text-align: center;
+    align-content: center;
     overflow-wrap:break-word
 
 }
@@ -159,7 +193,7 @@
 }
 
 .Jtitle {
-    width: 8.5%;
+    width: 11%;
     overflow-wrap:break-word
 }
 
@@ -169,12 +203,12 @@
 
 }
 .Pdate{
-    width:6%;
+    width:10%;
     overflow-wrap:break-word
 
 }
 .experiance {
-    width: 3%;
+    width: 7%;
     overflow-wrap:break-word
 
 }
@@ -215,10 +249,7 @@
     margin-left: 4%;
     width:230%;
     cursor: pointer;
-
-
 }
-
 
 .NuApplied{
     width:8%
