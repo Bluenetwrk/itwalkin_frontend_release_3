@@ -133,13 +133,14 @@
 .navigationWrapper{
     /* text-align:right; */
     margin:10px;
-     color:rgb(58, 57, 57);
+     /* color:rgb(58, 57, 57); */
 }
 .navigation{
-    background-color:rgb(240, 237, 237);
-    /* padding:5px; */
-    padding-left:7px;
-    padding-right:7px;
+    background-color:rgb(214, 212, 212);
+    padding:3px;
+    padding-left:10px;
+    padding-right:10px;
+    border:none
 }
 
 .seeMore{
@@ -282,17 +283,12 @@
 }
 /* ..............job details............. */
 .Hli:nth-child(odd){
-    /* background-color: aqua; */
     background:rgb(242, 244, 245)
 }
 .Rli:nth-child(odd){
-    /* background-color: aqua; */
     background:rgb(242, 244, 245)
 }
-.li:nth-child(odd){
-    background:rgb(242, 244, 245)
 
-}
 
 .dUiwarpper{
     margin-top: 10px;
@@ -353,31 +349,25 @@ border-left: none;
     color:rgb(109, 52, 201);
     cursor: pointer;
 }
-
-
-/* 
-.MobJobtitleFilter{
-    margin-left: 1%;
-    margin-top: 10px;
-    padding-left: 10px;
-    padding-right: 10px;
-    border: 1px solid rgb(40, 4, 99);
-    background-color: rgb(40, 4, 99);
-    color:white;
-    font-size: small;
-    font-weight: bold;
-    height: 30px;
-    border-radius: 5px;
-
-} */
-
-
-/* ......Cards.................cards Css... */
-
-/* .searchBoth {
+/* .........................Mobile - Cards................ */
+.MobLocationFilterWrapper{
     display: flex;
-    
+    flex-direction: column;
+    /* background-color: red; */
+    margin-left: -5px;
+}
+.MobFilterJobTitleWrapper{
+    display: flex;
+    flex-direction: column;
+    margin-left: 17px;
+
+}
+/* .MobFilterJobTitleWrapper{
+    display: flex;
+    flex-direction: column;
 } */
+
+
 .searchBoth{
     margin-left: 10%;
 

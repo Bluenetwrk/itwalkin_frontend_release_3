@@ -6,6 +6,7 @@ import { Link, useNavigate, BrowserRouter, Routes, Route, useLocation } from "re
 import { TailSpin, Puff } from "react-loader-spinner"
 import location from "../img/icons8-location-20.png"
 import graduation from "../img/icons8-graduation-cap-40.png"
+import SwipeableViews from "react-swipeable-views";
 
 import useScreenSize from '../SizeHook';
 import socketIO from 'socket.io-client';
@@ -33,7 +34,7 @@ function AllJobs(props) {
     {value: 'Flutter', label: 'Flutter'},
     ]
 
-    let JobLocationTags=["Bangalore", "Hyderabad", "Chennai", "Mumbai", "Delhi"]
+    let JobLocationTags=["Bangalore", "Hyderabad", "Chennai", "Mumbai"]
 
   const [jobs, setJobs] = useState([])
   const [Filterjobs, setFilterjobs] = useState([])
@@ -303,20 +304,7 @@ const [Filtereredjobs, setFiltereredjobs] = useState([])
       })
   }
 
-  async function getLocation(jobLocation) {
-    await axios.get(`/jobpost/getjobLocation/${jobLocation}`)
-      .then((res) => {
-        let result = (res.data)
-        let sortedate = result.sort(function (a, b) {
-          return new Date(b.createdAt) - new Date(a.createdAt);
-        });
-        setJobs(sortedate)
-        // setPageLoader(false)
-      }).catch((err) => {
-        alert("some thing went wrong")
-      })
-  }
-
+  
   async function getBothFiltered(jobTitle) {
 
     await axios.post(`/jobpost/getBothjobFilter/${jobLocation}`, { jobTitle })
@@ -370,6 +358,24 @@ function handleRecordchange(e){
   setrecordsPerPage(e.target.value)  
   setCurrentPage(1)
 }
+
+async function getLocation(jobLocation) {
+  setFiltereredjobs(jobLocation)
+  setNoPageFilter(true)
+  await axios.get(`/jobpost/getjobLocation/${jobLocation}`)
+    .then((res) => {
+      let result = (res.data)
+      let sortedate = result.sort(function (a, b) {
+        return new Date(b.createdAt) - new Date(a.createdAt);
+      });
+      setJobs(sortedate)
+      // setPageLoader(false)
+    }).catch((err) => {
+      alert("some thing went wrong")
+    })
+}
+
+
 
 async function filterByJobTitle(key){
   setNoPageFilter(true)
@@ -490,19 +496,19 @@ async function filterByJobTitle(key){
     <p style={{fontWeight:400, marginLeft:"10px"}}>showing {firstIndex+1} to {lastIndex} latest jobs</p>
     }
 <div className={styles.navigationWrapper}>
-  <p style={{display:"inline", margin:"5px"}} className={styles.navigation} onClick={firstPage}>
+  <button disabled={currentPage === 1} style={{display:"inline", margin:"5px"}} className={styles.navigation} onClick={firstPage}>
   <i class='fas fa-step-backward'></i>
-  </p>
-  <p style={{display:"inline", margin:"5px"}} className={styles.navigation} onClick={previous}>
+  </button>
+  <button disabled={currentPage === 1} style={{display:"inline", margin:"5px"}} className={styles.navigation} onClick={previous}>
   <i class='fas fa-caret-square-left'></i>
-  </p>
+  </button>
   <span>{currentPage}</span>
-  <p style={{display:"inline", margin:"5px"}} className={styles.navigation} onClick={next}>
+  <button disabled={currentPage === npage} style={{display:"inline", margin:"5px"}} className={styles.navigation} onClick={next}>
   <i class='fas fa-caret-square-right'></i>
-  </p>
-  <p style={{display:"inline", margin:"5px"}} className={styles.navigation} onClick={last}>
+  </button>
+  <button disabled={currentPage === npage} style={{display:"inline", margin:"5px"}} className={styles.navigation} onClick={last}>
   <i class='fas fa-step-forward'></i>
-  </p>
+  </button>
      </div>
      </div>
 
@@ -773,26 +779,90 @@ async function filterByJobTitle(key){
         : ""
       }
 
-          <div style={{ display: "flex", marginLeft: "18px" }}>
-            <div>
+  {/* ...................... All Filter for Mobile */}
 
-              <label> <input type="radio" name="location" checked={jobLocation === 'AllL'} onClick={() => { getjobsAllLoc(); setjobLocation("AllL") }} />All</label><br></br>
-              <label> <input type="radio" name="location" checked={jobLocation === 'banglore'} onClick={() => { getLocation("banglore"); setjobLocation('banglore') }} />Banglore</label><br></br>
-              <label> <input type="radio" name="location" disabled checked={jobLocation === 'chennai'} onClick={() => { getLocation("chennai"); setjobLocation('chennai') }} />Chennai</label><br></br>
-              <label> <input type="radio" name="location" disabled checked={jobLocation === 'hyderabad'} onClick={() => { getLocation("hyderabad"); setjobLocation('hyderabad') }} />Hyderabad</label><br></br>
-              <label> <input type="radio" name="location" disabled checked={jobLocation === 'mumbai'} onClick={() => { getLocation("mumbai"); setjobLocation('mumbai') }} />Mumbai</label><br></br>
-              <label> <input type="radio" name="location" disabled checked={jobLocation === 'delhi'} onClick={() => { getLocation("delhi"); setjobLocation('delhi') }} />Delhi</label>
-            </div>
-            <br></br>
+  <div style={{ display: "flex", marginLeft: "18px" }}>
+          <SwipeableViews style={{width:"100%"}}>    
+    
+<div style={{display:"flex"}}>
+            <div className={styles.MobLocationFilterWrapper}>
+              <label> <input className={styles.MobJobtitleFilter} type="radio" name="filter" onClick={() => { getjobs() }} />All</label>
+              {
+                JobLocationTags.map((location, i) => {
+                  return (
+                    <label> <input className={styles.MobJobtitleFilter} type="radio" disabled={location == "Chennai" || location == "Hyderabad" || location == "Mumbai" || location == "Delhi"} name="filter" onClick={() => { getLocation(location.toLowerCase()) }} />{location}</label>
 
-            <div>
-              <label><input type="radio" name="jobtitle" onClick={() => { getjobTitleAll('all'); setjobTitle("all") }} />All</label>            <br></br>
-              <label><input type="radio" name="jobtitle" onClick={() => { { jobLocation !== "AllL" ? getBothFiltered('java') : JobtitleFilter('java') } }} />Java developer</label> <br></br>
-              <label><input type="radio" name="jobtitle" onClick={() => { { jobLocation !== "AllL" ? getBothFiltered('full') : JobtitleFilter('full') } }} />Full Stack Developer</label> <br></br>
-              <label><input type="radio" name="jobtitle" onClick={() => { { jobLocation !== "AllL" ? getBothFiltered('front') : JobtitleFilter('front') } }} />Frontend Developer</label><br></br>
-              <label><input type="radio" name="jobtitle" onClick={() => { { jobLocation !== "AllL" ? getBothFiltered('back') : JobtitleFilter('back') } }} />Backend developer</label> <br></br>
-              <label><input type="radio" name="jobtitle" onClick={() => { { jobLocation !== "AllL" ? getBothFiltered('python') : JobtitleFilter('python') } }} />Python Developer</label>
+                  )
+                })
+              }
             </div>
+
+            <div className={styles.MobFilterJobTitleWrapper}>
+              <label><input className={styles.MobJobtitleFilter} type="radio" name="filter" onClick={() => { getjobs() }} />All</label>
+              {
+                jobTags.map((tags, i) => {
+                  return (
+                    <label><input className={styles.MobJobtitleFilter} type="radio" name="filter"
+                      onClick={() => { filterByJobTitle(tags.value) }} />{tags.value}</label>
+                  )
+                }).slice(0, 4)
+              }
+            </div>
+
+            <div className={styles.MobFilterJobTitleWrapper}>
+              {jobTags.map((tags, i) => {
+                return (
+                  <label><input className={styles.MobJobtitleFilter} type="radio" name="filter"
+                    onClick={() => { filterByJobTitle(tags.value) }} />{tags.value}</label>
+                )
+              }).slice(4, 9)
+              }
+            </div>
+            </div>
+              
+<div style={{display:"flex"}}>
+
+             <div className={styles.MobFilterJobTitleWrapper}>
+              {jobTags.map((tags, i) => {
+                return (
+                  <label><input className={styles.MobJobtitleFilter} type="radio" name="filter"
+                  onClick={() => { filterByJobTitle(tags.value) }} />{tags.value}</label>
+                  )
+                  }).slice(9, 14)
+                  }
+            </div>
+            <div className={styles.MobFilterJobTitleWrapper}>
+              {jobTags.map((tags, i) => {
+                return (
+                  <label><input className={styles.MobJobtitleFilter} type="radio" name="filter"
+                    onClick={() => { filterByJobTitle(tags.value) }} />{tags.value}</label>
+                )
+              }).slice(14, 19)
+              }
+            </div>
+            <div className={styles.MobFilterJobTitleWrapper}>
+              {jobTags.map((tags, i) => {
+                return (
+                  <label><input className={styles.MobJobtitleFilter} type="radio" name="filter"
+                    onClick={() => { filterByJobTitle(tags.value) }} />{tags.value}</label>
+                )
+              }).slice(19, 24)
+              }
+            </div>
+            <div className={styles.MobFilterJobTitleWrapper}>
+              {jobTags.map((tags, i) => {
+                return (
+                  <label><input className={styles.MobJobtitleFilter} type="radio" name="filter"
+                    onClick={() => { filterByJobTitle(tags.value) }} />{tags.value}</label>
+                )
+              }).slice(24, 29)
+              }
+            </div>
+            </div>
+
+            
+    </SwipeableViews>
+
           </div>
 
 

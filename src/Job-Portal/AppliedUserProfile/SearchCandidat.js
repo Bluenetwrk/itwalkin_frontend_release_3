@@ -15,105 +15,109 @@ import Arrowimage from '../img/icons8-arrow-left-48.png'
 // import Slider from "react-slick";
 
 function SearchCandidate() {
-    let params = useParams()
-    let navigate = useNavigate()
+  let params = useParams()
+  let navigate = useNavigate()
 
-    const [Candidate, setCandidate] = useState([])
-    const [FilCandidate, setFilCandidate] = useState([])
-    const [nopageFilter, setNoPageFilter] = useState(false)
-    const [Filtereredjobs, setFiltereredjobs] = useState([])
+  const [Candidate, setCandidate] = useState([])
+  const [FilCandidate, setFilCandidate] = useState([])
+  const [nopageFilter, setNoPageFilter] = useState(false)
+  const [Filtereredjobs, setFiltereredjobs] = useState([])
 
-    const [jobSeekers, setjobSeekers] = useState([])
-    const [NotFound, setNotFound] = useState("")
-    const [Result, setResult] = useState(false)
-const screenSize = useScreenSize();
-let jobTags = [
-    {value:'java', label: 'java'},{value:'Mern Stack', label:'Mern Stack' },{value:'ReactJs', label: 'ReactJs'},
-    {value:'Python', label: 'Python'},{value:'C', label: 'C' }, {value:'C++',label:'C++' },
-    {value: 'Javascript', label: "Javascript" }, {value:'Node js',label: 'Node js' }, 
-    {value:'Angular js',label: 'Angular js' },{value:'Vue js', label: 'Vue js'}, {value:'NextJs', label: 'NextJs'},
-    {value: 'Backend', label: 'Backend'},{value:'Frontend', label:'Frontend'},
-    {value: 'HTML-CSS', label: 'HTML-CSS'},
-    {value: 'MongoDB', label: 'MongoDB'}, 
-    {value: 'MySql', label: 'MySql'},
-    {value: 'React Native', label: 'React Native'},
-    {value: 'Flutter', label: 'Flutter'},
-    ]
+  const [jobSeekers, setjobSeekers] = useState([])
+  const [NotFound, setNotFound] = useState("")
+  const [Result, setResult] = useState(false)
+  const screenSize = useScreenSize();
+  let jobTags = [
+    { value: 'java', label: 'java' }, { value: 'Mern Stack', label: 'Mern Stack' }, { value: 'ReactJs', label: 'ReactJs' },
+    { value: 'Python', label: 'Python' }, { value: 'C', label: 'C' }, { value: 'C++', label: 'C++' },
+    { value: 'Javascript', label: "Javascript" }, { value: 'Node js', label: 'Node js' },
+    { value: 'Angular js', label: 'Angular js' }, { value: 'Vue js', label: 'Vue js' }, { value: 'NextJs', label: 'NextJs' },
+    { value: 'Backend', label: 'Backend' }, { value: 'Frontend', label: 'Frontend' },
+    { value: 'HTML-CSS', label: 'HTML-CSS' },
+    { value: 'MongoDB', label: 'MongoDB' },
+    { value: 'MySql', label: 'MySql' },
+    { value: 'React Native', label: 'React Native' },
+    { value: 'Flutter', label: 'Flutter' },
+  ]
 
-    const Location = ['Bangalore', 'Chennai',
-        'Hyderabad', 'Delhi', 'Mumbai']
+  const Location = ['Bangalore', 'Chennai',
+    'Hyderabad', 'Delhi', 'Mumbai']
 
-    // let jobSeekerId = JSON.parse(localStorage.getItem("StudId"))
+  // let jobSeekerId = JSON.parse(localStorage.getItem("StudId"))
 
-    async function getAllJobSeekers() {
-        // let userid = JSON.parse(localStorage.getItem("EmpIdG"))
-        // const headers = { authorization: userid +" "+ atob(JSON.parse(localStorage.getItem("EmpLog"))) };
+  async function getAllJobSeekers() {
+    setNoPageFilter(false)
+
+    // let userid = JSON.parse(localStorage.getItem("EmpIdG"))
+    // const headers = { authorization: userid +" "+ atob(JSON.parse(localStorage.getItem("EmpLog"))) };
     const headers = { authorization: 'BlueItImpulseWalkinIn' };
 
-        await axios.get("StudentProfile/getAllJobseekers", {headers})                        
-            .then((res) => {
-                let result = (res.data)
-                let sortedate = result.sort(function (a, b) {
-                    return new Date(b.createdAt) - new Date(a.createdAt);
-                });
-                setCandidate(sortedate)
-                setFilCandidate(sortedate)
-            })
+    await axios.get("StudentProfile/getAllJobseekers", { headers })
+      .then((res) => {
+        let result = (res.data)
+        let sortedate = result.sort(function (a, b) {
+          return new Date(b.createdAt) - new Date(a.createdAt);
+        });
+        setCandidate(sortedate)
+        setFilCandidate(sortedate)
+      })
+  }
+
+  useEffect(() => {
+    getAllJobSeekers()
+  }, [])
+
+  const [searchKey, setsearchKey] = useState()
+
+  async function searchIcon(key) {
+    setFiltereredjobs(key)
+    if (key) {
+      setResult(true)
+      let dubmyjobs = [...FilCandidate]
+      const filteredItems = dubmyjobs.filter((user) =>
+        JSON.stringify(user).toLowerCase().includes(key.toLowerCase())
+      )
+      setCandidate(filteredItems)
+    } else {
+      getAllJobSeekers()
+      setResult(false)
     }
+  }
 
-    useEffect(() => {
-        getAllJobSeekers()
-    }, [])
-
-    const [searchKey, setsearchKey] = useState()
-
-    async function searchIcon(key) {
-      setFiltereredjobs(key)
-      if (key) {
-        setResult(true)
-        let dubmyjobs = [...FilCandidate]
-        const filteredItems = dubmyjobs.filter((user) =>
-          JSON.stringify(user).toLowerCase().includes(key.toLowerCase())
-        )
-        setCandidate(filteredItems)
-      } else {
-        getAllJobSeekers()
-        setResult(false)
-      }
-    }
-
-    // const [status, setstatus] = useState({select})
-    async function search(e) {
-        let key = e.target.value
-  setsearchKey(key)
+  // const [status, setstatus] = useState({select})
+  async function search(e) {
+    let key = e.target.value
+    setsearchKey(key)
     setFiltereredjobs(key)
 
-        if (key) {
-            setResult(true)
-          let dubmyjobs = [...FilCandidate]
-    
-          const filteredItems = dubmyjobs.filter((user) =>
-            JSON.stringify(user).toLowerCase().includes(key.toLowerCase())
-          )
-          setCandidate(filteredItems)
-        } else {
-            getAllJobSeekers()
-            setResult(false)
+    if (key) {
+      setResult(true)
+      let dubmyjobs = [...FilCandidate]
 
-        }
-      }
+      const filteredItems = dubmyjobs.filter((user) =>
+        JSON.stringify(user).toLowerCase().includes(key.toLowerCase())
+      )
+      setCandidate(filteredItems)
+    } else {
+      getAllJobSeekers()
+      setResult(false)
 
-    function CheckProfile(StudID) {
-        // navigate(`/Check-Profile/${StudID}`)
-        window.open(`/Check-Profile/${StudID}`, '_blank')
     }
+  }
 
-    function handleRecordchange(e){  
-        setrecordsPerPage(e.target.value)  
-        setCurrentPage(1)
-      }
-    
+  function CheckProfile(StudID) {
+    // navigate(`/Check-Profile/${StudID}`)
+    window.open(`/Check-Profile/${StudID}`, '_blank')
+  }
+
+  function handleRecordchange(e) {
+    setrecordsPerPage(e.target.value)
+    setCurrentPage(1)
+  }
+
   async function getLocation(jobLocation) {
+    setFiltereredjobs(jobLocation)
+    setNoPageFilter(true)
     await axios.get(`/StudentProfile/getStuLocation/${jobLocation}`)
       .then((res) => {
         let result = (res.data)
@@ -155,7 +159,7 @@ let jobTags = [
   function last() {
     setCurrentPage(npage)
   }
-  
+
   async function filterByJobTitle(key) {
     setNoPageFilter(true)
     setFiltereredjobs(key)
@@ -168,8 +172,8 @@ let jobTags = [
         setCandidate(sortedate)
       })
   }
-// .........Notice Period sorting....
-  function NoticeAscendingOrder (){
+  // .........Notice Period sorting....
+  function NoticeAscendingOrder() {
     let newjob = [...FilCandidate]
     // const descend = newjob.sort(function (a, b) {
     //   return (
@@ -185,9 +189,9 @@ let jobTags = [
     })
     setCandidate(sorted)
   }
-  
 
-  function NoticeDescendingOrder (){
+
+  function NoticeDescendingOrder() {
     let newjob = [...FilCandidate]
     const collator = new Intl.Collator(undefined, {
       numeric: true,
@@ -198,9 +202,9 @@ let jobTags = [
     })
     setCandidate(sorted)
   }
-  
+
   // .......age Sorting.......
-  function AgeDescendingOrder (){
+  function AgeDescendingOrder() {
     let newjob = [...FilCandidate]
     const collator = new Intl.Collator(undefined, {
       numeric: true,
@@ -211,7 +215,7 @@ let jobTags = [
     })
     setCandidate(sorted)
   }
-  function AgeAscendingOrder (){
+  function AgeAscendingOrder() {
     let newjob = [...FilCandidate]
     const collator = new Intl.Collator(undefined, {
       numeric: true,
@@ -222,10 +226,10 @@ let jobTags = [
     })
     setCandidate(sorted)
   }
-  
-  
+
+
   // .......Experiance Sorting.......
-  function ExpDescendingOrder (){
+  function ExpDescendingOrder() {
     let newjob = [...FilCandidate]
     const collator = new Intl.Collator(undefined, {
       numeric: true,
@@ -236,7 +240,7 @@ let jobTags = [
     })
     setCandidate(sorted)
   }
-  function ExpAscendingOrder (){
+  function ExpAscendingOrder() {
     let newjob = [...FilCandidate]
     const collator = new Intl.Collator(undefined, {
       numeric: true,
@@ -247,9 +251,9 @@ let jobTags = [
     })
     setCandidate(sorted)
   }
-    
+
   // .......Curent CTC Sorting.......
-  function CurrCTCDescendingOrder (){
+  function CurrCTCDescendingOrder() {
     let newjob = [...FilCandidate]
     const collator = new Intl.Collator(undefined, {
       numeric: true,
@@ -260,7 +264,7 @@ let jobTags = [
     })
     setCandidate(sorted)
   }
-  function CurrCTCAscendingOrder (){
+  function CurrCTCAscendingOrder() {
     let newjob = [...FilCandidate]
     const collator = new Intl.Collator(undefined, {
       numeric: true,
@@ -271,11 +275,11 @@ let jobTags = [
     })
     setCandidate(sorted)
   }
-  
 
-    
+
+
   // .......Expected CTC Sorting.......
-  function ExpCTCDescendingOrder (){
+  function ExpCTCDescendingOrder() {
     let newjob = [...FilCandidate]
     const collator = new Intl.Collator(undefined, {
       numeric: true,
@@ -286,7 +290,7 @@ let jobTags = [
     })
     setCandidate(sorted)
   }
-  function ExpCTCAscendingOrder (){
+  function ExpCTCAscendingOrder() {
     let newjob = [...FilCandidate]
     const collator = new Intl.Collator(undefined, {
       numeric: true,
@@ -298,10 +302,35 @@ let jobTags = [
     setCandidate(sorted)
   }
 
+  // .......Last Active Sorting.......
+  function LastActDescendingOrder() {
+    let newjob = [...FilCandidate]
+    const collator = new Intl.Collator(undefined, {
+      numeric: true,
+      sensitivity: 'base'
+    });
+    const sorted = newjob.sort((a, b) => {
+      return collator.compare(a.updatedAt, b.updatedAt)
+    })
+    setCandidate(sorted)
+  }
 
-    return (
-        <>    
-        {screenSize.width > 850 ?
+  function LastActAscendingOrder() {
+    let newjob = [...FilCandidate]
+    const collator = new Intl.Collator(undefined, {
+      numeric: true,
+      sensitivity: 'base'
+    });
+    const sorted = newjob.sort((a, b) => {
+      return collator.compare(b.updatedAt, a.updatedAt)
+    })
+    setCandidate(sorted)
+  }
+
+
+  return (
+    <>
+      {screenSize.width > 850 ?
         <>
           <div className={styles.searchBothForNavWrapper}>
             <input className={styles.inputboxsearchNav} type="text" placeholder='Search for a Job / Skills / Location / Experiance' onChange={(e) => { search(e) }} />
@@ -315,20 +344,20 @@ let jobTags = [
           }
         </>
         : ""
-      }              
-        
-                  {screenSize.width>850?
-                  <>
-        <div style={{marginTop:"30px"}}></div>
+      }
 
-<div className={styles.FilterWrapper}>
+      {screenSize.width > 850 ?
+        <>
+          <div style={{ marginTop: "30px" }}></div>
+
+          <div className={styles.FilterWrapper}>
             <label><input className={styles.JobtitleFilter} type="radio" name="filter" onClick={() => { getAllJobSeekers() }} />All</label>
             {
 
               Location.map((location, i) => {
                 return (
                   <label><input className={styles.JobtitleFilter} type="radio" name="filter"
-                  disabled={location=="Chennai" || location== "Hyderabad" || location=="Mumbai" || location=="Delhi"}  onClick={() => { getLocation(location) }} />{location}</label>
+                    disabled={location == "Chennai" || location == "Hyderabad" || location == "Mumbai" || location == "Delhi"} onClick={() => { getLocation(location) }} />{location}</label>
                 )
               })
             }
@@ -364,234 +393,238 @@ let jobTags = [
               <p style={{ fontWeight: 400, marginLeft: "10px" }}>showing {firstIndex + 1} to {lastIndex} latest jobs</p>
             }
             <div className={styles.navigationWrapper}>
-              <p style={{ display: "inline", margin: "5px" }} className={styles.navigation} onClick={firstPage}>
-                <i class='fas fa-step-backward' disabled={currentPage === 1}></i>
-              </p>
-              <p style={{ display: "inline", margin: "5px" }} className={styles.navigation} onClick={previous}>
+              <button disabled={currentPage === 1} style={{ display: "inline", margin: "5px" }} className={styles.navigation} onClick={firstPage}>
+                <i class='fas fa-step-backward' ></i>
+              </button>
+              <button disabled={currentPage === 1} style={{ display: "inline", margin: "5px" }} className={styles.navigation} onClick={previous}>
                 <i class='fas fa-caret-square-left'></i>
-              </p>
+              </button>
               <span>{currentPage}</span>
-              <p style={{ display: "inline", margin: "5px" }} className={styles.navigation} onClick={next}>
+              <button disabled={currentPage === npage} style={{ display: "inline", margin: "5px" }} className={styles.navigation} onClick={next}>
                 <i class='fas fa-caret-square-right'></i>
-              </p>
-              <p style={{ display: "inline", margin: "5px" }} className={styles.navigation} onClick={last}>
+              </button>
+              <button disabled={currentPage === npage} style={{ display: "inline", margin: "5px" }} className={styles.navigation} onClick={last}>
                 <i class='fas fa-step-forward'></i>
-              </p>
+              </button>
             </div>
           </div>
 
-          <div className={styles.AllUiWrapper}>  
-                <ul className={styles.ul} >
-                    <li style={{backgroundColor:" rgb(40, 4, 99)"}} className={`${styles.li} ${styles.name}`}><b>Name</b>  
-                    </li>
-                    <li style={{backgroundColor:" rgb(40, 4, 99)"}} className={`${styles.li} ${styles.NoticePeriod}`}><b>Notice Period</b>
-                    <p style={{ display: "inline", marginLeft: "10px" }}>
+          <div className={styles.AllUiWrapper}>
+            <ul className={styles.ul} >
+              <li style={{ backgroundColor: " rgb(40, 4, 99)" }} className={`${styles.li} ${styles.name}`}><b>Name</b>
+              </li>
+              <li style={{ backgroundColor: " rgb(40, 4, 99)" }} className={`${styles.li} ${styles.NoticePeriod}`}><b>Notice Period</b>
+                <p style={{ display: "inline", marginLeft: "10px" }}>
                   <i onClick={NoticeAscendingOrder} className={`${styles.arrow} ${styles.up}`}> </i>
                   <i onClick={NoticeDescendingOrder} className={`${styles.arrow} ${styles.down}`}></i>
-                </p>  
-                    </li>
-                    <li style={{backgroundColor:" rgb(40, 4, 99)"}} className={`${styles.li} ${styles.age}`}> <b>Age</b>
-                    <p style={{ display: "inline", marginLeft: "10px" }}>
+                </p>
+              </li>
+              <li style={{ backgroundColor: " rgb(40, 4, 99)" }} className={`${styles.li} ${styles.age}`}> <b>Age</b>
+                <p style={{ display: "inline", marginLeft: "10px" }}>
                   <i onClick={AgeAscendingOrder} className={`${styles.arrow} ${styles.up}`}> </i>
                   <i onClick={AgeDescendingOrder} className={`${styles.arrow} ${styles.down}`}></i>
                 </p>
-                     </li>
-                    <li style={{backgroundColor:" rgb(40, 4, 99)"}} className={`${styles.li} ${styles.Qualification}`}>  <b>Qualif</b> 
-                    </li>
-                    <li style={{backgroundColor:" rgb(40, 4, 99)"}} className={`${styles.li} ${styles.Experiance}`}><b>Experience</b>  
-                    <p style={{ display: "inline", marginLeft: "10px" }}>
+              </li>
+              <li style={{ backgroundColor: " rgb(40, 4, 99)" }} className={`${styles.li} ${styles.Qualification}`}>  <b>Qualif</b>
+              </li>
+              <li style={{ backgroundColor: " rgb(40, 4, 99)" }} className={`${styles.li} ${styles.Experiance}`}><b>Experience</b>
+                <p style={{ display: "inline", marginLeft: "10px" }}>
                   <i onClick={ExpAscendingOrder} className={`${styles.arrow} ${styles.up}`}> </i>
                   <i onClick={ExpDescendingOrder} className={`${styles.arrow} ${styles.down}`}></i>
-                </p> 
-                    </li>
-                    <li style={{backgroundColor:" rgb(40, 4, 99)"}} className={`${styles.li} ${styles.Skills}`}> <b>Skills</b> </li>
-                    <li style={{backgroundColor:" rgb(40, 4, 99)"}} className={`${styles.li} ${styles.currentCTC}`}> <b>Curr. CTC</b> 
-                    <p style={{ display: "inline", marginLeft: "10px" }}>
+                </p>
+              </li>
+              <li style={{ backgroundColor: " rgb(40, 4, 99)" }} className={`${styles.li} ${styles.Skills}`}> <b>Skills</b> </li>
+              <li style={{ backgroundColor: " rgb(40, 4, 99)" }} className={`${styles.li} ${styles.currentCTC}`}> <b>Curr. CTC</b>
+                <p style={{ display: "inline", marginLeft: "10px" }}>
                   <i onClick={CurrCTCAscendingOrder} className={`${styles.arrow} ${styles.up}`}> </i>
                   <i onClick={CurrCTCDescendingOrder} className={`${styles.arrow} ${styles.down}`}></i>
-                </p> 
-                    </li>
-                    <li style={{backgroundColor:" rgb(40, 4, 99)"}} className={`${styles.li} ${styles.ExpectedSalary}`}><b>Exp. CTC</b> 
-                    <p style={{ display: "inline", marginLeft: "10px" }}>
+                </p>
+              </li>
+              <li style={{ backgroundColor: " rgb(40, 4, 99)" }} className={`${styles.li} ${styles.ExpectedSalary}`}><b>Exp. CTC</b>
+                <p style={{ display: "inline", marginLeft: "10px" }}>
                   <i onClick={ExpCTCAscendingOrder} className={`${styles.arrow} ${styles.up}`}> </i>
                   <i onClick={ExpCTCDescendingOrder} className={`${styles.arrow} ${styles.down}`}></i>
                 </p>
-                    </li>
-                    <li style={{backgroundColor:" rgb(40, 4, 99)"}} className={`${styles.li} ${styles.LastActive}`}><b>Last Active</b> 
-                    </li>
+              </li>
+              <li style={{ backgroundColor: " rgb(40, 4, 99)" }} className={`${styles.li} ${styles.LastActive}`}><b>Last Active</b>
+                <p style={{ display: "inline", marginLeft: "10px" }}>
+                  <i onClick={LastActAscendingOrder} className={`${styles.arrow} ${styles.up}`}> </i>
+                  <i onClick={LastActDescendingOrder} className={`${styles.arrow} ${styles.down}`}></i>
+                </p>
+              </li>
 
 
-                </ul>
+            </ul>
 
-                {
-                    !nopageFilter ?
-                    
-                    records.length > 0 ?
-                        records.map((Applieduser, i) => {
-                            return (
-                                <>
+            {
+              !nopageFilter ?
 
-                                    <ul className={styles.ul} key={i}>
-                                        <li className={`${styles.li} ${styles.name} ${styles.onclick}`} onClick={() => { CheckProfile(Applieduser._id) }} >
-                                            {Applieduser.name ? <a className={styles.namelink} title="Click to check the Contact Details">
-                                                {Applieduser.name}</a> : <li className={styles.Nli}>N/A</li>} </li>
-                                               
-                                        <li className={`${styles.li} ${styles.NoticePeriod}`}> {Applieduser.NoticePeriod ?
-                                            Applieduser.NoticePeriod : <li className={styles.Nli}>N/A</li>} </li>
-                                        <li className={`${styles.li} ${styles.age}`}> {Applieduser.age ?
-                                            Applieduser.age : <li className={styles.Nli}>N/A</li>} </li>
-                                        <li className={`${styles.li} ${styles.Qualification}`}> {Applieduser.Qualification ?
-                                            Applieduser.Qualification : <li className={styles.Nli}>N/A</li>} </li>
-                                        <li className={`${styles.li} ${styles.Experiance}`}> {Applieduser.Experiance ?
-                                            Applieduser.Experiance : <li className={styles.Nli}>N/A</li>} </li>
-                                        <li className={`${styles.li} ${styles.Skills}`}> {Applieduser.Skills ?
-                                            Applieduser.Skills : <li className={styles.Nli}>N/A</li>} </li>
-                                        <li className={`${styles.li} ${styles.currentCTC}`}> {Applieduser.currentCTC ?
-                                            Applieduser.currentCTC : <li className={styles.Nli}>N/A</li>} </li>
-                                        <li className={`${styles.li} ${styles.ExpectedSalary}`}> {Applieduser.ExpectedSalary ?
-                                            Applieduser.ExpectedSalary : <li className={styles.Nli}>N/A</li>} </li>
-                                             <li className={`${styles.li} ${styles.LastActive}`}>
-                                        {new Date(Applieduser.updatedAt).toLocaleString(
-                                                "en-US",
-                                                {
-                                                  month: "short",
-                                                  day: "2-digit",
-                                                  year: "numeric",
-                                                }
-                                              )} 
-                                            </li>
+                records.length > 0 ?
+                  records.map((Applieduser, i) => {
+                    return (
+                      <>
 
-                                    </ul>
-                                </>
+                        <ul className={styles.ul} key={i}>
+                          <li className={`${styles.li} ${styles.name} ${styles.onclick}`} onClick={() => { CheckProfile(Applieduser._id) }} >
+                            {Applieduser.name ? <a className={styles.namelink} title="Click to check the Contact Details">
+                              {Applieduser.name}</a> : <li className={styles.Nli}>N/A</li>} </li>
 
-                            )
-                        })
-                        :
-                        <p style={{ marginLeft: "45%", color:"red" }}>No Record found</p>
-                        :
-                        Candidate.length > 0 ?
-                        Candidate.map((Applieduser, i) => {
-                            return (
-                                <>
+                          <li className={`${styles.li} ${styles.NoticePeriod}`}> {Applieduser.NoticePeriod ?
+                            Applieduser.NoticePeriod : <li className={styles.Nli}>N/A</li>} </li>
+                          <li className={`${styles.li} ${styles.age}`}> {Applieduser.age ?
+                            Applieduser.age : <li className={styles.Nli}>N/A</li>} </li>
+                          <li className={`${styles.li} ${styles.Qualification}`}> {Applieduser.Qualification ?
+                            Applieduser.Qualification : <li className={styles.Nli}>N/A</li>} </li>
+                          <li className={`${styles.li} ${styles.Experiance}`}> {Applieduser.Experiance ?
+                            Applieduser.Experiance : <li className={styles.Nli}>N/A</li>} </li>
+                          <li className={`${styles.li} ${styles.Skills}`}> {Applieduser.Skills ?
+                            Applieduser.Skills : <li className={styles.Nli}>N/A</li>} </li>
+                          <li className={`${styles.li} ${styles.currentCTC}`}> {Applieduser.currentCTC ?
+                            Applieduser.currentCTC : <li className={styles.Nli}>N/A</li>} </li>
+                          <li className={`${styles.li} ${styles.ExpectedSalary}`}> {Applieduser.ExpectedSalary ?
+                            Applieduser.ExpectedSalary : <li className={styles.Nli}>N/A</li>} </li>
+                          <li className={`${styles.li} ${styles.LastActive}`}>
+                            {new Date(Applieduser.updatedAt).toLocaleString(
+                              "en-US",
+                              {
+                                month: "short",
+                                day: "2-digit",
+                                year: "numeric",
+                              }
+                            )}
+                          </li>
 
-                                    <ul className={styles.ul} key={i}>
-                                        <li className={`${styles.li} ${styles.name} ${styles.onclick}`} onClick={() => { CheckProfile(Applieduser._id) }} >
-                                            {Applieduser.name ? <a className={styles.namelink} title="Click to check the Contact Details">
-                                                {Applieduser.name}</a> : <li className={styles.Nli}>N/A</li>} </li>
-                                               
-                                        <li className={`${styles.li} ${styles.NoticePeriod}`}> {Applieduser.NoticePeriod ?
-                                            Applieduser.NoticePeriod : <li className={styles.Nli}>N/A</li>} </li>
-                                        <li className={`${styles.li} ${styles.age}`}> {Applieduser.age ?
-                                            Applieduser.age : <li className={styles.Nli}>N/A</li>} </li>
-                                        <li className={`${styles.li} ${styles.Qualification}`}> {Applieduser.Qualification ?
-                                            Applieduser.Qualification : <li className={styles.Nli}>N/A</li>} </li>
-                                        <li className={`${styles.li} ${styles.Experiance}`}> {Applieduser.Experiance ?
-                                            Applieduser.Experiance : <li className={styles.Nli}>N/A</li>} </li>
-                                        <li className={`${styles.li} ${styles.Skills}`}> {Applieduser.Skills ?
-                                            Applieduser.Skills : <li className={styles.Nli}>N/A</li>} </li>
-                                        <li className={`${styles.li} ${styles.currentCTC}`}> {Applieduser.currentCTC ?
-                                            Applieduser.currentCTC : <li className={styles.Nli}>N/A</li>} </li>
-                                        <li className={`${styles.li} ${styles.ExpectedSalary}`}> {Applieduser.ExpectedSalary ?
-                                            Applieduser.ExpectedSalary : <li className={styles.Nli}>N/A</li>} </li>
-                                            
-                                             <li className={`${styles.li} ${styles.LastActive}`}>
-                                        {new Date(Applieduser.updatedAt).toLocaleString(
-                                                "en-US",
-                                                {
-                                                  month: "short",
-                                                  day: "2-digit",
-                                                  year: "numeric",
-                                                }
-                                              )} 
-                                            </li>
-                                           
-                                    </ul>
-                                </>
+                        </ul>
+                      </>
 
-                            )
-                        })
-                        :
-                        <p style={{ marginLeft: "45%", color:"red" }}>No Record found</p>
-               
-               }
-               <div>
-               </div>
-               </div >
+                    )
+                  })
+                  :
+                  <p style={{ marginLeft: "45%", color: "red" }}>No Record found</p>
+                :
+                Candidate.length > 0 ?
+                  Candidate.map((Applieduser, i) => {
+                    return (
+                      <>
+
+                        <ul className={styles.ul} key={i}>
+                          <li className={`${styles.li} ${styles.name} ${styles.onclick}`} onClick={() => { CheckProfile(Applieduser._id) }} >
+                            {Applieduser.name ? <a className={styles.namelink} title="Click to check the Contact Details">
+                              {Applieduser.name}</a> : <li className={styles.Nli}>N/A</li>} </li>
+
+                          <li className={`${styles.li} ${styles.NoticePeriod}`}> {Applieduser.NoticePeriod ?
+                            Applieduser.NoticePeriod : <li className={styles.Nli}>N/A</li>} </li>
+                          <li className={`${styles.li} ${styles.age}`}> {Applieduser.age ?
+                            Applieduser.age : <li className={styles.Nli}>N/A</li>} </li>
+                          <li className={`${styles.li} ${styles.Qualification}`}> {Applieduser.Qualification ?
+                            Applieduser.Qualification : <li className={styles.Nli}>N/A</li>} </li>
+                          <li className={`${styles.li} ${styles.Experiance}`}> {Applieduser.Experiance ?
+                            Applieduser.Experiance : <li className={styles.Nli}>N/A</li>} </li>
+                          <li className={`${styles.li} ${styles.Skills}`}> {Applieduser.Skills ?
+                            Applieduser.Skills : <li className={styles.Nli}>N/A</li>} </li>
+                          <li className={`${styles.li} ${styles.currentCTC}`}> {Applieduser.currentCTC ?
+                            Applieduser.currentCTC : <li className={styles.Nli}>N/A</li>} </li>
+                          <li className={`${styles.li} ${styles.ExpectedSalary}`}> {Applieduser.ExpectedSalary ?
+                            Applieduser.ExpectedSalary : <li className={styles.Nli}>N/A</li>} </li>
+
+                          <li className={`${styles.li} ${styles.LastActive}`}>
+                            {new Date(Applieduser.updatedAt).toLocaleString(
+                              "en-US",
+                              {
+                                month: "short",
+                                day: "2-digit",
+                                year: "numeric",
+                              }
+                            )}
+                          </li>
+
+                        </ul>
+                      </>
+
+                    )
+                  })
+                  :
+                  <p style={{ marginLeft: "45%", color: "red" }}>No Record found</p>
+
+            }
+            <div>
+            </div>
+          </div >
           <div>
-            Show  <select onChange={(e)=>{handleRecordchange(e)}}>
-              <option value={10}>10</option>              
-              <option value={25}>25</option>              
-              <option value={50}>50</option>              
-              <option value={100}>100</option>              
+            Show  <select onChange={(e) => { handleRecordchange(e) }}>
+              <option value={10}>10</option>
+              <option value={25}>25</option>
+              <option value={50}>50</option>
+              <option value={100}>100</option>
             </select>  jobs per page
           </div>
-          </>
-          
-            
-            :
-            <>
-                       <div className={styles.searchBoth}>
-                <p className={styles.p}>Search </p>
-                <input className={styles.inputboxsearch} type="text" placeholder="candidate's/skills/experience/qualification/noticeperiod" onChange={(e) => { search(e) }} />
-            </div>
-            {Result?
-            <h4 style={{marginLeft:"19%", marginTop:"10px"}}> {Candidate.length} matching Result Found  </h4>
-            :""
-}
-            <div id={styles.JobCardWrapper} >
+        </>
 
-{Candidate.map((job, i) => {
-  return (
-    <>
-      <div className={styles.JobCard} key={i}>
-      <div style={{display:"flex"}}>
 
-<div className={styles.LeftTable}>
-                <span className={styles.span}>Name :  </span> <br></br>
-                <span className={styles.span}><u>Last Active :  </u></span> <br></br>
-                <span className={styles.span}>Age :</span><br></br>
-                <span className={styles.span}> Notice Period :</span><br></br>
-                <span className={styles.span}>Qualification :</span><br></br>
-                <span className={styles.span}>Experience : </span><br></br>
-                <span className={styles.span}> Current CTC :</span><br></br>
-                <span className={styles.span}>Expected CTC : </span><br></br>
-            </div>
-    
-            <div className={styles.RightTable}>
-            <span className={styles.span}><span style={{color:"blue", textDecoration:"underline"}} onClick={() => { CheckProfile(job._id) }} >{job.name}</span></span><br></br>  
-            <span className={styles.span}> <u>{new Date(job.updatedAt).toLocaleString(
+        :
+        <>
+          <div className={styles.searchBoth}>
+            <p className={styles.p}>Search </p>
+            <input className={styles.inputboxsearch} type="text" placeholder="candidate's/skills/experience/qualification/noticeperiod" onChange={(e) => { search(e) }} />
+          </div>
+          {Result ?
+            <h4 style={{ marginLeft: "19%", marginTop: "10px" }}> {Candidate.length} matching Result Found  </h4>
+            : ""
+          }
+          <div id={styles.JobCardWrapper} >
+
+            {Candidate.map((job, i) => {
+              return (
+                <>
+                  <div className={styles.JobCard} key={i}>
+                    <div style={{ display: "flex" }}>
+
+                      <div className={styles.LeftTable}>
+                        <span className={styles.span}>Name :  </span> <br></br>
+                        <span className={styles.span}><u>Last Active :  </u></span> <br></br>
+                        <span className={styles.span}>Age :</span><br></br>
+                        <span className={styles.span}> Notice Period :</span><br></br>
+                        <span className={styles.span}>Qualification :</span><br></br>
+                        <span className={styles.span}>Experience : </span><br></br>
+                        <span className={styles.span}> Current CTC :</span><br></br>
+                        <span className={styles.span}>Expected CTC : </span><br></br>
+                      </div>
+
+                      <div className={styles.RightTable}>
+                        <span className={styles.span}><span style={{ color: "blue", textDecoration: "underline" }} onClick={() => { CheckProfile(job._id) }} >{job.name}</span></span><br></br>
+                        <span className={styles.span}> <u>{new Date(job.updatedAt).toLocaleString(
                           "en-US",
                           {
                             month: "short",
                             day: "2-digit",
                             year: "numeric",
                           }
-                        )}</u></span><br></br>    
-            <span className={styles.span}>{job.age? <span style={{ color: "blue" }}>{job.age} </span>:<span style={{color:"red"}}>Not updated</span> }</span><br></br>
-            <span className={styles.span}> {job.NoticePeriod?<span style={{ color: "blue" }}>{job.NoticePeriod} </span>: <span style={{color:"red"}}>Not updated</span>}</span><br></br>
-            <span className={styles.span}> {job.Qualification?<span style={{ color: "blue" }}>{job.Qualification} </span>:<span style={{color:"red"}}>Not updated</span>}</span><br></br>
-            <span className={styles.span}> {job.Experiance?<span style={{ color: "blue" }}>{job.Experiance} </span>:<span style={{color:"red"}}>Not updated</span>}   </span><br></br>
-            <span className={styles.span}>{job.currentCTC?<span style={{ color: "blue" }}>{job.currentCTC} </span>:<span style={{color:"red"}}>Not updated</span>} </span><br></br>
-            <span className={styles.span}> {job.ExpectedSalary?<span style={{ color: "blue" }}>{job.ExpectedSalary} </span>:<span style={{color:"red"}}>Not updated</span>}</span><br></br>          
-            </div>
-            <img className={styles.MobileimageView} src={job.image?job.image : profileDp}/>
-    
-          </div>
+                        )}</u></span><br></br>
+                        <span className={styles.span}>{job.age ? <span style={{ color: "blue" }}>{job.age} </span> : <span style={{ color: "red" }}>Not updated</span>}</span><br></br>
+                        <span className={styles.span}> {job.NoticePeriod ? <span style={{ color: "blue" }}>{job.NoticePeriod} </span> : <span style={{ color: "red" }}>Not updated</span>}</span><br></br>
+                        <span className={styles.span}> {job.Qualification ? <span style={{ color: "blue" }}>{job.Qualification} </span> : <span style={{ color: "red" }}>Not updated</span>}</span><br></br>
+                        <span className={styles.span}> {job.Experiance ? <span style={{ color: "blue" }}>{job.Experiance} </span> : <span style={{ color: "red" }}>Not updated</span>}   </span><br></br>
+                        <span className={styles.span}>{job.currentCTC ? <span style={{ color: "blue" }}>{job.currentCTC} </span> : <span style={{ color: "red" }}>Not updated</span>} </span><br></br>
+                        <span className={styles.span}> {job.ExpectedSalary ? <span style={{ color: "blue" }}>{job.ExpectedSalary} </span> : <span style={{ color: "red" }}>Not updated</span>}</span><br></br>
+                      </div>
+                      <img className={styles.MobileimageView} src={job.image ? job.image : profileDp} />
 
-          <div className={styles.Down}>
-          <span className={styles.span}> Skills : {job.Skills?<span style={{ color: "blue" }}>{job.Skills} </span>:<span style={{color:"red"}}>Not updated</span>}</span><br></br>
-         </div>
-      </div>
+                    </div>
+
+                    <div className={styles.Down}>
+                      <span className={styles.span}> Skills : {job.Skills ? <span style={{ color: "blue" }}>{job.Skills} </span> : <span style={{ color: "red" }}>Not updated</span>}</span><br></br>
+                    </div>
+                  </div>
+                </>
+              )
+            })}
+
+          </div>
+        </>
+      }
+
     </>
   )
-})}
-
-</div>
-            </>
-}
-
-        </>
-    )
 }
 
 export default SearchCandidate

@@ -64,13 +64,15 @@
 .navigationWrapper{
     /* text-align:right; */
     margin:10px;
-     color:rgb(58, 57, 57);
+     /* color:rgb(58, 57, 57); */
 }
 .navigation{
-    background-color:rgb(240, 237, 237);
-    /* padding:5px; */
-    padding-left:7px;
-    padding-right:7px;
+    background-color:rgb(214, 212, 212);
+    padding:3px;
+    padding-left:10px;
+    padding-right:10px;
+    border:none
+    
 }
 
 .JobtitleFilter{
@@ -158,7 +160,26 @@
 /* ........................Home (without Login */
 .nameHome{
     width:7%;
-
+}
+.getContact{
+    border: 1px solid rgb(40, 4, 99);
+    background-color: rgb(40, 4, 99);
+    display: flex;
+    color: white;
+    font-weight: bold;
+    height: 25px;
+    align-items: center;
+    text-align: center;
+    margin-left: 6%;
+    cursor:pointer;
+}
+.getContactMob{
+    border: 1px solid rgb(40, 4, 99);
+    background-color: rgb(40, 4, 99);
+    display: flex;
+    color: white;
+    font-weight: 500;
+    cursor:pointer;
 }
 /* .ViewProfile{
     border: 1px solid rgb(40, 4, 99);

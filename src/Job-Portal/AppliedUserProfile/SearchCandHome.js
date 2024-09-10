@@ -52,6 +52,7 @@ function SearchCandidate() {
   // let jobSeekerId = JSON.parse(localStorage.getItem("StudId"))
 
   async function getAllJobSeekers() {
+    setNoPageFilter(false)
     // let userid = JSON.parse(localStorage.getItem("EmpIdG"))
     // const headers = { authorization: userid +" "+ atob(JSON.parse(localStorage.getItem("EmpLog"))) };
     const headers = { authorization: 'BlueItImpulseWalkinIn' };
@@ -109,6 +110,8 @@ function SearchCandidate() {
   }
 
   async function getLocation(jobLocation) {
+    setFiltereredjobs(jobLocation)
+  setNoPageFilter(true)
     await axios.get(`/StudentProfile/getStuLocation/${jobLocation}`)
       .then((res) => {
         let result = (res.data)
@@ -298,6 +301,31 @@ function SearchCandidate() {
     })
     setCandidate(sorted)
   }
+    
+  // .......Last Active Sorting.......
+  function LastActDescendingOrder (){
+    let newjob = [...FilCandidate]
+    const collator = new Intl.Collator(undefined, {
+      numeric: true,
+      sensitivity: 'base'
+    });
+    const sorted = newjob.sort((a, b) => {
+      return collator.compare(a.updatedAt, b.updatedAt)
+    })
+    setCandidate(sorted)
+  }
+
+  function LastActAscendingOrder (){
+    let newjob = [...FilCandidate]
+    const collator = new Intl.Collator(undefined, {
+      numeric: true,
+      sensitivity: 'base'
+    });
+    const sorted = newjob.sort((a, b) => {
+      return collator.compare(b.updatedAt, a.updatedAt)
+    })
+    setCandidate(sorted)
+  }
 
 
 
@@ -366,19 +394,19 @@ function SearchCandidate() {
               <p style={{ fontWeight: 400, marginLeft: "10px" }}>showing {firstIndex + 1} to {lastIndex} latest jobs</p>
             }
             <div className={styles.navigationWrapper}>
-              <p style={{ display: "inline", margin: "5px" }} className={styles.navigation} onClick={firstPage}>
-                <i class='fas fa-step-backward' disabled={currentPage === 1}></i>
-              </p>
-              <p style={{ display: "inline", margin: "5px" }} className={styles.navigation} onClick={previous}>
+              <button disabled={currentPage === 1} style={{ display: "inline", margin: "5px" }} className={styles.navigation} onClick={firstPage}>
+                <i class='fas fa-step-backward' ></i>
+              </button>
+              <button disabled={currentPage === 1} style={{ display: "inline", margin: "5px" }} className={styles.navigation} onClick={previous}>
                 <i class='fas fa-caret-square-left'></i>
-              </p>
+              </button>
               <span>{currentPage}</span>
-              <p style={{ display: "inline", margin: "5px" }} className={styles.navigation} onClick={next}>
+              <button disabled={currentPage === npage} style={{ display: "inline", margin: "5px" }} className={styles.navigation} onClick={next}>
                 <i class='fas fa-caret-square-right'></i>
-              </p>
-              <p style={{ display: "inline", margin: "5px" }} className={styles.navigation} onClick={last}>
+              </button>
+              <button disabled={currentPage === npage} style={{ display: "inline", margin: "5px" }} className={styles.navigation} onClick={last}>
                 <i class='fas fa-step-forward'></i>
-              </p>
+              </button>
             </div>
           </div>
 
@@ -417,7 +445,12 @@ function SearchCandidate() {
                   <i onClick={ExpCTCDescendingOrder} className={`${styles.arrow} ${styles.down}`}></i>
                 </p> 
                </li>
-              <li style={{ backgroundColor: " rgb(40, 4, 99)" }} className={`${styles.li} ${styles.LastActive}`}><b>Last Active</b> </li>
+              <li style={{ backgroundColor: " rgb(40, 4, 99)" }} className={`${styles.li} ${styles.LastActive}`}><b>Last Active</b> 
+              <p style={{ display: "inline", marginLeft: "10px" }}>
+                  <i onClick={LastActAscendingOrder} className={`${styles.arrow} ${styles.up}`}> </i>
+                  <i onClick={LastActDescendingOrder} className={`${styles.arrow} ${styles.down}`}></i>
+                </p> 
+                </li>
               <li style={{backgroundColor:" rgb(40, 4, 99)"}} className={`${styles.li} ${styles.currentCTC}`}> <b>Contact</b> </li>
 
             </ul>
@@ -456,8 +489,9 @@ function SearchCandidate() {
                               }
                             )}
                           </li>
-                          <li style={{cursor:"pointer"}}
-                             className={`${styles.li} ${styles.currentCTC}`} onClick={()=>{navigate("/EmployeeLogin")}}> Get Contact </li>
+                          <li  className={`${styles.li} ${styles.currentCTC}`}>
+                            <button className={styles.getContact}  onClick={()=>{navigate("/EmployeeLogin")}}> Get Contact</button>
+                               </li>
                         </ul>
                       </>
 
@@ -559,6 +593,7 @@ function SearchCandidate() {
                         <span className={styles.span}>Experience : </span><br></br>
                         <span className={styles.span}> Current CTC :</span><br></br>
                         <span className={styles.span}>Expected CTC : </span><br></br>
+                        <span className={styles.span}>Contact : </span><br></br>
                       </div>
 
                       <div className={styles.RightTable}>
@@ -577,6 +612,8 @@ function SearchCandidate() {
                         <span className={styles.span}> {job.Experiance ? <span style={{ color: "blue" }}>{job.Experiance} </span> : <span style={{ color: "red" }}>Not updated</span>}   </span><br></br>
                         <span className={styles.span}>{job.currentCTC ? <span style={{ color: "blue" }}>{job.currentCTC} </span> : <span style={{ color: "red" }}>Not updated</span>} </span><br></br>
                         <span className={styles.span}> {job.ExpectedSalary ? <span style={{ color: "blue" }}>{job.ExpectedSalary} </span> : <span style={{ color: "red" }}>Not updated</span>}</span><br></br>
+                        <button className={styles.getContactMob}  onClick={()=>{navigate("/EmployeeLogin")}}> Get Contact</button>
+                      
                       </div>
 
                       {/* <img className={styles.MobileimageView} src={job.image?job.image : profileDp}/><br></br> */}

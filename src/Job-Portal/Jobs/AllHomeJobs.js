@@ -7,6 +7,8 @@ import { Puff } from 'react-loader-spinner'
 import location from "../img/icons8-location-20.png"
 import graduation from "../img/icons8-graduation-cap-40.png"
 import useScreenSize from '../SizeHook';
+import SwipeableViews from "react-swipeable-views";
+
 
 // Page Navigation Button
 {/*import First from "../img/icons8-previousF-24.png"
@@ -52,7 +54,7 @@ function Home() {
     { value: 'Flutter', label: 'Flutter' },
   ]
 
-  let JobLocationTags = ["Bangalore", "Hyderabad", "Chennai", "Mumbai", "Delhi"]
+  let JobLocationTags = ["Bangalore", "Hyderabad", "Chennai", "Mumbai"]
 
   let navigate = useNavigate()
 
@@ -310,20 +312,6 @@ function Home() {
       })
   }
 
-  async function getLocation(jobLocation) {
-    console.log(jobLocation)
-    await axios.get(`/jobpost/getjobLocation/${jobLocation}`)
-      .then((res) => {
-        let result = (res.data)
-        let sortedate = result.sort(function (a, b) {
-          return new Date(b.createdAt) - new Date(a.createdAt);
-        });
-        setJobs(sortedate)
-        // setPageLoader(false)
-      }).catch((err) => {
-        alert("some thing went wrong")
-      })
-  }
 
   async function getBothFiltered(jobTitle) {
 
@@ -387,6 +375,23 @@ function Home() {
       })
   }
 
+  async function getLocation(jobLocation) {
+    setFiltereredjobs(jobLocation)
+    setNoPageFilter(true)
+
+    await axios.get(`/jobpost/getjobLocation/${jobLocation}`)
+      .then((res) => {
+        let result = (res.data)
+        let sortedate = result.sort(function (a, b) {
+          return new Date(b.createdAt) - new Date(a.createdAt);
+        });
+        setJobs(sortedate)
+        // setPageLoader(false)
+      }).catch((err) => {
+        alert("some thing went wrong")
+      })
+  }
+
   return (
     <>
       {screenSize.width > 850 ?
@@ -418,7 +423,7 @@ function Home() {
             {
               JobLocationTags.map((location, i) => {
                 return (
-                  <label> <input className={styles.JobtitleFilter} type="radio" disabled={location=="Chennai" || location== "Hyderabad" || location=="Mumbai" || location=="Delhi"} name="filter" onClick={() => { getLocation(location.toLowerCase()) }} />{location}</label>
+                  <label> <input className={styles.JobtitleFilter} type="radio" disabled={location == "Chennai" || location == "Hyderabad" || location == "Mumbai" || location == "Delhi"} name="filter" onClick={() => { getLocation(location.toLowerCase()) }} />{location}</label>
 
                 )
               })
@@ -496,19 +501,19 @@ function Home() {
               <p style={{ fontWeight: 400, marginLeft: "10px" }}>showing {firstIndex + 1} to {lastIndex} latest jobs</p>
             }
             <div className={styles.navigationWrapper}>
-              <p style={{ display: "inline", margin: "5px" }} className={styles.navigation} onClick={firstPage}>
-                <i class='fas fa-step-backward' disabled={currentPage === 1}></i>
-              </p>
-              <p style={{ display: "inline", margin: "5px" }} className={styles.navigation} onClick={previous}>
+              <button disabled={currentPage === 1} style={{ display: "inline", margin: "5px" }} className={styles.navigation} onClick={firstPage}>
+                <i class='fas fa-step-backward' ></i>
+              </button>
+              <button disabled={currentPage === 1} style={{ display: "inline", margin: "5px" }} className={styles.navigation} onClick={previous}>
                 <i class='fas fa-caret-square-left'></i>
-              </p>
+              </button>
               <span>{currentPage}</span>
-              <p style={{ display: "inline", margin: "5px" }} className={styles.navigation} onClick={next}>
+              <button disabled={currentPage === npage} style={{ display: "inline", margin: "5px" }} className={styles.navigation} onClick={next}>
                 <i class='fas fa-caret-square-right'></i>
-              </p>
-              <p style={{ display: "inline", margin: "5px" }} className={styles.navigation} onClick={last}>
+              </button>
+              <button disabled={currentPage === npage} style={{ display: "inline", margin: "5px" }} className={styles.navigation} onClick={last}>
                 <i class='fas fa-step-forward'></i>
-              </p>
+              </button>
             </div>
           </div>
           {/* <button >Previous</button>
@@ -748,11 +753,94 @@ function Home() {
             <h4 style={{ marginLeft: "18.5%", marginTop: "10px" }}> {jobs.length} matching Result Found  </h4>
             : ""
           }
-
+          {/* ...................... All Filter for Mobile */}
 
           <div style={{ display: "flex", marginLeft: "18px" }}>
-            <div >
+          <SwipeableViews style={{width:"100%"}}>    
+    
+<div style={{display:"flex"}}>
+            <div className={styles.MobLocationFilterWrapper}>
+              <label> <input className={styles.MobJobtitleFilter} type="radio" name="filter" onClick={() => { getjobs() }} />All</label>
+              {
+                JobLocationTags.map((location, i) => {
+                  return (
+                    <label> <input className={styles.MobJobtitleFilter} type="radio" disabled={location == "Chennai" || location == "Hyderabad" || location == "Mumbai" || location == "Delhi"} name="filter" onClick={() => { getLocation(location.toLowerCase()) }} />{location}</label>
 
+                  )
+                })
+              }
+            </div>
+
+            <div className={styles.MobFilterJobTitleWrapper}>
+              <label><input className={styles.MobJobtitleFilter} type="radio" name="filter" onClick={() => { getjobs() }} />All</label>
+              {
+                jobTags.map((tags, i) => {
+                  return (
+                    <label><input className={styles.MobJobtitleFilter} type="radio" name="filter"
+                      onClick={() => { filterByJobTitle(tags.value) }} />{tags.value}</label>
+                  )
+                }).slice(0, 4)
+              }
+            </div>
+
+            <div className={styles.MobFilterJobTitleWrapper}>
+              {jobTags.map((tags, i) => {
+                return (
+                  <label><input className={styles.MobJobtitleFilter} type="radio" name="filter"
+                    onClick={() => { filterByJobTitle(tags.value) }} />{tags.value}</label>
+                )
+              }).slice(4, 9)
+              }
+            </div>
+            </div>
+              
+<div style={{display:"flex"}}>
+
+             <div className={styles.MobFilterJobTitleWrapper}>
+              {jobTags.map((tags, i) => {
+                return (
+                  <label><input className={styles.MobJobtitleFilter} type="radio" name="filter"
+                  onClick={() => { filterByJobTitle(tags.value) }} />{tags.value}</label>
+                  )
+                  }).slice(9, 14)
+                  }
+            </div>
+            <div className={styles.MobFilterJobTitleWrapper}>
+              {jobTags.map((tags, i) => {
+                return (
+                  <label><input className={styles.MobJobtitleFilter} type="radio" name="filter"
+                    onClick={() => { filterByJobTitle(tags.value) }} />{tags.value}</label>
+                )
+              }).slice(14, 19)
+              }
+            </div>
+            <div className={styles.MobFilterJobTitleWrapper}>
+              {jobTags.map((tags, i) => {
+                return (
+                  <label><input className={styles.MobJobtitleFilter} type="radio" name="filter"
+                    onClick={() => { filterByJobTitle(tags.value) }} />{tags.value}</label>
+                )
+              }).slice(19, 24)
+              }
+            </div>
+            <div className={styles.MobFilterJobTitleWrapper}>
+              {jobTags.map((tags, i) => {
+                return (
+                  <label><input className={styles.MobJobtitleFilter} type="radio" name="filter"
+                    onClick={() => { filterByJobTitle(tags.value) }} />{tags.value}</label>
+                )
+              }).slice(24, 29)
+              }
+            </div>
+            </div>
+
+            
+    </SwipeableViews>
+
+          </div>
+          {/* <div style={{ display: "flex", marginLeft: "18px" }}>
+          
+            <div >
               <label> <input type="radio" name="location" checked={jobLocation === 'AllL'} onClick={() => { getjobsAllLoc(); setjobLocation("AllL") }} />All</label><br></br>
               <label> <input type="radio" name="location" checked={jobLocation === 'banglore'} onClick={() => { getLocation("banglore"); setjobLocation('banglore') }} />Banglore</label><br></br>
               <label> <input type="radio" name="location" disabled checked={jobLocation === 'chennai'} onClick={() => { getLocation("chennai"); setjobLocation('chennai') }} />Chennai</label><br></br>
@@ -770,7 +858,7 @@ function Home() {
               <label><input type="radio" name="jobtitle" onClick={() => { { jobLocation !== "AllL" ? getBothFiltered('back') : JobtitleFilter('back') } }} />Backend developer</label> <br></br>
               <label><input type="radio" name="jobtitle" onClick={() => { { jobLocation !== "AllL" ? getBothFiltered('python') : JobtitleFilter('python') } }} />Python Developer</label>
             </div>
-          </div>
+          </div> */}
 
 
           {PageLoader ?
