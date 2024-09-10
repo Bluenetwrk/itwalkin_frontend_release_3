@@ -359,8 +359,7 @@ border-left: none;
 .MobFilterJobTitleWrapper{
     display: flex;
     flex-direction: column;
-    margin-left: 17px;
-
+    margin-left: 12px;
 }
 /* .MobFilterJobTitleWrapper{
     display: flex;
