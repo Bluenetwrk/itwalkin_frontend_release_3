@@ -64,7 +64,7 @@ function Nav(props) {
 
   const navLinkStyles = ({ isActive }) => {
     return {
-      color: isActive ? "red" : "",
+      color: isActive ? "white" : "",
       textDecoration: isActive ? "underline" : ""
     }
   }
@@ -216,9 +216,11 @@ function Nav(props) {
                 <>
                   <div className={Styles.fullnavewrapper}>
                     <div className={Styles.logoWrapper}>
+                    
                       <NavLink to="/"> <img className={Styles.logo} src={logo} /> </NavLink>
                     </div>
                     <div className={Styles.linkWrapper}>
+                   
                       <NavLink to="/" className={Styles.Hlink} style={navLinkStyles}><i style={{padding:"5px"}} class="fa-solid fa-house"></i>Home</NavLink>
                       {/* <NavLink to="/AboutUs" className={`${Styles.Hlink} ${Styles.Aboutus}`} style={navLinkStyles} >About Us</NavLink>
                       <NavLink to="/Services" className={Styles.Hlink} style={navLinkStyles}>Services</NavLink>

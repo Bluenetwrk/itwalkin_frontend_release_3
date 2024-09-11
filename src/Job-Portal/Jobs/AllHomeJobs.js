@@ -7,7 +7,6 @@ import { Puff } from 'react-loader-spinner'
 import location from "../img/icons8-location-20.png"
 import graduation from "../img/icons8-graduation-cap-40.png"
 import useScreenSize from '../SizeHook';
-import SwipeableViews from "react-swipeable-views";
 
 
 // Page Navigation Button
@@ -763,7 +762,7 @@ function Home() {
           }
           {/* ...................... All Filter for Mobile */}
 
-          <div style={{ display: "flex", marginLeft: "18px" }}>
+          {/* <div style={{ display: "flex", marginLeft: "18px" }}>
           <SwipeableViews style={{width:"100%"}}>    
     
 <div style={{display:"flex"}}>
@@ -840,12 +839,9 @@ function Home() {
               }).slice(24, 29)
               }
             </div>
-            </div>
-
-            
+            </div>            
     </SwipeableViews>
-
-          </div>
+          </div> */}
           {/* <div style={{ display: "flex", marginLeft: "18px" }}>
           
             <div >

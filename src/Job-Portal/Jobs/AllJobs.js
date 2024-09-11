@@ -6,7 +6,6 @@ import { Link, useNavigate, BrowserRouter, Routes, Route, useLocation } from "re
 import { TailSpin, Puff } from "react-loader-spinner"
 import location from "../img/icons8-location-20.png"
 import graduation from "../img/icons8-graduation-cap-40.png"
-import SwipeableViews from "react-swipeable-views";
 
 import useScreenSize from '../SizeHook';
 import socketIO from 'socket.io-client';
@@ -781,7 +780,7 @@ async function filterByJobTitle(key){
 
   {/* ...................... All Filter for Mobile */}
 
-  <div style={{ display: "flex", marginLeft: "18px" }}>
+  {/* <div style={{ display: "flex", marginLeft: "18px" }}>
           <SwipeableViews style={{width:"100%"}}>    
     
 <div style={{display:"flex"}}>
@@ -858,12 +857,9 @@ async function filterByJobTitle(key){
               }).slice(24, 29)
               }
             </div>
-            </div>
-
-            
+            </div>            
     </SwipeableViews>
-
-          </div>
+          </div> */}
 
 
           {PageLoader ?
