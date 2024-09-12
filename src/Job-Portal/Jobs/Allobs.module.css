@@ -87,12 +87,13 @@
     cursor: pointer;
     color:black;
     font-weight: 600;
-    font-size: small;
+    font-size: smaller;
     padding: 4px 7px ;
     align-content: center;
     text-wrap: nowrap ;
     background-color:white;
     border-radius: 3px;
+
 }
 .JobtitleFilter:hover{
     
@@ -264,7 +265,7 @@
     border : 1px solid rgb(215, 223, 226);
     text-align: center;
     overflow-wrap:break-word;
-    font-size:medium;
+    font-size:small;
 }
 .CompanyName{
     width:12.5%;
