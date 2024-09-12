@@ -55,6 +55,8 @@ function Home() {
     { value: 'MySql', label: 'MySql' },
     { value: 'Flutter', label: 'Flutter' },
     { value: 'React Native', label: 'React Native' },
+    { value: 'HTML-CSS', label: 'HTML-CSS' },
+    { value: 'MongoDB', label: 'MongoDB' },
   ]
 
   let JobLocationTags = ["Bangalore", "Hyderabad", "Chennai", "Mumbai"]
@@ -435,28 +437,8 @@ function Home() {
               })
             }
           </div><br></br>
- <Carousel
-//  customRightArrow={<CustomRightArrow />}
-        responsive={responsive}
-        // showDots={true}
-        swipeable={false}
-        draggable={false}
-        autoPlay={false}
-        // renderDotsOutside={true}
-        autoPlaySpeed={2000}  //defalult is 3 sec
-        infinite={true} 
-        slidesToSlide={8}
-        centerMode={true}
-        keyBoardControl={true}
-        // customTransition="all .9"
-        // dotListClass="custom-dot-list-style"
-        // itemClass="carousel-item-padding-40-px"
-        // containerClass="carousel-container"
-        className={styles.JobtitleFilterWrapper}
-        arrows={true} //  same as removeArrowOnDeviceType
-        // removeArrowOnDeviceType={["tablet", "mobile", "desktop"]}        
-        >
-            {/* <div className={styles.JobtitleFilterWrapper}> */}
+
+            <div className={styles.JobtitleFilterWrapper}>
               {/* <buton className={Active === "All" ? styles.active : styles.JobtitleFilter} onClick={() => 
                 { getjobs(); setActive("All") }}>All</buton> */}
               {
@@ -467,50 +449,9 @@ function Home() {
                   )
                 })
               }
-               </Carousel>
-                       
-          {/* <br></br> */}
+          </div>
 
-          {/* <div className={styles.AllHeadingSortWrapper}>
-
-            <p className={`${styles.FilterHeading} ${styles.JobSorting}`} onClick={() => { setshowJobs((prev) => !prev) }}  ><b>Job Posted Date <i className={`${styles.arrow} ${styles.down}`}></i></b></p>
-
-            {showJobs ?
-              <>
-                <div className={`${styles.JobradioWrapper} ${styles.RadioWrapper}`}  >
-
-                  <label ><input className={styles.radio} type="radio" name="Job" onClick={sortbyOldjobs} />Show old</label><br></br>
-                  <label ><input className={styles.radio} type="radio" name="Job" onClick={sortbyNewjobs} />Show latest</label>
-
-                </div>
-              </>
-              : ""
-            }
-            <p className={`${styles.FilterHeading} ${styles.ExpSorting}`} onClick={() => { setshowExperiance((prev) => !prev) }}><b>Experience Level <i className={`${styles.arrow} ${styles.down}`}></i></b></p>
-
-            {showExperiance ?
-              <>
-
-                <div className={`${styles.PackageradioWrapper} ${styles.RadioWrapper}`}>
-
-                  <label><input className={styles.radio} type="radio" name="Package" onClick={EdescendingOrder} />High-Low</label><br></br>
-                  <label><input className={styles.radio} type="radio" name="Package" onClick={EascendingOrder} />Low-High</label>
-                </div>
-              </>
-              : ""
-            }
-            <p className={`${styles.FilterHeading} ${styles.PackageSorting}`} onClick={() => { setshowPackage((prev) => !prev) }}><b>Package Level <i className={`${styles.arrow} ${styles.down}`}></i></b></p>
-
-            {showPackage ?
-              <>
-                <div className={`${styles.ExperianceradioWrapper} ${styles.RadioWrapper}`}>
-                  <label><input className={styles.radio} type="radio" name="Experiance" onClick={SdescendingOrder} />High-Low</label><br></br>
-                  <label><input className={styles.radio} type="radio" name="Experiance" onClick={SascendingOrder} />Low-High</label>
-                </div>
-              </>
-              : ""
-            }
-          </div> */}
+                    
           <div style={{ display: "flex", justifyContent: "space-between" }}>
             {nopageFilter ?
               <p style={{ fontWeight: 400, marginLeft: "10px" }}>Displaying <span style={{ color: "blue" }}>{Filtereredjobs}</span> from All Jobs</p>
@@ -645,7 +586,7 @@ function Home() {
                           }
                         )}
                       </li>
-                      <li className={`${styles.li} ${styles.Location}`}>{items.jobLocation.toUpperCase()}</li>
+                      <li className={`${styles.li} ${styles.Location}`}>{items.jobLocation[0].toUpperCase()+items.jobLocation.slice(1)}</li>
                       <li className={`${styles.li} ${styles.Package}`}>{items.salaryRange}</li>
                       <li className={`${styles.li} ${styles.experiance}`}>{items.experiance}</li>
                       <li className={`${styles.li} ${styles.qualification}`}>{items.qualification}</li>
@@ -729,7 +670,7 @@ function Home() {
                           }
                         )}
                       </li>
-                      <li className={`${styles.li} ${styles.Location}`}>{items.jobLocation.toUpperCase()}</li>
+                      <li className={`${styles.li} ${styles.Location}`}>{items.jobLocation[0].toUpperCase()+items.jobLocation.slice(1)}</li>
                       <li className={`${styles.li} ${styles.Package}`}>{items.salaryRange}</li>
                       <li className={`${styles.li} ${styles.experiance}`}>{items.experiance}</li>
                       <li className={`${styles.li} ${styles.qualification}`}>{items.qualification}</li>

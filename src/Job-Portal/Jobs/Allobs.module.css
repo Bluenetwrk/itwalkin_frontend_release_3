@@ -76,19 +76,14 @@
 }
 /* ...........................for Filter..................... */
 .JobtitleFilterWrapper{
-    display: flex;
     background-color: rgb(40, 4, 99);
-
-    flex-wrap: wrap;
-    /* width:99%; */
-    margin-left: -35px;
-    /* margin-right: -10px; */
-    height: 40px;
+    margin-left: 3px;
+    padding: 10px;
     display: flex;
-    /* justify-content: space-evenly; */
+    flex-wrap: wrap;
 }
 .JobtitleFilter{
-    /* margin-left: 50px; */
+    margin-left: 5px;
     cursor: pointer;
     color:black;
     font-weight: 600;
@@ -100,31 +95,31 @@
     border-radius: 3px;
 }
 .JobtitleFilter:hover{
+    
     background-color:blue;
-    transition: all 0.7s;
-    color:white;
-    margin-left: 0px;
+    margin-left: 5px;
     cursor: pointer;
+    color:white;
+
     font-weight: 600;
     font-size: small;
     padding: 4px 7px ;
     align-content: center;
     text-wrap: nowrap ;
-    border-radius: 3px;  
+    border-radius: 3px;
 }
 
 .active{
     background-color:blue;
-    transition: all 0.4s;
     color:white;
-    margin-left: 0px;
+    margin-left: 5px;
     cursor: pointer;
     font-weight: 600;
     font-size: small;
     padding: 4px 7px ;
     align-content: center;
     text-wrap: nowrap ;
-    border-radius: 3px; 
+    border-radius: 3px;
 }
 
 

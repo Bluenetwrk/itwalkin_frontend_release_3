@@ -102,10 +102,97 @@ const screenSize = useScreenSize();
     })
   }
 
+  function sortbyOldjobs() {
+    let newjob = [...MyAppliedjob]
+    let oldjobSort = newjob.sort(function (a, b) {
+      return new Date(a.createdAt) - new Date(b.createdAt);
+    })
+    setMyAppliedjob(oldjobSort)
+
+  }
+  function sortbyNewjobs() {
+    let newjob = [...MyAppliedjob]
+    let newjobSort = newjob.sort(function (a, b) {
+      return new Date(b.createdAt) - new Date(a.createdAt);
+    })
+    setMyAppliedjob(newjobSort)
+
+  }
+
+  function SdescendingOrder() {
+    let newJobs = [...MyAppliedjob]
+    // const desendSort = newJobs.sort(function (a, b) {
+    //   return (
+    //     b.salaryRange - a.salaryRange
+    //   )
+    // })
+    const collator = new Intl.Collator(undefined, {
+      numeric: true,
+      sensitivity: 'base'
+    });
+    const sorted = newJobs.sort((a, b) => {
+      return collator.compare(b.salaryRange, a.salaryRange)
+    })
+    setMyAppliedjob(sorted)
+  }
+
+  function SascendingOrder() {
+    let newJObs = [...MyAppliedjob]
+    // const AscendSort = newJObs.sort(function (a, b) {
+    //   return (
+    //     a.salaryRange - b.salaryRange
+    //   )
+    // })
+    const collator = new Intl.Collator(undefined, {
+      numeric: true,
+      sensitivity: 'base'
+    });
+    const sorted = newJObs.sort((a, b) => {
+      return collator.compare(a.salaryRange, b.salaryRange)
+    })
+    setMyAppliedjob(sorted)
+  }
+
+  function EdescendingOrder() {
+    let newjob = [...MyAppliedjob]
+    // const descend = newjob.sort(function (a, b) {
+    //   return (
+    //     b.experiance - a.experiance
+    //   )
+    // })
+    const collator = new Intl.Collator(undefined, {
+      numeric: true,
+      sensitivity: 'base'
+    });
+    const sorted = newjob.sort((a, b) => {
+      return collator.compare(b.experiance, a.experiance)
+    })
+    setMyAppliedjob(sorted)
+
+  }
+
+  function EascendingOrder() {
+    let newjob = [...MyAppliedjob]
+    // const Ascend = newjob.sort(function (a, b) {
+    //   return (
+    //     a.experiance - b.experiance
+    //   )
+    // })
+    // setMyAppliedjob(Ascend)
+    const collator = new Intl.Collator(undefined, {
+      numeric: true,
+      sensitivity: 'base'
+    });
+    const sorted = newjob.sort((a, b) => {
+      return collator.compare(a.experiance, b.experiance)
+    })
+    setMyAppliedjob(sorted)
+  }
+
   return (
     <>
-      <h3 className={styles.h3}>My applied Jobs</h3>
-      <h3 className={styles.h3}>you have total {MyAppliedjob.length} applied jobs</h3>
+      <p className={styles.h3} style={{textAlign:"center"}}><b>My applied Jobs</b></p>
+      <p className={styles.h3}><b>you have total {MyAppliedjob.length} applied jobs</b></p>
       {screenSize.width>850?
       <div className={styles.Uiwarpper}>
         <ul className={styles.ul}>
@@ -114,12 +201,27 @@ const screenSize = useScreenSize();
           <li className={`${styles.li} ${styles.JobType}`}><b>JobType</b></li>
 
           <li className={`${styles.li} ${styles.liDescription}`}><b>Job description</b></li>
-          <li className={`${styles.li} ${styles.Pdate}`}><b>Posted Date</b></li>
+          <li className={`${styles.li} ${styles.Pdate}`}><b>Posted Date</b>
+          <p style={{display:"inline", marginLeft:"6px"}} >
+                   <i onClick={sortbyNewjobs} className={`${styles.arrow} ${styles.up}`}> </i>
+                  <i onClick={sortbyOldjobs} className={`${styles.arrow} ${styles.down}`}></i>
+                  </p >
+          </li>
 
           <li className={`${styles.li} ${styles.Location}`}><b>Location</b></li>
-          <li className={`${styles.li} ${styles.Package}`}><b>Salary /Year </b></li>
-          <li className={`${styles.li} ${styles.experiance}`}><b>Exp </b></li>
-          <li className={`${styles.li} ${styles.Qualif}`}><b>Qualif </b></li>
+          <li className={`${styles.li} ${styles.Package}`}><b>CTC </b>
+          <p style={{display:"inline", marginLeft:"10px"}}>
+                <i onClick={SdescendingOrder} className={`${styles.arrow} ${styles.up}`}> </i>
+                <i onClick={SascendingOrder} className={`${styles.arrow} ${styles.down}`}></i>
+                </p>
+          </li>
+          <li className={`${styles.li} ${styles.experiance}`}><b>Experience </b>
+          <p style={{display:"inline", marginLeft:"10px"}}>
+                <i onClick={EdescendingOrder} className={`${styles.arrow} ${styles.up}`}> </i>
+                <i onClick={EascendingOrder} className={`${styles.arrow} ${styles.down}`}></i>
+                </p>
+          </li>
+          <li className={`${styles.li} ${styles.Qualif}`}><b>Qualification </b></li>
 
           <li className={`${styles.li} ${styles.Skills}`}><b>Skills Required</b></li>
           <li className={`${styles.li} ${styles.DeleteAction}`}><b>Action</b></li>
@@ -136,9 +238,11 @@ const screenSize = useScreenSize();
               return (
 
                 <ul className={styles.ul} key={i}>
-                  <li style={{cursor:"pointer", textDecoration:"underline"}} className={styles.li} onClick={() => { navigate(`/CheckEmpHalfProfile/${items.empId}`) }} >{items.Logo ?
+                  <li style={{cursor:"pointer", textDecoration:"underline"}} className={styles.li} onClick={() => { navigate(`/CheckEmpHalfProfile/${items.empId}`) }} >
+                    {/* {items.Logo ?
                     < img style={{ width: "40%", height: "40px" }} src={items.Logo} />
-                    : ""}<br></br>{items.companyName}</li>
+                    : ""}<br></br> */}
+                    {items.companyName}</li>
 
                   <li className={`${styles.li} ${styles.Jtitle}`}>{items.jobTitle.toUpperCase()}</li>
                   <li className={`${styles.li} ${styles.JobType}`}>{items.jobtype}</li>
@@ -150,28 +254,7 @@ const screenSize = useScreenSize();
                     items.jobDescription.map((descrip, di) => {
                       return (
                         <>
-                          {
-                            // descrip.type == "unordered-list-item" ?
-            
-                            //   <ul style={{ listStyleType: "disc" }}>
-                            //     <li>
-                            //       {descrip.text}
-            
-                            //     </li>
-                            //   </ul>            
-                            //   : descrip.type == "ordered-list-item" ?
-            
-                            //     <ol >
-                            //       {/* <li> */}
-                            //         {descrip.text}
-            
-                            //       {/* </li> */}
-                            //     </ol>
-                            //     :
-                            //     <>
-                            //       {descrip.text}
-                            //       <br></br>
-                            //     </>   
+                          {   
                             descrip.text.slice(0,50)         
                           }
                         </>
@@ -192,7 +275,8 @@ const screenSize = useScreenSize();
                       }
                     )}
                   </li>
-                  <li className={`${styles.li} ${styles.Location}`}>{items.jobLocation.toUpperCase()}</li>
+                  <li className={`${styles.li} ${styles.Location}`}>{items.jobLocation[0].toUpperCase() +
+        items.jobLocation.slice(1)}</li>
                   <li className={`${styles.li} ${styles.Package}`}>{items.salaryRange}</li>
                   <li className={`${styles.li} ${styles.experiance}`}>{items.experiance}</li>
                   <li className={`${styles.li} ${styles.Qualif}`}>{items.qualification} </li>

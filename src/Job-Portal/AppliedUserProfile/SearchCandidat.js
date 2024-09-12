@@ -61,7 +61,7 @@ function SearchCandidate() {
   ]
 
   const Location = ['Bangalore', 'Chennai',
-    'Hyderabad', 'Delhi', 'Mumbai']
+    'Hyderabad', 'Mumbai']
 
   // let jobSeekerId = JSON.parse(localStorage.getItem("StudId"))
 

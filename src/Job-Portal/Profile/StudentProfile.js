@@ -48,6 +48,10 @@ let navigate = useNavigate()
         getProfile()
     }, [])
 
+    function updateprofile() {
+        navigate("/Update-Profile")
+      }
+
     return (
         <>
         <div style={{display:"flex"}}>
@@ -68,10 +72,10 @@ profileData.map((item, i) => {
         <img className={styles.imageV} src={item.image?item.image : profileDp}/>
         
         </div>
-    )
-
-})
+    )})
     }
+    <button className={styles.updateProfile} onClick={updateprofile}>Update Profile</button>
+
             {screenSize.width>850?
            
 <div className={styles.uiwrapper}>

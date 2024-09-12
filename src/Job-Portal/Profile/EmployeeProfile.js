@@ -44,6 +44,9 @@ let navigate = useNavigate()
     useEffect(() => {
         getProfile()
     }, [])
+    function updateEmployeeProfile() {
+        navigate("/UpdateProfile")
+      }
 
 
     return (
@@ -55,19 +58,19 @@ let navigate = useNavigate()
              width:"28px"}} onClick={()=>{navigate(-1)}}  src={Arrowimage} />
         <h3 style={{color:"rgb(40, 4, 99)", marginLeft:"40%"}}>My Profile</h3>
         </div>
-
          {
-
 profileData.map((item, i) => {
     return (
-        <div key={i}>
-        <img className={styles.EmpImage} src={item.image?item.image : Companylogo}/>
+        <div key={i} style={{}}>
+        <img style={{}} className={styles.EmpImage} src={item.image?item.image : Companylogo}/>
         
         </div>
     )
 
 })
     }
+    <button className={styles.updateProfile} onClick={updateEmployeeProfile}>Update Profile</button>
+
             {screenSize.width>850?
            
 <div className={styles.uiwrapper}>

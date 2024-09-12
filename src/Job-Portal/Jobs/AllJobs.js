@@ -549,8 +549,10 @@ async function filterByJobTitle(key){
               <li style={{backgroundColor:" rgb(40, 4, 99)"}} className={`${styles.li} ${styles.JobType}`}>JobType</li>
               {/* <li className={`${styles.li} ${styles.HliDescription}`}><b>Job description</b></li> */}
               <li style={{backgroundColor:" rgb(40, 4, 99)"}} className={`${styles.li} ${styles.date}`}>Posted Date
-                <p style={{display:"inline", marginLeft:"6px"}} > <i onClick={sortbyNewjobs} className={`${styles.arrow} ${styles.up}`}> </i>
-                  <i onClick={sortbyOldjobs} className={`${styles.arrow} ${styles.down}`}></i></p >
+                <p style={{display:"inline", marginLeft:"6px"}} >
+                   <i onClick={sortbyNewjobs} className={`${styles.arrow} ${styles.up}`}> </i>
+                  <i onClick={sortbyOldjobs} className={`${styles.arrow} ${styles.down}`}></i>
+                  </p >
               </li>
 
               <li style={{backgroundColor:" rgb(40, 4, 99)"}} className={`${styles.li} ${styles.Location}`}>Location</li>
@@ -646,7 +648,8 @@ async function filterByJobTitle(key){
                           }
                         )}
                       </li>
-                      <li className={`${styles.li} ${styles.Location}`}>{items.jobLocation.toUpperCase()}</li>
+                      <li className={`${styles.li} ${styles.Location}`}>
+                        {items.jobLocation[0].toUpperCase()+items.jobLocation.slice(1)}</li>
                       <li className={`${styles.li} ${styles.Package}`}>{items.salaryRange}</li>
                       <li className={`${styles.li} ${styles.experiance}`}>{items.experiance}</li>
                       <li className={`${styles.li} ${styles.qualification}`}>{items.qualification}</li>
@@ -748,7 +751,7 @@ async function filterByJobTitle(key){
                           }
                         )}
                       </li>
-                      <li className={`${styles.li} ${styles.Location}`}>{items.jobLocation.toUpperCase()}</li>
+                      <li className={`${styles.li} ${styles.Location}`}>{items.jobLocation[0].toUpperCase()+items.jobLocation.slice(1)}</li>
                       <li className={`${styles.li} ${styles.Package}`}>{items.salaryRange}</li>
                       <li className={`${styles.li} ${styles.experiance}`}>{items.experiance}</li>
                       <li className={`${styles.li} ${styles.qualification}`}>{items.qualification}</li>

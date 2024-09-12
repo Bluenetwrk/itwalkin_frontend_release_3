@@ -123,9 +123,7 @@ function Nav(props) {
               {showprofile ?
                 <div className={Styles.JobSeekerdropdownwrapper} ref={menuRef} >
                   <p className={Styles.text} ref={menuRef} onClick={myprofile}>My profile</p>
-
-                  <p className={Styles.text} ref={menuRef} onClick={updateprofile}>Update profile</p>
-
+                  {/* <p className={Styles.text} ref={menuRef} onClick={updateprofile}>Update profile</p> */}
                   <p className={Styles.text} ref={menuRef} onClick={MyJobApplied}>Jobs Applied</p>
                   <p className={Styles.text} ref={menuRef} onClick={StudlogOut}>Logout</p>
 
@@ -159,7 +157,7 @@ function Nav(props) {
                 {showprofile ?
                   <div className={Styles.Empdropdownwrapper} ref={menuRef} >
                     <p className={Styles.text} ref={menuRef} onClick={EmployeeProfile} >My profile</p>
-                    <p className={Styles.text} ref={menuRef} onClick={updateEmployeeProfile}>Update profile</p>
+                    {/* <p className={Styles.text} ref={menuRef} onClick={updateEmployeeProfile}>Update profile</p> */}
                     <p className={Styles.text} ref={menuRef} onClick={mypostedjob}>My posted Jobs</p>
 
 
@@ -226,7 +224,7 @@ function Nav(props) {
                       <NavLink to="/Services" className={Styles.Hlink} style={navLinkStyles}>Services</NavLink>
                       <NavLink to="/Contact" className={Styles.Hlink} style={navLinkStyles}>Contact</NavLink> */}
                       <div className={`${Styles.Hlink} ${Styles.Loginlinkwrapper}`}>
-                        <NavLink to="/Search-Candidate-Home" className={`${Styles.Loginlink} ${Styles.EmpLogin}`} style={navLinkStyles}>Employer </NavLink>
+                      <NavLink to="/Search-Candidate-Home" className={`${Styles.Loginlink} ${Styles.EmpLogin}`} style={navLinkStyles}>Employer </NavLink>
                         <img className={`${Styles.Icon} ${Styles.HomeprofileIcon}`} src={loginuser} ref={imgRef} onClick={() => setShowprofile((prev) => !prev)} />
                         {/* <NavLink to="/JobSeekerLogin" className={`${Styles.Loginlink} ${Styles.StuLogin}`} style={navLinkStyles}>Job Seeker Login</NavLink> */}
 
@@ -254,7 +252,7 @@ function Nav(props) {
                 </div>
                 <div className={Styles.linkWrapper}>
 
-                  <NavLink to="/alljobs" className={`${Styles.Moblink} ${Styles.AlllJobs}`} style={navLinkStyles} style={{ marginLeft: "10px" }}>All Jobs </NavLink>
+                  <NavLink to="/alljobs" className={`${Styles.Moblink} ${Styles.AlllJobs}`} style={navLinkStyles}>All Jobs </NavLink>
 
                   <div className={`${Styles.link} ${Styles.MobileIconeWrapper}`}>
 
