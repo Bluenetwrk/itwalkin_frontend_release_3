@@ -8,6 +8,25 @@ import useScreenSize from '../SizeHook';
 import profileDp from "../img/user_3177440.png"
 import Arrowimage from '../img/icons8-arrow-left-48.png'
 
+import Carousel from 'react-multi-carousel';
+import 'react-multi-carousel/lib/styles.css';
+const responsive = {
+
+  desktop: {
+    breakpoint: { max: 3000, min: 1024 },
+    items: 14
+  },
+  tablet: {
+    breakpoint: { max: 1024, min: 464 },
+    items: 8
+  },
+  mobile: {
+    breakpoint: { max: 464, min: 0 },
+    items: 1
+  }
+};
+
+
 
 
 // import { useSnapCarousel } from 'react-snap-carousel';
@@ -29,11 +48,11 @@ function SearchCandidate() {
   const [NotFound, setNotFound] = useState("")
   const [Result, setResult] = useState(false)
   const screenSize = useScreenSize();
-
+  const [Active, setActive] = useState("")
   const [jobLocation, setjobLocation] = useState("AllL")
 
   const Location = ['Bangalore', 'Chennai',
-    'Hyderabad', 'Delhi', 'Mumbai']
+    'Hyderabad', 'Mumbai']
 
 
   let jobTags = [
@@ -157,6 +176,7 @@ function SearchCandidate() {
   async function filterByJobTitle(key) {
     setNoPageFilter(true)
     setFiltereredjobs(key)
+    setActive(key)
     await axios.get(`/StudentProfile/getSkillTags/${key}`)
       .then((res) => {
         let result = (res.data)
@@ -335,7 +355,7 @@ function SearchCandidate() {
     {screenSize.width > 850 ?
         <>
           <div className={styles.searchBothForNavWrapper}>
-            <input className={styles.inputboxsearchNav} type="text" placeholder='Search for a Job / Skills / Location / Experiance' onChange={(e) => { search(e) }} />
+            <input className={styles.inputboxsearchNav} type="text" placeholder='Search Job Seekers' onChange={(e) => { search(e) }} />
 
             <i style={{ color: "rgb(40, 4, 99)", fontSize: "18px", paddingLeft: "8px", cursor: "pointer" }} onClick={() => { searchIcon(searchKey) }}
               class="fa fa-search" ></i>
@@ -352,31 +372,55 @@ function SearchCandidate() {
       {screenSize.width > 850 ?
         <>
         <div style={{marginTop:"30px"}}></div>
-          <div className={styles.FilterWrapper}>
-            <label><input className={styles.JobtitleFilter} type="radio" name="filter" onClick={() => { getAllJobSeekers() }} />All</label>
+          
+          <div className={styles.LocationFilterWrapper}>
+             <button className={`${styles.JobLocationFilter}`}  name="filter" onClick={() =>
+               { getAllJobSeekers(); setActive("All") }} >All</button>
             {
-
               Location.map((location, i) => {
                 return (
-                  <label><input className={styles.JobtitleFilter} type="radio" name="filter"
-                  disabled={location=="Chennai" || location== "Hyderabad" || location=="Mumbai" || location=="Delhi"}  onClick={() => { getLocation(location) }} />{location}</label>
+                  <button className={location == "Chennai" || location == "Hyderabad" || location == "Mumbai" ?
+                  styles.disable: Active ==="Bangalore"?  styles.locationActive :styles.JobLocationFilter} disabled={location == "Chennai" || 
+                  location == "Hyderabad" || location == "Mumbai" || location == "Delhi"} name="filter" onClick={() => { getLocation(location); setActive("Bangalore") }} >{location}</button>
+
                 )
               })
             }
           </div><br></br>
+          <Carousel
+//  customRightArrow={<CustomRightArrow />}
+        responsive={responsive}
+        // showDots={true}
+        swipeable={false}
+        draggable={false}
+        autoPlay={false}
+        // renderDotsOutside={true}
+        autoPlaySpeed={2000}  //defalult is 3 sec
+        infinite={true} 
+        slidesToSlide={8}
+        centerMode={true}
+        keyBoardControl={true}
+        // customTransition="all .9"
+        // dotListClass="custom-dot-list-style"
+        // itemClass="carousel-item-padding-40-px"
+        // containerClass="carousel-container"
+        className={styles.JobtitleFilterWrapper}
+        arrows={true} //  same as removeArrowOnDeviceType
+        // removeArrowOnDeviceType={["tablet", "mobile", "desktop"]}        
+        >
+            {/* <div className={styles.JobtitleFilterWrapper}> */}
+              {/* <buton className={Active === "All" ? styles.active : styles.JobtitleFilter} onClick={() => 
+                { getjobs(); setActive("All") }}>All</buton> */}
+              {
+                jobTags.map((tags, i) => {
+                  return (
+                    <buton className={Active === tags.value ? styles.active : styles.JobtitleFilter} onClick={() => 
+                      { filterByJobTitle(tags.value) }}>{tags.value} </buton>
+                  )
+                })
+              }
 
-          <div className={styles.FilterWrapper}>
-            <label><input className={styles.JobtitleFilter} type="radio" name="filter" onClick={() => { getAllJobSeekers() }} />All</label>
-            {
-              jobTags.map((tags, i) => {
-                return (
-                  <label><input className={styles.JobtitleFilter} type="radio" name="filter"
-                    onClick={() => { filterByJobTitle(tags.value) }} />{tags.value}</label>
-                )
-              }).slice(0, 12)
-            }
-          </div>
-          <br></br>
+               </Carousel>
 
           <div className={styles.FilterWrapper}>
             {jobTags.map((tags, i) => {
@@ -543,7 +587,7 @@ function SearchCandidate() {
                               }
                             )}
                           </li>
-                          <li style={{cursor:"pointer"}}>
+                          <li  className={`${styles.li} ${styles.currentCTC}`}>
                             <button className={styles.getContact}  onClick={()=>{navigate("/EmployeeLogin")}}> Get Contact</button>
 
                            </li>
@@ -584,11 +628,19 @@ function SearchCandidate() {
               return (
                 <>
                   <div className={styles.JobCard} key={i}>
-                    <div style={{ display: "flex" }}>
-
+                  <span className={styles.span} style={{display:"inline", marginLeft:"8px"}}>Last Active : </span>
+                  <p style={{display:"inline", marginLeft:"80px", fontSize:"xx-smaller"}}>{new Date(job.updatedAt).toLocaleString(
+                          "en-US",
+                          {
+                            month: "short",
+                            day: "2-digit",
+                            year: "numeric",
+                          }
+                        )}</p>
+                    <div style={{ display: "flex", marginTop:"-20px" }}>
                       <div className={styles.LeftTable}>
                         <span className={styles.span}>Name :  </span> <br></br>
-                        <span className={styles.span}><u>Last Active :  </u></span> <br></br>
+                        {/* <span className={styles.span}><u>Last Active :  </u></span> <br></br> */}
 
                         <span className={styles.span}>Age :</span><br></br>
                         <span className={styles.span}> Notice Period :</span><br></br>
@@ -601,14 +653,14 @@ function SearchCandidate() {
 
                       <div className={styles.RightTable}>
                         <span className={styles.span}><s>Locked</s></span><br></br>
-                        <span className={styles.span}> <u>{new Date(job.updatedAt).toLocaleString(
+                        {/* <span className={styles.span}> <u>{new Date(job.updatedAt).toLocaleString(
                           "en-US",
                           {
                             month: "short",
                             day: "2-digit",
                             year: "numeric",
                           }
-                        )}</u></span><br></br>
+                        )}</u></span><br></br> */}
                         <span className={styles.span}>{job.age ? <span style={{ color: "blue" }}>{job.age} </span> : <span style={{ color: "red" }}>Not updated</span>}</span><br></br>
                         <span className={styles.span}> {job.NoticePeriod ? <span style={{ color: "blue" }}>{job.NoticePeriod} </span> : <span style={{ color: "red" }}>Not updated</span>}</span><br></br>
                         <span className={styles.span}> {job.Qualification ? <span style={{ color: "blue" }}>{job.Qualification} </span> : <span style={{ color: "red" }}>Not updated</span>}</span><br></br>
@@ -619,7 +671,7 @@ function SearchCandidate() {
                       
                       </div>
 
-                      {/* <img className={styles.MobileimageView} src={job.image?job.image : profileDp}/><br></br> */}
+                      <img className={styles.MobileimageView} src={job.image?job.image : profileDp}/><br></br>
 
                     </div>
 

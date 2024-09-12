@@ -9,6 +9,24 @@ import profileDp from "../img/user_3177440.png"
 import Arrowimage from '../img/icons8-arrow-left-48.png'
 
 
+import Carousel from 'react-multi-carousel';
+import 'react-multi-carousel/lib/styles.css';
+const responsive = {
+
+  desktop: {
+    breakpoint: { max: 3000, min: 1024 },
+    items: 14
+  },
+  tablet: {
+    breakpoint: { max: 1024, min: 464 },
+    items: 8
+  },
+  mobile: {
+    breakpoint: { max: 464, min: 0 },
+    items: 1
+  }
+};
+
 
 // import { useSnapCarousel } from 'react-snap-carousel';
 // import AutoplaySlider from 'react-awesome-slider'
@@ -27,6 +45,8 @@ function SearchCandidate() {
   const [NotFound, setNotFound] = useState("")
   const [Result, setResult] = useState(false)
   const screenSize = useScreenSize();
+  const [Active, setActive] = useState("")
+
   let jobTags = [
     { value: 'java', label: 'java' }, { value: 'Mern Stack', label: 'Mern Stack' }, { value: 'ReactJs', label: 'ReactJs' },
     { value: 'Python', label: 'Python' }, { value: 'C', label: 'C' }, { value: 'C++', label: 'C++' },
@@ -163,6 +183,7 @@ function SearchCandidate() {
   async function filterByJobTitle(key) {
     setNoPageFilter(true)
     setFiltereredjobs(key)
+    setActive(key)
     await axios.get(`/StudentProfile/getSkillTags/${key}`)
       .then((res) => {
         let result = (res.data)
@@ -333,7 +354,7 @@ function SearchCandidate() {
       {screenSize.width > 850 ?
         <>
           <div className={styles.searchBothForNavWrapper}>
-            <input className={styles.inputboxsearchNav} type="text" placeholder='Search for a Job / Skills / Location / Experiance' onChange={(e) => { search(e) }} />
+            <input className={styles.inputboxsearchNav} type="text" placeholder='Search Seekers' onChange={(e) => { search(e) }} />
 
             <i style={{ color: "rgb(40, 4, 99)", fontSize: "18px", paddingLeft: "8px", cursor: "pointer" }} onClick={() => { searchIcon(searchKey) }}
               class="fa fa-search" ></i>
@@ -349,42 +370,56 @@ function SearchCandidate() {
       {screenSize.width > 850 ?
         <>
           <div style={{ marginTop: "30px" }}></div>
-
-          <div className={styles.FilterWrapper}>
-            <label><input className={styles.JobtitleFilter} type="radio" name="filter" onClick={() => { getAllJobSeekers() }} />All</label>
+          
+          <div className={styles.LocationFilterWrapper}>
+             <button className={`${styles.JobLocationFilter}`}  name="filter" onClick={() =>
+               { getAllJobSeekers(); setActive("All") }} >All</button>
             {
-
               Location.map((location, i) => {
                 return (
-                  <label><input className={styles.JobtitleFilter} type="radio" name="filter"
-                    disabled={location == "Chennai" || location == "Hyderabad" || location == "Mumbai" || location == "Delhi"} onClick={() => { getLocation(location) }} />{location}</label>
+                  <button className={location == "Chennai" || location == "Hyderabad" || location == "Mumbai" ?
+                  styles.disable: Active ==="Bangalore"?  styles.locationActive :styles.JobLocationFilter} disabled={location == "Chennai" || 
+                  location == "Hyderabad" || location == "Mumbai" || location == "Delhi"} name="filter" onClick={() => { getLocation(location); setActive("Bangalore") }} >{location}</button>
+
                 )
               })
             }
           </div><br></br>
+          <Carousel
+//  customRightArrow={<CustomRightArrow />}
+        responsive={responsive}
+        // showDots={true}
+        swipeable={false}
+        draggable={false}
+        autoPlay={false}
+        // renderDotsOutside={true}
+        autoPlaySpeed={2000}  //defalult is 3 sec
+        infinite={true} 
+        slidesToSlide={8}
+        centerMode={true}
+        keyBoardControl={true}
+        // customTransition="all .9"
+        // dotListClass="custom-dot-list-style"
+        // itemClass="carousel-item-padding-40-px"
+        // containerClass="carousel-container"
+        className={styles.JobtitleFilterWrapper}
+        arrows={true} //  same as removeArrowOnDeviceType
+        // removeArrowOnDeviceType={["tablet", "mobile", "desktop"]}        
+        >
+            {/* <div className={styles.JobtitleFilterWrapper}> */}
+              {/* <buton className={Active === "All" ? styles.active : styles.JobtitleFilter} onClick={() => 
+                { getjobs(); setActive("All") }}>All</buton> */}
+              {
+                jobTags.map((tags, i) => {
+                  return (
+                    <buton className={Active === tags.value ? styles.active : styles.JobtitleFilter} onClick={() => 
+                      { filterByJobTitle(tags.value) }}>{tags.value} </buton>
+                  )
+                })
+              }
 
-          <div className={styles.FilterWrapper}>
-            <label><input className={styles.JobtitleFilter} type="radio" name="filter" onClick={() => { getAllJobSeekers() }} />All</label>
-            {
-              jobTags.map((tags, i) => {
-                return (
-                  <label><input className={styles.JobtitleFilter} type="radio" name="filter"
-                    onClick={() => { filterByJobTitle(tags.value) }} />{tags.value}</label>
-                )
-              }).slice(0, 12)
-            }
-          </div>
-          <br></br>
+               </Carousel>
 
-          <div className={styles.FilterWrapper}>
-            {jobTags.map((tags, i) => {
-              return (
-                <label><input className={styles.JobtitleFilter} type="radio" name="filter"
-                  onClick={() => { filterByJobTitle(tags.value) }} />{tags.value}</label>
-              )
-            }).slice(12, 30)
-            }
-          </div>
 
           <div style={{ display: "flex", justifyContent: "space-between" }}>
             {nopageFilter ?

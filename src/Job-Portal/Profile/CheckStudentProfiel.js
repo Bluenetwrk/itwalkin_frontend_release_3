@@ -45,7 +45,7 @@ let navigate = useNavigate()
         <>
 <div style={{display:"flex"}}>
                             <img style={{ height:"25px", color:"grey", marginTop:"20px", marginLeft:"8%", cursor:"pointer",
-             width:"28px"}} onClick={()=>{navigate("/postedjobs")}}  src={Arrowimage} />
+             width:"28px"}} onClick={()=>{navigate(-1)}}  src={Arrowimage} />
     <p style={{marginLeft:"30%"}}><b>Student Profile </b></p>
     </div>
  {

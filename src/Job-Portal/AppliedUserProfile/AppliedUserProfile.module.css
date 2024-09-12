@@ -33,6 +33,109 @@
     cursor: pointer;
 }
 
+
+.disable{
+    margin-left: 10px;
+    color:white;
+    font-weight: 600;
+    padding: 4px 7px ;
+    align-content: center;
+    border: none;
+    border-radius: 3px;
+    background-color:rgb(226, 225, 225)
+}
+.locationActive{
+    margin-left: 10px;
+    cursor: pointer;
+    color:white;
+    font-weight: 600;
+    padding: 4px 7px ;
+    align-content: center;
+    border: none;
+    border-radius: 3px;
+    background-color: rgb(40, 4, 99);
+
+}
+
+.JobLocationFilter{
+    margin-left: 10px;
+    cursor: pointer;
+    color:white;
+    font-weight: 600;
+    padding: 4px 7px ;
+    align-content: center;
+    border: none;
+    border-radius: 3px;
+    background-color:rgb(158, 156, 170);
+}
+.JobLocationFilter:hover{
+    cursor: pointer;
+    margin-left: 10px;
+    cursor: pointer;
+    color:white;
+    font-weight: 600;
+    padding: 4px 7px ;
+    align-content: center;
+    border: none;
+    border-radius: 3px;
+    background-color: rgb(40, 4, 99);
+    transition: all 0.7s;
+}
+/* ...........................for Filter..................... */
+.JobtitleFilterWrapper{
+    display: flex;
+    background-color: rgb(40, 4, 99);
+
+    flex-wrap: wrap;
+    /* width:99%; */
+    margin-left: -35px;
+    /* margin-right: -10px; */
+    height: 40px;
+    display: flex;
+    /* justify-content: space-evenly; */
+}
+.JobtitleFilter{
+    /* margin-left: 50px; */
+    cursor: pointer;
+    color:black;
+    font-weight: 600;
+    font-size: small;
+    padding: 4px 7px ;
+    align-content: center;
+    text-wrap: nowrap ;
+    background-color:white;
+    border-radius: 3px;
+}
+.JobtitleFilter:hover{
+    background-color:blue;
+    transition: all 0.7s;
+    color:white;
+    margin-left: 0px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: small;
+    padding: 4px 7px ;
+    align-content: center;
+    text-wrap: nowrap ;
+    border-radius: 3px;  
+}
+
+.active{
+    background-color:blue;
+    transition: all 0.4s;
+    color:white;
+    margin-left: 0px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: small;
+    padding: 4px 7px ;
+    align-content: center;
+    text-wrap: nowrap ;
+    border-radius: 3px; 
+}
+
+
+
 .arrow {
     border: solid white;
     border-width: 0 2px 2px 0;
@@ -75,9 +178,7 @@
     
 }
 
-.JobtitleFilter{
-    margin-left: 25px;
-}
+
 
 .AllUiWrapper{
     margin-left: -38px;
@@ -262,6 +363,7 @@ text-wrap: nowrap;
 .span{
     font-weight: 500;
     font-size: small;
+
 }
 .Down{
     margin-left: 10px;

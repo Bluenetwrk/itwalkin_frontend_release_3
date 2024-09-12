@@ -65,7 +65,7 @@ function Nav(props) {
   const navLinkStyles = ({ isActive }) => {
     return {
       color: isActive ? "white" : "",
-      textDecoration: isActive ? "underline" : ""
+      textDecoration: isActive ? "underline" : "",
     }
   }
   function myprofile() {

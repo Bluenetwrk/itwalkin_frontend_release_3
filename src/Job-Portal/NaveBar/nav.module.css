@@ -141,7 +141,7 @@
 }
 
 .dropdownwrapper {
-    position: absolute;
+    position:absolute;
     /* right : 1.5rem; */
     left: 86.5%;
     padding-right: 15px;
@@ -150,6 +150,9 @@
     border-radius: 8px;
     border: 1px solid rgb(202, 202, 202);
     cursor: pointer;
+    z-index:100;
+    background-color: white;
+
 }
 .JobSeekerdropdownwrapper{
     position: absolute;
@@ -162,6 +165,7 @@
     background-color: white;
     border: 1px solid rgb(202, 202, 202);
     cursor: pointer;
+    z-index:100;
 }
 @media(max-width:1800px){
     .JobSeekerdropdownwrapper {
@@ -295,6 +299,7 @@
     background-color: white;
     border: 1px solid rgb(202, 202, 202);
     cursor: pointer;
+    z-index: 100;
 }
 @media(max-width:1500px){
     .Empdropdownwrapper {
@@ -553,9 +558,7 @@ font-weight: bold;
     margin-left: 32%;
 }
 
-/* 
-@media(min-width:449px){
-    .MobHomeDropdownwrapper {
+    /* .MobHomeDropdownwrapper {
         position: absolute;
         width:120px;
         margin-left: 50%;
@@ -567,9 +570,7 @@ font-weight: bold;
         background-color: white;
         border: 1px solid rgb(202, 202, 202);
         cursor: pointer;
-    }
-    }
-*/
+    } */
 
 @media(max-width:760px){
     .MobHomeDropdownwrapper {
