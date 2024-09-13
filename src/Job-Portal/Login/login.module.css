@@ -75,12 +75,10 @@
     color: rgb(0, 0, 0);
     font-weight: 550;
     font-size: medium;
+    margin-top: 11px;
     margin-left: 3%;
-    margin-top: 9px;
-    width: 100%;
     display: flex;
     flex-wrap: nowrap;
-    /* background-color: blue; */
 }
 
 .google {

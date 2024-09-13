@@ -54,19 +54,22 @@ function SearchCandidate() {
   const Location = ['Bangalore', 'Chennai',
     'Hyderabad', 'Mumbai']
 
-
-  let jobTags = [
-    { value: 'java', label: 'java' }, { value: 'Mern Stack', label: 'Mern Stack' }, { value: 'ReactJs', label: 'ReactJs' },
-    { value: 'Python', label: 'Python' }, { value: 'C', label: 'C' }, { value: 'C++', label: 'C++' },
-    { value: 'Javascript', label: "Javascript" }, { value: 'Node js', label: 'Node js' },
-    { value: 'Angular js', label: 'Angular js' }, { value: 'Vue js', label: 'Vue js' }, { value: 'NextJs', label: 'NextJs' },
-    { value: 'Backend', label: 'Backend' }, { value: 'Frontend', label: 'Frontend' },
-    { value: 'HTML-CSS', label: 'HTML-CSS' },
-    { value: 'MongoDB', label: 'MongoDB' },
-    { value: 'MySql', label: 'MySql' },
-    { value: 'React Native', label: 'React Native' },
-    { value: 'Flutter', label: 'Flutter' },
-  ]
+    let jobTags = [
+      { value: 'ReactJs', label: 'ReactJs' },
+       { value: 'Mern Stack', label: 'Mern Stack' }, { value: 'C++, C', label: 'C++, C' },
+       { value: 'Javascript', label: "Javascript" }, { value: 'Node js', label: 'Node js' },
+       { value: 'Angular js', label: 'Angular js' }, { value: 'Vue js', label: 'Vue js' }, { value: 'NextJs', label: 'NextJs' },
+       { value: 'Backend', label: 'Backend' }, { value: 'Frontend', label: 'Frontend' },
+       { value: 'HTML-CSS', label: 'HTML-CSS' },{ value: 'MongoDB', label: 'MongoDB' },
+       { value: 'MySql', label: 'MySql' },  { value: 'Flutter', label: 'Flutter' },{ value: 'Game Developer', label: 'Game Developer' },
+       { value: 'Mobile App Developer', label: 'Mobile App Developer' },  { value: 'Artificial Intelligence', label: 'Artificial Intelligence' },
+       { value: 'React Native', label: 'React Native' }, { value: 'DevOps Engineer', label: 'DevOps Engineer' },
+       { value: 'Security developer', label: 'Security developer' }, { value: 'Data science', label: 'Data science' },
+       { value: 'Data Analyst', label: 'Data Analyst' },   { value: 'java ', label: 'java ' },
+       { value: 'Python', label: 'Python' },
+       { value: 'Graphic Developers', label: 'Graphic Developers' }, { value: 'AI Engineer', label: 'AI Engineer' },
+       { value: 'Security Developer', label: 'Security Developer' }, { value: 'Cloud Developers', label: 'Cloud Developers' },
+       ]
 
   // let jobSeekerId = JSON.parse(localStorage.getItem("StudId"))
 
@@ -374,8 +377,8 @@ function SearchCandidate() {
         <div style={{marginTop:"30px"}}></div>
           
           <div className={styles.LocationFilterWrapper}>
-             <button className={`${styles.JobLocationFilter}`}  name="filter" onClick={() =>
-               { getAllJobSeekers(); setActive("All") }} >All</button>
+             {/* <button className={`${styles.JobLocationFilter}`}  name="filter" onClick={() =>
+               { getAllJobSeekers(); setActive("All") }} >All</button> */}
             {
               Location.map((location, i) => {
                 return (
@@ -387,30 +390,10 @@ function SearchCandidate() {
               })
             }
           </div><br></br>
-          <Carousel
-//  customRightArrow={<CustomRightArrow />}
-        responsive={responsive}
-        // showDots={true}
-        swipeable={false}
-        draggable={false}
-        autoPlay={false}
-        // renderDotsOutside={true}
-        autoPlaySpeed={2000}  //defalult is 3 sec
-        infinite={true} 
-        slidesToSlide={8}
-        centerMode={true}
-        keyBoardControl={true}
-        // customTransition="all .9"
-        // dotListClass="custom-dot-list-style"
-        // itemClass="carousel-item-padding-40-px"
-        // containerClass="carousel-container"
-        className={styles.JobtitleFilterWrapper}
-        arrows={true} //  same as removeArrowOnDeviceType
-        // removeArrowOnDeviceType={["tablet", "mobile", "desktop"]}        
-        >
-            {/* <div className={styles.JobtitleFilterWrapper}> */}
-              {/* <buton className={Active === "All" ? styles.active : styles.JobtitleFilter} onClick={() => 
-                { getjobs(); setActive("All") }}>All</buton> */}
+         
+            <div className={styles.JobtitleFilterWrapper}>
+              <buton className={Active === "All" ? styles.active : styles.JobtitleFilter} onClick={() => 
+                { getAllJobSeekers(); setActive("All") }}>All</buton>
               {
                 jobTags.map((tags, i) => {
                   return (
@@ -419,17 +402,6 @@ function SearchCandidate() {
                   )
                 })
               }
-
-               </Carousel>
-
-          <div className={styles.FilterWrapper}>
-            {jobTags.map((tags, i) => {
-              return (
-                <label><input className={styles.JobtitleFilter} type="radio" name="filter"
-                  onClick={() => { filterByJobTitle(tags.value) }} />{tags.value}</label>
-              )
-            }).slice(12, 30)
-            }
           </div>
 
           <div style={{ display: "flex", justifyContent: "space-between" }}>

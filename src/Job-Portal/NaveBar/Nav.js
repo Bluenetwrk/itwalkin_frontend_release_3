@@ -64,8 +64,13 @@ function Nav(props) {
 
   const navLinkStyles = ({ isActive }) => {
     return {
-      color: isActive ? "white" : "",
-      textDecoration: isActive ? "underline" : "",
+      color: isActive ? "rgb(40, 4, 99)" : "",
+      // textDecoration: isActive ? "underline" : "",
+      // position: isActive ? "absolute" : "",
+      // padding: isActive ? "3px" : "",
+      backgroundColor: isActive ? "white" : "",
+      // textDecoration: isActive ? "underline" : "",
+      
     }
   }
   function myprofile() {
@@ -106,14 +111,14 @@ function Nav(props) {
                 </div>
                 <div className={Styles.linkWrapper}>
 
-                  <NavLink to="/alljobs" className={Styles.link} style={navLinkStyles}>All Jobs </NavLink>
+                  <NavLink to="/alljobs" className={Styles.AllJobJobSeeker} style={navLinkStyles}>All Jobs </NavLink>
                   {/* <NavLink to="/AboutUs" className={Styles.link} style={navLinkStyles}>About Us</NavLink>
                   <NavLink to="/Services" className={Styles.link} style={navLinkStyles}>Services</NavLink>
                   <NavLink to="/Contact" className={Styles.link} style={navLinkStyles}>Contact</NavLink> */}
                   <div className={`${Styles.link} ${Styles.JobSeekerIconeWrapper}`}>
 
                     {/* <NavLink to="/" className={` ${Styles.notificationIcon}`}><img src={JobseekerNotification} /> </NavLink> */}
-                    <img className={`${Styles.Icon} ${Styles.profileIcon}`} src={loginuser} ref={imgRef} onClick={() => setShowprofile((prev) => !prev)} />
+                    <img className={`${Styles.Icon} ${Styles.JobSeekerprofileIcon}`} src={loginuser} ref={imgRef} onClick={() => setShowprofile((prev) => !prev)} />
 
                   </div >
 
@@ -142,12 +147,12 @@ function Nav(props) {
                   <div className={Styles.linkWrapper}>
 
                     {/* <NavLink to="/postedjobs" className={Styles.link} style={navLinkStyles}> Posted jobs</NavLink> */}
-                    <NavLink to="/PostJobs" className={Styles.link} style={navLinkStyles}>Post a Job</NavLink>
+                    <NavLink to="/PostJobs" className={Styles.PostJobLink} style={navLinkStyles}>Post a Job</NavLink>
                     {/* <NavLink to="/Services" className={Styles.link} style={navLinkStyles}>Services</NavLink> */}
                     {/* <NavLink to="/Contact" className={Styles.link} style={navLinkStyles}>Contact</NavLink> */}
                     <div className={`${Styles.link} ${Styles.EmpIconeWrapper}`}>
-                      {/* <NavLink to="/" className={` ${Styles.notificationIcon}`}><img src={JobseekerNotification} /> </NavLink> */}
-                      <img className={`${Styles.Icon} ${Styles.profileIcon}`} src={loginuser} ref={imgRef} onClick={() => setShowprofile((prev) => !prev)} />
+                      <NavLink to="/Search-Candidate" className={`${Styles.SearchCandidate}`} style={navLinkStyles}>Search Candidate</NavLink>
+                      <img className={`${Styles.Icon} ${Styles.EmpProfileIcon}`} src={loginuser} ref={imgRef} onClick={() => setShowprofile((prev) => !prev)} />
 
                     </div >
 
@@ -219,20 +224,20 @@ function Nav(props) {
                     </div>
                     <div className={Styles.linkWrapper}>
                    
-                      <NavLink to="/" className={Styles.Hlink} style={navLinkStyles}><i style={{padding:"5px"}} class="fa-solid fa-house"></i>Home</NavLink>
+                      <NavLink to="/" className={Styles.HomeJobs} style={navLinkStyles}><i style={{padding:"5px"}} class="fa-solid fa-house"></i>Home</NavLink>
                       {/* <NavLink to="/AboutUs" className={`${Styles.Hlink} ${Styles.Aboutus}`} style={navLinkStyles} >About Us</NavLink>
                       <NavLink to="/Services" className={Styles.Hlink} style={navLinkStyles}>Services</NavLink>
                       <NavLink to="/Contact" className={Styles.Hlink} style={navLinkStyles}>Contact</NavLink> */}
-                      <div className={`${Styles.Hlink} ${Styles.Loginlinkwrapper}`}>
-                      <NavLink to="/Search-Candidate-Home" className={`${Styles.Loginlink} ${Styles.EmpLogin}`} style={navLinkStyles}>Employer </NavLink>
-                        <img className={`${Styles.Icon} ${Styles.HomeprofileIcon}`} src={loginuser} ref={imgRef} onClick={() => setShowprofile((prev) => !prev)} />
+                      <div className={` ${Styles.LoginlinkwrapperHome}`}>
+                      <NavLink to="/Search-Candidate-Home" className={` ${Styles.SearchCandidate}`} style={navLinkStyles}>Employer </NavLink>
+                        <img className={` ${Styles.HomeprofileIcon}`} src={loginuser} ref={imgRef} onClick={() => setShowprofile((prev) => !prev)} />
                         {/* <NavLink to="/JobSeekerLogin" className={`${Styles.Loginlink} ${Styles.StuLogin}`} style={navLinkStyles}>Job Seeker Login</NavLink> */}
 
                       </div>
                     </div>
                   </div>
                   {showprofile ?
-                    <div style={{ marginLeft: "-18px" }} className={Styles.dropdownwrapper} ref={menuRef} >
+                    <div style={{ marginLeft: "-18px" }} className={Styles.dropdownwrapperHome} ref={menuRef} >
                       <p onClick={() => { navigate("/EmployeeLogin") }}>Employee Login </p>
                       <p onClick={() => { navigate("/JobSeekerLogin") }}>Job Seeker Login</p>
                     </div>

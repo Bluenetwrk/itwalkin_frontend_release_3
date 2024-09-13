@@ -41,17 +41,20 @@ function StudentUpdateProfile(props) {
   const [loader, setLoader] = useState(false)
 
   let jobTags = [
-    {value:'java', label: 'java'},{value:'Mern Stack', label:'Mern Stack' },{value:'ReactJs', label: 'ReactJs'},
-    {value:'Python', label: 'Python'},{value:'C', label: 'C' }, {value:'C++',label:'C++' },
-    {value: 'Javascript', label: "Javascript" }, {value:'Node js',label: 'Node js' }, 
-    {value:'Angular js',label: 'Angular js' },{value:'Vue js', label: 'Vue js'}, {value:'NextJs', label: 'NextJs'},
-    {value: 'Backend', label: 'Backend'},{value:'Frontend', label:'Frontend'},
-    {value: 'HTML-CSS', label: 'HTML-CSS'}, 
-    {value: 'MongoDB', label: 'MongoDB'}, 
-    {value: 'MySql', label: 'MySql'},
-    {value: 'React Native', label: 'React Native'},
-    {value: 'Flutter', label: 'Flutter'},
-    ]
+    { value: 'ReactJs', label: 'ReactJs' },
+     { value: 'Mern Stack', label: 'Mern Stack' }, { value: 'C++, C', label: 'C++, C' },
+     { value: 'Javascript', label: "Javascript" }, { value: 'Node js', label: 'Node js' },
+     { value: 'Angular js', label: 'Angular js' }, { value: 'Vue js', label: 'Vue js' }, { value: 'NextJs', label: 'NextJs' },
+     { value: 'Backend', label: 'Backend' }, { value: 'Frontend', label: 'Frontend' },
+     { value: 'HTML-CSS', label: 'HTML-CSS' },{ value: 'MongoDB', label: 'MongoDB' },
+     { value: 'MySql', label: 'MySql' },  { value: 'Flutter', label: 'Flutter' },{ value: 'Game Developer', label: 'Game Developer' },
+     { value: 'Mobile App Developer', label: 'Mobile App Developer' },  { value: 'Artificial Intelligence', label: 'Artificial Intelligence' },
+     { value: 'React Native', label: 'React Native' }, { value: 'DevOps Engineer', label: 'DevOps Engineer' },
+     { value: 'Security developer', label: 'Security developer' }, { value: 'Data science', label: 'Data science' },
+     { value: 'Data Analyst', label: 'Data Analyst' },   { value: 'java ', label: 'java ' },{ value: 'Python', label: 'Python' },
+     { value: 'Graphic Developers', label: 'Graphic Developers' }, { value: 'AI Engineer', label: 'AI Engineer' },
+     { value: 'Security Developer', label: 'Security Developer' }, { value: 'Cloud Developers', label: 'Cloud Developers' },
+     ]
   const [Tags, setTag] = useState([])
   const [Resulttag, setResulttagTag] = useState()
     function handleChange(tag){

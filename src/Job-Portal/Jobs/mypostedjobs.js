@@ -246,9 +246,12 @@ function JoppostedByEmp(props) {
 
      {screenSize.width>850?
        <>
+       <div style={{display:"flex"}}>
     <button className={styles.searchButton} onClick={() => {
           navigate("/Search-Candidate")
         }}>Search Candidate</button>
+        <p style={{marginLeft:"30%", marginTop:"30px", fontSize:"large", fontWeight:"bold", color:"blue"}}>My Posted Jobs</p>
+        </div>
       
    <div className={styles.Uiwarpper}>
           <ul className={styles.ul}>
@@ -267,7 +270,7 @@ function JoppostedByEmp(props) {
                   <i onClick={SascendingOrder} className={`${styles.arrow} ${styles.down}`}></i>
                 </p>
             </li>
-            <li className={`${styles.li} ${styles.experiance}`}><b>Exper. </b>
+            <li className={`${styles.li} ${styles.experiance}`}><b>Experience </b>
             <p style={{ display: "inline", marginLeft: "10px" }}>
                   <i onClick={EdescendingOrder} className={`${styles.arrow} ${styles.up}`}> </i>
                   <i onClick={EascendingOrder} className={`${styles.arrow} ${styles.down}`}></i>

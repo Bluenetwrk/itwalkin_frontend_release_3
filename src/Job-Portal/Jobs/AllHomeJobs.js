@@ -45,19 +45,21 @@ function Home() {
   const screenSize = useScreenSize();
 
   let jobTags = [
-    { value: 'java ', label: 'java ' }, { value: 'ReactJs', label: 'ReactJs' },{ value: 'Python', label: 'Python' },
+   { value: 'ReactJs', label: 'ReactJs' },
     { value: 'Mern Stack', label: 'Mern Stack' }, { value: 'C++, C', label: 'C++, C' },
     { value: 'Javascript', label: "Javascript" }, { value: 'Node js', label: 'Node js' },
     { value: 'Angular js', label: 'Angular js' }, { value: 'Vue js', label: 'Vue js' }, { value: 'NextJs', label: 'NextJs' },
     { value: 'Backend', label: 'Backend' }, { value: 'Frontend', label: 'Frontend' },
-    { value: 'HTML-CSS', label: 'HTML-CSS' },
-    { value: 'MongoDB', label: 'MongoDB' },
-    { value: 'MySql', label: 'MySql' },
-    { value: 'Flutter', label: 'Flutter' },
-    { value: 'React Native', label: 'React Native' },
-    { value: 'HTML-CSS', label: 'HTML-CSS' },
-    { value: 'MongoDB', label: 'MongoDB' },
-  ]
+    { value: 'HTML-CSS', label: 'HTML-CSS' },{ value: 'MongoDB', label: 'MongoDB' },
+    { value: 'MySql', label: 'MySql' },  { value: 'Flutter', label: 'Flutter' },{ value: 'Game Developer', label: 'Game Developer' },
+    { value: 'Mobile App Developer', label: 'Mobile App Developer' },  { value: 'Artificial Intelligence', label: 'Artificial Intelligence' },
+    { value: 'React Native', label: 'React Native' }, { value: 'DevOps Engineer', label: 'DevOps Engineer' },
+    { value: 'Security developer', label: 'Security developer' }, { value: 'Data science', label: 'Data science' },
+    { value: 'Data Analyst', label: 'Data Analyst' },   { value: 'java ', label: 'java ' },
+    { value: 'Python', label: 'Python' },
+    { value: 'Graphic Developers', label: 'Graphic Developers' }, { value: 'AI Engineer', label: 'AI Engineer' },
+    { value: 'Security Developer', label: 'Security Developer' }, { value: 'Cloud Developers', label: 'Cloud Developers' },
+    ]
 
   let JobLocationTags = ["Bangalore", "Hyderabad", "Chennai", "Mumbai"]
 
@@ -424,8 +426,8 @@ function Home() {
       {screenSize.width > 850 ?
         <>
         <div className={styles.LocationFilterWrapper}>
-             <button className={`${styles.JobLocationFilter}`}  name="filter" onClick={() =>
-               { getjobs(); setActive("All") }} >All</button>
+             {/* <button className={`${styles.JobLocationFilter}`}  name="filter" onClick={() =>
+               { getjobs(); setActive("All") }} >All</button> */}
             {
               JobLocationTags.map((location, i) => {
                 return (
@@ -439,8 +441,8 @@ function Home() {
           </div><br></br>
 
             <div className={styles.JobtitleFilterWrapper}>
-              {/* <buton className={Active === "All" ? styles.active : styles.JobtitleFilter} onClick={() => 
-                { getjobs(); setActive("All") }}>All</buton> */}
+              <buton className={Active === "All" ? styles.active : styles.JobtitleFilter} onClick={() => 
+                { getjobs(); setActive("All") }}>All</buton>
               {
                 jobTags.map((tags, i) => {
                   return (

@@ -1,4 +1,58 @@
 
+
+.LoginlinkwrapperHome {
+    align-items: center;
+    display: flex;
+    flex-wrap: nowrap;
+    width:29%;
+    height: 30px;
+    margin-left: 68%;
+}
+
+.HomeprofileIcon{
+    height: 35px;
+    margin-left: 40%;
+    margin-top: 5px;
+    cursor: pointer;
+}
+.SearchCandidate{
+    /* margin-left: 5%; */
+    text-decoration: none;
+    color: white;
+    font-size: small;
+    font-weight: 540;
+    text-wrap: nowrap;
+    padding: 8px 10px;
+    border-radius: 5px;
+}
+
+.dropdownwrapperHome {
+    position:absolute;
+    /* right : 1.5rem; */
+    left: 84%;
+    padding-right: 15px;
+    padding-left: 15px;
+    padding-bottom: 0px;
+    border-radius: 8px;
+    border: 1px solid rgb(202, 202, 202);
+    cursor: pointer;
+    z-index:100;
+    background-color: white;
+    width:100px
+}
+.dropdownwrapperHome::after {
+    content: "";
+    position: absolute;
+    top: -0.7rem;
+    right: 1rem;
+    width: 20px;
+    height: 20px;
+    transform: rotate(45deg);
+    background-color: white;
+    border-left: 1px solid grey;
+    border-top: 1px solid grey;
+}
+
 .Supfullnavewrapper {
     display: flex;
     background-color: rgb(40, 4, 99);
@@ -56,6 +110,30 @@
 }
 
 
+.PostJobLink {
+    /* background-color: aqua; */
+    margin: -2%;
+    text-decoration: none;
+    color: white;
+    font-size: small;
+    font-weight: 540;
+    /* width:14%; */
+    text-wrap: nowrap;
+    padding: 9px 12px;
+    border-radius: 5px;
+}
+.AllJobJobSeeker {
+    /* background-color: aqua; */
+    margin: 2%;
+    text-decoration: none;
+    color: white;
+    font-size: small;
+    font-weight: 540;
+    /* width:14%; */
+    text-wrap: nowrap;
+    padding: 8px 10px;
+    border-radius: 5px;
+}
 .link {
     /* background-color: aqua; */
     margin: 2%;
@@ -75,6 +153,17 @@
     font-weight: 540;
     width:18%    
 }
+.HomeJobs{
+    /* margin-left: 2%; */
+    text-decoration: none;
+    color: white;
+    font-size: medium;
+    font-weight: 540;
+    /* width:18%  */
+    position: absolute;
+    padding: 6px 13px;
+    border-radius: 5px;
+}
 
 .link:hover {
     color: red;
@@ -88,17 +177,28 @@
     width: 30%;
     margin-left: 10%;
 }
-.EmpIconeWrapper{
-    display: flex;
-    width: 10%;
-    margin-left: 65%;
-}
 .JobSeekerIconeWrapper{
     display: flex;
-    width: 10%;
-    margin-left: 65%;
+    /* width: 10%; */
+    margin-left: 70%;
+    /* background-color: aqua; */
 }
-.profileIcon {
+.EmpIconeWrapper{
+    display: flex;
+    /* width: 25%; */
+    margin-left: 64%;
+    align-items: center;
+    /* background-color: red; */
+}
+
+.EmpProfileIcon {
+    /* width: 35px; */
+    height: 35px;
+    margin-left: 69%;
+    margin-top: 5px;
+    cursor: pointer;
+}
+.JobSeekerprofileIcon {
     width: 35px;
     height: 35px;
     margin-left: 60%;
@@ -109,21 +209,6 @@
 .notificationIcon {
     margin-top: 8px;
     /* background-color: blue; */
-}
-.Loginlinkwrapper {
-    align-items: center;
-    display: flex;
-    flex-wrap: nowrap;
-    width:20%;
-    height: 30px;
-    margin-left: 55%;
-}
-.HomeprofileIcon{
-    width: 35px;
-    height: 35px;
-    margin-left: 50%;
-    margin-top: 5px;
-    cursor: pointer;
 }
 
 .Loginlink {
@@ -140,24 +225,10 @@
     margin-left: 18%;
 }
 
-.dropdownwrapper {
-    position:absolute;
-    /* right : 1.5rem; */
-    left: 86.5%;
-    padding-right: 15px;
-    padding-left: 15px;
-    padding-bottom: 0px;
-    border-radius: 8px;
-    border: 1px solid rgb(202, 202, 202);
-    cursor: pointer;
-    z-index:100;
-    background-color: white;
-
-}
 .JobSeekerdropdownwrapper{
     position: absolute;
     /* right : 1.5rem; */
-    left: 84%;
+    left: 86%;
     padding-right: 15px;
     padding-left: 15px;
     padding-bottom: 0px;
@@ -171,7 +242,7 @@
     .JobSeekerdropdownwrapper {
         position: absolute;
         /* right : 1.5rem; */
-        left: 86%;
+        left: 87%;
         padding-right: 15px;
         padding-left: 15px;
         padding-bottom: 0px;
@@ -184,7 +255,7 @@
     .JobSeekerdropdownwrapper {
         position: absolute;
         /* right : 1.5rem; */
-        left: 85%;
+        left: 86.5%;
         padding-right: 15px;
         padding-left: 15px;
         padding-bottom: 0px;
@@ -197,7 +268,7 @@
     .JobSeekerdropdownwrapper {
         position: absolute;
         /* right : 1.5rem; */
-        left: 84%;
+        left: 86.5%;
         padding-right: 15px;
         padding-left: 15px;
         padding-bottom: 0px;
@@ -210,7 +281,7 @@
     .JobSeekerdropdownwrapper {
         position: absolute;
         /* right : 1.5rem; */
-        left: 84%;
+        left: 86.5%;
         padding-right: 15px;
         padding-left: 15px;
         padding-bottom: 0px;
@@ -224,7 +295,7 @@
         .JobSeekerdropdownwrapper {
             position: absolute;
             /* right : 1.5rem; */
-            left: 83.5%;
+            left: 86.5%;
             padding-right: 15px;
             padding-left: 15px;
             padding-bottom: 0px;
@@ -237,7 +308,7 @@
         .JobSeekerdropdownwrapper {
             position: absolute;
             /* right : 1.5rem; */
-            left: 83%;
+            left: 86,5%;
             padding-right: 15px;
             padding-left: 15px;
             padding-bottom: 0px;
@@ -251,7 +322,7 @@
         .JobSeekerdropdownwrapper {
             position: absolute;
             /* right : 1.5rem; */
-            left: 82%;
+            left: 86.5%;
             padding-right: 15px;
             padding-left: 15px;
             padding-bottom: 0px;
@@ -265,7 +336,7 @@
         .JobSeekerdropdownwrapper {
             position: absolute;
             /* right : 1.5rem; */
-            left: 80%;
+            left: 86%;
             padding-right: 15px;
             padding-left: 15px;
             padding-bottom: 0px;
@@ -291,7 +362,7 @@
 .Empdropdownwrapper {
     position: absolute;
     /* right : 1.5rem; */
-    left: 84%;
+    left: 87%;
     padding-right: 15px;
     padding-left: 15px;
     padding-bottom: 0px;
@@ -318,7 +389,7 @@
     .Empdropdownwrapper {
         position: absolute;
         /* right : 1.5rem; */
-        left: 84%;
+        left: 86%;
         padding-right: 15px;
         padding-left: 15px;
         padding-bottom: 0px;
@@ -331,7 +402,7 @@
     .Empdropdownwrapper {
         position: absolute;
         /* right : 1.5rem; */
-        left: 83%;
+        left: 87%;
         padding-right: 15px;
         padding-left: 15px;
         padding-bottom: 0px;
@@ -345,7 +416,7 @@
         .Empdropdownwrapper {
             position: absolute;
             /* right : 1.5rem; */
-            left: 82%;
+            left: 88%;
             padding-right: 15px;
             padding-left: 15px;
             padding-bottom: 0px;
@@ -358,13 +429,14 @@
         .Empdropdownwrapper {
             position: absolute;
             /* right : 1.5rem; */
-            left: 81%;
-            padding-right: 15px;
-            padding-left: 15px;
+            left: 89%;
+            padding-right: 10px;
+            padding-left: 10px;
             padding-bottom: 0px;
             border-radius: 8px;
             border: 1px solid rgb(202, 202, 202);
             cursor: pointer;
+            width:100px
         }
         }
         
@@ -372,7 +444,7 @@
         .Empdropdownwrapper {
             position: absolute;
             /* right : 1.5rem; */
-            left: 80%;
+            left: 87.5%;
             padding-right: 15px;
             padding-left: 15px;
             padding-bottom: 0px;
@@ -386,7 +458,7 @@
         .Empdropdownwrapper {
             position: absolute;
             /* right : 1.5rem; */
-            left: 79%;
+            left: 85%;
             padding-right: 15px;
             padding-left: 15px;
             padding-bottom: 0px;
@@ -879,7 +951,6 @@ font-weight: bold;
     background-color: white;
     border-left: 1px solid grey;
     border-top: 1px solid grey;
-
 }
 
 @media (max-width :330px){

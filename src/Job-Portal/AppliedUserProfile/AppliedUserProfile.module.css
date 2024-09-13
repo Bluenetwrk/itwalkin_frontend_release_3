@@ -1,7 +1,7 @@
 
 .searchBothForNavWrapper{
     width:40%;
-    margin-left: 34%;
+    margin-left: 30%;
     margin-top: -47.5px;
     background-color: white;
     border-radius: 3px;
@@ -42,7 +42,10 @@
     align-content: center;
     border: none;
     border-radius: 3px;
-    background-color:rgb(226, 225, 225)
+    background-color:rgb(226, 225, 225);
+    background:rgb(242, 244, 245);
+
+    
 }
 .locationActive{
     margin-left: 10px;
@@ -53,8 +56,7 @@
     align-content: center;
     border: none;
     border-radius: 3px;
-    background-color: rgb(40, 4, 99);
-
+    background-color: blue
 }
 
 .JobLocationFilter{
@@ -66,7 +68,8 @@
     align-content: center;
     border: none;
     border-radius: 3px;
-    background-color:rgb(158, 156, 170);
+    background-color: rgb(40, 4, 99);
+
 }
 .JobLocationFilter:hover{
     cursor: pointer;
@@ -78,24 +81,25 @@
     align-content: center;
     border: none;
     border-radius: 3px;
-    background-color: rgb(40, 4, 99);
-    transition: all 0.7s;
+    background-color:blue;
+
+    transition: all 0.2s;
 }
 /* ...........................for Filter..................... */
 .JobtitleFilterWrapper{
-    display: flex;
-    background-color: rgb(40, 4, 99);
+    /* background-color: rgb(40, 4, 99); */
+    background:rgb(242, 244, 245);
 
-    flex-wrap: wrap;
-    /* width:99%; */
-    margin-left: -35px;
-    /* margin-right: -10px; */
-    height: 40px;
+    margin-left: 3px;
+    padding: 10px;
     display: flex;
-    /* justify-content: space-evenly; */
+    flex-wrap: wrap;
 }
+
 .JobtitleFilter{
-    /* margin-left: 50px; */
+    /* margin-left: 5px;
+    margin-top: 15px; */
+    margin: 4px;
     cursor: pointer;
     color:black;
     font-weight: 600;
@@ -105,35 +109,32 @@
     text-wrap: nowrap ;
     background-color:white;
     border-radius: 3px;
+
 }
-.JobtitleFilter:hover{
+.JobtitleFilter:hover{    
     background-color:blue;
-    transition: all 0.7s;
-    color:white;
-    margin-left: 0px;
+    margin: 4px;
     cursor: pointer;
+    color:white;
     font-weight: 600;
     font-size: small;
     padding: 4px 7px ;
     align-content: center;
     text-wrap: nowrap ;
-    border-radius: 3px;  
+    border-radius: 3px;
 }
-
 .active{
     background-color:blue;
-    transition: all 0.4s;
     color:white;
-    margin-left: 0px;
+    margin: 4px;
     cursor: pointer;
     font-weight: 600;
     font-size: small;
     padding: 4px 7px ;
     align-content: center;
     text-wrap: nowrap ;
-    border-radius: 3px; 
+    border-radius: 3px;
 }
-
 
 
 .arrow {
@@ -148,7 +149,6 @@
     -webkit-transform: rotate(-135deg);
     /* background-color: blue; */
     position: absolute;
-    margin-top: 2px;
   }
   .down {
     transform: rotate(90deg);

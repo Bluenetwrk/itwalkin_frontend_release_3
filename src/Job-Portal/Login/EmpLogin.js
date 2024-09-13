@@ -252,14 +252,14 @@ function EmpLogin(props) {
         <div className={styles.signUpWrapper} onClick={login} >
           <div className={styles.both}>
             <img className={styles.google} src={GoogleImage} />
-            <span className={styles.signUpwrap} >Continue with Google</span>
+            <p className={styles.signUpwrap} >Continue with Google</p>
           </div>
         </div>
 
         <div className={styles.signUpWrapper}  >
           <div className={styles.both}>
             <img className={styles.google} src={MicosoftImage} />
-            <span className={styles.signUpwrap} >Continue with Microsoft</span>
+            <p className={styles.signUpwrap} >Continue with Microsoft</p>
           </div>
         </div>
       </div>
