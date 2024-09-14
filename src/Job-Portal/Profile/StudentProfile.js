@@ -74,7 +74,14 @@ profileData.map((item, i) => {
         </div>
     )})
     }
-    <button className={styles.updateProfile} onClick={updateprofile}>Update Profile</button>
+
+    {screenSize.width>800?
+
+<button className={styles.updateProfile} onClick={updateprofile}>Update Profile</button>
+:
+<button className={styles.MobupdateProfile} onClick={updateprofile}>Update Profile</button>
+
+        }
 
             {screenSize.width>850?
            

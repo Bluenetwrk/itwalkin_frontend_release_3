@@ -34,8 +34,12 @@ const [Loader, setLoader] = useState(false)
   let params = useParams();
 
   async function getjobs() {
+    window.scrollTo({
+      top:0,
+      // behavior:"smooth"
+    })
     const headers = { authorization: 'BlueItImpulseWalkinIn'};
-    await axios.get(`/jobpost/getjobs/${params.id}`, {headers})
+    await axios.get(`/jobpost/getjobs/${atob(params.id)}`, {headers})
       .then((res) => {
         let result = (res.data)
         setJobs(result)

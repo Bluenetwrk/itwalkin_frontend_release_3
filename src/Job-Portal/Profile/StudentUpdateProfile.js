@@ -10,6 +10,8 @@ import { TailSpin } from "react-loader-spinner"
 import useScreenSize from '../SizeHook';
 import socketIO from 'socket.io-client';
 import CreatableSelect  from "react-select/creatable"
+import Arrowimage from '../img/icons8-arrow-left-48.png'
+
 
 
 
@@ -205,8 +207,8 @@ function StudentUpdateProfile(props) {
 
     // Check if key pressed is a special character
     if (keycode < 32 ||
-      (keycode > 32 && keycode < 44) ||
-      (keycode > 44 && keycode < 46) ||
+      (keycode > 32 && keycode < 43) ||
+      (keycode > 43 && keycode < 46) ||
       (keycode > 46 && keycode < 48) ||
       (keycode > 57 && keycode < 64) ||
       (keycode > 90 && keycode < 97) ||
@@ -225,7 +227,9 @@ function StudentUpdateProfile(props) {
 
       <div className={styles.EntireFullWrapper}>
         <div className={styles.EntireWrapper}>
-          <h3 style={{ color: "rgb(40, 4, 99)", marginLeft: "2%" }}>Update your Profile</h3>
+          {/* <h3 style={{ color: "rgb(40, 4, 99)", marginLeft: "2%" }}>Update your Profile</h3> */}
+          <img style={{ height:"25px", color:"grey", marginTop:"20px", marginLeft:"8%", cursor:"pointer",
+             width:"28px"}} onClick={()=>{navigate(-1)}}  src={Arrowimage} />
           <div className={styles.imageViewWrapper}>
 
             <img className={styles.imageView} src={image ? image : profileDp} />

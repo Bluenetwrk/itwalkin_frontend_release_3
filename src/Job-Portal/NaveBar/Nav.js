@@ -151,7 +151,7 @@ function Nav(props) {
                     {/* <NavLink to="/Services" className={Styles.link} style={navLinkStyles}>Services</NavLink> */}
                     {/* <NavLink to="/Contact" className={Styles.link} style={navLinkStyles}>Contact</NavLink> */}
                     <div className={`${Styles.link} ${Styles.EmpIconeWrapper}`}>
-                      <NavLink to="/Search-Candidate" className={`${Styles.SearchCandidate}`} style={navLinkStyles}>Search Candidate</NavLink>
+                      {/* <NavLink to="/Search-Candidate" className={`${Styles.SearchCandidate}`} style={navLinkStyles}>Search Candidate</NavLink> */}
                       <img className={`${Styles.Icon} ${Styles.EmpProfileIcon}`} src={loginuser} ref={imgRef} onClick={() => setShowprofile((prev) => !prev)} />
 
                     </div >
@@ -257,7 +257,7 @@ function Nav(props) {
                 </div>
                 <div className={Styles.linkWrapper}>
 
-                  <NavLink to="/alljobs" className={`${Styles.Moblink} ${Styles.AlllJobs}`} style={navLinkStyles}>All Jobs </NavLink>
+                  <NavLink to="/alljobs" className={`${Styles.Moblink} ${Styles.AlllJobs}`} >All Jobs </NavLink>
 
                   <div className={`${Styles.link} ${Styles.MobileIconeWrapper}`}>
 
@@ -292,9 +292,9 @@ function Nav(props) {
                   </div>
                   <div className={Styles.linkWrapper}>
 
-                    <NavLink to="/postedjobs" className={`${Styles.Moblink} ${Styles.PostedJobs}`} style={navLinkStyles}> Posted jobs</NavLink>
+                    <NavLink to="/postedjobs" className={`${Styles.Moblink} ${Styles.PostedJobs}`} > Posted jobs</NavLink>
 
-                    <NavLink to="/PostJobs" className={`${Styles.Moblink} ${Styles.PostJob}`} style={navLinkStyles}>Post a Job</NavLink>
+                    <NavLink to="/PostJobs" className={`${Styles.Moblink} ${Styles.PostJob}`} >Post a Job</NavLink>
 
 
 
@@ -312,7 +312,7 @@ function Nav(props) {
                   <div className={Styles.EmpMobDropdownwrapper} ref={menuRef} >
                     <p className={Styles.text} ref={menuRef} onClick={EmployeeProfile} >My profile</p>
                     {/* <p className={Styles.text} ref={menuRef} onClick={()=>{navigate("postedjobs")}} >My Posted Jobs</p> */}
-                    <p className={Styles.text} ref={menuRef} onClick={updateEmployeeProfile}>Update profile</p>
+                    {/* <p className={Styles.text} ref={menuRef} onClick={updateEmployeeProfile}>Update profile</p> */}
 
                     <p className={Styles.text} ref={menuRef} onClick={logutEmp}>Logout</p>
                   </div>

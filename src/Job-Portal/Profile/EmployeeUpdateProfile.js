@@ -10,6 +10,8 @@ import { TailSpin } from "react-loader-spinner"
 import Companylogo from "../img/logo.png"
 import useScreenSize from '../SizeHook';
 import socketIO from 'socket.io-client';
+import Arrowimage from '../img/icons8-arrow-left-48.png'
+
 
 
 function EmployeeUpdateProfile(props) {
@@ -162,15 +164,15 @@ const [immage, setimmage] = useState()
    };
 
    
-window.addEventListener('keypress', function(event){
+document.addEventListener('keypress', function(event){
     
   // Get the key code
   let keycode = event.which || event.keyCode;
   
   // Check if key pressed is a special character
   if(keycode < 32 || 
-   (keycode > 32 && keycode < 44) || 
-   (keycode > 44 && keycode < 46) || 
+   (keycode > 32 && keycode < 46) || 
+  //  (keycode > 44 && keycode < 46) || 
    (keycode > 46 && keycode < 48) || 
    (keycode > 57 && keycode < 64) || 
    (keycode > 90 && keycode < 97) ||
@@ -189,7 +191,9 @@ window.addEventListener('keypress', function(event){
 
       <div className={styles.EntireFullWrapper}>
         <div className={styles.EntireWrapper}>
-        <h3 style={{color:"rgb(40, 4, 99)", marginLeft:"2%"}}>Update your Profile</h3>
+        <img style={{ height:"25px", color:"grey", marginTop:"20px", marginLeft:"8%", cursor:"pointer",
+             width:"28px"}} onClick={()=>{navigate(-1)}}  src={Arrowimage} />
+        {/* <h3 style={{color:"rgb(40, 4, 99)", marginLeft:"2%"}}>Update your Profi</h3> */}
 
 
           <div className={styles.EmpimageViewWrapper}>
@@ -226,7 +230,7 @@ window.addEventListener('keypress', function(event){
 
             <label className={styles.inputName}>
               <h4>Phone number:</h4>
-              <input maxLength="15" className={styles.input} value={phoneNumber} onChange={(e) => { setphoneNumber(e.target.value) }} type="text" />
+              <input maxLength="15" className={styles.input} value={phoneNumber} onChange={(e) => { setphoneNumber(e.target.value) }} type="number" />
             </label>
             
             <label className={styles.inputName}>
@@ -251,7 +255,7 @@ window.addEventListener('keypress', function(event){
 
             <label className={styles.inputName}>
               <h4>Company Contact No:</h4>
-              <input maxLength="15" className={styles.input} value={CompanyContact} onChange={(e) => { setCompanyContact(e.target.value) }} type="text" />
+              <input maxLength="15"  className={styles.input} value={CompanyContact} onChange={(e) => { setCompanyContact(e.target.value) }} type="number" />
             </label>
 
             <label className={styles.inputName}>

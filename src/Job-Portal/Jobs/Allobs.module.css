@@ -452,23 +452,21 @@ border-left: none;
     display: flex;
     flex-direction: column;
     /* background-color: red; */
-    margin-left: 15px;
-    width:33%
-    
+    padding-left: 5px;
+    width:28%;
+    text-wrap: nowrap;
+    /* background-color: red; */
+
 }
 .MobFilterJobTitleWrapper{
     display: flex;
     flex-direction: column;
     /* background-color: aqua; */
-    /* margin-left: 5px; */
-    width:33%
-
+    margin-left: 5px;
+    width:32%;
+    text-wrap: nowrap;
+    overflow: hidden;
 }
-/* .MobFilterJobTitleWrapper{
-    display: flex;
-    flex-direction: column;
-} */
-
 
 .searchBoth{
     margin-left: 10%;

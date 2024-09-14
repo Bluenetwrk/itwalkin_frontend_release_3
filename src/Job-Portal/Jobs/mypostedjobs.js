@@ -340,7 +340,7 @@ function JoppostedByEmp(props) {
                     }).slice(0,1)
                     }
                    
-                      <span style={{ color: "blue", cursor:"pointer" }} onClick={() => { navigate(`/Jobdetails/${items._id}`) }} >...see more</span>
+                      <span style={{ color: "blue", cursor:"pointer" }} onClick={() => { navigate(`/Jobdetails/${btoa(items._id)}`) }} >...see more</span>
 
                     </li>
                     <li className={`${styles.li} ${styles.Pdate}`}>
@@ -410,7 +410,7 @@ myjobs.map((job, i) => {
   window.scrollTo({
     top:0
   })
-  navigate(`/Jobdetails/${job._id}`)}} >{job.jobTitle.toUpperCase()} </p>                      
+  navigate(`/Jobdetails/${btoa(job._id)}`)}} >{job.jobTitle.toUpperCase()} </p>                      
         <p className={styles.Date}>{new Date(job.createdAt).toLocaleString(
           "en-US",
           {

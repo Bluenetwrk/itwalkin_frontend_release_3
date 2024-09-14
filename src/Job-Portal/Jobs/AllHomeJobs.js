@@ -493,7 +493,9 @@ function Home() {
 
               {/* <li className={`${styles.li} ${styles.HliDescription}`}><b>Job description</b></li> */}
               <li style={{ backgroundColor: " rgb(40, 4, 99)" }} className={`${styles.li} ${styles.date}`}>Posted Date
-                <p style={{ display: "inline", marginLeft: "6px" }}> <i onClick={sortbyNewjobs} className={`${styles.arrow} ${styles.up}`} ></i>
+                <p style={{display:"inline",  marginLeft:"10%", marginTop:"2px"}} >
+
+                  <i onClick={sortbyNewjobs} className={`${styles.arrow} ${styles.up}`} ></i>
                   <i onClick={sortbyOldjobs} className={`${styles.arrow} ${styles.down}`}></i>
                 </p>
               </li>
@@ -501,14 +503,16 @@ function Home() {
               <li style={{ backgroundColor: " rgb(40, 4, 99)" }} className={`${styles.li} ${styles.Location}`}>Location</li>
 
               <li style={{ backgroundColor: " rgb(40, 4, 99)" }} className={`${styles.li} ${styles.Package}`}>CTC
-                <p style={{ display: "inline", marginLeft: "10px" }}>
+              <p style={{display:"inline", marginLeft:"20%", marginTop:"5px"}}>
+
                   <i onClick={SdescendingOrder} className={`${styles.arrow} ${styles.up}`}> </i>
                   <i onClick={SascendingOrder} className={`${styles.arrow} ${styles.down}`}></i>
                 </p>
               </li>
 
               <li style={{ backgroundColor: " rgb(40, 4, 99)" }} className={`${styles.li} ${styles.experiance}`}>Experience
-                <p style={{ display: "inline", marginLeft: "10px" }}>
+              <p style={{display:"inline", marginLeft:"10%", marginTop:"2px"}}>
+
                   <i onClick={EdescendingOrder} className={`${styles.arrow} ${styles.up}`}> </i>
                   <i onClick={EascendingOrder} className={`${styles.arrow} ${styles.down}`}></i>
                 </p>
@@ -534,7 +538,7 @@ function Home() {
                         !items.Source ?
 
                           <li style={{ cursor: "pointer", textDecoration: "underline" }} className={`${styles.li} ${styles.CompanyName}`}
-                            onClick={() => { navigate(`/CheckEmpHalfProfile/${items.empId}`) }}  >
+                            onClick={() => { navigate(`/CheckEmpHalfProfile/${btoa(items.empId)}`) }}  >
                             {/* {items.Logo ?
                               < img style={{ width: "38px", height: "38px" }} src={items.Logo} />
                               : ""} 
@@ -558,7 +562,7 @@ function Home() {
                       <li className={`${styles.li} ${styles.Source}`} >Itwalkin</li>
                       {/* } */}
 
-                      <li className={`${styles.li} ${styles.Jtitle}`} onClick={() => navigate(`/Jobdetails/${items._id}`)} style={{ cursor: "pointer", textDecoration: "underline", color: "blue" }}>{items.jobTitle}</li>
+                      <li className={`${styles.li} ${styles.Jtitle}`} onClick={() => navigate(`/Jobdetails/${btoa(items._id)}`)} style={{ cursor: "pointer", textDecoration: "underline", color: "blue" }}>{items.jobTitle}</li>
                       <li className={`${styles.li} ${styles.JobType}`}>{items.jobtype}</li>
 
                       {/* <li className={`${styles.li} ${styles.liDescription}`}>
@@ -617,7 +621,7 @@ function Home() {
                         !items.Source ?
 
                           <li style={{ cursor: "pointer", textDecoration: "underline" }} className={`${styles.li} ${styles.CompanyName}`}
-                            onClick={() => { navigate(`/CheckEmpHalfProfile/${items.empId}`) }}  >
+                            onClick={() => { navigate(`/CheckEmpHalfProfile/${btoa(items.empId)}`) }}  >
                             {/* {items.Logo ?
                               < img style={{ width: "38px", height: "38px" }} src={items.Logo} />
                               : ""} 
@@ -642,7 +646,7 @@ function Home() {
 
                       {/* } */}
 
-                      <li className={`${styles.li} ${styles.Jtitle}`} onClick={() => navigate(`/Jobdetails/${items._id}`)} style={{ cursor: "pointer", textDecoration: "underline", color: "blue" }}>{items.jobTitle}</li>
+                      <li className={`${styles.li} ${styles.Jtitle}`} onClick={() => navigate(`/Jobdetails/${btoa(items._id)}`)} style={{ cursor: "pointer", textDecoration: "underline", color: "blue" }}>{items.jobTitle}</li>
                       <li className={`${styles.li} ${styles.JobType}`}>{items.jobtype}</li>
 
                       {/* <li className={`${styles.li} ${styles.liDescription}`}>
@@ -838,7 +842,7 @@ function Home() {
                             window.scrollTo({
                               top: 0
                             })
-                            navigate(`/Jobdetails/${job._id}`)
+                            navigate(`/Jobdetails/${btoa(job._id)}`)
                           }} >{job.jobTitle.toUpperCase()} </p>
                           <p className={styles.Date}>{new Date(job.createdAt).toLocaleString(
                             "en-US",
@@ -857,7 +861,7 @@ function Home() {
                           <img className={styles.logo} src={job.Logo} />
                           {!job.Source ?
 
-                            <> <span className={styles.companyName} onClick={() => { checkEmpHalf(job.empId) }} >{job.companyName} </span><br></br></>
+                            <> <span className={styles.companyName} onClick={() => { checkEmpHalf(btoa(job.empId)) }} >{job.companyName} </span><br></br></>
                             :
                             //  <> <span className={styles.companyName} onClick={()=>{checkEmpHalf(job.empId)}} >{job.companyName} </span><br></br></>
                             <> <a className={`${styles.companyName}`} href={job.SourceLink} target="_blank">{job.Source}</a><br></br> </>

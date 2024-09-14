@@ -23,9 +23,12 @@ const screenSize = useScreenSize();
     let params =useParams()
 
     async function getProfile() {
+        window.scrollTo({
+            top:0
+        })
   setPageLoader(true)
   const headers = { authorization: 'BlueItImpulseWalkinIn'};
-        await axios.get(`/EmpProfile/getProfile/${params.empId}`, {headers})
+        await axios.get(`/EmpProfile/getProfile/${atob(params.empId)}`, {headers})
             .then((res) => {
                 let result = res.data.result  
                 console.log(res)              

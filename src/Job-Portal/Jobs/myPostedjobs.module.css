@@ -228,13 +228,13 @@
 .Acbuttons {
     height: 25px;
     display: flex;
-    margin-left: 10%;
+    margin-left:3%;
   }
 .Abutton {
     border: 1px solid;
     font-weight: 550;
     font-size: small;
-    margin-left: 5px;
+    margin-left:3%;
 }
 .update {
     background-color: rgb(40, 4, 99);
@@ -246,6 +246,8 @@
     background-color: rgb(252, 56, 56);
     color: white;
     cursor: pointer;
+    margin-left:5%;
+
 }
 
 .NuApplied{

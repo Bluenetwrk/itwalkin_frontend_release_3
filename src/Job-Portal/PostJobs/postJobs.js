@@ -55,18 +55,18 @@ function PostJobs(props) {
     const [skills, setSkills] = useState("")
     const [errorMessage, setErrorMessage] = useState("")
     const [successMessage, setSuccessMessage] = useState("")
-    const [others, setOthers] = useState(false)
     const [Logo, setLogo] = useState()
     const [other, setother] = useState(false)
+    const [others, setOthers] = useState(false)
     const [otherJobLocation, setotherJobLocation] = useState(false)
 
     const [profileData, setProfileData] = useState([])
-    const [tag, setTag] = useState([])
-    const Tags=tag.map((tag,i)=>{
-        return(
-            tag.value
-        )
-    })
+    const [Tags, setTag] = useState([])
+    // const Tags=tag.map((tag,i)=>{
+    //     return(
+    //         tag.value
+    //     )
+    // })
 
     function handleChange(tag){
         setTag(tag)
@@ -215,13 +215,7 @@ window.addEventListener('keypress', function(event){
          onChange={(e)=>{ setJobDescription(e.blocks) }}
       />
                          <h4 className={Style.jobHeadline}>Job Type</h4>
-                                        {/* <select className={Style.inputbox} onChange={(e) => { setJobtype(e.target.value) }}>
-                        <option value="" >Select Job Type</option>
-                        <option value="Full Time" >Full Time</option>
-                        <option value="Part Time">Part Time</option>
-                        <option value="Internship">Internship</option>
-                        <option value="Contract">Contract</option>
-                    </select> */}
+                                 
                                         <label><input name="Job-Type" type="radio" checked={jobtype==="Full Time"} value="Full Time" onChange={(e) => { setJobtype(e.target.value) }} />Full Time  </label>
                                         <label><input name="Job-Type" type="radio" checked={jobtype==="Part Time"} value="Part Time" onChange={(e) => { setJobtype(e.target.value) }} />Part Time  </label>
                                         <label><input name="Job-Type" type="radio" checked={jobtype==="Internship"} value="Internship" onChange={(e) => { setJobtype(e.target.value) }} />Internship </label>
@@ -278,7 +272,7 @@ window.addEventListener('keypress', function(event){
                            <CreatableSelect  
                           isMulti={true}
                           options={jobTags}
-                          value={tag}
+                          value={Tags}
                           onChange={handleChange}     
                         />
                          </div>

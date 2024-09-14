@@ -20,7 +20,7 @@ const responsive = {
   },
   tablet: {
     breakpoint: { max: 1024, min: 464 },
-    items: 8
+    items: 1
   },
   mobile: {
     breakpoint: { max: 464, min: 0 },
@@ -490,7 +490,7 @@ async function filterByJobTitle(key){
               <li style={{backgroundColor:" rgb(40, 4, 99)"}} className={`${styles.li} ${styles.JobType}`}>JobType</li>
               {/* <li className={`${styles.li} ${styles.HliDescription}`}><b>Job description</b></li> */}
               <li style={{backgroundColor:" rgb(40, 4, 99)"}} className={`${styles.li} ${styles.date}`}>Posted Date
-                <p style={{display:"inline", marginLeft:"6px"}} >
+                <p style={{display:"inline",  marginLeft:"10%", marginTop:"2px"}} >
                    <i onClick={sortbyNewjobs} className={`${styles.arrow} ${styles.up}`}> </i>
                   <i onClick={sortbyOldjobs} className={`${styles.arrow} ${styles.down}`}></i>
                   </p >
@@ -498,14 +498,14 @@ async function filterByJobTitle(key){
 
               <li style={{backgroundColor:" rgb(40, 4, 99)"}} className={`${styles.li} ${styles.Location}`}>Location</li>
               <li style={{backgroundColor:" rgb(40, 4, 99)"}} className={`${styles.li} ${styles.Package}`}>CTC
-              <p style={{display:"inline", marginLeft:"10px"}}>
+              <p style={{display:"inline", marginLeft:"20%", marginTop:"5px"}}>
                 <i onClick={SdescendingOrder} className={`${styles.arrow} ${styles.up}`}> </i>
                 <i onClick={SascendingOrder} className={`${styles.arrow} ${styles.down}`}></i>
                 </p>
               </li>
 
               <li style={{backgroundColor:" rgb(40, 4, 99)"}} className={`${styles.li} ${styles.experiance}`}>Expereince
-              <p style={{display:"inline", marginLeft:"10px"}}>
+              <p style={{display:"inline", marginLeft:"10%", marginTop:"2px"}}>
                 <i onClick={EdescendingOrder} className={`${styles.arrow} ${styles.up}`}> </i>
                 <i onClick={EascendingOrder} className={`${styles.arrow} ${styles.down}`}></i>
                 </p>
@@ -532,7 +532,7 @@ async function filterByJobTitle(key){
                         !items.Source ?
 
                           <li style={{ cursor: "pointer", textDecoration: "underline" }} className={`${styles.li} ${styles.CompanyName}`}
-                            onClick={() => { navigate(`/CheckEmpHalfProfile/${items.empId}`) }}  >
+                            onClick={() => { navigate(`/CheckEmpHalfProfile/${btoa(items.empId)}`) }}  >
                             {/* {items.Logo ?
                               < img style={{ width: "38px", height: "38px" }} src={items.Logo} />
                               : ""}
@@ -557,7 +557,7 @@ async function filterByJobTitle(key){
 
                       {/* } */}
 
-                      <li className={`${styles.li} ${styles.Jtitle}`} onClick={() => navigate(`/Jobdetails/${items._id}`)} style={{ cursor: "pointer", textDecoration: "underline", color: "blue" }}>{items.jobTitle.toUpperCase()}</li>
+                      <li className={`${styles.li} ${styles.Jtitle}`} onClick={() => navigate(`/Jobdetails/${btoa(items._id)}`)} style={{ cursor: "pointer", textDecoration: "underline", color: "blue" }}>{items.jobTitle.toUpperCase()}</li>
                       <li className={`${styles.li} ${styles.JobType}`}>{items.jobtype}</li>
 
                       {/* <li className={`${styles.li} ${styles.liDescription}`}>
@@ -635,7 +635,7 @@ async function filterByJobTitle(key){
                         !items.Source ?
 
                           <li style={{ cursor: "pointer", textDecoration: "underline" }} className={`${styles.li} ${styles.CompanyName}`}
-                            onClick={() => { navigate(`/CheckEmpHalfProfile/${items.empId}`) }}  >
+                            onClick={() => { navigate(`/CheckEmpHalfProfile/${btoa(items.empId)}`) }}  >
                             {/* {items.Logo ?
                               < img style={{ width: "38px", height: "38px" }} src={items.Logo} />
                               : ""}
@@ -660,7 +660,7 @@ async function filterByJobTitle(key){
 
                       {/* } */}
 
-                      <li className={`${styles.li} ${styles.Jtitle}`} onClick={() => navigate(`/Jobdetails/${items._id}`)} style={{ cursor: "pointer", textDecoration: "underline", color: "blue" }}>{items.jobTitle.toUpperCase()}</li>
+                      <li className={`${styles.li} ${styles.Jtitle}`} onClick={() => navigate(`/Jobdetails/${btoa(items._id)}`)} style={{ cursor: "pointer", textDecoration: "underline", color: "blue" }}>{items.jobTitle.toUpperCase()}</li>
                       <li className={`${styles.li} ${styles.JobType}`}>{items.jobtype}</li>
 
                       {/* <li className={`${styles.li} ${styles.liDescription}`}>
@@ -855,7 +855,7 @@ async function filterByJobTitle(key){
                             window.scrollTo({
                               top: 0
                             })
-                            navigate(`/Jobdetails/${job._id}`)
+                            navigate(`/Jobdetails/${btoa(job._id)}`)
                           }} >{job.jobTitle.toUpperCase()}</p>
                           <p className={styles.Date}>{new Date(job.createdAt).toLocaleString(
                             "en-US",
@@ -871,7 +871,7 @@ async function filterByJobTitle(key){
 
                           {!job.Source ?
 
-                            <> <span className={styles.companyName} onClick={() => { navigate(`/CheckEmpHalfProfile/${job.empId}`) }} >{job.companyName} </span><br></br></>
+                            <> <span className={styles.companyName} onClick={() => { navigate(`/CheckEmpHalfProfile/${btoa(job.empId)}`) }} >{job.companyName} </span><br></br></>
                             :
                             //  <> <span className={styles.companyName} onClick={()=>{checkEmpHalf(job.empId)}} >{job.companyName} </span><br></br></>
                             <> <a className={`${styles.companyName}`} href={job.SourceLink} target="_blank">{job.Source}</a><br></br> </>

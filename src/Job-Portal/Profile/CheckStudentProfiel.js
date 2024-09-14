@@ -26,7 +26,7 @@ let navigate = useNavigate()
         let userid = JSON.parse(localStorage.getItem("EmpIdG"))
         const headers = { authorization: userid +" "+ atob(JSON.parse(localStorage.getItem("EmpLog"))) };
         setPageLoader(true)
-        await axios.get(`/StudentProfile/getProfile/${params.CP}`,{headers})
+        await axios.get(`/StudentProfile/getProfile/${atob(params.CP)}`,{headers})
             .then((res) => {
                 let result = res.data.result
                 setProfileData([result])
@@ -44,9 +44,9 @@ let navigate = useNavigate()
     return (
         <>
 <div style={{display:"flex"}}>
-                            <img style={{ height:"25px", color:"grey", marginTop:"20px", marginLeft:"8%", cursor:"pointer",
-             width:"28px"}} onClick={()=>{navigate(-1)}}  src={Arrowimage} />
-    <p style={{marginLeft:"30%"}}><b>Student Profile </b></p>
+                             <img style={{ height:"25px", color:"grey", marginTop:"20px", marginLeft:"8%", cursor:"pointer",
+             width:"28px"}} onClick={()=>{navigate("/Search-Candidate")}}  src={Arrowimage} />
+    <p style={{marginLeft:"40%"}}><b>Student Profile </b></p>
     </div>
  {
 profileData.map((item, i) => {
@@ -100,7 +100,7 @@ profileData.map((item, i) => {
                        <li className={` ${styles.Hli}`}>{item.currentCTC?item.currentCTC:<li className={styles.Nli}>Not Updated</li>}</li>
                        <li className={` ${styles.Hli}`}>{item.Qualification?item.Qualification:<li className={styles.Nli}>Not Updated</li>}</li>
                        <li className={` ${styles.Hli}`}>{item.Skills?item.Skills:<li className={styles.Nli}>Not Updated</li>}</li>
-                       <li className={` ${styles.Hli}`}>{item.Experiance?item.email:<li className={styles.Nli}>Not Updated</li>}</li>
+                       <li className={` ${styles.Hli}`}>{item.Experiance?item.Experiance:<li className={styles.Nli}>Not Updated</li>}</li>
                         </ul>
                     )
                 })

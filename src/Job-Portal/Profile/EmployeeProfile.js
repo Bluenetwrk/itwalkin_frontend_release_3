@@ -56,7 +56,7 @@ let navigate = useNavigate()
          onClick={()=>{navigate(-1)}} >Back</button> */}
             <img style={{ height:"25px", color:"grey", marginTop:"20px", marginLeft:"8%", cursor:"pointer",
              width:"28px"}} onClick={()=>{navigate(-1)}}  src={Arrowimage} />
-        <h3 style={{color:"rgb(40, 4, 99)", marginLeft:"40%"}}>My Profile</h3>
+        <h3 style={{color:"rgb(40, 4, 99)", marginLeft:"35%"}}>My Profile</h3>
         </div>
          {
 profileData.map((item, i) => {
@@ -69,7 +69,13 @@ profileData.map((item, i) => {
 
 })
     }
+            {screenSize.width>800?
+
     <button className={styles.updateProfile} onClick={updateEmployeeProfile}>Update Profile</button>
+    :
+    <button className={styles.MobupdateProfile} onClick={updateEmployeeProfile}>Update Profile</button>
+
+            }
 
             {screenSize.width>850?
            

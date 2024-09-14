@@ -4,9 +4,9 @@
     align-items: center;
     display: flex;
     flex-wrap: nowrap;
-    width:29%;
+    width:25%;
     height: 30px;
-    margin-left: 68%;
+    margin-left: 72%;
 }
 
 .HomeprofileIcon{
@@ -29,7 +29,7 @@
 .dropdownwrapperHome {
     position:absolute;
     /* right : 1.5rem; */
-    left: 84%;
+    left: 86.3%;
     padding-right: 15px;
     padding-left: 15px;
     padding-bottom: 0px;
@@ -157,7 +157,7 @@
     /* margin-left: 2%; */
     text-decoration: none;
     color: white;
-    font-size: medium;
+    font-size: small;
     font-weight: 540;
     /* width:18%  */
     position: absolute;
@@ -186,7 +186,7 @@
 .EmpIconeWrapper{
     display: flex;
     /* width: 25%; */
-    margin-left: 64%;
+    margin-left: 76%;
     align-items: center;
     /* background-color: red; */
 }
@@ -194,9 +194,10 @@
 .EmpProfileIcon {
     /* width: 35px; */
     height: 35px;
-    margin-left: 69%;
+    margin-left: 63%;
     margin-top: 5px;
     cursor: pointer;
+    /* background-color: aqua; */
 }
 .JobSeekerprofileIcon {
     width: 35px;
@@ -362,9 +363,9 @@
 .Empdropdownwrapper {
     position: absolute;
     /* right : 1.5rem; */
-    left: 87%;
-    padding-right: 15px;
-    padding-left: 15px;
+    left: 86.2%;
+    padding-right: 10px;
+    padding-left: 10px;
     padding-bottom: 0px;
     border-radius: 8px;
     background-color: white;
@@ -372,10 +373,10 @@
     cursor: pointer;
     z-index: 100;
 }
+/* 
 @media(max-width:1500px){
     .Empdropdownwrapper {
         position: absolute;
-        /* right : 1.5rem; */
         left: 85%;
         padding-right: 15px;
         padding-left: 15px;
@@ -388,7 +389,6 @@
 @media(max-width:1400px){
     .Empdropdownwrapper {
         position: absolute;
-        /* right : 1.5rem; */
         left: 86%;
         padding-right: 15px;
         padding-left: 15px;
@@ -401,7 +401,6 @@
 @media(max-width:1300px){
     .Empdropdownwrapper {
         position: absolute;
-        /* right : 1.5rem; */
         left: 87%;
         padding-right: 15px;
         padding-left: 15px;
@@ -415,7 +414,6 @@
     @media(max-width:1150px){
         .Empdropdownwrapper {
             position: absolute;
-            /* right : 1.5rem; */
             left: 88%;
             padding-right: 15px;
             padding-left: 15px;
@@ -428,7 +426,6 @@
     @media(max-width:1050px){
         .Empdropdownwrapper {
             position: absolute;
-            /* right : 1.5rem; */
             left: 89%;
             padding-right: 10px;
             padding-left: 10px;
@@ -443,7 +440,6 @@
     @media(max-width:950px){
         .Empdropdownwrapper {
             position: absolute;
-            /* right : 1.5rem; */
             left: 87.5%;
             padding-right: 15px;
             padding-left: 15px;
@@ -457,7 +453,6 @@
     @media(max-width:850px){
         .Empdropdownwrapper {
             position: absolute;
-            /* right : 1.5rem; */
             left: 85%;
             padding-right: 15px;
             padding-left: 15px;
@@ -466,7 +461,7 @@
             border: 1px solid rgb(202, 202, 202);
             cursor: pointer;
         }
-        }
+        } */
 
 .dropdownwrapper::after {
     content: "";
