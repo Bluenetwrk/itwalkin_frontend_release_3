@@ -12,23 +12,6 @@ import location from "../img/icons8-location-20.png"
 function AllJobsForAdmin() {
   let navigate = useNavigate()
 
-  const [user, setUser] = useState([
-    { id: 1, name: "Peter", surname: "Robinson", checked: false },
-    { id: 2, name: "Ann", surname: "Walker", checked: false },
-    { id: 3, name: "James", surname: "Allen", checked: false }
-  ]);
-
-  const toggleCheck = (id) => {
-    const checkedIdx = user.findIndex((u) => u.id === id);
-    if (checkedIdx === -1) return;
-    const updatedUser = [...user];
-    updatedUser[checkedIdx].checked = !updatedUser[checkedIdx].checked;
-    setUser(updatedUser);
-  };
-
-  const remove = () => {
-    setUser([...user].filter((u) => !u.checked));
-  };
 
   useEffect(()=>{
     let adminLogin= localStorage.getItem("SupAdMLog")
@@ -189,7 +172,6 @@ const [checkBoxValue, setCheckBoxValue]=useState([])
                       <li className={`${styles.li} ${styles.Skills}`}>{items.skills}</li>
                      <li  className={`${styles.li} ${styles.DeleteAction}`} >
                       <button className={styles.DeleteButton} onClick={()=>{DeleteJob(items._id)}} >Delete</button></li>
-                      {/* <input type="checkbox" style={{marginTop:"-25px",}} onChange={() => toggleCheck(items._id)} */}
                           </ul>
                   )
                 })

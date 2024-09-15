@@ -269,7 +269,7 @@ StudentAuth ?
                 <div className={Styles.MobJobseekerDropdownwrapper} ref={menuRef} >
                   <p className={Styles.text} ref={menuRef} onClick={myprofile}>My profile</p>
 
-                  <p className={Styles.text} ref={menuRef} onClick={updateprofile}>Update profile</p>
+                  {/* <p className={Styles.text} ref={menuRef} onClick={updateprofile}>Update profile</p> */}
 
                   <p className={Styles.text} ref={menuRef} onClick={MyJobApplied}>Jobs Applied</p>
                   <p className={Styles.text} ref={menuRef} onClick={StudlogOut}>Logout</p>
