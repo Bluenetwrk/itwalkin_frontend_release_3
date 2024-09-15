@@ -12,6 +12,24 @@ import location from "../img/icons8-location-20.png"
 function AllJobsForAdmin() {
   let navigate = useNavigate()
 
+  const [user, setUser] = useState([
+    { id: 1, name: "Peter", surname: "Robinson", checked: false },
+    { id: 2, name: "Ann", surname: "Walker", checked: false },
+    { id: 3, name: "James", surname: "Allen", checked: false }
+  ]);
+
+  const toggleCheck = (id) => {
+    const checkedIdx = user.findIndex((u) => u.id === id);
+    if (checkedIdx === -1) return;
+    const updatedUser = [...user];
+    updatedUser[checkedIdx].checked = !updatedUser[checkedIdx].checked;
+    setUser(updatedUser);
+  };
+
+  const remove = () => {
+    setUser([...user].filter((u) => !u.checked));
+  };
+
   useEffect(()=>{
     let adminLogin= localStorage.getItem("SupAdMLog")
         if(!adminLogin){
@@ -82,12 +100,13 @@ const screenSize = useScreenSize();
 
       }
     }
+const [checkBoxValue, setCheckBoxValue]=useState([])
+    function checkBox(e){
+      console.log(e)
+    }
 
   return (
     <>
-                                                  {/* <button className={styles.searchButton} onClick={()=>{
-        navigate("/BIAddmin@PostJob")}}>Post Job</button> */}
-    {/* <h4 style={{marginLeft:"20px", marginTop:"10px"}}>All jobs for admin</h4> */}
     <div className={styles.searchBoth}>
             <p className={styles.p}>Search </p>
             <input className={styles.inputboxsearch} type="text" placeholder='Search for a Job / Skills / Location / Experiance' onChange={(e) => { search(e) }} />
@@ -125,6 +144,7 @@ const screenSize = useScreenSize();
                   return (
 
                     <ul className={styles.ul}>
+
  <li className={`${styles.li} ${styles.CompanyName}`}>{items.Logo ?
                         < img style={{ width: "38px", height: "38px" }} src={items.Logo} />
                         : ""}<br></br>{items.companyName}</li>
@@ -139,30 +159,8 @@ const screenSize = useScreenSize();
                       return (
                         <>
                           {
-                            // descrip.type == "unordered-list-item" ?
-            
-                            //   <ul style={{ listStyleType: "disc" }}>
-                            //     <li>
-                            //       {descrip.text}
-            
-                            //     </li>
-                            //   </ul>
-            
-                            //   : descrip.type == "ordered-list-item" ?
-            
-                            //     <ol >
-                            //       {/* <li> */}
-                            //         {descrip.text}
-            
-                            //       {/* </li> */}
-                            //     </ol>
-                            //     :
-                            //     <>
-                            //       {descrip.text.slice(0,3)}
-                            //       <br></br>
-                            //     </>
-                                descrip.text.slice(0,60)
-            
+
+                                descrip.text.slice(0,60)            
                           }
                         </>
                       )
@@ -191,14 +189,14 @@ const screenSize = useScreenSize();
                       <li className={`${styles.li} ${styles.Skills}`}>{items.skills}</li>
                      <li  className={`${styles.li} ${styles.DeleteAction}`} >
                       <button className={styles.DeleteButton} onClick={()=>{DeleteJob(items._id)}} >Delete</button></li>
-                     
+                      {/* <input type="checkbox" style={{marginTop:"-25px",}} onChange={() => toggleCheck(items._id)} */}
                           </ul>
                   )
                 })
-: <p style={{ color: "red", marginLeft: "42%" }}>No Record Found</p>
-
-            
-
+: 
+<>
+<p style={{ color: "red", marginLeft: "42%" }}>No Record Found</p>
+</>
               }
 
 

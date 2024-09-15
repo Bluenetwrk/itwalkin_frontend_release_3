@@ -11,6 +11,7 @@ import profileDp from "../img/user_3177440.png"
 function AppliedUserProfile() {
     let params = useParams()
     let JobId = params.jid
+    console.log(JobId)
 
     let navigate = useNavigate()
 

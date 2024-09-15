@@ -141,7 +141,7 @@
     border: solid white;
     border-width: 0 2px 2px 0;
     display: inline-block;
-    padding: 3px;
+    padding: 2.3px;
   }
   
   .up {
@@ -149,6 +149,7 @@
     -webkit-transform: rotate(-135deg);
     /* background-color: blue; */
     position: absolute;
+    margin-top: 2px;
   }
   .down {
     transform: rotate(90deg);

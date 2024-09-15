@@ -59,15 +59,20 @@ import Footer from "./Job-Portal/Footer/Footer";
 import Payment from "./Job-Portal/Payment"
 import socketIO from 'socket.io-client';
 
-// axios.defaults.baseURL = "http://localhost:8080"
+import useScreenSize from '../src/Job-Portal/SizeHook';
+
+
+axios.defaults.baseURL = "http://localhost:8080"
 // vercel Test
-axios.defaults.baseURL = " https://itwalkin-backend-testrelease-2-0-1-0824-ns0g.onrender.com"
+// axios.defaults.baseURL = " https://itwalkin-backend-testrelease-2-0-1-0824-ns0g.onrender.com"
 // Vercel Main Live 
 //  axios.defaults.baseURL = "https://itwalkin-backend-testrelease-2-0-1-0824.onrender.com";
 
 const App = () => {
   // let jobSeekerId = JSON.parse(localStorage.getItem("StudId"))
   // let empId = JSON.parse(localStorage.getItem("EmpIdG"))
+  const screenSize = useScreenSize();
+  let size =screenSize.width
 
   return (
     <>

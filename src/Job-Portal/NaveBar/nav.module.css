@@ -191,6 +191,14 @@
     /* background-color: red; */
 }
 
+.profileIcon {
+    /* width: 35px; */
+    height: 35px;
+    margin-left: 63%;
+    margin-top: 5px;
+    cursor: pointer;
+    /* background-color: aqua; */
+}
 .EmpProfileIcon {
     /* width: 35px; */
     height: 35px;
@@ -609,12 +617,15 @@ font-weight: bold;
     height:26px;
    margin-left: 5%;
    margin-top: 5px;
+   color:"red"
 }
 .NavIconCross{
     width:30px;
     height:30px;
    margin-left: 5%;
    margin-top: 5px;
+   color:"red"
+
 }
 .Aboutus{
     margin-left: -2px;
@@ -1188,7 +1199,7 @@ margin-left: 10%;
 .Admindropdownwrapper {
     position: absolute;
     /* right : 1.5rem; */
-    left: 71%;
+    left: 92.6%;
     padding-right: 5px;
     padding-left: 5px;
     padding-bottom: 0px;
@@ -1211,10 +1222,23 @@ margin-left: 10%;
     border-top: 1px solid grey;
 
 }
-@media(max-width:330px){
+@media(max-width:750px){
     .Admindropdownwrapper {
         position: absolute;
-        /* right : 1.5rem; */
+        left: 85%;
+        padding-right: 5px;
+        padding-left: 5px;
+        padding-bottom: 0px;
+        border-radius: 8px;
+        background-color: white;
+        border: 1px solid rgb(202, 202, 202);
+        cursor: pointer;
+    }
+} 
+
+/* @media(max-width:330px){
+    .Admindropdownwrapper {
+        position: absolute;
         left: 85.2%;
         padding-right: 5px;
         padding-left: 5px;
@@ -1228,7 +1252,6 @@ margin-left: 10%;
 @media(min-width:500px){
     .Admindropdownwrapper {
         position: absolute;
-        /* right : 1.5rem; */
         left: 73.6%;
         padding-right: 5px;
         padding-left: 5px;
@@ -1239,19 +1262,7 @@ margin-left: 10%;
         cursor: pointer;
     }
 }
-@media(min-width:600px){
-    .Admindropdownwrapper {
-        position: absolute;
-        /* right : 1.5rem; */
-        left: 75.2%;
-        padding-right: 5px;
-        padding-left: 5px;
-        padding-bottom: 0px;
-        border-radius: 8px;
-        background-color: white;
-        border: 1px solid rgb(202, 202, 202);
-        cursor: pointer;
-    }
-}
+    */
+
 
 /* ........................................................... */

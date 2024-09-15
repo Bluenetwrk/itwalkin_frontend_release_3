@@ -384,7 +384,7 @@ async function RecentLogin(e){
 
      jobSeekers.map((items, i) => {
                   return (
-
+<>
                     <ul className={styles.ul}>
 
                       <li className={`${styles.li} ${styles.name}`} 
@@ -451,6 +451,7 @@ async function RecentLogin(e){
 
                      
                           </ul>
+                          </>
                   )
                 })
             : <p style={{ color: "red", marginLeft: "42%" }}>No Record Found</p>

@@ -11,12 +11,10 @@ import JobseekerNotification from "../img/icons8-notification-30.png"
 import useScreenSize from '../SizeHook';
 import SidebarNav from "./SidebarNav"
 
-
 import loginuser from "../img/icons8-user-96.png"
 import StudentUpdateProfile from '../Profile/StudentUpdateProfile';
 
 function Nav(props) {
-
 
   const [showprofile, setShowprofile] = useState(false)
   const [ShowSideNave, setShowSideNave] = useState(false)
@@ -97,14 +95,13 @@ function Nav(props) {
 
   return (
     <>
-      
-
-          {
+          {            
+            
           //  ............................................Jobseeker Login...............................................   
         screenSize.width > 750 ?
-          StudentAuth ?
-            <>
-               
+        
+StudentAuth ?
+<>               
               <div className={Styles.fullnavewrapper}>
                 <div className={Styles.logoWrapper}>
                   <NavLink to="/" > <img className={Styles.logo} src={logo} /> </NavLink>
@@ -192,9 +189,9 @@ function Nav(props) {
                   </div>
                   {/* .....................drop down............ */}
                   {showprofile ?
-                    <div style={{ marginLeft: "-2%" }} className={Styles.dropdownwrapper} ref={menuRef} >
-                      <p className={Styles.text} ref={menuRef} >My profile</p>
-                      <p className={Styles.text} ref={menuRef} >Update profile</p>
+                    <div style={{ marginLeft: "-2%" }} className={Styles.Admindropdownwrapper} ref={menuRef} >
+                      {/* <p className={Styles.text} ref={menuRef} >My profile</p>
+                      <p className={Styles.text} ref={menuRef} >Update profile</p> */}
                       <p className={Styles.text} ref={menuRef} onClick={AdminlogOut}>Logout</p>
 
                     </div>
@@ -219,7 +216,6 @@ function Nav(props) {
                 <>
                   <div className={Styles.fullnavewrapper}>
                     <div className={Styles.logoWrapper}>
-                    
                       <NavLink to="/"> <img className={Styles.logo} src={logo} /> </NavLink>
                     </div>
                     <div className={Styles.linkWrapper}>
@@ -335,7 +331,6 @@ function Nav(props) {
                       <div className={`${Styles.link} ${Styles.IconeWrapper} ${Styles.AdminUser}`}>
                         <img className={`${Styles.Icon} ${Styles.profileIcon}`} src={loginuser} ref={imgRef} onClick={() => setShowprofile((prev) => !prev)} />
                       </div >
-
                     </div>
                   </div>
                   {/* .....................drop down............ */}
@@ -378,13 +373,8 @@ function Nav(props) {
                     <SidebarNav setShowSideNaveProps={setShowSideNave} />
                   </div>
                   {/* :"" }   */}
-
-
                 </>
-
       }
-
-
 
     </>
 
