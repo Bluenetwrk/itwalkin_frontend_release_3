@@ -34,7 +34,7 @@ getAboutUs()
 
   return (
     <>
-          <img style={{marginLeft:"50%"}}  onClick={()=>{goDown()}} src = {Down}/>
+          <img style={{marginLeft:"50%",}}  onClick={()=>{goDown()}} src = {Down}/>
      
         <div style={{marginLeft:"20px"}}>
         <p>

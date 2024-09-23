@@ -46,7 +46,7 @@ let navigate = useNavigate()
 <div style={{display:"flex"}}>
                              <img style={{ height:"25px", color:"grey", marginTop:"20px", marginLeft:"8%", cursor:"pointer",
              width:"28px"}} onClick={()=>{navigate("/Search-Candidate")}}  src={Arrowimage} />
-    <p style={{marginLeft:"40%"}}><b>Student Profile </b></p>
+    <p style={{marginLeft:"40%"}}><b>JobSeeker Profile </b></p>
     </div>
  {
 profileData.map((item, i) => {

@@ -11,6 +11,7 @@ import { GoogleLogin } from '@react-oauth/google';
 import image from "../img/user_3177440.png"
 import { TailSpin } from "react-loader-spinner"
 
+import Modal from "./EmpLogModal";
 
 
 
@@ -27,9 +28,8 @@ function EmpLogin(props) {
 
   const [showotp, setshowotp] = useState(false)
   const [Loader, setLoader] = useState(false)
-
-
   const [ipAddress, setIPAddress] = useState('')
+
 
   useEffect(() => {
     fetch('https://api.ipify.org?format=json')
@@ -189,6 +189,8 @@ function EmpLogin(props) {
   }
   return (
     <>
+
+
       {/* <div className={styles.LoginpageWapper}> */}
       {/* <p className={styles.topuperror}>{topuperror}</p>
       <div id={styles.inputWrapper}>
@@ -265,7 +267,6 @@ function EmpLogin(props) {
       </div>
 
 
-      {/* </div> */}
 
     </>
 

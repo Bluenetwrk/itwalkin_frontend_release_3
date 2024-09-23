@@ -182,14 +182,13 @@ h4 {
     background-color: rgb(40, 4, 99);
     color: white;
     font-weight: bold;
-    margin-left: 2.8%;
-
+    /* margin-left: 2.8%; */
 }
 
 .cancel {
     height: 30px;
     margin: 2%;
-    margin-left: 70%;
+    /* margin-left: 70%; */
     width: 60px;
     border-radius: 5px;
     border: 1px solid;
@@ -300,11 +299,9 @@ h4 {
     font-weight: bold;
     margin-left: 5%;
     margin-bottom: 5px;
-
 }
 .MobileSave {
     margin-bottom: 5px;
-
     height: 30px;
     width: 60px;
     border-radius: 5px;
@@ -313,5 +310,4 @@ h4 {
     color: white;
     font-weight: bold;
     margin-left: 2%;
-
 }

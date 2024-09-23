@@ -62,9 +62,9 @@ import socketIO from 'socket.io-client';
 import useScreenSize from '../src/Job-Portal/SizeHook';
 
 
-// axios.defaults.baseURL = "http://localhost:8080"
+axios.defaults.baseURL = "http://localhost:8080"
 // vercel Test
-axios.defaults.baseURL = " https://itwalkin-backend-testrelease-2-0-1-0824-ns0g.onrender.com"
+// axios.defaults.baseURL = " https://itwalkin-backend-testrelease-2-0-1-0824-ns0g.onrender.com"
 // Vercel Main Live 
 //  axios.defaults.baseURL = "https://itwalkin-backend-testrelease-2-0-1-0824.onrender.com";
 
@@ -77,6 +77,9 @@ const App = () => {
   return (
     <>
       <BrowserRouter>
+
+      {/* <i className="fas fa-times" ></i> */}
+                {/* <i className="fas fa-bars"></i> */}
         <Nav />
         <Routes>
           <Route path="/" element={<Home />} />

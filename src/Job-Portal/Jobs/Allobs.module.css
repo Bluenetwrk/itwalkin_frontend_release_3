@@ -233,16 +233,15 @@
 }
 
 .navigationWrapper{
-    /* text-align:right; */
+    text-align:right;
     margin:10px;
-     /* color:rgb(58, 57, 57); */
+
 }
 .navigation{
     background-color:rgb(214, 212, 212);
     padding:3px;
-    padding-left:10px;
-    padding-right:10px;
-    border:none
+    padding-right:10px; 
+    border:none;
 }
 
 .seeMore{
@@ -349,8 +348,8 @@
     background-color: rgb(40, 4, 99);
     display: flex;
     color: white;
-    font-weight: bold;
-    width:75px;
+    /* font-weight: bold; */
+    width:70px;
     padding-left: 15px;
     /* padding-right: 1px; */
     height: 25px;
@@ -365,8 +364,8 @@
     border: 1px solid green;
     background-color:green;    
     color: white;
-    font-weight: bold;
-    width:79px;
+    /* font-weight: bold; */
+    width:75px;
     height: 25px;    
     /* margin-left: -5%; */
     cursor:pointer;

@@ -1,6 +1,8 @@
 import React from 'react'
-import { Link, useNavigate, BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
+// import './footer.css'
 import Styles from "./footer.module.css"
+import { Link, useNavigate, BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
+
 
 
 function Footer() {
@@ -8,40 +10,72 @@ function Footer() {
 
   return (
     <>
-    <div className={Styles.FooterWrapper} >
+      <div className={Styles.footerWraper}>
+        <div className={Styles.footer}>
 
-        {/* <div> */}
-    <p className={Styles.FooterItem} onClick={()=>{
+          <div className={Styles.top}>
+            <div style={{ width: "50%" }} >
+              <p className={Styles.footCart}>Itwalkin.com</p>
+              <p  className={Styles.AddYour}>India's No.1 Job Portal</p>
+            </div>
+            <div className={Styles.brands}>
+              <a> <i className='fa-brands fa-facebook-square'></i> </a>
+              <a> <i className='fa-brands fa-instagram-square'></i> </a>
+              <a> <i className='fa-brands fa-twitter-square'></i> </a>
+            </div>
+          </div>
+
+          <div className={Styles.Bottom}>
+            <div>
+              <h4> Project</h4>
+              <a>Status</a>
+              <a>License</a>
+              <a>All Versions</a>
+            </div>
+            <div>
+              <h4> Community</h4>
+              <a>Github</a>
+              <a>Project</a>
+              <a>Twitter</a>
+            </div>
+            <div>
+              <h4> Help</h4>
+              <a>Support</a>
+              <a onClick={()=>{
       window.scrollTo({
         top:0,
         behavior:"smooth"
       })
-      navigate ("/AboutUs")}}>About Us</p>
-    <p className={Styles.FooterItem} onClick={()=>{
+      navigate ("/AboutUs")}}>About us</a>
+              <a
+              onClick={()=>{
+                window.scrollTo({
+                  top:0,
+                  behavior:"smooth"
+                })
+                navigate ("/Contact")}}>Contact Us</a>
+            </div>
+            <div>
+              <h4> Others</h4>
+              <a
+              onClick={()=>{
+                window.scrollTo({
+                  top:0,
+                  // behavior:"smooth"
+                })
+                navigate ("/TermsAndCondition")}}>Termis and Condition</a>
+              <a onClick={()=>{
       window.scrollTo({
         top:0,
         behavior:"smooth"
       })
-      navigate ("/Services")}}>Services</p>
-    {/* </div> */}
+      navigate ("/Services")}}>Our Services</a>
+              <a>License </a>
+            </div>
+          </div>
 
-    {/* <div style={{ marginLeft:"10%"}}> */}
-    <p className={Styles.FooterItem} onClick={()=>{
-      window.scrollTo({
-        top:0,
-        behavior:"smooth"
-      })
-      navigate ("/Contact")}}>Contact</p>
-    <p className={Styles.FooterItem} onClick={()=>{
-      window.scrollTo({
-        top:0,
-        // behavior:"smooth"
-      })
-      navigate ("/TermsAndCondition")}}>Terms & Conditions</p>
-    {/* <p className={Styles.FooterItem}>Blogs</p> */}
-    {/* </div> */}
-
-    </div>
+        </div>
+      </div>
     </>
   )
 }

@@ -262,7 +262,7 @@ const screenSize = useScreenSize();
                     }).slice(0,1)
                     }
                    
-                    <span style={{ color: "blue" }} onClick={() => { navigate(`/Jobdetails/${items._id}`) }} >...see more</span>
+                    <span style={{ color: "blue", cursor:"pointer" }} onClick={() => { navigate(`/Jobdetails/${btoa(items._id)}`) }} >...see more</span>
 
                   </li>
                   <li className={`${styles.li} ${styles.Pdate}`}>

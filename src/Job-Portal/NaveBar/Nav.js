@@ -14,6 +14,10 @@ import SidebarNav from "./SidebarNav"
 import loginuser from "../img/icons8-user-96.png"
 import StudentUpdateProfile from '../Profile/StudentUpdateProfile';
 
+import Modal from "../Login/EmpLogModal";
+import StuModal from "../Login/StudLogModal";
+
+
 function Nav(props) {
 
   const [showprofile, setShowprofile] = useState(false)
@@ -92,18 +96,40 @@ function Nav(props) {
   function EmployeeProfile() {
     navigate("/MyProfile")
   }
+  // ......Modal....
+  const [open, setOpen] = useState(false);
+  const [Stuopen, setStuopen] = useState(false);
+ 
+    const handleClose = () => {
+        setOpen(false);
+    };
+ 
+    const handleEmpOpen = () => {
+        setOpen(true);
+    };
+    const handleStuOpen = () => {
+      setStuopen(true);
+    };
+
+    const handleStuClose = () => {
+      setStuopen(false);
+  };
+    
+ 
 
   return (
-    <>
+    <>         
+
           {            
             
-          //  ............................................Jobseeker Login...............................................   
-        screenSize.width > 750 ?
-        
-StudentAuth ?
+            //  ............................................Jobseeker Login...............................................   
+            screenSize.width > 750 ?       
+            
+            StudentAuth ?
 <>               
               <div className={Styles.fullnavewrapper}>
                 <div className={Styles.logoWrapper}>
+                
                   <NavLink to="/" > <img className={Styles.logo} src={logo} /> </NavLink>
                 </div>
                 <div className={Styles.linkWrapper}>
@@ -232,11 +258,20 @@ StudentAuth ?
                       </div>
                     </div>
                   </div>
+                  <>
+                    <StuModal isStuOpen={Stuopen} onClose={()=>{handleStuClose()}}/>
+                    <Modal isOpen={open} onClose={()=>{handleClose()}}/>
+                    </>
                   {showprofile ?
+                    
+
                     <div style={{ marginLeft: "-18px" }} className={Styles.dropdownwrapperHome} ref={menuRef} >
-                      <p onClick={() => { navigate("/EmployeeLogin") }}>Employee Login </p>
-                      <p onClick={() => { navigate("/JobSeekerLogin") }}>Job Seeker Login</p>
+                      {/* <p onClick={() => { navigate("/EmployeeLogin") }}>Employee Login </p> */}
+                      {/* <p onClick={() => { navigate("/JobSeekerLogin") }}>Job Seeker Login</p> */}
+                      <p onClick={() => { handleEmpOpen() }}>Employee Login</p>
+                      <p onClick={() => { handleStuOpen() }}>Job Seeker Login</p>
                     </div>
+
                     : ""}
 
                 </>

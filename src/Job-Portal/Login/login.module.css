@@ -1,7 +1,8 @@
 
 .Loginpage{
     color:grey;
-    margin-left: 10px;
+    /* background-color: aqua; */
+    width:220px;
 }
 
 
@@ -53,6 +54,7 @@
     font-size: medium;
     font-weight: 550;
     height: 35px;
+    z-index: 100;
     /* width: 10%; */
 }
 
@@ -79,6 +81,8 @@
     margin-left: 3%;
     display: flex;
     flex-wrap: nowrap;
+    z-index: 100;
+
 }
 
 .google {

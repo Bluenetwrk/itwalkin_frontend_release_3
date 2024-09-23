@@ -70,7 +70,7 @@ useEffect(() => {
             if (result.status == "success") {
               localStorage.setItem("StudLog", JSON.stringify(btoa(token)))
               navigate("/alljobs", {state:{name:result.name}})
-              localStorage.setItem("StudId", JSON.stringify(Id))             
+              localStorage.setItem("StudId", JSON.stringify(Id))   
             }
           }).catch((err) => {
             alert("server issue occured")
@@ -203,11 +203,9 @@ useEffect(() => {
         </div>
       </div>
  */}
+ 
 <div className={styles.BothsignUpWrapper}>
 <h3 className={styles.Loginpage}> Job Seeker Login page  </h3>
-
-      
-{/* <div id={styles.inputWrapper}> */}
 
           <input maxLength="10" className={styles.inputs} type="number" placeholder='enter phone Number'
             value={PhoneNumber} autoComplete="on" onChange={(e) => { setPhoneNumber(e.target.value) }} />

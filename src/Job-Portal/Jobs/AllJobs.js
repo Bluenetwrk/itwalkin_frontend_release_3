@@ -399,6 +399,7 @@ async function getLocation(jobLocation) {
 
 
 async function filterByJobTitle(key){
+  setActive(key)
   setNoPageFilter(true)
   setFiltereredjobs(key)
   await axios.get(`/jobpost/getTagsJobs/${key}`)
@@ -603,7 +604,7 @@ async function filterByJobTitle(key){
                             jobseeker == jobSeekerId
                           )
                         }) ?
-                          <button className={styles.Appliedbutton} title='Successfully Applied, HR will get in with you, Once they check Your Profile' > Applied <span style={{ fontSize: '15px' }}>&#10004;</span></button>
+                          <button className={styles.Appliedbutton} title='HR will get in touch with you, Once they will check Your Profile' > Applied <span style={{ fontSize: '15px' }}>&#10004;</span></button>
 
                           :
                           // items .isApproved?
@@ -705,7 +706,7 @@ async function filterByJobTitle(key){
                             jobseeker == jobSeekerId
                           )
                         }) ?
-                          <button className={styles.Appliedbutton} title='Successfully Applied, HR will get in with you, Once they check Your Profile' > Applied <span style={{ fontSize: '15px' }}>&#10004;</span></button>
+                          <button className={styles.Appliedbutton} title='HR will get in touch with you, Once they will check Your Profile' > Applied <span style={{ fontSize: '15px' }}>&#10004;</span></button>
 
                           :
                           // items .isApproved?

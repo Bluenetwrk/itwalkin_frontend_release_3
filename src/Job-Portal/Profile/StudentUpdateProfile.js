@@ -288,7 +288,7 @@ function StudentUpdateProfile(props) {
 
               <label className={styles.inputName}>
                 <h4>Aadhaar number:</h4>
-                <input maxLength="16" className={styles.input} value={Aadhar} onChange={(e) => { AadharhandleChange(e) }} type="number" />
+                <input maxLength="12" className={styles.input} value={Aadhar} onChange={(e) => { AadharhandleChange(e) }} type="text" />
               </label>
 
               <label className={styles.inputName}>
@@ -324,13 +324,12 @@ function StudentUpdateProfile(props) {
               <label className={styles.inputName}>
                 <h4>Skill Tags:</h4>
                 <div style={{marginTop:"-7px", width:"81%", marginLeft:"18px"}}>
-                           <CreatableSelect  
-                          isMulti={true}
-                          options={jobTags}
-                          value={Tags}
-                          onChange={handleChange} 
-  
-                        />
+                   <CreatableSelect  
+                  isMulti={true}
+                  options={jobTags}
+                  value={Tags}
+                  onChange={handleChange}   
+                />
                          </div>
               </label>
 
@@ -377,7 +376,7 @@ function StudentUpdateProfile(props) {
 
               <label className={styles.MobileinputName}>
                 <h4 className={styles.MobileName}>Aadhaar number:</h4>
-                <input maxLength="16" className={styles.Mobileinput} value={Aadhar} onChange={(e) => { AadharhandleChange(e) }} type="number" />
+                <input maxLength="12" className={styles.Mobileinput} value={Aadhar} onChange={(e) => { AadharhandleChange(e) }} type="number" />
               </label>
 
               <label className={styles.MobileinputName}>
@@ -426,12 +425,6 @@ function StudentUpdateProfile(props) {
                          </div>
               </label>
 
-
-
-              <label className={styles.MobileinputName}>
-                <h4 className={styles.MobileName}>School:</h4>
-                <input maxLength="5" className={styles.Mobileinput} value={Experiance}  type="text" />
-              </label>
 
               <button className={styles.MobileSave} onClick={(e) => { saveUpdate(e) }}>Save</button>
               <button className={styles.Mobilecancel} onClick={() => { navigate(-1) }} >cancel</button>
