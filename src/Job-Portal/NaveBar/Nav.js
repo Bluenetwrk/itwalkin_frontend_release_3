@@ -246,7 +246,7 @@ function Nav(props) {
                     </div>
                     <div className={Styles.linkWrapper}>
                    
-                      <NavLink to="/" className={Styles.HomeJobs} style={navLinkStyles}><i style={{padding:"5px"}} class="fa-solid fa-house"></i>Home</NavLink>
+                      <NavLink to="/" className={Styles.HomeJobs} style={navLinkStyles}><i style={{marginLeft:0, marginRight:"5px"}} class="fa-solid fa-house"></i>Home</NavLink>
                       {/* <NavLink to="/AboutUs" className={`${Styles.Hlink} ${Styles.Aboutus}`} style={navLinkStyles} >About Us</NavLink>
                       <NavLink to="/Services" className={Styles.Hlink} style={navLinkStyles}>Services</NavLink>
                       <NavLink to="/Contact" className={Styles.Hlink} style={navLinkStyles}>Contact</NavLink> */}
@@ -262,14 +262,13 @@ function Nav(props) {
                     <StuModal isStuOpen={Stuopen} onClose={()=>{handleStuClose()}}/>
                     <Modal isOpen={open} onClose={()=>{handleClose()}}/>
                     </>
-                  {showprofile ?
-                    
+                  {showprofile ?                    
 
                     <div style={{ marginLeft: "-18px" }} className={Styles.dropdownwrapperHome} ref={menuRef} >
-                      {/* <p onClick={() => { navigate("/EmployeeLogin") }}>Employee Login </p> */}
-                      {/* <p onClick={() => { navigate("/JobSeekerLogin") }}>Job Seeker Login</p> */}
-                      <p onClick={() => { handleEmpOpen() }}>Employee Login</p>
-                      <p onClick={() => { handleStuOpen() }}>Job Seeker Login</p>
+                      {/* <p onClick={() => { navigate("/EmployeeLogin") }}>Employee Login </p>
+                      <p onClick={() => { navigate("/JobSeekerLogin") }}>Job Seeker Login</p> */}
+                      <p onClick={() => { handleEmpOpen() ; handleStuClose()}}>Employee Login</p> 
+                      <p onClick={() => { handleStuOpen(); handleClose() }}>Job Seeker Login</p>
                     </div>
 
                     : ""}

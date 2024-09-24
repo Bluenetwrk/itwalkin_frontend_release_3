@@ -15,11 +15,10 @@ function Footer() {
 
           <div className={Styles.top}>
             <div style={{ width: "50%" }} >
-              <p className={Styles.footCart}>Itwalkin.com</p>
-              <p  className={Styles.AddYour}>India's No.1 Job Portal</p>
+              <p className={Styles.footCart}>ITwalkin.com</p>
+              <p  className={Styles.AddYour}>only for IT jobs</p>
             </div>
             <div className={Styles.brands}>
-              <a> <i className='fa-brands fa-facebook-square'></i> </a>
               <a> <i className='fa-brands fa-instagram-square'></i> </a>
               <a> <i className='fa-brands fa-twitter-square'></i> </a>
             </div>

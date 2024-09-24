@@ -199,7 +199,7 @@ const Modal = ({ isOpen, onClose, children }) => {
 
 	return (
 		<>
-		<div
+		{/* <div
 			style={{
 				position: "fixed",
 				top: 0,
@@ -212,23 +212,27 @@ const Modal = ({ isOpen, onClose, children }) => {
 				justifyContent: "center",
 				zIndex:100
 			}}
-		>
-			<div
+		> */}
+				 <div
 				style={{
+				position: "fixed",
 					background: "white",
-					height: "50%",
-					width: "50%",
-					margin: "auto",
-					paddingRight: "5%",
-					paddingTop: "5%",
+					height: "35%",
+					width: "20%",
+					// margin: "auto",
+					// paddingRight: "7%",
+					// paddingTop: "3%",
 					paddingBottom: "5%",
 					border: "1px solid #000",
 					borderRadius: "10px",
 					boxShadow: "2px solid black",
+					zIndex:"100",
+					marginLeft:"78%"
 				}}
 			>
+			
 <p onClick={onClose} style={
-					{position:"absolute", marginLeft:"52%", marginTop:"-62px", cursor:"pointer", display:"inline"}}>
+					{position:"absolute", marginLeft:"87%", marginTop:"-1px", cursor:"pointer", display:"inline"}}>
 					
                     <i className="fas fa-times" style={{fontSize:"x-large"}}></i>
 				</p>
@@ -291,7 +295,7 @@ const Modal = ({ isOpen, onClose, children }) => {
 				</>
                 
 			</div>
-		</div>
+		{/* </div> */}
 		</>
 	);
 };
