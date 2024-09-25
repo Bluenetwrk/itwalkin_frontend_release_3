@@ -432,38 +432,38 @@ function SearchCandidate() {
             <ul className={styles.ul} >
               <li style={{ backgroundColor: " rgb(40, 4, 99)" }} className={`${styles.li} ${styles.nameHome}`}><b>Name</b>  </li>
               <li style={{ backgroundColor: " rgb(40, 4, 99)" }} className={`${styles.li} ${styles.NoticePeriod}`}><b>Notice Period</b> 
-              <p style={{ display: "inline", marginLeft:"22%"}}>
+              <p style={{ display: "inline", marginLeft:"4%"}}>
                   <i onClick={NoticeAscendingOrder} className={`${styles.arrow} ${styles.up}`}> </i>
                   <i onClick={NoticeDescendingOrder} className={`${styles.arrow} ${styles.down}`}></i>
                 </p> 
                </li>
               <li style={{ backgroundColor: " rgb(40, 4, 99)" }} className={`${styles.li} ${styles.age}`}> <b>Age</b>
-              <p style={{ display: "inline", marginLeft: "26%" }}>
+              <p style={{ display: "inline", marginLeft: "7%" }}>
                   <i onClick={AgeAscendingOrder} className={`${styles.arrow} ${styles.up}`}> </i>
                   <i onClick={AgeDescendingOrder} className={`${styles.arrow} ${styles.down}`}></i>
                 </p>
                </li>
               <li style={{ backgroundColor: " rgb(40, 4, 99)" }} className={`${styles.li} ${styles.Qualification}`}>  <b>Qualif</b> </li>
               <li style={{ backgroundColor: " rgb(40, 4, 99)" }} className={`${styles.li} ${styles.Experiance}`}><b>Experience</b> 
-              <p style={{ display: "inline", marginLeft: "18%" }}>
+              <p style={{ display: "inline", marginLeft: "1%" }}>
                   <i onClick={ExpAscendingOrder} className={`${styles.arrow} ${styles.up}`}> </i>
                   <i onClick={ExpDescendingOrder} className={`${styles.arrow} ${styles.down}`}></i>
                 </p>  </li>
               <li style={{ backgroundColor: " rgb(40, 4, 99)" }} className={`${styles.li} ${styles.Skills}`}> <b>Skills</b> </li>
               <li style={{ backgroundColor: " rgb(40, 4, 99)" }} className={`${styles.li} ${styles.currentCTC}`}> <b>Cur. CTC</b> 
-              <p style={{ display: "inline", marginLeft: "20%" }}>
+              <p style={{ display: "inline", marginLeft: "2%" }}>
                   <i onClick={CurrCTCAscendingOrder} className={`${styles.arrow} ${styles.up}`}> </i>
                   <i onClick={CurrCTCDescendingOrder} className={`${styles.arrow} ${styles.down}`}></i>
                 </p> 
               </li>
               <li style={{ backgroundColor: " rgb(40, 4, 99)" }} className={`${styles.li} ${styles.ExpectedSalary}`}><b>Exp. CTC</b>
-              <p style={{ display: "inline", marginLeft: "20%" }}>
+              <p style={{ display: "inline", marginLeft: "2%" }}>
                   <i onClick={ExpCTCAscendingOrder} className={`${styles.arrow} ${styles.up}`}> </i>
                   <i onClick={ExpCTCDescendingOrder} className={`${styles.arrow} ${styles.down}`}></i>
                 </p> 
                </li>
               <li style={{ backgroundColor: " rgb(40, 4, 99)" }} className={`${styles.li} ${styles.LastActive}`}><b>Last Active</b> 
-              <p style={{ display: "inline", marginLeft: "20%" }}>
+              <p style={{ display: "inline", marginLeft: "1%" }}>
                   <i onClick={LastActAscendingOrder} className={`${styles.arrow} ${styles.up}`}> </i>
                   <i onClick={LastActDescendingOrder} className={`${styles.arrow} ${styles.down}`}></i>
                 </p> 

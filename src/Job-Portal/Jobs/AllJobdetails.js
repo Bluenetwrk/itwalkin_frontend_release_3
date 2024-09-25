@@ -113,7 +113,7 @@ const [Loader, setLoader] = useState(false)
     <div style={{display:"flex"}}>
                             <img style={{ height:"25px", color:"grey", marginTop:"20px", marginLeft:"8%", cursor:"pointer",
              width:"28px"}} onClick={()=>{navigate(-1)}}  src={Arrowimage} />
-    <p style={{marginLeft:"30%"}}><b>Full Job Description</b></p>
+    {/* <p style={{marginLeft:"30%"}}><b>Full Job Description</b></p> */}
     </div>
 
       {screenSize.width>850 ?
@@ -123,18 +123,48 @@ const [Loader, setLoader] = useState(false)
         <img className={styles.imageV} src={jobs.Logo?jobs.Logo : profileDp}/>
         
         </div>
+
+        <ul>
+        <li className={`${styles.FJD}`}><b>Full Job Description:</b></li>
+
+        </ul>
           <div className={styles.dUiwarpper}>
+            {/* <ul className={styles.Hul}>
+
+            </ul> */}
             <ul className={styles.Hul}>
+            {/* <li className={`${styles.DHli}`}><b>Job Description:</b></li> */}
               <li className={styles.Hli}><b>Company Name</b></li>
               <li className={styles.Hli}><b>Job Title</b></li>
               <li className={styles.Hli}><b>Location</b></li>
               <li className={styles.Hli}><b>Package </b></li>
               <li className={styles.Hli}><b>Experience Required</b></li>
               <li className={styles.Hli}><b>Skills Required</b></li>
-              <li className={styles.Hli}><b>Posted Date</b></li>
-              <ul className={`${styles.DUIli}`}>
-                <li className={`${styles.Dli}`}><b>Job Description:</b></li>
-                <li className={`${styles.RDli} `}>
+              <li className={styles.Hli}><b>Posted Date</b></li>              
+            </ul>
+
+            <ul className={styles.Rul}>
+              <li className={styles.Rli}>{jobs.companyName ? jobs.companyName : <li style={{ display: "inline-block" }}>Company name</li>}</li>
+
+              <li className={styles.Rli}>{jobs.jobTitle ? jobs.jobTitle : <li style={{ display: "inline-block" }}>job Title</li>}</li>
+              <li className={styles.Rli}>{jobs.jobLocation ? jobs.jobLocation : <li style={{ display: "inline-block" }}>job Location</li>}</li>
+              <li className={styles.Rli}>{jobs.salaryRange ? jobs.salaryRange : <li style={{ display: "inline-block" }}>Salary Range</li>}</li>
+              <li className={styles.Rli}>{jobs.experiance ? jobs.experiance : <li style={{ display: "inline-block" }} >Experiance</li>}</li>
+              <li className={styles.Rli}>{jobs.skills ? jobs.skills : <li style={{ display: "inline-block" }} >Skills</li>}  </li>
+              <li className={styles.Rli}>
+                {jobs.updatedAt ? new Date(jobs.updatedAt).toLocaleString(
+                  "en-US",
+                  {
+                    month: "short",
+                    day: "2-digit",
+                    year: "numeric",
+                  }
+                ) : <li style={{ display: "inline-block" }}>Date</li>
+                }
+              </li>
+              <li className={`${styles.DHli}`}><b>Job Description:</b></li>
+
+              <li className={`${styles.DRli} `}>
                    {/* {jobs.jobDescription} */}
                  {
                 jobdescription.map((descrip, di) => {
@@ -166,30 +196,9 @@ const [Loader, setLoader] = useState(false)
                       )
                     })} 
                    
-                  {/* <span className={styles.showLess} onClick={showless}>...show less</span> */}
+
                   </li>
-              </ul>
-            </ul>
 
-            <ul className={styles.Rul}>
-              <li className={styles.Rli}>{jobs.companyName ? jobs.companyName : <li style={{ display: "inline-block" }}>Company name</li>}</li>
-
-              <li className={styles.Rli}>{jobs.jobTitle ? jobs.jobTitle : <li style={{ display: "inline-block" }}>job Title</li>}</li>
-              <li className={styles.Rli}>{jobs.jobLocation ? jobs.jobLocation : <li style={{ display: "inline-block" }}>job Location</li>}</li>
-              <li className={styles.Rli}>{jobs.salaryRange ? jobs.salaryRange : <li style={{ display: "inline-block" }}>Salary Range</li>}</li>
-              <li className={styles.Rli}>{jobs.experiance ? jobs.experiance : <li style={{ display: "inline-block" }} >Experiance</li>}</li>
-              <li className={styles.Rli}>{jobs.skills ? jobs.skills : <li style={{ display: "inline-block" }} >Skills</li>}  </li>
-              <li className={styles.Rli}>
-                {jobs.updatedAt ? new Date(jobs.updatedAt).toLocaleString(
-                  "en-US",
-                  {
-                    month: "short",
-                    day: "2-digit",
-                    year: "numeric",
-                  }
-                ) : <li style={{ display: "inline-block" }}>Date</li>
-                }
-              </li>
 
             </ul>
 

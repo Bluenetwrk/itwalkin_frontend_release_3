@@ -19,8 +19,10 @@ function Footer() {
               <p  className={Styles.AddYour}>only for IT jobs</p>
             </div>
             <div className={Styles.brands}>
+              <a> <i className='fa-brands fa-facebook-square'></i> </a>
               <a> <i className='fa-brands fa-instagram-square'></i> </a>
               <a> <i className='fa-brands fa-twitter-square'></i> </a>
+              <i class="fa-brands fa-linkedin-square" ></i>
             </div>
           </div>
 
@@ -39,7 +41,14 @@ function Footer() {
             </div>
             <div>
               <h4> Help</h4>
-              <a>Support</a>
+              <a
+              onClick={()=>{
+                window.scrollTo({
+                  top:0,
+                  behavior:"smooth"
+                })
+                navigate ("/Contact")}}
+              >Support</a>
               <a onClick={()=>{
       window.scrollTo({
         top:0,

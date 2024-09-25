@@ -151,15 +151,27 @@
   .up {
     transform: rotate(-135deg);
     -webkit-transform: rotate(-135deg);
-    /* background-color: blue; */
+    margin-top: 0px;
     position: absolute;
-    margin-top: 2px;
-  }
-  .down {
+}
+.down {
     transform: rotate(90deg);
     -webkit-transform: rotate(45deg);
-    /* background-color: red; */
-    /* position: absolute; */
+    margin-top: 8px;
+    position: absolute;
+
+  }
+  .up:hover {
+    transform: rotate(-135deg);
+    -webkit-transform: rotate(-135deg);
+    /* background-color: blue; */
+    position: absolute;
+    margin-top: 0px;
+  }
+  .down:hover {
+    transform: rotate(90deg);
+    -webkit-transform: rotate(45deg);
+   
   }
   .arrow:hover{
     border: solid grey;
@@ -392,6 +404,15 @@
 .Hul{
     width : 40%;
 }
+.FJD{
+    padding: 0.5%;
+    width : 89%;
+    border : 1px solid rgb(215, 223, 226);
+    text-align: center;
+    display: inline-block; 
+    background-color: rgb(40, 4, 99);
+    color:white
+}
 .Hli{
     padding: 0.5%;
     width : 65%;
@@ -400,9 +421,9 @@
 
     text-align: center;
     /* border-right: none; */
-    display: inline-block;  
-
+    display: inline-block; 
 }
+
 .Rul{
     width : 40%;
 height: 180px;
@@ -421,22 +442,24 @@ border-left: none;
 
     text-align: center;
 }
-.DUIli{
-    border-top: none;
+
+.DHli{
+    display: inline-block;
+    margin-left: -107.6%;
+    padding: 0.6%;
+    width :217.6%;
     /* border : 1px solid rgb(9, 247, 247); */
+    background-color: rgb(40, 4, 99);
     border : 1px solid rgb(215, 223, 226);
-
-    width : 210.8%;
-
-
+    color:white;
+    text-align: center;
 }
-.Dli{
+.DRli{
     display: inline-block;
-}
-.RDli{
-    display: inline-block;
-    width : 99.8%;
-
+    margin-left: -107.6%;
+    padding: 0.5%;
+    width :217.6%;
+    border : 1px solid rgb(215, 223, 226);
 }
 
 .showLess{

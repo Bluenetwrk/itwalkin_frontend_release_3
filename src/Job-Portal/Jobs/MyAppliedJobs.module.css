@@ -17,15 +17,13 @@
   }
   .down {
     transform: rotate(90deg);
-    -webkit-transform: rotate(45deg);
-    /* background-color: red; */
-    /* position: absolute; */
+    -webkit-transform: rotate(45deg);    
   }
+  
   .arrow:hover{
     border: solid grey;
     border-width: 0 2px 2px 0;
     display: inline-block;
-    /* margin-top: 100px; */
     padding: 3px;
   }
 

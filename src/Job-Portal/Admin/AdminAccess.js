@@ -62,18 +62,19 @@ function AdminAccess() {
     const [showPassword, setshowPassword] = useState(false)
     const [Error, setError] = useState("")
     const [AllAdmin, setAllAdmin] = useState([])
-    
 
     async function AdminRegister() {
         await axios.post("/admin/adminRegister", { email, password })
             .then((res) => {
                 if (res.data === "success") {
+                    setEmail("")
+                    setPassword("")
                     alert("User registered successfully")
+                    getAllAdmin()
                 }
             })
             .catch((err) => {
                 alert("some thing went wrong")
-
             })
     }
     // get all admin
@@ -83,12 +84,10 @@ function AdminAccess() {
                 setAllAdmin(res.data )
                 setEmail("")
                 setPassword("")
-        getAllAdmin()
 
             })
             .catch((err) => {
                 alert("some thing went wrong")
-
             })
     }
     useEffect(()=>{
@@ -111,16 +110,15 @@ function AdminAccess() {
 
                     <label> <input type="checkbox" value={showPassword} onClick={() => { setshowPassword((prev) => !prev) }} /><span>show password</span></label>
 
-
                     {/* <button className={`${styles.button} ${styles.inputs}`} onClick={Adminlogin}>Login</button> */}
-                    <button className={`${styles.button} ${styles.inputs}`} onClick={AdminRegister}>Register</button>
+                    <button className={`${styles.button} ${styles.inputs}`} onClick={()=>{AdminRegister()}}>Register</button>
                 </div>
                 {/* Right Side */}
                 <div style={{marginLeft:"20%"}}>
                     {
                         AllAdmin.map((user, i)=>{
                             return(
-                                <p  style={{  color:user.isSuperAdmin?"rgb(23, 209, 23)":"blue"}}>{user.email} {user.isSuperAdmin?<span> (Super Admin)</span>:""}</p>
+                                <p  style={{  color:user.isSuperAdmin?"rgb(23, 209, 23)":"blue"}} key={i}>{user.email} {user.isSuperAdmin?<span> (Super Admin)</span>:""}</p>
                             )
                         })
                     }                

@@ -491,22 +491,22 @@ async function filterByJobTitle(key){
               <li style={{backgroundColor:" rgb(40, 4, 99)"}} className={`${styles.li} ${styles.JobType}`}>JobType</li>
               {/* <li className={`${styles.li} ${styles.HliDescription}`}><b>Job description</b></li> */}
               <li style={{backgroundColor:" rgb(40, 4, 99)"}} className={`${styles.li} ${styles.date}`}>Posted Date
-                <p style={{display:"inline",  marginLeft:"22%", marginTop:"2px"}} >
+                <p style={{display:"inline",  marginLeft:"6%"}} >
                    <i onClick={sortbyNewjobs} className={`${styles.arrow} ${styles.up}`}> </i>
                   <i onClick={sortbyOldjobs} className={`${styles.arrow} ${styles.down}`}></i>
                   </p >
               </li>
 
               <li style={{backgroundColor:" rgb(40, 4, 99)"}} className={`${styles.li} ${styles.Location}`}>Location</li>
-              <li style={{backgroundColor:" rgb(40, 4, 99)"}} className={`${styles.li} ${styles.Package}`}>CTC
-              <p style={{display:"inline", marginLeft:"26%"}}>
+              <li style={{backgroundColor:" rgb(40, 4, 99)"}} className={`${styles.li} ${styles.Package}`} >CTC
+              <p style={{display:"inline", marginLeft:"-0%"}}>
                 <i onClick={SdescendingOrder} className={`${styles.arrow} ${styles.up}`}> </i>
                 <i onClick={SascendingOrder} className={`${styles.arrow} ${styles.down}`}></i>
                 </p>
               </li>
 
               <li style={{backgroundColor:" rgb(40, 4, 99)"}} className={`${styles.li} ${styles.experiance}`}>Expereince
-              <p style={{display:"inline", marginLeft:"18%", marginTop:"2px"}}>
+              <p style={{display:"inline", marginLeft:"-0%", marginTop:"2px"}}>
                 <i onClick={EdescendingOrder} className={`${styles.arrow} ${styles.up}`}> </i>
                 <i onClick={EascendingOrder} className={`${styles.arrow} ${styles.down}`}></i>
                 </p>
@@ -609,7 +609,7 @@ async function filterByJobTitle(key){
                           :
                           // items .isApproved?
                           items.SourceLink ?
-                            <button title='this will take to Source page' className={styles.Applybutton} onClick={() => {
+                            <button title='This will redirect to the source company webpage' className={styles.Applybutton} onClick={() => {
                               applyforOtherJob(items.SourceLink)
                             }}>Apply</button>
                             :

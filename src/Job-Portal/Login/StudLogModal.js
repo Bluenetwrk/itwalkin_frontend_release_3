@@ -213,8 +213,8 @@ useEffect(() => {
 				style={{
 				position: "fixed",
 					background: "white",
-					height: "35%",
-					width: "20%",
+					height: "200px",
+					width: "280px",
 					// margin: "auto",
 					// paddingRight: "7%",
 					// paddingTop: "3%",
@@ -227,13 +227,13 @@ useEffect(() => {
 				}}
 			> 
 				<p onClick={onClose} style={
-					{position:"absolute", marginLeft:"87%", marginTop:"-1px", cursor:"pointer", display:"inline"}}>
+					{position:"absolute", marginLeft:"80%", marginTop:"-1px", cursor:"pointer", display:"inline"}}>
 					
                     <i className="fas fa-times" style={{fontSize:"x-large"}}></i>
 				</p>
                 <>
 
-<div className={styles.BothsignUpWrapper}>
+<div className={styles.BothsignUpWrapperModel}>
 <h3 className={styles.Loginpage}> Job Seeker Login page  </h3>
 
           <input maxLength="10" className={styles.inputs} type="number" placeholder='enter phone Number'
