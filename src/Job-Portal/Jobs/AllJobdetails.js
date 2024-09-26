@@ -124,16 +124,15 @@ const [Loader, setLoader] = useState(false)
         
         </div>
 
-        <ul>
-        <li className={`${styles.FJD}`}><b>Full Job Description:</b></li>
-
-        </ul>
+        
           <div className={styles.dUiwarpper}>
             {/* <ul className={styles.Hul}>
 
             </ul> */}
             <ul className={styles.Hul}>
             {/* <li className={`${styles.DHli}`}><b>Job Description:</b></li> */}
+    <li className={`${styles.D} ${styles.Hli}`} style={{marginLeft:"-0.9px" , backgroundColor:" rgb(40, 4, 99)"}}><b style={{color:'rgb(40, 4, 99)'}}>`</b></li>  
+
               <li className={styles.Hli}><b>Company Name</b></li>
               <li className={styles.Hli}><b>Job Title</b></li>
               <li className={styles.Hli}><b>Location</b></li>
@@ -141,30 +140,8 @@ const [Loader, setLoader] = useState(false)
               <li className={styles.Hli}><b>Experience Required</b></li>
               <li className={styles.Hli}><b>Skills Required</b></li>
               <li className={styles.Hli}><b>Posted Date</b></li>              
-            </ul>
-
-            <ul className={styles.Rul}>
-              <li className={styles.Rli}>{jobs.companyName ? jobs.companyName : <li style={{ display: "inline-block" }}>Company name</li>}</li>
-
-              <li className={styles.Rli}>{jobs.jobTitle ? jobs.jobTitle : <li style={{ display: "inline-block" }}>job Title</li>}</li>
-              <li className={styles.Rli}>{jobs.jobLocation ? jobs.jobLocation : <li style={{ display: "inline-block" }}>job Location</li>}</li>
-              <li className={styles.Rli}>{jobs.salaryRange ? jobs.salaryRange : <li style={{ display: "inline-block" }}>Salary Range</li>}</li>
-              <li className={styles.Rli}>{jobs.experiance ? jobs.experiance : <li style={{ display: "inline-block" }} >Experiance</li>}</li>
-              <li className={styles.Rli}>{jobs.skills ? jobs.skills : <li style={{ display: "inline-block" }} >Skills</li>}  </li>
-              <li className={styles.Rli}>
-                {jobs.updatedAt ? new Date(jobs.updatedAt).toLocaleString(
-                  "en-US",
-                  {
-                    month: "short",
-                    day: "2-digit",
-                    year: "numeric",
-                  }
-                ) : <li style={{ display: "inline-block" }}>Date</li>
-                }
-              </li>
-              <li className={`${styles.DHli}`}><b>Job Description:</b></li>
-
-              <li className={`${styles.DRli} `}>
+    <li className={`${styles.D} ${styles.Hli}`} style={{marginLeft:"-0.9px", backgroundColor:" rgb(40, 4, 99)"}}><b style={{color:'rgb(40, 4, 99)'}}>`</b></li>  
+              <li className={`${styles.Hlii} ${styles.R} `}>
                    {/* {jobs.jobDescription} */}
                  {
                 jobdescription.map((descrip, di) => {
@@ -197,7 +174,31 @@ const [Loader, setLoader] = useState(false)
                     })} 
                    
 
-                  </li>
+                  </li>            
+            </ul>
+            <ul className={styles.Rul}>
+            <li className={`${styles.D} ${styles.Rli}`} style={{backgroundColor:" rgb(40, 4, 99)"}}><b style={{marginLeft:"-300px"}}> Full Job Description:</b></li>
+
+              <li className={styles.Rli}>{jobs.companyName ? jobs.companyName : <li style={{ display: "inline-block" }}>Company name</li>}</li>
+              <li className={styles.Rli}>{jobs.jobTitle ? jobs.jobTitle : <li style={{ display: "inline-block" }}>job Title</li>}</li>
+              <li className={styles.Rli}>{jobs.jobLocation ? jobs.jobLocation : <li style={{ display: "inline-block" }}>job Location</li>}</li>
+              <li className={styles.Rli}>{jobs.salaryRange ? jobs.salaryRange : <li style={{ display: "inline-block" }}>Salary Range</li>}</li>
+              <li className={styles.Rli}>{jobs.experiance ? jobs.experiance : <li style={{ display: "inline-block" }} >Experiance</li>}</li>
+              <li className={styles.Rli}>{jobs.skills ? jobs.skills : <li style={{ display: "inline-block" }} >Skills</li>}  </li>
+              <li className={styles.Rli}>
+                {jobs.updatedAt ? new Date(jobs.updatedAt).toLocaleString(
+                  "en-US",
+                  {
+                    month: "short",
+                    day: "2-digit",
+                    year: "numeric",
+                  }
+                ) : <li style={{ display: "inline-block" }}>Date</li>
+                }
+              </li>
+              <li className={`${styles.D} ${styles.Rli}`} style={{backgroundColor:" rgb(40, 4, 99)"}}><b style={{marginLeft:"-300px"}}> Description:</b></li>
+
+              
 
 
             </ul>

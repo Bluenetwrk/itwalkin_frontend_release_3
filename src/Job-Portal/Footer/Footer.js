@@ -8,6 +8,12 @@ import { Link, useNavigate, BrowserRouter, Routes, Route, useLocation } from "re
 function Footer() {
   const navigate = useNavigate()
 
+  function Linkedin(){
+    window.open("https://www.linkedin.com/company/104886917/admin/dashboard/", '_blank');
+                
+                
+  }
+
   return (
     <>
       <div className={Styles.footerWraper}>
@@ -22,7 +28,7 @@ function Footer() {
               <a> <i className='fa-brands fa-facebook-square'></i> </a>
               <a> <i className='fa-brands fa-instagram-square'></i> </a>
               <a> <i className='fa-brands fa-twitter-square'></i> </a>
-              <i class="fa-brands fa-linkedin-square" ></i>
+              <i class="fa-brands fa-linkedin-square" onClick={Linkedin} ></i>
             </div>
           </div>
 

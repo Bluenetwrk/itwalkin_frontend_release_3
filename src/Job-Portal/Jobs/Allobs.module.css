@@ -38,7 +38,6 @@
     border-radius: 3px;
     background-color:rgb(226, 225, 225);
     background:rgb(242, 244, 245);
-
     
 }
 .locationActive{
@@ -50,19 +49,22 @@
     align-content: center;
     border: none;
     border-radius: 3px;
-    background-color: blue
+    /* background-color: blue */
+    background-color: rgb(40, 4, 99);
+
 }
 
 .JobLocationFilter{
     margin-left: 10px;
     cursor: pointer;
-    color:white;
     font-weight: 600;
     padding: 4px 7px ;
     align-content: center;
     border: none;
     border-radius: 3px;
-    background-color: rgb(40, 4, 99);
+    /* background-color: white; */
+    background:rgb(242, 244, 245);
+        color: black
 
 }
 .JobLocationFilter:hover{
@@ -75,8 +77,7 @@
     align-content: center;
     border: none;
     border-radius: 3px;
-    background-color:blue;
-
+    background-color: rgb(40, 4, 99);
     transition: all 0.2s;
 }
 /* ...........................for Filter..................... */
@@ -106,8 +107,8 @@
 
 }
 .JobtitleFilter:hover{
-    
-    background-color:blue;
+    background-color: rgb(40, 4, 99);
+    /* background-color:blue; */
     margin: 4px;
     cursor: pointer;
     color:white;
@@ -120,7 +121,7 @@
 }
 
 .active{
-    background-color:blue;
+    background-color: rgb(40, 4, 99);
     color:white;
     margin: 4px;
     cursor: pointer;
@@ -443,22 +444,23 @@ border-left: none;
     text-align: center;
 }
 
-.DHli{
+.D{
     display: inline-block;
-    margin-left: -107.6%;
-    padding: 0.6%;
-    width :217.6%;
-    /* border : 1px solid rgb(9, 247, 247); */
+    color: white;
     background-color: rgb(40, 4, 99);
-    border : 1px solid rgb(215, 223, 226);
-    color:white;
-    text-align: center;
+}
+.R{
+    display: inline-block;
+    /* width:216% */
+    border: none;
+    margin-top: 10px;
+    
 }
 .DRli{
     display: inline-block;
-    margin-left: -107.6%;
+    margin-left: -440px;
     padding: 0.5%;
-    width :217.6%;
+    width:880px;
     border : 1px solid rgb(215, 223, 226);
 }
 

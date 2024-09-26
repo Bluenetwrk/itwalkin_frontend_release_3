@@ -5,9 +5,14 @@ import axios from "axios"
 import { useNavigate, Link, useLocation } from "react-router-dom";
 import GoogleImage from "../img/icons8-google-48.png"
 import MicosoftImage from "../img/icons8-windows-10-48.png"
+import linkedIn from "../img/icons8-linked-in-48.png"
+import github from "../img/icons8-github-50.png"
+
 import { useGoogleLogin } from '@react-oauth/google';
 import image from "../img/user_3177440.png"
 import { TailSpin } from "react-loader-spinner"
+
+
 
 
 
@@ -53,8 +58,10 @@ useEffect(() => {
           }
         );
         setGmailuser(res.data)
+        console.log(res.data)
         let gtoken = response.access_token
         let userId = res.data.sub
+        let Gpicture = res.data.picture
         let email = res.data.email
         let name = res.data.name
         let isApproved=false
@@ -62,7 +69,7 @@ useEffect(() => {
         // console.log("decoded name :", gemail)
         // console.log(" decoded id :", gname)
 
-        await axios.post("/StudentProfile/Glogin", {ipAddress, userId, email, name, gtoken, isApproved })
+        await axios.post("/StudentProfile/Glogin", {ipAddress, userId, email, name, gtoken, isApproved, Gpicture })
           .then((response) => {
             let result = response.data
             let token = result.token
@@ -205,12 +212,10 @@ useEffect(() => {
  */}
  
 <div className={styles.BothsignUpWrapper}>
-<h3 className={styles.Loginpage}> Job Seeker Login page  </h3>
+<p className={styles.Loginpage}> Job Seeker Login page  </p>
 
-          <input maxLength="10" className={styles.inputs} type="number" placeholder='enter phone Number'
+          {/* <input maxLength="10" className={styles.inputs} type="number" placeholder='enter phone Number'
             value={PhoneNumber} autoComplete="on" onChange={(e) => { setPhoneNumber(e.target.value) }} />
-          {/* {error && !email ? <p >field is missing</p> : ""} */}
-
 
           {showotp ?
             <>
@@ -234,10 +239,8 @@ useEffect(() => {
                         <TailSpin color=" rgb(40, 4, 99)" height={40} />
                         </div>
                         :""}
-{/* 
-        </div>
-      </div> */}
-            <h4 className={styles.OR}>OR</h4>
+
+            <h4 className={styles.OR}>OR</h4> */}
 
 
 
@@ -255,6 +258,23 @@ useEffect(() => {
           <span className={styles.signUpwrap} >Continue with Microsoft</span>
         </div>
       </div>
+
+      <div className={styles.signUpWrapper}  >
+        <div className={styles.both}>
+          <img className={styles.google} src={linkedIn} />
+          <span className={styles.signUpwrap} >Continue with Linkedin</span>
+        </div>
+      </div>
+
+
+      <div className={styles.signUpWrapper}  >
+        <div className={styles.both}>
+          <img className={styles.google} src={github} />
+          <span className={styles.signUpwrap} >Continue with Github</span>
+        </div>
+      </div>
+
+
       </div>
       {/* </div> */}
     </>

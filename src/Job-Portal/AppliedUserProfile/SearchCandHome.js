@@ -575,7 +575,7 @@ function SearchCandidate() {
                                              
                 }
           </div >
-          <div>
+          <div style={{marginTop:"10px"}}>
             Show  <select onChange={(e)=>{handleRecordchange(e)}}>
               <option value={10}>10</option>              
               <option value={25}>25</option>              

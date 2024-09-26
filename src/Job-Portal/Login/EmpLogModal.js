@@ -5,6 +5,8 @@ import styles from "./login.module.css"
 import axios from "axios"
 import GoogleImage from "../img/icons8-google-48.png"
 import MicosoftImage from "../img/icons8-windows-10-48.png"
+import linkedIn from "../img/icons8-linked-in-48.png"
+import github from "../img/icons8-github-50.png"
 
 import { useNavigate, Link } from "react-router-dom";
 import { useGoogleLogin } from '@react-oauth/google';
@@ -219,8 +221,8 @@ const Modal = ({ isOpen, onClose, children }) => {
 					background: "white",
 					// height: "35%",
 					// width: "20%",
-					height: "200px",
-					width: "280px",
+					height: "120px",
+					width: "240px",
 					// margin: "auto",
 					// paddingRight: "7%",
 					// paddingTop: "3%",
@@ -234,22 +236,20 @@ const Modal = ({ isOpen, onClose, children }) => {
 			>
 			
 <p onClick={onClose} style={
-					{position:"absolute", marginLeft:"80%", marginTop:"-1px", cursor:"pointer", display:"inline"}}>
+					{position:"absolute", marginLeft:"80%", marginTop:"0px", cursor:"pointer", display:"inline"}}>
 					
-                    <i className="fas fa-times" style={{fontSize:"x-large"}}></i>
+                    <i className="fas fa-times" style={{fontSize:"large"}}></i>
 				</p>
 
 				{/* {children} */}
                 <>
 
       <div className={styles.BothsignUpWrapperModel}>
-        <h3 className={styles.Loginpage}>Employer Login page </h3>
+        <p className={styles.Loginpage}>Employer Login page </p>
 
 
-        <input maxLength="10" className={styles.inputs} type="number" placeholder='enter phone Number'
+        {/* <input maxLength="10" className={styles.inputs} type="number" placeholder='enter phone Number'
           value={PhoneNumber} autoComplete="on" onChange={(e) => { setPhoneNumber(e.target.value) }} />
-        {/* {error && !email ? <p >field is missing</p> : ""} */}
-
 
         {showotp ?
           <>
@@ -273,10 +273,8 @@ const Modal = ({ isOpen, onClose, children }) => {
             <TailSpin color=" rgb(40, 4, 99)" height={40} />
           </div>
           : ""}
-        {/* 
-        </div>
-      </div>  */}
-        <h4 className={styles.OR}>OR</h4>
+        
+        <h4 className={styles.OR}>OR</h4> */}
 
 
         <div className={styles.signUpWrapper} onClick={login} >
@@ -292,6 +290,21 @@ const Modal = ({ isOpen, onClose, children }) => {
             <p className={styles.signUpwrap} >Continue with Microsoft</p>
           </div>
         </div>
+        <div className={styles.signUpWrapper}  >
+          <div className={styles.both}>
+            <img className={styles.google} src={linkedIn} />
+            <p className={styles.signUpwrap} >Continue with Linkedin</p>
+          </div>
+        </div>
+		
+        <div className={styles.signUpWrapper}  >
+          <div className={styles.both}>
+            <img className={styles.google} src={github} />
+            <p className={styles.signUpwrap} >Continue with Github</p>
+          </div>
+        </div>
+		
+		
       </div>
 
 				</>

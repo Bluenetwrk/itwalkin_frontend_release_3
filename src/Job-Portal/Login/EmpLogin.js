@@ -4,6 +4,9 @@ import styles from "./login.module.css"
 import axios from "axios"
 import GoogleImage from "../img/icons8-google-48.png"
 import MicosoftImage from "../img/icons8-windows-10-48.png"
+import linkedIn from "../img/icons8-linked-in-48.png"
+import github from "../img/icons8-github-50.png"
+
 
 import { useNavigate, Link } from "react-router-dom";
 import { useGoogleLogin } from '@react-oauth/google';
@@ -215,13 +218,11 @@ function EmpLogin(props) {
       {/* <div id={styles.inputWrapper}> */}
       {/* <div style={{ marginTop: "10px", marginLeft: "37%" }}> */}
       <div className={styles.BothsignUpWrapper}>
-        <h3 className={styles.Loginpage}>Employer Login page </h3>
+        <p className={styles.Loginpage}>Employer Login page </p>
 
-
+{/* 
         <input maxLength="10" className={styles.inputs} type="number" placeholder='enter phone Number'
           value={PhoneNumber} autoComplete="on" onChange={(e) => { setPhoneNumber(e.target.value) }} />
-        {/* {error && !email ? <p >field is missing</p> : ""} */}
-
 
         {showotp ?
           <>
@@ -245,10 +246,8 @@ function EmpLogin(props) {
             <TailSpin color=" rgb(40, 4, 99)" height={40} />
           </div>
           : ""}
-        {/* 
-        </div>
-      </div>  */}
-        <h4 className={styles.OR}>OR</h4>
+        
+        <h4 className={styles.OR}>OR</h4> */}
 
 
         <div className={styles.signUpWrapper} onClick={login} >
@@ -264,6 +263,20 @@ function EmpLogin(props) {
             <p className={styles.signUpwrap} >Continue with Microsoft</p>
           </div>
         </div>
+        <div className={styles.signUpWrapper}  >
+        <div className={styles.both}>
+          <img className={styles.google} src={linkedIn} />
+          <span className={styles.signUpwrap} >Continue with Linkedin</span>
+        </div>
+      </div>
+
+
+      <div className={styles.signUpWrapper}  >
+        <div className={styles.both}>
+          <img className={styles.google} src={github} />
+          <span className={styles.signUpwrap} >Continue with Github</span>
+        </div>
+      </div>
       </div>
 
 

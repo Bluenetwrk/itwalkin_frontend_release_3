@@ -9,6 +9,9 @@ import MicosoftImage from "../img/icons8-windows-10-48.png"
 import { useGoogleLogin } from '@react-oauth/google';
 import image from "../img/user_3177440.png"
 import { TailSpin } from "react-loader-spinner"
+import linkedIn from "../img/icons8-linked-in-48.png"
+import github from "../img/icons8-github-50.png"
+
 
 const Modal = ({ isStuOpen, onClose, children }) => {
 	
@@ -213,8 +216,9 @@ useEffect(() => {
 				style={{
 				position: "fixed",
 					background: "white",
-					height: "200px",
-					width: "280px",
+					
+					height: "120px",
+					width: "240px",
 					// margin: "auto",
 					// paddingRight: "7%",
 					// paddingTop: "3%",
@@ -227,19 +231,17 @@ useEffect(() => {
 				}}
 			> 
 				<p onClick={onClose} style={
-					{position:"absolute", marginLeft:"80%", marginTop:"-1px", cursor:"pointer", display:"inline"}}>
+					{position:"absolute", marginLeft:"80%", marginTop:"0px", cursor:"pointer", display:"inline"}}>
 					
-                    <i className="fas fa-times" style={{fontSize:"x-large"}}></i>
+                    <i className="fas fa-times" style={{fontSize:"large"}}></i>
 				</p>
                 <>
 
 <div className={styles.BothsignUpWrapperModel}>
-<h3 className={styles.Loginpage}> Job Seeker Login page  </h3>
+<p className={styles.Loginpage}> Job Seeker Login page  </p>
 
-          <input maxLength="10" className={styles.inputs} type="number" placeholder='enter phone Number'
+          {/* <input maxLength="10" className={styles.inputs} type="number" placeholder='enter phone Number'
             value={PhoneNumber} autoComplete="on" onChange={(e) => { setPhoneNumber(e.target.value) }} />
-          {/* {error && !email ? <p >field is missing</p> : ""} */}
-
 
           {showotp ?
             <>
@@ -248,7 +250,6 @@ useEffect(() => {
               <button className={`${styles.button} ${styles.inputs}`} onClick={confirmOtp}>Confirm OTP</button>
 
               <p style={{ color: "blue", textDecoration: "underline", cursor: "pointer" }} onClick={() => { setshowotp(false); setPhoneNumber(""); setotp("") }}>Want to change the number?</p>
-
 
             </>
             :
@@ -263,12 +264,7 @@ useEffect(() => {
                         <TailSpin color=" rgb(40, 4, 99)" height={40} />
                         </div>
                         :""}
-{/* 
-        </div>
-      </div> */}
-            <h4 className={styles.OR}>OR</h4>
-
-
+            <h4 className={styles.OR}>OR</h4> */}
 
 
       <div className={styles.signUpWrapper} onClick={login} >
@@ -284,6 +280,22 @@ useEffect(() => {
           <span className={styles.signUpwrap} >Continue with Microsoft</span>
         </div>
       </div>
+
+      <div className={styles.signUpWrapper}  >
+        <div className={styles.both}>
+          <img className={styles.google} src={linkedIn} />
+          <span className={styles.signUpwrap} >Continue with Linkedin</span>
+        </div>
+      </div>
+
+
+      <div className={styles.signUpWrapper}  >
+        <div className={styles.both}>
+          <img className={styles.google} src={github} />
+          <span className={styles.signUpwrap} >Continue with Github</span>
+        </div>
+      </div>
+
       </div>
       {/* </div> */}
     </>
