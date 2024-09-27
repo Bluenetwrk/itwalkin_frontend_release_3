@@ -388,86 +388,28 @@
     width:75%;
     margin-left: -15%;
 }
-/* ..............job details............. */
-.Hli:nth-child(odd){
+
+/* ..............Job Details  Table */
+
+table {
+    /* font-family: arial, sans-serif; */
+    border-collapse: collapse;
+    width: 90%;
+    margin-left: 30px;
+    margin-top: 30px;
+  }
+  
+  td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+  }
+  
+  tr:nth-child(even) {
+    /* background-color: #dddddd; */
     background:rgb(242, 244, 245)
-}
-.Rli:nth-child(odd){
-    background:rgb(242, 244, 245)
-}
 
-
-.dUiwarpper{
-    margin-top: 10px;
-    display: flex;
-}
-
-.Hul{
-    width : 40%;
-}
-.FJD{
-    padding: 0.5%;
-    width : 89%;
-    border : 1px solid rgb(215, 223, 226);
-    text-align: center;
-    display: inline-block; 
-    background-color: rgb(40, 4, 99);
-    color:white
-}
-.Hli{
-    padding: 0.5%;
-    width : 65%;
-    /* border : 1px solid rgb(9, 247, 247); */
-    border : 1px solid rgb(215, 223, 226);
-
-    text-align: center;
-    /* border-right: none; */
-    display: inline-block; 
-}
-
-.Rul{
-    width : 40%;
-height: 180px;
-
-
-}
-.Rli{
-    display: inline-block;
-    margin-left: -55%;
-    padding: 0.5%;
-    width : 165%;
-    /* border : 1px solid rgb(9, 247, 247); */
-    border : 1px solid rgb(215, 223, 226);
-
-border-left: none;
-
-    text-align: center;
-}
-
-.D{
-    display: inline-block;
-    color: white;
-    background-color: rgb(40, 4, 99);
-}
-.R{
-    display: inline-block;
-    /* width:216% */
-    border: none;
-    margin-top: 10px;
-    
-}
-.DRli{
-    display: inline-block;
-    margin-left: -440px;
-    padding: 0.5%;
-    width:880px;
-    border : 1px solid rgb(215, 223, 226);
-}
-
-.showLess{
-    color:rgb(109, 52, 201);
-    cursor: pointer;
-}
+  }
 /* .........................Mobile - Cards................ */
 .MobLocationFilterWrapper{
     display: flex;

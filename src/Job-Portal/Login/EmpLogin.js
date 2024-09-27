@@ -6,23 +6,19 @@ import GoogleImage from "../img/icons8-google-48.png"
 import MicosoftImage from "../img/icons8-windows-10-48.png"
 import linkedIn from "../img/icons8-linked-in-48.png"
 import github from "../img/icons8-github-50.png"
-
-
 import { useNavigate, Link } from "react-router-dom";
 import { useGoogleLogin } from '@react-oauth/google';
 import { GoogleLogin } from '@react-oauth/google';
 import image from "../img/user_3177440.png"
 import { TailSpin } from "react-loader-spinner"
-
 import Modal from "./EmpLogModal";
-
-
-
 import jwt_decode from "jwt-decode"
 
 // import style from "./styles.module.css"
 
 function EmpLogin(props) {
+
+
 
   const [gmailuser, setGmailuser] = useState("")
   const [topErrorMessage, setTopErrorMessage] = useState("")
@@ -190,10 +186,65 @@ function EmpLogin(props) {
     }, 1000);
     setLoader(false)
   }
+
+  const GITHUB_CLIENT_ID = 'Ov23liEVkuJU0edpK6Z0';
+  const GITHUB_CLIENT_SECRET = '63d5c5177657ddc76314a56e3f2283afbde3a99b';
+  const GITHUB_CALLBACK_URL = 'http://localhost:80/auth/github/callback';
+
+  const handleLogin = async (code) => {
+    try {
+      // Exchange the code for an access token
+  const githubOAuthURL = `https://github.com/login/oauth/authorize?client_id=${GITHUB_CLIENT_ID}&scope=user`;
+
+      const data = await fetch('https://github.com/login/oauth/access_token', {
+            method: 'POST',
+            body: {
+                  client_id: GITHUB_CLIENT_ID,
+                  client_secret: GITHUB_CLIENT_SECRET,
+                  code,
+            },
+            headers: {
+                  'Content-Type': 'application/json'
+            }
+      }).then((response) => response.json());
+
+      const accessToken = data.access_token;
+
+      // Fetch the user's GitHub profile
+      const userProfile = await fetch('https://api.github.com/user', {
+        headers: {
+          'Authorization': `Bearer ${accessToken}`,
+          'User-Agent': 'Your-App-Name'
+        }
+      });
+
+      // Handle the user profile data (e.g., store it in your database and log the user in)
+      console.log(`Welcome, ${userProfile.data.name}!`);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const handleGitHubCallback = () => {
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    const code = urlParams.get('code');
+    
+    if (code) {
+      handleLogin(code);
+    }
+  };
+
+  React.useEffect(() => {
+    handleGitHubCallback();
+  }, []);
+
+
+
+
   return (
     <>
-
-
+<a onClick={handleLogin}>Sign in with GitHub</a>
       {/* <div className={styles.LoginpageWapper}> */}
       {/* <p className={styles.topuperror}>{topuperror}</p>
       <div id={styles.inputWrapper}>
@@ -271,7 +322,7 @@ function EmpLogin(props) {
       </div>
 
 
-      <div className={styles.signUpWrapper}  >
+      <div className={styles.signUpWrapper} >
         <div className={styles.both}>
           <img className={styles.google} src={github} />
           <span className={styles.signUpwrap} >Continue with Github</span>

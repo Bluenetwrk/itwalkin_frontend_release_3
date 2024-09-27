@@ -34,57 +34,66 @@ function Footer() {
 
           <div className={Styles.Bottom}>
             <div>
-              <h4> Project</h4>
-              <a>Status</a>
-              <a>License</a>
-              <a>All Versions</a>
-            </div>
-            <div>
-              <h4> Community</h4>
-              <a>Github</a>
-              <a>Project</a>
-              <a>Twitter</a>
-            </div>
-            <div>
-              <h4> Help</h4>
-              <a
-              onClick={()=>{
-                window.scrollTo({
-                  top:0,
-                  behavior:"smooth"
-                })
-                navigate ("/Contact")}}
-              >Support</a>
-              <a onClick={()=>{
+              <h4>   
+                 <a onClick={()=>{
       window.scrollTo({
         top:0,
         behavior:"smooth"
       })
-      navigate ("/AboutUs")}}>About us</a>
-              <a
+      navigate ("/Services")}}>Our Services</a></h4>
+              {/* <a>Status</a>
+              <a>License</a>
+              <a>All Versions</a> */}
+            </div>
+            <div>
+              <h4>               <a onClick={()=>{
+      window.scrollTo({
+        top:0,
+        behavior:"smooth"
+      })
+      navigate ("/AboutUs")}}>About us</a></h4>
+              {/* <a>Github</a>
+              <a>Project</a>
+              <a>Twitter</a> */}
+            </div>
+            <div>
+              <h4> <a
               onClick={()=>{
                 window.scrollTo({
                   top:0,
                   behavior:"smooth"
                 })
-                navigate ("/Contact")}}>Contact Us</a>
+                navigate ("/Contact")}}>Contact Us</a></h4>
+              
+              {/* <a onClick={()=>{
+      window.scrollTo({
+        top:0,
+        behavior:"smooth"
+      })
+      navigate ("/AboutUs")}}>About us</a> */}
+              {/* <a
+              onClick={()=>{
+                window.scrollTo({
+                  top:0,
+                  behavior:"smooth"
+                })
+                navigate ("/Contact")}}>Contact Us</a> */}
             </div>
             <div>
-              <h4> Others</h4>
+              <h4> 
               <a
               onClick={()=>{
                 window.scrollTo({
                   top:0,
                   // behavior:"smooth"
                 })
-                navigate ("/TermsAndCondition")}}>Termis and Condition</a>
-              <a onClick={()=>{
+                navigate ("/TermsAndCondition")}}>Termis and Condition</a></h4>
+              {/* <a onClick={()=>{
       window.scrollTo({
         top:0,
         behavior:"smooth"
       })
-      navigate ("/Services")}}>Our Services</a>
-              <a>License </a>
+      navigate ("/Services")}}>Our Services</a> */}
             </div>
           </div>
 

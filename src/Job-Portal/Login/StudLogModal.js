@@ -12,6 +12,8 @@ import { TailSpin } from "react-loader-spinner"
 import linkedIn from "../img/icons8-linked-in-48.png"
 import github from "../img/icons8-github-50.png"
 
+import {auth, provider} from "../firebase"
+import {signInWithPopup} from 'firebase/auth'
 
 const Modal = ({ isStuOpen, onClose, children }) => {
 	
@@ -22,10 +24,8 @@ const Modal = ({ isStuOpen, onClose, children }) => {
   
   const [showotp, setshowotp] = useState(false)
   const [Loader, setLoader] = useState(false)
-
   
-const [ipAddress, setIPAddress] = useState('')
-  
+const [ipAddress, setIPAddress] = useState('')  
   // ......Modal....
 	const [open, setOpen] = React.useState(false);
    
@@ -35,9 +35,7 @@ const [ipAddress, setIPAddress] = useState('')
    
 	  const handleOpen = () => {
 		  setOpen(true);
-	  };
-  
-  
+	  }; 
   
 useEffect(() => {
 	fetch('https://api.ipify.org?format=json')
@@ -68,11 +66,10 @@ useEffect(() => {
 		  let email = res.data.email
 		  let name = res.data.name
 		  let isApproved=false
-		  // let image= res.data.picture
-		  // console.log("decoded name :", gemail)
-		  // console.log(" decoded id :", gname)
-  
-		  await axios.post("/StudentProfile/Glogin", {ipAddress, userId, email, name, gtoken, isApproved })
+
+
+		  let Gpicture= res.data.picture  
+		  await axios.post("/StudentProfile/Glogin", {ipAddress, userId, email, name, gtoken, isApproved, Gpicture})
 			.then((response) => {
 			  let result = response.data
 			  let token = result.token
@@ -82,7 +79,6 @@ useEffect(() => {
 				navigate("/alljobs", {state:{name:result.name}})
 				localStorage.setItem("StudId", JSON.stringify(Id))     
 				onClose()
-
 			  }
 			}).catch((err) => {
 			  alert("server issue occured")
@@ -195,9 +191,37 @@ useEffect(() => {
 	}
 	  if (!isStuOpen) return null;
 
+	  function giHubSign(){
+		signInWithPopup(auth, provider)
+		.then( async (res)=>{
+			let name= res.user.providerData[0].displayName
+			let email=res.user.providerData[0].email
+			let Gpicture = res.user.providerData[0].photoURL
+			let isApproved=false
+			await axios.post("/StudentProfile/Glogin", {ipAddress,  email, name,  isApproved, Gpicture})
+			.then((response) => {
+			  let result = response.data
+			  let token = result.token
+			  let Id = result.id
+			  if (result.status == "success") {
+				localStorage.setItem("StudLog", JSON.stringify(btoa(token)))
+				navigate("/alljobs", {state:{name:result.name}})
+				localStorage.setItem("StudId", JSON.stringify(Id))     
+				onClose()
+			  }
+			}).catch((err) => {
+			  alert("server issue occured")
+			})
+
+		}).catch((err)=>{
+			alert("something went wrong with github login ")
+		})
+	  }
+
 
 	return (
 		<>
+
 		{/* <div
 			style={{
 				position: "fixed",
@@ -289,7 +313,7 @@ useEffect(() => {
       </div>
 
 
-      <div className={styles.signUpWrapper}  >
+      <div className={styles.signUpWrapper} onClick={giHubSign} >
         <div className={styles.both}>
           <img className={styles.google} src={github} />
           <span className={styles.signUpwrap} >Continue with Github</span>
