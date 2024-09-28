@@ -242,7 +242,11 @@ function Nav(props) {
                 <>
                   <div className={Styles.fullnavewrapper}>
                     <div className={Styles.logoWrapper}>
-                      <NavLink to="/"> <img className={Styles.logo} src={logo} /> </NavLink>
+                      {/* <NavLink to="/"> <img className={Styles.logo} src={logo} /> </NavLink> */}
+                      <div className={Styles.ITwalkinWrapper}>
+                      <p className={Styles.ITwalkin}>ITwalkin</p>
+                      <p className={Styles.onlyforITjobs}>only for IT jobs</p>
+                      </div>
                     </div>
                     <div className={Styles.linkWrapper}>
                    

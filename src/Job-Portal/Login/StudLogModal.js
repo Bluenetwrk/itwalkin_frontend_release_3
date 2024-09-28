@@ -236,33 +236,16 @@ useEffect(() => {
 				zIndex:100
 			}}
 		> */}
-			 <div
-				style={{
-				position: "fixed",
-					background: "white",
-					
-					height: "120px",
-					width: "240px",
-					// margin: "auto",
-					// paddingRight: "7%",
-					// paddingTop: "3%",
-					paddingBottom: "5%",
-					border: "1px solid #000",
-					borderRadius: "10px",
-					boxShadow: "2px solid black",
-					zIndex:"100",
-					marginLeft:"78%"
-				}}
-			> 
+			 <div className={styles.ModelWrapper} > 
 				<p onClick={onClose} style={
-					{position:"absolute", marginLeft:"80%", marginTop:"0px", cursor:"pointer", display:"inline"}}>
+					{position:"absolute", marginLeft:"85%", marginTop:"0px", cursor:"pointer", display:"inline"}}>
 					
                     <i className="fas fa-times" style={{fontSize:"large"}}></i>
 				</p>
                 <>
 
 <div className={styles.BothsignUpWrapperModel}>
-<p className={styles.Loginpage}> Job Seeker Login page  </p>
+<p className={styles.Loginpage}> Job Seeker Login  </p>
 
           {/* <input maxLength="10" className={styles.inputs} type="number" placeholder='enter phone Number'
             value={PhoneNumber} autoComplete="on" onChange={(e) => { setPhoneNumber(e.target.value) }} />

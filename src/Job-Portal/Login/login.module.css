@@ -4,10 +4,33 @@
     /* background-color: aqua; */
     /* font-weight: 550; */
     width:220px;
-    margin-left: 5px;
+    margin-left: 59px;
     display: inline;
 }
-
+.ModelWrapper{
+    position: fixed;
+        background: white;
+        height: 188px;
+        width: 240px;
+        /* padding-bottom: 5%; */
+        border: 1px solid #000;
+        border-radius: 10px;
+        box-shadow: 2px solid black;
+        z-index:100;
+        margin-left:82%;
+}
+/* .ModelWrapper::after {
+    content: "";
+    position: absolute;
+    top: -0.7rem;
+    right: 2rem;
+    width: 20px;
+    height: 20px;
+    transform: rotate(45deg);
+    background-color: white;
+    border-left: 1px solid grey;
+    border-top: 1px solid grey;
+} */
 
 .BothsignUpWrapperModel{
     /* margin-top: -10px; */

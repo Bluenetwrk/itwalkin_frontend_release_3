@@ -41,20 +41,17 @@ function Footer() {
         behavior:"smooth"
       })
       navigate ("/Services")}}>Our Services</a></h4>
-              {/* <a>Status</a>
-              <a>License</a>
-              <a>All Versions</a> */}
+              
             </div>
             <div>
-              <h4>               <a onClick={()=>{
+              <h4>
+                <a onClick={()=>{
       window.scrollTo({
         top:0,
         behavior:"smooth"
       })
       navigate ("/AboutUs")}}>About us</a></h4>
-              {/* <a>Github</a>
-              <a>Project</a>
-              <a>Twitter</a> */}
+              
             </div>
             <div>
               <h4> <a
@@ -65,19 +62,6 @@ function Footer() {
                 })
                 navigate ("/Contact")}}>Contact Us</a></h4>
               
-              {/* <a onClick={()=>{
-      window.scrollTo({
-        top:0,
-        behavior:"smooth"
-      })
-      navigate ("/AboutUs")}}>About us</a> */}
-              {/* <a
-              onClick={()=>{
-                window.scrollTo({
-                  top:0,
-                  behavior:"smooth"
-                })
-                navigate ("/Contact")}}>Contact Us</a> */}
             </div>
             <div>
               <h4> 
@@ -87,13 +71,8 @@ function Footer() {
                   top:0,
                   // behavior:"smooth"
                 })
-                navigate ("/TermsAndCondition")}}>Termis and Condition</a></h4>
-              {/* <a onClick={()=>{
-      window.scrollTo({
-        top:0,
-        behavior:"smooth"
-      })
-      navigate ("/Services")}}>Our Services</a> */}
+                navigate ("/TermsAndCondition")}}>Terms and Conditions</a></h4>
+              
             </div>
           </div>
 

@@ -1,4 +1,21 @@
+.ITwalkinWrapper{
+    margin-top: -30px;
+margin-left: 20px;
 
+}
+.ITwalkin{
+color:white;
+font-weight: bold;
+font-size: xx-large;
+
+}
+.onlyforITjobs{
+margin-top: -37px;
+color:white;
+margin-left: 10px;
+font-weight: 400;
+
+}
 
 .LoginlinkwrapperHome {
     align-items: center;

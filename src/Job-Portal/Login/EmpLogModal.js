@@ -215,28 +215,10 @@ const Modal = ({ isOpen, onClose, children }) => {
 				zIndex:100
 			}}
 		> */}
-				 <div
-				style={{
-				position: "fixed",
-					background: "white",
-					// height: "35%",
-					// width: "20%",
-					height: "120px",
-					width: "240px",
-					// margin: "auto",
-					// paddingRight: "7%",
-					// paddingTop: "3%",
-					paddingBottom: "5%",
-					border: "1px solid #000",
-					borderRadius: "10px",
-					boxShadow: "2px solid black",
-					zIndex:"100",
-					marginLeft:"78%"
-				}}
-			>
+				 <div className={styles.ModelWrapper}>
 			
 <p onClick={onClose} style={
-					{position:"absolute", marginLeft:"80%", marginTop:"0px", cursor:"pointer", display:"inline"}}>
+					{position:"absolute", marginLeft:"85%", marginTop:"0px", cursor:"pointer", display:"inline"}}>
 					
                     <i className="fas fa-times" style={{fontSize:"large"}}></i>
 				</p>
@@ -245,7 +227,7 @@ const Modal = ({ isOpen, onClose, children }) => {
                 <>
 
       <div className={styles.BothsignUpWrapperModel}>
-        <p className={styles.Loginpage}>Employer Login page </p>
+        <p className={styles.Loginpage}>Employer Login </p>
 
 
         {/* <input maxLength="10" className={styles.inputs} type="number" placeholder='enter phone Number'
