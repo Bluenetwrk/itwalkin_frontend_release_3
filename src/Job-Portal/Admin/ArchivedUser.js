@@ -342,24 +342,6 @@ async function RecentLogin(e){
   return (
     <>
 
-    <h3 style={{marginLeft:"20px", marginTop:"10px"}}>All JobSeekers for admin</h3>
-
-<div className={styles.searchBoth}>
-              <p className={styles.p}>Search </p>
-              <input className={styles.inputboxsearch} type="text" placeholder='Search for a Job / Skills / Location/Experiance' onChange={(e) => { search(e) }} />
-            </div>
-            {Result?
-            <h4 style={{marginLeft:"14%", marginTop:"10px"}}> {jobSeekers.length} matching Result Found  </h4>
-            :""
-}
-            <div style={{marginLeft:"10px"}}>
-      <label><input id="checkApproved" name="checkApproved" type="radio" onChange={(e)=>{getAllJobSeekers(e)}} /><span>All Joseeker</span></label><br></br>
-      <label><input id="checkApproved" name="checkApproved" type="radio" onChange={(e)=>{Approvedjobseekers(e)}} /><span>Approved Joseeker</span></label><br></br>
-      <label><input id="checkApproved" name="checkApproved" type="radio" onChange={(e)=>{NotApprovedjobseekers(e)}} /><span>Joseeker who are yet to be approved</span></label><br></br>
-      <label><input id="checkApproved" name="checkApproved" type="radio" onChange={RecentLogin} /><span>Recent Login</span></label><br></br>
-      <label><input id="checkApproved" name="checkApproved" type="radio" onChange={checkOnline} /><span>check Online</span></label><br></br>
-      </div>
-
     {screenSize.width>850?
 
     <div style={{marginLeft:"7px"}} className={styles.Uiwarpper}>
