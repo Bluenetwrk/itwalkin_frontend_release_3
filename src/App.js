@@ -50,6 +50,7 @@ import SearchCandHome from "./Job-Portal/AppliedUserProfile/SearchCandHome";
 import AdminUpdate from "./Job-Portal/Admin/AdminUpdate"
 import AdminPostJobs from "./Job-Portal/Admin/AdminJobPosts";
 import AllIds from "./Job-Portal/Admin/Allid'sStudent";
+import ArchivedUser from "./Job-Portal/Admin/ArchivedUser";
 
 import AboutUs from "./Job-Portal/AboutUs"
 import Contact from "./Job-Portal/Contact"
@@ -118,6 +119,7 @@ const App = () => {
           <Route path="/BIAddmin@AdminUpdate" element ={<AdminUpdate/>} />
           <Route path="/BIAddmin@PostJob" element={<AdminPostJobs/>} />
           <Route path="/BIAddmin@AllIds" element={<AllIds/>} />
+          <Route path="/BIAddmin@ArchivedUser" element={<ArchivedUser/>} />
           <Route path="/JobSeekerLogin" element={<StudentLogin />} />
           <Route path="/EmployeeLogin" element={<EmployeeLogin />} />
           <Route path="/JobSeekerSignUp" element={<StudentSignUp />} />

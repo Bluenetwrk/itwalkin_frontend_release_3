@@ -35,6 +35,7 @@ let navigate = useNavigate()
         setPageLoader(true)
         await axios.get(`/StudentProfile/getProfile/${studId}`, {headers})
             .then((res) => {
+              console.log(res)
                 let result = res.data.result
                 setProfileData([result])
         setPageLoader(false)
@@ -51,6 +52,16 @@ let navigate = useNavigate()
     function updateprofile() {
         navigate("/Update-Profile")
       }
+            
+      async function DeleteProfile(){
+        let userId= profileData.map((item, i) => {
+          return (
+              item._id    
+          )})
+
+          await axios.delete(`/StudentProfile/deleteJobSeeker/${userId[0]}`)
+
+        }
 
     return (
         <>
@@ -77,7 +88,14 @@ profileData.map((item, i) => {
 
     {screenSize.width>800?
 
-profileData.length>0?<button className={styles.updateProfile} onClick={updateprofile}>Update Profile</button>:""
+profileData.length>0?
+<>
+<button className={styles.updateProfile} onClick={updateprofile}>Update Profile</button><br></br>
+<button className={styles.deletProfile} onClick={DeleteProfile}>Delete</button>
+</>
+
+:""
+
 :
 profileData.length>0?<button className={styles.MobupdateProfile} onClick={updateprofile}>Update Profile</button>:""
 

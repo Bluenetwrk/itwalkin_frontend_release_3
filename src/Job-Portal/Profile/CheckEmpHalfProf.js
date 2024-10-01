@@ -44,11 +44,16 @@ const screenSize = useScreenSize();
         getProfile()
     }, [])
 
+    function goback (e){
+    e.preventDefault();
+
+    }
+    
     return (
         <>
         <div style={{display:"flex"}}>
           <img style={{ height:"25px", color:"grey", marginTop:"20px", marginLeft:"8%", cursor:"pointer",
-             width:"28px"}} onClick={()=>{navigate(-1)}}  src={Arrowimage} />
+             width:"28px"}} onClick={(e)=>{navigate(-1); goback(e)}}  src={Arrowimage} />
     <p style={{marginLeft:"30%"}}><b>Company Details </b></p>
     </div>
 

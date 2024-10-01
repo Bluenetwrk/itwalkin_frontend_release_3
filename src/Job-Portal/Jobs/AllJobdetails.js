@@ -128,18 +128,20 @@ const [Loader, setLoader] = useState(false)
           <table>
           <tr>
     <td colSpan={2} style={{backgroundColor:" rgb(40, 4, 99)"}}>
-    <div  style={{marginLeft:"48%", color:"white", fontWeight:"550"}}>Full Job Description</div>
+    {/* <div  style={{marginLeft:"48%", color:"white", fontWeight:"550"}}>Full Job Description</div> */}
+    <div style={{marginLeft:"48%", color:"white", fontWeight:"550"}}>{jobs.jobTitle ? jobs.jobTitle[0].toUpperCase()+jobs.jobTitle.slice(1)
+    : <li style={{ display: "inline-block" }}>job Title</li>}</div>
+
     </td>
   </tr>
   <tr>
     <th>Company Name</th>
     <td>{jobs.companyName ? jobs.companyName : <li style={{ display: "inline-block" }}>Company name</li>}</td>
   </tr>
-  <tr>
-
+  {/* <tr>
 <th>Job Title</th>
     <td>{jobs.jobTitle ? jobs.jobTitle : <li style={{ display: "inline-block" }}>job Title</li>}</td>
-  </tr>
+  </tr> */}
   <tr>
     <th>Location</th>
     <td>{jobs.jobLocation ? jobs.jobLocation : <li style={{ display: "inline-block" }}>job Location</li>}</td>
@@ -174,7 +176,7 @@ const [Loader, setLoader] = useState(false)
   </tr>
   <tr>
     <td colSpan={2} style={{backgroundColor:" rgb(40, 4, 99)"}}>
-    <div  style={{marginLeft:"50%", color:"white", fontWeight:"550"}}>Description</div>
+    <div  style={{marginLeft:"49%", color:"white", fontWeight:"550"}}>Description</div>
     </td>
   </tr>
   <tr>

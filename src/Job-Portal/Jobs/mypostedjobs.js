@@ -250,7 +250,7 @@ function JoppostedByEmp(props) {
     <button className={styles.searchButton} onClick={() => {
           navigate("/Search-Candidate")
         }}>Search Candidate</button>
-        <p style={{marginLeft:"30%", marginTop:"30px", fontSize:"large", fontWeight:"bold", color:"blue"}}>My Posted Jobs</p>
+        <p style={{marginLeft:"38%", marginTop:"30px", fontSize:"large", fontWeight:"bold"}}>My Posted Jobs</p>
         </div>
       
    <div className={styles.Uiwarpper}>
@@ -354,8 +354,8 @@ function JoppostedByEmp(props) {
                       )}
                     </li>
                     <li className={`${styles.li} ${styles.Location}`}>{items.jobLocation.toUpperCase()}</li>
-                    <li className={`${styles.li} ${styles.Package}`}>{items.salaryRange}</li>
-                    <li className={`${styles.li} ${styles.experiance}`}>{items.experiance}</li>
+                    <li className={`${styles.li} ${styles.Package}`}>{items.salaryRange}L</li>
+                    <li className={`${styles.li} ${styles.experiance}`}>{items.experiance}Y</li>
                     <li className={`${styles.li} ${styles.Skills}`}>{items.skills}</li>
                     <li className={`${styles.li} ${styles.Action}`}>
                       <div className={styles.Acbuttons}>
@@ -435,7 +435,7 @@ myjobs.map((job, i) => {
         
         <  img className={styles.graduationImage} src={graduation}  /> 
 
-          {job.qualification}, {job.experiance} Exp ,   {job.jobtype}
+          {job.qualification}, {job.experiance}Y Exp ,   {job.jobtype}
         {/* <span className={styles.jobtypeAndDate}> {job.jobtype}</span> */}
         </span><br></br>
         
@@ -456,7 +456,7 @@ myjobs.map((job, i) => {
 
 
         <div className={styles.ApplyPackage}>
-          <span className={styles.salaryRange} style={{ marginLeft: "10px" }}><span>&#8377;</span>{job.salaryRange}</span>
+          <span className={styles.salaryRange} style={{ marginLeft: "10px" }}><span>&#8377;</span>{job.salaryRange}L</span>
           <div className={styles.MobileAcbuttons}>
           <button onClick={() => { update(job._id) }} className={` ${styles.MobileUpdate}`}>update</button>
           <button onClick={() => { deletejob(job._id) }} className={` ${styles.MobileDelete}`}>delete</button>

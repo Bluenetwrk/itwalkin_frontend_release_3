@@ -183,8 +183,8 @@ window.addEventListener('keypress', function(event){
                                  <label><input name="Job-Type" type="radio" checked={jobtype==="Contract"} value="Contract" onChange={(e) => { setJobtype(e.target.value) }} />Contract   </label>
 
 
-                                 <h4 className={Style.jobHeadline}>Salary Per Annum in Lakhs** &nbsp;<span className={Style.hint}>(e.g 5L or 10L)</span></h4>
-                                 <input maxLength="3" className={Style.inputbox} type="text" value={salaryRange} onChange={(e) => { setSalaryRange(e.target.value) }} />
+                                 <h4 className={Style.jobHeadline}>Salary Per Annum in Lakhs** &nbsp;<span className={Style.hint}>(e.g 5 or 10)</span></h4>
+                                 <input maxLength="3" className={Style.inputbox} type="number" value={salaryRange} onChange={(e) => { setSalaryRange(e.target.value) }} />
 
                                  <h4 className={Style.jobHeadline}>Job Location**</h4>
                                  <div style={{marginTop:"-10px"}}>
@@ -221,8 +221,8 @@ window.addEventListener('keypress', function(event){
                                  }
 
 
-                                 <h4 className={Style.jobHeadline}>Experience Needed** &nbsp;<span className={Style.hint}>(e.g 5Y or 10Y)</span></h4>
-                                 <input maxLength="3" className={Style.inputbox} type="text" value={experiance} onChange={(e) => { setExperiance(e.target.value) }} />
+                                 <h4 className={Style.jobHeadline}>Experience Needed** &nbsp;<span className={Style.hint}>(e.g 5 or 10)</span></h4>
+                                 <input maxLength="3" className={Style.inputbox} type="number" value={experiance} onChange={(e) => { setExperiance(e.target.value) }} />
 
                                  <h4 className={Style.jobHeadline}>Skills Needed**</h4>
                                

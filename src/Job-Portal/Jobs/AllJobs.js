@@ -600,8 +600,8 @@ async function filterByJobTitle(key){
                       </li>
                       <li className={`${styles.li} ${styles.Location}`}>
                         {items.jobLocation[0].toUpperCase()+items.jobLocation.slice(1)}</li>
-                      <li className={`${styles.li} ${styles.Package}`}>{items.salaryRange}</li>
-                      <li className={`${styles.li} ${styles.experiance}`}>{items.experiance}</li>
+                      <li className={`${styles.li} ${styles.Package}`}>{items.salaryRange}L</li>
+                      <li className={`${styles.li} ${styles.experiance}`}>{items.experiance}Y</li>
                       <li className={`${styles.li} ${styles.qualification}`}>{items.qualification}</li>
                       <li className={`${styles.li} ${styles.Skills}`}>{items.skills}</li>
 
@@ -702,8 +702,8 @@ async function filterByJobTitle(key){
                         )}
                       </li>
                       <li className={`${styles.li} ${styles.Location}`}>{items.jobLocation[0].toUpperCase()+items.jobLocation.slice(1)}</li>
-                      <li className={`${styles.li} ${styles.Package}`}>{items.salaryRange}</li>
-                      <li className={`${styles.li} ${styles.experiance}`}>{items.experiance}</li>
+                      <li className={`${styles.li} ${styles.Package}`}>{items.salaryRange}L</li>
+                      <li className={`${styles.li} ${styles.experiance}`}>{items.experiance}Y</li>
                       <li className={`${styles.li} ${styles.qualification}`}>{items.qualification}</li>
                       <li className={`${styles.li} ${styles.Skills}`}>{items.skills}</li>
 
@@ -739,7 +739,7 @@ async function filterByJobTitle(key){
           </div>
 
           <div style={{ display: "flex", justifyContent: "space-between"}}>
-          <div style={{marginTop:"14px"}} >
+          <div style={{marginTop:"14px", marginLeft:"10px"}} >
             Show  <select onChange={(e) => { handleRecordchange(e) }}>
               <option value={10}>10</option>
               <option value={25}>25</option>
@@ -912,7 +912,7 @@ async function filterByJobTitle(key){
                         <span className={styles.qualificationAndExperiance}>
                           <  img className={styles.graduationImage} src={graduation} />
 
-                          {job.qualification},   {job.experiance} Exp, {job.jobtype}
+                          {job.qualification},   {job.experiance}Y Exp, {job.jobtype}
                           {/* <span className={styles.jobtypeAndDate}> {job.jobtype}</span> */}
                         </span><br></br>
                         <span className={styles.jobtypeAndDate}>Source</span> :
@@ -933,7 +933,7 @@ async function filterByJobTitle(key){
 
 
                         <div className={styles.ApplyPackage}>
-                          <p className={styles.salaryRange}><span>&#8377;</span>{job.salaryRange}</p>
+                          <p className={styles.salaryRange}><span>&#8377;</span>{job.salaryRange}L</p>
 
 
                           {job.jobSeekerId.find((jobseeker) => {

@@ -2,6 +2,8 @@
 import { useState, useEffect } from "react"
 import React from 'react'
 import styles from "./login.module.css"
+import {useRef} from 'react';
+import{ LinkedInApi, NodeServer } from '../Config';
 import axios from "axios"
 import { useNavigate, Link, useLocation } from "react-router-dom";
 import GoogleImage from "../img/icons8-google-48.png"
@@ -11,11 +13,12 @@ import image from "../img/user_3177440.png"
 import { TailSpin } from "react-loader-spinner"
 import linkedIn from "../img/icons8-linked-in-48.png"
 import github from "../img/icons8-github-50.png"
-
 import {auth, provider} from "../firebase"
-import {signInWithPopup} from 'firebase/auth'
+import {signInWithPopup, OAuthProvider, getAuth } from "firebase/auth";
+
 
 const Modal = ({ isStuOpen, onClose, children }) => {
+
 	
   const [gmailuser, setGmailuser] = useState("")
   const [topErrorMessage, setTopErrorMessage] = useState("")
@@ -119,6 +122,7 @@ useEffect(() => {
 	  }
 	},[])
   
+
 	// async function Studlogin() {
 	//   console.log("before sending to backend", email, password)
 	//   await axios.post("http://localhost:8080/user/login/", { email, password })
@@ -219,6 +223,26 @@ useEffect(() => {
 	  }
 
 
+	//   const provider = new OAuthProvider('microsoft.com');
+	//   const auth = getAuth();
+	// console.log("result",result)
+	const Mprovider = new OAuthProvider('microsoft.com');
+	  function LoginwithMicrosoft(){
+		console.log("result")
+
+		signInWithPopup(auth, Mprovider )
+		.then((result) => {
+			console.log("result",result)
+			const credential = OAuthProvider.credentialFromResult(result);
+			const accessToken = credential.accessToken;
+			const idToken = credential.idToken
+
+		})
+		.catch((error) => {
+		});
+		}
+
+
 	return (
 		<>
 
@@ -281,14 +305,14 @@ useEffect(() => {
         </div>
        </div>
 
-      <div className={styles.signUpWrapper}  >
+      <div className={styles.signUpWrapper} onClick={LoginwithMicrosoft} >
         <div className={styles.both}>
           <img className={styles.google} src={MicosoftImage} />
           <span className={styles.signUpwrap} >Continue with Microsoft</span>
         </div>
       </div>
 
-      <div className={styles.signUpWrapper}  >
+      <div className={styles.signUpWrapper}>
         <div className={styles.both}>
           <img className={styles.google} src={linkedIn} />
           <span className={styles.signUpwrap} >Continue with Linkedin</span>

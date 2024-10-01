@@ -10,6 +10,8 @@ import useScreenSize from '../SizeHook';
 // import {SwipeableViews} from 'react-swipeable-views-v18';
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
+
+
 const responsive = {
   desktop: {
     breakpoint: { max: 3000, min: 1024 },
@@ -271,8 +273,10 @@ function Home() {
     })
     setJobs(sorted)
   }
-  function checkEmpHalf(empId) {
+  function checkEmpHalf(empId, e) {
+    
     navigate(`/CheckEmpHalfProfile/${empId}`)
+
   }
 
 
@@ -398,11 +402,13 @@ function Home() {
       })
   }
 
-
   return (
     <>
+
       {screenSize.width > 850 ?
         <>
+
+
 
           <div className={styles.searchBothForNavWrapper}>
             <input className={styles.inputboxsearchNav} type="text" placeholder='Search for a Job / Skills / Location / Experiance' onChange={(e) => { search(e) }} />
@@ -545,7 +551,7 @@ function Home() {
                         !items.Source ?
 
                           <li style={{ cursor: "pointer", textDecoration: "underline" }} className={`${styles.li} ${styles.CompanyName}`}
-                            onClick={() => { navigate(`/CheckEmpHalfProfile/${btoa(items.empId)}`) }}  >
+                            onClick={(e) => {checkEmpHalf(btoa(items.empId)) }}  >
                             {/* {items.Logo ?
                               < img style={{ width: "38px", height: "38px" }} src={items.Logo} />
                               : ""} 
@@ -600,8 +606,8 @@ function Home() {
                         )}
                       </li>
                       <li className={`${styles.li} ${styles.Location}`}>{items.jobLocation[0].toUpperCase()+items.jobLocation.slice(1)}</li>
-                      <li className={`${styles.li} ${styles.Package}`}>{items.salaryRange}</li>
-                      <li className={`${styles.li} ${styles.experiance}`}>{items.experiance}</li>
+                      <li className={`${styles.li} ${styles.Package}`}>{items.salaryRange}L</li>
+                      <li className={`${styles.li} ${styles.experiance}`}>{items.experiance}Y</li>
                       <li className={`${styles.li} ${styles.qualification}`}>{items.qualification}</li>
                       <li className={`${styles.li} ${styles.Skills}`}>{items.skills}</li>
 
@@ -628,7 +634,7 @@ function Home() {
                         !items.Source ?
 
                           <li style={{ cursor: "pointer", textDecoration: "underline" }} className={`${styles.li} ${styles.CompanyName}`}
-                            onClick={() => { navigate(`/CheckEmpHalfProfile/${btoa(items.empId)}`) }}  >
+                            onClick={(e) => {checkEmpHalf(btoa(items.empId)) }}  >
                             {/* {items.Logo ?
                               < img style={{ width: "38px", height: "38px" }} src={items.Logo} />
                               : ""} 
@@ -684,8 +690,8 @@ function Home() {
                         )}
                       </li>
                       <li className={`${styles.li} ${styles.Location}`}>{items.jobLocation[0].toUpperCase()+items.jobLocation.slice(1)}</li>
-                      <li className={`${styles.li} ${styles.Package}`}>{items.salaryRange}</li>
-                      <li className={`${styles.li} ${styles.experiance}`}>{items.experiance}</li>
+                      <li className={`${styles.li} ${styles.Package}`}>{items.salaryRange}L</li>
+                      <li className={`${styles.li} ${styles.experiance}`}>{items.experiance}Y</li>
                       <li className={`${styles.li} ${styles.qualification}`}>{items.qualification}</li>
                       <li className={`${styles.li} ${styles.Skills}`}>{items.skills}</li>
 
@@ -706,7 +712,7 @@ function Home() {
           </div>
 
           <div style={{ display: "flex", justifyContent: "space-between"}}>
-          <div style={{marginTop:"14px"}} >
+          <div style={{marginTop:"14px", marginLeft:"10px"}} >
             Show  <select onChange={(e) => { handleRecordchange(e) }}>
               <option value={10}>10</option>
               <option value={25}>25</option>
@@ -900,15 +906,12 @@ function Home() {
 
                           <  img className={styles.graduationImage} src={graduation} />
 
-                          {job.qualification}, {job.experiance} Exp ,   {job.jobtype}
+                          {job.qualification}, {job.experiance}Y Exp ,   {job.jobtype}
                           {/* <span className={styles.jobtypeAndDate}> {job.jobtype}</span> */}
                         </span><br></br>
 
                         <span className={styles.jobtypeAndDate}>Source</span> :
 
-                        {/* {job.Source ?
-                          <> <a className={`${styles.skills}`} href={job.SourceLink} target="_blank">{job.Source}</a><br></br> </>
-                          : */}
                         <> <span className={styles.skills}>ItWalkin</span><br></br></>
                         {/* } */}
 
@@ -916,7 +919,7 @@ function Home() {
                           <span className={styles.skillsHeading}>Skills: </span><span className={styles.skills}>{job.skills}</span><br></br>
                         </div>
                         <div className={styles.ApplyPackage}>
-                          <p className={styles.salaryRange}><span>&#8377;</span>{job.salaryRange}</p>
+                          <p className={styles.salaryRange}><span>&#8377;</span>{job.salaryRange}L</p>
                           {job.SourceLink ?
                             <button className={styles.ApplyMobile} onClick={() => {
                               applyforOtherJob(job.SourceLink)

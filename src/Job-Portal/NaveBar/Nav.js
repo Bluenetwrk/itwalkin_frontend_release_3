@@ -129,8 +129,11 @@ function Nav(props) {
 <>               
               <div className={Styles.fullnavewrapper}>
                 <div className={Styles.logoWrapper}>
-                
-                  <NavLink to="/" > <img className={Styles.logo} src={logo} /> </NavLink>
+                <div className={Styles.ITwalkinWrapper}>
+                      <p className={Styles.ITwalkin}>ITwalkin</p>
+                      <p className={Styles.onlyforITjobs}>only for IT jobs</p>
+                      </div>
+                  {/* <NavLink to="/" > <img className={Styles.logo} src={logo} /> </NavLink> */}
                 </div>
                 <div className={Styles.linkWrapper}>
 
@@ -165,7 +168,11 @@ function Nav(props) {
               <>
                 <div className={Styles.fullnavewrapper}>
                   <div className={Styles.logoWrapper}>
-                    <NavLink to="/" > <img className={Styles.logo} src={logo} /> </NavLink>
+                    {/* <NavLink to="/" > <img className={Styles.logo} src={logo} /> </NavLink> */}
+                    <div className={Styles.ITwalkinWrapper}>
+                      <p className={Styles.ITwalkin}>ITwalkin</p>
+                      <p className={Styles.onlyforITjobs}>only for IT jobs</p>
+                      </div>
                   </div>
                   <div className={Styles.linkWrapper}>
 
@@ -232,6 +239,7 @@ function Nav(props) {
                       <NavLink to="BIAddmin@AdminUpdate" className={Styles.link} style={navLinkStyles}> UpdateWebsite</NavLink>
                       <NavLink to="BIAddmin@AllIds" className={Styles.link} style={navLinkStyles}> All Email Id's</NavLink>
                       <NavLink to="BIAddAdminAccess" className={Styles.link} style={navLinkStyles}> Admin Access</NavLink>
+                      <NavLink to="BIAddmin@ArchivedUser" className={Styles.link} style={navLinkStyles}> Archived User</NavLink>
                     </div>
                   </div>
                   :""}

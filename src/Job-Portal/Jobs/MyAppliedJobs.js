@@ -277,8 +277,8 @@ const screenSize = useScreenSize();
                   </li>
                   <li className={`${styles.li} ${styles.Location}`}>{items.jobLocation[0].toUpperCase() +
         items.jobLocation.slice(1)}</li>
-                  <li className={`${styles.li} ${styles.Package}`}>{items.salaryRange}</li>
-                  <li className={`${styles.li} ${styles.experiance}`}>{items.experiance}</li>
+                  <li className={`${styles.li} ${styles.Package}`}>{items.salaryRange}L</li>
+                  <li className={`${styles.li} ${styles.experiance}`}>{items.experiance}Y</li>
                   <li className={`${styles.li} ${styles.Qualif}`}>{items.qualification} </li>
 
                   <li className={`${styles.li} ${styles.Skills}`}>{items.skills}</li>
@@ -365,7 +365,7 @@ MyAppliedjob.map((job, i) => {
         
         <  img className={styles.graduationImage} src={graduation}  /> 
 
-          {job.qualification}, {job.experiance} Exp ,   {job.jobtype}
+          {job.qualification}, {job.experiance}Y Exp ,   {job.jobtype}
         {/* <span className={styles.jobtypeAndDate}> {job.jobtype}</span> */}
         </span><br></br>
         
@@ -382,7 +382,7 @@ MyAppliedjob.map((job, i) => {
                         </div>
 
         <div className={styles.ApplyPackage}>
-          <h3 style={{ marginLeft: "10px", marginTop:"23px" }}><span>&#8377;</span>{job.salaryRange}</h3>        
+          <h3 style={{ marginLeft: "10px", marginTop:"23px" }}><span>&#8377;</span>{job.salaryRange}L</h3>        
           <button className={styles.MobileDelete} onClick={()=>{UndoApply(job._id)}}>Delete</button>
         </div>
         <p className={styles.MobileResult}>Result:</p><span >

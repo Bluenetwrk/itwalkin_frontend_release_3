@@ -5,40 +5,40 @@ import Companylogo from "../img/logo.png"
 import { useNavigate } from 'react-router-dom'
 
 import { Editor } from 'react-draft-wysiwyg';
-import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css"; 
+import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import Style from "./postJobs.module.css"
 import socketIO from 'socket.io-client';
-import CreatableSelect  from "react-select/creatable"
+import CreatableSelect from "react-select/creatable"
 // import CreatableSelect  from 'react-select/creatable';
 
 
 function PostJobs(props) {
 
-    useEffect( ()=>{    
-        const socket = socketIO.connect(props.url,{
-          auth:{
-            token: JSON.parse(localStorage.getItem("EmpIdG"))
-          }
+    useEffect(() => {
+        const socket = socketIO.connect(props.url, {
+            auth: {
+                token: JSON.parse(localStorage.getItem("EmpIdG"))
+            }
         });
-      },[])
+    }, [])
 
-      let jobTags = [
+    let jobTags = [
         { value: 'ReactJs', label: 'ReactJs' },
-         { value: 'Mern Stack', label: 'Mern Stack' }, { value: 'C++, C', label: 'C++, C' },
-         { value: 'Javascript', label: "Javascript" }, { value: 'Node js', label: 'Node js' },
-         { value: 'Angular js', label: 'Angular js' }, { value: 'Vue js', label: 'Vue js' }, { value: 'NextJs', label: 'NextJs' },
-         { value: 'Backend', label: 'Backend' }, { value: 'Frontend', label: 'Frontend' },
-         { value: 'HTML-CSS', label: 'HTML-CSS' },{ value: 'MongoDB', label: 'MongoDB' },
-         { value: 'MySql', label: 'MySql' },  { value: 'Flutter', label: 'Flutter' },{ value: 'Game Developer', label: 'Game Developer' },
-         { value: 'Mobile App Developer', label: 'Mobile App Developer' },  { value: 'Artificial Intelligence', label: 'Artificial Intelligence' },
-         { value: 'React Native', label: 'React Native' }, { value: 'DevOps Engineer', label: 'DevOps Engineer' },
-         { value: 'Security developer', label: 'Security developer' }, { value: 'Data science', label: 'Data science' },
-         { value: 'Data Analyst', label: 'Data Analyst' },   { value: 'java ', label: 'java ' },
-         { value: 'Python', label: 'Python' },
-         { value: 'Graphic Developers', label: 'Graphic Developers' }, { value: 'AI Engineer', label: 'AI Engineer' },
-         { value: 'Security Developer', label: 'Security Developer' }, { value: 'Cloud Developers', label: 'Cloud Developers' },
-         ]
-    
+        { value: 'Mern Stack', label: 'Mern Stack' }, { value: 'C++, C', label: 'C++, C' },
+        { value: 'Javascript', label: "Javascript" }, { value: 'Node js', label: 'Node js' },
+        { value: 'Angular js', label: 'Angular js' }, { value: 'Vue js', label: 'Vue js' }, { value: 'NextJs', label: 'NextJs' },
+        { value: 'Backend', label: 'Backend' }, { value: 'Frontend', label: 'Frontend' },
+        { value: 'HTML-CSS', label: 'HTML-CSS' }, { value: 'MongoDB', label: 'MongoDB' },
+        { value: 'MySql', label: 'MySql' }, { value: 'Flutter', label: 'Flutter' }, { value: 'Game Developer', label: 'Game Developer' },
+        { value: 'Mobile App Developer', label: 'Mobile App Developer' }, { value: 'Artificial Intelligence', label: 'Artificial Intelligence' },
+        { value: 'React Native', label: 'React Native' }, { value: 'DevOps Engineer', label: 'DevOps Engineer' },
+        { value: 'Security developer', label: 'Security developer' }, { value: 'Data science', label: 'Data science' },
+        { value: 'Data Analyst', label: 'Data Analyst' }, { value: 'java ', label: 'java ' },
+        { value: 'Python', label: 'Python' },
+        { value: 'Graphic Developers', label: 'Graphic Developers' }, { value: 'AI Engineer', label: 'AI Engineer' },
+        { value: 'Security Developer', label: 'Security Developer' }, { value: 'Cloud Developers', label: 'Cloud Developers' },
+    ]
+
 
     let empId = JSON.parse(localStorage.getItem("EmpIdG"))
     const [jobtitle, setJobTitle] = useState("")
@@ -68,16 +68,16 @@ function PostJobs(props) {
     //     )
     // })
 
-    function handleChange(tag){
+    function handleChange(tag) {
         setTag(tag)
     }
 
-    let navigate= useNavigate()
+    let navigate = useNavigate()
 
     async function getProfile() {
-        const headers = { authorization: 'BlueItImpulseWalkinIn'};
+        const headers = { authorization: 'BlueItImpulseWalkinIn' };
 
-        await axios.get(`/EmpProfile/getProfile/${empId}` , {headers})
+        await axios.get(`/EmpProfile/getProfile/${empId}`, { headers })
             .then((res) => {
                 let result = res.data.result
                 let companyName = res.data.result.CompanyName
@@ -94,8 +94,8 @@ function PostJobs(props) {
 
     async function getLogo() {
         let userid = JSON.parse(localStorage.getItem("EmpIdG"))
-        const headers = { authorization: userid +" "+ atob(JSON.parse(localStorage.getItem("EmpLog"))) };
-        await axios.get(`/EmpProfile/getLogo/${empId}`,{headers})
+        const headers = { authorization: userid + " " + atob(JSON.parse(localStorage.getItem("EmpLog"))) };
+        await axios.get(`/EmpProfile/getLogo/${empId}`, { headers })
             .then((res) => {
                 let result = res.data
                 setLogo(result)
@@ -111,12 +111,14 @@ function PostJobs(props) {
 
     async function postJob() {
         let userid = JSON.parse(localStorage.getItem("EmpIdG"))
-        const headers = { authorization: userid +" "+ atob(JSON.parse(localStorage.getItem("EmpLog"))) };
+        const headers = { authorization: userid + " " + atob(JSON.parse(localStorage.getItem("EmpLog"))) };
 
-       let jobTitle = jobtitle.toLowerCase()
-       let jobLocation = joblocation.toLowerCase()
-        await axios.post("/jobpost/jobpost/", { Logo, SourceLink, Source, empId, jobTitle, companyName, 
-            jobDescription, jobtype, salaryRange, jobLocation, qualification, experiance, skills, Tags },{headers})
+        let jobTitle = jobtitle.toLowerCase()
+        let jobLocation = joblocation.toLowerCase()
+        await axios.post("/jobpost/jobpost/", {
+            Logo, SourceLink, Source, empId, jobTitle, companyName,
+            jobDescription, jobtype, salaryRange, jobLocation, qualification, experiance, skills, Tags
+        }, { headers })
             .then((res) => {
                 let result = (res.data)
                 if (result == "success") {
@@ -134,7 +136,7 @@ function PostJobs(props) {
                     setSuccessMessage("Success! job successfully posted")
                 }
                 else if (result == "field are missing") {
-    setSuccessMessage("Alert!... JobTitle, CompanyName JobDescription, Experiance, JobLocation and Skills must be filled")
+                    setSuccessMessage("Alert!... JobTitle, CompanyName JobDescription, Experiance, JobLocation and Skills must be filled")
                 }
             }).catch((err) => {
                 alert("server issue occured", err)
@@ -144,49 +146,50 @@ function PostJobs(props) {
             behavior: "smooth"
         });
     }
-    
-window.addEventListener('keypress', function(event){    
-    // Get the key code
-    let keycode = event.which || event.keyCode;
-    
-    // Check if key pressed is a special character
-    if(keycode < 32 || 
-     (keycode > 32 && keycode < 44) || 
-     (keycode > 44 && keycode < 48) || 
-     (keycode > 57 && keycode < 65) || 
-     (keycode > 90 && keycode < 97) ||
-     keycode > 122
-    ){
-        // Restrict the special characters
-        event.preventDefault();  
-        // alert("special characters are not allowed")
-        return false;
-    }
-  }); 
+
+    window.addEventListener('keypress', function (event) {
+        // Get the key code
+        let keycode = event.which || event.keyCode;
+
+        // Check if key pressed is a special character
+        if (keycode < 32 ||
+            (keycode > 32 && keycode < 44) ||
+            (keycode > 44 && keycode < 48) ||
+            (keycode > 57 && keycode < 65) ||
+            (keycode > 90 && keycode < 97) ||
+            keycode > 122
+        ) {
+            // Restrict the special characters
+            event.preventDefault();
+            // alert("special characters are not allowed")
+            return false;
+        }
+    });
 
     return (
         <>
-            
+
             {
-                profileData.map((items,i) => {
+                profileData.map((items, i) => {
                     return (
                         items.isApproved ?
-                        
+
                             <div key={i}>
-                                              <button className={Style.searchButton} onClick={()=>{
-                    navigate("/Search-Candidate")}}>Search Candidate</button>
+                                <button className={Style.searchButton} onClick={() => {
+                                    navigate("/Search-Candidate")
+                                }}>Search Candidate</button>
                                 {Logo ? <img className={Style.logo} src={Logo} /> :
                                     <p style={{ color: "red", marginLeft: "5%", fontStyle: "italic" }}> Alert! You have not updated the Company logo, please update the Company Logo</p>}
                                 {/* <h3 style={{ color: "blue", marginLeft: "15%" }}>Welcome to Post job Page, Post a Job and get Connected with Job Seekers</h3> */}
 
                                 <div className={Style.postJobPageWrapper} >
                                     <div className={Style.postJobWrapper}>
-                                        <p className={successMessage==="Alert!... JobTitle, CompanyName JobDescription, Experiance, JobLocation and Skills must be filled"?
-                                        Style.errormessage: Style.successmessage}>{successMessage} </p>
+                                        <p className={successMessage === "Alert!... JobTitle, CompanyName JobDescription, Experiance, JobLocation and Skills must be filled" ?
+                                            Style.errormessage : Style.successmessage}>{successMessage} </p>
                                         {/* <p className={Style.errormessage}>{errorMessage} </p> */}
                                         <h4 className={Style.jobHeadline}  >Job title**</h4>
                                         <input maxLength="30" className={Style.inputbox} type="text" value={jobtitle} onChange={(e) => { setJobTitle(e.target.value) }} />
-{/* <div className={Style.jobHeadline}>
+                                        {/* <div className={Style.jobHeadline}>
                                         <label><input name="Job-Type" type="radio" value={other}  onClick={(e) => { setother((prev)=>!prev)} } />Select, if Job Source is from other Job Portal Site </label>
 </div>
     
@@ -200,56 +203,52 @@ window.addEventListener('keypress', function(event){
                                </>
                                 :""
                                     } */}
-                                        <h4 className={Style.jobHeadline}>Company Name** &nbsp;<span  className={Style.hint}>(Update Company Name from your Profile)</span></h4>
+                                        <h4 className={Style.jobHeadline}>Company Name** &nbsp;<span className={Style.hint}>(Update Company Name from your Profile)</span></h4>
                                         <input maxLength="30" className={Style.inputbox} type="text" value={companyName} disabled />
 
 
                                         <h4 className={Style.jobHeadline}>Job Description**</h4>
                                         {/* <input maxLength="100" className={Style.inputbox} type="text" value={jobDescription} onChange={(e) => { setJobDescription(e.target.value) }} /> */}
                                         <Editor
-         toolbarClassName="toolbarClassName"
-         wrapperClassName="wrapperClassName"
-         editorClassName="editorClassName"
-         wrapperStyle={{ width: "100%", marginLeft:"0px", border: "1px solid black", borderRadius:"4px" }}
-         className={Style.inputbox}
-         onChange={(e)=>{ setJobDescription(e.blocks) }}
-      />
-                         <h4 className={Style.jobHeadline}>Job Type</h4>
-                                 
-                                        <label><input name="Job-Type" type="radio" checked={jobtype==="Full Time"} value="Full Time" onChange={(e) => { setJobtype(e.target.value) }} />Full Time  </label>
-                                        <label><input name="Job-Type" type="radio" checked={jobtype==="Part Time"} value="Part Time" onChange={(e) => { setJobtype(e.target.value) }} />Part Time  </label>
-                                        <label><input name="Job-Type" type="radio" checked={jobtype==="Internship"} value="Internship" onChange={(e) => { setJobtype(e.target.value) }} />Internship </label>
-                                        <label><input name="Job-Type" type="radio" checked={jobtype==="Contract"} value="Contract" onChange={(e) => { setJobtype(e.target.value) }} />Contract   </label>
+                                            toolbarClassName="toolbarClassName"
+                                            wrapperClassName="wrapperClassName"
+                                            editorClassName="editorClassName"
+                                            wrapperStyle={{ width: "100%", marginLeft: "0px", border: "1px solid black", borderRadius: "4px" }}
+                                            className={Style.inputbox}
+                                            onChange={(e) => { setJobDescription(e.blocks) }}
+                                        />
+                                        <h4 className={Style.jobHeadline}>Job Type</h4>
 
-
-                                        <h4 className={Style.jobHeadline}>Salary Per Annum in Lakhs** &nbsp;<span className={Style.hint}>(e.g 5L or 10L)</span></h4>
-                                        <input maxLength="3" className={Style.inputbox} type="text" value={salaryRange} onChange={(e) => { setSalaryRange(e.target.value) }} />
+                                        <label><input name="Job-Type" type="radio" checked={jobtype === "Full Time"} value="Full Time" onChange={(e) => { setJobtype(e.target.value) }} />Full Time  </label>
+                                        <label><input name="Job-Type" type="radio" checked={jobtype === "Part Time"} value="Part Time" onChange={(e) => { setJobtype(e.target.value) }} />Part Time  </label>
+                                        <label><input name="Job-Type" type="radio" checked={jobtype === "Internship"} value="Internship" onChange={(e) => { setJobtype(e.target.value) }} />Internship </label>
+                                        <label><input name="Job-Type" type="radio" checked={jobtype === "Contract"} value="Contract" onChange={(e) => { setJobtype(e.target.value) }} />Contract   </label>
 
                                         <h4 className={Style.jobHeadline}>Job Location**</h4>
-                                        <div style={{marginTop:"-10px"}}>
-                                        <label><input name="Location" type="radio" checked={joblocation==="Bangalore"} value="Bangalore" onChange={(e) => { setJobLocation(e.target.value) }} />Bangalore </label>
-                                        <label><input name="Location" type="radio" checked={joblocation==="Hyderabad"} value="Hyderabad" onChange={(e) => { setJobLocation(e.target.value) }} />Hyderabad </label>
-                                        <label><input name="Location" type="radio" checked={joblocation==="Chennai"} value="Chennai" onChange={(e) => { setJobLocation(e.target.value) }} />Chennai </label>
-                                        <label><input name="Location" type="radio" checked={joblocation==="Mumbai"} value="Mumbai" onChange={(e) => { setJobLocation(e.target.value) }} />Mumbai </label>
-                                        <label><input name="Location" type="radio" checked={joblocation==="Delhi"} value="Delhi" onChange={(e) => { setJobLocation(e.target.value) }} />Delhi </label>
-                                        <label><input name="Location" type="radio" value="others" onClick={(e) => { setotherJobLocation((prev)=>!prev) }} />others </label>
+                                        <div style={{ marginTop: "-10px" }}>
+                                            <label><input name="Location" type="radio" checked={joblocation === "Bangalore"} value="Bangalore" onChange={(e) => { setJobLocation(e.target.value) }} />Bangalore </label>
+                                            <label><input name="Location" type="radio" checked={joblocation === "Hyderabad"} value="Hyderabad" onChange={(e) => { setJobLocation(e.target.value) }} />Hyderabad </label>
+                                            <label><input name="Location" type="radio" checked={joblocation === "Chennai"} value="Chennai" onChange={(e) => { setJobLocation(e.target.value) }} />Chennai </label>
+                                            <label><input name="Location" type="radio" checked={joblocation === "Mumbai"} value="Mumbai" onChange={(e) => { setJobLocation(e.target.value) }} />Mumbai </label>
+                                            <label><input name="Location" type="radio" checked={joblocation === "Delhi"} value="Delhi" onChange={(e) => { setJobLocation(e.target.value) }} />Delhi </label>
+                                            <label><input name="Location" type="radio" value="others" onClick={(e) => { setotherJobLocation((prev) => !prev) }} />others </label>
                                         </div>
                                         {
-                                            otherJobLocation?
-                                        <input maxLength="10" className={Style.Otherinputbox} type="text" value={joblocation} onChange={(e) => { setJobLocation(e.target.value) }} />
-                                        :
-                                        ""
+                                            otherJobLocation ?
+                                                <input maxLength="10" className={Style.Otherinputbox} type="text" value={joblocation} onChange={(e) => { setJobLocation(e.target.value) }} />
+                                                :
+                                                ""
                                         }
 
                                         <h4 className={Style.jobHeadline}>Qualification Needed**</h4>
 
-                                        <div style={{marginTop:"-10px"}}>
-                                        <label><input name="Qualification" type="radio" checked={qualification==="B.E/CSE"} value="B.E/CSE" onChange={(e) => { setQualification(e.target.value) }} />B.E/CSE </label>
-                                        <label><input name="Qualification" type="radio" checked={qualification==="B.E/Civil"} value="B.E/Civil" onChange={(e) => { setQualification(e.target.value) }} />B.E/Civil </label>
-                                        <label><input name="Qualification" type="radio" checked={qualification==="B.E/Mech"} value="B.E/Mech" onChange={(e) => { setQualification(e.target.value) }} />B.E/Mech </label>
-                                        <label><input name="Qualification" type="radio" checked={qualification==="B.E/ECE"} value="B.E/ECE" onChange={(e) => { setQualification(e.target.value) }} />B.E/ECE </label>
-                                        <label><input name="Qualification" type="radio" checked={qualification==="B.E/IT"} value="B.E/IT" onChange={(e) => { setQualification(e.target.value) }} />B.E/IT </label>
-                                        <label><input name="Qualification" type="radio"  value="others" onClick={(e) => { setOthers((prev)=>!prev) }} />others </label>
+                                        <div style={{ marginTop: "-10px" }}>
+                                            <label><input name="Qualification" type="radio" checked={qualification === "B.E/CSE"} value="B.E/CSE" onChange={(e) => { setQualification(e.target.value) }} />B.E/CSE </label>
+                                            <label><input name="Qualification" type="radio" checked={qualification === "B.E/Civil"} value="B.E/Civil" onChange={(e) => { setQualification(e.target.value) }} />B.E/Civil </label>
+                                            <label><input name="Qualification" type="radio" checked={qualification === "B.E/Mech"} value="B.E/Mech" onChange={(e) => { setQualification(e.target.value) }} />B.E/Mech </label>
+                                            <label><input name="Qualification" type="radio" checked={qualification === "B.E/ECE"} value="B.E/ECE" onChange={(e) => { setQualification(e.target.value) }} />B.E/ECE </label>
+                                            <label><input name="Qualification" type="radio" checked={qualification === "B.E/IT"} value="B.E/IT" onChange={(e) => { setQualification(e.target.value) }} />B.E/IT </label>
+                                            <label><input name="Qualification" type="radio" value="others" onClick={(e) => { setOthers((prev) => !prev) }} />others </label>
                                         </div>
                                         {
                                             others ?
@@ -259,23 +258,26 @@ window.addEventListener('keypress', function(event){
 
                                         }
 
+                                        <h4 className={Style.jobHeadline}>Salary Per Annum in Lakhs** &nbsp;<span className={Style.hint}>(e.g 5 or 10)</span></h4>
+                                        <input maxLength="3" className={Style.inputbox} type="number" value={salaryRange} onChange={(e) => { setSalaryRange(e.target.value) }} />
 
-                                        <h4 className={Style.jobHeadline}>Experience Needed** &nbsp;<span className={Style.hint}>(e.g 5Y or 10Y)</span></h4>
-                                        <input maxLength="3" className={Style.inputbox} type="text" value={experiance} onChange={(e) => { setExperiance(e.target.value) }} />
+
+                                        <h4 className={Style.jobHeadline}>Experience Needed** &nbsp;<span className={Style.hint}>(e.g 5 or 10)</span></h4>
+                                        <input maxLength="3" className={Style.inputbox} type="number" value={experiance} onChange={(e) => { setExperiance(e.target.value) }} />
 
                                         <h4 className={Style.jobHeadline}>Skills Needed**</h4>
-                                      
+
                                         <input maxLength="100" className={Style.inputbox} type="text" value={skills} onChange={(e) => { setSkills(e.target.value) }} />
-                                       
+
                                         <h4 className={Style.jobHeadline}>Tags</h4>
-                         <div>
-                           <CreatableSelect  
-                          isMulti={true}
-                          options={jobTags}
-                          value={Tags}
-                          onChange={handleChange}     
-                        />
-                         </div>
+                                        <div>
+                                            <CreatableSelect
+                                                isMulti={true}
+                                                options={jobTags}
+                                                value={Tags}
+                                                onChange={handleChange}
+                                            />
+                                        </div>
 
                                         {Logo ? <p ><span style={{ color: "blue" }}>Note** :</span> Logo will also be posted with the Job</p> : ""}
 
@@ -287,7 +289,7 @@ window.addEventListener('keypress', function(event){
                             : <p style={{ color: "red", fontStyle: "italic", marginLeft: "20px" }}>Your account is in under verification process, Once your account gets verified, then you will be able to post a Job</p>
 
                     )
-            
+
                 })
             }
         </>

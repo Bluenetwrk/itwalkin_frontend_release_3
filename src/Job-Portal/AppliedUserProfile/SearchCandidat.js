@@ -423,6 +423,15 @@ function SearchCandidate() {
             </div>
           </div>
 
+          <div style={{marginBottom:"5px", marginTop:"0", marginLeft:"10px"}}>
+            Show  <select onChange={(e) => { handleRecordchange(e) }}>
+              <option value={10}>10</option>
+              <option value={25}>25</option>
+              <option value={50}>50</option>
+              <option value={100}>100</option>
+            </select>  jobs per page
+            </div>
+
           <div className={styles.AllUiWrapper}>
             <ul className={styles.ul} >
               <li style={{ backgroundColor: " rgb(40, 4, 99)" }} className={`${styles.li} ${styles.name}`}><b>Name</b>
@@ -564,7 +573,8 @@ function SearchCandidate() {
             <div>
             </div>
           </div >
-          <div>
+          <div style={{ display: "flex", justifyContent: "space-between"}}>
+          <div style={{marginTop:"10px", marginLeft:"10px"}}>
             Show  <select onChange={(e) => { handleRecordchange(e) }}>
               <option value={10}>10</option>
               <option value={25}>25</option>
@@ -572,9 +582,24 @@ function SearchCandidate() {
               <option value={100}>100</option>
             </select>  jobs per page
           </div>
+          <div className={styles.navigationWrapper}>
+              <button disabled={currentPage === 1} style={{ display: "inline", margin: "5px" }} className={styles.navigation} onClick={firstPage}>
+                <i class='fas fa-step-backward' ></i>
+              </button>
+              <button disabled={currentPage === 1} style={{ display: "inline", margin: "5px" }} className={styles.navigation} onClick={previous}>
+                <i class='fas fa-caret-square-left'></i>
+              </button>
+              <span>{currentPage}</span>
+              <button disabled={currentPage === npage} style={{ display: "inline", margin: "5px" }} className={styles.navigation} onClick={next}>
+                <i class='fas fa-caret-square-right'></i>
+              </button>
+              <button disabled={currentPage === npage} style={{ display: "inline", margin: "5px" }} className={styles.navigation} onClick={last}>
+                <i class='fas fa-step-forward'></i>
+              </button>
+            </div>
+            </div>
+
         </>
-
-
         :
         <>
           <div className={styles.searchBoth}>

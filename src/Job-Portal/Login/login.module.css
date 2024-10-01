@@ -12,12 +12,11 @@
         background: white;
         height: 188px;
         width: 240px;
-        /* padding-bottom: 5%; */
         border: 1px solid #000;
         border-radius: 10px;
         box-shadow: 2px solid black;
         z-index:100;
-        margin-left:82%;
+        margin-left:80%;
 }
 /* .ModelWrapper::after {
     content: "";

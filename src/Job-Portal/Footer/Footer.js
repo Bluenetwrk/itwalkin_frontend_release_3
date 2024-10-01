@@ -8,9 +8,9 @@ import { Link, useNavigate, BrowserRouter, Routes, Route, useLocation } from "re
 function Footer() {
   const navigate = useNavigate()
 
-  function Linkedin(){
+  function Linkedin(e){
     window.open("https://www.linkedin.com/company/104886917/admin/dashboard/", '_blank');
-                
+              
                 
   }
 
@@ -20,7 +20,7 @@ function Footer() {
         <div className={Styles.footer}>
 
           <div className={Styles.top}>
-            <div style={{ width: "50%" }} >
+            <div style={{ width: "50%", marginLeft:"-5.8%" }} >
               <p className={Styles.footCart}>ITwalkin.com</p>
               <p  className={Styles.AddYour}>only for IT jobs</p>
             </div>
