@@ -84,6 +84,7 @@ function StudentUpdateProfile(props) {
   let studId = JSON.parse(localStorage.getItem("StudId"))
 
   const [topMessage, settopMessage] = useState("")
+  const [stuId, setstuId] = useState()
 
   async function getUser() {
     let userid = JSON.parse(localStorage.getItem("StudId"))
@@ -110,6 +111,7 @@ function StudentUpdateProfile(props) {
           setExperiance(result.Experiance)
           setage(result.age)
           setTag(result.Tags)
+          setstuId(result._id)
         }
       }).catch((err) => {
         alert("server issue occured", err)
@@ -220,6 +222,25 @@ function StudentUpdateProfile(props) {
       return false;
     }
   });
+const [showdelete, setShowdelete]=useState(false)
+
+async function DeleteProfile(){
+  let confirm = window.confirm("are you sure to delete your Account? your account will be deleted permanently, click on 'Ok', if you wish delete your Account permanently ")
+if(confirm){
+  await axios.delete(`/StudentProfile/deleteJobSeeker/${stuId }`)
+  .then((res)=>{
+    if(res.data){
+    alert("Account deleted successfully ")
+    navigate("/")
+    localStorage.clear()
+    }
+  }).catch((err)=>{
+    alert("some thing went wrong try again ")
+  })
+  
+}
+
+  }
 
 
   return (
@@ -234,6 +255,17 @@ function StudentUpdateProfile(props) {
 
             <img className={styles.imageView} src={image ? image : profileDp} />
             <img className={styles.fileView} src={file} />
+            <div style={{position:"absolute", marginLeft:"59%", marginTop:"40px"}}>
+              <input type='checkbox' onClick={()=>{setShowdelete(prev=>!prev)}} />
+             <span>delete Profile</span><br></br>
+             {showdelete?
+<button className={{}} style={{backgroundColor:"red", color:"white", 
+border:"none",padding: "4px 8px"}} onClick={DeleteProfile}>Delete</button>
+:""
+             }
+
+
+              </div>
 
             <div className={styles.addfileDiconwrapper}>
               <input className={`${styles.addfile} ${styles.addfileD}`} type="file" accept='.png, .jpg, .jpeg' onChange={prevewImage} />

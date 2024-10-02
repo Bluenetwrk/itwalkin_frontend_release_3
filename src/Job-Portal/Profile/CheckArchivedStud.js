@@ -96,10 +96,18 @@ function unReject(Empid , status){
       setPageLoader(true)
       let userid = atob(JSON.parse(localStorage.getItem("IdLog")))
       const headers = { authorization: userid +" "+ atob(JSON.parse(localStorage.getItem("AdMLog"))) };
-        await axios.get(`/StudentProfile/getProfile/${params.CP}`,{headers})
+        await axios.get(`/StudentProfile/getArchivedProfile/${params.CP}`,{headers})
             .then((res) => {
-                let result = res.data.result                
-                setProfileData([result])
+                let result = res.data 
+                // console.log(result)     
+                for(let i=0; i<result.length; i++)   {
+                if(result[i].Archived._id=== params.CP){
+                  let res = result[i].Archived
+                  setProfileData([res])
+
+                }
+
+                }    
         setPageLoader(false)
 
             }).catch((err) => {
@@ -188,10 +196,8 @@ function unReject(Empid , status){
 
     return (
         <>
-
-<img style={{ height:"25px", color:"grey", marginTop:"20px", marginLeft:"8%", cursor:"pointer",
+                        <img style={{ height:"25px", color:"grey", marginTop:"20px", marginLeft:"8%", cursor:"pointer",
              width:"28px"}} onClick={()=>{navigate(-1)}}  src={Arrowimage} />
-
 {
 
 profileData.map((item, i) => {
@@ -226,10 +232,10 @@ profileData.map((item, i) => {
                 <li className={styles.li}><b>Skills</b></li>
                 <li className={styles.li}><b>Experience</b></li>
                 <li className={styles.li}><b>Ip Address</b></li>
-                <li className={`${styles.li} ${styles.Approval}`}  ><b>Status</b></li>
+                {/* <li className={`${styles.li} ${styles.Approval}`}  ><b>Status</b></li> */}
                 {/* <li className={`${styles.li} ${styles.Approval}`}  ><b>Reject</b></li> */}
                 {/* <li className={`${styles.li} ${styles.Approval}`}  ><b>Delete</b></li> */}
-                <li className={`${styles.li}`} style={{height:"30px"}}><b>Message</b></li>
+                {/* <li className={`${styles.li}`} style={{height:"30px"}}><b>Message</b></li> */}
 
 
             </ul>
@@ -254,7 +260,7 @@ profileData.map((item, i) => {
                        <li className={` ${styles.Hli}`}>{item.Experiance?item.Experiance:<li className={styles.Nli}>Not Updated</li>}</li>
                        <li className={` ${styles.Hli}`}>{item.ipAddress?item.ipAddress:<li className={styles.Nli}>could not fetch the Ip Address</li>}</li>
                       
-                       <li className={` ${styles.Hli} ${styles.Approval}`}>
+                       {/* <li className={` ${styles.Hli} ${styles.Approval}`}>
                         {
                         item.isApproved?
                   <button className={styles.Approved} onClick={()=>{DisApprove(item._id, false)}}>Approved&#10004;</button>
@@ -267,10 +273,10 @@ profileData.map((item, i) => {
                   </>
 
                   }
-                  </li>
+                  </li> */}
 
-                    <li style={{height:"30px"}} className={` ${styles.Hli}`}> <input style={{height:"24px", width:"80%", marginLeft:"11%"}}  value ={message} onChange={(e)=>{setmessage(e.target.value)}} />
-                     <button onClick={()=>{sendMessage(item._id)}}>Send</button> </li>
+                    {/* <li style={{height:"30px"}} className={` ${styles.Hli}`}> <input style={{height:"24px", width:"80%", marginLeft:"11%"}}  value ={message} onChange={(e)=>{setmessage(e.target.value)}} />
+                     <button onClick={()=>{sendMessage(item._id)}}>Send</button> </li> */}
 
                         </ul>
                     )

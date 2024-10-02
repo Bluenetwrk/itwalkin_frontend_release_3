@@ -150,7 +150,7 @@ const [checkBoxValue, setCheckBoxValue]=useState([])
                     }).slice(0,1)
                     }
                       
-                        <span onClick={() => navigate(`/Jobdetails/${items._id}`)} style={{color:"blue"}} className={styles.seeMore}>
+                        <span onClick={() => navigate(`/Jobdetails/${btoa(items._id)}`)} style={{color:"blue", cursor:"pointer"}} className={styles.seeMore}>
                           ...read more
                         </span>
                       </li>

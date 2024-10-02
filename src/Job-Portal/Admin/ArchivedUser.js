@@ -372,13 +372,13 @@ async function RecentLogin(e){
                     <ul className={styles.ul}>
 
                       <li className={`${styles.li} ${styles.name}`} 
-    onClick={()=>{navigate(`/BIAddmin@CheckStudentProfile/${items._id}`)}}><Link style={{color:"blue"}}>
-     {items.online ? <span className={styles.dot}></span> :""} {items.Archived.name}
+    onClick={()=>{navigate(`/BIAddmin@CheckStudentArchived/${items.Archived._id}`)}}><Link style={{color:"blue"}}>
+     {items.Archived.name}
       </Link></li>
-                <li className={`${styles.li} ${styles.phoneNumber}`}>{items.Archived.phoneNumber}</li>
-                <li className={`${styles.li} ${styles.age}`}>{items.Archived.age}</li>
+                <li className={`${styles.li} ${styles.phoneNumber}`}>{items.Archived.phoneNumber?items.Archived.phoneNumber:"not available"}</li>
+                <li className={`${styles.li} ${styles.age}`}>{items.Archived.age?items.Archived.age:"not availabel"}</li>
 
-                      <li className={`${styles.li} ${styles.Aadhar}`}> {items.Archived.Aadhar}</li>
+                      <li className={`${styles.li} ${styles.Aadhar}`}> {items.Archived.Aadhar?items.Archived.Aadhar:"No aadhar available"}</li>
                       <li className={`${styles.li} ${styles.Pdate}`}>
                         {new Date(items.Archived.createdAt).toLocaleString(
                           "en-US",
@@ -403,8 +403,8 @@ async function RecentLogin(e){
   }
                   </li>
 
-                      <li className={`${styles.li} ${styles.Qualification}`}>{items.Archived.Qualification}</li>
-                      <li className={`${styles.li} ${styles.Skills}`}>{items.Archived.Skills}</li>
+                      <li className={`${styles.li} ${styles.Qualification}`}>{items.Archived.Qualification?items.Archived.Qualification:"no quali. available"}</li>
+                      <li className={`${styles.li} ${styles.Skills}`}>{items.Archived.Skills?items.Archived.Skills:"no kills available"}</li>
                       <li className={`${styles.li} ${styles.Approval}`}>
                         {
                         items.Archived.isApproved?
@@ -426,7 +426,7 @@ async function RecentLogin(e){
                         }
                   </li>
                   
-                  <li className={`${styles.li} ${styles.Message}`} >{items.Archived.message}
+                  <li className={`${styles.li} ${styles.Message}`} >{items.Archived.message?items.Archived.message:"no message was sent"}
                   {/* <textarea style={{height:"50px", width:"80%", marginLeft:"-11px"}} value ={currentBox == items._id ?message:""} onChange={(e)=>{
                      handleChange(e, items._id )}}> </textarea><br></br>
                      <button onClick={()=>{sendMessage(items._id)}}>Send</button> */}

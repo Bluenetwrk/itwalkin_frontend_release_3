@@ -53,15 +53,7 @@ let navigate = useNavigate()
         navigate("/Update-Profile")
       }
             
-      async function DeleteProfile(){
-        let userId= profileData.map((item, i) => {
-          return (
-              item._id    
-          )})
-
-          await axios.delete(`/StudentProfile/deleteJobSeeker/${userId[0]}`)
-
-        }
+      
 
     return (
         <>
@@ -91,7 +83,7 @@ profileData.map((item, i) => {
 profileData.length>0?
 <>
 <button className={styles.updateProfile} onClick={updateprofile}>Update Profile</button><br></br>
-<button className={styles.deletProfile} onClick={DeleteProfile}>Delete</button>
+
 </>
 
 :""

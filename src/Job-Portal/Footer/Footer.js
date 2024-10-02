@@ -22,7 +22,7 @@ function Footer() {
           <div className={Styles.top}>
             <div style={{ width: "50%", marginLeft:"-5.8%" }} >
               <p className={Styles.footCart}>ITwalkin.com</p>
-              <p  className={Styles.AddYour}>only for IT jobs</p>
+              <p  className={Styles.AddYour}>Only for IT jobs</p>
             </div>
             <div className={Styles.brands}>
               <a> <i className='fa-brands fa-facebook-square'></i> </a>

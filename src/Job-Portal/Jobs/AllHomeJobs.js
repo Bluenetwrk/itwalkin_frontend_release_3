@@ -337,9 +337,11 @@ function Home() {
       })
   }
 
+  let recordsperpage = JSON.parse(sessionStorage.getItem("recordsperpageHome"))
 
   const [currentPage, setCurrentPage] = useState(1)
-  const [recordsPerPage, setrecordsPerPage] = useState(10)
+  const [recordsPerPage, setrecordsPerPage] = useState(recordsperpage?recordsperpage:10)
+
   const lastIndex = currentPage * recordsPerPage //10
   const firstIndex = lastIndex - recordsPerPage //5
   const records = jobs.slice(firstIndex, lastIndex)//0,5
@@ -367,7 +369,9 @@ function Home() {
     setCurrentPage(npage)
   }
   function handleRecordchange(e) {
-    setrecordsPerPage(e.target.value)
+    sessionStorage.setItem("recordsperpageHome", JSON.stringify(e.target.value));
+    let recordsperpage = JSON.parse(sessionStorage.getItem("recordsperpageHome"))
+    setrecordsPerPage(recordsperpage) 
     setCurrentPage(1)
   }
 
@@ -484,6 +488,7 @@ function Home() {
           </div>
           <div style={{marginBottom:"5px", marginTop:"0", marginLeft:"10px"}}>
             Show  <select onChange={(e) => { handleRecordchange(e) }}>
+            <option value={""}>{recordsPerPage}</option>          
               <option value={10}>10</option>
               <option value={25}>25</option>
               <option value={50}>50</option>
@@ -714,6 +719,7 @@ function Home() {
           <div style={{ display: "flex", justifyContent: "space-between"}}>
           <div style={{marginTop:"14px", marginLeft:"10px"}} >
             Show  <select onChange={(e) => { handleRecordchange(e) }}>
+            <option value={""}>{recordsPerPage}</option>            
               <option value={10}>10</option>
               <option value={25}>25</option>
               <option value={50}>50</option>

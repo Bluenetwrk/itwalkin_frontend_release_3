@@ -132,10 +132,7 @@ function SearchCandidate() {
     window.open(`/Check-Profile/${StudID}`, '_blank')
   }
 
-  function handleRecordchange(e) {
-    setrecordsPerPage(e.target.value)
-    setCurrentPage(1)
-  }
+
 
   async function getLocation(jobLocation) {
     setFiltereredjobs(jobLocation)
@@ -153,8 +150,12 @@ function SearchCandidate() {
       })
   }
 
+  let recordsperpage = JSON.parse(sessionStorage.getItem("recordsperpageSerachCand"))
+
+
   const [currentPage, setCurrentPage] = useState(1)
-  const [recordsPerPage, setrecordsPerPage] = useState(10)
+  const [recordsPerPage, setrecordsPerPage] = useState(recordsperpage?recordsperpage:10)
+
   const lastIndex = currentPage * recordsPerPage //10
   const firstIndex = lastIndex - recordsPerPage //5
   const records = Candidate.slice(firstIndex, lastIndex)//0,5
@@ -180,6 +181,13 @@ function SearchCandidate() {
   }
   function last() {
     setCurrentPage(npage)
+  }
+
+  function handleRecordchange(e){  
+    sessionStorage.setItem("recordsperpageSerachCand", JSON.stringify(e.target.value));
+    let recordsperpage = JSON.parse(sessionStorage.getItem("recordsperpageSerachCand"))
+    setrecordsPerPage(recordsperpage) 
+    setCurrentPage(1)
   }
 
   async function filterByJobTitle(key) {
@@ -425,6 +433,7 @@ function SearchCandidate() {
 
           <div style={{marginBottom:"5px", marginTop:"0", marginLeft:"10px"}}>
             Show  <select onChange={(e) => { handleRecordchange(e) }}>
+            <option value={""}>{recordsPerPage}</option>              
               <option value={10}>10</option>
               <option value={25}>25</option>
               <option value={50}>50</option>
@@ -576,6 +585,8 @@ function SearchCandidate() {
           <div style={{ display: "flex", justifyContent: "space-between"}}>
           <div style={{marginTop:"10px", marginLeft:"10px"}}>
             Show  <select onChange={(e) => { handleRecordchange(e) }}>
+            <option value={""}>{recordsPerPage}</option>              
+
               <option value={10}>10</option>
               <option value={25}>25</option>
               <option value={50}>50</option>

@@ -45,6 +45,7 @@ import AllJobSeekers from "./Job-Portal/Admin/AllJobSeekers"
 import AllEmployees from "./Job-Portal/Admin/AllEmployees"
 import CheckEmpProfileForAdmin from "./Job-Portal/Profile/CheckEmplProfileForAdmin";
 import CheckStudentProfileForAdmin from "./Job-Portal/Profile/CheckStuForAdmin";
+import CheckArchivedJobSeeker from "./Job-Portal/Profile/CheckArchivedStud";
 import SearchCandidate from "./Job-Portal/AppliedUserProfile/SearchCandidat";
 import SearchCandHome from "./Job-Portal/AppliedUserProfile/SearchCandHome";
 import AdminUpdate from "./Job-Portal/Admin/AdminUpdate"
@@ -116,6 +117,7 @@ const App = () => {
           <Route path="/BIAddmin@AllEmployees" element={<AllEmployees />} />
           <Route path="/BIAddmin@CheckEmpProfile/:CP" element={<CheckEmpProfileForAdmin />} />
           <Route path="/BIAddmin@CheckStudentProfile/:CP" element={<CheckStudentProfileForAdmin />} />
+          <Route path="/BIAddmin@CheckStudentArchived/:CP" element={<CheckArchivedJobSeeker />} />
           <Route path="/BIAddmin@AdminUpdate" element ={<AdminUpdate/>} />
           <Route path="/BIAddmin@PostJob" element={<AdminPostJobs/>} />
           <Route path="/BIAddmin@AllIds" element={<AllIds/>} />

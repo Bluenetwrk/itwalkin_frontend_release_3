@@ -148,12 +148,12 @@ const [Loader, setLoader] = useState(false)
   </tr>
   <tr>
     <th>Package</th>
-    <td>{jobs.salaryRange ? jobs.salaryRange : <li style={{ display: "inline-block" }}>Salary Range</li>}</td>
+    <td>{jobs.salaryRange ? jobs.salaryRange+"L" : <li style={{ display: "inline-block" }}>Salary Range</li>}</td>
   </tr>
   <tr>
     <th>Experience Required</th>
     <td>
-    {jobs.experiance ? jobs.experiance : <li style={{ display: "inline-block" }} >Experiance</li>}
+    {jobs.experiance ? jobs.experiance+"Y" : <li style={{ display: "inline-block" }} >Experiance</li>}
     </td>
   </tr>
   <tr>
@@ -254,7 +254,7 @@ const [Loader, setLoader] = useState(false)
         <span className={styles.qualificationAndExperiance}>
         <  img className={styles.graduationImage} src={graduation}  /> 
 
-          {jobs.qualification},   {jobs.experiance} Exp, {jobs.jobtype}
+          {jobs.qualification},   {jobs.experiance}Y Exp, {jobs.jobtype}
         {/* <span className={styles.jobtypeAndDate}> {job.jobtype}</span> */}
         </span><br></br> 
         <span className={styles.jobtypeAndDate}>Source</span> :
@@ -271,7 +271,7 @@ const [Loader, setLoader] = useState(false)
 
             
             <div className={styles.ApplyPackage}>
-            <p className={styles.salaryRange}><span>&#8377;</span>{jobs.salaryRange}</p>        
+            <p className={styles.salaryRange}><span>&#8377;</span>{jobs.salaryRange}L</p>        
 
 
             {

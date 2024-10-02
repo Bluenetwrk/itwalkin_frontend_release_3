@@ -131,7 +131,7 @@ function Nav(props) {
                 <div className={Styles.logoWrapper}>
                 <div className={Styles.ITwalkinWrapper}>
                       <p className={Styles.ITwalkin}>ITwalkin</p>
-                      <p className={Styles.onlyforITjobs}>only for IT jobs</p>
+                      <p className={Styles.onlyforITjobs}>Only for IT jobs</p>
                       </div>
                   {/* <NavLink to="/" > <img className={Styles.logo} src={logo} /> </NavLink> */}
                 </div>
@@ -171,7 +171,7 @@ function Nav(props) {
                     {/* <NavLink to="/" > <img className={Styles.logo} src={logo} /> </NavLink> */}
                     <div className={Styles.ITwalkinWrapper}>
                       <p className={Styles.ITwalkin}>ITwalkin</p>
-                      <p className={Styles.onlyforITjobs}>only for IT jobs</p>
+                      <p className={Styles.OforITjobs}>Only for IT jobs</p>
                       </div>
                   </div>
                   <div className={Styles.linkWrapper}>
@@ -253,7 +253,7 @@ function Nav(props) {
                       {/* <NavLink to="/"> <img className={Styles.logo} src={logo} /> </NavLink> */}
                       <div className={Styles.ITwalkinWrapper}>
                       <p className={Styles.ITwalkin}>ITwalkin</p>
-                      <p className={Styles.onlyforITjobs}>only for IT jobs</p>
+                      <p className={Styles.onlyforITjobs}>Only for IT jobs</p>
                       </div>
                     </div>
                     <div className={Styles.linkWrapper}>

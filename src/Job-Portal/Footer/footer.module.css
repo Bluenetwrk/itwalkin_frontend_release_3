@@ -1,8 +1,9 @@
 
 .footerWraper{
-    /* background-color: black; */
     background-color: rgb(29, 1, 75);
-    margin-top: 10vh;
+    /* position: absolute; */
+    margin-top:38px;
+    width: 100%;
 
 }
 

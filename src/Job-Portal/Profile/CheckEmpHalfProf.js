@@ -31,7 +31,6 @@ const screenSize = useScreenSize();
         await axios.get(`/EmpProfile/getProfile/${atob(params.empId)}`, {headers})
             .then((res) => {
                 let result = res.data.result  
-                console.log(res)              
                 setProfileData([result])
   setPageLoader(false)
 
@@ -54,7 +53,7 @@ const screenSize = useScreenSize();
         <div style={{display:"flex"}}>
           <img style={{ height:"25px", color:"grey", marginTop:"20px", marginLeft:"8%", cursor:"pointer",
              width:"28px"}} onClick={(e)=>{navigate(-1); goback(e)}}  src={Arrowimage} />
-    <p style={{marginLeft:"30%"}}><b>Company Details </b></p>
+    {/* <p style={{marginLeft:"30%"}}><b>Company Details </b></p> */}
     </div>
 
 {
@@ -80,8 +79,9 @@ profileData.map((item, i) => {
            
 <div className={styles.uiwrapper}>
             <ul className={styles.ul}>
-                <li className={styles.li}><b>Name </b></li>
-                <li className={styles.li}><b>Company Name</b></li>
+                {/* <li className={styles.li}><b>Name </b></li> */}
+                <li className={styles.li} style={{backgroundColor:"rgb(40, 4, 99)", color:"rgb(40, 4, 99)"}}>`</li>
+                <li className={styles.li}><b>H.R Name</b></li>
                 <li className={styles.li}><b>Company Address</b></li>
                 <li className={styles.li}><b>Company Website</b></li>
                 {/* <li className={styles.li}><b>Email  Address</b></li>
@@ -106,8 +106,9 @@ profileData.map((item, i) => {
                 profileData.map((item, i) => {
                     return (
                         <ul className={styles.ulR} key={i}>
-                            <li className={`${styles.Hli}`}>{item.name?item.name:<li className={styles.Nli}>Not Updated</li>}</li>
-                       <li className={` ${styles.Hli}`}>{item.CompanyName?item.CompanyName:<li className={styles.Nli}>Not Updated</li>}</li>
+                       <li className={` ${styles.Hli}`} style={{backgroundColor:"rgb(40, 4, 99)"}}> 
+                        <div style={{color:"white", marginLeft:"-160px", fontWeight:"bold"}}>{item.CompanyName?item.CompanyName:<li className={styles.Nli}>Not Updated</li>} </div></li>
+                            <li className={`${styles.Hli}`}>{item.name?item.name:<li className={styles.Nli} >Not Updated</li>}</li>
                        <li className={` ${styles.Hli}`}>{item.CompanyAddress?item.CompanyAddress:<li className={styles.Nli}>Not Updated</li>}</li>
                        <li className={` ${styles.Hli}`}>{item.CompanyWebsite?item.CompanyWebsite:<li className={styles.Nli}>Not Updated</li>}</li>
                             {/* <li className={`${styles.Hli}`}>{item.email?item.email:<li className={styles.Nli}>Not Updated</li>}</li>

@@ -238,7 +238,7 @@ const screenSize = useScreenSize();
               return (
 
                 <ul className={styles.ul} key={i}>
-                  <li style={{cursor:"pointer", textDecoration:"underline"}} className={styles.li} onClick={() => { navigate(`/CheckEmpHalfProfile/${items.empId}`) }} >
+                  <li style={{cursor:"pointer", textDecoration:"underline"}} className={styles.li} onClick={() => { navigate(`/CheckEmpHalfProfile/${btoa(items.empId)}`) }} >
                     {/* {items.Logo ?
                     < img style={{ width: "40%", height: "40px" }} src={items.Logo} />
                     : ""}<br></br> */}
