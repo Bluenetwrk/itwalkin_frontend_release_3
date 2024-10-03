@@ -486,12 +486,10 @@ async function filterByJobTitle(key){
      </div>
      <div style={{marginBottom:"5px", marginTop:"0", marginLeft:"10px"}}>
             Show  <select onChange={(e) => { handleRecordchange(e) }}>
-            <option value={""}>{recordsPerPage}</option>              
-
-              <option value={10}>10</option>
-              <option value={25}>25</option>
-              <option value={50}>50</option>
-              <option value={100}>100</option>
+              <option selected = {lastIndex === 10} value={10}>10</option>
+              <option selected = {lastIndex === 25} value={25}>25</option>
+              <option selected = {lastIndex === 50} value={50}>50</option>
+              <option selected = {lastIndex === 100} value={100}>100</option>
             </select>  jobs per page
             </div>
 
@@ -504,7 +502,7 @@ async function filterByJobTitle(key){
               <li style={{backgroundColor:" rgb(40, 4, 99)"}} className={`${styles.li} ${styles.JobType}`}>JobType</li>
               {/* <li className={`${styles.li} ${styles.HliDescription}`}><b>Job description</b></li> */}
               <li style={{backgroundColor:" rgb(40, 4, 99)"}} className={`${styles.li} ${styles.date}`}>Posted Date
-                <p style={{display:"inline",  marginLeft:"6%"}} >
+                <p className={styles.arrowWrapper} >
                    <i onClick={sortbyNewjobs} className={`${styles.arrow} ${styles.up}`}> </i>
                   <i onClick={sortbyOldjobs} className={`${styles.arrow} ${styles.down}`}></i>
                   </p >
@@ -512,14 +510,14 @@ async function filterByJobTitle(key){
 
               <li style={{backgroundColor:" rgb(40, 4, 99)"}} className={`${styles.li} ${styles.Location}`}>Location</li>
               <li style={{backgroundColor:" rgb(40, 4, 99)"}} className={`${styles.li} ${styles.Package}`} >CTC
-              <p style={{display:"inline", marginLeft:"-0%"}}>
+              <p className={styles.arrowWrapper}>
                 <i onClick={SdescendingOrder} className={`${styles.arrow} ${styles.up}`}> </i>
                 <i onClick={SascendingOrder} className={`${styles.arrow} ${styles.down}`}></i>
                 </p>
               </li>
 
               <li style={{backgroundColor:" rgb(40, 4, 99)"}} className={`${styles.li} ${styles.experiance}`}>Expereince
-              <p style={{display:"inline", marginLeft:"-0%", marginTop:"2px"}}>
+              <p className={styles.arrowWrapper}>
                 <i onClick={EdescendingOrder} className={`${styles.arrow} ${styles.up}`}> </i>
                 <i onClick={EascendingOrder} className={`${styles.arrow} ${styles.down}`}></i>
                 </p>
@@ -746,11 +744,10 @@ async function filterByJobTitle(key){
           <div style={{ display: "flex", justifyContent: "space-between"}}>
           <div style={{marginTop:"14px", marginLeft:"10px"}} >
             Show  <select onChange={(e) => { handleRecordchange(e) }}>
-            <option value={""} >{recordsPerPage}</option>              
-              <option value={10}>10</option>
-              <option value={25}>25</option>
-              <option value={50}>50</option>
-              <option value={100}>100</option>
+              <option selected = {lastIndex === 10} value={10}>10</option>
+              <option selected = {lastIndex === 25} value={25}>25</option>
+              <option selected = {lastIndex === 50} value={50}>50</option>
+              <option selected = {lastIndex === 100} value={100}>100</option>
             </select>  jobs per page
             </div>
 

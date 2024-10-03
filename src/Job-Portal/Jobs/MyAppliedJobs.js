@@ -202,7 +202,7 @@ const screenSize = useScreenSize();
 
           <li className={`${styles.li} ${styles.liDescription}`}><b>Job description</b></li>
           <li className={`${styles.li} ${styles.Pdate}`}><b>Posted Date</b>
-          <p style={{display:"inline", marginLeft:"20%"}} >
+          <p className={styles.arrowWrapper} >
                    <i onClick={sortbyNewjobs} className={`${styles.arrow} ${styles.up}`}> </i>
                   <i onClick={sortbyOldjobs} className={`${styles.arrow} ${styles.down}`}></i>
                   </p >
@@ -210,13 +210,13 @@ const screenSize = useScreenSize();
 
           <li className={`${styles.li} ${styles.Location}`}><b>Location</b></li>
           <li className={`${styles.li} ${styles.Package}`}><b>CTC </b>
-          <p style={{display:"inline", marginLeft:"28%"}}>
+          <p className={styles.arrowWrapper}>
                 <i onClick={SdescendingOrder} className={`${styles.arrow} ${styles.up}`}> </i>
                 <i onClick={SascendingOrder} className={`${styles.arrow} ${styles.down}`}></i>
                 </p>
           </li>
           <li className={`${styles.li} ${styles.experiance}`}><b>Experience </b>
-          <p style={{display:"inline", marginLeft:"22%"}}>
+          <p className={styles.arrowWrapper}>
                 <i onClick={EdescendingOrder} className={`${styles.arrow} ${styles.up}`}> </i>
                 <i onClick={EascendingOrder} className={`${styles.arrow} ${styles.down}`}></i>
                 </p>

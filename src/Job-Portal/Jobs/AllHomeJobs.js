@@ -348,6 +348,7 @@ function Home() {
   const npage = Math.ceil(jobs.length / recordsPerPage) // last page
   const number = [...Array(npage + 1).keys()].slice(1)
 
+
   function firstPage() {
     setCurrentPage(1)
   }
@@ -368,10 +369,13 @@ function Home() {
   function last() {
     setCurrentPage(npage)
   }
+  // const [SelectedPage, setSelectedPage] = useState()
+
   function handleRecordchange(e) {
     sessionStorage.setItem("recordsperpageHome", JSON.stringify(e.target.value));
     let recordsperpage = JSON.parse(sessionStorage.getItem("recordsperpageHome"))
     setrecordsPerPage(recordsperpage) 
+    // setSelectedPage(e.target.value)
     setCurrentPage(1)
   }
 
@@ -411,8 +415,6 @@ function Home() {
 
       {screenSize.width > 850 ?
         <>
-
-
 
           <div className={styles.searchBothForNavWrapper}>
             <input className={styles.inputboxsearchNav} type="text" placeholder='Search for a Job / Skills / Location / Experiance' onChange={(e) => { search(e) }} />
@@ -488,11 +490,11 @@ function Home() {
           </div>
           <div style={{marginBottom:"5px", marginTop:"0", marginLeft:"10px"}}>
             Show  <select onChange={(e) => { handleRecordchange(e) }}>
-            <option value={""}>{recordsPerPage}</option>          
-              <option value={10}>10</option>
-              <option value={25}>25</option>
-              <option value={50}>50</option>
-              <option value={100}>100</option>
+            {/* <option value={""}>{recordsPerPage}</option> */}
+              <option selected= {lastIndex===10}  value={10}>10</option>
+              <option selected= {lastIndex===25}  value={25}>25</option>
+              <option selected= {lastIndex===50}  value={50}>50</option>
+              <option selected= {lastIndex===100} value={100}>100</option>
             </select>  jobs per page
             </div>
           {/* <button >Previous</button>
@@ -511,8 +513,8 @@ function Home() {
               <li style={{ backgroundColor: " rgb(40, 4, 99)" }} className={`${styles.li} ${styles.JobType}`}>JobType</li>
 
               {/* <li className={`${styles.li} ${styles.HliDescription}`}><b>Job description</b></li> */}
-              <li style={{ backgroundColor: " rgb(40, 4, 99)" }} className={`${styles.li} ${styles.date}`}>Posted Date
-                <p style={{display:"inline",  marginLeft:"6%", marginTop:"2px"}} >
+              <li style={{ backgroundColor: " rgb(40, 4, 99)",  }} className={`${styles.li} ${styles.date}`}>Posted Date
+                <p className={styles.arrowWrapper} >
                   <i onClick={sortbyNewjobs} className={`${styles.arrow} ${styles.up}`} ></i>
                   <i onClick={sortbyOldjobs} className={`${styles.arrow} ${styles.down}`}></i>
                 </p>
@@ -520,16 +522,16 @@ function Home() {
               {/* style={{ position:"absolute", display:"block"}} */}
               <li style={{ backgroundColor: " rgb(40, 4, 99)" }} className={`${styles.li} ${styles.Location}`}>Location</li>
 
-              <li style={{ backgroundColor: " rgb(40, 4, 99)" }} className={`${styles.li} ${styles.Package}`}>CTC
-              <p style={{display:"inline", marginLeft:"-10%", marginTop:"5px"}}>
+              <li style={{ backgroundColor: " rgb(40, 4, 99)",  }} className={`${styles.li} ${styles.Package}`}>CTC
+              <p className={styles.arrowWrapper}>
 
                   <i onClick={SdescendingOrder} className={`${styles.arrow} ${styles.up}`}> </i>
                   <i onClick={SascendingOrder} className={`${styles.arrow} ${styles.down}`}></i>
                 </p>
               </li>
 
-              <li style={{ backgroundColor: " rgb(40, 4, 99)" }} className={`${styles.li} ${styles.experiance}`}>Experience
-              <p style={{display:"inline", marginLeft:"0%", marginTop:"2px"}}>
+              <li style={{ backgroundColor: " rgb(40, 4, 99)",  }} className={`${styles.li} ${styles.experiance}`}>Experience
+              <p className={styles.arrowWrapper}>
 
                   <i onClick={EdescendingOrder} className={`${styles.arrow} ${styles.up}`}> </i>
                   <i onClick={EascendingOrder} className={`${styles.arrow} ${styles.down}`}></i>
@@ -719,11 +721,10 @@ function Home() {
           <div style={{ display: "flex", justifyContent: "space-between"}}>
           <div style={{marginTop:"14px", marginLeft:"10px"}} >
             Show  <select onChange={(e) => { handleRecordchange(e) }}>
-            <option value={""}>{recordsPerPage}</option>            
-              <option value={10}>10</option>
-              <option value={25}>25</option>
-              <option value={50}>50</option>
-              <option value={100}>100</option>
+              <option  selected = {lastIndex === 10} value={10}>10</option>
+              <option  selected = {lastIndex === 25} value={25}>25</option>
+              <option  selected = {lastIndex === 50} value={50}>50</option>
+              <option  selected = {lastIndex === 100} value={100}>100</option>
             </select>  jobs per page
             </div>
 

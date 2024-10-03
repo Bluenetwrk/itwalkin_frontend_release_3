@@ -171,7 +171,7 @@ function Nav(props) {
                     {/* <NavLink to="/" > <img className={Styles.logo} src={logo} /> </NavLink> */}
                     <div className={Styles.ITwalkinWrapper}>
                       <p className={Styles.ITwalkin}>ITwalkin</p>
-                      <p className={Styles.OforITjobs}>Only for IT jobs</p>
+                      <p className={Styles.onlyforITjobs}>Only for IT jobs</p>
                       </div>
                   </div>
                   <div className={Styles.linkWrapper}>

@@ -1,5 +1,7 @@
 
-
+.arrowWrapper{
+    display: inline;
+}
 
 .arrow {
     border: solid white;
@@ -13,7 +15,7 @@
     -webkit-transform: rotate(-135deg);
     /* background-color: blue; */
     position: absolute;
-    margin-top: 2px;
+    margin-top: 1px;
   }
   .down {
     transform: rotate(90deg);
