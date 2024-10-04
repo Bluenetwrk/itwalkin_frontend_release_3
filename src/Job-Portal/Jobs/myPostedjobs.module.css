@@ -122,6 +122,11 @@
 } */
 
 /* ...................................Li......................... */
+.arrowWrapper{
+    display: inline;
+    margin-left: 7%;
+    margin-top: 2px;
+}
 .arrow {
     border: solid white;
     border-width: 0 2px 2px 0;
@@ -132,14 +137,14 @@
   .up {
     transform: rotate(-135deg);
     -webkit-transform: rotate(-135deg);
-    margin-top: 0px;
+    margin-top: 2px;
     position: absolute;
 }
 .down {
     transform: rotate(90deg);
     -webkit-transform: rotate(45deg);
     margin-top: 8px;
-    position: absolute;
+    /* position: absolute; */
 
   }
   .up:hover {

@@ -230,9 +230,9 @@ function JoppostedByEmp(props) {
  {screenSize.width > 850 ?
         <>
           <div className={styles.searchBothForNavWrapper}>
-            <input className={styles.inputboxsearchNav} type="text" placeholder='Search for a Job / Skills / Location / Experiance' onChange={(e) => { search(e) }} />
+            <input className={styles.inputboxsearchNav} type="text" placeholder='Search for a Job / Skills / Location / Experience' onChange={(e) => { search(e) }} />
 
-            <i style={{ color: "rgb(40, 4, 99)", fontSize: "18px", paddingLeft: "8px", cursor: "pointer" }} onClick={() => { searchIcon(searchKey) }}
+            <i style={{ color: "rgb(40, 4, 99)", fontSize: "18px", cursor: "pointer" }} onClick={() => { searchIcon(searchKey) }}
               class="fa fa-search" ></i>
           </div>
           {Result ?
@@ -259,22 +259,25 @@ function JoppostedByEmp(props) {
             <li className={`${styles.li} ${styles.Jtitle}`}><b>Job Title</b></li>
             <li className={`${styles.li} ${styles.liDescription}`}><b>Job description</b></li>
             <li className={`${styles.li} ${styles.Pdate}`}><b>Posted Date</b>
-            <p className={styles.arrowWrapper}> <i onClick={sortbyNewjobs} className={`${styles.arrow} ${styles.up}`} ></i>
-                  <i onClick={sortbyOldjobs} className={`${styles.arrow} ${styles.down}`}></i>
-                  </p>
+            <p className={styles.arrowWrapper}>
+               <i onClick={sortbyNewjobs} className={`${styles.arrow} ${styles.up}`} ></i>
+                <i onClick={sortbyOldjobs} className={`${styles.arrow} ${styles.down}`}></i>
+            </p>
             </li>
             <li className={`${styles.li} ${styles.Location}`}><b>Location</b></li>
-            <li className={styles.arrowWrapper}><b>CTC </b>
-            <p style={{ display: "inline", marginLeft: "0%"}}>
+
+            <li className={`${styles.li} ${styles.Package}`}><b>CTC </b>
+            <p className={styles.arrowWrapper}>
                   <i onClick={SdescendingOrder} className={`${styles.arrow} ${styles.up}`}> </i>
                   <i onClick={SascendingOrder} className={`${styles.arrow} ${styles.down}`}></i>
-                </p>
+            </p>
             </li>
+
             <li className={`${styles.li} ${styles.experiance}`}><b>Experience </b>
             <p className={styles.arrowWrapper}>
                   <i onClick={EdescendingOrder} className={`${styles.arrow} ${styles.up}`}> </i>
                   <i onClick={EascendingOrder} className={`${styles.arrow} ${styles.down}`}></i>
-                </p>
+            </p>
             </li>
             <li className={`${styles.li} ${styles.Skills}`}><b>Skills Required</b></li>
             <li className={`${styles.li} ${styles.Action}`}><b>Action</b></li>
