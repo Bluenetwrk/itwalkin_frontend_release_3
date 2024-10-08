@@ -49,7 +49,6 @@ function PostJobs(props) {
     const [jobtype, setJobtype] = useState("")
     const [salaryRange, setSalaryRange] = useState("")
     const [joblocation, setJobLocation] = useState("")
-    console.log(joblocation)
     const [qualification, setQualification] = useState("")
     const [experiance, setExperiance] = useState("")
     const [skills, setSkills] = useState("")
@@ -133,6 +132,7 @@ function PostJobs(props) {
                     setExperiance("")
                     setExperiance("")
                     setSkills("")
+                    setTag("")
                     setSuccessMessage("Success! job successfully posted")
                 }
                 else if (result == "field are missing") {

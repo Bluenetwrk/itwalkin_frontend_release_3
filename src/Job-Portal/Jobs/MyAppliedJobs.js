@@ -191,6 +191,7 @@ const screenSize = useScreenSize();
 
   return (
     <>
+    
       <p className={styles.h3} style={{textAlign:"center"}}><b>My applied Jobs</b></p>
       <p className={styles.h3}><b>you have total {MyAppliedjob.length} applied jobs</b></p>
       {screenSize.width>850?
@@ -206,6 +207,9 @@ const screenSize = useScreenSize();
                    <i onClick={sortbyNewjobs} className={`${styles.arrow} ${styles.up}`}> </i>
                   <i onClick={sortbyOldjobs} className={`${styles.arrow} ${styles.down}`}></i>
                   </p >
+          </li>
+          <li className={`${styles.li} ${styles.Pdate}`}><b>Applied Date</b>
+          
           </li>
 
           <li className={`${styles.li} ${styles.Location}`}><b>Location</b></li>
@@ -272,6 +276,22 @@ const screenSize = useScreenSize();
                         month: "short",
                         day: "2-digit",
                         year: "numeric",
+                      }
+                    )}
+                  </li>
+                  <li className={`${styles.li} ${styles.Pdate}`}>
+                    {new Date(
+                      items.jobSeekerId.find((id)=>{
+                        return(
+                          id.jobSeekerId==jobSeekerId
+                        )
+                      }).date
+                    ).toLocaleString(
+                      "en-US",
+                      {
+                        month: "short",
+                        day: "2-digit",
+                        year: "2-digit",
                       }
                     )}
                   </li>
@@ -358,7 +378,7 @@ MyAppliedjob.map((job, i) => {
           <img className={styles.logo} src={job.Logo} />
           <span className={styles.companyName} >{job.companyName} </span><br></br>
           </div>
-          
+         
         <  img className={styles.jobLocationImage} src={location}  /> 
         <span className={styles.jobLocation}>{job.jobLocation[0].toUpperCase()+job.jobLocation.slice(1)} ,</span>
         <span className={styles.qualificationAndExperiance}>
@@ -374,8 +394,24 @@ MyAppliedjob.map((job, i) => {
 {job.Source ?
   <> <a className={`${styles.skills}`} href={job.SourceLink} target="_blank">{job.Source}</a><br></br> </>
   :
-  <> <span className={styles.skills}>ItWalkin</span><br></br></>
+  <> <span className={styles.skills}>ItWalkin </span></>
 }
+<span style={{marginBottom:"-3px", display:"inline"}}><span style={{marginLeft:"5px", fontWeight:"450"}}>Applied Date: </span>
+          {new Date(
+                      job.jobSeekerId.find((id)=>{
+                        return(
+                          id.jobSeekerId==jobSeekerId
+                        )
+                      }).date
+                    ).toLocaleString(
+                      "en-US",
+                      {
+                        month: "short",
+                        day: "2-digit",
+                        year: "2-digit",
+                      }
+                    )}
+          </span>
                                      
                         <div className={styles.skillWrapper}>
                           <span className={styles.skillsHeading}>Skills: </span><span className={styles.skills}>{job.skills}</span><br></br>

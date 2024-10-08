@@ -4,14 +4,21 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { GoogleOAuthProvider } from '@react-oauth/google'
+import { PublicClientApplication } from '@azure/msal-browser';
+import { MsalProvider } from '@azure/msal-react';
+
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  
+    // <MsalProvider instance={msalInstance}>
+    <>
     <GoogleOAuthProvider clientId="418754353770-u3bibuhf3upqjb7r95qflh10apqvhset.apps.googleusercontent.com">
+        
     <App />
     </GoogleOAuthProvider>
+     {/* </MsalProvider> */}
+    </>
 
 );
 

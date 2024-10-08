@@ -41,6 +41,7 @@ import SearchParamsDub from "./Job-Portal/Login/SearchParamsDupStuD";
 import SearchParamsDubEmp from "./Job-Portal/Login/SearchParamsDupEmp";
 import AdminProfile from "./Job-Portal/Admin/AdminProfile"
 import AllJobsForAdmin from "./Job-Portal/Admin/AllJobsForAdmin"
+import ArchiveJobs from "./Job-Portal/Admin/ArchiveJobs";
 import AllJobSeekers from "./Job-Portal/Admin/AllJobSeekers"
 import AllEmployees from "./Job-Portal/Admin/AllEmployees"
 import CheckEmpProfileForAdmin from "./Job-Portal/Profile/CheckEmplProfileForAdmin";
@@ -51,7 +52,7 @@ import SearchCandHome from "./Job-Portal/AppliedUserProfile/SearchCandHome";
 import AdminUpdate from "./Job-Portal/Admin/AdminUpdate"
 import AdminPostJobs from "./Job-Portal/Admin/AdminJobPosts";
 import AllIds from "./Job-Portal/Admin/Allid'sStudent";
-import ArchivedUser from "./Job-Portal/Admin/ArchivedUser";
+import ArchivedUser from "./Job-Portal/Admin/DeletedUser";
 
 import AboutUs from "./Job-Portal/AboutUs"
 import Contact from "./Job-Portal/Contact"
@@ -69,59 +70,60 @@ axios.defaults.baseURL = " https://itwalkin-backend-testrelease-2-0-1-0824-ns0g.
 // Vercel Main Live 
 //  axios.defaults.baseURL = "https://itwalkin-backend-testrelease-2-0-1-0824.onrender.com";
 
-const App = () => {
+function App() {
   // let jobSeekerId = JSON.parse(localStorage.getItem("StudId"))
   // let empId = JSON.parse(localStorage.getItem("EmpIdG"))
   const screenSize = useScreenSize();
-  let size =screenSize.width
+  let size = screenSize.width;
 
   return (
     <>
       <BrowserRouter>
 
-      {/* <i className="fas fa-times" ></i> */}
-                {/* <i className="fas fa-bars"></i> */}
+        {/* <i className="fas fa-times" ></i> */}
+        {/* <i className="fas fa-bars"></i> */}
         <Nav />
         <Routes>
           <Route path="/" element={<Home />} />
 
           {/* ..........Employee Private component i,e can not search in URL......... */}
-          <Route element={<EmpPrivate />} >
-            <Route path="/PostJobs" element={<PostJobs url= {axios.defaults.baseURL} />} />
-            <Route path="/postedjobs" element={<PostedJobsbyEmp url= {axios.defaults.baseURL} />} />
-            <Route path="/Updatepostedjobs" element={<UpdatePostedJobs url= {axios.defaults.baseURL} />} />
-            <Route path="/Applied-User-Profile/:jid" element={<AppliedUserProfile url= {axios.defaults.baseURL} />} />
-            <Route path="/Check-Profile/:CP" element={<CheckStudentProfiel url= {axios.defaults.baseURL} />} />
-            <Route path="/UpdateProfile" element={<EmployeeUpdateProfile url= {axios.defaults.baseURL} />} />
-            <Route path="/MyProfile" element={<EmployeeProfile url= {axios.defaults.baseURL} />} />
-            <Route path="Search-Candidate" element={<SearchCandidate url= {axios.defaults.baseURL} />} />
+          <Route element={<EmpPrivate />}>
+            <Route path="/PostJobs" element={<PostJobs url={axios.defaults.baseURL} />} />
+            <Route path="/postedjobs" element={<PostedJobsbyEmp url={axios.defaults.baseURL} />} />
+            <Route path="/Updatepostedjobs" element={<UpdatePostedJobs url={axios.defaults.baseURL} />} />
+            <Route path="/Applied-User-Profile/:jid" element={<AppliedUserProfile url={axios.defaults.baseURL} />} />
+            <Route path="/Check-Profile/:CP" element={<CheckStudentProfiel url={axios.defaults.baseURL} />} />
+            <Route path="/UpdateProfile" element={<EmployeeUpdateProfile url={axios.defaults.baseURL} />} />
+            <Route path="/MyProfile" element={<EmployeeProfile url={axios.defaults.baseURL} />} />
+            <Route path="Search-Candidate" element={<SearchCandidate url={axios.defaults.baseURL} />} />
 
           </Route>
           {/* ..........Jobseeker Private component i,e can not search in URL......... */}
-          <Route element={<StudPrivate />} >
+          <Route element={<StudPrivate />}>
             <Route path="/alljobs" element={<Jobs url={axios.defaults.baseURL} />} />
-            <Route path="/Update-Profile" element={<StudentUpdateProfile url= {axios.defaults.baseURL} />} />
-            <Route path="/My-Profile" element={<StudentProfile url= {axios.defaults.baseURL} />} />
-            <Route path="/My-Applied-Jobs" element={<MyAppliedJobs url= {axios.defaults.baseURL} />} />
+            <Route path="/Update-Profile" element={<StudentUpdateProfile url={axios.defaults.baseURL} />} />
+            <Route path="/My-Profile" element={<StudentProfile url={axios.defaults.baseURL} />} />
+            <Route path="/My-Applied-Jobs" element={<MyAppliedJobs url={axios.defaults.baseURL} />} />
           </Route>
 
           <Route path="/BIAdd@Logg" element={<AdminLogin />} />
           <Route path="/BIAddAdminAccess" element={<AdminAccess />} />
-          <Route path="/BIAdd@Gmail" element={<SearchParams/>} />
-          <Route path="/BIAdd@GmailEmp" element={<SearchParamsEmp/>} />
-          <Route path="/BIAdd@Gmaill" element={<SearchParamsDub/>} />
-          <Route path="/BIAdd@Gmaile" element={<SearchParamsDubEmp/>} />
+          <Route path="/BIAdd@Gmail" element={<SearchParams />} />
+          <Route path="/BIAdd@GmailEmp" element={<SearchParamsEmp />} />
+          <Route path="/BIAdd@Gmaill" element={<SearchParamsDub />} />
+          <Route path="/BIAdd@Gmaile" element={<SearchParamsDubEmp />} />
           <Route path="/BIAddmin@Profile" element={<AdminProfile />} />
           <Route path="/BIAddmin@AllJobs" element={<AllJobsForAdmin />} />
+          <Route path="/BIAddmin@ArchiveJobs" element={<ArchiveJobs />} />
           <Route path="/BIAddmin@AllJobSeekers" element={<AllJobSeekers />} />
           <Route path="/BIAddmin@AllEmployees" element={<AllEmployees />} />
           <Route path="/BIAddmin@CheckEmpProfile/:CP" element={<CheckEmpProfileForAdmin />} />
           <Route path="/BIAddmin@CheckStudentProfile/:CP" element={<CheckStudentProfileForAdmin />} />
           <Route path="/BIAddmin@CheckStudentArchived/:CP" element={<CheckArchivedJobSeeker />} />
-          <Route path="/BIAddmin@AdminUpdate" element ={<AdminUpdate/>} />
-          <Route path="/BIAddmin@PostJob" element={<AdminPostJobs/>} />
-          <Route path="/BIAddmin@AllIds" element={<AllIds/>} />
-          <Route path="/BIAddmin@ArchivedUser" element={<ArchivedUser/>} />
+          <Route path="/BIAddmin@AdminUpdate" element={<AdminUpdate />} />
+          <Route path="/BIAddmin@PostJob" element={<AdminPostJobs />} />
+          <Route path="/BIAddmin@AllIds" element={<AllIds />} />
+          <Route path="/BIAddmin@ArchivedUser" element={<ArchivedUser />} />
           <Route path="/JobSeekerLogin" element={<StudentLogin />} />
           <Route path="/EmployeeLogin" element={<EmployeeLogin />} />
           <Route path="/JobSeekerSignUp" element={<StudentSignUp />} />
@@ -129,24 +131,24 @@ const App = () => {
           <Route path="/JobDetails/:id" element={<Jobdetails />} />
           <Route path="/CheckEmpHalfProfile/:empId" element={<CheckEmpHalfProfile />} />
 
-          <Route path="Search-Candidate-Home" element={<SearchCandHome url= {axios.defaults.baseURL} />} />
+          <Route path="Search-Candidate-Home" element={<SearchCandHome url={axios.defaults.baseURL} />} />
 
-<Route path="/payment" element ={<Payment/>} />
+          <Route path="/payment" element={<Payment />} />
 
-<Route path ="/AboutUs" element = {<AboutUs/>} />
-<Route path ="/Services" element = {<Services/>} />
-<Route path ="/Contact" element = {<Contact/>} />
-<Route path ="/TermsAndCondition" element = {<TermsAndCondition/>} />
+          <Route path="/AboutUs" element={<AboutUs />} />
+          <Route path="/Services" element={<Services />} />
+          <Route path="/Contact" element={<Contact />} />
+          <Route path="/TermsAndCondition" element={<TermsAndCondition />} />
 
-<Route path ="*" element = { <h2 style={{marginLeft:"43%", marginTop:"10%", color:" rgb(40, 4, 99)"}}>Page Not Found</h2> }/>
+          <Route path="*" element={<h2 style={{ marginLeft: "43%", marginTop: "10%", color: " rgb(40, 4, 99)" }}>Page Not Found</h2>} />
 
         </Routes>
 
-        <Footer />        
+        <Footer />
 
       </BrowserRouter>
     </>
-  )
+  );
 }
 
 export default App

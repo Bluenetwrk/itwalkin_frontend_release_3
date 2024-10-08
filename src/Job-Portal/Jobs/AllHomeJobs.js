@@ -88,15 +88,18 @@ function Home() {
     }
   }, [])
 
+  let recordsperpage = JSON.parse(sessionStorage.getItem("recordsperpageHome"))
 
-  // let menuRef = useRef();
-  // let imgRef = useRef();
+  const [currentPage, setCurrentPage] = useState(1)
+  const [recordsPerPage, setrecordsPerPage] = useState(recordsperpage?recordsperpage:10)
 
-  // window.addEventListener("click", (e) => {
-  //   if (e.target !== menuRef.current && e.target !== imgRef.current) {
-  //     setshowJobs(false)
-  //   }
-  // })
+  const lastIndex = currentPage * recordsPerPage //10
+  const firstIndex = lastIndex - recordsPerPage //5
+  const records = jobs.slice(firstIndex, lastIndex)//0,5
+  const npage = Math.ceil(jobs.length / recordsPerPage) // last page
+  const number = [...Array(npage + 1).keys()].slice(1)
+
+  
   async function getjobs() {
     setPageLoader(true)
     setNoPageFilter(false)
@@ -195,11 +198,11 @@ function Home() {
   }
 
   function sortbyNewjobs() {
+
     let newjob = [...jobs]
     let newjobSort = newjob.sort(function (a, b) {
       return new Date(b.createdAt) - new Date(a.createdAt);
     })
-
     setJobs(newjobSort)
   }
 
@@ -336,17 +339,6 @@ function Home() {
         alert("some thing went wrong")
       })
   }
-
-  let recordsperpage = JSON.parse(sessionStorage.getItem("recordsperpageHome"))
-
-  const [currentPage, setCurrentPage] = useState(1)
-  const [recordsPerPage, setrecordsPerPage] = useState(recordsperpage?recordsperpage:10)
-
-  const lastIndex = currentPage * recordsPerPage //10
-  const firstIndex = lastIndex - recordsPerPage //5
-  const records = jobs.slice(firstIndex, lastIndex)//0,5
-  const npage = Math.ceil(jobs.length / recordsPerPage) // last page
-  const number = [...Array(npage + 1).keys()].slice(1)
 
 
   function firstPage() {

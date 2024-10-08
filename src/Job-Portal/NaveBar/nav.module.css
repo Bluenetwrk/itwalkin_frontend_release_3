@@ -73,11 +73,11 @@ font-weight: 400;
 .Supfullnavewrapper {
     display: flex;
     background-color: rgb(40, 4, 99);
-    width: 90%;
+    width: 99.5%;
     height: 60px;
     align-items: center;
     border-radius: 30px;
-    margin-left: 5%;
+    margin-left: 3px;
     margin-top: 10px;
     /* position:sticky;
     top:0px */
@@ -152,15 +152,37 @@ font-weight: 400;
     border-radius: 5px;
 }
 .link {
-    /* background-color: aqua; */
-    margin: 2%;
+    margin-left: 2%;
     text-decoration: none;
     color: white;
-    font-size: medium;
+    font-size: small;
+    font-weight: 540;
+    width:12%;
+    text-wrap: nowrap;
+    padding: 5px 8px;
+    border-radius: 3px;
+    text-align: center;
+}
+.linkSuperAdmin {
+    /* background-color: aqua; */
+    margin-left: 2%;
+    text-decoration: none;
+    color: white;
+    font-size: small;
     font-weight: 540;
     width:14%;
     text-wrap: nowrap;
+    padding: 5px 8px;
+    border-radius: 3px;
 }
+
+.linkSuperAdmin:hover {
+    color: red;
+}
+.link:hover {
+    color: red;
+}
+
 .Hlink{
     /* background-color: aqua; */
     margin-left: 2%;
@@ -183,10 +205,6 @@ font-weight: 400;
     padding-top: 8px ;
     padding-bottom: 8px ;
     border-radius: 5px;
-}
-
-.link:hover {
-    color: red;
 }
 
 .Loginlink:hover {

@@ -125,21 +125,24 @@ const [Filtereredjobs, setFiltereredjobs] = useState([])
   }
 
   async function applyforJob(jobId) {
+    let date=new Date()
     let userid = JSON.parse(localStorage.getItem("StudId"))
     const headers = { authorization: userid + " " + atob(JSON.parse(localStorage.getItem("StudLog"))) };
     setclickedJobId(jobId)
     setLoader(true)
     setTimeout(async () => {
 
-      await axios.put(`/jobpost/updatforJobApply/${jobId}`, { jobSeekerId }, { headers })
+      await axios.put(`/jobpost/updatforJobApply/${jobId}`, { jobSeekerId, date }, { headers })
         .then((res) => {
-          setLoader(false)
+          if(res.data)
+{         
+   setLoader(false)
           getjobs()
-
+}
         }).catch((err) => {
           alert("server issue occured", err)
         })
-    }, 700)
+    },5000)
   }
 
   // async function search(e) {
@@ -346,6 +349,7 @@ const [Filtereredjobs, setFiltereredjobs] = useState([])
   // function checkEmpHalf(empId) {
   //   navigate(`CheckEmpHalfProfile/${empId}`)
   // }
+  
   let recordsperpage = JSON.parse(sessionStorage.getItem("recordsperpage"))
     
   const [currentPage, setCurrentPage] = useState(1)
@@ -610,11 +614,13 @@ async function filterByJobTitle(key){
 
                       <li className={`${styles.li} ${styles.Status}`}>
 
-                        {items.jobSeekerId.find((jobseeker) => {
+                        {
+                       items.jobSeekerId.find((jobseeker) => {
                           return (
-                            jobseeker == jobSeekerId
+                            jobseeker.jobSeekerId == jobSeekerId
                           )
-                        }) ?
+                        })
+                         ?
                           <button className={styles.Appliedbutton} title='HR will get in touch with you, Once they will check Your Profile' > Applied <span style={{ fontSize: '15px' }}>&#10004;</span></button>
 
                           :
@@ -714,7 +720,7 @@ async function filterByJobTitle(key){
 
                         {items.jobSeekerId.find((jobseeker) => {
                           return (
-                            jobseeker == jobSeekerId
+                            jobseeker.jobSeekerId == jobSeekerId
                           )
                         }) ?
                           <button className={styles.Appliedbutton} title='HR will get in touch with you, Once they will check Your Profile' > Applied <span style={{ fontSize: '15px' }}>&#10004;</span></button>
@@ -941,7 +947,7 @@ async function filterByJobTitle(key){
 
                           {job.jobSeekerId.find((jobseeker) => {
                             return (
-                              jobseeker == jobSeekerId
+                              jobseeker.jobSeekerId == jobSeekerId
                             )
                           }) ?
                             <button className={styles.MobileAppliedButton} > Applied <span style={{ fontSize: '13.8px', marginBottom: "3px", marginLeft: "2px" }}>&#10004;</span></button>

@@ -236,30 +236,29 @@
 
 }
 .Action{
-    width:12%;
+    width:13%;
     overflow-wrap:break-word;
 }
 
 .Acbuttons {
     height: 25px;
     display: flex;
-    margin-left:3%;
+    margin-left:12%;
   }
 .Abutton {
     border: 1px solid;
-    margin-left:3%;
 }
 .update {
     background-color: rgb(40, 4, 99);
     color: white;
     cursor: pointer;
-
+    /* margin-left:2%; */
 }
 .delete {
     background-color: rgb(252, 56, 56);
     color: white;
     cursor: pointer;
-    margin-left:5%;
+    margin-left:2%;
 
 }
 

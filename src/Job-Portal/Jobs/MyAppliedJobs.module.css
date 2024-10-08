@@ -179,12 +179,12 @@ color:white;
 }
 .companyNameLocationWrapper{
     margin-left: 15px;
+    margin-top: -6px;
 }
 .logo{
     width:25px;
     height:20px;
-    margin-top: -50px;
-
+    margin-top: -6px;
 }
 
 .companyName{
@@ -192,7 +192,9 @@ color:white;
     font-weight: 400;
     text-decoration: underline;  
     font-size: medium;
-    width:100%
+    width:100%;
+    margin-top: -5px;
+    position: absolute;
 }
 
 .jobLocation{
@@ -244,10 +246,10 @@ color:white;
 .jobDescriptionHeading{
     margin-left: 15px;
     font-weight: 600;
-    margin-top: 5px;
+    margin-top: -8px;
 }
 .jobDescription{
-    margin-top: -15px;
+    margin-top: -12px;
     margin-left: 15px;
     width:94%;
     font-size: small;

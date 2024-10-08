@@ -35,7 +35,6 @@ let navigate = useNavigate()
         setPageLoader(true)
         await axios.get(`/StudentProfile/getProfile/${studId}`, {headers})
             .then((res) => {
-              console.log(res)
                 let result = res.data.result
                 setProfileData([result])
         setPageLoader(false)

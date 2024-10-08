@@ -30,34 +30,15 @@ const [message, setmessage] = useState("")
 
 const [currentBox, setcurrentBox] = useState("")
 
-
-  function handleChange(e, id){
-   setmessage(e.target.value)
-   setcurrentBox(id)
-  }
-    
-async function sendMessage(id){
-  await axios.put(`/StudentProfile/sendMessage/${id}`, {message})
-  .then((res)=>{
-    if(res.data){
-    alert("Message Sent Successfully")
-    }
-  }).catch((err)=>{
-    alert("some thing went wrong")
-  })
-}
-
-
       
   async function getAllJobSeekers() {
     // let userid = atob(JSON.parse(localStorage.getItem("IdLog")))
     // const headers = { authorization: userid +" "+ atob(JSON.parse(localStorage.getItem("AdMLog"))) };
     const headers = { authorization: 'BlueItImpulseWalkinIn' };
     await axios.get("/StudentProfile/getAllArchivedJobseekers", {headers})
-
       .then((res) => {
         let result = (res.data)
-    
+    console.log(result)
         let sortedate = result.sort(function (a, b) {
           return new Date(a.updatedAt) - new Date(b.updatedAt);
         });
@@ -65,279 +46,9 @@ async function sendMessage(id){
       })
   }
 
-  
-  useEffect(() => {
+  useEffect(()=>{
     getAllJobSeekers()
-  }, [])
-
-  
-  function  Hold(Empid , status){
-    let userid = atob(JSON.parse(localStorage.getItem("IdLog")))
-    const headers = { authorization: userid +" "+ atob(JSON.parse(localStorage.getItem("AdMLog"))) };
-    const isOnhold=status
-    Swal.fire({
-      title: "Are You sure?",
-    // position:"top",
-    width:"260",
-
-    customClass:{
-      popup:"alertIcon"
-    },
-      icon:"question",
-      showCancelButton:true
-    }).then( async (res)=>{
-      if(res.isConfirmed){
-        await axios.put(`/StudentProfile/isOnhold/${Empid}`,{isOnhold}, {headers})
-        .then((res)=>{
-    getAllJobSeekers()
-
-
-
-        }).catch((err)=>{
-          alert("backend error occured")
-        })
-      }
-    })
-  }    
-
-  function  unHold(Empid , status){
-    const isOnhold=status
-    let userid = atob(JSON.parse(localStorage.getItem("IdLog")))
-    const headers = { authorization: userid +" "+ atob(JSON.parse(localStorage.getItem("AdMLog"))) };
-    Swal.fire({
-      title: "Are You sure?",
-      // icon:"question",
-    // position:"top",
-    width:"260",
-    customClass:{
-      popup:"alertIcon"
-    },
-      showCancelButton:true
-    }).then( async (res)=>{
-      if(res.isConfirmed){
-        await axios.put(`/StudentProfile/isOnhold/${Empid}`,{isOnhold}, {headers})
-        .then((res)=>{
-          getAllJobSeekers()
-
-        }).catch((err)=>{
-          alert("backend error occured")
-        })
-      }
-    })
-  }
-  
-  function Reject(Empid , status){
-    let userid = atob(JSON.parse(localStorage.getItem("IdLog")))
-    const headers = { authorization: userid +" "+ atob(JSON.parse(localStorage.getItem("AdMLog"))) };
-    const isReject=status
-    Swal.fire({
-      title: "Are You sure?",
-    // position:"top",
-    width:"260",
-
-    customClass:{
-      popup:"alertIcon"
-    },
-      icon:"question",
-      showCancelButton:true
-    }).then( async (res)=>{
-      if(res.isConfirmed){
-        await axios.put(`/StudentProfile/isReject/${Empid}`,{isReject}, {headers})
-        .then((res)=>{
-
-    getAllJobSeekers()
-
-        }).catch((err)=>{
-          alert("backend error occured")
-        })
-      }
-    })
-  }    
-
-  function unReject(Empid , status){
-    const isReject=status
-    let userid = atob(JSON.parse(localStorage.getItem("IdLog")))
-    const headers = { authorization: userid +" "+ atob(JSON.parse(localStorage.getItem("AdMLog"))) };
-
-    Swal.fire({
-      title: "Are You sure?",
-      // icon:"question",
-    // position:"top",
-    width:"260",
-
-    customClass:{
-      popup:"alertIcon"
-    },
-      showCancelButton:true
-    }).then( async (res)=>{
-      if(res.isConfirmed){
-        await axios.put(`/StudentProfile/isReject/${Empid}`,{isReject}, {headers})
-        .then((res)=>{
-          getAllJobSeekers()
-
-        }).catch((err)=>{
-          alert("backend error occured")
-        })
-      }
-    })
-  }
-  function Approve(Empid , status){
-    let userid = atob(JSON.parse(localStorage.getItem("IdLog")))
-    const headers = { authorization: userid +" "+ atob(JSON.parse(localStorage.getItem("AdMLog"))) };
-    const isApproved = status
-    Swal.fire({
-      title: "Are You sure?",
-      // icon:"question"
-    width:"260",
-
-      customClass:{
-        popup:"alertIcon"
-      },
-      showCancelButton:true
-    }).then( async (res)=>{
-      if(res.isConfirmed){
-        await axios.put(`/StudentProfile/setApproval/${Empid}`,{isApproved}, {headers})
-        .then((res)=>{
-    getAllJobSeekers()   
-
-        }).catch((err)=>{
-          alert("backend error occured")
-        })
-      }
-    })
-
-  }
-
-  function DisApprove(Empid , status){
-    let userid = atob(JSON.parse(localStorage.getItem("IdLog")))
-    const headers = { authorization: userid +" "+ atob(JSON.parse(localStorage.getItem("AdMLog"))) };
-    const isApproved = status
-    Swal.fire({
-      title: "Are You sure?",
-      // icon:"question",
-
-    width:"260",
-
-      // position:"top",
-      customClass:{
-        popup:"alertIcon"
-      },
-      showCancelButton:true
-    }).then( async (res)=>{
-      if(res.isConfirmed){
-        await axios.put(`/StudentProfile/setApproval/${Empid}`,{isApproved}, {headers})
-        .then((res)=>{
-    getAllJobSeekers()
-
-        }).catch((err)=>{
-          alert("backend error occured")
-        })
-      }
-    })
-  }
-
-    async function DeleteJob(id){
-      console.log(id)
-      Swal.fire({
-        title: 'Are you sure?',
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-        confirmButtonText: 'Yes, delete it!'
-      }).then((result) => {
-        if (result.isConfirmed) {      
-       axios.delete(`/StudentProfile/deleteProfile/${id}`)
-      .then((res)=>{
-        
-        getAllJobSeekers()
-      }).catch((err)=>{
-
-        alert("server error occured")
-      })
-    }
-  })
-    }
-
-
-async function Approvedjobseekers() {
-  let userid = atob(JSON.parse(localStorage.getItem("IdLog")))
-  const headers = { authorization: userid +" "+ atob(JSON.parse(localStorage.getItem("AdMLog"))) };
-  await axios.get("/StudentProfile/getApprovedStu", {headers})
-    .then((res) => {
-      let result = (res.data)
-
-      setjobSeekers(result)
-    })
-    .catch((err) => {
-      alert("server issue occured")
-    })
-}
-
-
-async function NotApprovedjobseekers() {
-  let userid = atob(JSON.parse(localStorage.getItem("IdLog")))
-  const headers = { authorization: userid +" "+ atob(JSON.parse(localStorage.getItem("AdMLog"))) };
-  await axios.get("/StudentProfile/getNotApprovedStu", {headers})
-    .then((res) => {
-      let result = (res.data)
-      // console.log(result)        
-      setjobSeekers(result)
-    })
-    .catch((err) => {
-      alert("server issue occured")
-    })
-}
-    
-async function search(e) {
-  let key = e.target.value
-  if (key) {
-    setResult(true)
-    let dubmyjobs = [...jobSeekers] 
-    const filteredItems = dubmyjobs.filter((user) =>
-      JSON.stringify(user).toLowerCase().includes(key.toLowerCase())
-    )
-    setjobSeekers(filteredItems)
-  } else {
-    getAllJobSeekers()
-    setResult(false)
-  }
-}
-
-async function RecentLogin(e){
-  let userid = atob(JSON.parse(localStorage.getItem("IdLog")))
-  const headers = { authorization: userid +" "+ atob(JSON.parse(localStorage.getItem("AdMLog"))) };
-  if(e.target.checked){
-  await axios.get("/StudentProfile/RecentLogin", {headers})
-  .then((res) => {
-    let result = (res.data)
-    let sortresult = result.sort((a,b)=>{
-      return new Date(b.LogedInTime) - new Date(a.LogedInTime);      
-    })
-        setjobSeekers(sortresult)
-  })
-  .catch((err) => {
-    alert("server issue occured")
-  })
-}else{
-    getAllJobSeekers()
-
-  }  
-    }
-
-    async function checkOnline() {
-      let userid = atob(JSON.parse(localStorage.getItem("IdLog")))
-      const headers = { authorization: userid +" "+ atob(JSON.parse(localStorage.getItem("AdMLog"))) };
-      await axios.get("/StudentProfile/checkOnline", {headers})
-        .then((res) => {
-          let result = (res.data)
-          console.log(result)        
-          setjobSeekers(result)
-        })
-        .catch((err) => {
-          alert("server issue occured")
-        })
-    }
+  },[])
 
   return (
     <>
@@ -408,20 +119,20 @@ async function RecentLogin(e){
                       <li className={`${styles.li} ${styles.Approval}`}>
                         {
                         items.Archived.isApproved?
-                  <button className={styles.Approved} onClick={()=>{DisApprove(items._id, false)}}>Approved</button>
+                  <button className={styles.Approved}>Approved</button>
                     :
                   
                  items.Archived.isReject?
-                  <button className={styles.Rejected} onClick={()=>{unReject(items._id, false)}}>Rejected&#10004;</button>
+                  <button className={styles.Rejected}>Rejected&#10004;</button>
                   :
           items.Archived.isOnhold ?
-                  <button className={styles.OnHold} onClick={()=>{unHold(items._id, false)}}>OnHold&#10004;</button>
+                  <button className={styles.OnHold} >OnHold&#10004;</button>
                   :
                   <>
-                  <button className={styles.Approve} onClick={()=>{Reject(items._id, true)}}>Reject</button>
-                  <button className={styles.Approve} onClick={()=>{Approve(items._id, true)}}>Approve</button>
+                  <button className={styles.Approve}>Reject</button>
+                  <button className={styles.Approve} >Approve</button>
 
-                  <button className={styles.Approve} onClick={()=>{Hold(items._id, true)}}>Hold</button>
+                  <button className={styles.Approve}>Hold</button>
                   </>
                         }
                   </li>
@@ -495,8 +206,8 @@ async function RecentLogin(e){
                   <div className={styles.Down}>
                   <span className={styles.span}> Skills : {job.Skills?<span style={{ color: "blue" }}>{job.Skills} </span>:<span style={{color:"red"}}>Not updated</span>}</span><br></br>
                   <span className={styles.span}> Account Status:  {job.isApproved?
-  <button style={{  marginLeft:"20px" }} className={styles.MoApproved} onClick={()=>{DisApprove(job._id, false)}}>Approved</button>
-  :<button  style={{  marginLeft:"20px" }} className={styles.MoApprove} onClick={()=>{Approve(job._id, true)}}>Approve</button>}</span><br></br>
+  <button style={{  marginLeft:"20px" }} className={styles.MoApproved} >Approved</button>
+  :<button  style={{  marginLeft:"20px" }} className={styles.MoApprove}>Approve</button>}</span><br></br>
   <span className={`${styles.span} ${styles.LastDown}`}> Message:  {job.message ? <span className={styles.span} style={{ color: "blue", marginLeft:"5px" }}  >{job.message} </span> : <span style={{ color: "red", marginLeft:"5px" }} >No message Sent yet</span>}</span><br></br>
                     
                   </div>

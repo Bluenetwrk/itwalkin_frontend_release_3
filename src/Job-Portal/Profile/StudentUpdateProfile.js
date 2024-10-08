@@ -229,10 +229,13 @@ async function DeleteProfile(){
 if(confirm){
   await axios.delete(`/StudentProfile/deleteJobSeeker/${stuId }`)
   .then((res)=>{
-    if(res.data){
+    if(res.data==="success"){
     alert("Account deleted successfully ")
     navigate("/")
     localStorage.clear()
+    }else{
+    alert("some thing went wrong try again")
+
     }
   }).catch((err)=>{
     alert("some thing went wrong try again ")

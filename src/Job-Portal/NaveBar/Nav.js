@@ -211,8 +211,8 @@ function Nav(props) {
                     <div className={Styles.linkWrapper}>
                       <NavLink to="/BIAddmin@Profile" className={Styles.link} style={navLinkStyles}>All </NavLink>
 
-                      <NavLink to="/AboutUs" className={`${Styles.Hlink} ${Styles.Aboutus}`} style={navLinkStyles} >About Us</NavLink>
-                      <NavLink to="/Services" className={Styles.Hlink} style={navLinkStyles}>Services</NavLink>
+                      <NavLink to="/AboutUs" className={`${Styles.link}`} style={navLinkStyles} >About Us</NavLink>
+                      <NavLink to="/Services" className={Styles.link} style={navLinkStyles}>Services</NavLink>
                       <NavLink to="/BIAddmin@PostJob" className={Styles.link} style={navLinkStyles}> Post Job</NavLink>
 
                       <div className={`${Styles.link} ${Styles.IconeWrapper}`}>
@@ -232,14 +232,15 @@ function Nav(props) {
                   {/* .........only for Super Admin */}
 {SuperAdminLogin?
                   <div className={Styles.Supfullnavewrapper}>                    
-                    <div className={Styles.linkWrapper}>
-                      <NavLink to="/BIAddmin@AllJobs" style={navLinkStyles} className={Styles.link}>All Jobs </NavLink>
-                      <NavLink to="BIAddmin@AllEmployees" className={Styles.link} style={navLinkStyles}> Employers</NavLink>
-                      <NavLink to="BIAddmin@AllJobSeekers" className={Styles.link} style={navLinkStyles}> Jobseekers</NavLink>
-                      <NavLink to="BIAddmin@AdminUpdate" className={Styles.link} style={navLinkStyles}> UpdateWebsite</NavLink>
-                      <NavLink to="BIAddmin@AllIds" className={Styles.link} style={navLinkStyles}> All Email Id's</NavLink>
-                      <NavLink to="BIAddAdminAccess" className={Styles.link} style={navLinkStyles}> Admin Access</NavLink>
-                      <NavLink to="BIAddmin@ArchivedUser" className={Styles.link} style={navLinkStyles}> Archived User</NavLink>
+                    <div className={Styles.linkWrapper} style={{marginLeft:"1%"}}>
+                      <NavLink to="/BIAddmin@AllJobs" style={navLinkStyles} className={Styles.linkSuperAdmin}>All Jobs </NavLink>
+                      <NavLink to="BIAddmin@AllEmployees" className={Styles.linkSuperAdmin} style={navLinkStyles}>All Employers</NavLink>
+                      <NavLink to="BIAddmin@AllJobSeekers" className={Styles.linkSuperAdmin} style={navLinkStyles}>All Jobseekers</NavLink>
+                      <NavLink to="BIAddmin@AdminUpdate" className={Styles.linkSuperAdmin} style={navLinkStyles}> UpdateWebsite</NavLink>
+                      <NavLink to="BIAddmin@AllIds" className={Styles.linkSuperAdmin} style={navLinkStyles}> All Email Id's</NavLink>
+                      <NavLink to="BIAddAdminAccess" className={Styles.linkSuperAdmin} style={navLinkStyles}> Admin Access</NavLink>
+                      <NavLink to="BIAddmin@ArchivedUser" className={Styles.linkSuperAdmin} style={navLinkStyles}> Deleted Jobseeker</NavLink>
+                      <NavLink to="BIAddmin@ArchiveJobs" className={Styles.linkSuperAdmin} style={navLinkStyles}> Archived Jobs</NavLink>
                     </div>
                   </div>
                   :""}

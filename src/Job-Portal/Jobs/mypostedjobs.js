@@ -29,7 +29,10 @@ function JoppostedByEmp(props) {
   const [Result, setResult] = useState(false)
   const [NoJobFound, setNoJobFound] = useState("")
   const screenSize = useScreenSize();
+  const [Filterjobs, setFilterjobs] = useState([])
 
+  const [Filtereredjobs, setFiltereredjobs] = useState([])
+  const [nopageFilter, setNoPageFilter]=useState(false)
 
   const [isReadMore, setIsReadMore] = useState(true)
   const navigate = useNavigate()
@@ -223,6 +226,44 @@ function JoppostedByEmp(props) {
     setMyjobs(sorted)
   }
 
+  
+  let recordsperpage = JSON.parse(sessionStorage.getItem("recordsperpage"))
+    
+  const [currentPage, setCurrentPage] = useState(1)
+  const [recordsPerPage, setrecordsPerPage] = useState(recordsperpage?recordsperpage:10)
+  const lastIndex = currentPage * recordsPerPage //10
+  const firstIndex = lastIndex - recordsPerPage //5
+  const records = myjobs.slice(firstIndex, lastIndex)//0,5
+  const npage = Math.ceil(myjobs.length / recordsPerPage) // last page
+  const number = [...Array(npage + 1).keys()].slice(1)
+
+  function firstPage(id){
+    setCurrentPage(1)
+  }
+
+function previous(){
+  if(currentPage !==1){
+    setCurrentPage(currentPage-1)
+  }  
+}
+function changeCurrent(id){
+  setCurrentPage(id)
+}
+function next(){
+  if(currentPage !==npage){
+    setCurrentPage(currentPage+1)
+  }
+}
+function last(){
+    setCurrentPage(npage)
+}
+function handleRecordchange(e){  
+  sessionStorage.setItem("recordsperpage", JSON.stringify(e.target.value));
+  let recordsperpage = JSON.parse(sessionStorage.getItem("recordsperpage"))
+  setrecordsPerPage(recordsperpage)  
+  setCurrentPage(1)
+}
+
 
   return (
     <>
@@ -252,6 +293,37 @@ function JoppostedByEmp(props) {
         }}>Search Candidate</button>
         <p style={{marginLeft:"38%", marginTop:"30px", fontSize:"large", fontWeight:"bold"}}>My Posted Jobs</p>
         </div>
+
+        <div style={{display:"flex", justifyContent:"space-between"}}>
+            {        nopageFilter?
+    <p style={{fontWeight:400, marginLeft:"10px"}}>Displaying <span style={{color:"blue"}}>{Filtereredjobs}</span> from All Jobs</p>
+    :
+    <p style={{fontWeight:400, marginLeft:"10px"}}>showing {firstIndex+1} to {lastIndex} latest jobs</p>
+    }
+<div className={styles.navigationWrapper}>
+  <button disabled={currentPage === 1} style={{display:"inline", margin:"5px"}} className={styles.navigation} onClick={firstPage}>
+  <i class='fas fa-step-backward'></i>
+  </button>
+  <button disabled={currentPage === 1} style={{display:"inline", margin:"5px"}} className={styles.navigation} onClick={previous}>
+  <i class='fas fa-caret-square-left'></i>
+  </button>
+  <span>{currentPage}</span>
+  <button disabled={currentPage === npage} style={{display:"inline", margin:"5px"}} className={styles.navigation} onClick={next}>
+  <i class='fas fa-caret-square-right'></i>
+  </button>
+  <button disabled={currentPage === npage} style={{display:"inline", margin:"5px"}} className={styles.navigation} onClick={last}>
+  <i class='fas fa-step-forward'></i>
+  </button>
+     </div>
+     </div>
+     <div style={{marginBottom:"5px", marginTop:"0", marginLeft:"10px"}}>
+            Show  <select onChange={(e) => { handleRecordchange(e) }}>
+              <option selected = {lastIndex === 10} value={10}>10</option>
+              <option selected = {lastIndex === 25} value={25}>25</option>
+              <option selected = {lastIndex === 50} value={50}>50</option>
+              <option selected = {lastIndex === 100} value={100}>100</option>
+            </select>  jobs per page
+            </div>
       
    <div className={styles.Uiwarpper}>
           <ul className={styles.ul}>
@@ -289,9 +361,9 @@ function JoppostedByEmp(props) {
             : ""
           }
           {
-            myjobs.length > 0 ?
+            records.length > 0 ?
 
-              myjobs.map((items, i) => {
+            records.map((items, i) => {
                 return (
 
 
@@ -368,7 +440,7 @@ function JoppostedByEmp(props) {
                     </li>
                     <li className={`${styles.li} ${styles.NuApplied}`}>
                       {items.jobSeekerId.length > 0 ?
-                        <button className={`${styles.viewButton}`} onClick={() => { seeProfilejobSeekerId(items._id) }}>{items.jobSeekerId.length}</button>
+                        <button className={`${styles.viewButton}`} onClick={() => { seeProfilejobSeekerId(btoa(items._id)) }}>{items.jobSeekerId.length}</button>
                         :
                         <button className={`${styles.viewButton}`} >{items.jobSeekerId.length}</button>
 
@@ -380,8 +452,35 @@ function JoppostedByEmp(props) {
               // :""
               : <p style={{ marginLeft: "44%", color: "red" }}>You have not posted any jobs yet</p>
           }
-
         </div>
+        
+        <div style={{ display: "flex", justifyContent: "space-between"}}>
+          <div style={{marginTop:"14px", marginLeft:"10px"}} >
+            Show  <select onChange={(e) => { handleRecordchange(e) }}>
+              <option selected = {lastIndex === 10} value={10}>10</option>
+              <option selected = {lastIndex === 25} value={25}>25</option>
+              <option selected = {lastIndex === 50} value={50}>50</option>
+              <option selected = {lastIndex === 100} value={100}>100</option>
+            </select>  jobs per page
+            </div>
+
+          <div className={styles.navigationWrapper}>
+              <button disabled={currentPage === 1} style={{ display: "inline", margin: "5px" }} className={styles.navigation} onClick={firstPage}>
+                <i class='fas fa-step-backward' ></i>
+              </button>
+              <button disabled={currentPage === 1} style={{ display: "inline", margin: "5px" }} className={styles.navigation} onClick={previous}>
+                <i class='fas fa-caret-square-left'></i>
+              </button>
+              <span>{currentPage}</span>
+              <button disabled={currentPage === npage} style={{ display: "inline", margin: "5px" }} className={styles.navigation} onClick={next}>
+                <i class='fas fa-caret-square-right'></i>
+              </button>
+              <button disabled={currentPage === npage} style={{ display: "inline", margin: "5px" }} className={styles.navigation} onClick={last}>
+                <i class='fas fa-step-forward'></i>
+              </button>
+            </div>
+            </div>
+
       </>
       :
       <> 

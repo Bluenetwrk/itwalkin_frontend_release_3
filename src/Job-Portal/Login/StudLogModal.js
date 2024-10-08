@@ -15,11 +15,24 @@ import linkedIn from "../img/icons8-linked-in-48.png"
 import github from "../img/icons8-github-50.png"
 import {auth, provider} from "../firebase"
 import {signInWithPopup, OAuthProvider, getAuth } from "firebase/auth";
+import {PublicClientApplication} from "@azure/msal-browser"
+import * as Msal from '@azure/msal-browser';
 
+const Modal = ({ isStuOpen, onClose, children ,  msalInstance }) => {
+		
+	const microsoftLogin = async () => {
+		try {
+		 let res = await msalInstance.loginPopup({
+			scopes: ["User.Read"],
+			prompt: 'select_account',
+		  });
+console.log("sucess",res)
 
-const Modal = ({ isStuOpen, onClose, children }) => {
-
-	
+		} catch (error) {
+		  console.error(error);
+		}
+	  }
+	  
   const [gmailuser, setGmailuser] = useState("")
   const [topErrorMessage, setTopErrorMessage] = useState("")
   const [PhoneNumber, setPhoneNumber] = useState("")
@@ -312,7 +325,7 @@ useEffect(() => {
         </div>
       </div>
 
-      <div className={styles.signUpWrapper}>
+      <div className={styles.signUpWrapper} onClick={microsoftLogin}>
         <div className={styles.both}>
           <img className={styles.google} src={linkedIn} />
           <span className={styles.signUpwrap} >Continue with Linkedin</span>
