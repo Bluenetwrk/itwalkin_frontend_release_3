@@ -85,9 +85,25 @@ function AllJobsForAdmin() {
   }
   const [checkBoxValue, setCheckBoxValue] = useState([])
 
- async  function deleteCheckedJobs(){
-await axios.delete("/jobpost/deleteCheckBoxArray", {checkBoxValue})
+ async function deleteCheckedJobs(){
+  console.log(checkBoxValue)
+// await axios.delete(`/jobpost/deleteCheckBoxArray/${checkBoxValue}` )
+// .then((res)=>{
+//   if(res.data==="success"){
+//     getjobs()
+//     alert("deletd succesfully")
+
+//   }
+// }).catch((err)=>{
+//   alert("some thing went wrong")
+// })
+alert("some thing went wrong")
+ }
+ async function get(){
+  console.log(checkBoxValue)
+await axios.get(`/jobpost/getArchiveJobs` )
 .then((res)=>{
+  console.log(res.data)
 }).catch((err)=>{
   alert("some thing went wrong")
 })
@@ -132,9 +148,10 @@ await axios.delete("/jobpost/deleteCheckBoxArray", {checkBoxValue})
               <button style={{
                 backgroundColor: "red", border: "none", color: "white",
                 padding: "5px 10px", fontWeight: "bold", cursor: "pointer"
-              }} onClick={deleteCheckedJobs}>Delete</button>
+              }} onClick={()=>{deleteCheckedJobs()}}>Delete</button>
             : ""
           }
+
             </div>
           <ul className={styles.ul}>
             <li className={`${styles.li} ${styles.CompanyName}`}><b>Company Name</b></li>
@@ -205,7 +222,7 @@ await axios.delete("/jobpost/deleteCheckBoxArray", {checkBoxValue})
 
                     <li className={`${styles.li} ${styles.Skills}`}>{items.skills}</li>
                     <li className={`${styles.li} ${styles.DeleteAction}`} >
-                      <button className={styles.DeleteButton} onClick={() => { DeleteJob(items._id) }} >Delete</button><br></br>
+                      {/* <button className={styles.DeleteButton} onClick={() => { DeleteJob(items._id) }} >Delete</button><br></br> */}
                       <input type="checkbox" onClick={() => { checkBoxforDelete(items._id) }} />
                     </li>
                   </ul>

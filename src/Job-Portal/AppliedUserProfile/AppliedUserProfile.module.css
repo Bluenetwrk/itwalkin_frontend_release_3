@@ -5,6 +5,9 @@
     margin-top: -47.5px;
     background-color: white;
     border-radius: 3px;
+    position: sticky;
+    top: 12px;
+    z-index: 100
 
 }
 
@@ -16,8 +19,23 @@
     /* background-color: red; */
     border: 0px white;
     border-radius: 3px;
+    position: sticky;
+    top: 12px;
+    z-index: 100
 
 } 
+
+.navigationWrapper{
+    text-align:right;
+    margin:10px;
+
+}
+.navigation{
+    background-color:rgb(214, 212, 212);
+    padding:3px;
+    padding-right:10px; 
+    border:none;
+}
 
 
 .GoBackButton{

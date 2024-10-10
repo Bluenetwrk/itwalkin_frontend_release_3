@@ -8,6 +8,19 @@
 
 }
 
+
+.navigationWrapper{
+    text-align:right;
+    margin:10px;
+
+}
+.navigation{
+    background-color:rgb(214, 212, 212);
+    padding:3px;
+    padding-right:10px; 
+    border:none;
+}
+
 .inputboxsearchNav{
     padding: 10px;
     /* margin-left: 2%; */
@@ -185,6 +198,15 @@
 .ul:nth-child(1){
     background-color: rgb(40, 4, 99);    
     color:white;
+    /* height: 60px; */
+    /* padding: 0%; */
+
+}
+.ul:nth-child(even){
+    /* background-color: rgb(40, 4, 99);   */
+    background:rgb(242, 244, 245)
+
+    /* color:white; */
     /* height: 60px; */
     /* padding: 0%; */
 

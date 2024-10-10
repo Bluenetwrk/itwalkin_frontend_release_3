@@ -313,9 +313,8 @@ function AppliedUserProfile() {
         <>
             <h4 style={{ marginTop: "10px", marginLeft: "6%" }}>Total {AppliedUser.length} Job Seekers have Applied</h4>
             {screenSize.width > 850 ?
-
-                <div className={styles.AllUiWrapper}>
-                    <div style={{ display: "flex", justifyContent: "space-between" }}>
+<>
+                    <div style={{ display: "flex", justifyContent: "space-between"}}>
                         {nopageFilter ?
                             <p style={{ fontWeight: 400, marginLeft: "10px" }}>Displaying <span style={{ color: "blue" }}>{Filtereredjobs}</span> from All Jobs</p>
                             :
@@ -345,6 +344,8 @@ function AppliedUserProfile() {
                             <option selected={lastIndex === 100} value={100}>100</option>
                         </select>  jobs per page
                     </div>
+                <div className={styles.AllUiWrapper}>
+
                     <ul className={styles.ul} >
                         <li style={{ backgroundColor: " rgb(40, 4, 99)", color: "white" }} className={`${styles.li} ${styles.name}`}><b>Name</b>  </li>
                         <li style={{ backgroundColor: " rgb(40, 4, 99)", color: "white" }} className={`${styles.li} ${styles.NoticePeriod}`}><b>Notice Period</b>
@@ -506,6 +507,8 @@ function AppliedUserProfile() {
                             )
                         })
                     }
+                </div>
+
                            <div style={{ display: "flex", justifyContent: "space-between"}}>
           <div style={{marginTop:"14px", marginLeft:"10px"}} >
             Show  <select onChange={(e) => { handleRecordchange(e) }}>
@@ -532,8 +535,7 @@ function AppliedUserProfile() {
               </button>
             </div>
             </div>
-                </div>
-
+</>
                 :
                 <>
                     {PageLoader ?
