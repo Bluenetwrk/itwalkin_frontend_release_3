@@ -425,12 +425,12 @@ border:"none",padding: "4px 8px"}} onClick={DeleteProfile}>Delete</button>
 
               <label className={styles.MobileinputName}>
                 <h4 className={styles.MobileName}>Age:</h4>
-                <input maxLength="3" className={styles.Mobileinput} value={age} onChange={(e) => { setage(e.target.value) }} type="text" />
+                <input maxLength="3" className={styles.Mobileinput} value={age} onChange={(e) => { handleAge(e) }} type="text" />
               </label>
 
               <label className={styles.MobileinputName}>
                 <h4 className={styles.MobileName}>Phone number:</h4>
-                <input maxLength="15" className={styles.Mobileinput} value={phoneNumber} onChange={(e) => { setphoneNumber(e.target.value) }} type="text" />
+                <input maxLength="15" className={styles.Mobileinput} value={phoneNumber} onChange={(e) => { handlePhoneNumber(e) }} type="text" />
               </label>
 
               <label className={styles.MobileinputName}>
