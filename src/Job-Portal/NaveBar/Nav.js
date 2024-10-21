@@ -190,6 +190,7 @@ function Nav(props) {
                 </div>
                 {/* .....................drop down............ */}
                 {showprofile ?
+                <div className={Styles.Alldownwrapper} >
                   <div className={Styles.Empdropdownwrapper} ref={menuRef} >
                     <p className={Styles.text} ref={menuRef} onClick={EmployeeProfile} >My profile</p>
                     {/* <p className={Styles.text} ref={menuRef} onClick={updateEmployeeProfile}>Update profile</p> */}
@@ -197,6 +198,7 @@ function Nav(props) {
 
 
                     <p className={Styles.text} ref={menuRef} onClick={logutEmp}>Logout</p>
+                  </div>
                   </div>
                   : ""}
               </>

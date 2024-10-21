@@ -68,12 +68,14 @@ getContact()
         </p>
         <p>
         Contact us:
-        BLUENETWORKS 
-        Shop no: 3-37, 3rd floor,
+        ITWalkin,
+        Splendid Plaza, L3-09, 2nd Floor, No.63, 5th Block,
+        100 Feet Road, Kormangala, Bangalore - 560095
+        {/* Shop no: 3-37, 3rd floor,
         6th main road,
         Grand Majestic Mall,
         Gandhinagar,
-        BENGALURU-560009
+        BENGALURU-560009 */}
         </p>
         </div>
     </>

@@ -115,6 +115,9 @@
     /* background-color: rgb(35, 206, 206); */
     margin-top: 20px;
 }
+.hint{
+    opacity:0.5;
+}
 
 .saveImage {
     height: 30px;

@@ -29,14 +29,21 @@ const screenSize = useScreenSize();
     async function getjobs() {
       let userid = atob(JSON.parse(localStorage.getItem("IdLog")))
       const headers = { authorization: userid +" "+ atob(JSON.parse(localStorage.getItem("AdMLog"))) };
-      await axios.get("/jobpost/getjobs", {headers})
+      await axios.get("/jobpost/getArchiveJobs", {headers})
       .then((res) => {
         let result = (res.data)
-       
-        let sortedate = result.sort(function (a, b) {
-          return new Date(b.createdAt) - new Date(a.createdAt);
-        });
-        setAllJobs(sortedate)  
+        console.log("result",result)    
+
+        let jobs=result.map((Archjobs)=>{
+          return(
+            Archjobs.Archived
+          )
+        })    
+        console.log("Archived jobs",jobs)    
+      //   let sortedate = result.sort(function (a, b) {
+      //     return new Date(b.createdAt) - new Date(a.createdAt);
+      //   });
+      //   setAllJobs(sortedate)  
       })
     }
   

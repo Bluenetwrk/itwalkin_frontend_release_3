@@ -11,7 +11,7 @@ import Companylogo from "../img/logo.png"
 import useScreenSize from '../SizeHook';
 import socketIO from 'socket.io-client';
 import Arrowimage from '../img/icons8-arrow-left-48.png'
-
+import validator from "validator";
 
 
 function EmployeeUpdateProfile(props) {
@@ -80,7 +80,12 @@ const [immage, setimmage] = useState()
     getUser()
   }, [])
 
+  const [emailError, setEmailError] = useState("");
+
   async function saveUpdate(e) {
+    if(emailError==="Enter valid Email!"){
+      return false
+    }
     let userid = JSON.parse(localStorage.getItem("EmpIdG"))
     const headers = { authorization: userid +" "+ atob(JSON.parse(localStorage.getItem("EmpLog"))) };
     // e.preventDefault()
@@ -150,40 +155,84 @@ const [immage, setimmage] = useState()
       })
   }
 
+  function handlephoneNumber(e){
+    if (e.target.value.length > 10){
+      return false
+  }else{
+  setphoneNumber(e.target.value)
+  }
+   }
 
   const AadharhandleChange = (event) => {
-    const value = event.target.value;
-    const sanitizedValue = value.replace(/[^\w\s]/gi, ''); // Regex to remove special characters
-    setAadhar(sanitizedValue);
+    if (event.target.value.length > 12){
+      return false
+  }else{
+  // setphoneNumber(e.target.value)
+  const value = event.target.value;
+  const sanitizedValue = value.replace(/[^\w\s]/gi, ''); // Regex to remove special characters
+  setAadhar(sanitizedValue);
+  }
+
    };
    
   const PanCardhandleChange = (event) => {
+    if (event.target.value.length> 10){
+      return false
+  }else{
     const value = event.target.value;
     const sanitizedValue = value.replace(/[^\w\s]/gi, ''); // Regex to remove special characters
     setpanCard(sanitizedValue);
+  }
    };
 
-   
-document.addEventListener('keypress', function(event){
-    
-  // Get the key code
-  let keycode = event.which || event.keyCode;
-  
-  // Check if key pressed is a special character
-  if(keycode < 32 || 
-   (keycode > 32 && keycode < 46) || 
-  //  (keycode > 44 && keycode < 46) || 
-   (keycode > 46 && keycode < 48) || 
-   (keycode > 57 && keycode < 64) || 
-   (keycode > 90 && keycode < 97) ||
-   keycode > 122
-  ){
-      // Restrict the special characters
-      event.preventDefault();  
-      // alert("special characters are not allowed")
-      return false;
+   function  handleCompanyname(event){
+    const value = event.target.value;
+    const sanitizedValue = value.replace(/[^\w\s.]|_/g, ''); // Regex to remove special characters
+    setCompanyName(sanitizedValue);
+    // setCompanyName(e.target.value)
+   }
+
+   function handleCompanyEmail(event){
+    const email = event.target.value;
+    const sanitizedValue = email.replace(/[^\w\s.@]|_/g, ''); // Regex to remove special characters
+    setCompanyEmail(sanitizedValue);
+
+    if (validator.isEmail(email)) {
+      setEmailError("");
+  } else {
+      setEmailError("Enter valid Email!");
   }
-}); 
+
+   }
+
+   function handleCompanyPhoneNumber(e){
+
+    if (e.target.value.length > 10){
+      return false
+  }else{
+  setCompanyContact(e.target.value)
+  }
+   }
+
+   function handleGstn(e){
+    if (e.target.value.length > 15){
+      return false
+  }else{
+    const value = e.target.value;
+    const sanitizedValue = value.replace(/[^\w\s]|_/g, ''); // Regex to remove special characters
+    setCompanyGSTIN(sanitizedValue);
+  }
+   }
+   function handleCompanyWebsite(event){
+    const email = event.target.value;
+    const sanitizedValue = email.replace(/[^\w\s.@/]|_/g, ''); // Regex to remove special characters
+    setCompanyWebsite(sanitizedValue);
+   }
+   function handleCompanyAddress(event){
+    const email = event.target.value;
+    const sanitizedValue = email.replace(/[^\w\s,.]|_/g, ''); // Regex to remove special characters
+    setCompanyAddress(sanitizedValue);
+   }
 
 
   return (
@@ -220,17 +269,17 @@ document.addEventListener('keypress', function(event){
 
             <label className={styles.inputName}>
               <h4>Name:</h4>
-              <input maxLength="20" className={styles.input}  value={name} onChange={(e) => { setname(e.target.value) }} type="text" />
+              <input maxLength="20" className={styles.input}  value={name} disabled onChange={(e) => { setname(e.target.value) }} type="text" />
             </label>
 
             <label className={styles.inputName}>
               <h4>Email Id:</h4>
-              <input maxLength="25" className={styles.input} value={email} onChange={(e) => { setemail(e.target.value) }} type="text" />
+              <input maxLength="25" className={styles.input} value={email} disabled onChange={(e) => { setemail(e.target.value) }} type="text" />
             </label>
 
             <label className={styles.inputName}>
               <h4>Phone number:</h4>
-              <input maxLength="15" className={styles.input} value={phoneNumber} onChange={(e) => { setphoneNumber(e.target.value) }} type="number" />
+            <input maxLength="15" className={styles.input}  value={phoneNumber} onChange={(e) => { handlephoneNumber(e) }} type="number" />
             </label>
             
             <label className={styles.inputName}>
@@ -245,32 +294,33 @@ document.addEventListener('keypress', function(event){
 
             <label className={styles.inputName}>
               <h4>Company Name: </h4>
-              <input maxLength="20" className={styles.input} value={CompanyName} onChange={(e) => { setCompanyName(e.target.value) }} type="text" />
+              <input maxLength="20" className={styles.input} value={CompanyName} onChange={(e) => {handleCompanyname(e) }} type="text" />
             </label>
 
             <label className={styles.inputName}>
               <h4>Company Email id:</h4>
-              <input maxLength="25" className={styles.input} value={CompanyEmail} onChange={(e) => { setCompanyEmail(e.target.value) }} type="text" />
+              <input maxLength="25" className={styles.input} value={CompanyEmail} onChange={(e) => { handleCompanyEmail(e) }} type="text" /><br></br>
+              <span style={{color:"red", marginLeft:"5%"}}>{emailError}</span>
             </label>
 
             <label className={styles.inputName}>
               <h4>Company Contact No:</h4>
-              <input maxLength="15"  className={styles.input} value={CompanyContact} onChange={(e) => { setCompanyContact(e.target.value) }} type="number" />
+              <input maxLength="15"  className={styles.input} value={CompanyContact} onChange={(e) => { handleCompanyPhoneNumber(e) }} type="number" />
             </label>
 
             <label className={styles.inputName}>
               <h4>Company GSTIN: </h4>
-              <input maxLength="20" className={styles.input} value={CompanyGSTIN} onChange={(e) => { setCompanyGSTIN(e.target.value) }} type="text" />
+              <input maxLength="15" className={styles.input} value={CompanyGSTIN} onChange={(e) => { handleGstn(e) }} type="text" />
             </label>
 
             <label className={styles.inputName}>
               <h4>Company Website:</h4>
-              <input maxLength="25" className={styles.input} value={CompanyWebsite} onChange={(e) => { setCompanyWebsite(e.target.value) }} type="text" />
+              <input maxLength="25" className={styles.input} value={CompanyWebsite} onChange={(e) => { handleCompanyWebsite(e) }} type="text" />
             </label>
 
             <label className={styles.inputName}>
               <h4>Company Address:</h4>
-              <input maxLength="90" className={styles.input} value={CompanyAddress} onChange={(e) => { setCompanyAddress(e.target.value) }} type="text" />
+              <input maxLength="90" className={styles.input} value={CompanyAddress} onChange={(e) => { handleCompanyAddress(e) }} type="text" />
             </label>
             {/* <label className={styles.inputName}>
               <h4>Type of Organisation:</h4>
@@ -299,17 +349,17 @@ document.addEventListener('keypress', function(event){
            
 <label className={styles.MobileinputName}>
               <h4  className={styles.MobileName}>Name:</h4>
-              <input maxLength="22" className={styles.Mobileinput} value={name} onChange={(e) => { setname(e.target.value) }} type="text" />
+              <input maxLength="22" className={styles.Mobileinput} value={name} disabled onChange={(e) => { setname(e.target.value) }} type="text" />
             </label>
 
             <label className={styles.MobileinputName}>
               <h4  className={styles.MobileName}>Email Id:</h4>
-              <input maxLength="25" className={styles.Mobileinput} value={email} onChange={(e) => { setemail(e.target.value) }} type="text" />
+              <input maxLength="25" className={styles.Mobileinput} value={email} disabled onChange={(e) => { setemail(e.target.value) }} type="text" />
             </label>
 
             <label className={styles.MobileinputName}>
               <h4 className={styles.MobileName}>Phone number:</h4>
-              <input maxLength="15" className={styles.Mobileinput} value={phoneNumber} onChange={(e) => { setphoneNumber(e.target.value) }} type="text" />
+              <input className={styles.Mobileinput} value={phoneNumber} onChange={(e) => { handlephoneNumber(e) }} type="number" />
             </label>
             
             <label className={styles.MobileinputName}>
@@ -319,37 +369,40 @@ document.addEventListener('keypress', function(event){
 
             <label className={styles.MobileinputName}>
               <h4 className={styles.MobileName}>Pan Card Number:</h4>
-              <input maxLength="16" className={styles.Mobileinput} value={panCard} onChange={(e) => { PanCardhandleChange(e) }} type="text" />
+              <input className={styles.Mobileinput} value={panCard} onChange={(e) => { PanCardhandleChange(e) }} type="text" />
             </label>
 
             <label className={styles.MobileinputName}>
               <h4 className={styles.MobileName}>Company Name: </h4>
-              <input maxLength="25" className={styles.Mobileinput} value={CompanyName} onChange={(e) => { setCompanyName(e.target.value) }} type="text" />
+              <input maxLength="25" className={styles.Mobileinput} value={CompanyName} onChange={(e) => { handleCompanyname(e) }} type="text" />
             </label>
 
             <label className={styles.MobileinputName}>
               <h4 className={styles.MobileName}>Company Email id:</h4>
-              <input maxLength="25" className={styles.Mobileinput} value={CompanyEmail} onChange={(e) => { setCompanyEmail(e.target.value) }} type="text" />
+              <input maxLength="25" className={styles.Mobileinput} value={CompanyEmail} onChange={(e) => { handleCompanyEmail(e) }} type="text" />
+           <br></br>
+           <span style={{color:"red", marginLeft:"5%"}}>{emailError}</span>
+
             </label>
 
             <label className={styles.MobileinputName}>
               <h4 className={styles.MobileName}>Company Contact No:</h4>
-              <input maxLength="15" className={styles.Mobileinput} value={CompanyContact} onChange={(e) => { setCompanyContact(e.target.value) }} type="text" />
+              <input maxLength="15" className={styles.Mobileinput} value={CompanyContact} onChange={(e) => { handleCompanyPhoneNumber(e) }} type="number" />
             </label>
 
             <label className={styles.MobileinputName}>
               <h4 className={styles.MobileName}>Company GSTIN: </h4>
-              <input maxLength="15" className={styles.Mobileinput} value={CompanyGSTIN} onChange={(e) => { setCompanyGSTIN(e.target.value) }} type="text" />
+              <input maxLength="15" className={styles.Mobileinput} value={CompanyGSTIN} onChange={(e) => { handleGstn(e) }} type="text" />
             </label>
 
             <label className={styles.MobileinputName}>
               <h4 className={styles.MobileName}>Company Website:</h4>
-              <input maxLength="25" className={styles.Mobileinput} value={CompanyWebsite} onChange={(e) => { setCompanyWebsite(e.target.value) }} type="text" />
+              <input maxLength="25" className={styles.Mobileinput} value={CompanyWebsite} onChange={(e) => { handleCompanyWebsite(e)}} type="text" />
             </label>
 
             <label className={styles.MobileinputName}>
               <h4 className={styles.MobileName}>Company Address:</h4>
-              <input maxLength="90" className={styles.Mobileinput} value={CompanyAddress} onChange={(e) => { setCompanyAddress(e.target.value) }} type="text" />
+              <input maxLength="90" className={styles.Mobileinput} value={CompanyAddress} onChange={(e) => {handleCompanyAddress(e) }} type="text" />
             </label>
            
             <div className={styles.MobileinputName}>

@@ -84,30 +84,21 @@ function AllJobsForAdmin() {
     }
   }
   const [checkBoxValue, setCheckBoxValue] = useState([])
+  const [check, setCheck] = useState(true)
 
  async function deleteCheckedJobs(){
-  console.log(checkBoxValue)
-// await axios.delete(`/jobpost/deleteCheckBoxArray/${checkBoxValue}` )
-// .then((res)=>{
-//   if(res.data==="success"){
-//     getjobs()
-//     alert("deletd succesfully")
-
-//   }
-// }).catch((err)=>{
-//   alert("some thing went wrong")
-// })
-alert("some thing went wrong")
- }
- async function get(){
-  console.log(checkBoxValue)
-await axios.get(`/jobpost/getArchiveJobs` )
+await axios.delete(`/jobpost/deleteCheckBoxArray/${checkBoxValue}` )
 .then((res)=>{
-  console.log(res.data)
+  if(res.data==="success"){
+    getjobs()
+    alert("deletd succesfully")
+    window.location.reload()
+  }
 }).catch((err)=>{
   alert("some thing went wrong")
 })
  }
+ 
 
   function checkBoxforDelete(id) {
 
@@ -223,7 +214,7 @@ await axios.get(`/jobpost/getArchiveJobs` )
                     <li className={`${styles.li} ${styles.Skills}`}>{items.skills}</li>
                     <li className={`${styles.li} ${styles.DeleteAction}`} >
                       {/* <button className={styles.DeleteButton} onClick={() => { DeleteJob(items._id) }} >Delete</button><br></br> */}
-                      <input type="checkbox" onClick={() => { checkBoxforDelete(items._id) }} />
+                      <input type="checkbox"  onClick={() => { checkBoxforDelete(items._id) }} />
                     </li>
                   </ul>
                 )

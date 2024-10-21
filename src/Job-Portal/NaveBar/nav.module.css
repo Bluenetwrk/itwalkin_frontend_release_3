@@ -407,6 +407,12 @@ font-weight: 400;
     border-left: 1px solid grey;
     border-top: 1px solid grey;
 }
+.Alldownwrapper{
+    position: sticky;
+    top:60px;
+    z-index: 100;
+
+}
 
 .Empdropdownwrapper {
     position: absolute;
@@ -420,6 +426,20 @@ font-weight: 400;
     border: 1px solid rgb(202, 202, 202);
     cursor: pointer;
     z-index: 100;
+}
+.Empdropdownwrapper::after {
+    content: "";
+    position: absolute;
+    top: -0.7rem;
+    right: 1rem;
+    width: 20px;
+    height: 20px;
+    transform: rotate(45deg);
+    background-color: white;
+    border-left: 1px solid grey;
+    border-top: 1px solid grey;
+    z-index: 100;
+
 }
 /* 
 @media(max-width:1500px){
@@ -524,19 +544,7 @@ font-weight: 400;
     border-top: 1px solid grey;
 
 }
-.Empdropdownwrapper::after {
-    content: "";
-    position: absolute;
-    top: -0.7rem;
-    right: 1rem;
-    width: 20px;
-    height: 20px;
-    transform: rotate(45deg);
-    background-color: white;
-    border-left: 1px solid grey;
-    border-top: 1px solid grey;
 
-}
 
 .text {
 

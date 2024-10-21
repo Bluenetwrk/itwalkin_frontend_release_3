@@ -8,7 +8,7 @@ import { Editor } from 'react-draft-wysiwyg';
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import Style from "./postJobs.module.css"
 import socketIO from 'socket.io-client';
-import CreatableSelect from "react-select/creatable"
+import CreatableSelect from "react-select"
 // import CreatableSelect  from 'react-select/creatable';
 
 
@@ -51,7 +51,6 @@ function PostJobs(props) {
     const [joblocation, setJobLocation] = useState("")
     const [qualification, setQualification] = useState("")
     const [experiance, setExperiance] = useState("")
-    const [skills, setSkills] = useState("")
     const [errorMessage, setErrorMessage] = useState("")
     const [successMessage, setSuccessMessage] = useState("")
     const [Logo, setLogo] = useState()
@@ -61,14 +60,33 @@ function PostJobs(props) {
 
     const [profileData, setProfileData] = useState([])
     const [Tags, setTag] = useState([])
-    // const Tags=tag.map((tag,i)=>{
-    //     return(
-    //         tag.value
-    //     )
-    // })
+    const [skills, setSkills] = useState("")
 
     function handleChange(tag) {
         setTag(tag)
+        const Tagskills=tag.map((tag,i)=>{
+            return(
+                tag.value
+            )
+        })
+        setSkills(Tagskills.toString())        
+    }
+
+    function handleSalary(e){
+        if (e.target.value.length>2){
+            return false
+        }else{
+            setSalaryRange(e.target.value)
+        }
+    }
+
+    function handleExperiance(e){
+        if (e.target.value.length>2){
+            return false
+        }else{
+        setExperiance(e.target.value)
+
+        }
     }
 
     let navigate = useNavigate()
@@ -120,6 +138,7 @@ function PostJobs(props) {
         }, { headers })
             .then((res) => {
                 let result = (res.data)
+                console.log(result)
                 if (result == "success") {
                     setJobTitle("")
                     setJobDescription("")
@@ -146,26 +165,13 @@ function PostJobs(props) {
             behavior: "smooth"
         });
     }
-
-    window.addEventListener('keypress', function (event) {
-        // Get the key code
-        let keycode = event.which || event.keyCode;
-
-        // Check if key pressed is a special character
-        if (keycode < 32 ||
-            (keycode > 32 && keycode < 44) ||
-            (keycode > 44 && keycode < 48) ||
-            (keycode > 57 && keycode < 65) ||
-            (keycode > 90 && keycode < 97) ||
-            keycode > 122
-        ) {
-            // Restrict the special characters
-            event.preventDefault();
-            // alert("special characters are not allowed")
-            return false;
-        }
-    });
-
+    
+    function handlejobtitle(e){ 
+        // let keycode=e.target.value.charCodeAt(jobtitle.length)
+    //  console.log(keycode)
+     setJobTitle(e.target.value)
+                    
+    }
     return (
         <>
 
@@ -188,7 +194,7 @@ function PostJobs(props) {
                                             Style.errormessage : Style.successmessage}>{successMessage} </p>
                                         {/* <p className={Style.errormessage}>{errorMessage} </p> */}
                                         <h4 className={Style.jobHeadline}  >Job title**</h4>
-                                        <input maxLength="30" className={Style.inputbox} type="text" value={jobtitle} onChange={(e) => { setJobTitle(e.target.value) }} />
+                                        <input maxLength="30" className={Style.inputbox} type="text" value={jobtitle} onChange={(e) => { handlejobtitle(e) }} />
                                         {/* <div className={Style.jobHeadline}>
                                         <label><input name="Job-Type" type="radio" value={other}  onClick={(e) => { setother((prev)=>!prev)} } />Select, if Job Source is from other Job Portal Site </label>
 </div>
@@ -243,11 +249,11 @@ function PostJobs(props) {
                                         <h4 className={Style.jobHeadline}>Qualification Needed**</h4>
 
                                         <div style={{ marginTop: "-10px" }}>
-                                            <label><input name="Qualification" type="radio" checked={qualification === "B.E/CSE"} value="B.E/CSE" onChange={(e) => { setQualification(e.target.value) }} />B.E/CSE </label>
-                                            <label><input name="Qualification" type="radio" checked={qualification === "B.E/Civil"} value="B.E/Civil" onChange={(e) => { setQualification(e.target.value) }} />B.E/Civil </label>
-                                            <label><input name="Qualification" type="radio" checked={qualification === "B.E/Mech"} value="B.E/Mech" onChange={(e) => { setQualification(e.target.value) }} />B.E/Mech </label>
-                                            <label><input name="Qualification" type="radio" checked={qualification === "B.E/ECE"} value="B.E/ECE" onChange={(e) => { setQualification(e.target.value) }} />B.E/ECE </label>
-                                            <label><input name="Qualification" type="radio" checked={qualification === "B.E/IT"} value="B.E/IT" onChange={(e) => { setQualification(e.target.value) }} />B.E/IT </label>
+                                            <label><input name="Qualification" type="radio" checked={qualification === "B.E/CSE"} value="B.E/CSE" onChange={(e) => { setQualification(e.target.value) }} />B.E(CSE) </label>
+                                            <label><input name="Qualification" type="radio" checked={qualification === "B.E/Civil"} value="B.E/Civil" onChange={(e) => { setQualification(e.target.value) }} />B.E(Civil) </label>
+                                            <label><input name="Qualification" type="radio" checked={qualification === "B.E/Mech"} value="B.E/Mech" onChange={(e) => { setQualification(e.target.value) }} />B.E(Mech) </label>
+                                            <label><input name="Qualification" type="radio" checked={qualification === "B.E/ECE"} value="B.E/ECE" onChange={(e) => { setQualification(e.target.value) }} />B.E(ECE) </label>
+                                            <label><input name="Qualification" type="radio" checked={qualification === "B.E/IT"} value="B.E/IT" onChange={(e) => { setQualification(e.target.value) }} />B.E(IT) </label>
                                             <label><input name="Qualification" type="radio" value="others" onClick={(e) => { setOthers((prev) => !prev) }} />others </label>
                                         </div>
                                         {
@@ -259,17 +265,13 @@ function PostJobs(props) {
                                         }
 
                                         <h4 className={Style.jobHeadline}>Salary Per Annum in Lakhs** &nbsp;<span className={Style.hint}>(e.g 5 or 10)</span></h4>
-                                        <input maxLength="3" className={Style.inputbox} type="number" value={salaryRange} onChange={(e) => { setSalaryRange(e.target.value) }} />
+                                        <input maxLength="3" className={Style.inputbox} type="number" value={salaryRange} onChange={(e) => { handleSalary(e) }} />
 
 
                                         <h4 className={Style.jobHeadline}>Experience Needed** &nbsp;<span className={Style.hint}>(e.g 5 or 10)</span></h4>
-                                        <input maxLength="3" className={Style.inputbox} type="number" value={experiance} onChange={(e) => { setExperiance(e.target.value) }} />
+                                        <input maxLength="3" className={Style.inputbox} type="number" value={experiance} onChange={(e) => { handleExperiance(e) }} />
 
-                                        <h4 className={Style.jobHeadline}>Skills Needed**</h4>
-
-                                        <input maxLength="100" className={Style.inputbox} type="text" value={skills} onChange={(e) => { setSkills(e.target.value) }} />
-
-                                        <h4 className={Style.jobHeadline}>Tags</h4>
+                                        <h4 className={Style.jobHeadline}>Skill Tags**</h4>
                                         <div>
                                             <CreatableSelect
                                                 isMulti={true}
@@ -278,6 +280,10 @@ function PostJobs(props) {
                                                 onChange={handleChange}
                                             />
                                         </div>
+                                        <h4 className={Style.jobHeadline}>Skills Needed**</h4>
+
+<input maxLength="100" className={Style.inputbox} disabled type="text" value={skills} />
+
 
                                         {Logo ? <p ><span style={{ color: "blue" }}>Note** :</span> Logo will also be posted with the Job</p> : ""}
 

@@ -189,39 +189,6 @@ function StudentUpdateProfile(props) {
       })
   }
 
-  const AadharhandleChange = (event) => {
-    const value = event.target.value;
-    const sanitizedValue = value.replace(/[^\w\s]/gi, ''); // Regex to remove special characters
-    setAadhar(sanitizedValue);
-  };
-
-  const PanCardhandleChange = (event) => {
-    const value = event.target.value;
-    const sanitizedValue = value.replace(/[^\w\s]/gi, ''); // Regex to remove special characters
-    setpanCard(sanitizedValue);
-  };
-
-
-  window.addEventListener('keypress', function (event) {
-
-    // Get the key code
-    let keycode = event.which || event.keyCode;
-
-    // Check if key pressed is a special character
-    if (keycode < 32 ||
-      (keycode > 32 && keycode < 43) ||
-      (keycode > 43 && keycode < 46) ||
-      (keycode > 46 && keycode < 48) ||
-      (keycode > 57 && keycode < 64) ||
-      (keycode > 90 && keycode < 97) ||
-      keycode > 122
-    ) {
-      // Restrict the special characters
-      event.preventDefault();
-      // alert("special characters are not allowed")
-      return false;
-    }
-  });
 const [showdelete, setShowdelete]=useState(false)
 
 async function DeleteProfile(){
@@ -239,10 +206,67 @@ if(confirm){
     }
   }).catch((err)=>{
     alert("some thing went wrong try again ")
-  })
-  
+  })  
 }
+  }
 
+  function handleAge(e){
+    if (e.target.value.length>2){
+      return false
+  }else{
+  setage(e.target.value)
+  }
+  }
+
+  function handlePhoneNumber(e){
+    if (e.target.value.length>10){
+      return false
+  }else{
+  setphoneNumber(e.target.value)
+  }
+  }
+
+  const AadharhandleChange = (event) => {
+    if (event.target.value.length>12){
+      return false
+  }else{
+   
+    const value = event.target.value;
+    const sanitizedValue = value.replace(/[^\w\s]/gi, ''); // Regex to remove special characters
+    setAadhar(sanitizedValue);
+  }
+  };
+
+  const PanCardhandleChange = (event) => {
+    const value = event.target.value;
+    const sanitizedValue = value.replace(/[^\w\s]/gi, ''); // Regex to remove special characters
+    setpanCard(sanitizedValue);
+  };
+  function handleNoticePeriod(e){
+    const value = e.target.value;
+    const sanitizedValue = value.replace(/[^\w\s]/gi, ''); // Regex to remove special characters
+    setNoticePeriod(sanitizedValue);
+  }
+  function handleexpectedSalary(e){
+    const value = e.target.value;
+    const sanitizedValue = value.replace(/[^\w\s]/gi, ''); // Regex to remove special characters
+    setExpectedSalary(sanitizedValue);
+  }
+
+  function handleCurrentCTC(e){
+    const value = e.target.value;
+    const sanitizedValue = value.replace(/[^\w\s]/gi, ''); // Regex to remove special characters
+    setcurrentCTC(sanitizedValue);
+  }
+  function handleQualification(e){
+    const value = e.target.value;
+    const sanitizedValue = value.replace(/[^\w\s.]/gi, ''); // Regex to remove special characters
+    setQualification(sanitizedValue);
+  }
+  function handleExperiance(e){
+    const value = e.target.value;
+    const sanitizedValue = value.replace(/[^\w\s]/gi, ''); // Regex to remove special characters
+    setExperiance(sanitizedValue);
   }
 
 
@@ -291,12 +315,12 @@ border:"none",padding: "4px 8px"}} onClick={DeleteProfile}>Delete</button>
 
               <label className={styles.inputName}>
                 <h4>Name:</h4>
-                <input maxLength="22" className={styles.input} value={name} onChange={(e) => { setname(e.target.value) }} type="text" />
+                <input maxLength="22" className={styles.input} value={name} disabled onChange={(e) => { setname(e.target.value) }} type="text" />
               </label>
 
               <label className={styles.inputName}>
                 <h4>Email Address:</h4>
-                <input maxLength="25" className={styles.input} value={email} onChange={(e) => { setemail(e.target.value) }} type="text" />
+                <input maxLength="25" className={styles.input} value={email} disabled onChange={(e) => { setemail(e.target.value) }} type="text" />
               </label>
               <label className={styles.inputName}>
                 <h4>City: <span style={{color:"blue"}}>{city}</span></h4>
@@ -313,47 +337,47 @@ border:"none",padding: "4px 8px"}} onClick={DeleteProfile}>Delete</button>
 
               <label className={styles.inputName}>
                 <h4>Age:</h4>
-                <input maxLength="3" className={styles.input} value={age} onChange={(e) => { setage(e.target.value) }} type="number" />
+                <input maxLength="3" className={styles.input} value={age} onChange={(e) => { handleAge(e) }} type="number" />
               </label>
 
               <label className={styles.inputName}>
                 <h4>Phone number:</h4>
-                <input maxLength="15" className={styles.input} value={phoneNumber} onChange={(e) => { setphoneNumber(e.target.value) }} type="text" />
+                <input maxLength="15" className={styles.input} value={phoneNumber} onChange={(e) => { handlePhoneNumber(e) }} type="number" />
               </label>
 
               <label className={styles.inputName}>
                 <h4>Aadhaar number:</h4>
-                <input maxLength="12" className={styles.input} value={Aadhar} onChange={(e) => { AadharhandleChange(e) }} type="text" />
+                <input maxLength="12" className={styles.input} value={Aadhar} onChange={(e) => { AadharhandleChange(e) }} type="number" />
               </label>
 
               <label className={styles.inputName}>
                 <h4>Pan Card Number:</h4>
-                <input maxLength="16" className={styles.input} value={panCard} onChange={(e) => { PanCardhandleChange(e) }} type="text" />
+                <input maxLength="10" className={styles.input} value={panCard} onChange={(e) => { PanCardhandleChange(e) }} type="text" />
               </label>
 
               <label className={styles.inputName}>
                 <h4>Notice Period in days: </h4>
-                <input maxLength="7" className={styles.input} value={NoticePeriod} onChange={(e) => { setNoticePeriod(e.target.value) }} type="text" />
+                <input maxLength="6" className={styles.input} value={NoticePeriod} onChange={(e) => { handleNoticePeriod(e) }} type="text" />
               </label>
 
               <label className={styles.inputName}>
-                <h4>Expected Salary:</h4>
-                <input maxLength="5" className={styles.input} value={ExpectedSalary} onChange={(e) => { setExpectedSalary(e.target.value) }} type="text" />
+                <h4>Expected Salary: &nbsp;<span className={styles.hint}>(e.g 5L or 10L)</span></h4>
+                <input maxLength="3" className={styles.input} value={ExpectedSalary} onChange={(e) => { handleexpectedSalary(e)}} type="text" />
               </label>
 
               <label className={styles.inputName}>
-                <h4>Current CTC:</h4>
-                <input maxLength="5" className={styles.input} value={currentCTC} onChange={(e) => { setcurrentCTC(e.target.value) }} type="text" />
+                <h4>Current CTC: &nbsp;<span className={styles.hint}>(e.g 5L or 10L)</span></h4>
+                <input maxLength="3" className={styles.input} value={currentCTC} onChange={(e) => {handleCurrentCTC(e)}} type="text" />
               </label>
 
               <label className={styles.inputName}>
                 <h4>Qualification:</h4>
-                <input maxLength="12" className={styles.input} value={Qualification} onChange={(e) => { setQualification(e.target.value) }} type="text" />
+                <input maxLength="6" className={styles.input} value={Qualification} onChange={(e) => {handleQualification(e) }} type="text" />
               </label>
 
               <label className={styles.inputName}>
-                <h4>Experience:</h4>
-                <input maxLength="5" className={styles.input} value={Experiance} onChange={(e) => { setExperiance(e.target.value) }} type="text" />
+                <h4>Experience: &nbsp;<span className={styles.hint}>(e.g 3Y or 10Y)</span></h4>
+                <input maxLength="3" className={styles.input} value={Experiance} onChange={(e) => { handleExperiance(e) }} type="text" />
               </label>
 
               <label className={styles.inputName}>
@@ -369,8 +393,8 @@ border:"none",padding: "4px 8px"}} onClick={DeleteProfile}>Delete</button>
               </label>
 
               <label className={styles.inputName}>
-                <h4>Skills:</h4>
-                <input maxLength="100" className={styles.input} value={Skills} onChange={(e) => { setSkills(e.target.value) }} type="text" />
+                <h4>College:</h4>
+                <input maxLength="100" className={styles.input} disabled type="text" />
               </label>
 
               <button className={styles.Save} onClick={(e) => { saveUpdate(e) }}>Save</button>
@@ -382,12 +406,12 @@ border:"none",padding: "4px 8px"}} onClick={DeleteProfile}>Delete</button>
 
               <label className={styles.MobileinputName}>
                 <h4 className={styles.MobileName}>Name:</h4>
-                <input maxLength="20" className={styles.Mobileinput} value={name} onChange={(e) => { setname(e.target.value) }} type="text" />
+                <input maxLength="20" className={styles.Mobileinput} disabled value={name} onChange={(e) => { setname(e.target.value) }} type="text" />
               </label>
 
               <label className={styles.MobileinputName}>
                 <h4 className={styles.MobileName}>Email Address:</h4>
-                <input maxLength="25" className={styles.Mobileinput} value={email} onChange={(e) => { setemail(e.target.value) }} type="text" />
+                <input maxLength="25" className={styles.Mobileinput} disabled value={email} onChange={(e) => { setemail(e.target.value) }} type="text" />
               </label>
 
               <label className={styles.MobileinputName}>
@@ -421,32 +445,32 @@ border:"none",padding: "4px 8px"}} onClick={DeleteProfile}>Delete</button>
 
               <label className={styles.MobileinputName}>
                 <h4 className={styles.MobileName}>Notice Period in days: </h4>
-                <input maxLength="10" className={styles.Mobileinput} value={NoticePeriod} onChange={(e) => { setNoticePeriod(e.target.value) }} type="text" />
+                <input maxLength="6" className={styles.Mobileinput} value={NoticePeriod} onChange={(e) => { handleNoticePeriod(e) }} type="text" />
               </label>
 
               <label className={styles.MobileinputName}>
-                <h4 className={styles.MobileName}>Expected Salary:</h4>
-                <input maxLength="5" className={styles.Mobileinput} value={ExpectedSalary} onChange={(e) => { setExpectedSalary(e.target.value) }} type="text" />
+                <h4 className={styles.MobileName}>Expected Salary: &nbsp;<span className={styles.hint}>(e.g 5L or 10L)</span></h4>
+                <input maxLength="3" className={styles.Mobileinput} value={ExpectedSalary} onChange={(e) => { handleexpectedSalary(e) }} type="nmber" />
               </label>
 
               <label className={styles.MobileinputName}>
-                <h4 className={styles.MobileName}>Current CTC:</h4>
-                <input maxLength="15" className={styles.Mobileinput} value={currentCTC} onChange={(e) => { setcurrentCTC(e.target.value) }} type="text" />
+                <h4 className={styles.MobileName}>Current CTC: &nbsp;<span className={styles.hint}>(e.g 5L or 10L)</span></h4>
+                <input maxLength="3" className={styles.Mobileinput} value={currentCTC} onChange={(e) => { handleCurrentCTC(e) }} type="text" />
               </label>
 
               <label className={styles.MobileinputName}>
                 <h4 className={styles.MobileName}>Qualification:</h4>
-                <input maxLength="10" className={styles.Mobileinput} value={Qualification} onChange={(e) => { setQualification(e.target.value) }} type="text" />
+                <input maxLength="10" className={styles.Mobileinput} value={Qualification} onChange={(e) => { handleQualification(e) }} type="text" />
               </label>
 
-              <label className={styles.MobileinputName}>
-                <h4 className={styles.MobileName}>Skills:</h4>
-                <input maxLength="100" className={styles.Mobileinput} value={Skills} onChange={(e) => { setSkills(e.target.value) }} type="text" />
-              </label>
+              {/* <label className={styles.MobileinputName}>
+                <h4 className={styles.MobileName}>College:</h4>
+                <input maxLength="100" className={styles.Mobileinput}   type="text" />
+              </label> */}
 
               <label className={styles.MobileinputName}>
-                <h4 className={styles.MobileName}>Experience: </h4>
-                <input maxLength="5" className={styles.Mobileinput} value={Experiance} onChange={(e) => { setExperiance(e.target.value) }} type="text" />
+                <h4 className={styles.MobileName}>Experience: &nbsp;<span className={styles.hint}>(e.g 2Y or 10Y)</span> </h4>
+                <input maxLength="3" className={styles.Mobileinput} value={Experiance} onChange={(e) => { handleExperiance(e) }} type="text" />
               </label>
                <label className={styles.inputName}>
                 <h4 className={styles.MobileName}>Skill Tags:</h4>
