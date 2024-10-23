@@ -152,12 +152,14 @@ function Nav(props) {
               </div>
               {/* .....................drop down............ */}
               {showprofile ?
+                <div className={Styles.Alldownwrapper} >
                 <div className={Styles.JobSeekerdropdownwrapper} ref={menuRef} >
                   <p className={Styles.text} ref={menuRef} onClick={myprofile}>My profile</p>
                   {/* <p className={Styles.text} ref={menuRef} onClick={updateprofile}>Update profile</p> */}
                   <p className={Styles.text} ref={menuRef} onClick={MyJobApplied}>Jobs Applied</p>
                   <p className={Styles.text} ref={menuRef} onClick={StudlogOut}>Logout</p>
 
+                </div>
                 </div>
                 : ""}
             </>
@@ -224,11 +226,14 @@ function Nav(props) {
                   </div>
                   {/* .....................drop down............ */}
                   {showprofile ?
+                <div className={Styles.Alldownwrapper} >
+
                     <div style={{ marginLeft: "-2%" }} className={Styles.Admindropdownwrapper} ref={menuRef} >
                       {/* <p className={Styles.text} ref={menuRef} >My profile</p>
                       <p className={Styles.text} ref={menuRef} >Update profile</p> */}
                       <p className={Styles.text} ref={menuRef} onClick={AdminlogOut}>Logout</p>
 
+                    </div>
                     </div>
                     : ""}
                   {/* .........only for Super Admin */}
@@ -241,8 +246,9 @@ function Nav(props) {
                       <NavLink to="BIAddmin@AdminUpdate" className={Styles.linkSuperAdmin} style={navLinkStyles}> UpdateWebsite</NavLink>
                       <NavLink to="BIAddmin@AllIds" className={Styles.linkSuperAdmin} style={navLinkStyles}> All Email Id's</NavLink>
                       <NavLink to="BIAddAdminAccess" className={Styles.linkSuperAdmin} style={navLinkStyles}> Admin Access</NavLink>
-                      <NavLink to="BIAddmin@ArchivedUser" className={Styles.linkSuperAdmin} style={navLinkStyles}> Deleted Jobseeker</NavLink>
+                      <NavLink to="BIAddmin@ArchivedUser" className={Styles.linkSuperAdmin} style={navLinkStyles}> Archive Jobseeker</NavLink>
                       <NavLink to="BIAddmin@ArchiveJobs" className={Styles.linkSuperAdmin} style={navLinkStyles}> Archived Jobs</NavLink>
+                      <NavLink to="BIAddmin@DeletedJobs" className={Styles.linkSuperAdmin} style={navLinkStyles}> Deleted Jobs</NavLink>
                     </div>
                   </div>
                   :""}
@@ -278,12 +284,14 @@ function Nav(props) {
                     <Modal isOpen={open} onClose={()=>{handleClose()}}/>
                     </>
                   {showprofile ?                    
+                <div className={Styles.Alldownwrapper} >
 
                     <div style={{ marginLeft: "-18px" }} className={Styles.dropdownwrapperHome} ref={menuRef} >
                       {/* <p onClick={() => { navigate("/EmployeeLogin") }}>Employee Login </p>
                       <p onClick={() => { navigate("/JobSeekerLogin") }}>Job Seeker Login</p> */}
-                      <p onClick={() => { handleEmpOpen() ; handleStuClose()}}>Employee Login</p> 
+                      <p onClick={() => { handleEmpOpen() ; handleStuClose()}}>Employer Login</p> 
                       <p onClick={() => { handleStuOpen(); handleClose() }}>Job Seeker Login</p>
+                    </div>
                     </div>
 
                     : ""}

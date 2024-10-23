@@ -42,6 +42,7 @@ import SearchParamsDubEmp from "./Job-Portal/Login/SearchParamsDupEmp";
 import AdminProfile from "./Job-Portal/Admin/AdminProfile"
 import AllJobsForAdmin from "./Job-Portal/Admin/AllJobsForAdmin"
 import ArchiveJobs from "./Job-Portal/Admin/ArchiveJobs";
+import DeletedJobs from "./Job-Portal/Admin/DeletedJobs";
 import AllJobSeekers from "./Job-Portal/Admin/AllJobSeekers"
 import AllEmployees from "./Job-Portal/Admin/AllEmployees"
 import CheckEmpProfileForAdmin from "./Job-Portal/Profile/CheckEmplProfileForAdmin";
@@ -52,7 +53,7 @@ import SearchCandHome from "./Job-Portal/AppliedUserProfile/SearchCandHome";
 import AdminUpdate from "./Job-Portal/Admin/AdminUpdate"
 import AdminPostJobs from "./Job-Portal/Admin/AdminJobPosts";
 import AllIds from "./Job-Portal/Admin/Allid'sStudent";
-import ArchivedUser from "./Job-Portal/Admin/DeletedUser";
+import ArchivedUser from "./Job-Portal/Admin/ArchiveJobSeekers";
 
 import AboutUs from "./Job-Portal/AboutUs"
 import Contact from "./Job-Portal/Contact"
@@ -116,6 +117,7 @@ function App() {
           <Route path="/BIAddmin@Profile" element={<AdminProfile />} />
           <Route path="/BIAddmin@AllJobs" element={<AllJobsForAdmin />} />
           <Route path="/BIAddmin@ArchiveJobs" element={<ArchiveJobs />} />
+          <Route path="/BIAddmin@DeletedJobs" element={<DeletedJobs />} />
           <Route path="/BIAddmin@AllJobSeekers" element={<AllJobSeekers />} />
           <Route path="/BIAddmin@AllEmployees" element={<AllEmployees />} />
           <Route path="/BIAddmin@CheckEmpProfile/:CP" element={<CheckEmpProfileForAdmin />} />

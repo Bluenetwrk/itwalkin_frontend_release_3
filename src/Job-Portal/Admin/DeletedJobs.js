@@ -9,7 +9,7 @@ import location from "../img/icons8-location-20.png"
 
 
 
-function AllJobsForAdmin() {
+function DeletedJobs() {
   let navigate = useNavigate()
 
 
@@ -21,23 +21,29 @@ function AllJobsForAdmin() {
   }, [])
 
   const [AllJobs, setAllJobs] = useState([])
+  const [date, setdate] = useState([])
   const [Result, setResult] = useState(false)
   let jobSeekerId = JSON.parse(localStorage.getItem("StudId"))
   const screenSize = useScreenSize();
 
-
   async function getjobs() {
     let userid = atob(JSON.parse(localStorage.getItem("IdLog")))
     const headers = { authorization: userid + " " + atob(JSON.parse(localStorage.getItem("AdMLog"))) };
-    await axios.get("/jobpost/getjobs", { headers })
+    await axios.get("/jobpost/getDeletedJobs", { headers })
       .then((res) => {
         let result = (res.data)
+  // const [date, setdate] = useState([])
+      // result.map((date)=>{
+      //   return(
+      //     console.log(date.createdAt)
+      //   )
+      // })
 
-        let sortedate = result.sort(function (a, b) {
-          return new Date(b.createdAt) - new Date(a.createdAt);
-        });
-        setAllJobs(sortedate)
-      })
+      let elements=  result.flatMap( subArray =>  subArray.Archived).forEach(  element => {
+           setAllJobs(oldArray => [...oldArray,element] )
+      });
+  })
+
   }
 
   useEffect(() => {
@@ -84,58 +90,8 @@ function AllJobsForAdmin() {
     }
   }
   const [checkBoxValue, setCheckBoxValue] = useState([])
-  const [check, setCheck] = useState(true)
-
- async function ArchiveCheckBoxArray(){
-  let userid = atob(JSON.parse(localStorage.getItem("IdLog")))
-  const headers = { authorization: userid + " " + atob(JSON.parse(localStorage.getItem("AdMLog"))) };
-await axios.delete(`/jobpost/ArchiveCheckBoxArray/${checkBoxValue}`, {headers} )
-.then((res)=>{
-  if(res.data==="success"){
-    getjobs()
-    alert("deletd succesfully")
-    window.location.reload()
-  }
-}).catch((err)=>{
-  alert("some thing went wrong")
-})
- }
- async function deleteCheckedJobs(){
-  let userid = atob(JSON.parse(localStorage.getItem("IdLog")))
-  const headers = { authorization: userid + " " + atob(JSON.parse(localStorage.getItem("AdMLog"))) };
-await axios.delete(`/jobpost/deleteCheckBoxArray/${checkBoxValue}`, {headers} )
-.then((res)=>{
-  if(res.data==="success"){
-    getjobs()
-    alert("deletd succesfully")
-    window.location.reload()
-  }
-}).catch((err)=>{
-  alert("some thing went wrong")
-})
- }
- 
-
-  function checkBoxforDelete(id) {
-
-    const checkedid = checkBoxValue.findIndex((checkedid) => {
-      return (
-        checkedid === id
-      )
-    })
-    if (checkedid < 0) {
-      setCheckBoxValue([...checkBoxValue, id])
-    } else {
-      // checkBoxValue.splice(checkedid, 1)
-      let removeId=checkBoxValue.filter((foundId)=>{
-        return(
-          foundId!==id
-        )
-      })
-      setCheckBoxValue(removeId)
-
-    }
-
+  function checkBox(e) {
+    console.log(e)
   }
 
   return (
@@ -148,25 +104,10 @@ await axios.delete(`/jobpost/deleteCheckBoxArray/${checkBoxValue}`, {headers} )
         <h4 style={{ marginLeft: "18%", marginTop: "10px" }}> {AllJobs.length} matching Result Found  </h4>
         : ""
       }
+
       {screenSize.width > 850 ?
+
         <div style={{ marginLeft: "7px" }} className={styles.Uiwarpper}>
-            <div style={{ textAlign: "end", marginRight: "5%", marginBottom: "10px" }}>
-          {checkBoxValue.length > 0 ?
-          <>
-              <button style={{
-                backgroundColor: "blue", border: "none", color: "white",
-                padding: "5px 10px", fontWeight: "bold", cursor: "pointer"
-              }} onClick={()=>{ArchiveCheckBoxArray()}}>Archive</button>
-
-              <button style={{
-                backgroundColor: "red", border: "none", color: "white", marginLeft:"5px",
-                padding: "5px 10px", fontWeight: "bold", cursor: "pointer"
-              }} onClick={()=>{deleteCheckedJobs()}}>Delete</button>
-              </>
-            : ""
-          }
-
-            </div>
           <ul className={styles.ul}>
             <li className={`${styles.li} ${styles.CompanyName}`}><b>Company Name</b></li>
             <li className={`${styles.li} ${styles.Jtitle}`}><b>Job Title</b></li>
@@ -181,7 +122,7 @@ await axios.delete(`/jobpost/deleteCheckBoxArray/${checkBoxValue}`, {headers} )
             <li className={`${styles.li} ${styles.Qualif}`}><b>Qualif </b></li>
 
             <li className={`${styles.li} ${styles.Skills}`}><b>Skills Required</b></li>
-            <li className={`${styles.li} ${styles.DeleteAction}`} ><b>Action</b></li>
+            {/* <li className={`${styles.li} ${styles.DeleteAction}`} ><b>Arch. Date</b></li> */}
 
 
           </ul>
@@ -202,7 +143,7 @@ await axios.delete(`/jobpost/deleteCheckBoxArray/${checkBoxValue}`, {headers} )
                     <li className={`${styles.li} ${styles.liDescription}`}>
                       {/* {items.jobDescription.slice(0,60)} 
 <span style={{color:"blue"}} onClick={()=>{navigate(`/Jobdetails/${items._id}`)}}>...see more</span> */}
-                      {
+                       {
                         items.jobDescription.map((descrip, di) => {
                           return (
                             <>
@@ -218,7 +159,8 @@ await axios.delete(`/jobpost/deleteCheckBoxArray/${checkBoxValue}`, {headers} )
                       <span onClick={() => navigate(`/Jobdetails/${btoa(items._id)}`)} style={{ color: "blue", cursor: "pointer" }} className={styles.seeMore}>
                         ...read more
                       </span>
-                    </li>
+
+                    </li> 
                     <li className={`${styles.li} ${styles.Pdate}`}>
                       {new Date(items.createdAt).toLocaleString(
                         "en-US",
@@ -235,10 +177,9 @@ await axios.delete(`/jobpost/deleteCheckBoxArray/${checkBoxValue}`, {headers} )
                     <li className={`${styles.li} ${styles.Qualif}`}>{items.qualification} </li>
 
                     <li className={`${styles.li} ${styles.Skills}`}>{items.skills}</li>
-                    <li className={`${styles.li} ${styles.DeleteAction}`} >
-                      {/* <button className={styles.DeleteButton} onClick={() => { DeleteJob(items._id) }} >Delete</button><br></br> */}
-                      <input type="checkbox"  onClick={() => { checkBoxforDelete(items._id) }} />
-                    </li>
+                    {/* <li className={`${styles.li} ${styles.DeleteAction}`} >
+                      <button className={styles.DeleteButton} onClick={() =>
+                       { DeleteJob(items._id) }} >Delete</button></li> */}
                   </ul>
                 )
               })
@@ -339,4 +280,4 @@ await axios.delete(`/jobpost/deleteCheckBoxArray/${checkBoxValue}`, {headers} )
   )
 }
 
-export default AllJobsForAdmin
+export default DeletedJobs
