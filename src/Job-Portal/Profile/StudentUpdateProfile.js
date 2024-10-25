@@ -59,24 +59,17 @@ function StudentUpdateProfile(props) {
      ]
   const [Tags, setTag] = useState([])
   const [Resulttag, setResulttagTag] = useState()
+
     function handleChange(tag){
       setTag(tag)      
-  }
-  // const Tags=tag.map((tag,i)=>{
-  //   return(
-  //       tag.value            
-  //     )
-  //   })   
-    // ......City....
-    const [citytag, setcityTag] = useState()
-    const [city, setcity] = useState()
+  }  
+    const [city, setcity] = useState([])
 
     const CTags=[{value:'Bangalore', label: 'Bangalore'},{value:'Chennai', label:'Chennai' },
       {value:'Hyderabad', label: 'Hyderabad'}, {value:'Delhi', label: 'Delhi'},{value:'Mumbai', label: 'Mumbai' }]
     
       function handleChangeCityTag(tag){
-      setcityTag(tag)      
-      setcity(tag.value)      
+      setcity(tag)   
   }    
 
   let navigate = useNavigate()
@@ -101,7 +94,7 @@ function StudentUpdateProfile(props) {
           setphoneNumber(result.phoneNumber)
           setAadhar(result.Aadhar)
           setpanCard(result.panCard)
-          setcityTag(result.city)
+          // setcityTag(result.city)
           setcity(result.city)          
           setNoticePeriod(result.NoticePeriod)
           setExpectedSalary(result.ExpectedSalary)
@@ -323,12 +316,15 @@ border:"none",padding: "4px 8px"}} onClick={DeleteProfile}>Delete</button>
                 <input maxLength="25" className={styles.input} value={email} disabled onChange={(e) => { setemail(e.target.value) }} type="text" />
               </label>
               <label className={styles.inputName}>
-                <h4>City: <span style={{color:"blue"}}>{city}</span></h4>
+                <h4>City: 
+                  {/* <span style={{color:"blue"}}>{city}</span> */}
+                </h4>
                 {/* <input maxLength="15" className={styles.input} value={city} onChange={(e) => { setCity(e.target.value) }} type="text" /> */}
                 <div style={{marginTop:"-7px", width:"81%", marginLeft:"18px"}}>
-                           <CreatableSelect                          
+                           <CreatableSelect  
+                  // isMulti={true}
                           options={CTags}
-                          value={citytag}
+                          value={city}
                           onChange={handleChangeCityTag}     
                         />
                          </div>
@@ -416,11 +412,12 @@ border:"none",padding: "4px 8px"}} onClick={DeleteProfile}>Delete</button>
 
               <label className={styles.MobileinputName}>
                 <h4>City: <span style={{color:"blue"}}>{city}</span></h4>
-                <CreatableSelect                          
-                          options={CTags}
-                          value={citytag}
-                          onChange={handleChangeCityTag}     
-                        />
+                <CreatableSelect  
+                isMulti={true}
+                  options={CTags}
+                  value={city}
+                  onChange={handleChangeCityTag}     
+                />
               </label>
 
               <label className={styles.MobileinputName}>

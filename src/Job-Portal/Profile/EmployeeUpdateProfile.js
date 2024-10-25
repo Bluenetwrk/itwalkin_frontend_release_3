@@ -156,11 +156,14 @@ const [immage, setimmage] = useState()
   }
 
   function handlephoneNumber(e){
-    if (e.target.value.length > 10){
-      return false
-  }else{
-  setphoneNumber(e.target.value)
-  }
+
+    const sanitizedValue = e.target.value.replace(/[A-Za-z]/g, '');
+        // if(e.target.value.includes(/[1-9]/g))
+            if (sanitizedValue.length>10){
+            return false
+        }else{
+          setphoneNumber(sanitizedValue)
+        }
    }
 
   const AadharhandleChange = (event) => {
@@ -185,11 +188,11 @@ const [immage, setimmage] = useState()
   }
    };
 
-   function  handleCompanyname(event){
-    const value = event.target.value;
+   function  handleCompanyname(e){    
+    const value = e.target.value;
     const sanitizedValue = value.replace(/[^\w\s.]|_/g, ''); // Regex to remove special characters
     setCompanyName(sanitizedValue);
-    // setCompanyName(e.target.value)
+
    }
 
    function handleCompanyEmail(event){

@@ -1,4 +1,17 @@
 
+
+.inputbox {
+    -moz-appearance: textfield;
+  }
+  .inputbox::-webkit-inner-spin-button {
+    display: none;
+  }
+  .inputbox::-webkit-outer-spin-button,
+  .inputbox::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
 .searchButton{
     background-color: rgb(40, 4, 99);
     color: white;

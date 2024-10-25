@@ -64,6 +64,17 @@ function Footer() {
               
             </div>
             <div>
+              <h4> <a
+              onClick={()=>{
+                window.scrollTo({
+                  top:0,
+                  behavior:"smooth"
+                })
+                navigate ("/AllCareerJobs")}}>Career Section</a></h4>
+              
+            </div>
+
+            <div>
               <h4> 
               <a
               onClick={()=>{

@@ -54,6 +54,8 @@ import AdminUpdate from "./Job-Portal/Admin/AdminUpdate"
 import AdminPostJobs from "./Job-Portal/Admin/AdminJobPosts";
 import AllIds from "./Job-Portal/Admin/Allid'sStudent";
 import ArchivedUser from "./Job-Portal/Admin/ArchiveJobSeekers";
+import AdminCareerPostJobs from "./Job-Portal/Admin/AdminCareerJobPosts";
+import AllCareerJobs from "./Job-Portal/Jobs/AllCareerJobs";
 
 import AboutUs from "./Job-Portal/AboutUs"
 import Contact from "./Job-Portal/Contact"
@@ -107,6 +109,8 @@ function App() {
             <Route path="/My-Profile" element={<StudentProfile url={axios.defaults.baseURL} />} />
             <Route path="/My-Applied-Jobs" element={<MyAppliedJobs url={axios.defaults.baseURL} />} />
           </Route>
+            <Route path="/AllCareerJobs" element={<AllCareerJobs />} />
+
 
           <Route path="/BIAdd@Logg" element={<AdminLogin />} />
           <Route path="/BIAddAdminAccess" element={<AdminAccess />} />
@@ -125,6 +129,7 @@ function App() {
           <Route path="/BIAddmin@CheckStudentArchived/:CP" element={<CheckArchivedJobSeeker />} />
           <Route path="/BIAddmin@AdminUpdate" element={<AdminUpdate />} />
           <Route path="/BIAddmin@PostJob" element={<AdminPostJobs />} />
+          <Route path="/BIAddmin@AdminCareerPostJobs" element={<AdminCareerPostJobs />} />
           <Route path="/BIAddmin@AllIds" element={<AllIds />} />
           <Route path="/BIAddmin@ArchivedUser" element={<ArchivedUser />} />
           <Route path="/JobSeekerLogin" element={<StudentLogin />} />

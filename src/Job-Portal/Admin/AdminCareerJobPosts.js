@@ -11,7 +11,7 @@ import CreatableSelect  from "react-select/creatable"
 
 import Style from "../PostJobs/postJobs.module.css"
 
-function AdminPostJobs() {
+function AdminCareerPostJobs() {
     let adminLoginAuth= localStorage.getItem("AdMLog")
 
 
@@ -166,7 +166,7 @@ function AdminPostJobs() {
         let adminLogin = true
        let jobTitle = jobtitle.toLowerCase()
        let jobLocation = joblocation.toLowerCase()
-        await axios.post("/jobpost/jobpost/", { Logo, SourceLink, Source, SourceCompanyLink, Adminpost, adminLogin, jobTitle,
+        await axios.post("/Careerjobpost/Careerjobpost/", { Logo, SourceLink, Source, SourceCompanyLink, Adminpost, adminLogin, jobTitle,
     companyName, jobDescription, jobtype, salaryRange, jobLocation, qualification, experiance, skills, Tags }, {headers})
             .then((res) => {
                 let result = (res.data)
@@ -256,25 +256,25 @@ window.addEventListener('keypress', function(event){
     
                                {/* { other?
                                <> */}
-                               <hr style={{marginTop:"50px"}}></hr>
+                               {/* <hr style={{marginTop:"50px"}}></hr>
                                        <h4 className={Style.jobHeadline}  >Job Post Source &nbsp;<span className={Style.hint}>(e.g Linkedin, Noukri, indeed etc.)</span></h4>
                                         <input maxLength="20" className={Style.inputbox} type="text" value={Source} onChange={(e) => { setSource(e.target.value) }} />
 
                                         <h4 className={Style.jobHeadline}  > Job Post Source Link</h4>
                                         <input className={Style.inputbox} type="text" value={SourceLink} onChange={(e) => { setSourceLink(e.target.value) }} />
                                        
-                                        <h4 className={Style.jobHeadline}  >Source Company Name </h4>
-                                        <input className={Style.inputbox} type="text" value={companyName} disabled/>
-                                       
-                                        <hr style={{marginBottom:"50px", marginTop:"30px"}}></hr>
+                                        <hr style={{marginBottom:"50px", marginTop:"30px"}}></hr> */}
                               
                                {/* </>
 
-                                :""
-                                    } */}
+
+:""
+} */}
                                         {/* <h4 className={Style.jobHeadline}>Company Name** &nbsp;<span className={Style.hint}>(Update Company Name from your Profile)</span></h4>
                                         <input maxLength="30" className={Style.inputbox} type="text" value={companyName} onChange={(e) => { setCompanyName(e.target.value) }} /> */}
 
+                                        <h4 className={Style.jobHeadline}  >Source Company Name </h4>
+                                        <input className={Style.inputbox} type="text" value={companyName} disabled/>
 
                                         <h4 className={Style.jobHeadline}>Job Description**</h4>
                                         {/* <input maxLength="100" className={Style.inputbox} type="text" value={jobDescription} onChange={(e) => { setJobDescription(e.target.value) }} /> */}
@@ -372,4 +372,4 @@ window.addEventListener('keypress', function(event){
     )
 }
 
-export default AdminPostJobs
+export default AdminCareerPostJobs

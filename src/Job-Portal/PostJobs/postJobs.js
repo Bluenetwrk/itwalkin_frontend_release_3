@@ -11,7 +11,6 @@ import socketIO from 'socket.io-client';
 import CreatableSelect from "react-select"
 // import CreatableSelect  from 'react-select/creatable';
 
-
 function PostJobs(props) {
 
     useEffect(() => {
@@ -73,19 +72,22 @@ function PostJobs(props) {
     }
 
     function handleSalary(e){
-        if (e.target.value.length>2){
+        const sanitizedValue = e.target.value.replace(/[A-Za-z]/g, '');
+        // if(e.target.value.includes(/[1-9]/g))
+            if (sanitizedValue.length>2){
             return false
         }else{
-            setSalaryRange(e.target.value)
+            setSalaryRange(sanitizedValue)
         }
     }
 
     function handleExperiance(e){
-        if (e.target.value.length>2){
+        const sanitizedValue = e.target.value.replace(/[A-Za-z]/g, '');
+        // if(e.target.value.includes(/[1-9]/g))
+            if (sanitizedValue.length>2){
             return false
         }else{
-        setExperiance(e.target.value)
-
+        setExperiance(sanitizedValue)
         }
     }
 
@@ -267,10 +269,8 @@ function PostJobs(props) {
                                         <h4 className={Style.jobHeadline}>Salary Per Annum in Lakhs** &nbsp;<span className={Style.hint}>(e.g 5 or 10)</span></h4>
                                         <input maxLength="3" className={Style.inputbox} type="number" value={salaryRange} onChange={(e) => { handleSalary(e) }} />
 
-
                                         <h4 className={Style.jobHeadline}>Experience Needed** &nbsp;<span className={Style.hint}>(e.g 5 or 10)</span></h4>
                                         <input maxLength="3" className={Style.inputbox} type="number" value={experiance} onChange={(e) => { handleExperiance(e) }} />
-
                                         <h4 className={Style.jobHeadline}>Skill Tags**</h4>
                                         <div>
                                             <CreatableSelect

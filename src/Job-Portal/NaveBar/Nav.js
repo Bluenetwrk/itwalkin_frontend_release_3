@@ -218,6 +218,7 @@ function Nav(props) {
                       <NavLink to="/AboutUs" className={`${Styles.link}`} style={navLinkStyles} >About Us</NavLink>
                       <NavLink to="/Services" className={Styles.link} style={navLinkStyles}>Services</NavLink>
                       <NavLink to="/BIAddmin@PostJob" className={Styles.link} style={navLinkStyles}> Post Job</NavLink>
+                      <NavLink to="/BIAddmin@AdminCareerPostJobs" className={Styles.link} style={navLinkStyles}>Career Job Post</NavLink>
 
                       <div className={`${Styles.link} ${Styles.IconeWrapper}`}>
                         <img className={`${Styles.Icon} ${Styles.profileIcon}`} src={loginuser} ref={imgRef} onClick={() => setShowprofile((prev) => !prev)} />

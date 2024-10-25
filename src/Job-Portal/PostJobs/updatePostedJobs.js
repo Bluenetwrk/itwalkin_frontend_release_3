@@ -101,8 +101,6 @@ function UpdatePostedJobs() {
     await axios.put(`/jobpost/updatPostedJob/${Jobid}`,{ jobTitle, SourceLink, Source, companyName,
          jobDescription, jobtype, salaryRange, jobLocation, qualification, experiance, skills, Tags},{headers})
     .then((res)=>{
-        console.log(res)
-
         let result = (res.data)
         if(result=="success"){
             // setJobTitle("")
@@ -147,8 +145,6 @@ window.addEventListener('keypress', function(event){
 
     return (
         <>
-
-
             <div className={Style.postJobPageWrapper}>
           <img style={{ height:"25px", color:"grey", marginTop:"20px", marginLeft:"8%", cursor:"pointer",
              width:"28px"}} onClick={()=>{navigate(-1)}}  src={Arrowimage} />

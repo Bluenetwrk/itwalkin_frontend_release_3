@@ -32,13 +32,6 @@ function DeletedJobs() {
     await axios.get("/jobpost/getDeletedJobs", { headers })
       .then((res) => {
         let result = (res.data)
-  // const [date, setdate] = useState([])
-      // result.map((date)=>{
-      //   return(
-      //     console.log(date.createdAt)
-      //   )
-      // })
-
       let elements=  result.flatMap( subArray =>  subArray.Archived).forEach(  element => {
            setAllJobs(oldArray => [...oldArray,element] )
       });

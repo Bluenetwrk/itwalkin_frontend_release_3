@@ -95,29 +95,17 @@ function AllJobs(props) {
   const [clickedJobId, setclickedJobId] = useState() //for single job loader
   let jobSeekerId = JSON.parse(localStorage.getItem("StudId"))
 
-
-  // let menuRef = useRef();
-  // let imgRef = useRef();
-
-  // window.addEventListener("click", (e) => {
-  //   if (e.target !== menuRef.current) {
-  //     setshowPosteddateJobs(false)
-  //     console.log(menuRef.current)
-  //   }
-  // })
-
-
-
   const navigate = useNavigate()
   const Location = useLocation()
 
   async function getjobs() {
     setPageLoader(true)
     setNoPageFilter(false)
-
-    let userid = JSON.parse(localStorage.getItem("StudId"))
-    const headers = { authorization: userid + " " + atob(JSON.parse(localStorage.getItem("StudLog"))) };
-    await axios.get("/jobpost/getjobs", { headers })
+    // let userid = JSON.parse(localStorage.getItem("StudId"))
+    // const headers = { authorization: userid + " " + atob(JSON.parse(localStorage.getItem("StudLog"))) };
+    // await axios.get("/jobpost/getjobs", { headers })
+    const headers = { authorization: 'BlueItImpulseWalkinIn' };
+    await axios.get("/Careerjobpost/getCareerjobs", { headers })
       .then((res) => {
         let result = (res.data)
         let sortedate = result.sort((a, b) => {
@@ -148,7 +136,7 @@ function AllJobs(props) {
     setLoader(true)
     setTimeout(async () => {
 
-      await axios.put(`/jobpost/updatforJobApply/${jobId}`, { jobSeekerId, date }, { headers })
+      await axios.put(`/Careerjobpost/updatforJobApply/${jobId}`, { jobSeekerId, date }, { headers })
         .then((res) => {
           if (res.data) {
             setLoader(false)
@@ -160,19 +148,6 @@ function AllJobs(props) {
     }, 5000)
   }
 
-  // async function search(e) {
-  //   let key = e.target.value
-
-  //   await axios.get(`/jobpost/searchJob/${key}`)
-  //     .then((res) => {
-  //       if (key) {
-  //         setJobs(res.data)
-  //       } else {
-  //         getjobs()
-
-  //       }
-  //     })
-  // }
 
   const [searchKey, setsearchKey] = useState()
   // const [jobs, setJobs] = useState([])  
@@ -424,7 +399,7 @@ function AllJobs(props) {
     setActive(key)
     setNoPageFilter(true)
     setFiltereredjobs(key)
-    await axios.get(`/jobpost/getTagsJobs/${key}`)
+    await axios.get(`/Careerjobpost/getTagsJobs/${key}`)
       .then((res) => {
         let result = (res.data)
         let sortedate = result.sort((a, b) => {
@@ -626,8 +601,8 @@ function AllJobs(props) {
                         <li className={`${styles.li} ${styles.Skills}`}>{items.skills}</li>
 
                         <li className={`${styles.li} ${styles.Status}`}>
-
-                          {
+                          
+ {jobSeekerId?
                             items.jobSeekerId.find((jobseeker) => {
                               return (
                                 jobseeker.jobSeekerId == jobSeekerId
@@ -635,21 +610,21 @@ function AllJobs(props) {
                             })
                               ?
                               <button className={styles.Appliedbutton} title='HR will get in touch with you, Once they will check Your Profile' > Applied <span style={{ fontSize: '15px' }}>&#10004;</span></button>
-
                               :
-                              // items .isApproved?
                               items.SourceLink ?
                                 <button title='This will redirect to the source company webpage' className={styles.Applybutton} onClick={() => {
                                   applyforOtherJob(items.SourceLink)
                                 }}>Apply</button>
                                 :
-
                                 <button className={styles.Applybutton} onClick={() => { applyforJob(items._id) }}>Apply
                                   <span className={styles.Loader} >{Loader && items._id == clickedJobId ?
                                     <TailSpin color="white" height={20} />
-                                    : ""}</span></button>
-                            //  : <button className={styles.Applybutton} onClick={()=>{alert("You can not Apply for the job, Your account is under Approval Process")}} > Apply </button>
-                          }
+                                    : ""}</span></button> 
+                                    :
+                          <button className={styles.Applybutton} onClick={() => { navigate("/JobSeekerLogin") }}>Apply</button>
+                                  }
+                                                                  
+                                    
                         </li>
                       </ul>
                     )
@@ -730,14 +705,14 @@ function AllJobs(props) {
                         <li className={`${styles.li} ${styles.Skills}`}>{items.skills}</li>
 
                         <li className={`${styles.li} ${styles.Status}`}>
-
-                          {items.jobSeekerId.find((jobseeker) => {
+                          {jobSeekerId?
+                          (
+                          items.jobSeekerId.find((jobseeker) => {
                             return (
                               jobseeker.jobSeekerId == jobSeekerId
                             )
                           }) ?
                             <button className={styles.Appliedbutton} title='HR will get in touch with you, Once they will check Your Profile' > Applied <span style={{ fontSize: '15px' }}>&#10004;</span></button>
-
                             :
                             // items .isApproved?
                             items.SourceLink ?
@@ -745,12 +720,14 @@ function AllJobs(props) {
                                 applyforOtherJob(items.SourceLink)
                               }}>Apply</button>
                               :
-
                               <button className={styles.Applybutton} onClick={() => { applyforJob(items._id) }}>Apply
                                 <span className={styles.Loader} >{Loader && items._id == clickedJobId ?
                                   <TailSpin color="white" height={20} />
-                                  : ""}</span></button>
-                            //  : <button className={styles.Applybutton} onClick={()=>{alert("You can not Apply for the job, Your account is under Approval Process")}} > Apply </button>
+                                  : ""}</span></button>  )  
+                                  :
+                          <button className={styles.Applybutton} onClick={() => { navigate("/JobSeekerLogin") }}>Apply</button>
+                                                       
+
                           }
                         </li>
                       </ul>
@@ -958,7 +935,8 @@ function AllJobs(props) {
                           <p className={styles.salaryRange}><span>&#8377;</span>{job.salaryRange}L</p>
 
 
-                          {job.jobSeekerId.find((jobseeker) => {
+                          {jobSeekerId?
+                          job.jobSeekerId.find((jobseeker) => {
                             return (
                               jobseeker.jobSeekerId == jobSeekerId
                             )
@@ -975,8 +953,9 @@ function AllJobs(props) {
                                 <span className={styles.Loader} >{Loader && job._id == clickedJobId ?
                                   <TailSpin color="white" height={20} />
                                   : ""}</span></button>
-                            // :      <button className={styles.ApplyMobile} onClick={()=>{alert("You can not Apply for the job, Your account is under Approval Process")}} > Apply </button>
 
+                                  :
+                          <button className={styles.ApplyMobile} onClick={() => { navigate("/JobSeekerLogin") }}><b>Apply</b></button>
                           }
                         </div>
                         <p className={styles.jobDescriptionHeading}>Job Description:</p>
