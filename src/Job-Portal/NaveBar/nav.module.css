@@ -1247,7 +1247,7 @@ margin-left: 10%;
 .Admindropdownwrapper {
     position: absolute;
     /* right : 1.5rem; */
-    left: 92.6%;
+    left: 88.6%;
     padding-right: 5px;
     padding-left: 5px;
     padding-bottom: 0px;
@@ -1270,10 +1270,24 @@ margin-left: 10%;
     border-top: 1px solid grey;
 
 }
-@media(max-width:750px){
+
+@media(max-width:1200px){
     .Admindropdownwrapper {
         position: absolute;
-        left: 85%;
+        left: 87%;
+        padding-right: 5px;
+        padding-left: 5px;
+        padding-bottom: 0px;
+        border-radius: 8px;
+        background-color: white;
+        border: 1px solid rgb(202, 202, 202);
+        cursor: pointer;
+    }
+} 
+@media(max-width:1000px){
+    .Admindropdownwrapper {
+        position: absolute;
+        left: 86%;
         padding-right: 5px;
         padding-left: 5px;
         padding-bottom: 0px;

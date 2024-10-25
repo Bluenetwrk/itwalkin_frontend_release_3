@@ -11,14 +11,15 @@ import graduation from "../img/icons8-graduation-cap-40.png"
 import socketIO from 'socket.io-client';
 
 
-function JoppostedByEmp(props) {
-  useEffect( ()=>{    
-    const socket = socketIO.connect(props.url,{
-      auth:{
-        token: JSON.parse(localStorage.getItem("EmpIdG"))
-      }
-    });
-  },[])
+function AdminPostedJobs(props) {
+  
+
+  useEffect(()=>{
+    let adminLogin= localStorage.getItem("SupAdMLog")
+        if(!adminLogin){
+            navigate("/")
+        }
+    },[])
 
   // let location = useLocation()
   // let empName= location.state.gserid 
@@ -37,14 +38,12 @@ function JoppostedByEmp(props) {
   const [isReadMore, setIsReadMore] = useState(true)
   const navigate = useNavigate()
 
-  let empId = JSON.parse(localStorage.getItem("EmpIdG"))
 
   async function getjobs() {
-    let userid = JSON.parse(localStorage.getItem("EmpIdG"))
-    const headers = { authorization: userid +" "+ atob(JSON.parse(localStorage.getItem("EmpLog"))) };
     setPageLoader(true)
     setTimeout(async () => {
-      await axios.get(`/jobpost/getPostedjobs/${empId}`, {headers})
+      const headers = { authorization: 'BlueItImpulseWalkinIn' };
+      await axios.get("/jobpost/getAdminjobs", {headers })
         .then((res) => {
           let result = (res.data)
           let sortedate = result.sort(function (a, b) {
@@ -52,14 +51,13 @@ function JoppostedByEmp(props) {
           });
           setMyjobs(sortedate)
           setmyjobsforFilter(sortedate)
-    setPageLoader(false)
           if (res.data.length == 0) {
             setNoJobFound("You have not posted any job")
           }
-
         }).catch((err) => {
           alert("back error occured")
         })
+        setPageLoader(false)
     }, 1000)
 
   }
@@ -68,8 +66,9 @@ function JoppostedByEmp(props) {
   }, [])
   // .................delete function............
   async function deletejob(deleteid) {
-    let userid = JSON.parse(localStorage.getItem("EmpIdG"))
-    const headers = { authorization: userid +" "+ atob(JSON.parse(localStorage.getItem("EmpLog"))) };
+
+    const headers = { authorization: 'BlueItImpulseWalkinIn' };
+
     Swal.fire({
       title: 'Are you sure?',
       // icon: 'warning',
@@ -84,7 +83,7 @@ function JoppostedByEmp(props) {
       confirmButtonText: 'delete!'
     }).then((result) => {
       if (result.isConfirmed) {
-        axios.delete(`/jobpost/deleteProduct/${deleteid}`, {headers})
+        axios.delete(`/Careerjobpost/deleteJobs/${deleteid}`, {headers})
           .then((res) => {
             getjobs()
           })
@@ -138,7 +137,8 @@ function JoppostedByEmp(props) {
   }
 
   function seeProfilejobSeekerId(id) {
-    window.open(`/Applied-User-Profile/${id}`, '_blank')
+    // window.open(`/Applied-User-Profile/${id}`, '_blank')
+    window.open(`/BIAdd@Applied-User-Profile/${id}`, '_blank')
   }
 
   // ..........Sorting.......
@@ -268,31 +268,13 @@ function handleRecordchange(e){
   return (
     <>
  
- {screenSize.width > 850 ?
-        <>
-          <div className={styles.searchBothForNavWrapper}>
-            <input className={styles.inputboxsearchNav} type="text" placeholder='Search for a Job / Skills / Location / Experience' onChange={(e) => { search(e) }} />
-
-            <i style={{ color: "rgb(40, 4, 99)", fontSize: "18px", cursor: "pointer" }} onClick={() => { searchIcon(searchKey) }}
-              class="fa fa-search" ></i>
-          </div>
-          {Result ?
-            <h4 style={{ marginLeft: "40%", marginTop: "20px" }}> {myjobs.length} matching Result Found  </h4>
-            : ""
-          }
-        </>
-        : ""
-      }      
+    
  {/* <p>My Posted Jobs</p> */}
 
      {screenSize.width>850?
        <>
-       <div style={{display:"flex"}}>
-    <button className={styles.searchButton} onClick={() => {
-          navigate("/Search-Candidate")
-        }}>Search Candidate</button>
-        <p style={{marginLeft:"38%", marginTop:"30px", fontSize:"large", fontWeight:"bold"}}>My Posted Jobs</p>
-        </div>
+       <p style={{marginLeft:"38%", marginTop:"30px", fontSize:"large", fontWeight:"bold"}}>Admin Posted Jobs</p>
+
 
         <div style={{display:"flex", justifyContent:"space-between"}}>
             {        nopageFilter?
@@ -434,7 +416,7 @@ function handleRecordchange(e){
                     <li className={`${styles.li} ${styles.Skills}`}>{items.skills}</li>
                     <li className={`${styles.li} ${styles.Action}`}>
                       <div className={styles.Acbuttons}>
-                        <button onClick={() => { update(items._id) }} className={`${styles.Abutton} ${styles.update}`}>update</button>
+                        {/* <button onClick={() => { update(items._id) }} className={`${styles.Abutton} ${styles.update}`}>update</button> */}
                         <button onClick={() => { deletejob(items._id) }} className={`${styles.Abutton} ${styles.delete}`}>delete</button>
                       </div>
                     </li>
@@ -484,21 +466,8 @@ function handleRecordchange(e){
       </>
       :
       <> 
+       <p style={{marginLeft:"28%", marginTop:"30px", fontSize:"medium", fontWeight:"bold"}}>Admin Posted Jobs</p>
 
-
-<button className={styles.searchButton} onClick={() => {
-          navigate("/Search-Candidate")
-        }}>Search Candidate</button>
-
-<p style={{ marginLeft: "4%", color: "blue", fontWeight:"bold" }}> Total {myjobs.length} jobs</p>
-        <div className={styles.searchBoth}>
-          <p className={styles.p}>Search </p>
-          <input className={styles.inputboxsearch} type="text" placeholder='search for a posted job' onChange={(e) => { search(e) }} />
-        </div>
-        {Result ?
-            <h4 style={{ marginLeft: "34%", marginTop: "0px"}}> {myjobs.length} matching Result Found  </h4>
-            : ""
-          }
       <div id={styles.JobCardWrapper} >
 
 {myjobs.length>0?
@@ -560,7 +529,7 @@ myjobs.map((job, i) => {
         <div className={styles.ApplyPackage}>
           <span className={styles.salaryRange} style={{ marginLeft: "10px" }}><span>&#8377;</span>{job.salaryRange}L</span>
           <div className={styles.MobileAcbuttons}>
-          <button onClick={() => { update(job._id) }} className={` ${styles.MobileUpdate}`}>update</button>
+          {/* <button onClick={() => { update(job._id) }} className={` ${styles.MobileUpdate}`}>update</button> */}
           <button onClick={() => { deletejob(job._id) }} className={` ${styles.MobileDelete}`}>delete</button>
                </div>
         </div>
@@ -621,4 +590,4 @@ myjobs.map((job, i) => {
   )
 }
 
-export default JoppostedByEmp
+export default AdminPostedJobs

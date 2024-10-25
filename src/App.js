@@ -16,6 +16,8 @@ import StudentSignUp from "./Job-Portal/SignUp/StudSignin";
 import EmployeeSignUp from "./Job-Portal/SignUp/EmplSign";
 import StudPrivate from "./Job-Portal/Private/OutletStud";
 import PostedJobsbyEmp from "./Job-Portal/Jobs/mypostedjobs";
+import PostedJobsByAdmin from "./Job-Portal/Jobs/AdminPostedJobs";
+import PostedCareerJobs from "./Job-Portal/Jobs/myPostedCaereerjobs";
 import EmpPrivate from "./Job-Portal/Private/OuletEmp";
 import PostJobs from "./Job-Portal/PostJobs/postJobs";
 import Jobs from "./Job-Portal/Jobs/AllJobs";
@@ -29,6 +31,7 @@ import EmployeeProfile from "./Job-Portal/Profile/EmployeeProfile";
 import UpdatePostedJobs from "./Job-Portal/PostJobs/updatePostedJobs";
 import MyAppliedJobs from "./Job-Portal/Jobs/MyAppliedJobs"
 import AppliedUserProfile from "./Job-Portal/AppliedUserProfile/AppliedUserProfile";
+import AppliedUserForAdminJobs from "./Job-Portal/AppliedUserProfile/AdminJobsAppliedUser";
 import CheckStudentProfiel from "./Job-Portal/Profile/CheckStudentProfiel";
 import CheckEmpHalfProfile from "./Job-Portal/Profile/CheckEmpHalfProf";
 // admin
@@ -111,7 +114,11 @@ function App() {
           </Route>
             <Route path="/AllCareerJobs" element={<AllCareerJobs />} />
 
+            <Route path="/BIAdd@Applied-User-Profile/:jid" element={<AppliedUserForAdminJobs url={axios.defaults.baseURL} />} />
 
+
+          <Route path="/BIAdd@PostedCareerJobs" element={<PostedCareerJobs url={axios.defaults.baseURL} />} />
+          <Route path="/BIAdd@AdminPostedJobs" element={<PostedJobsByAdmin url={axios.defaults.baseURL} />} />
           <Route path="/BIAdd@Logg" element={<AdminLogin />} />
           <Route path="/BIAddAdminAccess" element={<AdminAccess />} />
           <Route path="/BIAdd@Gmail" element={<SearchParams />} />

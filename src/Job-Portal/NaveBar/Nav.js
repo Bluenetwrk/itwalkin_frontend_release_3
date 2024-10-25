@@ -231,7 +231,13 @@ function Nav(props) {
 
                     <div style={{ marginLeft: "-2%" }} className={Styles.Admindropdownwrapper} ref={menuRef} >
                       {/* <p className={Styles.text} ref={menuRef} >My profile</p>
-                      <p className={Styles.text} ref={menuRef} >Update profile</p> */}
+
+                      <p className={Styles.text} ref={menuRef} >Update BIAdd@PostedCareerJobs</p> */}
+                    <p className={Styles.text} ref={menuRef} onClick={()=>
+                      {navigate("BIAdd@PostedCareerJobs")}}>Posted Career Jobs</p>
+                    <p className={Styles.text} ref={menuRef} onClick={()=>
+                      {navigate("BIAdd@AdminPostedJobs")}}>Admin Posted Jobs</p>
+
                       <p className={Styles.text} ref={menuRef} onClick={AdminlogOut}>Logout</p>
 
                     </div>

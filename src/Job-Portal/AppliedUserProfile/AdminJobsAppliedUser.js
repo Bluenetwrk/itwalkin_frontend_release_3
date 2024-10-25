@@ -8,7 +8,7 @@ import useScreenSize from '../SizeHook';
 import profileDp from "../img/user_3177440.png"
 
 
-function AppliedUserProfile() {
+function AppliedUserProfileAdmin() {
     let params = useParams()
     let JobId = atob(params.jid)
 
@@ -452,22 +452,22 @@ function AppliedUserProfile() {
                                                                         })) ?
                                                                             <>
                                                                                 <button onClick={() => { UndoOnHold(Applieduser._id, "selected") }} style={{
-                                                                                    marginLeft: "2%", background: "blue", color: "white",cursor:"pointer",
+                                                                                    marginLeft: "2%", background: "blue", color: "white", cursor:"pointer",
                                                                                     border: "solid", width: "80%", height: "30px", fontWeight: "bold"
                                                                                 }} title="Click to Undo On Hold">OnHold<span style={{ fontSize: '16px' }} >&#10004;</span></button><br></br></>
                                                                             :
                                                                             <>
                                                                                 <button style={{
                                                                                     marginLeft: "2%", background: "rgb(40, 4, 99)", color: "white", border: "solid",
-                                                                                    width: "70%", height: "30px", fontWeight: "bold",cursor:"pointer",
+                                                                                    width: "70%", height: "30px", fontWeight: "bold",cursor:"pointer"
                                                                                 }} onClick={() => { Select(Applieduser._id, "selected") }}>Select</button><br></br>
                                                                                 <button style={{
                                                                                     marginLeft: "2%", background: "rgb(40, 4, 99)", color: "white", border: "solid",
-                                                                                    width: "70%", height: "30px", fontWeight: "bold",cursor:"pointer",
+                                                                                    width: "70%", height: "30px", fontWeight: "bold",cursor:"pointer"
                                                                                 }} onClick={() => { Reject(Applieduser._id, "Rejected") }}>Reject</button><br></br>
                                                                                 <button style={{
                                                                                     marginLeft: "2%", background: "rgb(40, 4, 99)", color: "white", border: "solid",
-                                                                                    width: "70%", height: "30px", fontWeight: "bold",cursor:"pointer",
+                                                                                    width: "70%", height: "30px", fontWeight: "bold",cursor:"pointer"
                                                                                 }} onClick={() => { onHold(Applieduser._id, "OhHold") }}>OnHold</button><br></br>
 
                                                                             </>
@@ -562,7 +562,7 @@ function AppliedUserProfile() {
                                             </div>
 
                                             <div className={styles.RightTable}>
-                                                <span className={styles.span}><span style={{ color: "blue", textDecoration: "underline" }} onClick={() => { CheckProfile(btoa(job._id)) }}  >{job.name} </span></span><br></br>
+                                                <span className={styles.span}><span style={{ color: "blue", textDecoration: "underline" }} onClick={() => { CheckProfile(job._id) }}  >{job.name} </span></span><br></br>
                                                 <span className={styles.span}>{job.age ? <span style={{ color: "blue" }}>{job.age} </span> : <span style={{ color: "red" }}>N/A</span>}</span><br></br>
                                                 <span className={styles.span}> {job.NoticePeriod ? <span style={{ color: "blue" }}>{job.NoticePeriod} </span> : <span style={{ color: "red" }}>N/A</span>}</span><br></br>
                                                 <span className={styles.span}> {job.Qualification ? <span style={{ color: "blue" }}>{job.Qualification} </span> : <span style={{ color: "red" }}>N/A</span>}</span><br></br>
@@ -656,4 +656,4 @@ function AppliedUserProfile() {
     )
 }
 
-export default AppliedUserProfile
+export default AppliedUserProfileAdmin

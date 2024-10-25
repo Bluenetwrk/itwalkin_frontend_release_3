@@ -46,27 +46,45 @@ function Home() {
   const [Active, setActive] = useState("")
   const screenSize = useScreenSize();
 
+  let AgeTags = [
+    { value: '2 to 5 Yrs', label: '2 to 5 Yrs ' }, { value: '6 to 10 Yrs', label: '6 to 10 Yrs' },
+    { value: '11 to 15', label: '11 to 15' }, { value: '16 and above', label: '16 and above' }
+  ]
+
+  let TechTags = [
+    { value: 'S-w Developer', label: 'S/w Developer ' }, { value: 'Firmware Tester', label: 'Firmware Tester' },
+    { value: 'Firmware Developer', label: 'Firmware Developer' }, { value: 'Hardware Engineer', label: 'Hardware Engineer' },
+    { value: 'Agile', label: 'Agile' }, { value: 'Scrum Master', label: "Scrum Master" },
+    { value: 'Product Owner', label: 'Product Owner' }, { value: 'Product Line Manager', label: 'Product Line Manager' },
+    { value: 'Project Manager', label: 'Project Manager' }, { value: 'Automation Tester', label: 'Automation Tester' },
+    { value: 'QA Enginner', label: 'QA Enginner' }, { value: 'Senior Tester', label: 'Senior Tester' },
+    { value: 'Manager', label: 'Manager' }, { value: 'Director', label: 'Director' },
+    { value: 'Compliance Engineer', label: 'Compliance Engineer' },
+    { value: 'Verification Engineer', label: 'Verification Engineer' },
+    { value: 'QA Manager', label: 'QA Manager' }, { value: 'Verification Lead', label: 'Verification Lead' },
+    { value: 'Validation Engineer', label: 'Validation Engineer' },
+    { value: 'Testing Manager', label: 'Testing Manager' }, { value: 'Team Lead', label: 'Team Lead' },
+    { value: 'Senior Developer', label: 'Senior Developer' },
+  ]
+
   let jobTags = [
-    { value: 'Java', label: 'Java ' }, { value: 'ReactJs', label: 'ReactJs' }, { value: 'Python', label: 'Python' },
-    { value: 'Mern Stack', label: 'Mern Stack' }, { value: 'C++,C', label: 'C++,C' },
-    { value: 'Javascript', label: "Javascript" }, { value: 'Node js', label: 'Node js' },
-    { value: 'Angular js', label: 'Angular js' }, { value: 'Vue js', label: 'Vue js' }, 
-    { value: 'NextJs', label: 'NextJs' },  { value: '.NET', label: '.NET' }, { value: 'Larvel', label: 'Larvel' },
+    { value: 'Angular js', label: 'Angular js' }, { value: 'Vue js', label: 'Vue js' },
+    { value: 'NextJs', label: 'NextJs' }, { value: '.NET', label: '.NET' }, { value: 'Larvel', label: 'Larvel' },
     { value: 'Kotlin', label: 'Kotlin' }, { value: 'Android', label: 'Android' }, { value: 'iOS', label: 'iOS' },
-    { value: 'Xamarin', label: 'Xamarin' },{ value: 'Ember JS', label: 'Ember JS' }, { value: 'Cordova', label: 'Cordova' },
-    { value: 'Groovey,Grails', label: 'Groovey,Grails'}, { value: 'QT', label: 'QT'},
-    { value: 'Oracle', label: 'Oracle'}, { value: 'Postgres SQL', label: 'Postgres SQL'},
-    { value: 'CouchDB', label: 'CouchDB'}, { value: 'Redis', label: 'Redis'},{ value: 'Azure', label: 'Azure'},
-    { value: 'AWS', label: 'AWS'}, { value: 'Rackspace', label: 'Rackspace'},{ value: 'Heroku', label: 'Heroku'},
-    { value: 'GoogleCloud', label: 'GoogleCloud'}, { value: 'Weblogic', label: 'Weblogic'},
-    { value: 'Apache', label: 'Apache'}, { value: 'Lotus', label: 'Lotus'}, { value: 'Domino', label: 'Domino'}, 
-    { value: 'MS IIS', label: 'MS IIS'}, { value: 'ColdFusion', label: 'ColdFusion'},
-    { value: 'nginx', label: 'nginx'}, { value: 'Resin', label: 'Resin'}, { value: 'Selenium', label: 'Selenium'},
-    { value: 'HP LoadRunner', label: 'HP LoadRunner'}, { value: 'jUnit', label: 'jUnit'},
-    { value: 'Jira', label: 'Jira'}, { value: 'Confluence', label: 'Confluence'},
-    { value: 'Testrails', label: 'Testrails'}, { value: 'PLC,SCADA', label: 'PLC,SCADA'},
-    { value: 'ModBUS', label: 'ModBUS'},{ value: 'CANBUS', label: 'CANBUS'}, { value: 'Machine Learing', label: 'Machine Learing'},
-    { value: 'Cybersecurity', label: 'Cybersecurity'}, { value: 'AI', label: 'AI'},
+    { value: 'Xamarin', label: 'Xamarin' }, { value: 'Ember JS', label: 'Ember JS' }, { value: 'Cordova', label: 'Cordova' },
+    { value: 'Groovey,Grails', label: 'Groovey,Grails' }, { value: 'QT', label: 'QT' },
+    { value: 'Oracle', label: 'Oracle' }, { value: 'Postgres SQL', label: 'Postgres SQL' },
+    { value: 'CouchDB', label: 'CouchDB' }, { value: 'Redis', label: 'Redis' }, { value: 'Azure', label: 'Azure' },
+    { value: 'AWS', label: 'AWS' }, { value: 'Rackspace', label: 'Rackspace' }, { value: 'Heroku', label: 'Heroku' },
+    { value: 'GoogleCloud', label: 'GoogleCloud' }, { value: 'Weblogic', label: 'Weblogic' },
+    { value: 'Apache', label: 'Apache' }, { value: 'Lotus', label: 'Lotus' }, { value: 'Domino', label: 'Domino' },
+    { value: 'MS IIS', label: 'MS IIS' }, { value: 'ColdFusion', label: 'ColdFusion' },
+    { value: 'nginx', label: 'nginx' }, { value: 'Resin', label: 'Resin' }, { value: 'Selenium', label: 'Selenium' },
+    { value: 'HP LoadRunner', label: 'HP LoadRunner' }, { value: 'jUnit', label: 'jUnit' },
+    { value: 'Jira', label: 'Jira' }, { value: 'Confluence', label: 'Confluence' },
+    { value: 'Testrails', label: 'Testrails' }, { value: 'PLC,SCADA', label: 'PLC,SCADA' },
+    { value: 'ModBUS', label: 'ModBUS' }, { value: 'CANBUS', label: 'CANBUS' }, { value: 'Machine Learing', label: 'Machine Learing' },
+    { value: 'Cybersecurity', label: 'Cybersecurity' }, { value: 'AI', label: 'AI' },
     { value: 'Backend', label: 'Backend' }, { value: 'Frontend', label: 'Frontend' },
     { value: 'HTML-CSS', label: 'HTML-CSS' }, { value: 'MongoDB', label: 'MongoDB' },
     { value: 'MySql', label: 'MySql' }, { value: 'Flutter', label: 'Flutter' },
@@ -75,8 +93,8 @@ function Home() {
     { value: 'Security developer', label: 'Security developer' }, { value: 'Data science', label: 'Data science' },
     { value: 'Data Analyst', label: 'Data Analyst' }, { value: 'Game Developer', label: 'Game Developer' },
     { value: 'Graphic Developers', label: 'Graphic Developers' }, { value: 'AI Engineer', label: 'AI Engineer' },
-    { value: 'Security Developer', label: 'Security Developer'},{ value: 'Cloud Developers', label: 'Cloud Developers'},
-    ]
+    { value: 'Security Developer', label: 'Security Developer' }, { value: 'Cloud Developers', label: 'Cloud Developers' },
+  ]
 
   let JobLocationTags = ["Bangalore", "Hyderabad", "Chennai", "Mumbai"]
 
@@ -106,7 +124,7 @@ function Home() {
   let recordsperpage = JSON.parse(sessionStorage.getItem("recordsperpageHome"))
 
   const [currentPage, setCurrentPage] = useState(1)
-  const [recordsPerPage, setrecordsPerPage] = useState(recordsperpage?recordsperpage:10)
+  const [recordsPerPage, setrecordsPerPage] = useState(recordsperpage ? recordsperpage : 10)
 
   const lastIndex = currentPage * recordsPerPage //10
   const firstIndex = lastIndex - recordsPerPage //5
@@ -114,7 +132,7 @@ function Home() {
   const npage = Math.ceil(jobs.length / recordsPerPage) // last page
   const number = [...Array(npage + 1).keys()].slice(1)
 
-  
+
   async function getjobs() {
     setPageLoader(true)
     setNoPageFilter(false)
@@ -292,7 +310,7 @@ function Home() {
     setJobs(sorted)
   }
   function checkEmpHalf(empId, e) {
-    
+
     navigate(`/CheckEmpHalfProfile/${empId}`)
 
   }
@@ -381,7 +399,7 @@ function Home() {
   function handleRecordchange(e) {
     sessionStorage.setItem("recordsperpageHome", JSON.stringify(e.target.value));
     let recordsperpage = JSON.parse(sessionStorage.getItem("recordsperpageHome"))
-    setrecordsPerPage(recordsperpage) 
+    setrecordsPerPage(recordsperpage)
     // setSelectedPage(e.target.value)
     setCurrentPage(1)
   }
@@ -444,35 +462,73 @@ function Home() {
 
       {screenSize.width > 850 ?
         <>
-        <div className={styles.LocationFilterWrapper}>
-             {/* <button className={`${styles.JobLocationFilter}`}  name="filter" onClick={() =>
+          <div className={styles.LocationFilterWrapper}>
+            {/* <button className={`${styles.JobLocationFilter}`}  name="filter" onClick={() =>
                { getjobs(); setActive("All") }} >All</button> */}
             {
               JobLocationTags.map((location, i) => {
                 return (
                   <button className={location == "Chennai" || location == "Hyderabad" || location == "Mumbai" ?
-                  styles.disable: Active ==="Bangalore"?  styles.locationActive :styles.JobLocationFilter} disabled={location == "Chennai" || 
-                  location == "Hyderabad" || location == "Mumbai" || location == "Delhi"} name="filter" onClick={() => { getLocation(location.toLowerCase()); setActive("Bangalore") }} >{location}</button>
+                    styles.disable : Active === "Bangalore" ? styles.locationActive : styles.JobLocationFilter} disabled={location == "Chennai" ||
+                      location == "Hyderabad" || location == "Mumbai" || location == "Delhi"} name="filter" onClick={() => { getLocation(location.toLowerCase()); setActive("Bangalore") }} >{location}</button>
 
                 )
               })
             }
           </div><br></br>
 
-            <div className={styles.JobtitleFilterWrapper}>
-              <buton className={Active === "All" ? styles.active : styles.JobtitleFilter} onClick={() => 
-                { getjobs(); setActive("All") }}>All</buton>
-              {
-                jobTags.map((tags, i) => {
-                  return (
-                    <buton className={Active === tags.value ? styles.active : styles.JobtitleFilter} onClick={() => 
-                      { filterByJobTitle(tags.value) }}>{tags.value} </buton>
-                  )
-                })
-              }
+          <div style={{display:"flex" , alignItems:"center"}}>
+
+          <p>
+Technologies
+          </p>
+
+          <div className={styles.JobtitleFilterWrapper}>
+            <buton className={Active === "All" ? styles.active : styles.JobtitleFilter} onClick={() => { getjobs(); setActive("All") }}>All</buton>
+            {
+              jobTags.map((tags, i) => {
+                return (
+                  <buton className={Active === tags.value ? styles.active : styles.JobtitleFilter} onClick={() => { filterByJobTitle(tags.value) }}>{tags.value} </buton>
+                )
+              })
+            }
+          </div>
+          </div>
+          <div style={{display:"flex" , alignItems:"center"}}>
+
+            <p style={{marginLeft:"1%"}}>Role</p>          
+
+          <div className={styles.JobtitleFilterWrapper} style={{marginLeft:"2.4%"}}>
+            <buton className={Active === "All" ? styles.active : styles.JobtitleFilter} onClick={() => { getjobs(); setActive("All") }}>All</buton>
+            {
+              TechTags.map((tags, i) => {
+                return (
+                  <buton className={Active === tags.value ? styles.active : styles.JobtitleFilter} onClick={() => { filterByJobTitle(tags.value) }}>{tags.value} </buton>
+                )
+              })
+            }
+          </div>
           </div>
 
-                    
+          <div style={{display:"flex" , alignItems:"center"}}>
+
+          <p>Experience</p>          
+
+          <div className={styles.JobtitleFilterWrapper} style={{marginLeft:"1%"}}>
+            <buton className={Active === "All" ? styles.active : styles.JobtitleFilter} onClick={() => { getjobs(); setActive("All") }}>All</buton>
+            {
+              AgeTags.map((tags, i) => {
+                return (
+                  // <buton className={Active === tags.value ? styles.active : styles.JobtitleFilter} onClick={() => 
+                  //   { filterByJobTitle(tags.value) }}>{tags.value} </buton>
+                  <buton className={Active === tags.value ? styles.active : styles.JobtitleFilter} onClick={() => { filterByJobTitle(tags.value) }}>{tags.value} </buton>
+                )
+              })
+            }
+          </div>
+          </div>
+
+
           <div style={{ display: "flex", justifyContent: "space-between" }}>
             {nopageFilter ?
               <p style={{ fontWeight: 400, marginLeft: "10px" }}>Displaying <span style={{ color: "blue" }}>{Filtereredjobs}</span> from All Jobs</p>
@@ -495,15 +551,15 @@ function Home() {
               </button>
             </div>
           </div>
-          <div style={{marginBottom:"5px", marginTop:"0", marginLeft:"10px"}}>
+          <div style={{ marginBottom: "5px", marginTop: "0", marginLeft: "10px" }}>
             Show  <select onChange={(e) => { handleRecordchange(e) }}>
-            {/* <option value={""}>{recordsPerPage}</option> */}
-              <option selected= {lastIndex===10}  value={10}>10</option>
-              <option selected= {lastIndex===25}  value={25}>25</option>
-              <option selected= {lastIndex===50}  value={50}>50</option>
-              <option selected= {lastIndex===100} value={100}>100</option>
+              {/* <option value={""}>{recordsPerPage}</option> */}
+              <option selected={lastIndex === 10} value={10}>10</option>
+              <option selected={lastIndex === 25} value={25}>25</option>
+              <option selected={lastIndex === 50} value={50}>50</option>
+              <option selected={lastIndex === 100} value={100}>100</option>
             </select>  jobs per page
-            </div>
+          </div>
           {/* <button >Previous</button>
           { number.map((job,index)=>{
               return(
@@ -520,7 +576,7 @@ function Home() {
               <li style={{ backgroundColor: " rgb(40, 4, 99)" }} className={`${styles.li} ${styles.JobType}`}>JobType</li>
 
               {/* <li className={`${styles.li} ${styles.HliDescription}`}><b>Job description</b></li> */}
-              <li style={{ backgroundColor: " rgb(40, 4, 99)",  }} className={`${styles.li} ${styles.date}`}>Posted Date
+              <li style={{ backgroundColor: " rgb(40, 4, 99)", }} className={`${styles.li} ${styles.date}`}>Posted Date
                 <p className={styles.arrowWrapper} >
                   <i onClick={sortbyNewjobs} className={`${styles.arrow} ${styles.up}`} ></i>
                   <i onClick={sortbyOldjobs} className={`${styles.arrow} ${styles.down}`}></i>
@@ -529,16 +585,16 @@ function Home() {
               {/* style={{ position:"absolute", display:"block"}} */}
               <li style={{ backgroundColor: " rgb(40, 4, 99)" }} className={`${styles.li} ${styles.Location}`}>Location</li>
 
-              <li style={{ backgroundColor: " rgb(40, 4, 99)",  }} className={`${styles.li} ${styles.Package}`}>CTC
-              <p className={styles.arrowWrapper}>
+              <li style={{ backgroundColor: " rgb(40, 4, 99)", }} className={`${styles.li} ${styles.Package}`}>CTC
+                <p className={styles.arrowWrapper}>
 
                   <i onClick={SdescendingOrder} className={`${styles.arrow} ${styles.up}`}> </i>
                   <i onClick={SascendingOrder} className={`${styles.arrow} ${styles.down}`}></i>
                 </p>
               </li>
 
-              <li style={{ backgroundColor: " rgb(40, 4, 99)",  }} className={`${styles.li} ${styles.experiance}`}>Experience
-              <p className={styles.arrowWrapper}>
+              <li style={{ backgroundColor: " rgb(40, 4, 99)", }} className={`${styles.li} ${styles.experiance}`}>Experience
+                <p className={styles.arrowWrapper}>
 
                   <i onClick={EdescendingOrder} className={`${styles.arrow} ${styles.up}`}> </i>
                   <i onClick={EascendingOrder} className={`${styles.arrow} ${styles.down}`}></i>
@@ -565,7 +621,7 @@ function Home() {
                         !items.Source ?
 
                           <li style={{ cursor: "pointer", textDecoration: "underline" }} className={`${styles.li} ${styles.CompanyName}`}
-                            onClick={(e) => {checkEmpHalf(btoa(items.empId)) }}  >
+                            onClick={(e) => { checkEmpHalf(btoa(items.empId)) }}  >
                             {/* {items.Logo ?
                               < img style={{ width: "38px", height: "38px" }} src={items.Logo} />
                               : ""} 
@@ -619,7 +675,7 @@ function Home() {
                           }
                         )}
                       </li>
-                      <li className={`${styles.li} ${styles.Location}`}>{items.jobLocation[0].toUpperCase()+items.jobLocation.slice(1)}</li>
+                      <li className={`${styles.li} ${styles.Location}`}>{items.jobLocation[0].toUpperCase() + items.jobLocation.slice(1)}</li>
                       <li className={`${styles.li} ${styles.Package}`}>{items.salaryRange}L</li>
                       <li className={`${styles.li} ${styles.experiance}`}>{items.experiance}Y</li>
                       <li className={`${styles.li} ${styles.qualification}`}>{items.qualification}</li>
@@ -648,7 +704,7 @@ function Home() {
                         !items.Source ?
 
                           <li style={{ cursor: "pointer", textDecoration: "underline" }} className={`${styles.li} ${styles.CompanyName}`}
-                            onClick={(e) => {checkEmpHalf(btoa(items.empId)) }}  >
+                            onClick={(e) => { checkEmpHalf(btoa(items.empId)) }}  >
                             {/* {items.Logo ?
                               < img style={{ width: "38px", height: "38px" }} src={items.Logo} />
                               : ""} 
@@ -703,7 +759,7 @@ function Home() {
                           }
                         )}
                       </li>
-                      <li className={`${styles.li} ${styles.Location}`}>{items.jobLocation[0].toUpperCase()+items.jobLocation.slice(1)}</li>
+                      <li className={`${styles.li} ${styles.Location}`}>{items.jobLocation[0].toUpperCase() + items.jobLocation.slice(1)}</li>
                       <li className={`${styles.li} ${styles.Package}`}>{items.salaryRange}L</li>
                       <li className={`${styles.li} ${styles.experiance}`}>{items.experiance}Y</li>
                       <li className={`${styles.li} ${styles.qualification}`}>{items.qualification}</li>
@@ -725,17 +781,17 @@ function Home() {
             }
           </div>
 
-          <div style={{ display: "flex", justifyContent: "space-between"}}>
-          <div style={{marginTop:"14px", marginLeft:"10px"}} >
-            Show  <select onChange={(e) => { handleRecordchange(e) }}>
-              <option  selected = {lastIndex === 10} value={10}>10</option>
-              <option  selected = {lastIndex === 25} value={25}>25</option>
-              <option  selected = {lastIndex === 50} value={50}>50</option>
-              <option  selected = {lastIndex === 100} value={100}>100</option>
-            </select>  jobs per page
+          <div style={{ display: "flex", justifyContent: "space-between" }}>
+            <div style={{ marginTop: "14px", marginLeft: "10px" }} >
+              Show  <select onChange={(e) => { handleRecordchange(e) }}>
+                <option selected={lastIndex === 10} value={10}>10</option>
+                <option selected={lastIndex === 25} value={25}>25</option>
+                <option selected={lastIndex === 50} value={50}>50</option>
+                <option selected={lastIndex === 100} value={100}>100</option>
+              </select>  jobs per page
             </div>
 
-          <div className={styles.navigationWrapper}>
+            <div className={styles.navigationWrapper}>
               <button disabled={currentPage === 1} style={{ display: "inline", margin: "5px" }} className={styles.navigation} onClick={firstPage}>
                 <i class='fas fa-step-backward' ></i>
               </button>
@@ -751,7 +807,7 @@ function Home() {
               </button>
             </div>
 
-            </div>
+          </div>
 
         </>
         // Mobile View
