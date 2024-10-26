@@ -6,7 +6,7 @@ import { Editor } from 'react-draft-wysiwyg';
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css"; 
 import CreatableSelect  from "react-select/creatable"
 import Arrowimage from '../img/icons8-arrow-left-48.png';
-
+import Footer from '../Footer/Footer';
 
 import Style from "./postJobs.module.css"
 
@@ -237,6 +237,9 @@ window.addEventListener('keypress', function(event){
 
                 </div >
             </div >
+            <div style={{marginTop:"10px"}}>
+          <Footer/>
+        </div>
         </>
 
     )

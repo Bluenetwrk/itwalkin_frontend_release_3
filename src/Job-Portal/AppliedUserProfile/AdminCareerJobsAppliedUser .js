@@ -6,10 +6,9 @@ import { Link, useNavigate, useLocation, useParams } from "react-router-dom";
 import { Puff } from 'react-loader-spinner'
 import useScreenSize from '../SizeHook';
 import profileDp from "../img/user_3177440.png"
-import Footer from '../Footer/Footer';
 
 
-function AppliedUserProfile() {
+function AppliedUserProfileAdmin() {
     let params = useParams()
     let JobId = atob(params.jid)
 
@@ -30,7 +29,7 @@ function AppliedUserProfile() {
     async function getAppliedUserIds(OId) {
         setPageLoader(true)
 
-        await axios.get(`/jobpost/getAppliedUserIds/${OId}`)
+        await axios.get(`/Careerjobpost/getAppliedUserIds/${OId}`)
             .then(async (res) => {
                 let AppliedUserIds = res.data.jobSeekerId
                 let appliedUserIds = AppliedUserIds.map((ids) => {
@@ -57,12 +56,12 @@ function AppliedUserProfile() {
 
     function CheckProfile(StudID) {
         // navigate(`/Check-Profile/${StudID}`)
-        window.open(`/Check-Profile/${StudID}`, '_blank')
+        window.open(`/BIAddmin@CheckStudentProfile/${StudID}`, '_blank')
     }
 
     async function Select(id, status) {
         let slectedJobseker = id
-        await axios.put(`/jobpost/status/${JobId}`, { slectedJobseker })
+        await axios.put(`/Careerjobpost/status/${JobId}`, { slectedJobseker })
             .then((res) => {
                 getAppliedUserIds(JobId)
 
@@ -72,7 +71,7 @@ function AppliedUserProfile() {
     }
     async function Reject(id, status) {
         let rejectedJobseker = id
-        await axios.put(`/jobpost/status/${JobId}`, { rejectedJobseker })
+        await axios.put(`/Careerjobpost/status/${JobId}`, { rejectedJobseker })
             .then((res) => {
                 getAppliedUserIds(JobId)
 
@@ -82,7 +81,7 @@ function AppliedUserProfile() {
     }
     async function onHold(id, status) {
         let onHoldJobseker = id
-        await axios.put(`/jobpost/status/${JobId}`, { onHoldJobseker })
+        await axios.put(`/Careerjobpost/status/${JobId}`, { onHoldJobseker })
             .then((res) => {
                 getAppliedUserIds(JobId)
 
@@ -95,10 +94,8 @@ function AppliedUserProfile() {
         console.log(id)
         let userid = JSON.parse(localStorage.getItem("StudId"))
         const headers = { authorization: userid + " " + atob(JSON.parse(localStorage.getItem("StudLog"))) };
-
         let slectedJobseker = id
-
-        await axios.put(`/jobpost/updatforUndoJobApplied/${JobId}`, { slectedJobseker }, { headers })
+        await axios.put(`/Careerjobpost/updatforUndoJobApplied/${JobId}`, { slectedJobseker }, { headers })
             .then((res) => {
                 getAppliedUserIds(JobId)
             }).catch((err) => {
@@ -114,7 +111,7 @@ function AppliedUserProfile() {
 
         let rejectedJobseker = id
 
-        await axios.put(`/jobpost/updatforUndoJobApplied/${JobId}`, { rejectedJobseker }, { headers })
+        await axios.put(`/Careerjobpost/updatforUndoJobApplied/${JobId}`, { rejectedJobseker }, { headers })
             .then((res) => {
                 getAppliedUserIds(JobId)
             }).catch((err) => {
@@ -130,7 +127,7 @@ function AppliedUserProfile() {
 
         let onHoldJobseker = id
 
-        await axios.put(`/jobpost/updatforUndoJobApplied/${JobId}`, { onHoldJobseker }, { headers })
+        await axios.put(`/Careerjobpost/updatforUndoJobApplied/${JobId}`, { onHoldJobseker }, { headers })
             .then((res) => {
                 getAppliedUserIds(JobId)
             }).catch((err) => {
@@ -395,7 +392,7 @@ function AppliedUserProfile() {
                             return (
                                 <ul className={styles.ul} key={i}>
 
-                                    <li className={`${styles.li} ${styles.name} ${styles.onclick}`} onClick={() => { CheckProfile(btoa(Applieduser._id)) }} >
+                                    <li className={`${styles.li} ${styles.name} ${styles.onclick}`} onClick={() => { CheckProfile(Applieduser._id) }} >
                                         {Applieduser.name ? <a className={styles.namelink} title="Click to check the Contact Details">
                                             {Applieduser.name}</a> : <li className={styles.Nli}>N/A</li>} </li>
                                     <li className={`${styles.li} ${styles.NoticePeriod}`}> {Applieduser.NoticePeriod ?
@@ -453,22 +450,22 @@ function AppliedUserProfile() {
                                                                         })) ?
                                                                             <>
                                                                                 <button onClick={() => { UndoOnHold(Applieduser._id, "selected") }} style={{
-                                                                                    marginLeft: "2%", background: "blue", color: "white",cursor:"pointer",
+                                                                                    marginLeft: "2%", background: "blue", color: "white", cursor:"pointer",
                                                                                     border: "solid", width: "80%", height: "30px", fontWeight: "bold"
                                                                                 }} title="Click to Undo On Hold">OnHold<span style={{ fontSize: '16px' }} >&#10004;</span></button><br></br></>
                                                                             :
                                                                             <>
                                                                                 <button style={{
                                                                                     marginLeft: "2%", background: "rgb(40, 4, 99)", color: "white", border: "solid",
-                                                                                    width: "70%", height: "30px", fontWeight: "bold",cursor:"pointer",
+                                                                                    width: "70%", height: "30px", fontWeight: "bold",cursor:"pointer"
                                                                                 }} onClick={() => { Select(Applieduser._id, "selected") }}>Select</button><br></br>
                                                                                 <button style={{
                                                                                     marginLeft: "2%", background: "rgb(40, 4, 99)", color: "white", border: "solid",
-                                                                                    width: "70%", height: "30px", fontWeight: "bold",cursor:"pointer",
+                                                                                    width: "70%", height: "30px", fontWeight: "bold",cursor:"pointer"
                                                                                 }} onClick={() => { Reject(Applieduser._id, "Rejected") }}>Reject</button><br></br>
                                                                                 <button style={{
                                                                                     marginLeft: "2%", background: "rgb(40, 4, 99)", color: "white", border: "solid",
-                                                                                    width: "70%", height: "30px", fontWeight: "bold",cursor:"pointer",
+                                                                                    width: "70%", height: "30px", fontWeight: "bold",cursor:"pointer"
                                                                                 }} onClick={() => { onHold(Applieduser._id, "OhHold") }}>OnHold</button><br></br>
 
                                                                             </>
@@ -563,7 +560,7 @@ function AppliedUserProfile() {
                                             </div>
 
                                             <div className={styles.RightTable}>
-                                                <span className={styles.span}><span style={{ color: "blue", textDecoration: "underline" }} onClick={() => { CheckProfile(btoa(job._id)) }}  >{job.name} </span></span><br></br>
+                                                <span className={styles.span}><span style={{ color: "blue", textDecoration: "underline" }} onClick={() => { CheckProfile(job._id)}}  >{job.name} </span></span><br></br>
                                                 <span className={styles.span}>{job.age ? <span style={{ color: "blue" }}>{job.age} </span> : <span style={{ color: "red" }}>N/A</span>}</span><br></br>
                                                 <span className={styles.span}> {job.NoticePeriod ? <span style={{ color: "blue" }}>{job.NoticePeriod} </span> : <span style={{ color: "red" }}>N/A</span>}</span><br></br>
                                                 <span className={styles.span}> {job.Qualification ? <span style={{ color: "blue" }}>{job.Qualification} </span> : <span style={{ color: "red" }}>N/A</span>}</span><br></br>
@@ -653,11 +650,8 @@ function AppliedUserProfile() {
                     </div>
                 </>
             }
-                              <div style={{marginTop:"70px"}}>
-                              <Footer/>
-                            </div>
         </>
     )
 }
 
-export default AppliedUserProfile
+export default AppliedUserProfileAdmin

@@ -56,7 +56,7 @@ function AppliedUserProfileAdmin() {
 
     function CheckProfile(StudID) {
         // navigate(`/Check-Profile/${StudID}`)
-        window.open(`/Check-Profile/${StudID}`, '_blank')
+        window.open(`/BIAddmin@CheckStudentProfile/${StudID}`, '_blank')
     }
 
     async function Select(id, status) {
@@ -394,7 +394,7 @@ function AppliedUserProfileAdmin() {
                             return (
                                 <ul className={styles.ul} key={i}>
 
-                                    <li className={`${styles.li} ${styles.name} ${styles.onclick}`} onClick={() => { CheckProfile(btoa(Applieduser._id)) }} >
+                                    <li className={`${styles.li} ${styles.name} ${styles.onclick}`} onClick={() => { CheckProfile(Applieduser._id) }} >
                                         {Applieduser.name ? <a className={styles.namelink} title="Click to check the Contact Details">
                                             {Applieduser.name}</a> : <li className={styles.Nli}>N/A</li>} </li>
                                     <li className={`${styles.li} ${styles.NoticePeriod}`}> {Applieduser.NoticePeriod ?
@@ -562,7 +562,7 @@ function AppliedUserProfileAdmin() {
                                             </div>
 
                                             <div className={styles.RightTable}>
-                                                <span className={styles.span}><span style={{ color: "blue", textDecoration: "underline" }} onClick={() => { CheckProfile(job._id) }}  >{job.name} </span></span><br></br>
+                                                <span className={styles.span}><span style={{ color: "blue", textDecoration: "underline" }} onClick={() => { CheckProfile(job._id)}}  >{job.name} </span></span><br></br>
                                                 <span className={styles.span}>{job.age ? <span style={{ color: "blue" }}>{job.age} </span> : <span style={{ color: "red" }}>N/A</span>}</span><br></br>
                                                 <span className={styles.span}> {job.NoticePeriod ? <span style={{ color: "blue" }}>{job.NoticePeriod} </span> : <span style={{ color: "red" }}>N/A</span>}</span><br></br>
                                                 <span className={styles.span}> {job.Qualification ? <span style={{ color: "blue" }}>{job.Qualification} </span> : <span style={{ color: "red" }}>N/A</span>}</span><br></br>

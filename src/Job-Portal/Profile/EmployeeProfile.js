@@ -9,6 +9,7 @@ import useScreenSize from '../SizeHook';
 import image from '../img/icons8-arrow-button-24.png'
 import Arrowimage from '../img/icons8-arrow-left-48.png'
 import socketIO from 'socket.io-client';
+import Footer from '../Footer/Footer'
 
 function EmployeeProfile(props) {
     useEffect( ()=>{    
@@ -188,9 +189,13 @@ profileData.length>0?<button className={styles.updateProfile} onClick={updateEmp
                         })}
 
                     </div>
+
                 </>
         
 }
+<div style={{marginTop:"10px"}}>
+                      <Footer/>
+                    </div>
         </>
     )
 }

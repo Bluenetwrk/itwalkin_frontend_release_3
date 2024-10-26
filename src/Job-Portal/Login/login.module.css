@@ -4,7 +4,7 @@
     /* background-color: aqua; */
     /* font-weight: 550; */
     width:220px;
-    margin-left: 59px;
+    margin-left: 50px;
     display: inline;
 }
 .ModelWrapper{
@@ -37,7 +37,7 @@
 }
 .BothsignUpWrapper{
     margin-top: 2%;
-    margin-left: 46%;
+    margin-left: 42%;
 }
 
 @media (max-width:850px){

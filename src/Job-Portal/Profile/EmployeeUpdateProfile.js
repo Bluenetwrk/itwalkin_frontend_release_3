@@ -12,6 +12,7 @@ import useScreenSize from '../SizeHook';
 import socketIO from 'socket.io-client';
 import Arrowimage from '../img/icons8-arrow-left-48.png'
 import validator from "validator";
+import Footer from '../Footer/Footer';
 
 
 function EmployeeUpdateProfile(props) {
@@ -428,7 +429,9 @@ const [immage, setimmage] = useState()
         </div>
 
       </div>
-
+      <div style={{marginTop:"10px"}}>
+                      <Footer/>
+                    </div>
     </>
   )
 }

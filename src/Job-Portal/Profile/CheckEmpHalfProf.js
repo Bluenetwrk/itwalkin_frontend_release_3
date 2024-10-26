@@ -8,8 +8,7 @@ import Swal from "sweetalert2";
 import { Puff } from  'react-loader-spinner'
 import useScreenSize from '../SizeHook';
 import Arrowimage from '../img/icons8-arrow-left-48.png'
-
-
+import Footer from '../Footer/Footer';
 
 function CheckEmpHalfProfile() {
     
@@ -217,6 +216,9 @@ profileData.map((item, i) => {
             </>
 
           }
+                                <div style={{marginTop:"130px"}}>
+                      <Footer/>
+                    </div>
 
         </>
     )

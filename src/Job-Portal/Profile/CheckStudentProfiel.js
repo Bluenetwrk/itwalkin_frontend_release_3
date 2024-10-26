@@ -7,7 +7,7 @@ import profileDp from "../img/user_3177440.png"
 import { Puff } from  'react-loader-spinner'
 import useScreenSize from '../SizeHook';
 import Arrowimage from '../img/icons8-arrow-left-48.png'
-
+import Footer from '../Footer/Footer';
 
 function CheckStudentProfile() {
 
@@ -154,6 +154,9 @@ profileData.map((item, i) => {
 </div>
             </>
 }
+<div style={{marginTop:"10px"}}>
+                      <Footer/>
+                    </div>
         </>
     )
 }

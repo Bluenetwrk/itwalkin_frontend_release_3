@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react'
 import axios from "axios"
 import Companylogo from "../img/logo.png"
 import { useNavigate } from 'react-router-dom'
+import Footer from '../Footer/Footer'
 
 import { Editor } from 'react-draft-wysiwyg';
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
@@ -298,6 +299,9 @@ function PostJobs(props) {
 
                 })
             }
+                  <div style={{marginTop:"10px"}}>
+          <Footer/>
+        </div>
         </>
 
     )

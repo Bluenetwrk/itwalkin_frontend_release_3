@@ -11,8 +11,7 @@ import useScreenSize from '../SizeHook';
 import socketIO from 'socket.io-client';
 import CreatableSelect  from "react-select/creatable"
 import Arrowimage from '../img/icons8-arrow-left-48.png'
-
-
+import Footer from '../Footer/Footer';
 
 
 function StudentUpdateProfile(props) {
@@ -23,24 +22,119 @@ function StudentUpdateProfile(props) {
       }
     });
   }, [])
-  const [file, setFile] = useState()
-  const [uploaded, setUploaded] = useState()
-  const screenSize = useScreenSize();
-  const [image, setimage] = useState()
-  const [immage, setimmage] = useState()
-  const [name, setname] = useState("")
-  const [email, setemail] = useState("")
-  const [phoneNumber, setphoneNumber] = useState("")
-  const [Aadhar, setAadhar] = useState("")
-  const [panCard, setpanCard] = useState("")
-  const [NoticePeriod, setNoticePeriod] = useState("")
-  const [ExpectedSalary, setExpectedSalary] = useState("")
-  const [currentCTC, setcurrentCTC] = useState("")
-  const [age, setage] = useState("")
-  const [Qualification, setQualification] = useState("")
-  const [Skills, setSkills] = useState("")
-  const [Experiance, setExperiance] = useState("")
-  const [loader, setLoader] = useState(false)
+
+  let colleges=[
+    {value:'Indian Institute Of Technology, Kharagpur', label: 'Indian Institute Of Technology, Kharagpur'},
+    {value:'Indian Institute Of Engineering Science And Technology, Shibpur', label:'Indian Institute Of Engineering Science And Technology, Shibpur' },
+    {value:'National Institute Of Technology, Durgapur', label:'National Institute Of Technology, Durgapur' },
+    {value:'Institute Of Engineering & Management', label:'Institute Of Engineering & Management' },
+    {value:'Bengal Institute Of Technology', label:'Bengal Institute Of Technology' },
+    {value:'Indian Institute Of Technology, Roorkee', label:'Indian Institute Of Technology, Roorkee' },
+    {value:'Adhiyamaan College Of Engineering & Technology', label:'Adhiyamaan College Of Engineering & Technology' }, 
+    {value:'Anand Institute Of Higher Technology', label:'Anand Institute Of Higher Technology' }, 
+    {value:'Indian Institute Of Technology, Kanpur', label:'Indian Institute Of Technology, Kanpur' },
+    {value:'Indian Institute Of Technology Banaras Hindu University, Varanasi', label:'Indian Institute Of Technology Banaras Hindu University, Varanasi' },
+    {value:'Motilal Nehru National Institute Of Technology', label:'Motilal Nehru National Institute Of Technology' },
+    {value:'Noida Institute Of Engineering & Technology', label:'Noida Institute Of Engineering & Technology' },
+    {value:'National Institute Of Technology, Agartala', label:'National Institute Of Technology, Agartala' }, 
+    {value:'Indian Institute Of Technology, Hyderabad', label:'Indian Institute Of Technology, Hyderabad' }, 
+    {value:'National Institute Of Technology, Warangal', label:'National Institute Of Technology, Warangal' }, 
+    {value:'Chaitanya Bharathi Institute Of Technology', label:'Chaitanya Bharathi Institute Of Technology' }, 
+    {value:'Indian Institute Of Technology, Madras', label:'Indian Institute Of Technology, Madras' }, 
+    {value:'National Institute Of Technology, Tiruchirappalli', label:'National Institute Of Technology, Tiruchirappalli' }, 
+    {value:'Psg College Of Technology-Coimbatore', label:'Psg College Of Technology-Coimbatore' }, 
+    {value:'Thiagarajar College Of Engineering-Madurai', label:'Thiagarajar College Of Engineering-Madurai' }, 
+    {value:'Coimbatore Institute Of Technology', label:'Coimbatore Institute Of Technology' }, 
+    {value:'Kongu Engineering College', label:'Kongu Engineering College' }, 
+    {value:'sona College Of Technology-Salem', label:'sona College Of Technology-Salem' }, 
+    {value:'Amrita Viswa Vidyapeetham-Amrita Nagar  ,Ettimadai', label:'Amrita Viswa Vidyapeetham-Amrita Nagar ,Ettimadai' },  
+    {value:'Kumaraguru College Of Technology-Coimbatore', label:'Kumaraguru College Of Technology-Coimbatore' },  
+    {value:'Bannari Amman Institute Of Technology-Sathyamangalam', label:'Bannari Amman Institute Of Technology-Sathyamangalam' },  
+    {value:'Indian Institute Of Information Technology, Design & Manufacturing (IIITD&M) Kancheepuram-Chennai', label:'Indian Institute Of Information Technology, Design & Manufacturing (IIITD&M) Kancheepuram-Chennai' },  
+    {value:'Sri Ramakrishna Engineering College-Coimbatore', label:'Sri Ramakrishna Engineering College-Coimbatore' }, 
+    {value:'Indian Institute Of Technology, Jodhpur', label:'Indian Institute Of Technology, Jodhpur' }, 
+    {value:'alaviya National Institute Of Technology, Jaipur', label:'alaviya National Institute Of Technology, Jaipur' }, 
+    {value:'College Of Technology And Engineering-Udaipur', label:'College Of Technology And Engineering-Udaipur' }, 
+    {value:'Indian Institute Of Technology, Ropar', label:'Indian Institute Of Technology, Ropar' }, 
+    {value:'Thapar University-Patiala', label:'Thapar University-Patiala' }, 
+    {value:'Dr. B R Ambedkar National Institute Of Technology, Jalandhar', label:'Dr. B R Ambedkar National Institute Of Technology, Jalandhar' }, 
+    {value:'Indian Institute Of Science Education & Research, Mohali', label:'Indian Institute Of Science Education & Research, Mohali' }, 
+    {value:'Sant Longowal Institute Of Engineering & Technology-Sangrur', label:'Sant Longowal Institute Of Engineering & Technology-Sangrur' }, 
+    {value:'Pondicherry Engineering College', label:'Pondicherry Engineering College' }, 
+    {value:'National Institute Of Technology, Rourkela', label:'National Institute Of Technology, Rourkela' }, 
+    {value:'Indian Institute Of Technology, Bhubaneswar', label:'Indian Institute Of Technology, Bhubaneswar' }, 
+    {value:'Kalinga Institue Of Industrial Technology', label:'Kalinga Institue Of Industrial Technology' }, 
+    {value:'National Institute Of Science & Technology-Berhampur', label:'National Institute Of Science & Technology-Berhampur' }, 
+    {value:'C.V.Raman College Of Engineering-Bhubaneswar', label:'C.V.Raman College Of Engineering-Bhubaneswar' }, 
+    {value:'Centurion Institute Of Technology', label:'Centurion Institute Of Technology' }, 
+    {value:'National Institute Of Technology, Meghalaya', label:'National Institute Of Technology, Meghalaya' }, 
+    {value:'Indian Institute Of Technology, Bombay', label:'Indian Institute Of Technology, Bombay' }, 
+    {value:'Visvesvaraya National Institute Of Technology, Nagpur ', label:'Visvesvaraya National Institute Of Technology, Nagpur ' }, 
+    {value:'Bharati Vidyapeeth Deemed University College Of Engineering-Pune', label:'Bharati Vidyapeeth Deemed University College Of Engineering-Pune' }, 
+    {value:'Vishwakarma Institute Of Technology-Pune', label:'Vishwakarma Institute Of Technology-Pune' }, 
+    {value:'University Institute Of Chemical Technology, North Maharashtra University, Jalgaon', label:'University Institute Of Chemical Technology, North Maharashtra University, Jalgaon' }, 
+    {value:'Kasegaon Education Societys Rajarambapu Institute Of Technology-Islampur', label:'Kasegaon Education Societys Rajarambapu Institute Of Technology-Islampur' }, 
+    {value:'Veermata Jijabai Technological Institute', label:'Veermata Jijabai Technological Institute' }, 
+    {value:'K. K. Wagh Institute Of Engineering Education & Research-Nashik', label:'K. K. Wagh Institute Of Engineering Education & Research-Nashik' }, 
+    {value:'Shri Ramdeobaba College Of Engineering And Management, Ramdeo Tekdi, Gittikhadan, Nagpur', label:'Shri Ramdeobaba College Of Engineering And Management, Ramdeo Tekdi, Gittikhadan, Nagpur' }, 
+    {value:'Shri Guru Gobind Singhji Institute Of Engineering And Technology-Nanded', label:'Shri Guru Gobind Singhji Institute Of Engineering And Technology-Nanded' }, 
+    {value:'Yeshwantrao Chavan College Of Engineering-Nagpur', label:'Yeshwantrao Chavan College Of Engineering-Nagpur' }, 
+    {value:'Maharashtra Academy Of Engineering And Educational Research, Mit College Of Engineering, Pune', label:'Maharashtra Academy Of Engineering And Educational Research, Mit College Of Engineering, Pune' }, 
+    {value:'Government College Of Engineering, Aurangabad ', label:'Government College Of Engineering, Aurangabad ' }, 
+    {value:'Indian Institute Of Technology, Indore', label:'Indian Institute Of Technology, Indore' }, 
+    {value:'Itm University School Of Engineering & Technology-Gwalior', label:'Itm University School Of Engineering & Technology-Gwalior' }, 
+    {value:'Pandit Dwarka Prasad Mishra Indian Institute Of Information Technology, Jabalpur', label:'Pandit Dwarka Prasad Mishra Indian Institute Of Information Technology, Jabalpur' }, 
+    {value:'Amrita School Of Engineering', label:'Amrita School Of Engineering' }, 
+    {value:'National Institute Of Technology, Calicut', label:'National Institute Of Technology, Calicut' }, 
+    {value:'Cochin University Of Science And Technology-Cochin ', label:'Cochin University Of Science And Technology-Cochin ' }, 
+    {value:'National Institute Of Technology, Karnataka', label:'National Institute Of Technology, Karnataka' }, 
+    {value:'M. S. Ramaiah Institute Of Technology-Bangalore', label:'M. S. Ramaiah Institute Of Technology-Bangalore' }, 
+    {value:'R.V. College Of Engineering-Bengaluru', label:'R.V. College Of Engineering-Bengaluru' }, 
+    {value:'Manipal Institute Of Technology', label:'Manipal Institute Of Technology' }, 
+    {value:'Siddaganga Institute Of Technology-Tumkur', label:'Siddaganga Institute Of Technology-Tumkur' }, 
+    {value:'The National Institute Of Engineering', label:'The National Institute Of Engineering' }, 
+    {value:'Birla Institute Of Technology', label:'Birla Institute Of Technology' }, 
+    {value:'National Institute Of Technology, Jamshedpur', label:'National Institute Of Technology, Jamshedpur' }, 
+    {value:'National Institute Of Technology, Srinagar', label:'National Institute Of Technology, Srinagar' }, 
+    {value:'Indian Institute Of Technology, Mandi', label:'Indian Institute Of Technology, Mandi' }, 
+    {value:'National Institute Of Technology, Hamirpur', label:'National Institute Of Technology, Hamirpur' }, 
+    {value:'National Institute Of Technology, Kurukshetra', label:'National Institute Of Technology, Kurukshetra' }, 
+    {value:'Indian Institute Of Technology, Gandhinagar', label:'Indian Institute Of Technology, Gandhinagar' }, 
+    {value:'Sardar Vallabhbhai National Institute Of Technology', label:'Sardar Vallabhbhai National Institute Of Technology' }, 
+    {value:'National Institute Of Technology, Goa', label:'National Institute Of Technology, Goa' }, 
+    {value:'Indian Institute Of Technology, Delhi', label:'Indian Institute Of Technology, Delhi' }, 
+    {value:'Jamia Millia Islamia A Central University', label:'Jamia Millia Islamia A Central University' }, 
+    {value:'National Institute Of Technology, Delhi', label:'National Institute Of Technology, Delhi' }, 
+    {value:'National Institute Of Technology, Raipur', label:'National Institute Of Technology, Raipur' }, 
+    {value:'Pec University Of Technology - Chandigar', label:'Pec University Of Technology - Chandigar' }, 
+    {value:'University Institute Of Chemical Engineering And Technology', label:'University Institute Of Chemical Engineering And Technology' }, 
+    {value:'Indian Institute Of Technology, Patna', label:'Indian Institute Of Technology, Patna' }, 
+    {value:'National Institute Of Technology, Patna', label:'National Institute Of Technology, Patna' }, 
+    {value:'Indian Institute Of Technology, North Guwahati', label:'Indian Institute Of Technology, North Guwahati' }, 
+    {value:'National Institute Of Technology, Silchar', label:'National Institute Of Technology, Silchar' }, 
+    {value:'Sagi Ramakrishnam Raju Engineering College-Bhimavaram', label:'Sagi Ramakrishnam Raju Engineering College-Bhimavaram' }, 
+     ]
+
+     const [file, setFile] = useState()
+     const [uploaded, setUploaded] = useState()
+     const screenSize = useScreenSize();
+     const [image, setimage] = useState()
+     const [immage, setimmage] = useState()
+     const [name, setname] = useState("")
+     const [email, setemail] = useState("")
+     const [phoneNumber, setphoneNumber] = useState("")
+     const [Aadhar, setAadhar] = useState("")
+     const [panCard, setpanCard] = useState("")
+     const [NoticePeriod, setNoticePeriod] = useState("")
+     const [ExpectedSalary, setExpectedSalary] = useState("")
+     const [currentCTC, setcurrentCTC] = useState("")
+     const [age, setage] = useState("")
+     const [Qualification, setQualification] = useState("")
+     const [Skills, setSkills] = useState("")
+     const [Experiance, setExperiance] = useState("")
+     const [loader, setLoader] = useState(false)
+
+
 
   let jobTags = [
     { value: 'ReactJs', label: 'ReactJs' },
@@ -58,10 +152,14 @@ function StudentUpdateProfile(props) {
      { value: 'Security Developer', label: 'Security Developer' }, { value: 'Cloud Developers', label: 'Cloud Developers' },
      ]
   const [Tags, setTag] = useState([])
+  const [college, setcollege] = useState([])
   const [Resulttag, setResulttagTag] = useState()
 
     function handleChange(tag){
       setTag(tag)      
+  }  
+    function handleCollege(tag){
+      setcollege(tag)      
   }  
     const [city, setcity] = useState([])
 
@@ -94,8 +192,8 @@ function StudentUpdateProfile(props) {
           setphoneNumber(result.phoneNumber)
           setAadhar(result.Aadhar)
           setpanCard(result.panCard)
-          // setcityTag(result.city)
           setcity(result.city)          
+          setcollege(result.college)          
           setNoticePeriod(result.NoticePeriod)
           setExpectedSalary(result.ExpectedSalary)
           setcurrentCTC(result.currentCTC)
@@ -133,7 +231,7 @@ function StudentUpdateProfile(props) {
     // e.preventDefault()
     await axios.put(`/StudentProfile/updatProfile/${studId}`, {
       name, email, phoneNumber, Aadhar, panCard, city, NoticePeriod, 
-      ExpectedSalary, currentCTC, age, Qualification, Skills, Experiance, Tags
+      ExpectedSalary, currentCTC, age, Qualification, Skills, Experiance, Tags, college
     }, { headers })
       .then(async (res) => {
         let result = res.data
@@ -275,7 +373,7 @@ if(confirm){
 
             <img className={styles.imageView} src={image ? image : profileDp} />
             <img className={styles.fileView} src={file} />
-            <div style={{position:"absolute", marginLeft:"59%", marginTop:"40px"}}>
+            <div style={{position:"absolute", marginLeft:"50%", marginTop:"40px"}}>
               <input type='checkbox' onClick={()=>{setShowdelete(prev=>!prev)}} />
              <span>delete Profile</span><br></br>
              {showdelete?
@@ -390,7 +488,14 @@ border:"none",padding: "4px 8px"}} onClick={DeleteProfile}>Delete</button>
 
               <label className={styles.inputName}>
                 <h4>College:</h4>
-                <input maxLength="100" className={styles.input} disabled type="text" />
+                <div style={{marginTop:"-7px", width:"81%", marginLeft:"18px"}}>
+                {/* <input maxLength="100" className={styles.input} disabled type="text" /> */}
+                <CreatableSelect  
+                  options={colleges}
+                  value={college}
+                  onChange={handleCollege}   
+                />
+                </div>
               </label>
 
               <button className={styles.Save} onClick={(e) => { saveUpdate(e) }}>Save</button>
@@ -411,13 +516,16 @@ border:"none",padding: "4px 8px"}} onClick={DeleteProfile}>Delete</button>
               </label>
 
               <label className={styles.MobileinputName}>
-                <h4>City: <span style={{color:"blue"}}>{city}</span></h4>
+                <h4>City: </h4>
+                <div style={{ width:"88%", marginLeft:"10px"}}>
+
                 <CreatableSelect  
-                isMulti={true}
-                  options={CTags}
-                  value={city}
-                  onChange={handleChangeCityTag}     
-                />
+                  // isMulti={true}
+                          options={CTags}
+                          value={city}
+                          onChange={handleChangeCityTag}     
+                        />
+                        </div>
               </label>
 
               <label className={styles.MobileinputName}>
@@ -480,10 +588,21 @@ border:"none",padding: "4px 8px"}} onClick={DeleteProfile}>Delete</button>
                         />
                          </div>
               </label>
+               <label className={styles.inputName}>
+                <h4 className={styles.MobileName}>College:</h4>
+                <div style={{ width:"88%", marginLeft:"10px"}}>
+                <CreatableSelect  
+                  options={colleges}
+                  value={college}
+                  onChange={handleCollege}   
+                />
+                         </div>
+              </label>
 
-
+<div style={{marginTop:"10px"}}>
               <button className={styles.MobileSave} onClick={(e) => { saveUpdate(e) }}>Save</button>
               <button className={styles.Mobilecancel} onClick={() => { navigate(-1) }} >cancel</button>
+              </div>
 
             </>
 
@@ -491,6 +610,9 @@ border:"none",padding: "4px 8px"}} onClick={DeleteProfile}>Delete</button>
         </div>
 
       </div>
+      <div style={{marginTop:"60px"}}>
+          <Footer/>
+        </div>
 
     </>
   )

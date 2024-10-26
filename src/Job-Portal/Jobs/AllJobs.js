@@ -1,5 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 
+import Footer from '../Footer/Footer';
+
 import styles from "./Allobs.module.css"
 import axios from "axios";
 import { Link, useNavigate, BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
@@ -1015,6 +1017,8 @@ function AllJobs(props) {
         </>
 
       }
+      
+        <Footer />
     </>
 
   )

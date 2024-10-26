@@ -138,7 +138,7 @@ function PostedCareerJobs(props) {
   }
 
   function seeProfilejobSeekerId(id) {
-    window.open(`/Applied-User-Profile/${id}`, '_blank')
+    window.open(`/BIAdd@Applied-CareerUser-Profile/${id}`, '_blank')
   }
 
   // ..........Sorting.......
@@ -397,7 +397,7 @@ function handleRecordchange(e){
                     }).slice(0,1)
                     }
                    
-                      <span style={{ color: "blue", cursor:"pointer" }} onClick={() => { navigate(`/Jobdetails/${btoa(items._id)}`) }} >...see more</span>
+                      <span style={{ color: "blue", cursor:"pointer" }} onClick={() => { navigate(`/CareerJobdetails/${btoa(items._id)}`) }} >...see more</span>
 
                     </li>
                     <li className={`${styles.li} ${styles.Pdate}`}>
@@ -466,21 +466,8 @@ function handleRecordchange(e){
       </>
       :
       <> 
+       <p style={{marginLeft:"28%", marginTop:"30px", fontSize:"medium", fontWeight:"bold"}}>Career Posted Jobs</p>
 
-
-<button className={styles.searchButton} onClick={() => {
-          navigate("/Search-Candidate")
-        }}>Search Candidate</button>
-
-<p style={{ marginLeft: "4%", color: "blue", fontWeight:"bold" }}> Total {myjobs.length} jobs</p>
-        <div className={styles.searchBoth}>
-          <p className={styles.p}>Search </p>
-          <input className={styles.inputboxsearch} type="text" placeholder='search for a posted job' onChange={(e) => { search(e) }} />
-        </div>
-        {Result ?
-            <h4 style={{ marginLeft: "34%", marginTop: "0px"}}> {myjobs.length} matching Result Found  </h4>
-            : ""
-          }
       <div id={styles.JobCardWrapper} >
 
 {myjobs.length>0?
@@ -494,7 +481,7 @@ myjobs.map((job, i) => {
   window.scrollTo({
     top:0
   })
-  navigate(`/Jobdetails/${btoa(job._id)}`)}} >{job.jobTitle.toUpperCase()} </p>                      
+  navigate(`/CareerJobdetails/${btoa(job._id)}`)}} >{job.jobTitle.toUpperCase()} </p>                      
         <p className={styles.Date}>{new Date(job.createdAt).toLocaleString(
           "en-US",
           {
@@ -531,7 +518,7 @@ myjobs.map((job, i) => {
 
         <span className={styles.NoOfJobSeekersApplied}> No. of Job Seekers Applied:
         {job.jobSeekerId.length > 0 ?
-                          <button className={`${styles.MobileviewButton}`} onClick={() => { seeProfilejobSeekerId(job._id) }}>{job.jobSeekerId.length}</button>
+                          <button className={`${styles.MobileviewButton}`} onClick={() => { seeProfilejobSeekerId(btoa(job._id)) }}>{job.jobSeekerId.length}</button>
                           :
                           <button className={`${styles.MobileZeroViewButton}`} >{job.jobSeekerId.length}</button>
 

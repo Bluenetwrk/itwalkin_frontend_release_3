@@ -2,6 +2,7 @@ import { useState, useEffect } from "react"
 import React from 'react'
 import styles from "./login.module.css"
 import axios from "axios"
+import Footer from "../Footer/Footer"
 import { useNavigate, Link, useLocation } from "react-router-dom";
 import GoogleImage from "../img/icons8-google-48.png"
 import MicosoftImage from "../img/icons8-windows-10-48.png"
@@ -276,7 +277,10 @@ useEffect(() => {
 
 
       </div>
-      {/* </div> */}
+
+      <div style={{marginTop:"170px"}}>
+          <Footer/>
+        </div>
     </>
 
   )

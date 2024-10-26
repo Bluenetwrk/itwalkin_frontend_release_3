@@ -3,6 +3,7 @@ import axios from "axios"
 import { useState, useEffect } from 'react'
 import Up from "./img/icons8-arrow-button-24.png"
 import Down from "./img/icons8-down-button-24.png"
+import Footer from './Footer/Footer'
 
 
 function TermsAndCondition() {
@@ -362,6 +363,9 @@ We does not take responsibility or liability for the actions, products, content 
         </p>
         </div>
 <img style={{marginLeft:"50%"}} id="down" onClick={()=>{goUp()}} src = {Up}/>
+<div style={{marginTop:"60px"}}>
+          <Footer/>
+        </div>
 
     </>
 

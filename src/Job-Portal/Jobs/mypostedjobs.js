@@ -9,6 +9,7 @@ import useScreenSize from '../SizeHook';
 import location from "../img/icons8-location-20.png" 
 import graduation from "../img/icons8-graduation-cap-40.png"
 import socketIO from 'socket.io-client';
+import Footer from '../Footer/Footer';
 
 
 function JoppostedByEmp(props) {
@@ -614,7 +615,9 @@ myjobs.map((job, i) => {
 </div>
       </>
 }
-
+<div style={{marginTop:"10px"}}>
+          <Footer/>
+        </div>
 
     </>
 

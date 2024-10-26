@@ -6,6 +6,7 @@ import { Link, useNavigate, BrowserRouter, Routes, Route, useLocation } from "re
 import { TailSpin, Puff } from "react-loader-spinner"
 import location from "../img/icons8-location-20.png"
 import graduation from "../img/icons8-graduation-cap-40.png"
+import Footer from '../Footer/Footer';
 
 import useScreenSize from '../SizeHook';
 import socketIO from 'socket.io-client';
@@ -536,7 +537,8 @@ function AllJobs(props) {
                           !items.Source ?
 
                             <li style={{ cursor: "pointer", textDecoration: "underline" }} className={`${styles.li} ${styles.CompanyName}`}
-                              onClick={() => { navigate(`/CheckEmpHalfProfile/${btoa(items.empId)}`) }}  >
+                              // onClick={() => { navigate(`/CheckEmpHalfProfile/${btoa(items.empId)}`) }} 
+                               >
                               {/* {items.Logo ?
                               < img style={{ width: "38px", height: "38px" }} src={items.Logo} />
                               : ""}
@@ -561,7 +563,7 @@ function AllJobs(props) {
 
                         {/* } */}
 
-                        <li className={`${styles.li} ${styles.Jtitle}`} onClick={() => navigate(`/Jobdetails/${btoa(items._id)}`)} style={{ cursor: "pointer", textDecoration: "underline", color: "blue" }}>{items.jobTitle.toUpperCase()}</li>
+                        <li className={`${styles.li} ${styles.Jtitle}`} onClick={() => navigate(`/CareerJobdetails/${btoa(items._id)}`)} style={{ cursor: "pointer", textDecoration: "underline", color: "blue" }}>{items.jobTitle.toUpperCase()}</li>
                         <li className={`${styles.li} ${styles.JobType}`}>{items.jobtype}</li>
 
                         {/* <li className={`${styles.li} ${styles.liDescription}`}>
@@ -641,7 +643,8 @@ function AllJobs(props) {
                           !items.Source ?
 
                             <li style={{ cursor: "pointer", textDecoration: "underline" }} className={`${styles.li} ${styles.CompanyName}`}
-                              onClick={() => { navigate(`/CheckEmpHalfProfile/${btoa(items.empId)}`) }}  >
+                              // onClick={() => { navigate(`/CheckEmpHalfProfile/${btoa(items.empId)}`) }} 
+                               >
                               {/* {items.Logo ?
                               < img style={{ width: "38px", height: "38px" }} src={items.Logo} />
                               : ""}
@@ -666,7 +669,7 @@ function AllJobs(props) {
 
                         {/* } */}
 
-                        <li className={`${styles.li} ${styles.Jtitle}`} onClick={() => navigate(`/Jobdetails/${btoa(items._id)}`)} style={{ cursor: "pointer", textDecoration: "underline", color: "blue" }}>{items.jobTitle.toUpperCase()}</li>
+                        <li className={`${styles.li} ${styles.Jtitle}`} onClick={() => navigate(`/CareerJobdetails/${btoa(items._id)}`)} style={{ cursor: "pointer", textDecoration: "underline", color: "blue" }}>{items.jobTitle.toUpperCase()}</li>
                         <li className={`${styles.li} ${styles.JobType}`}>{items.jobtype}</li>
 
                         {/* <li className={`${styles.li} ${styles.liDescription}`}>
@@ -882,7 +885,7 @@ function AllJobs(props) {
                             window.scrollTo({
                               top: 0
                             })
-                            navigate(`/Jobdetails/${btoa(job._id)}`)
+                            navigate(`/CareerJobdetails/${btoa(job._id)}`)
                           }} >{job.jobTitle.toUpperCase()}</p>
                           <p className={styles.Date}>{new Date(job.createdAt).toLocaleString(
                             "en-US",
@@ -898,7 +901,10 @@ function AllJobs(props) {
 
                           {!job.Source ?
 
-                            <> <span className={styles.companyName} onClick={() => { navigate(`/CheckEmpHalfProfile/${btoa(job.empId)}`) }} >{job.companyName} </span><br></br></>
+                            <> <span className={styles.companyName}
+                            //  onClick={() => { navigate(`/CheckEmpHalfProfile/${btoa(job.empId)}`) }} 
+                            >
+                              {job.companyName} </span><br></br></>
                             :
                             //  <> <span className={styles.companyName} onClick={()=>{checkEmpHalf(job.empId)}} >{job.companyName} </span><br></br></>
                             <> <a className={`${styles.companyName}`} href={job.SourceLink} target="_blank">{job.Source}</a><br></br> </>
@@ -994,6 +1000,9 @@ function AllJobs(props) {
         </>
 
       }
+      <div style={{marginTop:"60px"}}>
+          <Footer/>
+        </div>
     </>
 
   )

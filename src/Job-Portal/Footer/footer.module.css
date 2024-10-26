@@ -1,10 +1,8 @@
 
 .footerWraper{
     background-color: rgb(29, 1, 75);
-    /* position: absolute; */
-    margin-top:38px;
     width: 100%;
-
+    margin-top: 50px;
 }
 
 .footer{

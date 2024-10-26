@@ -312,9 +312,13 @@ function Nav(props) {
           StudentAuth ?
             <>
               <div className={Styles.fullnavewrapper}>
-                <div className={Styles.logoWrapper}>
-                  <NavLink to="/" > <img className={Styles.Moblogo} src={logo} /> </NavLink>
-                </div>
+                {/* <div className={Styles.logoWrapper}> */}
+                  {/* <NavLink to="/" > <img className={Styles.Moblogo} src={logo} /> </NavLink> */}
+                  <div className={Styles.ITwalkinWrapper}>
+                      <p className={Styles.ITwalkin}>ITwalkin</p>
+                      <p className={Styles.onlyforITjobs}>Only for IT jobs</p>
+                      </div>
+                {/* </div> */}
                 <div className={Styles.linkWrapper}>
 
                   <NavLink to="/alljobs" className={`${Styles.Moblink} ${Styles.AlllJobs}`} >All Jobs </NavLink>
@@ -330,6 +334,8 @@ function Nav(props) {
               </div>
               {/* .....................drop down............ */}
               {showprofile ?
+                <div className={Styles.Alldownwrapper} >
+
                 <div className={Styles.MobJobseekerDropdownwrapper} ref={menuRef} >
                   <p className={Styles.text} ref={menuRef} onClick={myprofile}>My profile</p>
 
@@ -338,6 +344,7 @@ function Nav(props) {
                   <p className={Styles.text} ref={menuRef} onClick={MyJobApplied}>Jobs Applied</p>
                   <p className={Styles.text} ref={menuRef} onClick={StudlogOut}>Logout</p>
 
+                </div>
                 </div>
                 : ""}
             </>

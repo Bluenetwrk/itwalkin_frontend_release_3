@@ -7,7 +7,7 @@ import { Link, useNavigate, useLocation, useParams } from "react-router-dom";
 import useScreenSize from '../SizeHook';
 import profileDp from "../img/user_3177440.png"
 import Arrowimage from '../img/icons8-arrow-left-48.png'
-
+import Footer from '../Footer/Footer';
 
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
@@ -683,6 +683,10 @@ function SearchCandidate() {
           </div>
         </>
       }
+
+<div style={{marginTop:"10px"}}>
+          <Footer/>
+        </div>
 
     </>
   )

@@ -8,6 +8,7 @@ import { useNavigate } from 'react-router-dom'
 import useScreenSize from '../SizeHook';
 import Arrowimage from '../img/icons8-arrow-left-48.png'
 import socketIO from 'socket.io-client';
+import Footer from '../Footer/Footer'
 
 
 function StudentProfile(props) {
@@ -202,6 +203,9 @@ profileData.length>0?<button className={styles.MobupdateProfile} onClick={update
             </>
       }
 
+<div style={{marginTop:"60px"}}>
+<Footer/>
+</div>
         </>
     )
 }

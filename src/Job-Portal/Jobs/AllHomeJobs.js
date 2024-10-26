@@ -10,7 +10,7 @@ import useScreenSize from '../SizeHook';
 // import {SwipeableViews} from 'react-swipeable-views-v18';
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
-
+import Footer from '../Footer/Footer';
 
 const responsive = {
   desktop: {
@@ -622,6 +622,7 @@ Technologies
 
                           <li style={{ cursor: "pointer", textDecoration: "underline" }} className={`${styles.li} ${styles.CompanyName}`}
                             onClick={(e) => { checkEmpHalf(btoa(items.empId)) }}  >
+
                             {/* {items.Logo ?
                               < img style={{ width: "38px", height: "38px" }} src={items.Logo} />
                               : ""} 
@@ -1063,6 +1064,9 @@ Technologies
 
         </>
       }
+            {/* <div style={{marginTop:"10px"}}> */}
+          <Footer/>
+        {/* </div> */}
     </>
 
   )

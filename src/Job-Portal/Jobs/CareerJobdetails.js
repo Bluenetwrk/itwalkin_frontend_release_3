@@ -2,7 +2,6 @@ import React from 'react'
 import styles from "./Allobs.module.css"
 import { useEffect, useState } from 'react'
 import axios from "axios";
-import Footer from '../Footer/Footer';
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { TailSpin, Puff } from "react-loader-spinner"
 import location from "../img/icons8-location-20.png" 
@@ -41,7 +40,7 @@ const [Loader, setLoader] = useState(false)
       // behavior:"smooth"
     })
     const headers = { authorization: 'BlueItImpulseWalkinIn'};
-    await axios.get(`/jobpost/getjobs/${atob(params.id)}`, {headers})
+    await axios.get(`/Careerjobpost/getjobDetails/${atob(params.id)}`, {headers})
       .then((res) => {
         let result = (res.data)
         setJobs(result)
@@ -366,9 +365,6 @@ const [Loader, setLoader] = useState(false)
 
 
               }
-                                    <div style={{marginTop:"60px"}}>
-                      <Footer/>
-                    </div>
         </>
 
   )

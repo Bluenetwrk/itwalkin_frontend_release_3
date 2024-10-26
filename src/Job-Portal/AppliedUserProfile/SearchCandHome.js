@@ -1,6 +1,7 @@
 
 import React from 'react'
 import styles from "./AppliedUserProfile.module.css"
+import Footer from '../Footer/Footer';
 import { useEffect, useState } from 'react'
 import axios from "axios";
 import { Link, useNavigate, useLocation, useParams } from "react-router-dom";
@@ -705,7 +706,9 @@ function SearchCandidate() {
           </div>
         </>
       }
-
+      <div style={{marginTop:"10px"}}>
+          <Footer/>
+        </div>
     </>
   )
 }

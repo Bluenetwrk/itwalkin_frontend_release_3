@@ -23,6 +23,7 @@ import PostJobs from "./Job-Portal/PostJobs/postJobs";
 import Jobs from "./Job-Portal/Jobs/AllJobs";
 import Nav from "./Job-Portal/NaveBar/Nav";
 import Jobdetails from "./Job-Portal/Jobs/AllJobdetails"
+import CareerJobdetails from "./Job-Portal/Jobs/CareerJobdetails"
 import Home from "./Job-Portal/Jobs/AllHomeJobs";
 import StudentUpdateProfile from "./Job-Portal/Profile/StudentUpdateProfile";
 import EmployeeUpdateProfile from "./Job-Portal/Profile/EmployeeUpdateProfile";
@@ -32,6 +33,7 @@ import UpdatePostedJobs from "./Job-Portal/PostJobs/updatePostedJobs";
 import MyAppliedJobs from "./Job-Portal/Jobs/MyAppliedJobs"
 import AppliedUserProfile from "./Job-Portal/AppliedUserProfile/AppliedUserProfile";
 import AppliedUserForAdminJobs from "./Job-Portal/AppliedUserProfile/AdminJobsAppliedUser";
+import AppliedUserForCareerJobs from "./Job-Portal/AppliedUserProfile/AdminCareerJobsAppliedUser ";
 import CheckStudentProfiel from "./Job-Portal/Profile/CheckStudentProfiel";
 import CheckEmpHalfProfile from "./Job-Portal/Profile/CheckEmpHalfProf";
 // admin
@@ -112,11 +114,9 @@ function App() {
             <Route path="/My-Profile" element={<StudentProfile url={axios.defaults.baseURL} />} />
             <Route path="/My-Applied-Jobs" element={<MyAppliedJobs url={axios.defaults.baseURL} />} />
           </Route>
-            <Route path="/AllCareerJobs" element={<AllCareerJobs />} />
-
+            <Route path="/AllCareerJobs" element={<AllCareerJobs />}/>
             <Route path="/BIAdd@Applied-User-Profile/:jid" element={<AppliedUserForAdminJobs url={axios.defaults.baseURL} />} />
-
-
+            <Route path="/BIAdd@Applied-CareerUser-Profile/:jid" element={<AppliedUserForCareerJobs url={axios.defaults.baseURL} />} />
           <Route path="/BIAdd@PostedCareerJobs" element={<PostedCareerJobs url={axios.defaults.baseURL} />} />
           <Route path="/BIAdd@AdminPostedJobs" element={<PostedJobsByAdmin url={axios.defaults.baseURL} />} />
           <Route path="/BIAdd@Logg" element={<AdminLogin />} />
@@ -144,6 +144,7 @@ function App() {
           <Route path="/JobSeekerSignUp" element={<StudentSignUp />} />
           <Route path="/EmployeeSignUp" element={<EmployeeSignUp />} />
           <Route path="/JobDetails/:id" element={<Jobdetails />} />
+          <Route path="/CareerJobdetails/:id" element={<CareerJobdetails />} />
           <Route path="/CheckEmpHalfProfile/:empId" element={<CheckEmpHalfProfile />} />
 
           <Route path="Search-Candidate-Home" element={<SearchCandHome url={axios.defaults.baseURL} />} />
@@ -159,7 +160,7 @@ function App() {
 
         </Routes>
 
-        <Footer />
+        {/* <Footer /> */}
 
       </BrowserRouter>
     </>

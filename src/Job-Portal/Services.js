@@ -1,7 +1,7 @@
 import React  from 'react'
 import axios from "axios"
 import { useState, useEffect } from 'react'
-
+import Footer from './Footer/Footer'
 
 function Services() {
     const [Services, setServices]= useState([])
@@ -61,6 +61,9 @@ getServices()
 
 Any Employer accessing the ITwalkin Platform shall be bound by these Terms of Service, and all other rules, regulations and terms of use referred to herein or provided by ITwalkin in relation to any services provided via the ITwalkin Platform.
         </p>
+        </div>
+        <div style={{marginTop:"300px"}}>
+          <Footer/>
         </div>
     </>
 

@@ -1121,7 +1121,8 @@ font-weight: bold;
 .MobJobseekerDropdownwrapper{
     position: absolute;
     /* right : 1.5rem; */
-    margin-left: 62%;
+
+    margin-left: 75%;
     padding-right: 5px;
     padding-left: 5px;
     padding-bottom: 0px;
@@ -1129,7 +1130,7 @@ font-weight: bold;
     background-color: white;
     border: 1px solid rgb(202, 202, 202);
     cursor: pointer;
-    width:102px; 
+    /* width:102px;  */
     z-index: 100;   
 }
 .MobJobseekerDropdownwrapper::after {
@@ -1145,11 +1146,11 @@ font-weight: bold;
     border-top: 1px solid grey;
 
 }
+
 @media (max-width :360px){
     .MobJobseekerDropdownwrapper{
         position: absolute;
-        /* right : 1.5rem; */
-        margin-left: 59%;
+        margin-left: 74%;
         padding-right: 5px;
         padding-left: 5px;
         padding-bottom: 0px;
@@ -1157,15 +1158,14 @@ font-weight: bold;
         background-color: white;
         border: 1px solid rgb(202, 202, 202);
         cursor: pointer;
-        /* width:26%; */
-    }
-    
+        width:78px;
+    }    
 }
+/* 
 @media (min-width :460px){
     .MobJobseekerDropdownwrapper{
         position: absolute;
-        /* right : 1.5rem; */
-        margin-left: 65%;
+        margin-left: 75%;
         padding-right: 5px;
         padding-left: 5px;
         padding-bottom: 0px;
@@ -1173,15 +1173,13 @@ font-weight: bold;
         background-color: white;
         border: 1px solid rgb(202, 202, 202);
         cursor: pointer;
-        /* width:26%; */
     }
     
 }
 @media (min-width :560px){
     .MobJobseekerDropdownwrapper{
         position: absolute;
-        /* right : 1.5rem; */
-        margin-left: 67.5%;
+        margin-left: 75%;
         padding-right: 5px;
         padding-left: 5px;
         padding-bottom: 0px;
@@ -1189,15 +1187,13 @@ font-weight: bold;
         background-color: white;
         border: 1px solid rgb(202, 202, 202);
         cursor: pointer;
-        /* width:26%; */
     }
     
 }
 @media (min-width :660px){
     .MobJobseekerDropdownwrapper{
         position: absolute;
-        /* right : 1.5rem; */
-        margin-left: 69%;
+        margin-left: 75%;
         padding-right: 5px;
         padding-left: 5px;
         padding-bottom: 0px;
@@ -1205,10 +1201,9 @@ font-weight: bold;
         background-color: white;
         border: 1px solid rgb(202, 202, 202);
         cursor: pointer;
-        /* width:26%; */
     }
     
-}
+} */
 
      
 /* ....Admin.......Nave....... */

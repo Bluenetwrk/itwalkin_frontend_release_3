@@ -1,6 +1,7 @@
 import React  from 'react'
 import axios from "axios"
 import { useState, useEffect } from 'react'
+import Footer from './Footer/Footer'
 
 
 function Contact() {
@@ -77,6 +78,9 @@ getContact()
         Gandhinagar,
         BENGALURU-560009 */}
         </p>
+        </div>
+        <div style={{marginTop:"250px"}}>
+          <Footer/>
         </div>
     </>
 
