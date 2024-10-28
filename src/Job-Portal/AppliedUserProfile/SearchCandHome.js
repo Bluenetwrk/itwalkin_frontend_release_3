@@ -52,13 +52,10 @@ function SearchCandidate() {
   const [Active, setActive] = useState("")
   const [jobLocation, setjobLocation] = useState("AllL")
 
-  const Location = ['Bangalore', 'Chennai',
-    'Hyderabad', 'Mumbai']
+  const Location = ['Bangalore', "Hyderabad"]
 
     let jobTags = [
-
       { value: 'TECHNOLOGIES', label: 'TECHNOLOGIES'},
-
       { value: 'Angular js', label: 'Angular js' }, { value: 'Vue js', label: 'Vue js' },
       { value: 'NextJs', label: 'NextJs' },{ value: '.NET', label: '.NET' }, { value: 'Larvel', label: 'Larvel' },
       { value: 'Kotlin', label: 'Kotlin' }, { value: 'Android', label: 'Android' }, { value: 'iOS', label: 'iOS' },
@@ -70,30 +67,28 @@ function SearchCandidate() {
       { value: 'GoogleCloud', label: 'GoogleCloud' }, { value: 'Weblogic', label: 'Weblogic' },
       { value: 'Apache', label: 'Apache' }, { value: 'Lotus', label: 'Lotus' }, { value: 'Domino', label: 'Domino' },
       { value: 'MS IIS', label: 'MS IIS' }, { value: 'ColdFusion', label: 'ColdFusion' },
-      { value: 'nginx', label: 'nginx' }, { value: 'Resin', label: 'Resin' }, { value: 'Selenium', label: 'Selenium' },
-      { value: 'HP LoadRunner', label: 'HP LoadRunner' }, { value: 'jUnit', label: 'jUnit' },
-      { value: 'Jira', label: 'Jira' }, { value: 'Confluence', label: 'Confluence' },
-      { value: 'Testrails', label: 'Testrails' },{ value: 'Machine Learing', label: 'Machine Learing' },
+      { value: 'nginx', label: 'nginx' }, { value: 'Resin', label: 'Resin' },
+       { value: 'Selenium', label: 'Selenium' },
+      { value: 'Machine Learing', label: 'Machine Learing' },
       { value: 'Cybersecurity', label: 'Cybersecurity' }, { value: 'AI', label: 'AI' },
-      { value: 'Backend', label: 'Backend' }, { value: 'Frontend', label: 'Frontend' },
       { value: 'HTML-CSS', label: 'HTML-CSS' }, { value: 'MongoDB', label: 'MongoDB' },
       { value: 'MySql', label: 'MySql' }, { value: 'Flutter', label: 'Flutter' },
-      { value: 'Mobile App Developer', label: 'Mobile App Developer' }, { value: 'Artificial Intelligence', label: 'Artificial Intelligence' },
-      { value: 'React Native', label: 'React Native' }, { value: 'DevOps Engineer', label: 'DevOps Engineer' },
-      { value: 'Security developer', label: 'Security developer' }, { value: 'Data science', label: 'Data science' },
-      { value: 'Data Analyst', label: 'Data Analyst' }, { value: 'Game Developer', label: 'Game Developer' },
-      { value: 'Graphic Developers', label: 'Graphic Developers' }, { value: 'AI Engineer', label: 'AI Engineer' },
-      { value: 'Security Developer', label: 'Security Developer' }, { value: 'Cloud Developers', label: 'Cloud Developers' },
-  
-  
-    // ]
-  
-    // let TechTags = [
-      { value: 'ROLE', label: 'ROLE'},
-  
-      { value: 'S-w Developer', label: 'S/w Developer ' }, { value: 'Firmware Tester', label: 'Firmware Tester' },
-      { value: 'Firmware Developer', label: 'Firmware Developer' }, { value: 'Hardware Engineer', label: 'Hardware Engineer' },
-      { value: 'Agile', label: 'Agile' }, { value: 'Scrum Master', label: "Scrum Master" },
+      { value: 'Artificial Intelligence', label: 'Artificial Intelligence' },
+      { value: 'React Native', label: 'React Native' }, 
+      { value: 'Data science', label: 'Data science' },
+      
+      // ]
+      
+      // let TechTags = [
+        { value: 'ROLE', label: 'ROLE'},
+        
+        { value: 'Sw Developer', label: 'Sw Developer ' }, { value: 'Firmware Tester', label: 'Firmware Tester' },
+        { value: 'Backend developer', label: 'Backend developer' }, { value: 'Frontend developer', label: 'Frontend developer' },
+        { value: 'Mobile App Developer', label: 'Mobile App Developer' },
+        { value: 'DevOps Engineer', label: 'DevOps Engineer' },
+        { value: 'Firmware Developer', label: 'Firmware Developer' }, { value: 'Hardware Engineer', label: 'Hardware Engineer' },
+        { value: 'Data Analyst', label: 'Data Analyst' },
+       { value: 'Scrum Master', label: "Scrum Master" },
       { value: 'Product Owner', label: 'Product Owner' }, { value: 'Product Line Manager', label: 'Product Line Manager' },
       { value: 'Project Manager', label: 'Project Manager' }, { value: 'Automation Tester', label: 'Automation Tester' },
       { value: 'QA Enginner', label: 'QA Enginner' }, { value: 'Senior Tester', label: 'Senior Tester' },
@@ -107,13 +102,14 @@ function SearchCandidate() {
       { value: 'Purchase', label: 'Purchase' },{ value: 'Finance', label: 'Finance' },   
       { value: 'Recruiter', label: 'Recruiter' }, { value: 'Lab Technician', label: 'Lab Technician' },
       { value: 'Store keeper', label: 'Store keeper' },
-    // ]
+      { value: 'Reliability Engineer', label: 'Reliability Engineer' },  // ]
   
     // let TOOLSPROTOCOLS =[
       { value: 'TOOLS/PROTOCOLS', label: 'TOOLS/PROTOCOLS'},
   
       { value: 'HP LoadRunner', label: 'HP LoadRunner' },
       { value: 'jUnit', label: 'jUnit' },
+      { value: 'Agile', label: 'Agile' },
       { value: 'Jira', label: 'Jira' },
       { value: 'Confluence', label: 'Confluence' },
       { value: 'Testrails', label: 'Testrails' },
@@ -155,10 +151,10 @@ function SearchCandidate() {
     { value: 'EXPERIENCE', label: 'EXPERIENCE'},
   
     { value: '2 to 5 Yrs', label: '2 to 5 Yrs ' }, { value: '6 to 10 Yrs', label: '6 to 10 Yrs' },
+    { value: '11 to 15', label: '11 to 15' }, { value: '16 and above', label: '16 and above' },
     // let SALARY=[ 
       { value: 'SALARY', label: 'SALARY'},
   
-      { value: '11 to 15', label: '11 to 15' }, { value: '16 and above', label: '16 and above' },
       { value: '<10L', label: '<10L' },
       { value: '10 to 20L', label: '10 to 20L' },
       { value: '20 to 30L', label: '20 to 30L' },
@@ -188,22 +184,22 @@ function SearchCandidate() {
     // let COLLEGE_TYPE=[
       { value: 'COLLEGE TYPE', label: 'COLLEGE TYPE' },
   
-      { value: 'IITs/NITs', label: 'IITs/NITs' },
+      { value: 'IITs-NITs', label: 'IITs-NITs' },
       { value: 'Top 100', label: 'Top 100' },
       { value: 'Top 500', label: 'Top 500' },
-      { value: 'Others', label: 'Others' },
+      { value: 'Other', label: 'Other' },
     // ]
   
     // let EDUCATION =[
       { value: 'EDUCATION', label: 'EDUCATION' },
   
       { value: 'Phd', label: 'Phd' },
-      { value: 'ME/ MTech', label: 'ME/ MTech' },
+      { value: 'ME-MTech', label: 'ME-MTech' },
       { value: 'MBA', label: 'MBA' },
-      { value: 'BE/BTECH', label: 'BE/BTECH' },
+      { value: 'BE-BTECH', label: 'BE-BTECH' },
       { value: 'Diploma', label: 'Diploma' },
-      { value: 'MCA/BCA', label: 'MCA/BCA' },
-      { value: 'Bcom/BA', label: 'Bcom/BA' },
+      { value: 'MCA-BCA', label: 'MCA-BCA' },
+      { value: 'Bcom-BA', label: 'Bcom-BA' },
       { value: 'Others', label: 'Others' },
      
       ]
@@ -534,7 +530,7 @@ function SearchCandidate() {
           </div><br></br>
          
             <div className={styles.JobtitleFilterWrapper}>
-              <buton className={Active === "All" ? styles.active : styles.JobtitleFilter} onClick={() => 
+              <buton className={styles.active} onClick={() => 
                 { getAllJobSeekers(); setActive("All") }}>All</buton>
               {
                 jobTags.map((tags, i) => {
@@ -543,9 +539,9 @@ function SearchCandidate() {
                     //   { filterByJobTitle(tags.value) }}>{tags.value} </buton>
                                    
                       <button disabled={tags.value==="TECHNOLOGIES" || tags.value==="EDUCATION" || tags.value==="COLLEGE TYPE" || tags.value==="NOTICE PERIOD" || tags.value==="SALARY" || 
-                        tags.value==="EXPERIENCE" || tags.value==="Job Type" || tags.value==="INDUSTRY" || tags.value==="TOOLS/PROTOCOLS" || tags.value==="ROLE" } 
+                        tags.value==="EXPERIENCE" || tags.value==="Job Type" || tags.value==="INDUSTRY" || tags.value==="TOOLS/PROTOCOLS" || tags.value==="ROLE" || tags.value==="COMPANY TYPE" } 
                         className={tags.value==="TECHNOLOGIES" || tags.value==="EDUCATION" || tags.value==="COLLEGE TYPE" || tags.value==="NOTICE PERIOD" || tags.value==="SALARY" || 
-                        tags.value==="EXPERIENCE" || tags.value==="Job Type" || tags.value==="INDUSTRY" || tags.value==="TOOLS/PROTOCOLS" || tags.value==="ROLE"?
+                        tags.value==="EXPERIENCE" || tags.value==="Job Type" || tags.value==="INDUSTRY" || tags.value==="TOOLS/PROTOCOLS" || tags.value==="COMPANY TYPE" || tags.value==="ROLE"?
                         styles.TagHeading:  Active === tags.value ? 
                         styles.active : styles.JobtitleFilter} onClick={() => { filterByJobTitle(tags.value) }}>{tags.value} </button>
                   )
@@ -770,9 +766,100 @@ function SearchCandidate() {
         <h4 style={{ marginLeft: "19%", marginTop: "10px" }}> {Candidate.length} matching Result Found  </h4>
         : ""
       }
+
+      
+<Carousel
+            swipeable={true}
+            draggable={false}
+            responsive={responsive}
+            autoPlay={false}
+            autoPlaySpeed={4000} //defalult is 3 sec
+            keyBoardControl={true}
+            dotListClass="custom-dot-list-style"
+            itemClass="carousel-item-padding-40-px"
+            containerClass="carousel-container"
+            // showDots={true}
+            infinite={true}
+            // className='cardWrapper'
+            removeArrowOnDeviceType={["tablet", "mobile", "desktop"]}
+          >
+
+            <div style={{ display: "flex" }}>
+              <div className={styles.MobLocationFilterWrapper}>
+                <label> <input className={styles.MobJobtitleFilter} type="radio" name="filter" onClick={() => { getAllJobSeekers() }} />All</label>
+                {
+                  Location.map((location, i) => {
+                    return (
+                      <label> <input className={styles.MobJobtitleFilter} type="radio" disabled={location == "Chennai" || location == "Hyderabad" || location == "Mumbai" || location == "Delhi"} name="filter" onClick={() => { getLocation(location.toLowerCase()) }} />{location}</label>
+
+                    )
+                  })
+                }
+              </div>
+
+              <div className={styles.MobFilterJobTitleWrapper}>
+                <label><input className={styles.MobJobtitleFilter} type="radio" name="filter" onClick={() => { getAllJobSeekers() }} />All</label>
+                {
+                  jobTags.map((tags, i) => {
+                    return (
+                      <label><input className={styles.MobJobtitleFilter} type="radio" name="filter"
+                        onClick={() => { filterByJobTitle(tags.value) }} />{tags.value}</label>
+                    )
+                  }).slice(0, 4)
+                }
+              </div>
+
+              <div className={styles.MobFilterJobTitleWrapper}>
+                {jobTags.map((tags, i) => {
+                  return (
+                    <label><input className={styles.MobJobtitleFilter} type="radio" name="filter"
+                      onClick={() => { filterByJobTitle(tags.value) }} />{tags.value}</label>
+                  )
+                }).slice(4, 9)
+                }
+              </div>
+            </div>
+            {/* ........................up to here is 1st div and now from down here is 2nd div..................................... */}
+            <div style={{ display: "flex" }}>
+              <div className={styles.MobFilterJobTitleWrapper}>
+                {jobTags.map((tags, i) => {
+                  return (
+                    <label><input className={styles.MobJobtitleFilter} type="radio" name="filter"
+                      onClick={() => { filterByJobTitle(tags.value) }} />{tags.value}</label>
+                  )
+                }).slice(9, 14)
+                }
+              </div>
+              <div className={styles.MobFilterJobTitleWrapper}>
+                {jobTags.map((tags, i) => {
+                  return (
+                    <label><input className={styles.MobJobtitleFilter} type="radio" name="filter"
+                      onClick={() => { filterByJobTitle(tags.value) }} />{tags.value}</label>
+                  )
+                }).slice(14, 19)
+                }
+              </div>
+              <div className={styles.MobFilterJobTitleWrapper}>
+                {jobTags.map((tags, i) => {
+                  return (
+                    <label><input className={styles.MobJobtitleFilter} type="radio" name="filter"
+                      onClick={() => { filterByJobTitle(tags.value) }} />{tags.value}</label>
+                  )
+                }).slice(19, 24)
+                }
+              </div>
+            </div>
+
+          </Carousel>
+
+
+
           <div id={styles.JobCardWrapper} >
 
-            {Candidate.map((job, i) => {
+            {
+            Candidate.length>0?
+                
+            Candidate.map((job, i) => {
               return (
                 <>
                   <div className={styles.JobCard} key={i}>
@@ -829,7 +916,11 @@ function SearchCandidate() {
                   </div>
                 </>
               )
-            })}
+            })
+            :
+            <p style={{ marginLeft: "37%", color: "red" }}>No Record found</p>
+
+          }
 
           </div>
         </>

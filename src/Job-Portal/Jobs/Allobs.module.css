@@ -1,20 +1,44 @@
 
-.searchBothForNavWrapper{
-    width:40%;
-    margin-left: 34%;
+
+
+.NavConetenetWrapper{
+    display: flex;
     margin-top: -47.5px;
+    align-items: center;
+
+}
+.LocationFilterWrapper{
+    z-index: 100;
+    margin-left: 23%;
+
+}
+
+.JobLocationFilter{
+    margin-left: 40px;
+    cursor: pointer;
+    font-weight: 600;
+    padding: 4px 7px ;
+    align-content: center;
+    border: none;
+    border-radius: 3px;
+    /* background-color: white; */
+    background:rgb(242, 244, 245);
+        color: black
+}
+.searchBothForNavWrapper{
+    width:30%;
     background-color: white;
     border-radius: 3px;
     position: sticky;
-    top: 12px;
-    z-index: 100;   
+    z-index: 100;  
+    margin-left: 4%; 
 
 }
 
 .inputboxsearchNav{
     padding: 10px;
     /* margin-left: 2%; */
-    width: 86%;
+    width: 83%;
     border : 1px solid rgb(204, 209, 211);
     /* background-color: red; */
     border: 0px white;
@@ -56,20 +80,7 @@
 
 }
 
-.JobLocationFilter{
-    margin-left: 10px;
-    cursor: pointer;
-    font-weight: 600;
-    padding: 4px 7px ;
-    align-content: center;
-    border: none;
-    border-radius: 3px;
-    /* background-color: white; */
-    background:rgb(242, 244, 245);
-        color: black
-
-}
-.JobLocationFilter:hover{
+/* .JobLocationFilter:hover{
     cursor: pointer;
     margin-left: 10px;
     cursor: pointer;
@@ -81,7 +92,7 @@
     border-radius: 3px;
     background-color: rgb(40, 4, 99);
     transition: all 0.2s;
-}
+} */
 /* ...........................for Filter..................... */
 .JobtitleFilterWrapper{
     /* background-color: rgb(40, 4, 99); */
@@ -140,7 +151,7 @@
 
 }
 .TagHeading{
-    background-color:blue;
+    background-color:#dbdfd9;
     color:white;
     margin: 4px;
     cursor: pointer;

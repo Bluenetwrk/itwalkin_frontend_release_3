@@ -1,4 +1,12 @@
 
+.NavConetenetWrapper{
+    display: flex;
+    margin-top: -47.5px;
+    align-items: center;
+
+}
+
+
 .searchBothForNavWrapper{
     width:40%;
     margin-left: 30%;
@@ -345,6 +353,26 @@
 } */
 
 /* .....For Mobile....... */
+
+.MobLocationFilterWrapper{
+    display: flex;
+    flex-direction: column;
+    /* background-color: red; */
+    padding-left: 5px;
+    width:28%;
+    text-wrap: nowrap;
+    /* background-color: red; */
+
+}
+.MobFilterJobTitleWrapper{
+    display: flex;
+    flex-direction: column;
+    /* background-color: aqua; */
+    margin-left: 5px;
+    width:32%;
+    text-wrap: nowrap;
+    overflow: hidden;
+}
 
 
 .searchBoth {

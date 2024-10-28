@@ -49,8 +49,8 @@ function Home() {
   // let AgeTags = [
  
   let jobTags = [
-    { value: 'TECHNOLOGIES', label: 'TECHNOLOGIES'},
 
+    { value: 'TECHNOLOGIES', label: 'TECHNOLOGIES'},
     { value: 'Angular js', label: 'Angular js' }, { value: 'Vue js', label: 'Vue js' },
     { value: 'NextJs', label: 'NextJs' },{ value: '.NET', label: '.NET' }, { value: 'Larvel', label: 'Larvel' },
     { value: 'Kotlin', label: 'Kotlin' }, { value: 'Android', label: 'Android' }, { value: 'iOS', label: 'iOS' },
@@ -62,30 +62,28 @@ function Home() {
     { value: 'GoogleCloud', label: 'GoogleCloud' }, { value: 'Weblogic', label: 'Weblogic' },
     { value: 'Apache', label: 'Apache' }, { value: 'Lotus', label: 'Lotus' }, { value: 'Domino', label: 'Domino' },
     { value: 'MS IIS', label: 'MS IIS' }, { value: 'ColdFusion', label: 'ColdFusion' },
-    { value: 'nginx', label: 'nginx' }, { value: 'Resin', label: 'Resin' }, { value: 'Selenium', label: 'Selenium' },
-    { value: 'HP LoadRunner', label: 'HP LoadRunner' }, { value: 'jUnit', label: 'jUnit' },
-    { value: 'Jira', label: 'Jira' }, { value: 'Confluence', label: 'Confluence' },
-    { value: 'Testrails', label: 'Testrails' },{ value: 'Machine Learing', label: 'Machine Learing' },
+    { value: 'nginx', label: 'nginx' }, { value: 'Resin', label: 'Resin' },
+     { value: 'Selenium', label: 'Selenium' },
+    { value: 'Machine Learing', label: 'Machine Learing' },
     { value: 'Cybersecurity', label: 'Cybersecurity' }, { value: 'AI', label: 'AI' },
-    { value: 'Backend', label: 'Backend' }, { value: 'Frontend', label: 'Frontend' },
     { value: 'HTML-CSS', label: 'HTML-CSS' }, { value: 'MongoDB', label: 'MongoDB' },
     { value: 'MySql', label: 'MySql' }, { value: 'Flutter', label: 'Flutter' },
-    { value: 'Mobile App Developer', label: 'Mobile App Developer' }, { value: 'Artificial Intelligence', label: 'Artificial Intelligence' },
-    { value: 'React Native', label: 'React Native' }, { value: 'DevOps Engineer', label: 'DevOps Engineer' },
-    { value: 'Security developer', label: 'Security developer' }, { value: 'Data science', label: 'Data science' },
-    { value: 'Data Analyst', label: 'Data Analyst' }, { value: 'Game Developer', label: 'Game Developer' },
-    { value: 'Graphic Developers', label: 'Graphic Developers' }, { value: 'AI Engineer', label: 'AI Engineer' },
-    { value: 'Security Developer', label: 'Security Developer' }, { value: 'Cloud Developers', label: 'Cloud Developers' },
-
-
-  // ]
-
-  // let TechTags = [
-    { value: 'ROLE', label: 'ROLE'},
-
-    { value: 'S-w Developer', label: 'S/w Developer ' }, { value: 'Firmware Tester', label: 'Firmware Tester' },
-    { value: 'Firmware Developer', label: 'Firmware Developer' }, { value: 'Hardware Engineer', label: 'Hardware Engineer' },
-    { value: 'Agile', label: 'Agile' }, { value: 'Scrum Master', label: "Scrum Master" },
+    { value: 'Artificial Intelligence', label: 'Artificial Intelligence' },
+    { value: 'React Native', label: 'React Native' }, 
+    { value: 'Data science', label: 'Data science' },
+    
+    // ]
+    
+    // let TechTags = [
+      { value: 'ROLE', label: 'ROLE'},
+      
+      { value: 'Sw Developer', label: 'Sw Developer ' }, { value: 'Firmware Tester', label: 'Firmware Tester' },
+      { value: 'Backend developer', label: 'Backend developer' }, { value: 'Frontend developer', label: 'Frontend developer' },
+      { value: 'Mobile App Developer', label: 'Mobile App Developer' },
+      { value: 'DevOps Engineer', label: 'DevOps Engineer' },
+      { value: 'Firmware Developer', label: 'Firmware Developer' }, { value: 'Hardware Engineer', label: 'Hardware Engineer' },
+      { value: 'Data Analyst', label: 'Data Analyst' },
+     { value: 'Scrum Master', label: "Scrum Master" },
     { value: 'Product Owner', label: 'Product Owner' }, { value: 'Product Line Manager', label: 'Product Line Manager' },
     { value: 'Project Manager', label: 'Project Manager' }, { value: 'Automation Tester', label: 'Automation Tester' },
     { value: 'QA Enginner', label: 'QA Enginner' }, { value: 'Senior Tester', label: 'Senior Tester' },
@@ -99,13 +97,14 @@ function Home() {
     { value: 'Purchase', label: 'Purchase' },{ value: 'Finance', label: 'Finance' },   
     { value: 'Recruiter', label: 'Recruiter' }, { value: 'Lab Technician', label: 'Lab Technician' },
     { value: 'Store keeper', label: 'Store keeper' },
-  // ]
+    { value: 'Reliability Engineer', label: 'Reliability Engineer' },  // ]
 
   // let TOOLSPROTOCOLS =[
     { value: 'TOOLS/PROTOCOLS', label: 'TOOLS/PROTOCOLS'},
 
     { value: 'HP LoadRunner', label: 'HP LoadRunner' },
     { value: 'jUnit', label: 'jUnit' },
+    { value: 'Agile', label: 'Agile' },
     { value: 'Jira', label: 'Jira' },
     { value: 'Confluence', label: 'Confluence' },
     { value: 'Testrails', label: 'Testrails' },
@@ -147,10 +146,10 @@ function Home() {
   { value: 'EXPERIENCE', label: 'EXPERIENCE'},
 
   { value: '2 to 5 Yrs', label: '2 to 5 Yrs ' }, { value: '6 to 10 Yrs', label: '6 to 10 Yrs' },
+  { value: '11 to 15', label: '11 to 15' }, { value: '16 and above', label: '16 and above' },
   // let SALARY=[ 
     { value: 'SALARY', label: 'SALARY'},
 
-    { value: '11 to 15', label: '11 to 15' }, { value: '16 and above', label: '16 and above' },
     { value: '<10L', label: '<10L' },
     { value: '10 to 20L', label: '10 to 20L' },
     { value: '20 to 30L', label: '20 to 30L' },
@@ -180,30 +179,27 @@ function Home() {
   // let COLLEGE_TYPE=[
     { value: 'COLLEGE TYPE', label: 'COLLEGE TYPE' },
 
-    { value: 'IITs/NITs', label: 'IITs/NITs' },
+    { value: 'IITs-NITs', label: 'IITs-NITs' },
     { value: 'Top 100', label: 'Top 100' },
     { value: 'Top 500', label: 'Top 500' },
-    { value: 'Others', label: 'Others' },
+    { value: 'Other', label: 'Other' },
   // ]
 
   // let EDUCATION =[
     { value: 'EDUCATION', label: 'EDUCATION' },
 
     { value: 'Phd', label: 'Phd' },
-    { value: 'ME/ MTech', label: 'ME/ MTech' },
+    { value: 'ME-MTech', label: 'ME-MTech' },
     { value: 'MBA', label: 'MBA' },
-    { value: 'BE/BTECH', label: 'BE/BTECH' },
+    { value: 'BE-BTECH', label: 'BE-BTECH' },
     { value: 'Diploma', label: 'Diploma' },
-    { value: 'MCA/BCA', label: 'MCA/BCA' },
-    { value: 'Bcom/BA', label: 'Bcom/BA' },
+    { value: 'MCA-BCA', label: 'MCA-BCA' },
+    { value: 'Bcom-BA', label: 'Bcom-BA' },
     { value: 'Others', label: 'Others' },
+   
+    ]
 
-  // ]
-
-  // let jobTags = [
-  ]
-
-  let JobLocationTags = ["Bangalore", "Hyderabad", "Chennai", "Mumbai"]
+  let JobLocationTags = ["Bangalore", "Hyderabad"]
 
   let navigate = useNavigate()
 
@@ -547,12 +543,26 @@ function Home() {
 
       {screenSize.width > 850 ?
         <>
+        <div className={styles.NavConetenetWrapper}>
 
+
+          <div className={styles.LocationFilterWrapper}>
+            {
+              JobLocationTags.map((location, i) => {
+                return (
+                  <button className={styles.JobLocationFilter} disabled={location == "Chennai" ||
+                      location == "Hyderabad" || location == "Mumbai" || location == "Delhi"}
+                       name="filter" onClick={() => { getLocation(location.toLowerCase()); setActive("Bangalore") }} >{location}</button>
+                )
+              })
+            }
+          </div>          
           <div className={styles.searchBothForNavWrapper}>
             <input className={styles.inputboxsearchNav} type="text" placeholder='Search for a Job / Skills / Location / Experiance' onChange={(e) => { search(e) }} />
 
-            <i style={{ color: "rgb(40, 4, 99)", fontSize: "18px", cursor: "pointer" }} onClick={() => { searchIcon(searchKey) }}
+            <i style={{ color: "rgb(40, 4, 99)", fontSize: "18px", cursor: "pointer" , marginLeft:"2%"}} onClick={() => { searchIcon(searchKey) }}
               class="fa fa-search" ></i>
+          </div>
           </div>
           {Result ?
             <h4 style={{ marginLeft: "40%", marginTop: "20px" }}> {jobs.length} matching Result Found  </h4>
@@ -569,30 +579,18 @@ function Home() {
 
       {screenSize.width > 850 ?
         <>
-          <div className={styles.LocationFilterWrapper}>
-            {/* <button className={`${styles.JobLocationFilter}`}  name="filter" onClick={() =>
-               { getjobs(); setActive("All") }} >All</button> */}
-            {
-              JobLocationTags.map((location, i) => {
-                return (
-                  <button className={location == "Chennai" || location == "Hyderabad" || location == "Mumbai" ?
-                    styles.disable : Active === "Bangalore" ? styles.locationActive : styles.JobLocationFilter} disabled={location == "Chennai" ||
-                      location == "Hyderabad" || location == "Mumbai" || location == "Delhi"} name="filter" onClick={() => { getLocation(location.toLowerCase()); setActive("Bangalore") }} >{location}</button>
-                )
-              })
-            }
-          </div><br></br>
+
 
           <div className={styles.JobtitleFilterWrapper}>
-            <buton className={Active === "All" ? styles.active : styles.JobtitleFilter} onClick={() => { getjobs(); setActive("All") }}>All</buton>
+            <buton className={ styles.active} onClick={() => { getjobs(); setActive("All") }}>All</buton>
             {
               jobTags.map((tags, i) => {
                 return (
                                    
                   <button disabled={tags.value==="TECHNOLOGIES" || tags.value==="EDUCATION" || tags.value==="COLLEGE TYPE" || tags.value==="NOTICE PERIOD" || tags.value==="SALARY" || 
-                    tags.value==="EXPERIENCE" || tags.value==="Job Type" || tags.value==="INDUSTRY" || tags.value==="TOOLS/PROTOCOLS" || tags.value==="ROLE" } 
+                    tags.value==="EXPERIENCE" || tags.value==="Job Type" || tags.value==="INDUSTRY" || tags.value==="TOOLS/PROTOCOLS" || tags.value==="ROLE" || tags.value==="COMPANY TYPE" } 
                     className={tags.value==="TECHNOLOGIES" || tags.value==="EDUCATION" || tags.value==="COLLEGE TYPE" || tags.value==="NOTICE PERIOD" || tags.value==="SALARY" || 
-                    tags.value==="EXPERIENCE" || tags.value==="Job Type" || tags.value==="INDUSTRY" || tags.value==="TOOLS/PROTOCOLS" || tags.value==="ROLE"?
+                    tags.value==="EXPERIENCE" || tags.value==="Job Type" || tags.value==="INDUSTRY" || tags.value==="TOOLS/PROTOCOLS" || tags.value==="COMPANY TYPE" || tags.value==="ROLE"?
                     styles.TagHeading:  Active === tags.value ? 
                     styles.active : styles.JobtitleFilter} onClick={() => { filterByJobTitle(tags.value) }}>{tags.value} </button>
                 

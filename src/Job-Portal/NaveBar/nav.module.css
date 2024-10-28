@@ -1,6 +1,29 @@
+
+
+.ITwalkinWrapperHomeMobile{
+    margin-left: 20px;
+    height: 65px;
+    /* margin-top: 10px; */
+
+}
+.ITwalkinMob{
+    margin-top: 10px;
+
+    color:white;
+font-weight: bold;
+font-size: xx-large;
+}
+.onlyforITjobsMob{
+    margin-top: -40px;
+    /* margin-top: -17px; */
+    color:white;
+    /* font-weight: 400; */
+
+    }
+
 .ITwalkinWrapper{
     margin-top: -25px;
-margin-left: 20px;
+margin-left: 4%;
 
 }
 .ITwalkin{
@@ -14,7 +37,6 @@ margin-top: -37px;
 color:white;
 margin-left: 10px;
 font-weight: 400;
-
 }
 
 .LoginlinkwrapperHome {
@@ -28,12 +50,12 @@ font-weight: 400;
 
 .HomeprofileIcon{
     height: 35px;
-    margin-left: 40%;
+    margin-left: 25%;
     margin-top: 5px;
     cursor: pointer;
 }
 .SearchCandidate{
-    /* margin-left: 5%; */
+    margin-left: 20%;
     text-decoration: none;
     color: white;
     font-size: small;
@@ -46,7 +68,7 @@ font-weight: 400;
 .dropdownwrapperHome {
     position:absolute;
     /* right : 1.5rem; */
-    left: 86.3%;
+    left: 87%;
     padding-right: 15px;
     padding-left: 15px;
     padding-bottom: 0px;
@@ -195,7 +217,7 @@ font-weight: 400;
     width:18%    
 }
 .HomeJobs{
-    /* margin-left: 2%; */
+    margin-left: -5%;
     text-decoration: none;
     color: white;
     font-size: small;
@@ -682,14 +704,13 @@ font-weight: bold;
     height:28px;
     width:45px;
     margin-top: 4px;
-    margin-left: 32%;
+    margin-left: 17%;
 }
 
     .MobHomeDropdownwrapper {
         position: absolute;
-        width:120px;
-        margin-left: 50%;
-        margin-top: 150px;
+        margin-left: 7%;
+        margin-top: 130px;
         padding-right: 5px;
         padding-left: 5px;
         padding-bottom: 0px;
@@ -697,14 +718,14 @@ font-weight: bold;
         border: 1px solid rgb(202, 202, 202);
         cursor: pointer;
         z-index: 100;
+        background-color: white;
     }
 
 @media(max-width:760px){
     .MobHomeDropdownwrapper {
         position: absolute;
-        width:120px;
-        margin-left: 255px;
-        margin-top: 150px;
+        margin-left: 20%;
+        margin-top: 130px;
         padding-right: 5px;
         padding-left: 5px;
         padding-bottom: 0px;
@@ -718,12 +739,11 @@ font-weight: bold;
     }
 
 
-@media(max-width:720px){
+@media(max-width:730px){
     .MobHomeDropdownwrapper {
         position: absolute;
-        width:120px;
-        margin-left: 255px;
-        margin-top: 150px;
+        margin-left: 23%;
+        margin-top: 130px;
         padding-right: 5px;
         padding-left: 5px;
         padding-bottom: 0px;
@@ -739,9 +759,8 @@ font-weight: bold;
 @media(max-width:680px){
     .MobHomeDropdownwrapper {
         position: absolute;
-        width:120px;
-        margin-left: 225px;
-        margin-top: 150px;
+        margin-left: 21%;
+        margin-top: 130px;
         padding-right: 5px;
         padding-left: 5px;
         padding-bottom: 0px;
@@ -754,12 +773,11 @@ font-weight: bold;
     }
     }
 
-@media(max-width:640px){
+@media(max-width:570px){
     .MobHomeDropdownwrapper {
         position: absolute;
-        width:120px;
-        margin-left: 200px;
-        margin-top: 150px;
+        margin-left: 19%;
+        margin-top: 130px;
         padding-right: 5px;
         padding-left: 5px;
         padding-bottom: 0px;
@@ -772,67 +790,13 @@ font-weight: bold;
     }
     }
 
-
-@media(max-width:590px){
-    .MobHomeDropdownwrapper {
-        position: absolute;
-        width:120px;
-        margin-left: 175px;
-        margin-top: 150px;
-        padding-right: 5px;
-        padding-left: 5px;
-        padding-bottom: 0px;
-        border-radius: 8px;
-        background-color: white;
-        border: 1px solid rgb(202, 202, 202);
-        cursor: pointer;
-        z-index: 100;
-
-    }
-    }
-
-@media(max-width:550px){
-    .MobHomeDropdownwrapper {
-        position: absolute;
-        width:120px;
-        margin-left: 160px;
-        margin-top: 150px;
-        padding-right: 5px;
-        padding-left: 5px;
-        padding-bottom: 0px;
-        border-radius: 8px;
-        background-color: white;
-        border: 1px solid rgb(202, 202, 202);
-        cursor: pointer;
-        z-index: 100;
-
-    }
-    }
 
 
 @media(max-width:500px){
     .MobHomeDropdownwrapper {
         position: absolute;
-        width:125px;
-        margin-left: 135px;
-        margin-top: 150px;
-        padding-right: 5px;
-        padding-left: 5px;
-        padding-bottom: 0px;
-        border-radius: 8px;
-        background-color: white;
-        border: 1px solid rgb(202, 202, 202);
-        cursor: pointer;
-        z-index: 100;
-
-    }
-    }
-@media(max-width:460px){
-    .MobHomeDropdownwrapper {
-        position: absolute;
-        width:125px;
-        margin-left: 113px;
-        margin-top: 150px;
+        margin-left: 16%;
+        margin-top: 130px;
         padding-right: 5px;
         padding-left: 5px;
         padding-bottom: 0px;
@@ -845,29 +809,11 @@ font-weight: bold;
     }
     }
 
-@media(max-width:430px){
-    .MobHomeDropdownwrapper {
-        position: absolute;
-        width:127px;
-        margin-left: 98px;
-        margin-top: 150px;
-        padding-right: 5px;
-        padding-left: 5px;
-        padding-bottom: 0px;
-        border-radius: 8px;
-        background-color: white;
-        border: 1px solid rgb(202, 202, 202);
-        cursor: pointer;
-        z-index: 100;
-
-    }
-    }
-    @media(max-width:400px){
+    @media(max-width:445px){
         .MobHomeDropdownwrapper {
             position: absolute;
-            width:127px;
-            margin-left: 86px;
-            margin-top: 150px;
+            margin-left: 14%;
+            margin-top: 130px;
             padding-right: 5px;
             padding-left: 5px;
             padding-bottom: 0px;
@@ -881,12 +827,11 @@ font-weight: bold;
         }
 
 
-@media(max-width:370px){
+@media(max-width:390px){
     .MobHomeDropdownwrapper {
         position: absolute;
-        width:126px;
-        margin-left: 72px;
-        margin-top: 150px;
+        margin-left: 10%;
+        margin-top: 130px;
         padding-right: 5px;
         padding-left: 5px;
         padding-bottom: 0px;
@@ -904,9 +849,8 @@ font-weight: bold;
 @media(max-width:330px){
     .MobHomeDropdownwrapper {
         position: absolute;
-        width:120px;
-        margin-left: 55px;
-        margin-top: 150px;
+        margin-left: 2%;
+        margin-top: 130px;
         padding-right: 5px;
         padding-left: 5px;
         padding-bottom: 0px;
@@ -918,64 +862,22 @@ font-weight: bold;
 
     }
     } 
-
-    @media(max-width:280px){
-        .MobHomeDropdownwrapper {
+        
+        .MobHomeDropdownwrapper::after {
+            content: "";
             position: absolute;
-            width:120px;
-            margin-left: 33px;
-            margin-top: 150px;
-            padding-right: 5px;
-            padding-left: 5px;
-            padding-bottom: 0px;
-            border-radius: 8px;
+            top: -0.7rem;
+            right: 1rem;
+            width: 20px;
+            height: 20px;
+            transform: rotate(45deg);
             background-color: white;
-            border: 1px solid rgb(202, 202, 202);
-            cursor: pointer;
-        z-index: 100;
-
+            border-left: 1px solid grey;
+            border-top: 1px solid grey;
+            z-index: 100;
+        
         }
-        }
-
-
-
-@media(max-width:250px){
-.MobHomeDropdownwrapper {
-    position: absolute;
-    /* right : 1.5rem; */
-    width:120px;
-    margin-left: 0px;
-    margin-top: 150px;
-    padding-right: 5px;
-    padding-left: 5px;
-    padding-bottom: 0px;
-    border-radius: 8px;
-    background-color: white;
-    border: 1px solid rgb(202, 202, 202);
-    cursor: pointer;
-    z-index: 100;
-
-}
-}
-
-.MobHomeDropdownwrapper::after {
-    content: "";
-    position: absolute;
-    top: -0.7rem;
-    right: 1rem;
-    width: 20px;
-    height: 20px;
-    transform: rotate(45deg);
-    background-color: white;
-    border-left: 1px solid grey;
-    border-top: 1px solid grey;
-    z-index: 100;
-
-}
-
-
-/* Emp  dropdown */
-
+        
 .EmpMobDropdownwrapper{
     position: absolute;
     /* right : 1.5rem; */
