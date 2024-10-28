@@ -97,6 +97,8 @@
 .JobtitleFilter{
     /* margin-left: 5px;
     margin-top: 15px; */
+    border: none;
+
     margin: 4px;
     cursor: pointer;
     color:black;
@@ -134,6 +136,21 @@
     align-content: center;
     text-wrap: nowrap ;
     border-radius: 3px;
+    border: none;
+
+}
+.TagHeading{
+    background-color:blue;
+    color:white;
+    margin: 4px;
+    cursor: pointer;
+    font-weight: 500;
+    font-size: small;
+    padding: 4px 7px ;
+    align-content: center;
+    text-wrap: nowrap ;
+    border-radius: 3px;
+    border: none;
 }
 
 
