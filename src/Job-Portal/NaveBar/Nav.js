@@ -130,6 +130,7 @@ function Nav(props) {
               <div className={Styles.fullnavewrapper}>
                 {/* <div className={Styles.logoWrapper}> */}
                 <div className={Styles.ITwalkinWrapper}>
+
                       <p className={Styles.ITwalkin}>ITwalkin</p>
                       <p className={Styles.onlyforITjobs}>Only for IT jobs</p>
                       </div>
@@ -268,6 +269,7 @@ function Nav(props) {
                     <div className={Styles.logoWrapper}>
                       {/* <NavLink to="/"> <img className={Styles.logo} src={logo} /> </NavLink> */}
                       <div className={Styles.ITwalkinWrapper}>
+
                       <p className={Styles.ITwalkin}>ITwalkin</p>
                       <p className={Styles.onlyforITjobs}>Only for IT jobs</p>
                       </div>
@@ -280,6 +282,7 @@ function Nav(props) {
                       <NavLink to="/Contact" className={Styles.Hlink} style={navLinkStyles}>Contact</NavLink> */}
                       <div className={` ${Styles.LoginlinkwrapperHome}`}>
                       <NavLink to="/Search-Candidate-Home" className={` ${Styles.SearchCandidate}`} style={navLinkStyles}>Employer </NavLink>
+                      
                         <img className={` ${Styles.HomeprofileIcon}`} src={loginuser} ref={imgRef} onClick={() => setShowprofile((prev) => !prev)} />
                         {/* <NavLink to="/JobSeekerLogin" className={`${Styles.Loginlink} ${Styles.StuLogin}`} style={navLinkStyles}>Job Seeker Login</NavLink> */}
 

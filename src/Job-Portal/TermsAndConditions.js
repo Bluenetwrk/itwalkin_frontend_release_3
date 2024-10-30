@@ -363,9 +363,11 @@ We does not take responsibility or liability for the actions, products, content 
         </p>
         </div>
 <img style={{marginLeft:"50%"}} id="down" onClick={()=>{goUp()}} src = {Up}/>
-<div style={{marginTop:"60px"}}>
+
+
+{/* <div style={{marginTop:"60px"}}>
           <Footer/>
-        </div>
+        </div> */}
 
     </>
 

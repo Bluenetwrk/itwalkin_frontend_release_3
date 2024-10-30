@@ -2,7 +2,10 @@
 .footerWraper{
     background-color: rgb(29, 1, 75);
     width: 100%;
-    margin-top: 50px;
+    /* margin-top: 70px; */
+    /* position:absolute; */
+    position: sticky;
+    bottom: 0;
 }
 
 .footer{

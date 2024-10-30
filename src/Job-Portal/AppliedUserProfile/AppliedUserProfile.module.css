@@ -3,33 +3,43 @@
     display: flex;
     margin-top: -47.5px;
     align-items: center;
+    position: sticky;
+    top:10px;
+    z-index: 100;
+    width:50%;
+    margin-left: 28%;
 
 }
+.LocationFilterWrapper{
+    z-index: 100;
+    width:180px;
+}
 
+.JobLocationFilter{
+    margin-left: 40px;
+    cursor: pointer;
+    font-weight: 600;
+    align-content: center;
+    border: none;
+    border-radius: 3px;
+    color: white
+}
 
 .searchBothForNavWrapper{
-    width:40%;
-    margin-left: 30%;
-    margin-top: -47.5px;
+    width:68%;
     background-color: white;
     border-radius: 3px;
     position: sticky;
-    top: 12px;
-    z-index: 100
-
+    z-index: 100;  
 }
 
 .inputboxsearchNav{
     padding: 10px;
-    /* margin-left: 2%; */
-    width: 86%;
+    width: 85%;
     border : 1px solid rgb(204, 209, 211);
-    /* background-color: red; */
     border: 0px white;
     border-radius: 3px;
-    position: sticky;
-    top: 12px;
-    z-index: 100
+    z-index: 100;
 
 } 
 
@@ -87,22 +97,6 @@
     /* background-color: blue */
 }
 
-.JobLocationFilter{
-    margin-left: 10px;
-    cursor: pointer;
-    /* color:white; */
-    font-weight: 600;
-    padding: 4px 7px ;
-    align-content: center;
-    border: none;
-    border-radius: 3px;
-    /* background-color: rgb(40, 4, 99); */
-    /* background-color:rgb(226, 225, 225); */
-    background:rgb(242, 244, 245);
-
-
-
-}
 .JobLocationFilter:hover{
     cursor: pointer;
     margin-left: 10px;
@@ -134,8 +128,9 @@
     margin: 4px;
     cursor: pointer;
     color:black;
-    font-weight: 600;
-    font-size: small;
+
+    font-weight: 550;
+    font-size: xx-small;
     padding: 4px 7px ;
     align-content: center;
     text-wrap: nowrap ;
@@ -149,8 +144,8 @@
     margin: 4px;
     cursor: pointer;
     color:white;
-    font-weight: 600;
-    font-size: small;
+    font-weight: 550;
+    font-size: xx-small;
     padding: 4px 7px ;
     align-content: center;
     text-wrap: nowrap ;
@@ -161,8 +156,8 @@
     color:white;
     margin: 4px;
     cursor: pointer;
-    font-weight: 500;
-    font-size: small;
+    font-weight: 550;
+    font-size: xx-small;
     padding: 4px 7px ;
     align-content: center;
     text-wrap: nowrap ;
@@ -175,8 +170,8 @@
     color:white;
     margin: 4px;
     cursor: pointer;
-    font-weight: 600;
-    font-size: small;
+    font-weight: 550;
+    font-size: xx-small;
     padding: 4px 7px ;
     align-content: center;
     text-wrap: nowrap ;

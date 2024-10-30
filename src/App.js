@@ -147,7 +147,7 @@ function App() {
           <Route path="/CareerJobdetails/:id" element={<CareerJobdetails />} />
           <Route path="/CheckEmpHalfProfile/:empId" element={<CheckEmpHalfProfile />} />
 
-          <Route path="Search-Candidate-Home" element={<SearchCandHome url={axios.defaults.baseURL} />} />
+          <Route path="/Search-Candidate-Home" element={<SearchCandHome url={axios.defaults.baseURL} />} />
 
           <Route path="/payment" element={<Payment />} />
 
@@ -160,7 +160,7 @@ function App() {
 
         </Routes>
 
-        {/* <Footer /> */}
+        <Footer />
 
       </BrowserRouter>
     </>

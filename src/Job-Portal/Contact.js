@@ -79,9 +79,10 @@ getContact()
         BENGALURU-560009 */}
         </p>
         </div>
-        <div style={{marginTop:"250px"}}>
+        
+        {/* <div style={{marginTop:"250px"}}>
           <Footer/>
-        </div>
+        </div> */}
     </>
 
     // <div style={{marginLeft:"2%", marginTop:"10px"}}> {Contact} </div>

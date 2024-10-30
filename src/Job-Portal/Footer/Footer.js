@@ -70,7 +70,7 @@ function Footer() {
                   top:0,
                   behavior:"smooth"
                 })
-                navigate ("/AllCareerJobs")}}>Career Section</a></h4>
+                navigate ("/AllCareerJobs")}}>Career</a></h4>
               
             </div>
 

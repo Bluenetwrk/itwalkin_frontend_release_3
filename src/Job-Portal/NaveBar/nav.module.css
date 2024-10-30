@@ -105,6 +105,10 @@ font-weight: 400;
     top:0px */
 }
 
+.fullnavewrapper * {
+    /* background-color: green; */
+    z-index: 1000;
+}
 
 .fullnavewrapper {
     display: flex;
@@ -217,7 +221,7 @@ font-weight: 400;
     width:18%    
 }
 .HomeJobs{
-    margin-left: -5%;
+    margin-left: -2%;
     text-decoration: none;
     color: white;
     font-size: small;
@@ -298,8 +302,7 @@ font-weight: 400;
 
 .JobSeekerdropdownwrapper{
     position: absolute;
-    /* right : 1.5rem; */
-    left: 86%;
+    left: 84%;
     padding-right: 15px;
     padding-left: 15px;
     padding-bottom: 0px;
@@ -309,11 +312,13 @@ font-weight: 400;
     cursor: pointer;
     z-index:100;
 }
+
+
 @media(max-width:1800px){
     .JobSeekerdropdownwrapper {
         position: absolute;
-        /* right : 1.5rem; */
-        left: 87%;
+        
+        left: 82%;
         padding-right: 15px;
         padding-left: 15px;
         padding-bottom: 0px;
@@ -325,8 +330,8 @@ font-weight: 400;
 @media(max-width:1500px){
     .JobSeekerdropdownwrapper {
         position: absolute;
-        /* right : 1.5rem; */
-        left: 86.5%;
+        
+        left: 83.5%;
         padding-right: 15px;
         padding-left: 15px;
         padding-bottom: 0px;
@@ -338,8 +343,8 @@ font-weight: 400;
 @media(max-width:1330px){
     .JobSeekerdropdownwrapper {
         position: absolute;
-        /* right : 1.5rem; */
-        left: 86.5%;
+        
+        left: 84.5%;
         padding-right: 15px;
         padding-left: 15px;
         padding-bottom: 0px;
@@ -351,8 +356,8 @@ font-weight: 400;
 @media(max-width:1200px){
     .JobSeekerdropdownwrapper {
         position: absolute;
-        /* right : 1.5rem; */
-        left: 86.5%;
+        
+        left: 85.5%;
         padding-right: 15px;
         padding-left: 15px;
         padding-bottom: 0px;
@@ -365,7 +370,7 @@ font-weight: 400;
     @media(max-width:1130px){
         .JobSeekerdropdownwrapper {
             position: absolute;
-            /* right : 1.5rem; */
+            
             left: 86.5%;
             padding-right: 15px;
             padding-left: 15px;
@@ -378,7 +383,7 @@ font-weight: 400;
     @media(max-width:1050px){
         .JobSeekerdropdownwrapper {
             position: absolute;
-            /* right : 1.5rem; */
+            
             left: 86,5%;
             padding-right: 15px;
             padding-left: 15px;
@@ -392,8 +397,8 @@ font-weight: 400;
     @media(max-width:950px){
         .JobSeekerdropdownwrapper {
             position: absolute;
-            /* right : 1.5rem; */
-            left: 86.5%;
+            
+            left: 87%;
             padding-right: 15px;
             padding-left: 15px;
             padding-bottom: 0px;
@@ -406,7 +411,7 @@ font-weight: 400;
     @media(max-width:850px){
         .JobSeekerdropdownwrapper {
             position: absolute;
-            /* right : 1.5rem; */
+            
             left: 86%;
             padding-right: 15px;
             padding-left: 15px;
@@ -438,7 +443,7 @@ font-weight: 400;
 
 .Empdropdownwrapper {
     position: absolute;
-    /* right : 1.5rem; */
+    
     left: 86.2%;
     padding-right: 10px;
     padding-left: 10px;
@@ -880,7 +885,7 @@ font-weight: bold;
         
 .EmpMobDropdownwrapper{
     position: absolute;
-    /* right : 1.5rem; */
+    
     left: 70.2%;
     padding-right: 5px;
     padding-left: 5px;
