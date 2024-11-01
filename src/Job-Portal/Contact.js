@@ -2,10 +2,13 @@ import React  from 'react'
 import axios from "axios"
 import { useState, useEffect } from 'react'
 import Footer from './Footer/Footer'
+import useScreenSize from './SizeHook';
+
 
 
 function Contact() {
-    const [Contact, setContact]= useState([])
+  const [Contact, setContact]= useState([])
+  const screenSize = useScreenSize();
 
    async function getContact(){
     await axios.get("/admin/getWebsiteDetails")
@@ -80,9 +83,18 @@ getContact()
         </p>
         </div>
         
-        {/* <div style={{marginTop:"250px"}}>
+
+
+        {screenSize.width > 750 ?
+  <div style={{marginTop:"370px", position:"sticky", bottom:0}}>
           <Footer/>
-        </div> */}
+        </div>
+        :
+  <div style={{marginTop:"230px",}}>
+
+        <Footer/>   
+        </div>
+}
     </>
 
     // <div style={{marginLeft:"2%", marginTop:"10px"}}> {Contact} </div>

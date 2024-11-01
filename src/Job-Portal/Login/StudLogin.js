@@ -12,17 +12,16 @@ import github from "../img/icons8-github-50.png"
 import { useGoogleLogin } from '@react-oauth/google';
 import image from "../img/user_3177440.png"
 import { TailSpin } from "react-loader-spinner"
-
-
-
-
-
+import useScreenSize from '../SizeHook';
 
 // import style from "./styles.module.css"
 
 
 
 function StudentLogin(props) {
+
+  const screenSize = useScreenSize();
+
 
   const [gmailuser, setGmailuser] = useState("")
   const [topErrorMessage, setTopErrorMessage] = useState("")
@@ -31,7 +30,6 @@ function StudentLogin(props) {
   
   const [showotp, setshowotp] = useState(false)
   const [Loader, setLoader] = useState(false)
-
   
 const [ipAddress, setIPAddress] = useState('')
 
@@ -278,9 +276,17 @@ useEffect(() => {
 
       </div>
 
-      <div style={{marginTop:"170px"}}>
+      {screenSize.width > 750 ?
+  <div style={{marginTop:"330px", position:"sticky", bottom:0}}>
           <Footer/>
         </div>
+        :
+  <div style={{marginTop:"50px",}}>
+
+        <Footer/>   
+        </div>
+}
+
     </>
 
   )

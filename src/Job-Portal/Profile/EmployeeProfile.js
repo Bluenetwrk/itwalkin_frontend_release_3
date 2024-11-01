@@ -79,7 +79,7 @@ profileData.length>0?<button className={styles.updateProfile} onClick={updateEmp
             }
 
             {screenSize.width>850?
-           
+           <>
 <div className={styles.uiwrapper}>
             <ul className={styles.ul}>
                 <li className={styles.li}><b>Name </b></li>
@@ -137,6 +137,10 @@ profileData.length>0?<button className={styles.updateProfile} onClick={updateEmp
 
             }
             </div>
+                     <div style={{marginTop:"20px", position:"sticky", bottom:0}}>
+                     <Footer/>
+                   </div>
+                   </>
             :
                            
 <>
@@ -189,13 +193,13 @@ profileData.length>0?<button className={styles.updateProfile} onClick={updateEmp
                         })}
 
                     </div>
-
+                    <div style={{marginTop:"10px"}}>
+                      <Footer/>
+                    </div>
                 </>
         
 }
-<div style={{marginTop:"10px"}}>
-                      <Footer/>
-                    </div>
+
         </>
     )
 }

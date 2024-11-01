@@ -94,7 +94,6 @@
 } */
 /* ...........................for Filter..................... */
 .JobtitleFilterWrapper{
-    /* background-color: rgb(40, 4, 99); */
     background:rgb(242, 244, 245);
 
     margin-left: 3px;
@@ -102,6 +101,10 @@
     padding: 10px;
     display: flex;
     flex-wrap: wrap;
+            height: 105px;
+            overflow-x: hidden;
+            overflow-y: auto;
+            text-align: justify;
 }
 
 .JobtitleFilter{
@@ -150,13 +153,15 @@
 
 }
 .TagHeading{
-    background:rgb(242, 244, 245);
+    /* background:rgb(242, 244, 245); */
+    background:rgb(228, 230, 231);
+
 
     color:black;
     margin: 4px;
     cursor: pointer;
-    font-weight: 650;
-    font-size: x-small;
+    font-weight: 550;
+    font-size: small;
     padding: 4px 7px ;
     align-content: center;
     text-wrap: nowrap ;

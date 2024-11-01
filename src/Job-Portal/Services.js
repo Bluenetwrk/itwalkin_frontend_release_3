@@ -2,8 +2,11 @@ import React  from 'react'
 import axios from "axios"
 import { useState, useEffect } from 'react'
 import Footer from './Footer/Footer'
+import useScreenSize from './SizeHook';
+
 
 function Services() {
+  const screenSize = useScreenSize();
     const [Services, setServices]= useState([])
 
    async function getServices(){
@@ -60,9 +63,21 @@ getServices()
         The ITwalkin Platform (including any mobile based applications, website and web applications) is provided by ITwalkin is either directly or through its affiliates including but not limited to Bluenetworks. Through the ITwalkin Platform any person with a verified account can post jobs ("Job Poster") to the ITwalkin Platform, access and participate in the services provided by ITwalkin. By using ITwalkin Platform, your consent to the terms of the Terms of Service in addition to our Privacy Policy.
 
 Any Employer accessing the ITwalkin Platform shall be bound by these Terms of Service, and all other rules, regulations and terms of use referred to herein or provided by ITwalkin in relation to any services provided via the ITwalkin Platform.
+     
         </p>
+        
         </div>
-        {/* <div style={{marginTop:"300px"}}>
+        {screenSize.width > 750 ?
+  <div style={{marginTop:"430px", position:"sticky", bottom:0}}>
+          <Footer/>
+        </div>
+        :
+  <div style={{marginTop:"100px",}}>
+
+        <Footer/>   
+        </div>
+}
+        {/* <div style={{marginTop:"330px", position:"sticky", bottom:0,}}>
           <Footer/>
         </div> */}
     </>

@@ -594,6 +594,9 @@ function SearchCandidate() {
               </button>
             </div>
             </div>
+            <div style={{marginTop:"180px", position:"sticky", bottom:0}}>
+          <Footer/>
+        </div>
 
         </>
         :
@@ -747,12 +750,13 @@ function SearchCandidate() {
           }
 
           </div>
+          <div style={{marginTop:"10px"}}>
+          <Footer/>
+        </div>
         </>
       }
 
-<div style={{marginTop:"10px"}}>
-          <Footer/>
-        </div>
+
 
     </>
   )

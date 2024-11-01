@@ -400,7 +400,7 @@ border:"none",padding: "4px 8px"}} onClick={DeleteProfile}>Delete</button>
 
           <p style={{ fontStyle: "italic", color: "green" }}>{topMessage}</p>
           {screenSize.width > 850 ?
-
+<>
             <div className={styles.inputWrapper}>
 
 
@@ -500,8 +500,11 @@ border:"none",padding: "4px 8px"}} onClick={DeleteProfile}>Delete</button>
 
               <button className={styles.Save} onClick={(e) => { saveUpdate(e) }}>Save</button>
               <button className={styles.cancel} onClick={() => { navigate(-1) }} >cancel</button>
-
             </div>
+              <div style={{marginTop:"20px", position:"sticky", bottom:0}}>
+          <Footer/>
+        </div>
+        </>
             :
             <>
 
@@ -603,16 +606,16 @@ border:"none",padding: "4px 8px"}} onClick={DeleteProfile}>Delete</button>
               <button className={styles.MobileSave} onClick={(e) => { saveUpdate(e) }}>Save</button>
               <button className={styles.Mobilecancel} onClick={() => { navigate(-1) }} >cancel</button>
               </div>
-
+              <div style={{marginTop:"60px"}}>
+          <Footer/>
+        </div>
             </>
 
           }
         </div>
 
       </div>
-      <div style={{marginTop:"60px"}}>
-          <Footer/>
-        </div>
+
 
     </>
   )

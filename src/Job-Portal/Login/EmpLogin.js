@@ -15,11 +15,12 @@ import { TailSpin } from "react-loader-spinner"
 import Modal from "./EmpLogModal";
 import jwt_decode from "jwt-decode"
 
+import useScreenSize from '../SizeHook';
+
 // import style from "./styles.module.css"
 
 function EmpLogin(props) {
-
-
+  const screenSize = useScreenSize();
 
   const [gmailuser, setGmailuser] = useState("")
   const [topErrorMessage, setTopErrorMessage] = useState("")
@@ -195,18 +196,18 @@ function EmpLogin(props) {
   const handleLogin = async (code) => {
     try {
       // Exchange the code for an access token
-  const githubOAuthURL = `https://github.com/login/oauth/authorize?client_id=${GITHUB_CLIENT_ID}&scope=user`;
+      const githubOAuthURL = `https://github.com/login/oauth/authorize?client_id=${GITHUB_CLIENT_ID}&scope=user`;
 
       const data = await fetch('https://github.com/login/oauth/access_token', {
-            method: 'POST',
-            body: {
-                  client_id: GITHUB_CLIENT_ID,
-                  client_secret: GITHUB_CLIENT_SECRET,
-                  code,
-            },
-            headers: {
-                  'Content-Type': 'application/json'
-            }
+        method: 'POST',
+        body: {
+          client_id: GITHUB_CLIENT_ID,
+          client_secret: GITHUB_CLIENT_SECRET,
+          code,
+        },
+        headers: {
+          'Content-Type': 'application/json'
+        }
       }).then((response) => response.json());
 
       const accessToken = data.access_token;
@@ -230,7 +231,7 @@ function EmpLogin(props) {
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
     const code = urlParams.get('code');
-    
+
     if (code) {
       handleLogin(code);
     }
@@ -271,7 +272,7 @@ function EmpLogin(props) {
       <div className={styles.BothsignUpWrapper}>
         <p className={styles.Loginpage}>Employer Login page </p>
 
-{/* 
+        {/* 
         <input maxLength="10" className={styles.inputs} type="number" placeholder='enter phone Number'
           value={PhoneNumber} autoComplete="on" onChange={(e) => { setPhoneNumber(e.target.value) }} />
 
@@ -315,23 +316,30 @@ function EmpLogin(props) {
           </div>
         </div>
         <div className={styles.signUpWrapper}  >
-        <div className={styles.both}>
-          <img className={styles.google} src={linkedIn} />
-          <span className={styles.signUpwrap} >Continue with Linkedin</span>
+          <div className={styles.both}>
+            <img className={styles.google} src={linkedIn} />
+            <span className={styles.signUpwrap} >Continue with Linkedin</span>
+          </div>
         </div>
-      </div>
 
 
-      <div className={styles.signUpWrapper} >
-        <div className={styles.both}>
-          <img className={styles.google} src={github} />
-          <span className={styles.signUpwrap} >Continue with Github</span>
+        <div className={styles.signUpWrapper} >
+          <div className={styles.both}>
+            <img className={styles.google} src={github} />
+            <span className={styles.signUpwrap} >Continue with Github</span>
+          </div>
         </div>
       </div>
-      </div>
-      <div style={{marginTop:"170px"}}>
-          <Footer/>
+      {screenSize.width > 750 ?
+        <div style={{ marginTop: "330px", position: "sticky", bottom: 0 }}>
+          <Footer />
         </div>
+        :
+        <div style={{ marginTop: "50px", }}>
+
+          <Footer />
+        </div>
+      }
 
 
     </>

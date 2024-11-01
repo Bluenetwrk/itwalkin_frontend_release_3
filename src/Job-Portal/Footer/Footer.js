@@ -20,19 +20,12 @@ function Footer() {
         <div className={Styles.footer}>
 
           <div className={Styles.top}>
-            <div style={{ width: "50%", marginLeft:"-5.8%" }} >
-              <p className={Styles.footCart}>ITwalkin.com</p>
-              <p  className={Styles.AddYour}>Only for IT jobs</p>
+              <p className={Styles.ITwalkin}>ITwalkin.com</p>
+              <p  className={Styles.OnlyforIT}>Only for IT jobs</p>
             </div>
-            <div className={Styles.brands}>
-              <a> <i className='fa-brands fa-facebook-square'></i> </a>
-              <a> <i className='fa-brands fa-instagram-square'></i> </a>
-              <a> <i className='fa-brands fa-twitter-square'></i> </a>
-              <i class="fa-brands fa-linkedin-square" onClick={Linkedin} ></i>
-            </div>
-          </div>
 
-          <div className={Styles.Bottom}>
+
+            <div className={Styles.Bottom}>
             <div>
               <h4>   
                  <a onClick={()=>{
@@ -85,10 +78,20 @@ function Footer() {
                 navigate ("/TermsAndCondition")}}>Terms and Conditions</a></h4>
               
             </div>
+            </div>
+
+
+            <div className={Styles.brands}>
+              <a> <i className='fa-brands fa-facebook-square'></i> </a>
+              <a> <i className='fa-brands fa-instagram-square'></i> </a>
+              <a> <i className='fa-brands fa-twitter-square'></i> </a>
+              <i class="fa-brands fa-linkedin-square" onClick={Linkedin} ></i>
+            </div>
           </div>
 
-        </div>
-      </div>
+
+          </div>
+
     </>
   )
 }

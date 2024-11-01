@@ -1,7 +1,6 @@
 
 .Loginpage{
     /* color:grey; */
-    /* background-color: aqua; */
     /* font-weight: 550; */
     width:220px;
     margin-left: 50px;
@@ -36,8 +35,8 @@
     margin-left: 6%;
 }
 .BothsignUpWrapper{
-    margin-top: 2%;
-    margin-left: 42%;
+    margin:10%;
+    margin-left: 43%;
 }
 
 @media (max-width:850px){

@@ -7,12 +7,15 @@ import { TailSpin, Puff } from "react-loader-spinner"
 import location from "../img/icons8-location-20.png"
 import graduation from "../img/icons8-graduation-cap-40.png"
 import Footer from '../Footer/Footer';
+import {jobTags} from '../Tags'
+
 
 import useScreenSize from '../SizeHook';
 import socketIO from 'socket.io-client';
 
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
+
 const responsive = {
 
   desktop: {
@@ -39,39 +42,8 @@ function AllJobs(props) {
     });
   }, [])
 
-  let jobTags = [
-  { value: 'Java', label: 'Java ' }, { value: 'ReactJs', label: 'ReactJs' }, { value: 'Python', label: 'Python' },
-  { value: 'Mern Stack', label: 'Mern Stack' }, { value: 'C++,C', label: 'C++,C' },
-  { value: 'Javascript', label: "Javascript" }, { value: 'Node js', label: 'Node js' },
-  { value: 'Angular js', label: 'Angular js' }, { value: 'Vue js', label: 'Vue js' }, 
-  { value: 'NextJs', label: 'NextJs' },  { value: '.NET', label: '.NET' }, { value: 'Larvel', label: 'Larvel' },
-  { value: 'Kotlin', label: 'Kotlin' }, { value: 'Android', label: 'Android' }, { value: 'iOS', label: 'iOS' },
-  { value: 'Xamarin', label: 'Xamarin' },{ value: 'Ember JS', label: 'Ember JS' }, { value: 'Cordova', label: 'Cordova' },
-  { value: 'Groovey,Grails', label: 'Groovey,Grails'}, { value: 'QT', label: 'QT'},
-  { value: 'Oracle', label: 'Oracle'}, { value: 'Postgres SQL', label: 'Postgres SQL'},
-  { value: 'CouchDB', label: 'CouchDB'}, { value: 'Redis', label: 'Redis'},{ value: 'Azure', label: 'Azure'},
-  { value: 'AWS', label: 'AWS'}, { value: 'Rackspace', label: 'Rackspace'},{ value: 'Heroku', label: 'Heroku'},
-  { value: 'GoogleCloud', label: 'GoogleCloud'}, { value: 'Weblogic', label: 'Weblogic'},
-  { value: 'Apache', label: 'Apache'}, { value: 'Lotus', label: 'Lotus'}, { value: 'Domino', label: 'Domino'}, 
-  { value: 'MS IIS', label: 'MS IIS'}, { value: 'ColdFusion', label: 'ColdFusion'},
-  { value: 'nginx', label: 'nginx'}, { value: 'Resin', label: 'Resin'}, { value: 'Selenium', label: 'Selenium'},
-  { value: 'HP LoadRunner', label: 'HP LoadRunner'}, { value: 'jUnit', label: 'jUnit'},
-  { value: 'Jira', label: 'Jira'}, { value: 'Confluence', label: 'Confluence'},
-  { value: 'Testrails', label: 'Testrails'}, { value: 'PLC,SCADA', label: 'PLC,SCADA'},
-  { value: 'ModBUS', label: 'ModBUS'},{ value: 'CANBUS', label: 'CANBUS'}, { value: 'Machine Learing', label: 'Machine Learing'},
-  { value: 'Cybersecurity', label: 'Cybersecurity'}, { value: 'AI', label: 'AI'},
-  { value: 'Backend', label: 'Backend' }, { value: 'Frontend', label: 'Frontend' },
-  { value: 'HTML-CSS', label: 'HTML-CSS' }, { value: 'MongoDB', label: 'MongoDB' },
-  { value: 'MySql', label: 'MySql' }, { value: 'Flutter', label: 'Flutter' },
-  { value: 'Mobile App Developer', label: 'Mobile App Developer' }, { value: 'Artificial Intelligence', label: 'Artificial Intelligence' },
-  { value: 'React Native', label: 'React Native' }, { value: 'DevOps Engineer', label: 'DevOps Engineer' },
-  { value: 'Security developer', label: 'Security developer' }, { value: 'Data science', label: 'Data science' },
-  { value: 'Data Analyst', label: 'Data Analyst' }, { value: 'Game Developer', label: 'Game Developer' },
-  { value: 'Graphic Developers', label: 'Graphic Developers' }, { value: 'AI Engineer', label: 'AI Engineer' },
-  { value: 'Security Developer', label: 'Security Developer'},{ value: 'Cloud Developers', label: 'Cloud Developers'},
-  ]
-
-  let JobLocationTags = ["Bangalore", "Hyderabad", "Chennai", "Mumbai"]
+  
+  let JobLocationTags = ["Bangalore", "Hyderabad"]
 
   const [jobs, setJobs] = useState([])
   const [Filterjobs, setFilterjobs] = useState([])
@@ -414,12 +386,32 @@ function AllJobs(props) {
     <>
       {screenSize.width > 850 ?
         <>
-          <div className={styles.searchBothForNavWrapper}>
-            <input className={styles.inputboxsearchNav} type="text" placeholder='Search for a Job / Skills / Location / Experiance' onChange={(e) => { search(e) }} />
 
-            <i style={{ color: "rgb(40, 4, 99)", fontSize: "18px", cursor: "pointer" }} onClick={() => { searchIcon(searchKey) }}
-              class="fa fa-search" ></i>
-          </div>
+<div className={styles.NavConetenetWrapper}>
+
+
+<div className={styles.LocationFilterWrapper}>
+  {
+    JobLocationTags.map((location, i) => {
+      return (
+        <>
+        <label className={styles.JobLocationFilter}>
+        <input type="radio"  disabled={location == "Chennai" ||
+        location == "Hyderabad" || location == "Mumbai" || location == "Delhi"} name="filter" onClick={() => 
+            { getLocation(location.toLowerCase()); setActive("Bangalore") }} />{location}</label><br></br>
+            </>
+      )
+    })
+  }
+</div>          
+<div className={styles.searchBothForNavWrapper}>
+  <input className={styles.inputboxsearchNav} type="text" placeholder='Search for a Job / Skills / Location / Experiance' onChange={(e) => { search(e) }} />
+
+  <i style={{ color: "rgb(40, 4, 99)", fontSize: "18px", cursor: "pointer" , marginLeft:"2%"}} onClick={() => { searchIcon(searchKey) }}
+    class="fa fa-search" ></i>
+</div>
+</div>
+
           {Result ?
             <h4 style={{ marginLeft: "40%", marginTop: "20px" }}> {jobs.length} matching Result Found  </h4>
             : ""
@@ -430,20 +422,7 @@ function AllJobs(props) {
 
       {screenSize.width > 850 ?
         <>
-          <div style={{ marginTop: "30px" }}></div>
-          <div className={styles.LocationFilterWrapper}>
 
-            {
-              JobLocationTags.map((location, i) => {
-                return (
-                  <button className={location == "Chennai" || location == "Hyderabad" || location == "Mumbai" ?
-                    styles.disable : Active === "Bangalore" ? styles.locationActive : styles.JobLocationFilter} disabled={location == "Chennai" ||
-                      location == "Hyderabad" || location == "Mumbai" || location == "Delhi"} name="filter" onClick={() => { getLocation(location.toLowerCase()); setActive("Bangalore") }} >{location}</button>
-
-                )
-              })
-            }
-          </div><br></br>
           <div className={styles.JobtitleFilterWrapper}>
             <buton className={Active === "All" ? styles.active : styles.JobtitleFilter} onClick={() => { getjobs(); setActive("All") }}>All</buton>
             {
@@ -765,8 +744,10 @@ function AllJobs(props) {
                 <i class='fas fa-step-forward'></i>
               </button>
             </div>
-
           </div>
+          <div style={{marginTop:"100px", position:"sticky", bottom:0}}>
+          <Footer/>
+        </div>
 
         </>
         :
@@ -997,12 +978,13 @@ function AllJobs(props) {
             }
 
           </div>
+                    <div style={{marginTop:"20px",}}>
+            <Footer/>
+            </div>
         </>
 
       }
-      <div style={{marginTop:"60px"}}>
-          <Footer/>
-        </div>
+
     </>
 
   )

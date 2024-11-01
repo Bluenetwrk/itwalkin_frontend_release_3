@@ -4,9 +4,13 @@ import { useState, useEffect } from 'react'
 import Up from "./img/icons8-arrow-button-24.png"
 import Down from "./img/icons8-down-button-24.png"
 import Footer from './Footer/Footer'
+import useScreenSize from './SizeHook';
+
 
 
 function TermsAndCondition() {
+  const screenSize = useScreenSize();
+
     const [TermsAndCondition, setTermsAndCondition]= useState([])
 
    async function getAboutUs(){
@@ -363,11 +367,16 @@ We does not take responsibility or liability for the actions, products, content 
         </p>
         </div>
 <img style={{marginLeft:"50%"}} id="down" onClick={()=>{goUp()}} src = {Up}/>
-
-
-{/* <div style={{marginTop:"60px"}}>
+{screenSize.width > 750 ?
+  <div style={{marginTop:"60px", position:"sticky", bottom:0}}>
           <Footer/>
-        </div> */}
+        </div>
+        :
+        <Footer/>       
+}
+
+
+
 
     </>
 

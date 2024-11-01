@@ -32,6 +32,8 @@ const responsive = {
 function Home() {
 
   const [jobs, setJobs] = useState([])
+  console.log(jobs)
+
   const [nopageFilter, setNoPageFilter] = useState(false)
   const [Filtereredjobs, setFiltereredjobs] = useState([])
 
@@ -44,7 +46,8 @@ function Home() {
   const [PageLoader, setPageLoader] = useState(false)
   const [Result, setResult] = useState(false)
   const [NotFound, setNotFound] = useState("")
-  const [Active, setActive] = useState("")
+  const [Active, setActive] = useState([])
+  console.log(Active)
   const screenSize = useScreenSize();
 
   // let AgeTags = [
@@ -82,7 +85,7 @@ function Home() {
   let recordsperpage = JSON.parse(sessionStorage.getItem("recordsperpageHome"))
 
   const [currentPage, setCurrentPage] = useState(1)
-  const [recordsPerPage, setrecordsPerPage] = useState(recordsperpage ? recordsperpage : 10)
+  const [recordsPerPage, setrecordsPerPage] = useState(recordsperpage ? recordsperpage : 5)
 
   const lastIndex = currentPage * recordsPerPage //10
   const firstIndex = lastIndex - recordsPerPage //5
@@ -92,6 +95,9 @@ function Home() {
 
 
   async function getjobs() {
+    setCount(1)
+    setActive([])
+
     setPageLoader(true)
     setNoPageFilter(false)
     const headers = { authorization: 'BlueItImpulseWalkinIn' };
@@ -159,6 +165,7 @@ function Home() {
     }
   }
   async function search(e) {
+
     setNoPageFilter(true)
     let key = e.target.value
     setFiltereredjobs(key)
@@ -352,31 +359,71 @@ function Home() {
   function last() {
     setCurrentPage(npage)
   }
-  // const [SelectedPage, setSelectedPage] = useState()
 
   function handleRecordchange(e) {
     sessionStorage.setItem("recordsperpageHome", JSON.stringify(e.target.value));
     let recordsperpage = JSON.parse(sessionStorage.getItem("recordsperpageHome"))
     setrecordsPerPage(recordsperpage)
-    // setSelectedPage(e.target.value)
     setCurrentPage(1)
   }
 
+  const [count, setCount]=useState(1)
+
   async function filterByJobTitle(key) {
-    setActive(key)
+    if(count==1){
+      setJobs("")
+    }
+    setCount(prev=>prev+1)
+
+    const isIndex=Active.findIndex((present)=>{
+return(
+  present===key
+)
+    })
+    if(isIndex<0){
+    setActive([...Active, key])
+    }else{
+      const IndexId=Active.findIndex((present)=>{
+        return(
+          present==key
+        )
+            })
+            Active.splice(IndexId,1)
+    }
     setNoPageFilter(true)
     setFiltereredjobs(key)
     await axios.get(`/jobpost/getTagsJobs/${key}`)
-      .then((res) => {
+      .then( (res) => {
         let result = (res.data)
-        let sortedate = result.sort((a, b) => {
+        let sortedate = result.sort( (a, b) => {
           return new Date(b.createdAt) - new Date(a.createdAt);
         });
-        setJobs(sortedate)
+
+      //   console.log("sortedate", jobs)
+
+      //  let availableItems= jobs.filter(async (items)=>{
+      //     return(
+
+      //   console.log("availableItems", items.Tags)
+
+      //     )
+      //   })
+        // console.log("availableItems", availableItems)
+        // setJobs(sortedate)
+        // setJobs([...jobs ,sortedate])
+        //  setJobs(oldArray => [...oldArray, sortedate] )
+        let elements=  sortedate.flatMap(element => {
+          setJobs(oldArray => [...oldArray,element] )
+     });
+
       })
   }
 
   async function getLocation(jobLocation) {
+    setCount(1)
+    setActive([])
+
+
     setFiltereredjobs(jobLocation)
     setNoPageFilter(true)
 
@@ -409,7 +456,7 @@ function Home() {
                   <label className={styles.JobLocationFilter}>
                   <input type="radio"  disabled={location == "Chennai" ||
                   location == "Hyderabad" || location == "Mumbai" || location == "Delhi"} name="filter" onClick={() => 
-                      { getLocation(location.toLowerCase()); setActive("Bangalore") }} />{location}</label><br></br>
+                      { getLocation(location.toLowerCase()) }} />{location}</label><br></br>
                       </>
                 )
               })
@@ -437,7 +484,7 @@ function Home() {
 
 
           <div className={styles.JobtitleFilterWrapper}>
-            <buton className={ styles.active} onClick={() => { getjobs(); setActive("All") }}>All</buton>
+            <buton className={ styles.active} onClick={() => { getjobs() }}>All</buton>
             {
               jobTags.map((tags, i) => {
                 return (
@@ -446,8 +493,14 @@ function Home() {
                     tags.value==="EXPERIENCE" || tags.value==="Job Type" || tags.value==="INDUSTRY" || tags.value==="TOOLS/PROTOCOLS" || tags.value==="ROLE" || tags.value==="COMPANY TYPE" } 
                     className={tags.value==="TECHNOLOGIES" || tags.value==="EDUCATION" || tags.value==="COLLEGE TYPE" || tags.value==="NOTICE PERIOD" || tags.value==="SALARY" || 
                     tags.value==="EXPERIENCE" || tags.value==="Job Type" || tags.value==="INDUSTRY" || tags.value==="TOOLS/PROTOCOLS" || tags.value==="COMPANY TYPE" || tags.value==="ROLE"?
-                    styles.TagHeading:  Active === tags.value ? 
-                    styles.active : styles.JobtitleFilter} onClick={() => { filterByJobTitle(tags.value) }}>{tags.value} </button>
+                    styles.TagHeading: 
+                    //  Active === tags.value ? 
+                    Active.findIndex((present)=>{
+                      return(
+                        present===tags.value
+                      )
+                          }) >=0?
+                     styles.active : styles.JobtitleFilter} onClick={() => { filterByJobTitle(tags.value) }}>{tags.value} </button>
                 
                   )
               })
@@ -456,7 +509,7 @@ function Home() {
 
           <div style={{ display: "flex", justifyContent: "space-between" }}>
             {nopageFilter ?
-              <p style={{ fontWeight: 400, marginLeft: "10px" }}>Displaying <span style={{ color: "blue" }}>{Filtereredjobs}</span> from All Jobs</p>
+              <p style={{ fontWeight: 400, marginLeft: "10px" }}>Displaying <span style={{ color: "blue" }}>{Active.toString()}</span> from All Jobs</p>
               :
               <p style={{ fontWeight: 400, marginLeft: "10px" }}>showing {firstIndex + 1} to {lastIndex} latest jobs</p>
             }
@@ -734,6 +787,10 @@ function Home() {
             </div>
 
           </div>
+{/*           
+          <div style={{marginTop:"200px", position:"sticky", bottom:0}}>
+          <Footer/>
+        </div> */}
 
         </>
         // Mobile View
@@ -982,11 +1039,12 @@ function Home() {
                 })
                 : <p style={{ marginLeft: "35%", color: "red" }}>No Record Found</p>
 
-
             }
 
           </div>
-
+          <div style={{marginTop:"20px",}}>
+            <Footer/>
+            </div>
         </>
       }
 

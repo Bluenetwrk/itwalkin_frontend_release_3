@@ -97,7 +97,7 @@
     /* background-color: blue */
 }
 
-.JobLocationFilter:hover{
+/* .JobLocationFilter:hover{
     cursor: pointer;
     margin-left: 10px;
     cursor: pointer;
@@ -107,10 +107,9 @@
     align-content: center;
     border: none;
     border-radius: 3px;
-    /* background-color:blue; */
     background-color: rgb(40, 4, 99);
     transition: all 0.2s;
-}
+} */
 /* ...........................for Filter..................... */
 .JobtitleFilterWrapper{
     /* background-color: rgb(40, 4, 99); */
@@ -120,6 +119,11 @@
     padding: 10px;
     display: flex;
     flex-wrap: wrap;
+    height: 100px;
+    overflow-x: hidden;
+    overflow-y: auto;
+    text-align: justify;
+
 }
 
 .JobtitleFilter{

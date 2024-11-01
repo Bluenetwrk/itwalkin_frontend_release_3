@@ -667,8 +667,8 @@ function SearchCandidate() {
                             <button className={styles.getContact}  onClick={()=>{navigate("/EmployeeLogin")}}> Get Contact</button>
                                </li>
                         </ul>
+              
                       </>
-
                     )
                   })
                   :
@@ -759,6 +759,11 @@ function SearchCandidate() {
               </button>
             </div>
           </div>
+
+          <div style={{marginTop:"200px", position:"sticky", bottom:0}}>
+          <Footer/>
+        </div>
+
         </>
         :
         <>
@@ -927,6 +932,9 @@ function SearchCandidate() {
           }
 
           </div>
+          <div style={{marginTop:"10px"}}>
+          <Footer/>
+        </div>
         </>
       }
 

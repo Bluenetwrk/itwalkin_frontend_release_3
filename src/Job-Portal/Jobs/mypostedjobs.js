@@ -481,7 +481,9 @@ function handleRecordchange(e){
               </button>
             </div>
             </div>
-
+            <div style={{marginTop:"200px", position:"sticky", bottom:0}}>
+          <Footer/>
+        </div>
       </>
       :
       <> 
@@ -613,11 +615,12 @@ myjobs.map((job, i) => {
 }
 
 </div>
-      </>
-}
 <div style={{marginTop:"10px"}}>
           <Footer/>
         </div>
+      </>
+}
+
 
     </>
 

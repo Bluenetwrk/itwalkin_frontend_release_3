@@ -775,6 +775,10 @@ function AllJobs(props) {
 
           </div>
 
+          <div style={{marginTop:"200px", position:"sticky", bottom:0}}>
+          <Footer/>
+        </div>
+
         </>
         :
         // Mobile View
@@ -784,7 +788,8 @@ function AllJobs(props) {
             <input className={styles.inputboxsearch} type="text" placeholder='Search for a Job / Skills / Location / Experiance' onChange={(e) => { search(e) }} />
           </div>
           {Result ?
-            <h4 style={{ marginLeft: "18%", marginTop: "10px" }}> {jobs.length} matching Result Found  </h4>
+            <h4 style={{ marginLeft: "18.5%", marginTop: "10px" }}> {jobs.length} matching Result Found  </h4>
+
             : ""
           }
 
@@ -999,11 +1004,13 @@ function AllJobs(props) {
             }
 
           </div>
+          <div style={{marginTop:"20px",}}>
+            <Footer/>
+            </div>
         </>
 
       }
-      
-        <Footer />
+
     </>
 
   )

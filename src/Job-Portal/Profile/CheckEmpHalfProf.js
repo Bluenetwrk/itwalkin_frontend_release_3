@@ -75,7 +75,7 @@ profileData.map((item, i) => {
   }
 {screenSize.width>850?
 
-           
+           <>
 <div className={styles.uiwrapper}>
             <ul className={styles.ul}>
                 {/* <li className={styles.li}><b>Name </b></li> */}
@@ -149,6 +149,10 @@ profileData.map((item, i) => {
 
             }
             </div>
+                      <div style={{marginTop:"220px", position:"sticky", bottom:0}}>
+          <Footer/>
+        </div>
+        </>
             :
             <>
             <div id={styles.JobCardWrapper} >
@@ -212,13 +216,13 @@ profileData.map((item, i) => {
 })}
 
 </div>
-   
+<div style={{marginTop:"90px"}}>
+                      <Footer/>
+                    </div>
             </>
 
           }
-                                <div style={{marginTop:"130px"}}>
-                      <Footer/>
-                    </div>
+                          
 
         </>
     )

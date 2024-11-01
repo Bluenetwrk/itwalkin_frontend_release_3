@@ -95,7 +95,7 @@ profileData.length>0?<button className={styles.MobupdateProfile} onClick={update
 
             {screenSize.width>850?
 
-            
+      <>      
            
 <div className={styles.uiwrapper}>
             <ul className={styles.ul}>
@@ -147,7 +147,12 @@ profileData.length>0?<button className={styles.MobupdateProfile} onClick={update
                 })
 
             }
+
          </div>
+         <div style={{marginTop:"20px", position:"sticky", bottom:0}}>
+          <Footer/>
+        </div>
+        </>
 
             :
             <>
@@ -200,12 +205,13 @@ profileData.length>0?<button className={styles.MobupdateProfile} onClick={update
 })}
 
 </div>
+<div style={{marginTop:"30px"}}>
+<Footer/>
+</div>
             </>
       }
 
-<div style={{marginTop:"60px"}}>
-<Footer/>
-</div>
+
         </>
     )
 }

@@ -408,11 +408,11 @@ function handleRecordchange(e){
               })
 
               : <p style={{ marginLeft: "35%", color: "red" }}> {NoJobFound} </p>
-
-
           }
 
-
+<div style={{marginTop:"220px", position:"sticky", bottom:0}}>
+          <Footer/>
+        </div>
         </div>
         </>
         :
@@ -585,11 +585,11 @@ function handleRecordchange(e){
             }
 
           </div>
-        </>
-      }
       <div style={{marginTop:"80px"}}>
           <Footer/>
         </div>
+        </>
+      }
     </>
   )
 }

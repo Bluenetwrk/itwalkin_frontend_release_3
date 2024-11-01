@@ -2,10 +2,13 @@ import React  from 'react'
 import axios from "axios"
 import { useState, useEffect } from 'react'
 import Footer from './Footer/Footer'
+import useScreenSize from './SizeHook';
+
 
 
 function AboutUs() {
-    const [AboutUs, setAboutUs]= useState([])
+  const [AboutUs, setAboutUs]= useState([])
+  const screenSize = useScreenSize();
 
    async function getAboutUs(){
     await axios.get("/admin/getWebsiteDetails")
@@ -70,9 +73,17 @@ ITWalkin works closely to bridge the gap between talent & opportunities and offe
 At the heart of our success and our future is innovation. We are building some of the best technology to customise our search results, keeping in mind that your job title doesn't define your potential. So much so that two of you from the same field will see completely different results for the same query. Decades of industry insights and new-age technology have come together to bring you the perfect career experience.<br></br><br></br>
         </p>
         </div>
-        {/* <div style={{marginTop:"190px"}}>
+
+        {screenSize.width > 750 ?
+  <div style={{marginTop:"330px", position:"sticky", bottom:0}}>
           <Footer/>
-        </div> */}
+        </div>
+        :
+  <div style={{marginTop:"100px",}}>
+
+        <Footer/>   
+        </div>
+}
     </>
 
     // <div style={{marginLeft:"2%", marginTop:"10px"}}> {AboutUs} </div>
