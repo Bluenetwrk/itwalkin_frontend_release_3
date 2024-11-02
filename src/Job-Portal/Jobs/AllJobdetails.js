@@ -366,9 +366,7 @@ const [Loader, setLoader] = useState(false)
 
 
               }
-                                    <div style={{marginTop:"60px"}}>
-                      <Footer/>
-                    </div>
+                          
         </>
 
   )

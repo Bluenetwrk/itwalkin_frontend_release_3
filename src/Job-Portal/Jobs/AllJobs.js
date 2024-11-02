@@ -775,9 +775,9 @@ function AllJobs(props) {
 
           </div>
 
-          <div style={{marginTop:"200px", position:"sticky", bottom:0}}>
+          {/* <div style={{marginTop:"200px", position:"sticky", bottom:0}}>
           <Footer/>
-        </div>
+        </div> */}
 
         </>
         :

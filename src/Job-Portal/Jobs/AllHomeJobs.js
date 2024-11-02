@@ -32,7 +32,6 @@ const responsive = {
 function Home() {
 
   const [jobs, setJobs] = useState([])
-  console.log(jobs)
 
   const [nopageFilter, setNoPageFilter] = useState(false)
   const [Filtereredjobs, setFiltereredjobs] = useState([])
@@ -47,7 +46,6 @@ function Home() {
   const [Result, setResult] = useState(false)
   const [NotFound, setNotFound] = useState("")
   const [Active, setActive] = useState([])
-  console.log(Active)
   const screenSize = useScreenSize();
 
   // let AgeTags = [
@@ -85,7 +83,7 @@ function Home() {
   let recordsperpage = JSON.parse(sessionStorage.getItem("recordsperpageHome"))
 
   const [currentPage, setCurrentPage] = useState(1)
-  const [recordsPerPage, setrecordsPerPage] = useState(recordsperpage ? recordsperpage : 5)
+  const [recordsPerPage, setrecordsPerPage] = useState(recordsperpage ? recordsperpage : 10)
 
   const lastIndex = currentPage * recordsPerPage //10
   const firstIndex = lastIndex - recordsPerPage //5
@@ -370,9 +368,12 @@ function Home() {
   const [count, setCount]=useState(1)
 
   async function filterByJobTitle(key) {
+
     if(count==1){
       setJobs("")
+
     }
+
     setCount(prev=>prev+1)
 
     const isIndex=Active.findIndex((present)=>{
@@ -389,7 +390,15 @@ return(
         )
             })
             Active.splice(IndexId,1)
+         let removedItems = jobs.filter((tags)=>{
+            return(
+              !tags.skills.includes(key)            
+        )
+      })      
+      setJobs(removedItems)
+      return false
     }
+
     setNoPageFilter(true)
     setFiltereredjobs(key)
     await axios.get(`/jobpost/getTagsJobs/${key}`)
@@ -398,6 +407,7 @@ return(
         let sortedate = result.sort( (a, b) => {
           return new Date(b.createdAt) - new Date(a.createdAt);
         });
+
 
       //   console.log("sortedate", jobs)
 
@@ -422,8 +432,6 @@ return(
   async function getLocation(jobLocation) {
     setCount(1)
     setActive([])
-
-
     setFiltereredjobs(jobLocation)
     setNoPageFilter(true)
 
@@ -738,7 +746,7 @@ return(
                           }
                         )}
                       </li>
-                      <li className={`${styles.li} ${styles.Location}`}>{items.jobLocation[0].toUpperCase() + items.jobLocation.slice(1)}</li>
+                      {/* <li className={`${styles.li} ${styles.Location}`}>{items.jobLocation[0].toUpperCase() + items.jobLocation.slice(1)}</li> */}
                       <li className={`${styles.li} ${styles.Package}`}>{items.salaryRange}L</li>
                       <li className={`${styles.li} ${styles.experiance}`}>{items.experiance}Y</li>
                       <li className={`${styles.li} ${styles.qualification}`}>{items.qualification}</li>
