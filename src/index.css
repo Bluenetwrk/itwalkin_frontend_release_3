@@ -21,3 +21,24 @@ code {
   /* background-color:aqua;
   margin-top:"-500px" */
 }
+
+.BigNavWrapper{
+  background-color: white;
+  z-index: 100;
+  transition: all 0.2s;
+  position: fixed;
+
+  font-weight: bold;
+  white-space:wrap;
+  z-index: 100; 
+  border-bottom-right-radius: 10px;
+  border-top-right-radius: 10px;
+  box-shadow: 1px 1px 3px 3px #999999;
+  padding-bottom: 7px;
+  padding-top: 20px;    
+  width:143px;
+  /* position:fixed; */
+  margin-top: 46px;
+  /* width:1000px */
+
+}

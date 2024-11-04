@@ -26,7 +26,7 @@ function AppledJobs(props) {
   const [NoJobFound, setNoJobFound] = useState("")
   const screenSize = useScreenSize();
   const [Filtereredjobs, setFiltereredjobs] = useState([])
-  const [nopageFilter, setNoPageFilter]=useState(false)
+  const [nopageFilter, setNoPageFilter] = useState(false)
 
 
 
@@ -194,41 +194,41 @@ function AppledJobs(props) {
 
 
   let recordsperpage = JSON.parse(sessionStorage.getItem("recordsperpage"))
-    
+
   const [currentPage, setCurrentPage] = useState(1)
-  const [recordsPerPage, setrecordsPerPage] = useState(recordsperpage?recordsperpage:10)
+  const [recordsPerPage, setrecordsPerPage] = useState(recordsperpage ? recordsperpage : 10)
   const lastIndex = currentPage * recordsPerPage //10
   const firstIndex = lastIndex - recordsPerPage //5
   const records = MyAppliedjob.slice(firstIndex, lastIndex)//0,5
   const npage = Math.ceil(MyAppliedjob.length / recordsPerPage) // last page
   const number = [...Array(npage + 1).keys()].slice(1)
 
-  function firstPage(id){
+  function firstPage(id) {
     setCurrentPage(1)
   }
 
-function previous(){
-  if(currentPage !==1){
-    setCurrentPage(currentPage-1)
-  }  
-}
-function changeCurrent(id){
-  setCurrentPage(id)
-}
-function next(){
-  if(currentPage !==npage){
-    setCurrentPage(currentPage+1)
+  function previous() {
+    if (currentPage !== 1) {
+      setCurrentPage(currentPage - 1)
+    }
   }
-}
-function last(){
+  function changeCurrent(id) {
+    setCurrentPage(id)
+  }
+  function next() {
+    if (currentPage !== npage) {
+      setCurrentPage(currentPage + 1)
+    }
+  }
+  function last() {
     setCurrentPage(npage)
-}
-function handleRecordchange(e){  
-  sessionStorage.setItem("recordsperpage", JSON.stringify(e.target.value));
-  let recordsperpage = JSON.parse(sessionStorage.getItem("recordsperpage"))
-  setrecordsPerPage(recordsperpage)  
-  setCurrentPage(1)
-}
+  }
+  function handleRecordchange(e) {
+    sessionStorage.setItem("recordsperpage", JSON.stringify(e.target.value));
+    let recordsperpage = JSON.parse(sessionStorage.getItem("recordsperpage"))
+    setrecordsPerPage(recordsperpage)
+    setCurrentPage(1)
+  }
 
 
   return (
@@ -237,8 +237,8 @@ function handleRecordchange(e){
       <p className={styles.h3} style={{ textAlign: "center" }}><b>My applied Jobs</b></p>
       <p className={styles.h3}><b>you have total {MyAppliedjob.length} applied jobs</b></p>
       {screenSize.width > 850 ?
-      <>
-            <div style={{ display: "flex", justifyContent: "space-between" }}>
+        <>
+          <div style={{ display: "flex", justifyContent: "space-between" }}>
             {nopageFilter ?
               <p style={{ fontWeight: 400, marginLeft: "10px" }}>Displaying <span style={{ color: "blue" }}>{Filtereredjobs}</span> from All Jobs</p>
               :
@@ -269,151 +269,148 @@ function handleRecordchange(e){
             </select>  jobs per page
           </div>
 
-<div className={styles.Uiwarpper}>
+          <div className={styles.Uiwarpper}>
 
-          <ul className={styles.ul}>
-            <li className={styles.li}><b>Company Name</b></li>
-            <li className={`${styles.li} ${styles.Jtitle}`}><b>Job Title</b></li>
-            <li className={`${styles.li} ${styles.JobType}`}><b>JobType</b></li>
+            <ul className={styles.ul}>
+              <li className={styles.li}><b>Company Name</b></li>
+              <li className={`${styles.li} ${styles.Jtitle}`}><b>Job Title</b></li>
+              <li className={`${styles.li} ${styles.JobType}`}><b>JobType</b></li>
 
-            <li className={`${styles.li} ${styles.liDescription}`}><b>Job description</b></li>
-            <li className={`${styles.li} ${styles.Pdate}`}><b>Posted Date</b>
-              <p className={styles.arrowWrapper} >
-                <i onClick={sortbyNewjobs} className={`${styles.arrow} ${styles.up}`}> </i>
-                <i onClick={sortbyOldjobs} className={`${styles.arrow} ${styles.down}`}></i>
-              </p >
-            </li>
-            <li className={`${styles.li} ${styles.Pdate}`}><b>Applied Date</b>
+              <li className={`${styles.li} ${styles.liDescription}`}><b>Job description</b></li>
+              <li className={`${styles.li} ${styles.Pdate}`}><b>Posted Date</b>
+                <p className={styles.arrowWrapper} >
+                  <i onClick={sortbyNewjobs} className={`${styles.arrow} ${styles.up}`}> </i>
+                  <i onClick={sortbyOldjobs} className={`${styles.arrow} ${styles.down}`}></i>
+                </p >
+              </li>
+              <li className={`${styles.li} ${styles.Pdate}`}><b>Applied Date</b>
 
-            </li>
+              </li>
 
-            <li className={`${styles.li} ${styles.Location}`}><b>Location</b></li>
-            <li className={`${styles.li} ${styles.Package}`}><b>CTC </b>
-              <p className={styles.arrowWrapper}>
-                <i onClick={SdescendingOrder} className={`${styles.arrow} ${styles.up}`}> </i>
-                <i onClick={SascendingOrder} className={`${styles.arrow} ${styles.down}`}></i>
-              </p>
-            </li>
-            <li className={`${styles.li} ${styles.experiance}`}><b>Experience </b>
-              <p className={styles.arrowWrapper}>
-                <i onClick={EdescendingOrder} className={`${styles.arrow} ${styles.up}`}> </i>
-                <i onClick={EascendingOrder} className={`${styles.arrow} ${styles.down}`}></i>
-              </p>
-            </li>
-            <li className={`${styles.li} ${styles.Qualif}`}><b>Qualification </b></li>
+              <li className={`${styles.li} ${styles.Location}`}><b>Location</b></li>
+              <li className={`${styles.li} ${styles.Package}`}><b>CTC </b>
+                <p className={styles.arrowWrapper}>
+                  <i onClick={SdescendingOrder} className={`${styles.arrow} ${styles.up}`}> </i>
+                  <i onClick={SascendingOrder} className={`${styles.arrow} ${styles.down}`}></i>
+                </p>
+              </li>
+              <li className={`${styles.li} ${styles.experiance}`}><b>Experience </b>
+                <p className={styles.arrowWrapper}>
+                  <i onClick={EdescendingOrder} className={`${styles.arrow} ${styles.up}`}> </i>
+                  <i onClick={EascendingOrder} className={`${styles.arrow} ${styles.down}`}></i>
+                </p>
+              </li>
+              <li className={`${styles.li} ${styles.Qualif}`}><b>Qualification </b></li>
 
-            <li className={`${styles.li} ${styles.Skills}`}><b>Skills Required</b></li>
-            <li className={`${styles.li} ${styles.DeleteAction}`}><b>Action</b></li>
-            <li className={`${styles.li} ${styles.Status}`}><b>Status</b></li>
-          </ul>
-          {PageLoader ?
-            <Puff height="80" width="80" color="#4fa94d" ariaLabel="bars-loading" wrapperStyle={{ marginLeft: "45%", marginTop: "100px" }} />
-            : ""
-          }
-          {
-            records.length > 0 ?
+              <li className={`${styles.li} ${styles.Skills}`}><b>Skills Required</b></li>
+              <li className={`${styles.li} ${styles.DeleteAction}`}><b>Action</b></li>
+              <li className={`${styles.li} ${styles.Status}`}><b>Status</b></li>
+            </ul>
+            {PageLoader ?
+              <Puff height="80" width="80" color="#4fa94d" ariaLabel="bars-loading" wrapperStyle={{ marginLeft: "45%", marginTop: "100px" }} />
+              : ""
+            }
+            {
+              records.length > 0 ?
 
-              records.map((items, i) => {
-                return (
+                records.map((items, i) => {
+                  return (
 
-                  <ul className={styles.ul} key={i}>
-                    <li style={{ cursor: "pointer", textDecoration: "underline" }} className={styles.li} onClick={() => { navigate(`/CheckEmpHalfProfile/${btoa(items.empId)}`) }} >
-                      {/* {items.Logo ?
+                    <ul className={styles.ul} key={i}>
+                      <li style={{ cursor: "pointer", textDecoration: "underline" }} className={styles.li} onClick={() => { navigate(`/CheckEmpHalfProfile/${btoa(items.empId)}`) }} >
+                        {/* {items.Logo ?
                     < img style={{ width: "40%", height: "40px" }} src={items.Logo} />
                     : ""}<br></br> */}
-                      {items.companyName}</li>
+                        {items.companyName}</li>
 
-                    <li className={`${styles.li} ${styles.Jtitle}`}>{items.jobTitle.toUpperCase()}</li>
-                    <li className={`${styles.li} ${styles.JobType}`}>{items.jobtype}</li>
+                      <li className={`${styles.li} ${styles.Jtitle}`}>{items.jobTitle.toUpperCase()}</li>
+                      <li className={`${styles.li} ${styles.JobType}`}>{items.jobtype}</li>
 
-                    <li className={`${styles.li} ${styles.liDescription}`}>
-                      {/* {items.jobDescription.slice(0, 60)}
+                      <li className={`${styles.li} ${styles.liDescription}`}>
+                        {/* {items.jobDescription.slice(0, 60)}
                    */}
-                      {
-                        items.jobDescription.map((descrip, di) => {
-                          return (
-                            <>
-                              {
-                                descrip.text.slice(0, 50)
-                              }
-                            </>
-                          )
-                        }).slice(0, 1)
-                      }
-
-                      <span style={{ color: "blue", cursor: "pointer" }} onClick={() => { navigate(`/Jobdetails/${btoa(items._id)}`) }} >...see more</span>
-
-                    </li>
-                    <li className={`${styles.li} ${styles.Pdate}`}>
-                      {new Date(items.createdAt).toLocaleString(
-                        "en-US",
                         {
-                          month: "short",
-                          day: "2-digit",
-                          year: "numeric",
-                        }
-                      )}
-                    </li>
-                    <li className={`${styles.li} ${styles.Pdate}`}>
-                      {new Date(
-                        items.jobSeekerId.find((id) => {
-                          return (
-                            id.jobSeekerId == jobSeekerId
-                          )
-                        }).date
-                      ).toLocaleString(
-                        "en-US",
-                        {
-                          month: "short",
-                          day: "2-digit",
-                          year: "2-digit",
-                        }
-                      )}
-                    </li>
-                    <li className={`${styles.li} ${styles.Location}`}>{items.jobLocation[0].toUpperCase() +
-                      items.jobLocation.slice(1)}</li>
-                    <li className={`${styles.li} ${styles.Package}`}>{items.salaryRange}L</li>
-                    <li className={`${styles.li} ${styles.experiance}`}>{items.experiance}Y</li>
-                    <li className={`${styles.li} ${styles.Qualif}`}>{items.qualification} </li>
-
-                    <li className={`${styles.li} ${styles.Skills}`}>{items.skills}</li>
-                    <li className={`${styles.li} ${styles.DeleteAction}`}>
-                      <button className={styles.DeleteButton} onClick={() => { UndoApply(items._id) }}>Delete</button></li>
-                    <li className={`${styles.li} ${styles.Status}`}>
-
-                      {items.onHoldJobseker.find((onholdProfile) => {
-                        return (
-                          onholdProfile == jobSeekerId
-                        )
-                      }) ? <p style={{ color: "blue" }}>Your Profile is on Hold</p> :
-
-                        items.slectedJobseker.find((SelectedProfile) => {
-                          return (
-                            SelectedProfile == jobSeekerId
-                          )
-                        }) ? <p style={{ color: "rgb(7, 161, 7)" }}>Congrates! Your profile has been selected, HR will get in touch with You very shortly</p>
-                          :
-                          items.rejectedJobseker.find((rejectProfile) => {
+                          items.jobDescription.map((descrip, di) => {
                             return (
-                              rejectProfile == jobSeekerId
+                              <>
+                                {
+                                  descrip.text.slice(0, 50)
+                                }
+                              </>
                             )
-                          }) ? <p style={{ color: "red" }}>Sorry! Your profile has not been Selected for this job</p>
-                            : "Your status will be updated here, Once the HR checks Your Profile"
-                      }
+                          }).slice(0, 1)
+                        }
 
-                    </li>
+                        <span style={{ color: "blue", cursor: "pointer" }} onClick={() => { navigate(`/Jobdetails/${btoa(items._id)}`) }} >...see more</span>
 
-                  </ul>
-                )
-              })
+                      </li>
+                      <li className={`${styles.li} ${styles.Pdate}`}>
+                        {new Date(items.createdAt).toLocaleString(
+                          "en-US",
+                          {
+                            month: "short",
+                            day: "2-digit",
+                            year: "numeric",
+                          }
+                        )}
+                      </li>
+                      <li className={`${styles.li} ${styles.Pdate}`}>
+                        {new Date(
+                          items.jobSeekerId.find((id) => {
+                            return (
+                              id.jobSeekerId == jobSeekerId
+                            )
+                          }).date
+                        ).toLocaleString(
+                          "en-US",
+                          {
+                            month: "short",
+                            day: "2-digit",
+                            year: "2-digit",
+                          }
+                        )}
+                      </li>
+                      <li className={`${styles.li} ${styles.Location}`}>{items.jobLocation[0].toUpperCase() +
+                        items.jobLocation.slice(1)}</li>
+                      <li className={`${styles.li} ${styles.Package}`}>{items.salaryRange}L</li>
+                      <li className={`${styles.li} ${styles.experiance}`}>{items.experiance}Y</li>
+                      <li className={`${styles.li} ${styles.Qualif}`}>{items.qualification} </li>
 
-              : <p style={{ marginLeft: "35%", color: "red" }}> {NoJobFound} </p>
-          }
+                      <li className={`${styles.li} ${styles.Skills}`}>{items.skills}</li>
+                      <li className={`${styles.li} ${styles.DeleteAction}`}>
+                        <button className={styles.DeleteButton} onClick={() => { UndoApply(items._id) }}>Delete</button></li>
+                      <li className={`${styles.li} ${styles.Status}`}>
 
-<div style={{marginTop:"220px", position:"sticky", bottom:0}}>
-          <Footer/>
-        </div>
-        </div>
+                        {items.onHoldJobseker.find((onholdProfile) => {
+                          return (
+                            onholdProfile == jobSeekerId
+                          )
+                        }) ? <p style={{ color: "blue" }}>Your Profile is on Hold</p> :
+
+                          items.slectedJobseker.find((SelectedProfile) => {
+                            return (
+                              SelectedProfile == jobSeekerId
+                            )
+                          }) ? <p style={{ color: "rgb(7, 161, 7)" }}>Congrates! Your profile has been selected, HR will get in touch with You very shortly</p>
+                            :
+                            items.rejectedJobseker.find((rejectProfile) => {
+                              return (
+                                rejectProfile == jobSeekerId
+                              )
+                            }) ? <p style={{ color: "red" }}>Sorry! Your profile has not been Selected for this job</p>
+                              : "Your status will be updated here, Once the HR checks Your Profile"
+                        }
+
+                      </li>
+
+                    </ul>
+                  )
+                })
+
+                : <p style={{ marginLeft: "35%", color: "red" }}> {NoJobFound} </p>
+            }
+
+          </div>
         </>
         :
         <>
@@ -435,7 +432,7 @@ function handleRecordchange(e){
                           window.scrollTo({
                             top: 0
                           })
-                          navigate(`/Jobdetails/${job._id}`)
+                          navigate(`/Jobdetails/${btoa(job._id)}`)
                         }} >{job.jobTitle.toUpperCase()} </p>
                         <p className={styles.Date}>{new Date(job.createdAt).toLocaleString(
                           "en-US",
@@ -451,7 +448,7 @@ function handleRecordchange(e){
 
                       {/* <br></br> */}
 
-                      <div className={styles.companyNameLocationWrapper} onClick={() => { navigate(`/CheckEmpHalfProfile/${job.empId}`) }} >
+                      <div className={styles.companyNameLocationWrapper} onClick={() => { navigate(`/CheckEmpHalfProfile/${btoa(job.empId)}`) }} >
                         <img className={styles.logo} src={job.Logo} />
                         <span className={styles.companyName} >{job.companyName} </span><br></br>
                       </div>
@@ -569,7 +566,7 @@ function handleRecordchange(e){
                           window.scrollTo({
                             top: 0
                           })
-                          navigate(`/Jobdetails/${job._id}`)
+                          navigate(`/Jobdetails/${btoa(job._id)}`)
                         }} style={{ color: "blue" }}>
                           ...read more
                         </span>
@@ -585,9 +582,9 @@ function handleRecordchange(e){
             }
 
           </div>
-      <div style={{marginTop:"80px"}}>
-          <Footer/>
-        </div>
+          <div style={{ marginTop: "80px" }}>
+            <Footer />
+          </div>
         </>
       }
     </>

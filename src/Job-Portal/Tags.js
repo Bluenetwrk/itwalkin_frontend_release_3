@@ -1,6 +1,8 @@
 export const jobTags=[
-    { value: 'TECHNOLOGIES', label: 'TECHNOLOGIES'},
+    { value: 'TECHNOLOGIES', label: 'TECHNOLOGIES'}, { value: 'Javascript', label: 'Javascript'},
+    { value: 'ReactJs', label: 'ReactJs'},    { value: 'Node js', label: 'Node Js'},
     { value: 'Angular js', label: 'Angular js' }, { value: 'Vue js', label: 'Vue js' },
+    { value: 'Mern Stack', label: 'Mern Stack' },
     { value: 'NextJs', label: 'NextJs' },{ value: '.NET', label: '.NET' }, { value: 'Larvel', label: 'Larvel' },
     { value: 'Kotlin', label: 'Kotlin' }, { value: 'Android', label: 'Android' }, { value: 'iOS', label: 'iOS' },
     { value: 'Xamarin', label: 'Xamarin' }, { value: 'Ember JS', label: 'Ember JS' }, 

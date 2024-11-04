@@ -102,13 +102,13 @@
 }
 
 .signUpwrap {
-    color: rgb(0, 0, 0);
+    /* color: rgb(0, 0, 0); */
     /* font-weight: 550; */
     /* font-size: medium; */
     margin-left: 7%;
     display: flex;
     flex-wrap: nowrap;
-    z-index: 100;
+    /* z-index: 100; */
     margin-top: 9px;
 }
 

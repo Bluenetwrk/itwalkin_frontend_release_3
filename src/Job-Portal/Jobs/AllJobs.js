@@ -42,7 +42,7 @@ function AllJobs(props) {
     });
   }, [])
 
-  let JobLocationTags = ["Bangalore", "Hyderabad"]
+  let JobLocationTags = ["Bangalore"]
 
   const [jobs, setJobs] = useState([])
   const [Filterjobs, setFilterjobs] = useState([])
@@ -793,6 +793,18 @@ function AllJobs(props) {
             : ""
           }
 
+<div className={styles.MobLocationFilterWrapperLogin}>
+                {/* <label> <input className={styles.MobJobtitleFilter} type="radio" name="filter" onClick={() => { getjobs() }} />All</label> */}
+                {
+                  JobLocationTags.map((location, i) => {
+                    return (
+                      <label> <input className={styles.MobJobtitleFilter} type="radio" disabled={location == "Chennai" || location == "Hyderabad" || location == "Mumbai" || location == "Delhi"} name="filter" onClick={() => { getLocation(location.toLowerCase()) }} />{location}</label>
+
+                    )
+                  })
+                }
+              </div>
+
           {/* ...................... All Filter for Mobile */}
 
           <Carousel
@@ -812,17 +824,7 @@ function AllJobs(props) {
           >
 
             <div style={{ display: "flex" }}>
-              <div className={styles.MobLocationFilterWrapper}>
-                <label> <input className={styles.MobJobtitleFilter} type="radio" name="filter" onClick={() => { getjobs() }} />All</label>
-                {
-                  JobLocationTags.map((location, i) => {
-                    return (
-                      <label> <input className={styles.MobJobtitleFilter} type="radio" disabled={location == "Chennai" || location == "Hyderabad" || location == "Mumbai" || location == "Delhi"} name="filter" onClick={() => { getLocation(location.toLowerCase()) }} />{location}</label>
-
-                    )
-                  })
-                }
-              </div>
+              
 
               <div className={styles.MobFilterJobTitleWrapper}>
                 <label><input className={styles.MobJobtitleFilter} type="radio" name="filter" onClick={() => { getjobs() }} />All</label>

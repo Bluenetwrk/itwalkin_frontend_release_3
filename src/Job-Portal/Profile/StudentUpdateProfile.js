@@ -501,9 +501,7 @@ border:"none",padding: "4px 8px"}} onClick={DeleteProfile}>Delete</button>
               <button className={styles.Save} onClick={(e) => { saveUpdate(e) }}>Save</button>
               <button className={styles.cancel} onClick={() => { navigate(-1) }} >cancel</button>
             </div>
-              <div style={{marginTop:"20px", position:"sticky", bottom:0}}>
-          <Footer/>
-        </div>
+             
         </>
             :
             <>

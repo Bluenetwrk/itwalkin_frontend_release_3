@@ -154,7 +154,7 @@ window.addEventListener('keypress', function(event){
                 <p className={Style.errormessage}>{errorMessage} </p>
 
      <h4 className={Style.jobHeadline}>Job title</h4>
-    <input maxLength="30" className={Style.inputbox} type="text" value={jobtitle} onChange={(e) => { setJobTitle(e.target.value) }} />
+    <input maxLength="100" className={Style.inputbox} type="text" value={jobtitle} onChange={(e) => { setJobTitle(e.target.value) }} />
 
 
                     <h4 className={Style.jobHeadline}>Company Name**</h4>

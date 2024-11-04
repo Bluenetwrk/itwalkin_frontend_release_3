@@ -149,9 +149,7 @@ profileData.length>0?<button className={styles.MobupdateProfile} onClick={update
             }
 
          </div>
-         <div style={{marginTop:"20px", position:"sticky", bottom:0}}>
-          <Footer/>
-        </div>
+
         </>
 
             :

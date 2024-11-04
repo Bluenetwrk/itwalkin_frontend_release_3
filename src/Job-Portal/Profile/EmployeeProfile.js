@@ -137,9 +137,7 @@ profileData.length>0?<button className={styles.updateProfile} onClick={updateEmp
 
             }
             </div>
-                     <div style={{marginTop:"20px", position:"sticky", bottom:0}}>
-                     <Footer/>
-                   </div>
+
                    </>
             :
                            

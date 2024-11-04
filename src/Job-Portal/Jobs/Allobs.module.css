@@ -16,6 +16,8 @@
     z-index: 100;
     /* background-color: aqua; */
     width:180px;
+    /* position: absolute; */
+
 }
 .JobLocationFilter{
     margin-left: 40px;
@@ -24,7 +26,8 @@
     align-content: center;
     border: none;
     border-radius: 3px;
-    color: white
+    color: white;
+    /* position: absolute; */
 
 }
 .searchBothForNavWrapper{
@@ -167,7 +170,7 @@
     margin: 4px;
     cursor: pointer;
     font-weight: 550;
-    font-size: small;
+    font-size: x-small;
     padding: 4px 7px ;
     align-content: center;
     text-wrap: nowrap ;
@@ -456,14 +459,47 @@ table {
 
   }
 /* .........................Mobile - Cards................ */
+.MobLocationFilterWrapperLogin{
+    position: absolute;
+    margin-top: -102px;
+    margin-left: 55%;
+    z-index: 100;
+    color: white;
+}
+@media (max-width:480px){
+    .MobLocationFilterWrapperLogin{
+        margin-left: 59%;
+    }
+    }
+@media (max-width:390px){
+    .MobLocationFilterWrapperLogin{
+        margin-left: 60%;
+    }
+    }
+@media (max-width:360px){
+    .MobLocationFilterWrapperLogin{
+        margin-left: 65%;
+    }
+    }
 .MobLocationFilterWrapper{
-    display: flex;
-    flex-direction: column;
-    /* background-color: red; */
-    padding-left: 5px;
-    width:28%;
-    text-wrap: nowrap;
-    /* background-color: red; */
+    position: absolute;
+    margin-top: -102px;
+    margin-left: 50%;
+    z-index: 100;
+    color: white;
+}
+@media (max-width:430px){
+.MobLocationFilterWrapper{
+    margin-left: 53%;
+}
+}
+@media (max-width:360px){
+.MobLocationFilterWrapper{
+    margin-left: 57%;
+}
+}
+.MobJobtitleFilter{
+    /* color: white; */
 
 }
 .MobFilterJobTitleWrapper{
@@ -478,7 +514,6 @@ table {
 
 .searchBoth{
     margin-left: 10%;
-
     margin-top: 15px;
     display: flex;
     width:90%;
@@ -677,5 +712,7 @@ table {
     margin-top: 12px;
 }
 
-
+.showLess{
+    color:rgb(148, 112, 216)
+}
 

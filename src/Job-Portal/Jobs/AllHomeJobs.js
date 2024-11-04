@@ -55,7 +55,7 @@ function Home() {
     
   //   ]
 
-  let JobLocationTags = ["Bangalore", "Hyderabad"]
+  let JobLocationTags = ["Bangalore"]
 
   let navigate = useNavigate()
 
@@ -392,7 +392,13 @@ return(
             Active.splice(IndexId,1)
          let removedItems = jobs.filter((tags)=>{
             return(
-              !tags.skills.includes(key)            
+              // !tags.skills.includes(key)   
+              // console.log(tags.Tags)         
+              !tags.Tags.map((value)=>{
+                return(
+                value.value
+                )
+              }).includes(key)    
         )
       })      
       setJobs(removedItems)
@@ -813,6 +819,17 @@ return(
             : ""
           }
           {/* ...................... All Filter for Mobile */}
+          <div className={styles.MobLocationFilterWrapper}>
+                {/* <label> <input className={styles.MobJobtitleFilter} type="radio" name="filter" onClick={() => { getjobs() }} />All</label> */}
+                {
+                  JobLocationTags.map((location, i) => {
+                    return (
+                      <label> <input className={styles.MobJobtitleFilter} type="radio" disabled={location == "Chennai" || location == "Hyderabad" || location == "Mumbai" || location == "Delhi"} name="filter" onClick={() => { getLocation(location.toLowerCase()) }} />{location}</label>
+
+                    )
+                  })
+                }
+              </div>
 
           <Carousel
             swipeable={true}
@@ -829,17 +846,7 @@ return(
           >
 
             <div style={{ display: "flex" }}>
-              <div className={styles.MobLocationFilterWrapper}>
-                <label> <input className={styles.MobJobtitleFilter} type="radio" name="filter" onClick={() => { getjobs() }} />All</label>
-                {
-                  JobLocationTags.map((location, i) => {
-                    return (
-                      <label> <input className={styles.MobJobtitleFilter} type="radio" disabled={location == "Chennai" || location == "Hyderabad" || location == "Mumbai" || location == "Delhi"} name="filter" onClick={() => { getLocation(location.toLowerCase()) }} />{location}</label>
-
-                    )
-                  })
-                }
-              </div>
+              
 
               <div className={styles.MobFilterJobTitleWrapper}>
                 <label><input className={styles.MobJobtitleFilter} type="radio" name="filter" onClick={() => { getjobs() }} />All</label>
@@ -1034,7 +1041,7 @@ return(
                             window.scrollTo({
                               top: 0
                             })
-                            navigate(`/Jobdetails/${job._id}`)
+                            navigate(`/Jobdetails/${btoa(job._id)}`)
                           }} className={styles.seeMore}>
                             ...read more
                           </span>

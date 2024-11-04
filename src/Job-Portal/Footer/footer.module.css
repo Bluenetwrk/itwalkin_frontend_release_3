@@ -107,7 +107,8 @@ cursor: pointer;
         } */
         .brands{
             font-size:xx-large;
-            margin-left: -15px;
+            /* margin-left: -15px; */
+            /* background-color: red; */
     
         }
     

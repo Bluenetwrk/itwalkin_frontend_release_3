@@ -23,7 +23,7 @@ margin-top: -30px;
 
      position:absolute;
      padding:12px;
-     margin-left:85%;
+     margin-left:74%;
      margin-top:-80px;
      border: 1px solid ;
      color:rgb(40, 4, 99);;
@@ -33,14 +33,13 @@ margin-top: -30px;
 }
 
 .updateProfile:hover{
-    /* background-color: rgb(40, 4, 99); */
     background:rgb(242, 244, 245);
 
      position:absolute;
      padding:12px;
-     margin-left:85%;
+     margin-left:74%;
      margin-top:-80px;
-     border: 2px solid grey ;
+     border: 1px solid grey ;
      color:rgb(40, 4, 99);
      font-weight: 600;
      border-radius: 25px;
