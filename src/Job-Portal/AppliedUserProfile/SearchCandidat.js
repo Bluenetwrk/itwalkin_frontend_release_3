@@ -48,7 +48,7 @@ function SearchCandidate() {
   const screenSize = useScreenSize();
   const [Active, setActive] = useState("")
   
-  const Location = ['Bangalore', 'Hyderabad']
+  const Location = ['Bangalore']
 
   async function getAllJobSeekers() {
     setNoPageFilter(false)

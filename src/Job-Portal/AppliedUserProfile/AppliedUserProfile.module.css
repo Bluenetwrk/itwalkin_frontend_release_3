@@ -33,6 +33,12 @@
     z-index: 100;  
 }
 
+@media (max-width:900px){
+    .searchBothForNavWrapper{
+        width:84%;
+    }
+}
+
 .inputboxsearchNav{
     padding: 10px;
     width: 85%;
@@ -123,7 +129,11 @@
     overflow-x: hidden;
     overflow-y: auto;
     text-align: justify;
+    margin-right: 10px;
 
+}
+.JobtitleFilterWrapper:hover{
+    scrollbar-color: white rgb(40, 4, 99)  ;
 }
 
 .JobtitleFilter{
@@ -156,12 +166,15 @@
     border-radius: 3px;
 }
 .TagHeading{
-    background-color:blue;
-    color:white;
+    /* background:rgb(242, 244, 245); */
+    background:rgb(228, 230, 231);
+
+
+    color:black;
     margin: 4px;
     cursor: pointer;
-    font-weight: 550;
-    font-size: xx-small;
+    font-weight: 850;
+    font-size: x-small;
     padding: 4px 7px ;
     align-content: center;
     text-wrap: nowrap ;

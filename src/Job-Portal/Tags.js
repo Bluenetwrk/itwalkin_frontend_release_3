@@ -19,7 +19,6 @@ export const jobTags=[
     { value: 'Cybersecurity', label: 'Cybersecurity' }, { value: 'AI', label: 'AI' },
     { value: 'HTML-CSS', label: 'HTML-CSS' }, { value: 'MongoDB', label: 'MongoDB' },
     { value: 'MySql', label: 'MySql' }, { value: 'Flutter', label: 'Flutter' },
-    { value: 'Artificial Intelligence', label: 'Artificial Intelligence' },
     { value: 'React Native', label: 'React Native' }, 
     { value: 'Data science', label: 'Data science' },
     

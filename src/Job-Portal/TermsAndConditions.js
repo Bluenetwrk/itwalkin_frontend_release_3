@@ -38,12 +38,12 @@ getAboutUs()
       }
 
   return (
-    <>
+    <div>
           <img style={{marginLeft:"50%",}}  onClick={()=>{goDown()}} src = {Down}/>
      
         <div style={{marginLeft:"20px"}}>
+          <p style={{ fontWeight:"bold", width:"20%", marginTop:"-20px"}}>TERMS AND CONDITIONS</p>
         <p>
-          <h2>TERMS AND CONDITIONS</h2><br></br>
           WE DO NOT GUARANTEE OR OFFER ANY WARRANTY OF ANY INTERVIEW CALLS OR ASSURE ANY JOB OFFERS WITH ANY OF OUR SERVICES OR FROM ANY PROSPECTIVE EMPLOYER/ORGANIZATION WHICH DOWNLOADS THE RESUME/ INSERTION OR INFORMATION/DATA AND USES IT TO CONTACT THE USER. THE USER IS ADVISED TO BE CAUTIOUS OF CALLS/EMAILS ASKING FOR PAYMENT FROM OTHER WEBSITES THAT CLAIM TO OFFER SIMILAR SERVICES UNDER THE NAME OF ITWALKIN ”<br></br><br></br>
 
 PLEASE READ THESE TERMS AND CONDITIONS OF USE CAREFULLY. BY ACCESSING THIS WEBSITE AND ANY PAGES THEREOF, YOU AGREE TO BE BOUND BY THE TERMS AND CONDITIONS OF USE BELOW AND/OR ANY SUCH TERMS AND CONDITIONS OF USE AS ARE COMMUNICATED ON THE PAGES THEREOF. IF YOU DO NOT AGREE TO THE TERMS AND CONDITIONS OF USE BELOW AND/OR ANY SUCH TERMS AND CONDITIONS OF USE AS ARE COMMUNICATED ON THE PAGES THEREOF, DO NOT ACCESS THIS WEBBSITE, OR ANY PAGES THEREOF.<br></br><br></br>
@@ -368,9 +368,7 @@ We does not take responsibility or liability for the actions, products, content 
         </div>
 <img style={{marginLeft:"50%"}} id="down" onClick={()=>{goUp()}} src = {Up}/>
 {screenSize.width > 750 ?
-  <div style={{marginTop:"60px", position:"sticky", bottom:0}}>
-          <Footer/>
-        </div>
+""  
         :
         <Footer/>       
 }
@@ -378,7 +376,7 @@ We does not take responsibility or liability for the actions, products, content 
 
 
 
-    </>
+    </div>
 
     // <div style={{marginLeft:"2%", marginTop:"10px"}}> {AboutUs} </div>
   )

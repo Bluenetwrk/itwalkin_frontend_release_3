@@ -48,6 +48,15 @@ font-weight: 400;
     margin-left: 72%;
 }
 
+@media (max-width:900px){
+    .LoginlinkwrapperHome{
+        width:20%;
+        margin-left: 70%;
+    
+    }
+}
+
+
 .HomeprofileIcon{
     height: 35px;
     margin-left: 25%;
@@ -68,16 +77,18 @@ font-weight: 400;
 .dropdownwrapperHome {
     position:absolute;
     /* right : 1.5rem; */
-    left: 87%;
-    padding-right: 15px;
-    padding-left: 15px;
+    /* left: 86.3%; */
+    padding-right: 10px;
+    padding-left: 10px;
     padding-bottom: 0px;
     border-radius: 8px;
     border: 1px solid rgb(202, 202, 202);
     cursor: pointer;
     z-index:100;
     background-color: white;
-    width:100px
+    width:100px;
+    margin-top: 14px;
+    margin-left: -110px;
 }
 .dropdownwrapperHome::after {
     content: "";
@@ -394,7 +405,13 @@ font-weight: 400;
 
     @media(max-width:900px){
         .Empdropdownwrapper {
-        margin-left: -46px;
+        margin-left: -50px;
+
+         }
+        } 
+    @media(max-width:850px){
+        .Empdropdownwrapper {
+        margin-left: -57px;
 
          }
         } 
@@ -594,11 +611,18 @@ font-weight: 400;
     /* margin-left: -1000px; */
 
 }
-.p{
+.textinMobileSodeBar{
     padding-top: 15px;
     padding-bottom: 15px;
     margin-left: 15px;
     cursor: pointer;
+}
+.textBigSodeBar{
+    padding-top: 15px;
+    padding-bottom: 15px;
+    margin-left: 15px;
+    cursor: pointer;
+    margin-top: 25px;
 }
 
 
@@ -678,17 +702,17 @@ font-weight: 400;
 
 
 .NavIconBars{
-    width:28px;
-    height:26px;
+    width:24px;
+    height:23px;
    margin-left: 5%;
-   margin-top: 5px;
+   margin-top: 0px;
    color:"red"
 }
 .NavIconCross{
-    width:30px;
-    height:30px;
+    width:24px;
+    height:23px;
    margin-left: 5%;
-   margin-top: 5px;
+   /* margin-top: 5px; */
    color:"red"
 
 }
@@ -702,15 +726,15 @@ font-weight: 400;
     margin-left: 17%;
 }
 
-/* .MobileLoginIconWrapper {
+.MobileLoginIconWrapper {
 
     display: flex;
     flex-wrap: nowrap;
-    margin-left: 40%;
+    /* margin-left: 40%; */
     height: 60px;
     align-items: center;
 
-} */
+}
 
 .MobloginLogo{
     width:30px;
@@ -736,84 +760,85 @@ font-weight: 400;
 
  @media(max-width:760px){
     .MobileLoginIconWrapper {
-
-    display: flex;
-    flex-wrap: nowrap;
-    margin-left: 52%;
-    height: 60px;
-    align-items: center;
-    /* background-color: aqua; */
+        margin-left: 52%;
 }
     }
 
-
-@media(max-width:550px){
+@media(max-width:480px){
    .MobileLoginIconWrapper {
-
-    display: flex;
-    flex-wrap: nowrap;
     margin-left: 46%;
-    height: 60px;
-    align-items: center;
 }
     }
 
-@media(max-width:490px){
-    .MobileLoginIconWrapper {
-    display: flex;
-    flex-wrap: nowrap;
-    margin-left: 42%;
-    height: 60px;
-    align-items: center;
-}
-    }
-
-@media(max-width:440px){
+@media(max-width:400px){
    .MobileLoginIconWrapper {
-
-    display: flex;
-    flex-wrap: nowrap;
-    margin-left: 38%;
-    height: 60px;
-    align-items: center;
+       margin-left: 42%;
 
 }
     }
-@media(max-width:380px){
-   .MobileLoginIconWrapper {
-
-    display: flex;
-    flex-wrap: nowrap;
-    margin-left: 31%;
-    height: 60px;
-    align-items: center;
-
-}
-    }
-@media(max-width:334px){
-   .MobileLoginIconWrapper {
-
-    display: flex;
-    flex-wrap: nowrap;
-    margin-left: 26%;
-    height: 60px;
-    align-items: center;
-
-}
-    }
-@media(max-width:310px){
+@media(max-width:375px){
     .MobileLoginIconWrapper{
-    margin-left: 18%;
+    margin-left: 39%;
 
     }
-   .MobHomeDropdownwrapper {
-width:90px;
-z-index: 100;
-margin-top: 145px;
-margin-left: -65px;
-
 }
+@media(max-width:350px){
+    .MobileLoginIconWrapper{
+    margin-left: 37%;
+    }   
     }
+@media(max-width:340px){
+    .MobileLoginIconWrapper{
+    margin-left: 35%;
+    }   
+    }
+@media(max-width:325px){
+    .MobileLoginIconWrapper{
+    margin-left: 32%;
+    }   
+    }
+@media(max-width:315px){
+    .MobileLoginIconWrapper{
+    margin-left: 30%;
+    }   
+    }
+@media(max-width:305px){     
+    .MobHomeDropdownwrapper {
+        position: absolute;
+        margin-left: -60px;
+        margin-top: 146px;
+        /* padding-right: 5px; */
+        /* padding-left: 5px; */
+        /* padding-bottom: 0px; */
+        border-radius: 8px;
+        border: 1px solid rgb(202, 202, 202);
+        cursor: pointer;
+        z-index: 100;
+        width:90px
+    } }
+
+@media(max-width:299px){ 
+    .MobileLoginIconWrapper{
+        margin-left: 27%;
+        }    
+    .MobHomeDropdownwrapper {
+        position: absolute;
+        margin-left: -37px;
+        margin-top: 160px;
+        /* padding-right: 5px; */
+        /* padding-left: 5px; */
+        /* padding-bottom: 0px; */
+        border-radius: 8px;
+        border: 1px solid rgb(202, 202, 202);
+        cursor: pointer;
+        z-index: 100;
+        background-color: red;
+        width:65px
+    } }
+    @media(max-width:285px){ 
+        .MobileLoginIconWrapper{
+            margin-left: 21%;
+            }  }
         
         .MobHomeDropdownwrapper::after {
             content: "";

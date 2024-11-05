@@ -10,6 +10,7 @@ import EmpNotification from "../img/icons8-notification-33.png"
 import JobseekerNotification from "../img/icons8-notification-30.png"
 import useScreenSize from '../SizeHook';
 import SidebarNav from "./SidebarNav"
+import BigSidebarNav from '../BigSideNav'
 
 import loginuser from "../img/icons8-user-96.png"
 import StudentUpdateProfile from '../Profile/StudentUpdateProfile';
@@ -116,6 +117,15 @@ function Nav(props) {
   };
 
 
+  const [ShowBigSideNave, setShowBigSideNave] = useState(false)
+
+  function ChangeSideNaveBar() {
+    props.chandinmargin((prev) => !prev)
+    setShowBigSideNave((prev) => !prev)
+  }
+  function ChangeSideNaveMobile() {
+    setShowSideNave((prev) => !prev)
+  }
 
   return (
     <>
@@ -128,6 +138,14 @@ function Nav(props) {
           StudentAuth ?
             <>
               <div className={Styles.fullnavewrapper}>
+                <div style={{ width:"20px"}}>
+                  <i style={{ fontSize: "Large", color: "white", zIndex: "1000",  }}
+                    className={ShowBigSideNave ? "fas fa-times" : "fas fa-bars"} onClick={ChangeSideNaveBar}>
+                  </i>
+                  <div className="BigNavWrapper" style={ShowBigSideNave ? { marginLeft: "-5px" } : { marginLeft: "-105px" }}>
+                    <BigSidebarNav />
+                  </div>
+                </div>
                 {/* <div className={Styles.logoWrapper}> */}
                 <div className={Styles.ITwalkinWrapper}>
 
@@ -170,16 +188,25 @@ function Nav(props) {
 
             // ..........................................Emplyee login.......................................................              
             :
+            
             (EmployeeAuth) ?
               <>
                 <div className={Styles.fullnavewrapper}>
-                  <div className={Styles.logoWrapper}>
+                  {/* <div className={Styles.logoWrapper}> */}
+                  <div style={{ width:"20px"}}>
+                  <i style={{ fontSize: "Large", color: "white", zIndex: "1000",  }}
+                    className={ShowBigSideNave ? "fas fa-times" : "fas fa-bars"} onClick={ChangeSideNaveBar}>
+                  </i>
+                  <div className="BigNavWrapper" style={ShowBigSideNave ? { marginLeft: "-5px" } : { marginLeft: "-105px" }}>
+                    <BigSidebarNav />
+                  </div>
+                </div>
                     {/* <NavLink to="/" > <img className={Styles.logo} src={logo} /> </NavLink> */}
                     <div className={Styles.ITwalkinWrapper}>
                       <p className={Styles.ITwalkin}>ITwalkin</p>
                       <p className={Styles.onlyforITjobs}>Only for IT jobs</p>
                     </div>
-                  </div>
+                  
                   <div className={Styles.linkWrapper}>
 
                     {/* <NavLink to="/postedjobs" className={Styles.link} style={navLinkStyles}> Posted jobs</NavLink> */}
@@ -189,18 +216,18 @@ function Nav(props) {
                     <div className={`${Styles.link} ${Styles.EmpIconeWrapper}`}>
                       {/* <NavLink to="/Search-Candidate" className={`${Styles.SearchCandidate}`} style={navLinkStyles}>Search Candidate</NavLink> */}
                       <img className={`${Styles.Icon} ${Styles.EmpProfileIcon}`} src={loginuser} ref={imgRef} onClick={() => setShowprofile((prev) => !prev)} />
-                   
-                    {/* .....................drop down............ */}
-                    {showprofile ?
-                      <div className={Styles.Alldownwrapper} >
-                        <div className={Styles.Empdropdownwrapper} ref={menuRef} >
-                          <p className={Styles.text} ref={menuRef} onClick={EmployeeProfile} >My profile</p>
-                          <p className={Styles.text} ref={menuRef} onClick={mypostedjob}>My posted Jobs</p>
-                          <p className={Styles.text} ref={menuRef} onClick={logutEmp}>Logout</p>
+
+                      {/* .....................drop down............ */}
+                      {showprofile ?
+                        <div className={Styles.Alldownwrapper} >
+                          <div className={Styles.Empdropdownwrapper} ref={menuRef} >
+                            <p className={Styles.text} ref={menuRef} onClick={EmployeeProfile} >My profile</p>
+                            <p className={Styles.text} ref={menuRef} onClick={mypostedjob}>My posted Jobs</p>
+                            <p className={Styles.text} ref={menuRef} onClick={logutEmp}>Logout</p>
+                          </div>
                         </div>
-                      </div>
-                      : ""}
-                      </div >
+                        : ""}
+                    </div >
 
 
                   </div>
@@ -266,14 +293,22 @@ function Nav(props) {
                 :
                 <>
                   <div className={Styles.fullnavewrapper}>
-                    <div className={Styles.logoWrapper}>
                       {/* <NavLink to="/"> <img className={Styles.logo} src={logo} /> </NavLink> */}
-                      <div className={Styles.ITwalkinWrapper}>
 
+                      <div style={{ width:"20px"}}>
+                  <i style={{ fontSize: "Large", color: "white", zIndex: "1000",  }}
+                    className={ShowBigSideNave ? "fas fa-times" : "fas fa-bars"} onClick={ChangeSideNaveBar}>
+                  </i>
+                  <div className="BigNavWrapper" style={ShowBigSideNave ? { marginLeft: "-5px" } : { marginLeft: "-105px" }}>
+                    <BigSidebarNav />
+                  </div>
+                </div>
+
+
+                      <div className={Styles.ITwalkinWrapper}>
                         <p className={Styles.ITwalkin}>ITwalkin</p>
                         <p className={Styles.onlyforITjobs}>Only for IT jobs</p>
                       </div>
-                    </div>
                     <div className={Styles.linkWrapper}>
 
                       <NavLink to="/" className={Styles.HomeJobs} style={navLinkStyles}><i style={{ marginLeft: 0, marginRight: "5px" }} class="fa-solid fa-house"></i>Home</NavLink>
@@ -285,18 +320,10 @@ function Nav(props) {
 
                         <img className={` ${Styles.HomeprofileIcon}`} src={loginuser} ref={imgRef} onClick={() => setShowprofile((prev) => !prev)} />
                         {/* <NavLink to="/JobSeekerLogin" className={`${Styles.Loginlink} ${Styles.StuLogin}`} style={navLinkStyles}>Job Seeker Login</NavLink> */}
-
-                      </div>
-                    </div>
-                  </div>
-                  <>
-                    <StuModal isStuOpen={Stuopen} onClose={() => { handleStuClose() }} />
-                    <Modal isOpen={open} onClose={() => { handleClose() }} />
-                  </>
-                  {showprofile ?
+                        {showprofile ?
                     <div className={Styles.Alldownwrapper} >
 
-                      <div style={{ marginLeft: "-18px" }} className={Styles.dropdownwrapperHome} ref={menuRef} >
+                      <div style={{  }} className={Styles.dropdownwrapperHome} ref={menuRef} >
                         {/* <p onClick={() => { navigate("/EmployeeLogin") }}>Employee Login </p>
                       <p onClick={() => { navigate("/JobSeekerLogin") }}>Job Seeker Login</p> */}
                         <p onClick={() => { handleEmpOpen(); handleStuClose() }}>Employer Login</p>
@@ -305,13 +332,21 @@ function Nav(props) {
                     </div>
 
                     : ""}
+                      </div>
+                    </div>
+                  </div>
+                  <>
+                    <StuModal isStuOpen={Stuopen} onClose={() => { handleStuClose() }} />
+                    <Modal isOpen={open} onClose={() => { handleClose() }} />
+                  </>
+
 
                 </>
 
           :    //OR  mobile Nave
 
 
-          //  ............................................Jobseeker Login...............................................   
+          //  ............................................Jobseeker Login...Mobile view............................................   
           StudentAuth ?
             <>
               <div className={Styles.fullnavewrapper}>
@@ -335,7 +370,7 @@ function Nav(props) {
 
                 </div>
               </div>
-              {/* .....................drop down............ */}
+              {/* .....................drop down..Mobile View.......... */}
               {showprofile ?
                 <div className={Styles.Alldownwrapper} >
 
@@ -352,7 +387,7 @@ function Nav(props) {
                 : ""}
             </>
 
-            // ..........................................Emplyee login.......................................................              
+            // ..........................................Emplyee login......Mobile View.................................................              
             :
             (EmployeeAuth) ?
               <>
@@ -375,13 +410,13 @@ function Nav(props) {
                     <div className={`${Styles.link} ${Styles.MobileIconeWrapper}`}>
 
                       {/* <NavLink to="/" className={` ${Styles.JobMobileNotificationIcon}`}><img src={JobseekerNotification} /> </NavLink> */}
-                 
+
                       <img className={`${Styles.Icon} ${Styles.EmpMobileProfileIcon}`} src={loginuser} ref={imgRef} onClick={() => setShowprofile((prev) => !prev)} />
-                      </div >
-                      
+                    </div >
+
                   </div>
                 </div>
-                {/* .....................drop down............ */}
+                {/* ............Mobile View.........drop down............ */}
                 {showprofile ?
                   <div className={Styles.EmpMobDropdownwrapper} ref={menuRef} >
                     <p className={Styles.text} ref={menuRef} onClick={EmployeeProfile} >My profile</p>
@@ -394,7 +429,7 @@ function Nav(props) {
 
 
               </>
-              // ............Admin Login......................
+              // ............Admin Login............Mobile View..........
               :
               (adminLogin) ?
                 <>
@@ -417,7 +452,7 @@ function Nav(props) {
                       </div >
                     </div>
                   </div>
-                  {/* .....................drop down............ */}
+                  {/* .....................drop down...Mobile View......... */}
                   {showprofile ?
                     <div style={{ marginLeft: "-2%" }} className={Styles.Admindropdownwrapper} ref={menuRef} >
                       {/* <p className={Styles.text} ref={menuRef} >My profile</p> */}
@@ -427,16 +462,23 @@ function Nav(props) {
                     </div>
                     : ""}
                 </>
-                // ............................................Home Nave....................................................      
+                // ............................................Home Nave....Mobile View................................................      
                 :
 
                 <>
 
                   <div className={Styles.fullnavewrapper}>
-                    {ShowSideNave ?
+                    {/* {ShowSideNave ?
                       <img className={`${Styles.NavIconCross} `} src={Cancel} ref={SimgRef} onClick={() => { setShowSideNave((prev) => !prev) }} />
                       : <img className={`${Styles.NavIconBars} `} src={NavIcon} ref={SimgRef} onClick={() => { setShowSideNave((prev) => !prev) }} />
-                    }
+                    } */}
+                <div style={{ width:"30px"}}>
+
+                    <i style={{ fontSize: "Large", color: "white", zIndex: "1000",  }}
+                    className={ShowSideNave ? "fas fa-times" : "fas fa-bars"} ref={SimgRef} onClick={() => { setShowSideNave((prev) => !prev)}}>
+                  </i>
+                </div>
+
                     <div className={Styles.ITwalkinWrapperHomeMobile}>
                       <p className={Styles.ITwalkinMob}>ITwalkin</p>
                       <p className={Styles.onlyforITjobsMob}>Only for IT jobs</p>

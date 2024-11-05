@@ -75,14 +75,10 @@ At the heart of our success and our future is innovation. We are building some o
         </div>
 
         {screenSize.width > 750 ?
-  <div style={{marginTop:"330px", position:"sticky", bottom:0}}>
-          <Footer/>
-        </div>
+""
         :
-  <div style={{marginTop:"100px",}}>
 
         <Footer/>   
-        </div>
 }
     </>
 

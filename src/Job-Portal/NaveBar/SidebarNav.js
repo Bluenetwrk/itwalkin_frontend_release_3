@@ -11,12 +11,12 @@ function SidebarNav(props) {
       <div  ref ={props.refrence} >
       {/* <p style={{marginLeft:"80%"}} onClick={()=>{props.setShowSideNaveProps((prev)=>!prev)}}> &#10005;</p> */}
       <div style={{ marginTop:"-15px", zIndex:1000}}>
-        <p onClick={()=>{navigate("/")}} className={`${Styles.p} `}>Home </p>
-        <p onClick={()=>{navigate("/AboutUs")}} className={`${Styles.p} `}>About Us</p>
-        <p onClick={()=>{navigate("/Services")}} className={`${Styles.p} `}>Our Services</p>
-        <p onClick={()=>{navigate("/Contact")}} className={`${Styles.p} `}>Contact U</p>
-        <p onClick={()=>{navigate("/AllCareerJobs")}} className={`${Styles.p} `}>Career</p>
-        <p onClick={()=>{navigate("/TermsAndCondition")}} className={`${Styles.p} `}>Terms & Conditions</p>
+        <p onClick={()=>{navigate("/")}} className={`${Styles.textinMobileSodeBar} `}>Home </p>
+        <p onClick={()=>{navigate("/AboutUs")}} className={`${Styles.textinMobileSodeBar} `}>About Us</p>
+        <p onClick={()=>{navigate("/Services")}} className={`${Styles.textinMobileSodeBar} `}>Our Services</p>
+        <p onClick={()=>{navigate("/Contact")}} className={`${Styles.textinMobileSodeBar} `}>Contact Us</p>
+        <p onClick={()=>{navigate("/AllCareerJobs")}} className={`${Styles.textinMobileSodeBar} `}>Career</p>
+        <p onClick={()=>{navigate("/TermsAndCondition")}} className={`${Styles.textinMobileSodeBar} `}>Terms & Conditions</p>
         </div>
       </div>
       </>

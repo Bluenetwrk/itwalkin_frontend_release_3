@@ -67,15 +67,9 @@ Any Employer accessing the ITwalkin Platform shall be bound by these Terms of Se
         </p>
         
         </div>
-        {screenSize.width > 750 ?
-  <div style={{marginTop:"430px", position:"sticky", bottom:0}}>
-          <Footer/>
-        </div>
+        {screenSize.width > 750 ?""
         :
-  <div style={{marginTop:"100px",}}>
-
         <Footer/>   
-        </div>
 }
         {/* <div style={{marginTop:"330px", position:"sticky", bottom:0,}}>
           <Footer/>

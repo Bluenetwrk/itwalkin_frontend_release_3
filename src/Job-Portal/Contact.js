@@ -86,14 +86,10 @@ getContact()
 
 
         {screenSize.width > 750 ?
-  <div style={{marginTop:"370px", position:"sticky", bottom:0}}>
-          <Footer/>
-        </div>
-        :
-  <div style={{marginTop:"230px",}}>
+""
+:
 
         <Footer/>   
-        </div>
 }
     </>
 

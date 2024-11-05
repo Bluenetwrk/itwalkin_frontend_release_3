@@ -74,13 +74,10 @@ import TermsAndCondition from "./Job-Portal/TermsAndConditions"
 import Footer from "./Job-Portal/Footer/Footer";
 import Payment from "./Job-Portal/Payment"
 import socketIO from 'socket.io-client';
-
 import useScreenSize from '../src/Job-Portal/SizeHook';
-
 // axios.defaults.baseURL = "http://localhost:8080"
 // vercel Test
 axios.defaults.baseURL = " https://itwalkin-backend-testrelease-2-0-1-0824-ns0g.onrender.com"
-
 // Vercel Main Live 
 //  axios.defaults.baseURL = "https://itwalkin-backend-testrelease-2-0-1-0824.onrender.com";
 
@@ -103,21 +100,9 @@ function App() {
     <>
 
       <BrowserRouter>
-        <Nav />
-        {screenSize.width > 850 ?
-
-        <i style={{ fontSize: "Large", position: "absolute", color: "white", zIndex: "1000", marginTop: "-38px" }}
-          className={ShowSideNave ? "fas fa-times" : "fas fa-bars"} onClick={ChangeSideNaveBar}>
-        </i>
-        :""
-        }
-        <div style={ShowSideNave ? { marginLeft: "100px", transition: " ease-in-out 0.6s" } : { marginLeft: "-3px", transition: " ease-in-out 0.5s" }}>
-
-          {/* {ShowSideNave ? */}
-          <div className="BigNavWrapper" style={ShowSideNave ? { marginLeft: "-100px" } : { marginLeft: "-105px" }}>
-            <SidebarNav />
-          </div>
-
+        <Nav  chandinmargin={setShowSideNave}/>
+        
+        <div style={ShowSideNave && screenSize.width > 850 ? { marginLeft: "100px", transition: " ease-in-out 0.6s" } : { marginLeft: "-3px", transition: " ease-in-out 0.5s" }}>
           <Routes>
 
             <Route path="/" element={<Home />} />
