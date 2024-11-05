@@ -111,13 +111,12 @@ function App() {
         </i>
         :""
         }
-        <div style={ShowSideNave ? { marginLeft: "140px", transition: "0.5s" } : { marginLeft: "0px", }}>
+        <div style={ShowSideNave ? { marginLeft: "100px", transition: " ease-in-out 0.6s" } : { marginLeft: "-3px", transition: " ease-in-out 0.5s" }}>
 
           {/* {ShowSideNave ? */}
-          <div className="BigNavWrapper" style={ShowSideNave ? { marginLeft: "-140px" } : { marginLeft: "-900px" }}>
+          <div className="BigNavWrapper" style={ShowSideNave ? { marginLeft: "-100px" } : { marginLeft: "-105px" }}>
             <SidebarNav />
           </div>
-
 
           <Routes>
 
