@@ -424,7 +424,7 @@ return(
 
   async function getLocation(jobLocation) {
     setCount(1)
-    setActive([])
+    setActive(["Banglore"])
     setFiltereredjobs(jobLocation)
     setNoPageFilter(true)
 
@@ -457,7 +457,7 @@ return(
                   <label className={styles.JobLocationFilter}>
                   <input type="radio" checked disabled={location == "Chennai" ||
                   location == "Hyderabad" || location == "Mumbai" || location == "Delhi"} name="filter" onClick={() => 
-                      { getLocation(location.toLowerCase()) }} />{location}</label><br></br>
+                      { getjobs() }} />{location}</label><br></br>
                       </>
                 )
               })

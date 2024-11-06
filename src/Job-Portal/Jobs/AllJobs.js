@@ -462,7 +462,7 @@ return(
         <label className={styles.JobLocationFilter}>
         <input type="radio" checked disabled={location == "Chennai" ||
         location == "Hyderabad" || location == "Mumbai" || location == "Delhi"} name="filter" onClick={() => 
-            { getLocation(location.toLowerCase()) }} />{location}</label><br></br>
+            { getjobs()}} />{location}</label><br></br>
             </>
       )
     })
@@ -516,7 +516,7 @@ return(
 
           <div style={{ display: "flex", justifyContent: "space-between" }}>
             {nopageFilter ?
-              <p style={{ fontWeight: 400, marginLeft: "10px" }}>Displaying <span style={{ color: "blue" }}>{Filtereredjobs}</span> from All Jobs</p>
+              <p style={{ fontWeight: 400, marginLeft: "10px" }}>Displaying <span style={{ color: "blue" }}>{Active.toString()}</span> from All Jobs</p>
               :
               <p style={{ fontWeight: 400, marginLeft: "10px" }}>showing {firstIndex + 1} to {lastIndex} latest jobs</p>
             }
