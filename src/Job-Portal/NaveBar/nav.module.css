@@ -138,7 +138,6 @@ font-weight: 400;
     width: 79%;
     height: 60px;
     align-items: center;
-
 }
 
 /* for mobile only fullNave */
@@ -650,25 +649,13 @@ font-weight: 400;
     width:14%;
     white-space:nowrap;
 }
-.PostedJobs{
-    margin-left: -0%;
 
-}
-.PostJob{
-    margin-left: 25%;
-}
 .MobileIconeWrapper{
     display: flex;
     width: 30%;
     margin-left: 10%;
 }
-.EmpMobileProfileIcon{
-    width: 35px;
-    height: 35px;
-    margin-left: 30%;
-    margin-top: 5px;
-    cursor: pointer;
-}
+
 .MobJobseekerProfileIcon{
     width: 35px;
     height: 35px;
@@ -855,6 +842,26 @@ font-weight: 400;
             z-index: 100;
         
         }
+
+        .PostedJobs{
+            margin-left: -0%;
+            /* background-color: aqua; */
+            font-weight: 700;
+            font-size: small;
+        }
+        .PostJob{
+            margin-left: 25%;
+            font-weight: 700;
+            font-size: small;
+        }
+
+        .EmpMobileProfileIcon{
+            width: 35px;
+            height: 35px;
+            margin-left: 30%;
+            margin-top: 5px;
+            cursor: pointer;
+        }
         
 .EmpMobDropdownwrapper{
     position: absolute;
@@ -867,7 +874,8 @@ font-weight: 400;
     border: 1px solid rgb(202, 202, 202);
     cursor: pointer;
     width:62px;
-    z-index: 100;   
+    z-index: 100;  
+
 }
 .EmpMobDropdownwrapper::after {
     content: "";
@@ -882,15 +890,55 @@ font-weight: 400;
     border-top: 1px solid grey;
 }
 
-@media (max-width :330px){
+@media (min-width :350px){
     .EmpMobDropdownwrapper{
-        left: 75%;
+        left: 80%;
+    width:58px;
+
     }    
 }
-@media (min-width :331px){
+@media (max-width :349px){
     .EmpMobDropdownwrapper{
-        left: 78.5%;
-    }    
+        left: 81%;
+    width:57px;
+    padding-right:2px;
+    padding-left: 2px;
+    } 
+    
+    .PostedJobs{
+        margin-left: -3%;
+        /* background-color: aqua; */
+        font-weight: 700;
+        font-size: small;
+    }
+    .PostJob{
+        margin-left: 25%;
+        font-weight: 700;
+        font-size: small;
+    }
+}
+@media (max-width :332px){
+    .EmpMobDropdownwrapper{
+        left: 79.5%;
+    width:57px;
+    padding-right:2px;
+    padding-left: 2px;
+    } 
+    .EmpMobileProfileIcon{
+        margin-left: 20%;
+    }
+    
+    .PostedJobs{
+        margin-left: -5%;
+        /* background-color: aqua; */
+        font-weight: 700;
+        font-size: small;
+    }
+    .PostJob{
+        margin-left: 25%;
+        font-weight: 700;
+        font-size: small;
+    }
 }
 
 

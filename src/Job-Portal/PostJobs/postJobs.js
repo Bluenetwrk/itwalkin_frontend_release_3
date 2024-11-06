@@ -10,10 +10,15 @@ import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import Style from "./postJobs.module.css"
 import socketIO from 'socket.io-client';
 import CreatableSelect from "react-select"
+import useScreenSize from '../SizeHook';
+import {jobTags} from "../Tags"
+
 // import CreatableSelect  from 'react-select/creatable';
 
 function PostJobs(props) {
+    const screenSize = useScreenSize();
 
+  
     useEffect(() => {
         const socket = socketIO.connect(props.url, {
             auth: {
@@ -21,24 +26,6 @@ function PostJobs(props) {
             }
         });
     }, [])
-
-    let jobTags = [
-        { value: 'ReactJs', label: 'ReactJs' },
-        { value: 'Mern Stack', label: 'Mern Stack' }, { value: 'C++, C', label: 'C++, C' },
-        { value: 'Javascript', label: "Javascript" }, { value: 'Node js', label: 'Node js' },
-        { value: 'Angular js', label: 'Angular js' }, { value: 'Vue js', label: 'Vue js' }, { value: 'NextJs', label: 'NextJs' },
-        { value: 'Backend', label: 'Backend' }, { value: 'Frontend', label: 'Frontend' },
-        { value: 'HTML-CSS', label: 'HTML-CSS' }, { value: 'MongoDB', label: 'MongoDB' },
-        { value: 'MySql', label: 'MySql' }, { value: 'Flutter', label: 'Flutter' }, { value: 'Game Developer', label: 'Game Developer' },
-        { value: 'Mobile App Developer', label: 'Mobile App Developer' }, { value: 'Artificial Intelligence', label: 'Artificial Intelligence' },
-        { value: 'React Native', label: 'React Native' }, { value: 'DevOps Engineer', label: 'DevOps Engineer' },
-        { value: 'Security developer', label: 'Security developer' }, { value: 'Data science', label: 'Data science' },
-        { value: 'Data Analyst', label: 'Data Analyst' }, { value: 'java ', label: 'java ' },
-        { value: 'Python', label: 'Python' },
-        { value: 'Graphic Developers', label: 'Graphic Developers' }, { value: 'AI Engineer', label: 'AI Engineer' },
-        { value: 'Security Developer', label: 'Security Developer' }, { value: 'Cloud Developers', label: 'Cloud Developers' },
-    ]
-
 
     let empId = JSON.parse(localStorage.getItem("EmpIdG"))
     const [jobtitle, setJobTitle] = useState("")
@@ -58,8 +45,13 @@ function PostJobs(props) {
     const [others, setOthers] = useState(false)
     const [otherJobLocation, setotherJobLocation] = useState(false)
 
+  const [Active, setActive] = useState([])
+  console.log(Active)
+
     const [profileData, setProfileData] = useState([])
     const [Tags, setTag] = useState([])
+  console.log(Tags)
+
     const [skills, setSkills] = useState("")
 
     function handleChange(tag) {
@@ -170,11 +162,34 @@ function PostJobs(props) {
     }
     
     function handlejobtitle(e){ 
-        // let keycode=e.target.value.charCodeAt(jobtitle.length)
-    //  console.log(keycode)
      setJobTitle(e.target.value)
                     
     }
+
+    const [count, setCount]=useState(1)
+
+    async function handleTags(key) {
+        const isIndex=Tags.findIndex((present)=>{
+            return(
+              present===key
+            )
+                })
+                if(isIndex<0){
+                    setTag([...Tags, key])
+                }else{
+                  const IndexId=Tags.filter((present)=>{
+                    return(
+                      present!==key
+                    )
+                        })
+                        console.log(IndexId)
+                        setTag(IndexId)
+                        // Active.splice(IndexId,1)
+    }
+}
+
+
+
     return (
         <>
 
@@ -226,6 +241,35 @@ function PostJobs(props) {
                                             className={Style.inputbox}
                                             onChange={(e) => { setJobDescription(e.blocks) }}
                                         />
+                                        <h4 className={Style.jobHeadline}>Job Tags</h4>
+
+<div className={Style.JobtitleFilterWrapper}>
+            {/* <buton className={ Active.length===0? Style.active:Style.JobtitleFilter} onClick={() => { getjobs() }}>All</buton> */}
+            {
+              jobTags.map((tags, i) => {
+                return (
+                                   
+                  <button disabled={tags.value==="TECHNOLOGIES" || tags.value==="EDUCATION" || tags.value==="COLLEGE TYPE" || tags.value==="NOTICE PERIOD" || tags.value==="SALARY" || 
+                    tags.value==="EXPERIENCE" || tags.value==="Job Type" || tags.value==="INDUSTRY" || tags.value==="TOOLS/PROTOCOLS" || tags.value==="ROLE" || tags.value==="COMPANY TYPE" } 
+                    className={tags.value==="TECHNOLOGIES" || tags.value==="EDUCATION" || tags.value==="COLLEGE TYPE" || tags.value==="NOTICE PERIOD" || tags.value==="SALARY" || 
+                    tags.value==="EXPERIENCE" || tags.value==="Job Type" || tags.value==="INDUSTRY" || tags.value==="TOOLS/PROTOCOLS" || tags.value==="COMPANY TYPE" || tags.value==="ROLE"?
+                    Style.TagHeading: 
+                    //  Active === tags.value ? 
+                    Tags.findIndex(  (present)=>{
+                      return(
+                        present===tags.value
+                      )
+                          }) >=0?
+                     Style.active : Style.JobtitleFilter} 
+                     onClick={ () => {  handleTags(tags.value) }}
+                     >{tags.value} </button>
+                
+                  )
+              })
+            }
+          </div>
+
+
                                         <h4 className={Style.jobHeadline}>Job Type</h4>
 
                                         <label><input name="Job-Type" type="radio" checked={jobtype === "Full Time"} value="Full Time" onChange={(e) => { setJobtype(e.target.value) }} />Full Time  </label>
@@ -272,7 +316,7 @@ function PostJobs(props) {
 
                                         <h4 className={Style.jobHeadline}>Experience Needed** &nbsp;<span className={Style.hint}>(e.g 5 or 10)</span></h4>
                                         <input maxLength="3" className={Style.inputbox} type="number" value={experiance} onChange={(e) => { handleExperiance(e) }} />
-                                        <h4 className={Style.jobHeadline}>Skill Tags**</h4>
+                                        {/* <h4 className={Style.jobHeadline}>Skill Tags**</h4>
                                         <div>
                                             <CreatableSelect
                                                 isMulti={true}
@@ -280,10 +324,10 @@ function PostJobs(props) {
                                                 value={Tags}
                                                 onChange={handleChange}
                                             />
-                                        </div>
+                                        </div> */}
                                         <h4 className={Style.jobHeadline}>Skills Needed**</h4>
 
-<input maxLength="100" className={Style.inputbox} disabled type="text" value={skills} />
+<input maxLength="100" value={skills} className={Style.inputbox} onChange={(e)=>{setSkills(e.target.value)}}  type="text" />
 
 
                                         {Logo ? <p ><span style={{ color: "blue" }}>Note** :</span> Logo will also be posted with the Job</p> : ""}
@@ -299,9 +343,13 @@ function PostJobs(props) {
 
                 })
             }
-                  <div style={{marginTop:"10px"}}>
+           {screenSize.width > 750 ?
+""
+:
+            <div style={{marginTop:"20px"}}>
           <Footer/>
         </div>
+}
         </>
 
     )

@@ -46,7 +46,6 @@ function Home() {
   const [Result, setResult] = useState(false)
   const [NotFound, setNotFound] = useState("")
   const [Active, setActive] = useState([])
-  console.log(Active)
   const screenSize = useScreenSize();
 
   // let AgeTags = [
@@ -374,7 +373,6 @@ function Home() {
       setJobs("")
 
     }
-
     setCount(prev=>prev+1)
 
     const isIndex=Active.findIndex((present)=>{
@@ -391,20 +389,22 @@ return(
         )
             })
             Active.splice(IndexId,1)
+                if(Active.length===0){
+      getjobs()
+    }
+    if(jobs.length>0){
          let removedItems = jobs.filter((tags)=>{
-            return(
-              // !tags.skills.includes(key)   
-              // console.log(tags.Tags)         
+            return(     
               !tags.Tags.map((value)=>{
                 return(
                 value.value
                 )
               }).includes(key)    
         )
-      })      
+      }) 
       setJobs(removedItems)
       return false
-    }
+    }}
 
     setNoPageFilter(true)
     setFiltereredjobs(key)
@@ -415,20 +415,6 @@ return(
           return new Date(b.createdAt) - new Date(a.createdAt);
         });
 
-
-      //   console.log("sortedate", jobs)
-
-      //  let availableItems= jobs.filter(async (items)=>{
-      //     return(
-
-      //   console.log("availableItems", items.Tags)
-
-      //     )
-      //   })
-        // console.log("availableItems", availableItems)
-        // setJobs(sortedate)
-        // setJobs([...jobs ,sortedate])
-        //  setJobs(oldArray => [...oldArray, sortedate] )
         let elements=  sortedate.flatMap(element => {
           setJobs(oldArray => [...oldArray,element] )
      });
@@ -469,7 +455,7 @@ return(
                 return (
                   <>
                   <label className={styles.JobLocationFilter}>
-                  <input type="radio"  disabled={location == "Chennai" ||
+                  <input type="radio" checked disabled={location == "Chennai" ||
                   location == "Hyderabad" || location == "Mumbai" || location == "Delhi"} name="filter" onClick={() => 
                       { getLocation(location.toLowerCase()) }} />{location}</label><br></br>
                       </>

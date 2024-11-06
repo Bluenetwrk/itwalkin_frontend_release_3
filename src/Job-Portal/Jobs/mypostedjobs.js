@@ -284,7 +284,6 @@ function handleRecordchange(e){
         </>
         : ""
       }      
- {/* <p>My Posted Jobs</p> */}
 
      {screenSize.width>850?
        <>
@@ -481,14 +480,14 @@ function handleRecordchange(e){
               </button>
             </div>
             </div>
-            <div style={{marginTop:"200px", position:"sticky", bottom:0}}>
+            {/* <div style={{marginTop:"200px", position:"sticky", bottom:0}}>
           <Footer/>
-        </div>
+        </div> */}
       </>
       :
       <> 
 
-
+<p style={{marginLeft:"45%"}}>My Posted Jobs</p>
 <button className={styles.searchButton} onClick={() => {
           navigate("/Search-Candidate")
         }}>Search Candidate</button>
@@ -615,7 +614,7 @@ myjobs.map((job, i) => {
 }
 
 </div>
-<div style={{marginTop:"10px"}}>
+<div style={{marginTop:"120px"}}>
           <Footer/>
         </div>
       </>

@@ -23,6 +23,7 @@ code {
 }
 
 .BigNavWrapper{
+  height: 100vh;
   background-color: rgb(40, 4, 99);
   z-index: 100;
   transition: ease-in-out 0.5s;
@@ -31,9 +32,9 @@ code {
   font-weight: bold;
   white-space:wrap;
   z-index: 100; 
-  border-bottom-right-radius: 10px;
-  border-top-right-radius: 10px;
-  box-shadow: 1px 1px 3px 1px #999999;
+  /* border-bottom-right-radius: 10px;
+  border-top-right-radius: 10px; */
+  /* box-shadow: 1px 1px 3px 1px #999999; */
   padding-bottom: 7px;
   padding-top: 20px;    
   width:105px;

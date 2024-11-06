@@ -60,7 +60,7 @@ function AllJobs(props) {
   const [Result, setResult] = useState(false)
   const [nojob, setnojob] = useState("")
   const screenSize = useScreenSize();
-  const [Active, setActive] = useState("")
+  const [Active, setActive] = useState([])
 
   const [Loader, setLoader] = useState(false)
 
@@ -418,7 +418,7 @@ function AllJobs(props) {
       return (
         <>
         <label className={styles.JobLocationFilter}>
-        <input type="radio"  disabled={location == "Chennai" ||
+        <input type="radio" checked disabled={location == "Chennai" ||
         location == "Hyderabad" || location == "Mumbai" || location == "Delhi"} name="filter" onClick={() => 
             { getLocation(location.toLowerCase()); setActive("Bangalore") }} />{location}</label><br></br>
             </>
@@ -446,7 +446,7 @@ function AllJobs(props) {
         <>
 
           <div className={styles.JobtitleFilterWrapper}>
-            <buton className={styles.active} onClick={() => { getjobs(); setActive("All") }}>All</buton>
+            <buton className={Active.length===0?styles.active:styles.JobtitleFilter} onClick={() => { getjobs() }}>All</buton>
             {
               jobTags.map((tags, i) => {
                 return (

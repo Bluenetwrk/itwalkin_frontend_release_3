@@ -7,10 +7,13 @@ import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import CreatableSelect  from "react-select/creatable"
 import Arrowimage from '../img/icons8-arrow-left-48.png';
 import Footer from '../Footer/Footer';
+import useScreenSize from '../SizeHook';
+
 
 import Style from "./postJobs.module.css"
 
 function UpdatePostedJobs() {
+  const screenSize = useScreenSize();
 
     let jobTags = [
         { value: 'ReactJs', label: 'ReactJs' },
@@ -237,9 +240,14 @@ window.addEventListener('keypress', function(event){
 
                 </div >
             </div >
-            <div style={{marginTop:"10px"}}>
+
+            {screenSize.width > 750 ?
+""
+:
+            <div style={{marginTop:"20px"}}>
           <Footer/>
         </div>
+}
         </>
 
     )

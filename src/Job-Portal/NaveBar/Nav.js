@@ -11,13 +11,11 @@ import JobseekerNotification from "../img/icons8-notification-30.png"
 import useScreenSize from '../SizeHook';
 import SidebarNav from "./SidebarNav"
 import BigSidebarNav from '../BigSideNav'
-
 import loginuser from "../img/icons8-user-96.png"
 import StudentUpdateProfile from '../Profile/StudentUpdateProfile';
 
 import Modal from "../Login/EmpLogModal";
 import StuModal from "../Login/StudLogModal";
-
 
 function Nav(props) {
 
@@ -142,7 +140,7 @@ function Nav(props) {
                   <i style={{ fontSize: "Large", color: "white", zIndex: "1000",  }}
                     className={ShowBigSideNave ? "fas fa-times" : "fas fa-bars"} onClick={ChangeSideNaveBar}>
                   </i>
-                  <div className="BigNavWrapper" style={ShowBigSideNave ? { marginLeft: "-5px" } : { marginLeft: "-105px" }}>
+                  <div className="BigNavWrapper" style={ShowBigSideNave ? { marginLeft: "-5px" } : { marginLeft: "-115px" }}>
                     <BigSidebarNav />
                   </div>
                 </div>
@@ -197,7 +195,7 @@ function Nav(props) {
                   <i style={{ fontSize: "Large", color: "white", zIndex: "1000",  }}
                     className={ShowBigSideNave ? "fas fa-times" : "fas fa-bars"} onClick={ChangeSideNaveBar}>
                   </i>
-                  <div className="BigNavWrapper" style={ShowBigSideNave ? { marginLeft: "-5px" } : { marginLeft: "-105px" }}>
+                  <div className="BigNavWrapper" style={ShowBigSideNave ? { marginLeft: "-5px" } : { marginLeft: "-115px" }}>
                     <BigSidebarNav />
                   </div>
                 </div>
@@ -299,7 +297,7 @@ function Nav(props) {
                   <i style={{ fontSize: "Large", color: "white", zIndex: "1000",  }}
                     className={ShowBigSideNave ? "fas fa-times" : "fas fa-bars"} onClick={ChangeSideNaveBar}>
                   </i>
-                  <div className="BigNavWrapper" style={ShowBigSideNave ? { marginLeft: "-5px" } : { marginLeft: "-105px" }}>
+                  <div className="BigNavWrapper" style={ShowBigSideNave ? { marginLeft: "-5px" } : { marginLeft: "-112px" }}>
                     <BigSidebarNav />
                   </div>
                 </div>
