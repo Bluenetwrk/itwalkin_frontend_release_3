@@ -84,6 +84,10 @@ function AllJobs(props) {
   const Location = useLocation()
 
   async function getjobs() {
+    setCount(1)
+    setActive([])
+
+
     setPageLoader(true)
     setNoPageFilter(false)
 
@@ -375,6 +379,9 @@ function AllJobs(props) {
   }
 
   async function getLocation(jobLocation) {
+    setCount(1)
+    setActive([])
+
     setFiltereredjobs(jobLocation)
     setNoPageFilter(true)
     await axios.get(`/jobpost/getjobLocation/${jobLocation}`)
@@ -391,9 +398,41 @@ function AllJobs(props) {
   }
 
 
+  const [count, setCount]=useState(1)
 
   async function filterByJobTitle(key) {
-    setActive(key)
+    if(count==1){
+      setJobs("")
+    }
+    setCount(prev=>prev+1)
+
+    const isIndex=Active.findIndex((present)=>{
+return(
+  present===key
+)
+    })
+    if(isIndex<0){
+    setActive([...Active, key])
+    }else{
+      const IndexId=Active.findIndex((present)=>{
+        return(
+          present==key
+        )
+            })
+            Active.splice(IndexId,1)
+                if(Active.length===0){
+      getjobs()
+    }
+    if(jobs.length>0){
+         let removedItems = jobs.filter((tags)=>{
+            return(     
+              !tags.Tags.includes(key)   
+        )
+      }) 
+      setJobs(removedItems)
+      return false
+    }}
+    // setActive(key)
     setNoPageFilter(true)
     setFiltereredjobs(key)
     await axios.get(`/jobpost/getTagsJobs/${key}`)
@@ -402,7 +441,10 @@ function AllJobs(props) {
         let sortedate = result.sort((a, b) => {
           return new Date(b.createdAt) - new Date(a.createdAt);
         });
-        setJobs(sortedate)
+        // setJobs(sortedate)
+        let elements=  sortedate.flatMap(element => {
+          setJobs(oldArray => [...oldArray,element] )
+     });
       })
   }
 
@@ -420,7 +462,7 @@ function AllJobs(props) {
         <label className={styles.JobLocationFilter}>
         <input type="radio" checked disabled={location == "Chennai" ||
         location == "Hyderabad" || location == "Mumbai" || location == "Delhi"} name="filter" onClick={() => 
-            { getLocation(location.toLowerCase()); setActive("Bangalore") }} />{location}</label><br></br>
+            { getLocation(location.toLowerCase()) }} />{location}</label><br></br>
             </>
       )
     })
@@ -458,7 +500,13 @@ function AllJobs(props) {
                     className={tags.value==="TECHNOLOGIES" || tags.value==="EDUCATION" || tags.value==="COLLEGE TYPE" || tags.value==="NOTICE PERIOD" || tags.value==="SALARY" || 
                     tags.value==="EXPERIENCE" || tags.value==="Job Type" || tags.value==="INDUSTRY" || tags.value==="TOOLS/PROTOCOLS"
                      || tags.value==="COMPANY TYPE" || tags.value==="ROLE"?
-                    styles.TagHeading:  Active === tags.value ? 
+                    styles.TagHeading:
+                      // Active === tags.value ? 
+                      Active.findIndex( (present)=>{
+                        return(
+                          present===tags.value
+                        )
+                            })>=0?
                     styles.active : styles.JobtitleFilter} onClick={() => { filterByJobTitle(tags.value) }}>{tags.value} </button>
                 
                 )

@@ -146,7 +146,7 @@ function PostJobs(props) {
                     setExperiance("")
                     setExperiance("")
                     setSkills("")
-                    setTag("")
+                    setTag([])
                     setSuccessMessage("Success! job successfully posted")
                 }
                 else if (result == "field are missing") {

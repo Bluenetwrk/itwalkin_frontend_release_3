@@ -394,17 +394,19 @@ return(
     }
     if(jobs.length>0){
          let removedItems = jobs.filter((tags)=>{
-            return(     
-              !tags.Tags.map((value)=>{
-                return(
-                value.value
-                )
-              }).includes(key)    
+            return( 
+              !tags.Tags.includes(key)
+              // !tags.Tags.map((value)=>{
+              //   return(
+              //   value.value
+              //   )
+              // }).includes(key)    
         )
       }) 
       setJobs(removedItems)
       return false
-    }}
+    }
+  }
 
     setNoPageFilter(true)
     setFiltereredjobs(key)
@@ -414,11 +416,9 @@ return(
         let sortedate = result.sort( (a, b) => {
           return new Date(b.createdAt) - new Date(a.createdAt);
         });
-
         let elements=  sortedate.flatMap(element => {
           setJobs(oldArray => [...oldArray,element] )
      });
-
       })
   }
 
