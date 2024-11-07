@@ -73,7 +73,7 @@ function UpdatePostedJobs() {
        await axios.get(`/jobpost/getJobForUpdate/${Jobid}`, {headers})
        .then((res)=>{
         let result=res.data
-        console.log(result)
+        // console.log(result)
         if(result){
         setJobTitle(result.jobTitle)
             setJobDescription(result.jobDescription)
@@ -227,7 +227,7 @@ window.addEventListener('keypress', function(event){
                                
                                  <input maxLength="100" className={Style.inputbox} type="text" value={skills} onChange={(e) => { setSkills(e.target.value) }} />
                                 
-                                 <h4 className={Style.jobHeadline}>Tags</h4>
+                                 {/* <h4 className={Style.jobHeadline}>Tags</h4>
                   <div>
                     <CreatableSelect  
                    isMulti={true}
@@ -235,7 +235,7 @@ window.addEventListener('keypress', function(event){
                    value={Tags}
                    onChange={handleChange}     
                  />
-                  </div>
+                  </div> */}
                     <button className={Style.button} onClick={updateJob}>Update</button>
 
                 </div >

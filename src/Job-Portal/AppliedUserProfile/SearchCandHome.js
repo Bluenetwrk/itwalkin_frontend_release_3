@@ -40,6 +40,7 @@ function SearchCandidate() {
   let navigate = useNavigate()
 
   const [Candidate, setCandidate] = useState([])
+  console.log(Candidate)
   const [FilCandidate, setFilCandidate] = useState([])
 
   const [nopageFilter, setNoPageFilter] = useState(false)
@@ -51,9 +52,7 @@ function SearchCandidate() {
   const [Result, setResult] = useState(false)
   const screenSize = useScreenSize();
   const [Active, setActive] = useState([])
-  console.log(Active)
   const [jobLocation, setjobLocation] = useState("AllL")
-
   const Location = ['Bangalore']
 
    

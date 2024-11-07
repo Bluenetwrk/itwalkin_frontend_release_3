@@ -182,7 +182,6 @@ function PostJobs(props) {
                       present!==key
                     )
                         })
-                        console.log(IndexId)
                         setTag(IndexId)
                         // Active.splice(IndexId,1)
     }
@@ -241,7 +240,7 @@ function PostJobs(props) {
                                             className={Style.inputbox}
                                             onChange={(e) => { setJobDescription(e.blocks) }}
                                         />
-                                        <h4 className={Style.jobHeadline}>Job Tags</h4>
+                                        <h4 className={Style.jobHeadline}>Job Tags (Select multiple Tags to reach the best Matching Jobs)</h4>
 
 <div className={Style.JobtitleFilterWrapper}>
             {/* <buton className={ Active.length===0? Style.active:Style.JobtitleFilter} onClick={() => { getjobs() }}>All</buton> */}

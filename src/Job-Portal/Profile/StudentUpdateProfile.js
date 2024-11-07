@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import styles from "./SudentUpdateProfile.module.css"
+import Style  from "../Jobs/Allobs.module.css"
 import imageCompression from 'browser-image-compression';
 import axios from 'axios';
 import logo from "../img/Blue.jpg"
@@ -13,6 +14,7 @@ import CreatableSelect  from "react-select/creatable"
 import Arrowimage from '../img/icons8-arrow-left-48.png'
 import Footer from '../Footer/Footer';
 
+import {jobTags} from '../Tags'
 
 function StudentUpdateProfile(props) {
   useEffect(() => {
@@ -135,28 +137,29 @@ function StudentUpdateProfile(props) {
      const [loader, setLoader] = useState(false)
 
 
-
-  let jobTags = [
-    { value: 'ReactJs', label: 'ReactJs' },
-     { value: 'Mern Stack', label: 'Mern Stack' }, { value: 'C++, C', label: 'C++, C' },
-     { value: 'Javascript', label: "Javascript" }, { value: 'Node js', label: 'Node js' },
-     { value: 'Angular js', label: 'Angular js' }, { value: 'Vue js', label: 'Vue js' }, { value: 'NextJs', label: 'NextJs' },
-     { value: 'Backend', label: 'Backend' }, { value: 'Frontend', label: 'Frontend' },
-     { value: 'HTML-CSS', label: 'HTML-CSS' },{ value: 'MongoDB', label: 'MongoDB' },
-     { value: 'MySql', label: 'MySql' },  { value: 'Flutter', label: 'Flutter' },{ value: 'Game Developer', label: 'Game Developer' },
-     { value: 'Mobile App Developer', label: 'Mobile App Developer' },  { value: 'Artificial Intelligence', label: 'Artificial Intelligence' },
-     { value: 'React Native', label: 'React Native' }, { value: 'DevOps Engineer', label: 'DevOps Engineer' },
-     { value: 'Security developer', label: 'Security developer' }, { value: 'Data science', label: 'Data science' },
-     { value: 'Data Analyst', label: 'Data Analyst' },   { value: 'java ', label: 'java ' },{ value: 'Python', label: 'Python' },
-     { value: 'Graphic Developers', label: 'Graphic Developers' }, { value: 'AI Engineer', label: 'AI Engineer' },
-     { value: 'Security Developer', label: 'Security Developer' }, { value: 'Cloud Developers', label: 'Cloud Developers' },
-     ]
   const [Tags, setTag] = useState([])
+  console.log(Tags)
   const [college, setcollege] = useState([])
   const [Resulttag, setResulttagTag] = useState()
 
-    function handleChange(tag){
-      setTag(tag)      
+    function handleTags(key){
+      // setTag(tag)    
+      const isIndex=Tags.findIndex((present)=>{
+        return(
+          present===key
+        )
+            })
+            if(isIndex<0){
+                setTag([...Tags, key])
+            }else{
+              const IndexId=Tags.filter((present)=>{
+                return(
+                  present!==key
+                )
+                    })
+                    setTag(IndexId)
+                    // Active.splice(IndexId,1)
+}  
   }  
     function handleCollege(tag){
       setcollege(tag)      
@@ -475,21 +478,47 @@ border:"none",padding: "4px 8px"}} onClick={DeleteProfile}>Delete</button>
               </label>
 
               <label className={styles.inputName}>
-                <h4>Skill Tags:</h4>
-                <div style={{marginTop:"-7px", width:"81%", marginLeft:"18px"}}>
+                <h4>Job Tags: (Select multiple Tags to reach the best Matching Jobs) </h4>
+                {/* <div style={{marginTop:"-7px", width:"81%", marginLeft:"18px"}}>
                    <CreatableSelect  
                   isMulti={true}
                   options={jobTags}
                   value={Tags}
                   onChange={handleChange}   
                 />
-                         </div>
+                         </div> */}
+                         <div className={Style.JobtitleFilterWrapper}>
+            {/* <buton className={ Active.length===0? Style.active:Style.JobtitleFilter} onClick={() => { getjobs() }}>All</buton> */}
+            {
+              jobTags.map((tags, i) => {
+                return (
+                                   
+                  <button disabled={tags.value==="TECHNOLOGIES" || tags.value==="EDUCATION" || tags.value==="COLLEGE TYPE" || tags.value==="NOTICE PERIOD" || tags.value==="SALARY" || 
+                    tags.value==="EXPERIENCE" || tags.value==="Job Type" || tags.value==="INDUSTRY" || tags.value==="TOOLS/PROTOCOLS" || tags.value==="ROLE" || tags.value==="COMPANY TYPE" } 
+                    className={tags.value==="TECHNOLOGIES" || tags.value==="EDUCATION" || tags.value==="COLLEGE TYPE" || tags.value==="NOTICE PERIOD" || tags.value==="SALARY" || 
+                    tags.value==="EXPERIENCE" || tags.value==="Job Type" || tags.value==="INDUSTRY" || tags.value==="TOOLS/PROTOCOLS" || tags.value==="COMPANY TYPE" || tags.value==="ROLE"?
+                    Style.TagHeading: 
+                    //  Active === tags.value ? 
+                    Tags.findIndex(  (present)=>{
+                      return(
+                        present===tags.value
+                      )
+                          }) >=0?
+                     Style.active : Style.JobtitleFilter} 
+                     onClick={ () => {  handleTags(tags.value) }}
+                     >{tags.value} </button>
+                
+                  )
+              })
+            }
+          </div>
+
+
               </label>
 
               <label className={styles.inputName}>
                 <h4>College:</h4>
                 <div style={{marginTop:"-7px", width:"81%", marginLeft:"18px"}}>
-                {/* <input maxLength="100" className={styles.input} disabled type="text" /> */}
                 <CreatableSelect  
                   options={colleges}
                   value={college}
@@ -578,7 +607,7 @@ border:"none",padding: "4px 8px"}} onClick={DeleteProfile}>Delete</button>
                 <h4 className={styles.MobileName}>Experience: &nbsp;<span className={styles.hint}>(e.g 2Y or 10Y)</span> </h4>
                 <input maxLength="3" className={styles.Mobileinput} value={Experiance} onChange={(e) => { handleExperiance(e) }} type="text" />
               </label>
-               <label className={styles.inputName}>
+               {/* <label className={styles.inputName}>
                 <h4 className={styles.MobileName}>Skill Tags:</h4>
                 <div style={{ width:"88%", marginLeft:"10px"}}>
                            <CreatableSelect  
@@ -588,7 +617,7 @@ border:"none",padding: "4px 8px"}} onClick={DeleteProfile}>Delete</button>
                           onChange={handleChange}     
                         />
                          </div>
-              </label>
+              </label> */}
                <label className={styles.inputName}>
                 <h4 className={styles.MobileName}>College:</h4>
                 <div style={{ width:"88%", marginLeft:"10px"}}>
