@@ -46,11 +46,9 @@ function PostJobs(props) {
     const [otherJobLocation, setotherJobLocation] = useState(false)
 
   const [Active, setActive] = useState([])
-  console.log(Active)
 
     const [profileData, setProfileData] = useState([])
     const [Tags, setTag] = useState([])
-  console.log(Tags)
 
     const [skills, setSkills] = useState("")
 
@@ -152,6 +150,11 @@ function PostJobs(props) {
                 else if (result == "field are missing") {
                     setSuccessMessage("Alert!... JobTitle, CompanyName JobDescription, Experiance, JobLocation and Skills must be filled")
                 }
+                // else if (result ==="server issue")
+                else
+                    {
+                    setSuccessMessage("something went wrong, Could not save your Jobs post")
+                }
             }).catch((err) => {
                 alert("server issue occured", err)
             })
@@ -169,6 +172,7 @@ function PostJobs(props) {
     const [count, setCount]=useState(1)
 
     async function handleTags(key) {
+        setSkills((prev=>prev+" "+key))
         const isIndex=Tags.findIndex((present)=>{
             return(
               present===key
@@ -207,8 +211,8 @@ function PostJobs(props) {
 
                                 <div className={Style.postJobPageWrapper} >
                                     <div className={Style.postJobWrapper}>
-                                        <p className={successMessage === "Alert!... JobTitle, CompanyName JobDescription, Experiance, JobLocation and Skills must be filled" ?
-                                            Style.errormessage : Style.successmessage}>{successMessage} </p>
+                                        <p className={successMessage === "Success! job successfully posted" ?
+                                            Style.successmessage : Style.errormessage}>{successMessage} </p>
                                         {/* <p className={Style.errormessage}>{errorMessage} </p> */}
                                         <h4 className={Style.jobHeadline}  >Job title**</h4>
                                         <input maxLength="100" className={Style.inputbox} type="text" value={jobtitle} onChange={(e) => { handlejobtitle(e) }} />
@@ -326,7 +330,9 @@ function PostJobs(props) {
                                         </div> */}
                                         <h4 className={Style.jobHeadline}>Skills Needed**</h4>
 
-<input maxLength="100" value={skills} className={Style.inputbox} onChange={(e)=>{setSkills(e.target.value)}}  type="text" />
+<input maxLength="100" value={Tags} className={Style.inputbox} disabled type="text"
+// onChange={(e)=>{setSkills(e.target.value)}} 
+/>
 
 
                                         {Logo ? <p ><span style={{ color: "blue" }}>Note** :</span> Logo will also be posted with the Job</p> : ""}

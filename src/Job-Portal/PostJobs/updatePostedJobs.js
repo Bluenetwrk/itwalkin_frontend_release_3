@@ -8,6 +8,8 @@ import CreatableSelect  from "react-select/creatable"
 import Arrowimage from '../img/icons8-arrow-left-48.png';
 import Footer from '../Footer/Footer';
 import useScreenSize from '../SizeHook';
+import {jobTags} from "../Tags"
+
 
 
 import Style from "./postJobs.module.css"
@@ -15,23 +17,7 @@ import Style from "./postJobs.module.css"
 function UpdatePostedJobs() {
   const screenSize = useScreenSize();
 
-    let jobTags = [
-        { value: 'ReactJs', label: 'ReactJs' },
-         { value: 'Mern Stack', label: 'Mern Stack' }, { value: 'C++, C', label: 'C++, C' },
-         { value: 'Javascript', label: "Javascript" }, { value: 'Node js', label: 'Node js' },
-         { value: 'Angular js', label: 'Angular js' }, { value: 'Vue js', label: 'Vue js' }, { value: 'NextJs', label: 'NextJs' },
-         { value: 'Backend', label: 'Backend' }, { value: 'Frontend', label: 'Frontend' },
-         { value: 'HTML-CSS', label: 'HTML-CSS' },{ value: 'MongoDB', label: 'MongoDB' },
-         { value: 'MySql', label: 'MySql' },  { value: 'Flutter', label: 'Flutter' },{ value: 'Game Developer', label: 'Game Developer' },
-         { value: 'Mobile App Developer', label: 'Mobile App Developer' },  { value: 'Artificial Intelligence', label: 'Artificial Intelligence' },
-         { value: 'React Native', label: 'React Native' }, { value: 'DevOps Engineer', label: 'DevOps Engineer' },
-         { value: 'Security developer', label: 'Security developer' }, { value: 'Data science', label: 'Data science' },
-         { value: 'Data Analyst', label: 'Data Analyst' },   { value: 'java ', label: 'java ' },
-         { value: 'Python', label: 'Python' },
-         { value: 'Graphic Developers', label: 'Graphic Developers' }, { value: 'AI Engineer', label: 'AI Engineer' },
-         { value: 'Security Developer', label: 'Security Developer' }, { value: 'Cloud Developers', label: 'Cloud Developers' },
-         ]
-
+   
   const location = useLocation()
   let Jobid = location.state.getId
   let navigate= useNavigate()
@@ -62,6 +48,26 @@ function UpdatePostedJobs() {
     //         tag.value
     //     )
     // })
+
+    async function handleTags(key) {
+        setSkills((prev=>prev+" "+key))
+        const isIndex=Tags.findIndex((present)=>{
+            return(
+              present===key
+            )
+                })
+                if(isIndex<0){
+                    setTag([...Tags, key])
+                }else{
+                  const IndexId=Tags.filter((present)=>{
+                    return(
+                      present!==key
+                    )
+                        })
+                        setTag(IndexId)
+                        // Active.splice(IndexId,1)
+    }
+}
 
     function handleChange(tag){
         setTag(tag)
@@ -174,6 +180,34 @@ window.addEventListener('keypress', function(event){
          onChange={(e)=>{ setJobDescription(e.blocks) }}
       />
 
+<h4 className={Style.jobHeadline}>Job Tags (Select multiple Tags to reach the best Matching Jobs)</h4>
+
+<div className={Style.JobtitleFilterWrapper}>
+            {/* <buton className={ Active.length===0? Style.active:Style.JobtitleFilter} onClick={() => { getjobs() }}>All</buton> */}
+            {
+              jobTags.map((tags, i) => {
+                return (
+                                   
+                  <button disabled={tags.value==="TECHNOLOGIES" || tags.value==="EDUCATION" || tags.value==="COLLEGE TYPE" || tags.value==="NOTICE PERIOD" || tags.value==="SALARY" || 
+                    tags.value==="EXPERIENCE" || tags.value==="Job Type" || tags.value==="INDUSTRY" || tags.value==="TOOLS/PROTOCOLS" || tags.value==="ROLE" || tags.value==="COMPANY TYPE" } 
+                    className={tags.value==="TECHNOLOGIES" || tags.value==="EDUCATION" || tags.value==="COLLEGE TYPE" || tags.value==="NOTICE PERIOD" || tags.value==="SALARY" || 
+                    tags.value==="EXPERIENCE" || tags.value==="Job Type" || tags.value==="INDUSTRY" || tags.value==="TOOLS/PROTOCOLS" || tags.value==="COMPANY TYPE" || tags.value==="ROLE"?
+                    Style.TagHeading: 
+                    //  Active === tags.value ? 
+                    Tags.findIndex(  (present)=>{
+                      return(
+                        present===tags.value
+                      )
+                          }) >=0?
+                     Style.active : Style.JobtitleFilter} 
+                     onClick={ () => {  handleTags(tags.value) }}
+                     >{tags.value} </button>
+                
+                  )
+              })
+            }
+          </div>
+
 <h4 className={Style.jobHeadline}>Job Type</h4>
                                  
                                  <label><input name="Job-Type" type="radio" checked={jobtype==="Full Time"} value="Full Time" onChange={(e) => { setJobtype(e.target.value) }} />Full Time  </label>
@@ -225,7 +259,9 @@ window.addEventListener('keypress', function(event){
 
                                  <h4 className={Style.jobHeadline}>Skills Needed**</h4>
                                
-                                 <input maxLength="100" className={Style.inputbox} type="text" value={skills} onChange={(e) => { setSkills(e.target.value) }} />
+                                 <input maxLength="100" className={Style.inputbox} type="text" value={skills} disabled
+                                  onChange={(e) => { setSkills(e.target.value) }} 
+                                  />
                                 
                                  {/* <h4 className={Style.jobHeadline}>Tags</h4>
                   <div>

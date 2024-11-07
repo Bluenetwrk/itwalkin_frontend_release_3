@@ -478,7 +478,7 @@ border:"none",padding: "4px 8px"}} onClick={DeleteProfile}>Delete</button>
               </label>
 
               <label className={styles.inputName}>
-                <h4>Job Tags: (Select multiple Tags to reach the best Matching Jobs) </h4>
+                <h4>Job Tags: </h4>
                 {/* <div style={{marginTop:"-7px", width:"81%", marginLeft:"18px"}}>
                    <CreatableSelect  
                   isMulti={true}
@@ -526,9 +526,10 @@ border:"none",padding: "4px 8px"}} onClick={DeleteProfile}>Delete</button>
                 />
                 </div>
               </label>
-
+<div style={{display:"flex", marginLeft:"80%"}}>
               <button className={styles.Save} onClick={(e) => { saveUpdate(e) }}>Save</button>
               <button className={styles.cancel} onClick={() => { navigate(-1) }} >cancel</button>
+              </div>
             </div>
              
         </>
@@ -618,6 +619,33 @@ border:"none",padding: "4px 8px"}} onClick={DeleteProfile}>Delete</button>
                         />
                          </div>
               </label> */}
+                <div className={Style.JobtitleFilterWrapper}>
+            {/* <buton className={ Active.length===0? Style.active:Style.JobtitleFilter} onClick={() => { getjobs() }}>All</buton> */}
+            {
+              jobTags.map((tags, i) => {
+                return (
+                                   
+                  <button disabled={tags.value==="TECHNOLOGIES" || tags.value==="EDUCATION" || tags.value==="COLLEGE TYPE" || tags.value==="NOTICE PERIOD" || tags.value==="SALARY" || 
+                    tags.value==="EXPERIENCE" || tags.value==="Job Type" || tags.value==="INDUSTRY" || tags.value==="TOOLS/PROTOCOLS" || tags.value==="ROLE" || tags.value==="COMPANY TYPE" } 
+                    className={tags.value==="TECHNOLOGIES" || tags.value==="EDUCATION" || tags.value==="COLLEGE TYPE" || tags.value==="NOTICE PERIOD" || tags.value==="SALARY" || 
+                    tags.value==="EXPERIENCE" || tags.value==="Job Type" || tags.value==="INDUSTRY" || tags.value==="TOOLS/PROTOCOLS" || tags.value==="COMPANY TYPE" || tags.value==="ROLE"?
+                    Style.TagHeading: 
+                    //  Active === tags.value ? 
+                    Tags.findIndex(  (present)=>{
+                      return(
+                        present===tags.value
+                      )
+                          }) >=0?
+                     Style.active : Style.JobtitleFilter} 
+                     onClick={ () => {  handleTags(tags.value) }}
+                     >{tags.value} </button>
+                
+                  )
+              })
+            }
+          </div>
+
+
                <label className={styles.inputName}>
                 <h4 className={styles.MobileName}>College:</h4>
                 <div style={{ width:"88%", marginLeft:"10px"}}>
