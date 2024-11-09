@@ -81,6 +81,7 @@ export const jobTags=[
 
     { value: 'Full Time', label: 'Full Time' },
     { value: 'Contract', label: 'Contract' },
+    { value: 'Internship', label: 'Internship' },
     { value: 'Part Time', label: 'Part Time' },
     { value: 'Work from Home', label: 'Work from Home' },
     { value: 'Remote', label: 'Remote' },
@@ -94,7 +95,7 @@ export const jobTags=[
   { value: 'EXPERIENCE', label: 'EXPERIENCE'},
 
   { value: '2 to 5 Yrs', label: '2 to 5 Yrs ' }, { value: '6 to 10 Yrs', label: '6 to 10 Yrs' },
-  { value: '11 to 15', label: '11 to 15' }, { value: '16 and above', label: '16 and above' },
+  { value: '11 to 15 Yrs', label: '11 to 15 Yrs' }, { value: '16 and above Yrs', label: '16 and above Yrs' },
   // let SALARY=[ 
     { value: 'SALARY', label: 'SALARY'},
 
@@ -123,6 +124,7 @@ export const jobTags=[
     { value: 'Manpower sourcing', label: 'Manpower sourcing' },
     { value: 'Firm', label: 'Firm' },
     { value: 'Pvt Ltd', label: 'Pvt Ltd' },
+    { value: 'Start Up', label: 'Start Up' },
   // ]
   // let COLLEGE_TYPE=[
     { value: 'COLLEGE TYPE', label: 'COLLEGE TYPE' },

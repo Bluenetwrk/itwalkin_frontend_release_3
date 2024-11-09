@@ -43,7 +43,7 @@ function AllJobs(props) {
   }, [])
 
   
-  let JobLocationTags = ["Bangalore", "Hyderabad"]
+  let JobLocationTags = ["Bangalore"]
 
   const [jobs, setJobs] = useState([])
   const [Filterjobs, setFilterjobs] = useState([])
@@ -61,7 +61,7 @@ function AllJobs(props) {
   const [Result, setResult] = useState(false)
   const [nojob, setnojob] = useState("")
   const screenSize = useScreenSize();
-  const [Active, setActive] = useState("")
+  const [Active, setActive] = useState([])
 
   const [Loader, setLoader] = useState(false)
 
@@ -72,6 +72,9 @@ function AllJobs(props) {
   const Location = useLocation()
 
   async function getjobs() {
+    setCount(1)
+    setActive([])
+
     setPageLoader(true)
     setNoPageFilter(false)
     // let userid = JSON.parse(localStorage.getItem("StudId"))
@@ -366,10 +369,44 @@ function AllJobs(props) {
       })
   }
 
+  const [count, setCount]=useState(1)
 
 
   async function filterByJobTitle(key) {
-    setActive(key)
+
+    if(count==1){
+      setJobs("")
+    }
+    setCount(prev=>prev+1)
+
+    const isIndex=Active.findIndex((present)=>{
+return(
+  present===key
+)
+    })
+    if(isIndex<0){
+    setActive([...Active, key])
+    }else{
+      const IndexId=Active.findIndex((present)=>{
+        return(
+          present==key
+        )
+            })
+            Active.splice(IndexId,1)
+                if(Active.length===0){
+      getjobs()
+    }
+    if(jobs.length>0){
+         let removedItems = jobs.filter((tags)=>{
+            return(     
+              !tags.Tags.includes(key)   
+        )
+      }) 
+      setJobs(removedItems)
+      return false
+    }}
+
+
     setNoPageFilter(true)
     setFiltereredjobs(key)
     await axios.get(`/Careerjobpost/getTagsJobs/${key}`)
@@ -378,7 +415,10 @@ function AllJobs(props) {
         let sortedate = result.sort((a, b) => {
           return new Date(b.createdAt) - new Date(a.createdAt);
         });
-        setJobs(sortedate)
+        // setJobs(sortedate)
+        let elements=  sortedate.flatMap(element => {
+          setJobs(oldArray => [...oldArray,element] )
+     });
       })
   }
 
@@ -396,9 +436,9 @@ function AllJobs(props) {
       return (
         <>
         <label className={styles.JobLocationFilter}>
-        <input type="radio"  disabled={location == "Chennai" ||
+        <input type="radio" checked  disabled={location == "Chennai" ||
         location == "Hyderabad" || location == "Mumbai" || location == "Delhi"} name="filter" onClick={() => 
-            { getLocation(location.toLowerCase()); setActive("Bangalore") }} />{location}</label><br></br>
+            { getjobs() }} />{location}</label><br></br>
             </>
       )
     })
@@ -424,11 +464,27 @@ function AllJobs(props) {
         <>
 
           <div className={styles.JobtitleFilterWrapper}>
-            <buton className={Active === "All" ? styles.active : styles.JobtitleFilter} onClick={() => { getjobs(); setActive("All") }}>All</buton>
+            <buton className={Active.length===0?styles.active:styles.JobtitleFilter} onClick={() =>
+               { getjobs() }}>All</buton>
             {
               jobTags.map((tags, i) => {
                 return (
-                  <buton className={Active === tags.value ? styles.active : styles.JobtitleFilter} onClick={() => { filterByJobTitle(tags.value) }}>{tags.value} </buton>
+                  <button disabled={tags.value==="TECHNOLOGIES" || tags.value==="EDUCATION" || tags.value==="COLLEGE TYPE" || tags.value==="NOTICE PERIOD" || tags.value==="SALARY" || 
+                    tags.value==="EXPERIENCE" || tags.value==="Job Type" || tags.value==="INDUSTRY" || tags.value==="TOOLS/PROTOCOLS" 
+                    || tags.value==="ROLE"  || tags.value==="COMPANY TYPE" 
+                  } 
+                    className={tags.value==="TECHNOLOGIES" || tags.value==="EDUCATION" || tags.value==="COLLEGE TYPE" || tags.value==="NOTICE PERIOD" || tags.value==="SALARY" || 
+                    tags.value==="EXPERIENCE" || tags.value==="Job Type" || tags.value==="INDUSTRY" || tags.value==="TOOLS/PROTOCOLS"
+                     || tags.value==="COMPANY TYPE" || tags.value==="ROLE"?
+                    styles.TagHeading:
+                      // Active === tags.value ? 
+                      Active.findIndex( (present)=>{
+                        return(
+                          present===tags.value
+                        )
+                            })>=0?
+                    styles.active : styles.JobtitleFilter} onClick={() => { filterByJobTitle(tags.value) }}>{tags.value} </button>
+                
                 )
               })
             }

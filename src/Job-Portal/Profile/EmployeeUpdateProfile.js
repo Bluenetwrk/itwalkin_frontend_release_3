@@ -343,6 +343,7 @@ const [immage, setimmage] = useState()
               <option value="Pvt.Ltd.">Pvt. Ltd.</option>
               <option value="Firm">Firm</option>
               <option value="Consultancy">Consultancy</option> 
+              <option value="Individual">Individual</option> 
             </select>                                 
             </div>           
 
@@ -422,6 +423,8 @@ const [immage, setimmage] = useState()
               <option value="Pvt.Ltd.">Pvt. Ltd.</option>
               <option value="Firm">Firm</option>
               <option value="Consultancy">Consultancy</option> 
+              <option value="Individual">Individual</option> 
+
             </select>  
             
             <button className={styles.MobileSave} onClick={(e) => { saveUpdate(e) }}>Save</button>

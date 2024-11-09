@@ -36,6 +36,7 @@ import StudentProfile from "./Job-Portal/Profile/StudentProfile";
 import EmployeeProfile from "./Job-Portal/Profile/EmployeeProfile";
 import UpdatePostedJobs from "./Job-Portal/PostJobs/updatePostedJobs";
 import MyAppliedJobs from "./Job-Portal/Jobs/MyAppliedJobs"
+import CareerAppliedJobs from "./Job-Portal/Jobs/MyCareerAppliedJobs"
 import AppliedUserProfile from "./Job-Portal/AppliedUserProfile/AppliedUserProfile";
 import AppliedUserForAdminJobs from "./Job-Portal/AppliedUserProfile/AdminJobsAppliedUser";
 import AppliedUserForCareerJobs from "./Job-Portal/AppliedUserProfile/AdminCareerJobsAppliedUser ";
@@ -125,6 +126,7 @@ function App() {
               <Route path="/Update-Profile" element={<StudentUpdateProfile url={axios.defaults.baseURL} />} />
               <Route path="/My-Profile" element={<StudentProfile url={axios.defaults.baseURL} />} />
               <Route path="/My-Applied-Jobs" element={<MyAppliedJobs url={axios.defaults.baseURL} />} />
+              <Route path="/MyCareer-Applied-Jobs" element={<CareerAppliedJobs url={axios.defaults.baseURL} />} />
             </Route>
             <Route path="/AllCareerJobs" element={<AllCareerJobs />} />
             <Route path="/BIAdd@Applied-User-Profile/:jid" element={<AppliedUserForAdminJobs url={axios.defaults.baseURL} />} />

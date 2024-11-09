@@ -165,13 +165,47 @@ function PostJobs(props) {
     }
     
     function handlejobtitle(e){ 
-     setJobTitle(e.target.value)
-                    
+     setJobTitle(e.target.value)                    
+    }
+
+    function handleRadioTags(e){
+        // setTag([...Tags, e])
+        handleTags(e)
+        if(e<10){
+        handleTags("<10L")
+        }
+        else if(e<20 && e>10){
+        handleTags("10 to 20L")
+        }
+        else if(e<30 && e>20){
+        handleTags("20 to 30L")
+        }
+       else if(e>=30){
+        handleTags("30 and above")
+        }
+        
+    }
+    function handleExpButton(e){
+        if(e<5){
+            handleTags("2 to 5 Yrs")
+            }
+            else if(e>5 && e<11){
+                handleTags("6 to 10 Yrs")
+            }
+            else if(e>10 && e<16){
+                handleTags("11 to 15 Yrs")
+            }
+            else if(e>15){
+                handleTags("16 and above Yrs")
+            }
     }
 
     const [count, setCount]=useState(1)
 
     async function handleTags(key) {
+if(key==='Full Time' || 'Contract' || 'Internship' || 'Part Time'){
+    setJobtype(key)
+}
         setSkills((prev=>prev+" "+key))
         const isIndex=Tags.findIndex((present)=>{
             return(
@@ -275,10 +309,10 @@ function PostJobs(props) {
 
                                         <h4 className={Style.jobHeadline}>Job Type</h4>
 
-                                        <label><input name="Job-Type" type="radio" checked={jobtype === "Full Time"} value="Full Time" onChange={(e) => { setJobtype(e.target.value) }} />Full Time  </label>
-                                        <label><input name="Job-Type" type="radio" checked={jobtype === "Part Time"} value="Part Time" onChange={(e) => { setJobtype(e.target.value) }} />Part Time  </label>
-                                        <label><input name="Job-Type" type="radio" checked={jobtype === "Internship"} value="Internship" onChange={(e) => { setJobtype(e.target.value) }} />Internship </label>
-                                        <label><input name="Job-Type" type="radio" checked={jobtype === "Contract"} value="Contract" onChange={(e) => { setJobtype(e.target.value) }} />Contract   </label>
+                                        <label><input name="Job-Type" type="radio" checked={jobtype === "Full Time" || Tags.filter} value="Full Time" onChange={(e) => { setJobtype(e.target.value); handleRadioTags(e.target.value) }} />Full Time  </label>
+                                        <label><input name="Job-Type" type="radio" checked={jobtype === "Part Time"} value="Part Time" onChange={(e) => { setJobtype(e.target.value); handleRadioTags(e.target.value) }} />Part Time  </label>
+                                        <label><input name="Job-Type" type="radio" checked={jobtype === "Internship"} value="Internship" onChange={(e) => { setJobtype(e.target.value); handleRadioTags(e.target.value) }} />Internship </label>
+                                        <label><input name="Job-Type" type="radio" checked={jobtype === "Contract"} value="Contract" onChange={(e) => { setJobtype(e.target.value); handleRadioTags(e.target.value) }} />Contract   </label>
 
                                         <h4 className={Style.jobHeadline}>Job Location**</h4>
                                         <div style={{ marginTop: "-10px" }}>
@@ -299,11 +333,11 @@ function PostJobs(props) {
                                         <h4 className={Style.jobHeadline}>Qualification Needed**</h4>
 
                                         <div style={{ marginTop: "-10px" }}>
-                                            <label><input name="Qualification" type="radio" checked={qualification === "B.E/CSE"} value="B.E/CSE" onChange={(e) => { setQualification(e.target.value); setOthers(false) }} />B.E(CSE) </label>
-                                            <label><input name="Qualification" type="radio" checked={qualification === "B.E/Civil"} value="B.E/Civil" onChange={(e) => { setQualification(e.target.value); setOthers(false) }} />B.E(Civil) </label>
-                                            <label><input name="Qualification" type="radio" checked={qualification === "B.E/Mech"} value="B.E/Mech" onChange={(e) => { setQualification(e.target.value); setOthers(false) }} />B.E(Mech) </label>
-                                            <label><input name="Qualification" type="radio" checked={qualification === "B.E/ECE"} value="B.E/ECE" onChange={(e) => { setQualification(e.target.value); setOthers(false) }} />B.E(ECE) </label>
-                                            <label><input name="Qualification" type="radio" checked={qualification === "B.E/IT"} value="B.E/IT" onChange={(e) => { setQualification(e.target.value); setOthers(false) }} />B.E(IT) </label>
+                                            <label><input name="Qualification" type="radio" checked={qualification === "B.E/CSE"} value="B.E/CSE" onChange={(e) => { setQualification(e.target.value); setOthers(false); }} />B.E(CSE) </label>
+                                            <label><input name="Qualification" type="radio" checked={qualification === "B.E/Civil"} value="B.E/Civil" onChange={(e) => { setQualification(e.target.value); setOthers(false); }} />B.E(Civil) </label>
+                                            <label><input name="Qualification" type="radio" checked={qualification === "B.E/Mech"} value="B.E/Mech" onChange={(e) => { setQualification(e.target.value); setOthers(false); }} />B.E(Mech) </label>
+                                            <label><input name="Qualification" type="radio" checked={qualification === "B.E/ECE"} value="B.E/ECE" onChange={(e) => { setQualification(e.target.value); setOthers(false); }} />B.E(ECE) </label>
+                                            <label><input name="Qualification" type="radio" checked={qualification === "B.E/IT"} value="B.E/IT" onChange={(e) => { setQualification(e.target.value); setOthers(false); }} />B.E(IT) </label>
                                             <label><input name="Qualification" type="radio" value="others" onClick={(e) => { setOthers((prev) => !prev); setQualification("") }} />others </label>
                                         </div>
                                         {
@@ -315,10 +349,10 @@ function PostJobs(props) {
                                         }
 
                                         <h4 className={Style.jobHeadline}>Salary Per Annum in Lakhs** &nbsp;<span className={Style.hint}>(e.g 5 or 10)</span></h4>
-                                        <input maxLength="3" className={Style.inputbox} type="number" value={salaryRange} onChange={(e) => { handleSalary(e) }} />
+                                        <input maxLength="3" className={Style.inputbox} type="number" value={salaryRange} onChange={(e) => { handleSalary(e); handleRadioTags(e.target.value) }} />
 
                                         <h4 className={Style.jobHeadline}>Experience Needed** &nbsp;<span className={Style.hint}>(e.g 5 or 10)</span></h4>
-                                        <input maxLength="3" className={Style.inputbox} type="number" value={experiance} onChange={(e) => { handleExperiance(e) }} />
+                                        <input maxLength="3" className={Style.inputbox} type="number" value={experiance} onChange={(e) => { handleExperiance(e); handleExpButton(e.target.value) }} />
                                         {/* <h4 className={Style.jobHeadline}>Skill Tags**</h4>
                                         <div>
                                             <CreatableSelect
@@ -333,12 +367,12 @@ function PostJobs(props) {
 <input maxLength="100" value={Tags} className={Style.inputbox} disabled type="text"
 // onChange={(e)=>{setSkills(e.target.value)}} 
 />
+<p>I have read the terms and conditions if ITwalkin.com and i agree to all the terms and conditons before posting the jobs </p>
 
 
                                         {Logo ? <p ><span style={{ color: "blue" }}>Note** :</span> Logo will also be posted with the Job</p> : ""}
 
                                         <button className={Style.button} onClick={postJob}>Post Job</button>
-
                                     </div >
                                 </div >
                             </div>

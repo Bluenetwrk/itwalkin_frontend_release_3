@@ -53,7 +53,7 @@ function AppledJobs(props) {
     setPageLoader(true)
     setTimeout(async () => {
 
-      await axios.get(`/jobpost/getMyAppliedjobs/${jobSeekerId}`, { headers })
+      await axios.get(`/Careerjobpost/getMyAppliedjobs/${jobSeekerId}`, { headers })
         .then((res) => {
           let result = (res.data)
           let sortedate = result.sort(function (a, b) {
@@ -94,7 +94,7 @@ function AppledJobs(props) {
       }
     }).then((result) => {
       if (result.isConfirmed) {
-        axios.put(`/jobpost/updatforUndoJobApplied/${id}`, { jobSeekerId }, { headers })
+        axios.put(`/Careerjobpost/updatforUndoJobApplied/${id}`, { jobSeekerId }, { headers })
           .then((res) => {
             getjobs()
           }).catch((err) => {
@@ -236,7 +236,6 @@ function AppledJobs(props) {
 
       <p className={styles.h3} style={{ textAlign: "center" }}><b>My applied Jobs</b></p>
       <p className={styles.h3}><b>you have total {MyAppliedjob.length} applied jobs</b></p>
-      <button onClick={()=>{navigate("/MyCareer-Applied-Jobs")}} style={{ backgroundColor:"rgb(40, 4, 99)", marginLeft:"10px", fontWeight:600, color:"white", border:"none", cursor:"pointer", padding:"5px 10px"}}>Career Jobs</button>
       {screenSize.width > 850 ?
         <>
           <div style={{ display: "flex", justifyContent: "space-between" }}>

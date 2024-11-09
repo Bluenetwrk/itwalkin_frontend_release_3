@@ -7,9 +7,10 @@ import { useNavigate } from 'react-router-dom'
 import { Editor } from 'react-draft-wysiwyg';
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css"; 
 import CreatableSelect  from "react-select/creatable"
-
-
 import Style from "../PostJobs/postJobs.module.css"
+
+import {jobTags} from "../Tags"
+
 
 function AdminPostJobs() {
     let adminLoginAuth= localStorage.getItem("AdMLog")
@@ -47,40 +48,29 @@ function AdminPostJobs() {
     const [profileData, setProfileData] = useState([])
     let navigate= useNavigate()
 
-    let jobTags = [
-        { value: 'Java', label: 'Java ' }, { value: 'ReactJs', label: 'ReactJs' }, { value: 'Python', label: 'Python' },
-        { value: 'Mern Stack', label: 'Mern Stack' }, { value: 'C++,C', label: 'C++,C' },
-        { value: 'Javascript', label: "Javascript" }, { value: 'Node js', label: 'Node js' },
-        { value: 'Angular js', label: 'Angular js' }, { value: 'Vue js', label: 'Vue js' }, 
-        { value: 'NextJs', label: 'NextJs' },  { value: '.NET', label: '.NET' }, { value: 'Larvel', label: 'Larvel' },
-        { value: 'Kotlin', label: 'Kotlin' }, { value: 'Android', label: 'Android' }, { value: 'iOS', label: 'iOS' },
-        { value: 'Xamarin', label: 'Xamarin' },{ value: 'Ember JS', label: 'Ember JS' }, { value: 'Cordova', label: 'Cordova' },
-        { value: 'Groovey,Grails', label: 'Groovey,Grails'}, { value: 'QT', label: 'QT'},
-        { value: 'Oracle', label: 'Oracle'}, { value: 'Postgres SQL', label: 'Postgres SQL'},
-        { value: 'CouchDB', label: 'CouchDB'}, { value: 'Redis', label: 'Redis'},{ value: 'Azure', label: 'Azure'},
-        { value: 'AWS', label: 'AWS'}, { value: 'Rackspace', label: 'Rackspace'},{ value: 'Heroku', label: 'Heroku'},
-        { value: 'GoogleCloud', label: 'GoogleCloud'}, { value: 'Weblogic', label: 'Weblogic'},
-        { value: 'Apache', label: 'Apache'}, { value: 'Lotus', label: 'Lotus'}, { value: 'Domino', label: 'Domino'}, 
-        { value: 'MS IIS', label: 'MS IIS'}, { value: 'ColdFusion', label: 'ColdFusion'},
-        { value: 'nginx', label: 'nginx'}, { value: 'Resin', label: 'Resin'}, { value: 'Selenium', label: 'Selenium'},
-        { value: 'HP LoadRunner', label: 'HP LoadRunner'}, { value: 'jUnit', label: 'jUnit'},
-        { value: 'Jira', label: 'Jira'}, { value: 'Confluence', label: 'Confluence'},
-        { value: 'Testrails', label: 'Testrails'}, { value: 'PLC,SCADA', label: 'PLC,SCADA'},
-        { value: 'ModBUS', label: 'ModBUS'},{ value: 'CANBUS', label: 'CANBUS'}, { value: 'Machine Learing', label: 'Machine Learing'},
-        { value: 'Cybersecurity', label: 'Cybersecurity'}, { value: 'AI', label: 'AI'},
-        { value: 'Backend', label: 'Backend' }, { value: 'Frontend', label: 'Frontend' },
-        { value: 'HTML-CSS', label: 'HTML-CSS' }, { value: 'MongoDB', label: 'MongoDB' },
-        { value: 'MySql', label: 'MySql' }, { value: 'Flutter', label: 'Flutter' },
-        { value: 'Mobile App Developer', label: 'Mobile App Developer' }, { value: 'Artificial Intelligence', label: 'Artificial Intelligence' },
-        { value: 'React Native', label: 'React Native' }, { value: 'DevOps Engineer', label: 'DevOps Engineer' },
-        { value: 'Security developer', label: 'Security developer' }, { value: 'Data science', label: 'Data science' },
-        { value: 'Data Analyst', label: 'Data Analyst' }, { value: 'Game Developer', label: 'Game Developer' },
-        { value: 'Graphic Developers', label: 'Graphic Developers' }, { value: 'AI Engineer', label: 'AI Engineer' },
-        { value: 'Security Developer', label: 'Security Developer'},{ value: 'Cloud Developers', label: 'Cloud Developers'},
-        ]
-
         // const [tag, setTag] = useState([])
     const [Tags, setTag] = useState([])
+
+    async function handleTags(key) {
+        setSkills((prev=>prev+" "+key))
+        const isIndex=Tags.findIndex((present)=>{
+            return(
+              present===key
+            )
+                })
+                if(isIndex<0){
+                    setTag([...Tags, key])
+                }else{
+                  const IndexId=Tags.filter((present)=>{
+                    return(
+                      present!==key
+                    )
+                        })
+                        setTag(IndexId)
+                        // Active.splice(IndexId,1)
+    }
+}
+
 
     // const Tags=tag.map((tag,i)=>{
     //     return(
@@ -184,11 +174,15 @@ function AdminPostJobs() {
                     setJobLocation("")
                     setQualification("")
                     setSkills("")
-                    setTag("")
+                    setTag([])
                     setSuccessMessage("Success! job successfully posted")
                 }
                 else if (result == "field are missing") {
                     setSuccessMessage("Alert!... JobTitle, CompanyName JobDescription, Experiance, JobLocation and Skills must be filled")
+                }
+                else
+                {
+                setSuccessMessage("something went wrong, Could not save your Jobs post")
                 }
             }).catch((err) => {
                 alert("server issue occured", err)
@@ -199,26 +193,6 @@ function AdminPostJobs() {
         });
     }
 
-    
-window.addEventListener('keypress', function(event){
-    
-    // Get the key code
-    let keycode = event.which || event.keyCode;
-    
-    // Check if key pressed is a special character
-    if(keycode < 32 || 
-     (keycode > 32 && keycode < 44) || 
-     (keycode > 44 && keycode < 48) || 
-     (keycode > 57 && keycode < 65) || 
-     (keycode > 90 && keycode < 97) ||
-     keycode > 122
-    ){
-        // Restrict the special characters
-        event.preventDefault();  
-        // alert("special characters are not allowed")
-        return false;
-    }
-  }); 
 
     return (
         <>
@@ -242,14 +216,14 @@ window.addEventListener('keypress', function(event){
 
                                     <div className={Style.postJobWrapper}>
                                         {/* <p className={Style.successmessage}>{successMessage} </p> */}
-                                        <p className={successMessage==="Alert!... JobTitle, CompanyName JobDescription, Experiance, JobLocation and Skills must be filled"?
-                                        Style.errormessage: Style.successmessage}>{successMessage} </p>
+                                        <p className={successMessage === "Success! job successfully posted" ?
+                                            Style.successmessage : Style.errormessage}>{successMessage} </p>
                                         {/* <p className={Style.errormessage}>{errorMessage} </p> */}
 
 
 
                                         <h4 className={Style.jobHeadline}  >Job title**</h4>
-                                        <input maxLength="30" className={Style.inputbox} type="text" value={jobtitle} onChange={(e) => { setJobTitle(e.target.value) }} />
+                                        <input maxLength="100" className={Style.inputbox} type="text" value={jobtitle} onChange={(e) => { setJobTitle(e.target.value) }} />
 <div className={Style.jobHeadline}>
                                         {/* <label><input name="Job-Type" type="radio" value={other}  onClick={(e) => { setother((prev)=>!prev)} } />Select, if Job Source is from other Job Portal Site </label> */}
 </div>
@@ -286,6 +260,35 @@ window.addEventListener('keypress', function(event){
          className={Style.inputbox}
          onChange={(e)=>{ setJobDescription(e.blocks) }}
       />
+                                        <h4 className={Style.jobHeadline}>Job Tags (Select multiple Tags to reach the best Matching Jobs)</h4>
+
+<div className={Style.JobtitleFilterWrapper}>
+            {/* <buton className={ Active.length===0? Style.active:Style.JobtitleFilter} onClick={() => { getjobs() }}>All</buton> */}
+            {
+              jobTags.map((tags, i) => {
+                return (
+                                   
+                  <button disabled={tags.value==="TECHNOLOGIES" || tags.value==="EDUCATION" || tags.value==="COLLEGE TYPE" || tags.value==="NOTICE PERIOD" || tags.value==="SALARY" || 
+                    tags.value==="EXPERIENCE" || tags.value==="Job Type" || tags.value==="INDUSTRY" || tags.value==="TOOLS/PROTOCOLS" || tags.value==="ROLE" || tags.value==="COMPANY TYPE" } 
+                    className={tags.value==="TECHNOLOGIES" || tags.value==="EDUCATION" || tags.value==="COLLEGE TYPE" || tags.value==="NOTICE PERIOD" || tags.value==="SALARY" || 
+                    tags.value==="EXPERIENCE" || tags.value==="Job Type" || tags.value==="INDUSTRY" || tags.value==="TOOLS/PROTOCOLS" || tags.value==="COMPANY TYPE" || tags.value==="ROLE"?
+                    Style.TagHeading: 
+                    //  Active === tags.value ? 
+                    Tags.findIndex(  (present)=>{
+                      return(
+                        present===tags.value
+                      )
+                          }) >=0?
+                     Style.active : Style.JobtitleFilter} 
+                     onClick={ () => {  handleTags(tags.value) }}
+                     >{tags.value} </button>
+                
+                  )
+              })
+            }
+          </div>
+
+
                                         <h4 className={Style.jobHeadline}>Job Type</h4>
                                         {/* <select className={Style.inputbox} onChange={(e) => { setJobtype(e.target.value) }}>
                         <option value="" >Select Job Type</option>
@@ -342,17 +345,19 @@ window.addEventListener('keypress', function(event){
                                         <h4 className={Style.jobHeadline}>Experience Needed** &nbsp;<span className={Style.hint}>(e.g 5 or 10)</span></h4>
                                         <input maxLength="3" className={Style.inputbox} type="text" value={experiance} onChange={(e) => { handleExperiance(e) }} />
 
-                                        <h4 className={Style.jobHeadline}>Tags</h4>
+                                        {/* <h4 className={Style.jobHeadline}>Tags</h4>
                          <div>
                            <CreatableSelect  
                           isMulti={true}
                           options={jobTags}
                           value={Tags}
                           onChange={handleChange}     
-                        />
+                        /> 
                          </div>
+                        */}
                          <h4 className={Style.jobHeadline}>Skills Needed**</h4>
-                                        <input maxLength="100" className={Style.inputbox} type="text" disabled value={skills} />
+                                        <input maxLength="100" className={Style.inputbox} type="text" disabled 
+                                        value={Tags} />
                                        
 
                                         {/* {Logo ? <p ><span style={{ color: "blue" }}>Note** :</span> Logo will also be posted with the Job</p> : ""} */}

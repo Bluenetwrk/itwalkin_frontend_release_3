@@ -82,6 +82,28 @@ function AdminCareerPostJobs() {
         // const [tag, setTag] = useState([])
     const [Tags, setTag] = useState([])
 
+    
+    async function handleTags(key) {
+        setSkills((prev=>prev+" "+key))
+        const isIndex=Tags.findIndex((present)=>{
+            return(
+              present===key
+            )
+                })
+                if(isIndex<0){
+                    setTag([...Tags, key])
+                }else{
+                  const IndexId=Tags.filter((present)=>{
+                    return(
+                      present!==key
+                    )
+                        })
+                        setTag(IndexId)
+                        // Active.splice(IndexId,1)
+    }
+}
+
+
     // const Tags=tag.map((tag,i)=>{
     //     return(
     //         tag.value
@@ -184,7 +206,7 @@ function AdminCareerPostJobs() {
                     setJobLocation("")
                     setQualification("")
                     setSkills("")
-                    setTag("")
+                    setTag([])
                     setSuccessMessage("Success! job successfully posted")
                 }
                 else if (result == "field are missing") {
@@ -286,6 +308,33 @@ window.addEventListener('keypress', function(event){
          className={Style.inputbox}
          onChange={(e)=>{ setJobDescription(e.blocks) }}
       />
+                                        <h4 className={Style.jobHeadline}>Job Tags (Select multiple Tags to reach the best Matching Jobs)</h4>
+
+      <div className={Style.JobtitleFilterWrapper}>
+            {/* <buton className={ Active.length===0? Style.active:Style.JobtitleFilter} onClick={() => { getjobs() }}>All</buton> */}
+            {
+              jobTags.map((tags, i) => {
+                return (
+                                   
+                  <button disabled={tags.value==="TECHNOLOGIES" || tags.value==="EDUCATION" || tags.value==="COLLEGE TYPE" || tags.value==="NOTICE PERIOD" || tags.value==="SALARY" || 
+                    tags.value==="EXPERIENCE" || tags.value==="Job Type" || tags.value==="INDUSTRY" || tags.value==="TOOLS/PROTOCOLS" || tags.value==="ROLE" || tags.value==="COMPANY TYPE" } 
+                    className={tags.value==="TECHNOLOGIES" || tags.value==="EDUCATION" || tags.value==="COLLEGE TYPE" || tags.value==="NOTICE PERIOD" || tags.value==="SALARY" || 
+                    tags.value==="EXPERIENCE" || tags.value==="Job Type" || tags.value==="INDUSTRY" || tags.value==="TOOLS/PROTOCOLS" || tags.value==="COMPANY TYPE" || tags.value==="ROLE"?
+                    Style.TagHeading: 
+                    //  Active === tags.value ? 
+                    Tags.findIndex(  (present)=>{
+                      return(
+                        present===tags.value
+                      )
+                          }) >=0?
+                     Style.active : Style.JobtitleFilter} 
+                     onClick={ () => {  handleTags(tags.value) }}
+                     >{tags.value} </button>
+                
+                  )
+              })
+            }
+          </div>
                                         <h4 className={Style.jobHeadline}>Job Type</h4>
                                         {/* <select className={Style.inputbox} onChange={(e) => { setJobtype(e.target.value) }}>
                         <option value="" >Select Job Type</option>
@@ -342,7 +391,7 @@ window.addEventListener('keypress', function(event){
                                         <h4 className={Style.jobHeadline}>Experience Needed** &nbsp;<span className={Style.hint}>(e.g 5 or 10)</span></h4>
                                         <input maxLength="3" className={Style.inputbox} type="text" value={experiance} onChange={(e) => { handleExperiance(e) }} />
 
-                                        <h4 className={Style.jobHeadline}>Tags</h4>
+                                        {/* <h4 className={Style.jobHeadline}>Tags</h4>
                          <div>
                            <CreatableSelect  
                           isMulti={true}
@@ -350,9 +399,9 @@ window.addEventListener('keypress', function(event){
                           value={Tags}
                           onChange={handleChange}     
                         />
-                         </div>
+                         </div> */}
                          <h4 className={Style.jobHeadline}>Skills Needed**</h4>
-                                        <input maxLength="100" className={Style.inputbox} type="text" disabled value={skills} />
+                                        <input maxLength="100" className={Style.inputbox} type="text" disabled value={Tags} />
                                        
 
                                         {/* {Logo ? <p ><span style={{ color: "blue" }}>Note** :</span> Logo will also be posted with the Job</p> : ""} */}
