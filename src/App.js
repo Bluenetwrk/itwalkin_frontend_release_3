@@ -77,8 +77,9 @@ import Payment from "./Job-Portal/Payment"
 import socketIO from 'socket.io-client';
 import useScreenSize from '../src/Job-Portal/SizeHook';
 // axios.defaults.baseURL = "http://localhost:8080"
+axios.defaults.baseURL = "https://i-twalkin-backend-testrelease-2-0-1-0824.vercel.app"
 // vercel Test
-axios.defaults.baseURL = " https://itwalkin-backend-testrelease-2-0-1-0824-ns0g.onrender.com"
+// axios.defaults.baseURL = " https://itwalkin-backend-testrelease-2-0-1-0824-ns0g.onrender.com"
 // Vercel Main Live 
 //  axios.defaults.baseURL = "https://itwalkin-backend-testrelease-2-0-1-0824.onrender.com";
 

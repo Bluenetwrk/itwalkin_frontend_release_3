@@ -136,10 +136,10 @@ profileData.length>0?<button className={styles.MobupdateProfile} onClick={update
                          {item.panCard?          <li className={` ${styles.Hli}`}>{item.panCard}</li>: <li className={` ${styles.Hli} ${styles.Nli}`}>you have not updated your pan Id yet</li>}
                          {item.age?              <li className={` ${styles.Hli}`}>{item.age}</li>: <li className={` ${styles.Hli} ${styles.Nli}`}>you have not updated your age yet</li>}
                          {item.NoticePeriod?     <li className={` ${styles.Hli}`}>{item.NoticePeriod}</li>: <li className={` ${styles.Hli} ${styles.Nli}`}>you have not updated your NoticePeriod yet</li>}
-                         {item.ExpectedSalary?   <li className={` ${styles.Hli}`}>{item.ExpectedSalary}</li>: <li className={` ${styles.Hli} ${styles.Nli}`}>you have not updated your Expected Salary yet</li>}
+                         {item.ExpectedSalary?  <li className={` ${styles.Hli}`}>{item.ExpectedSalary}</li>: <li className={` ${styles.Hli} ${styles.Nli}`}>you have not updated your Expected Salary yet</li>}
                          {item.currentCTC?       <li className={` ${styles.Hli}`}>{item.currentCTC}</li>: <li className={` ${styles.Hli} ${styles.Nli}`}>you have not updated your current CTC yet</li>}
                          {item.Qualification?    <li className={` ${styles.Hli}`}>{item.Qualification}</li>: <li className={` ${styles.Hli} ${styles.Nli}`}>you have not updated your Qualification yet</li>}
-                         {item.Tags?           <li className={` ${styles.Hli}`}>{item.Tags.map((sk)=>{return(sk.value)})}
+                         {item.Tags?           <li className={` ${styles.Hli}`}>{item.Tags.filter(e  => typeof e === 'string')}&nbsp;
 
                          </li>: <li className={` ${styles.Hli} ${styles.Nli}`}>you have not updated your Skills yet</li>}
                          {item.Experiance?       <li className={` ${styles.Hli}`}>{item.Experiance}</li>:  <li className={` ${styles.Hli} ${styles.Nli}`}>you have not updated your experiance yet</li> }

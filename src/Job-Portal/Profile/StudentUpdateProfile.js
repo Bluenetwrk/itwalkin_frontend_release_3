@@ -121,6 +121,7 @@ function StudentUpdateProfile(props) {
      const [uploaded, setUploaded] = useState()
      const screenSize = useScreenSize();
      const [image, setimage] = useState()
+     console.log(image)
      const [immage, setimmage] = useState()
      const [name, setname] = useState("")
      const [email, setemail] = useState("")
@@ -138,7 +139,6 @@ function StudentUpdateProfile(props) {
 
 
   const [Tags, setTag] = useState([])
-  console.log(Tags)
   const [college, setcollege] = useState([])
   const [Resulttag, setResulttagTag] = useState()
 
