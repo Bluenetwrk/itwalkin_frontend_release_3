@@ -460,7 +460,8 @@ return(
 
           <div style={{ display: "flex", justifyContent: "space-between" }}>
             {nopageFilter ?
-              <p style={{ fontWeight: 400, marginLeft: "10px" }}>Displaying Candidates <span style={{ color: "blue" }}>{Active.toString()}</span> Skills from All Candidates</p>
+              <p style={{ fontWeight: 400, marginLeft: "10px" }}>Displaying Candidates with following matching tags: 
+              <span style={{ color: "blue" }}>{Active.toString()}</span></p>
               :
               <p style={{ fontWeight: 400, marginLeft: "10px" }}>showing {firstIndex + 1} to {lastIndex} latest Candidates</p>
             }

@@ -19,13 +19,13 @@ function PostJobs(props) {
     const screenSize = useScreenSize();
 
   
-    useEffect(() => {
-        const socket = socketIO.connect(props.url, {
-            auth: {
-                token: JSON.parse(localStorage.getItem("EmpIdG"))
-            }
-        });
-    }, [])
+    // useEffect(() => {
+    //     const socket = socketIO.connect(props.url, {
+    //         auth: {
+    //             token: JSON.parse(localStorage.getItem("EmpIdG"))
+    //         }
+    //     });
+    // }, [])
 
     let empId = JSON.parse(localStorage.getItem("EmpIdG"))
     const [jobtitle, setJobTitle] = useState("")
@@ -52,15 +52,15 @@ function PostJobs(props) {
 
     const [skills, setSkills] = useState("")
 
-    function handleChange(tag) {
-        setTag(tag)
-        const Tagskills=tag.map((tag,i)=>{
-            return(
-                tag.value
-            )
-        })
-        setSkills(Tagskills.toString())        
-    }
+    // function handleChange(tag) {
+    //     setTag(tag)
+    //     const Tagskills=tag.map((tag,i)=>{
+    //         return(
+    //             tag.value
+    //         )
+    //     })
+    //     setSkills(Tagskills.toString())        
+    // }
 
     function handleSalary(e){
         const sanitizedValue = e.target.value.replace(/[A-Za-z]/g, '');
@@ -206,7 +206,7 @@ function PostJobs(props) {
 if(key==='Full Time' || 'Contract' || 'Internship' || 'Part Time'){
     setJobtype(key)
 }
-        setSkills((prev=>prev+" "+key))
+        setSkills((prev)=>prev ? prev + ", " + key : key)
         const isIndex=Tags.findIndex((present)=>{
             return(
               present===key
@@ -364,10 +364,12 @@ if(key==='Full Time' || 'Contract' || 'Internship' || 'Part Time'){
                                         </div> */}
                                         <h4 className={Style.jobHeadline}>Skills Needed**</h4>
 
-<input maxLength="100" value={Tags} className={Style.inputbox} disabled type="text"
+<input maxLength="100" value={skills} className={Style.inputbox} disabled type="text"
 // onChange={(e)=>{setSkills(e.target.value)}} 
 />
-<p>I have read the terms and conditions if ITwalkin.com and i agree to all the terms and conditons before posting the jobs </p>
+<p><input type="checkbox" />
+    I have read the terms and conditions if ITwalkin.com and i agree to all the 
+     <span style={{color:"blue", cursor:"pointer"}} onClick={()=>(navigate("/TermsAndCondition"))}> terms and conditons</span> before posting the jobs </p>
 
 
                                         {Logo ? <p ><span style={{ color: "blue" }}>Note** :</span> Logo will also be posted with the Job</p> : ""}

@@ -398,7 +398,8 @@ function SearchCandidate() {
               </div>
           <div style={{ display: "flex", justifyContent: "space-between" }}>
             {nopageFilter ?
-              <p style={{ fontWeight: 400, marginLeft: "10px" }}>Displaying Candidates with <span style={{ color: "blue" }}>{Filtereredjobs}</span> Skills from All Candidates</p>
+              <p style={{ fontWeight: 400, marginLeft: "10px" }}>Displaying Candidates with with following matching tags
+               <span style={{ color: "blue" }}>{Filtereredjobs}</span></p>
               :
               <p style={{ fontWeight: 400, marginLeft: "10px" }}>showing {firstIndex + 1} to {lastIndex} latest Candidates</p>
             }

@@ -516,7 +516,8 @@ return(
 
           <div style={{ display: "flex", justifyContent: "space-between" }}>
             {nopageFilter ?
-              <p style={{ fontWeight: 400, marginLeft: "10px" }}>Displaying <span style={{ color: "blue" }}>{Active.toString()}</span> from All Jobs</p>
+              <p style={{ fontWeight: 400, marginLeft: "10px" }}>Displaying Jobs with following matching tags: 
+              <span style={{ color: "blue" }}>{Active.toString()}</span></p>
               :
               <p style={{ fontWeight: 400, marginLeft: "10px" }}>showing {firstIndex + 1} to {lastIndex} latest jobs</p>
             }
