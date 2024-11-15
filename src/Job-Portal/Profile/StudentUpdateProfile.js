@@ -121,7 +121,6 @@ function StudentUpdateProfile(props) {
      const [uploaded, setUploaded] = useState()
      const screenSize = useScreenSize();
      const [image, setimage] = useState()
-     console.log(image)
      const [immage, setimmage] = useState()
      const [name, setname] = useState("")
      const [email, setemail] = useState("")
@@ -133,17 +132,15 @@ function StudentUpdateProfile(props) {
      const [currentCTC, setcurrentCTC] = useState("")
      const [age, setage] = useState("")
      const [Qualification, setQualification] = useState("")
-     const [Skills, setSkills] = useState("")
      const [Experiance, setExperiance] = useState("")
      const [loader, setLoader] = useState(false)
-
-
-  const [Tags, setTag] = useState([])
-  const [college, setcollege] = useState([])
-  const [Resulttag, setResulttagTag] = useState()
-
+     const [Tags, setTag] = useState([])
+     const [college, setcollege] = useState([])
+     const [Resulttag, setResulttagTag] = useState()
+     const [Skills, setSkills] = useState([])
+     console.log(Skills)
     function handleTags(key){
-      // setTag(tag)    
+      // setTag(tag)   
       const isIndex=Tags.findIndex((present)=>{
         return(
           present===key
@@ -151,6 +148,8 @@ function StudentUpdateProfile(props) {
             })
             if(isIndex<0){
                 setTag([...Tags, key])
+      setSkills((prev)=>prev ? prev + ", " + key : key)
+
             }else{
               const IndexId=Tags.filter((present)=>{
                 return(
@@ -158,7 +157,9 @@ function StudentUpdateProfile(props) {
                 )
                     })
                     setTag(IndexId)
-                    // Active.splice(IndexId,1)
+
+                      let str=IndexId.toString().split(",").join(", ")
+                      // setSkills(str)
 }  
   }  
     function handleCollege(tag){
@@ -478,7 +479,7 @@ border:"none",padding: "4px 8px"}} onClick={DeleteProfile}>Delete</button>
               </label>
 
               <label className={styles.inputName}>
-                <h4>Job Tags: </h4>
+                <h4>Skill Tags: </h4>
                 {/* <div style={{marginTop:"-7px", width:"81%", marginLeft:"18px"}}>
                    <CreatableSelect  
                   isMulti={true}

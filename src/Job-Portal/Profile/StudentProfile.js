@@ -37,7 +37,6 @@ let navigate = useNavigate()
         await axios.get(`/StudentProfile/getProfile/${studId}`, {headers})
             .then((res) => {
                 let result = res.data.result
-                console.log(result)
                 setProfileData([result])
         setPageLoader(false)
 
@@ -104,7 +103,7 @@ profileData.length>0?<button className={styles.MobupdateProfile} onClick={update
                 <li className={styles.li}><b>Email Address</b></li>
                 <li className={styles.li}><b>City</b></li>
                 <li className={styles.li}><b>Phone Number</b></li>
-                <li className={styles.li}><b>Aadhar Id</b></li>
+                <li className={styles.li}><b>Aadhaar Id</b></li>
                 <li className={styles.li}><b>Pan Card Id</b></li>
                 <li className={styles.li}><b>Age</b></li>
                 <li className={styles.li}><b>Notice  Period</b></li>
@@ -139,14 +138,15 @@ profileData.length>0?<button className={styles.MobupdateProfile} onClick={update
                          {item.ExpectedSalary?  <li className={` ${styles.Hli}`}>{item.ExpectedSalary}</li>: <li className={` ${styles.Hli} ${styles.Nli}`}>you have not updated your Expected Salary yet</li>}
                          {item.currentCTC?       <li className={` ${styles.Hli}`}>{item.currentCTC}</li>: <li className={` ${styles.Hli} ${styles.Nli}`}>you have not updated your current CTC yet</li>}
                          {item.Qualification?    <li className={` ${styles.Hli}`}>{item.Qualification}</li>: <li className={` ${styles.Hli} ${styles.Nli}`}>you have not updated your Qualification yet</li>}
-                         {item.Tags?           <li className={` ${styles.Hli}`}>{item.Tags.filter(e  => typeof e === 'string')}&nbsp;
-
+                         {item.Skills?           <li className={` ${styles.Hli}`}>{item.Skills}&nbsp;
+                         {/* => typeof e === 'string' */}
                          </li>: <li className={` ${styles.Hli} ${styles.Nli}`}>you have not updated your Skills yet</li>}
                          {item.Experiance?       <li className={` ${styles.Hli}`}>{item.Experiance}</li>:  <li className={` ${styles.Hli} ${styles.Nli}`}>you have not updated your experiance yet</li> }
                          {item.isApproved?   <li className={` ${styles.Hli}`} style={{color:"blue"}}>Congrates! Your account has been Approved</li>: <li className={` ${styles.Hli} ${styles.Nli}`} style={{fontStyle:"italic"}}>"Your account is in under Verfication process"</li>}                        
                          {item.message?<p style={{width:"450%",  marginLeft:"-70%"}}><b> Message :</b><span style={{color:"red"}}> {item.message}! </span></p>:""}
                         </ul>
                     )
+
                 })
 
             }

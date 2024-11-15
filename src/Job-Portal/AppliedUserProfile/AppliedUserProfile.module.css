@@ -133,7 +133,8 @@
 
 }
 .JobtitleFilterWrapper:hover{
-    scrollbar-color: white rgb(40, 4, 99)  ;
+    scrollbar-color:  rgb(40, 4, 99) white ;
+
 }
 
 .JobtitleFilter{

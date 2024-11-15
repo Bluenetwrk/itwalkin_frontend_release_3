@@ -16,13 +16,13 @@ import Footer from '../Footer/Footer';
 
 
 function EmployeeUpdateProfile(props) {
-  useEffect( ()=>{    
-    const socket = socketIO.connect(props.url,{
-      auth:{
-        token: JSON.parse(localStorage.getItem("EmpIdG"))
-      }
-    });
-  },[])
+  // useEffect( ()=>{    
+  //   const socket = socketIO.connect(props.url,{
+  //     auth:{
+  //       token: JSON.parse(localStorage.getItem("EmpIdG"))
+  //     }
+  //   });
+  // },[])
   const [file, setFile] = useState()
   const [uploaded, setUploaded] = useState()
 const screenSize = useScreenSize();
@@ -120,7 +120,7 @@ const [immage, setimmage] = useState()
     const formdata = new FormData()
     formdata.append('image', image)
 
-    // console.log(formdata)
+    console.log(formdata)
     await axios.put(`/EmpProfile/uploadImage/${empId}`, formdata)
       .then((res) => {
         window.location.reload()

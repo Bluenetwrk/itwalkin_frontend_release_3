@@ -15,7 +15,7 @@ function SidebarNav(props) {
         <p onClick={()=>{navigate("/AboutUs")}} className={`${Styles.textinMobileSodeBar} `}>About Us</p>
         <p onClick={()=>{navigate("/Services")}} className={`${Styles.textinMobileSodeBar} `}>Our Services</p>
         <p onClick={()=>{navigate("/Contact")}} className={`${Styles.textinMobileSodeBar} `}>Contact Us</p>
-        <p onClick={()=>{navigate("/AllCareerJobs")}} className={`${Styles.textinMobileSodeBar} `}>Career</p>
+        <p onClick={()=>{navigate("/AllCareerJobs")}} className={`${Styles.textinMobileSodeBar} `}>ITwalkin Career</p>
         <p onClick={()=>{navigate("/TermsAndCondition")}} className={`${Styles.textinMobileSodeBar} `}>Terms & Conditions</p>
         </div>
       </div>

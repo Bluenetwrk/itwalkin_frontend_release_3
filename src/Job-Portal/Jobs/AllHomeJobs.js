@@ -661,6 +661,7 @@ return(
                       <li className={`${styles.li} ${styles.experiance}`}>{items.experiance}Y</li>
                       <li className={`${styles.li} ${styles.qualification}`}>{items.qualification}</li>
                       <li className={`${styles.li} ${styles.Skills}`}>{items.skills}
+                      {console.log(items.skills)}
                       </li>
 
                       <li className={`${styles.li} ${styles.Apply}`}>

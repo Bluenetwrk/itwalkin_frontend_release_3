@@ -149,9 +149,7 @@ profileData.map((item, i) => {
 
             }
             </div>
-                      <div style={{marginTop:"220px", position:"sticky", bottom:0}}>
-          <Footer/>
-        </div>
+              
         </>
             :
             <>

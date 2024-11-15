@@ -203,10 +203,11 @@ function PostJobs(props) {
     const [count, setCount]=useState(1)
 
     async function handleTags(key) {
-if(key==='Full Time' || 'Contract' || 'Internship' || 'Part Time'){
+if(key==='Full Time' ||key=== 'Contract' || key==='Internship' || key==='Part Time'){
     setJobtype(key)
 }
-        setSkills((prev)=>prev ? prev + ", " + key : key)
+        // setSkills((prev)=>prev ? prev + ", " + key : key)
+        // setSkills(Tags)
         const isIndex=Tags.findIndex((present)=>{
             return(
               present===key
@@ -214,6 +215,8 @@ if(key==='Full Time' || 'Contract' || 'Internship' || 'Part Time'){
                 })
                 if(isIndex<0){
                     setTag([...Tags, key])
+                    setSkills((prev)=>prev ? prev + ", " + key : key)
+                    // setSkills([...skills, key])
                 }else{
                   const IndexId=Tags.filter((present)=>{
                     return(
@@ -221,7 +224,11 @@ if(key==='Full Time' || 'Contract' || 'Internship' || 'Part Time'){
                     )
                         })
                         setTag(IndexId)
-                        // Active.splice(IndexId,1)
+
+                      let str=IndexId.toString().split(",").join(", ")
+                        setSkills(str)
+
+                    // setSkills((prev)=>prev.length>=0 ?  IndexId : "," + IndexId)
     }
 }
 

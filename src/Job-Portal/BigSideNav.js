@@ -22,7 +22,7 @@ function SidebarNav(props) {
         <p onClick={()=>{navigate("/AboutUs")}} className={`${Styles.textBigSodeBar} `}>About Us</p>
         <p onClick={()=>{navigate("/Services")}} className={`${Styles.textBigSodeBar} `}>Our Services</p>
         <p onClick={()=>{navigate("/Contact")}} className={`${Styles.textBigSodeBar} `}>Contact Us</p>
-        <p onClick={()=>{navigate("/AllCareerJobs")}} className={`${Styles.textBigSodeBar} `}>Career</p>
+        <p onClick={()=>{navigate("/AllCareerJobs")}} className={`${Styles.textBigSodeBar} `}>ITwalkin Career</p>
         <p onClick={()=>{navigate("/TermsAndCondition")}} className={`${Styles.textBigSodeBar} `}>Terms & Conditions</p>
         <div className={Styles.brands}>
 
