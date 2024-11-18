@@ -549,9 +549,9 @@ return(
           <div className={styles.Uiwarpper}>
             <ul className={styles.ul} style={{ color: 'white', fontWeight: "bold" }}>
 
-              <li style={{ backgroundColor: " rgb(40, 4, 99)" }} className={`${styles.li} ${styles.CompanyName}`}>Company Name</li>
-              <li style={{ backgroundColor: " rgb(40, 4, 99)" }} className={`${styles.li} ${styles.Source}`}>Source</li>
               <li style={{ backgroundColor: " rgb(40, 4, 99)" }} className={`${styles.li} ${styles.Jtitle}`}>Job Title</li>
+              <li style={{ backgroundColor: " rgb(40, 4, 99)" }} className={`${styles.li} ${styles.Source}`}>Source</li>
+              <li style={{ backgroundColor: " rgb(40, 4, 99)" }} className={`${styles.li} ${styles.CompanyName}`}>Company Name</li>
               <li style={{ backgroundColor: " rgb(40, 4, 99)" }} className={`${styles.li} ${styles.JobType}`}>JobType</li>
               {/* <li className={`${styles.li} ${styles.HliDescription}`}><b>Job description</b></li> */}
               <li style={{ backgroundColor: " rgb(40, 4, 99)" }} className={`${styles.li} ${styles.date}`}>Posted Date
@@ -593,6 +593,12 @@ return(
 
                       <ul className={styles.ul} key={i}>
 
+{/* } */}
+
+<li className={`${styles.li} ${styles.Jtitle}`} onClick={() => navigate(`/Jobdetails/${btoa(items._id)}`)} style={{ cursor: "pointer", textDecoration: "underline", color: "blue" }}>{items.jobTitle.toUpperCase()}</li>
+                          <li className={`${styles.li} ${styles.Source}`} >Itwalkin</li>
+
+
                         {
                           !items.Source ?
 
@@ -618,11 +624,7 @@ return(
                         {/* {items.Source ?
                         <a className={`${styles.li} ${styles.Source}`} href={items.SourceLink} target="_blank">{items.Source}</a>
                         : */}
-                        <li className={`${styles.li} ${styles.Source}`} >Itwalkin</li>
-
-                        {/* } */}
-
-                        <li className={`${styles.li} ${styles.Jtitle}`} onClick={() => navigate(`/Jobdetails/${btoa(items._id)}`)} style={{ cursor: "pointer", textDecoration: "underline", color: "blue" }}>{items.jobTitle.toUpperCase()}</li>
+                      
                         <li className={`${styles.li} ${styles.JobType}`}>{items.jobtype}</li>
 
                         {/* <li className={`${styles.li} ${styles.liDescription}`}>
@@ -697,6 +699,11 @@ return(
                     return (
 
                       <ul className={styles.ul} key={i}>
+{/* } */}
+
+<li className={`${styles.li} ${styles.Jtitle}`} onClick={() => navigate(`/Jobdetails/${btoa(items._id)}`)} style={{ cursor: "pointer", textDecoration: "underline", color: "blue" }}>{items.jobTitle.toUpperCase()}</li>
+                          <li className={`${styles.li} ${styles.Source}`} >Itwalkin</li>
+
 
                         {
                           !items.Source ?
@@ -723,11 +730,7 @@ return(
                         {/* {items.Source ?
                         <a className={`${styles.li} ${styles.Source}`} href={items.SourceLink} target="_blank">{items.Source}</a>
                         : */}
-                        <li className={`${styles.li} ${styles.Source}`} >Itwalkin</li>
-
-                        {/* } */}
-
-                        <li className={`${styles.li} ${styles.Jtitle}`} onClick={() => navigate(`/Jobdetails/${btoa(items._id)}`)} style={{ cursor: "pointer", textDecoration: "underline", color: "blue" }}>{items.jobTitle.toUpperCase()}</li>
+                       
                         <li className={`${styles.li} ${styles.JobType}`}>{items.jobtype}</li>
 
                         {/* <li className={`${styles.li} ${styles.liDescription}`}>
