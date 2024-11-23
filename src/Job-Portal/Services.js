@@ -65,6 +65,7 @@ getServices()
 Any Employer accessing the ITwalkin Platform shall be bound by these Terms of Service, and all other rules, regulations and terms of use referred to herein or provided by ITwalkin in relation to any services provided via the ITwalkin Platform.
      
         </p>
+    <div> {Services} </div>
         
         </div>
         {screenSize.width > 750 ?""
@@ -77,7 +78,6 @@ Any Employer accessing the ITwalkin Platform shall be bound by these Terms of Se
     </>
 
 
-    // <div style={{marginLeft:"2%", marginTop:"10px"}}> {Services} </div>
   )
 }
 

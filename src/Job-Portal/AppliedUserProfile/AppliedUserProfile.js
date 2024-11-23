@@ -92,7 +92,6 @@ function AppliedUserProfile() {
     }
 
     async function UndoSelect(id) {
-        console.log(id)
         let userid = JSON.parse(localStorage.getItem("StudId"))
         const headers = { authorization: userid + " " + atob(JSON.parse(localStorage.getItem("StudLog"))) };
 
@@ -109,6 +108,7 @@ function AppliedUserProfile() {
     }
 
     async function UndoReject(id) {
+
         let userid = JSON.parse(localStorage.getItem("StudId"))
         const headers = { authorization: userid + " " + atob(JSON.parse(localStorage.getItem("StudLog"))) };
 
@@ -651,11 +651,13 @@ function AppliedUserProfile() {
                         })}
 
                     </div>
+                                              <div style={{marginTop:"70px"}}>
+                                              <Footer/>
+                                            </div>
                 </>
+
             }
-                              <div style={{marginTop:"70px"}}>
-                              <Footer/>
-                            </div>
+
         </>
     )
 }

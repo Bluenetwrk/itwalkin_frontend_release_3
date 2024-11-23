@@ -94,7 +94,7 @@ function AppledJobs(props) {
       }
     }).then((result) => {
       if (result.isConfirmed) {
-        axios.put(`/Careerjobpost/updatforUndoJobApplied/${id}`, { jobSeekerId }, { headers })
+        axios.put(`/Careerjobpost/DeleteJobApplied/${id}`, { jobSeekerId }, { headers })
           .then((res) => {
             getjobs()
           }).catch((err) => {

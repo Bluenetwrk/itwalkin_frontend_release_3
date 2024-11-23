@@ -81,6 +81,8 @@ getContact()
         Gandhinagar,
         BENGALURU-560009 */}
         </p>
+    <div style={{marginLeft:"2%", marginTop:"10px"}}> {Contact} </div>
+
         </div>
         
 
@@ -93,7 +95,6 @@ getContact()
 }
     </>
 
-    // <div style={{marginLeft:"2%", marginTop:"10px"}}> {Contact} </div>
   )
 }
 

@@ -175,6 +175,7 @@
 }
 .hint{
     opacity:0.5;
+    font-weight: 500;
 }
 .postJobWrapper{
     /* margin-left: 7%; */
@@ -205,7 +206,7 @@
     .jobHeadline{
         margin-top: 15px;
     margin-left: -0%; 
-    /* background-color: blue;  */
+    font-weight: 800;
 
     }
 

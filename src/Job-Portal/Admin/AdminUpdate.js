@@ -3,6 +3,8 @@ import { useEffect, useState } from 'react'
 import { useNavigate } from "react-router-dom"
 import axios from "axios"
 import styles from "./AdminProfile.module.css"
+import toast from 'react-hot-toast';
+
 
 import { Editor } from 'react-draft-wysiwyg';
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css"; 
@@ -29,6 +31,7 @@ function AdminUpdate() {
     .then((res)=>{
         if(res.data){
         alert("Updated successfully")
+    // toast.success("Your Cart is Empty")
 
         }
     }).catch((err)=>{
@@ -48,6 +51,7 @@ setTermsAndCondition(result.TermsAndCondition)
 
     }).catch((err)=>{
       alert("some thing went wrong")
+
     })
   }
 
@@ -62,50 +66,51 @@ setTermsAndCondition(result.TermsAndCondition)
 
      <h4 className={styles.AdminEdit}  >About Us</h4>
 
-<Editor
+     <textarea className={styles.inputbox} type="text" value={AboutUs} onChange={(e)=>{ setAboutUs(e.target.value) }}/>
+
+{/* <Editor
          toolbarClassName="toolbarClassName"
          wrapperClassName="wrapperClassName"
          editorClassName="editorClassName"
          wrapperStyle={{ width: "70%", marginTop:"10px",marginLeft:"0px", border: "1px solid black", borderRadius:"4px" }}
          className={styles.inputbox} 
          onChange={(e)=>{ setAboutUs(e.blocks) }}
-      />
+      /> */}
           <h4 className={styles.AdminEdit}  >Services</h4>
-       {/* <textarea className={styles.inputbox} type="text" value={Services} onChange={(e) => { setServices(e.target.value) }}></textarea> */}
+       <textarea className={styles.inputbox} type="text" value={Services} onChange={(e) => { setServices(e.target.value) }}></textarea>
 
-       <Editor
+       {/* <Editor
          toolbarClassName="toolbarClassName"
          wrapperClassName="wrapperClassName"
          editorClassName="editorClassName"
          wrapperStyle={{ width: "70%", marginTop:"10px",marginLeft:"0px", border: "1px solid black", borderRadius:"4px" }}
          className={styles.inputbox} 
          onChange={(e)=>{ setServices(e.blocks) }}
-      />
+      /> */}
 
          <h4 className={styles.AdminEdit}  >Contact Us</h4>
-       {/* <textarea className={styles.inputbox} type="text" value={Contact} onChange={(e) => { setContact(e.target.value) }}></textarea> */}
+       <textarea className={styles.inputbox} type="text" value={Contact} onChange={(e) => { setContact(e.target.value) }}></textarea>
 
-       <Editor
+       {/* <Editor
          toolbarClassName="toolbarClassName"
          wrapperClassName="wrapperClassName"
          editorClassName="editorClassName"
          wrapperStyle={{ width: "70%", marginTop:"10px",marginLeft:"0px", border: "1px solid black", borderRadius:"4px" }}
          className={styles.inputbox} 
          onChange={(e)=>{ setContact(e.blocks) }}
-      />
-
+      /> */}
 
          <h4 className={styles.AdminEdit}  >Terms And Conditions</h4>
-       {/* <textarea className={styles.inputbox} type="text" value={TermsAndCondition} onChange={(e) => { setTermsAndCondition(e.target.value) }}></textarea><br></br> */}
+       <textarea className={styles.inputbox} type="text" value={TermsAndCondition} onChange={(e) => { setTermsAndCondition(e.target.value) }}></textarea><br></br>
 
-       <Editor
+       {/* <Editor
          toolbarClassName="toolbarClassName"
          wrapperClassName="wrapperClassName"
          editorClassName="editorClassName"
          wrapperStyle={{ width: "70%", marginTop:"10px",marginLeft:"0px", border: "1px solid black", borderRadius:"4px" }}
          className={styles.inputbox} 
          onChange={(e)=>{ setTermsAndCondition(e.blocks) }}
-      />
+      /> */}
 
         <button onClick={()=>{update()}}>Update</button>       
 

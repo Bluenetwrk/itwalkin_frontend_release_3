@@ -15,7 +15,7 @@ import {jobTags} from "../Tags"
 
 // import CreatableSelect  from 'react-select/creatable';
 
-function PostJobs(props) {
+function PostBlogs(props) {
     const screenSize = useScreenSize();
 
   
@@ -126,7 +126,7 @@ function PostJobs(props) {
 
         let jobTitle = jobtitle.toLowerCase()
         let jobLocation = joblocation.toLowerCase()
-        await axios.post("/jobpost/jobpost/", {
+        await axios.post("/BlogRoutes/blogpost/", {
             Logo, SourceLink, Source, empId, jobTitle, companyName,
             jobDescription, jobtype, salaryRange, jobLocation, qualification, experiance, skills, Tags
         }, { headers })
@@ -245,18 +245,18 @@ if(key==='Full Time' ||key=== 'Contract' || key==='Internship' || key==='Part Ti
 
                             <div key={i}>
                                 <button className={Style.searchButton} onClick={() => {
-                                    navigate("/Search-Candidate")
-                                }}>Search Candidate</button>
-                                {Logo ? <img className={Style.logo} src={Logo} /> :
-                                    <p style={{ color: "red", marginLeft: "5%", fontStyle: "italic" }}> Alert! You have not updated the Company logo, please update the Company Logo</p>}
-                                {/* <h3 style={{ color: "blue", marginLeft: "15%" }}>Welcome to Post job Page, Post a Job and get Connected with Job Seekers</h3> */}
+                                    navigate(-1)
+                                }}>Go Back</button>
+                                {/* {Logo ? <img className={Style.logo} src={Logo} /> :
+                                    <p style={{ color: "red", marginLeft: "5%", fontStyle: "italic" }}> Alert! You have not updated the Company logo, please update the Company Logo</p>
+                                    } */}
 
                                 <div className={Style.postJobPageWrapper} >
                                     <div className={Style.postJobWrapper}>
                                         <p className={successMessage === "Success! job successfully posted" ?
                                             Style.successmessage : Style.errormessage}>{successMessage} </p>
                                         {/* <p className={Style.errormessage}>{errorMessage} </p> */}
-                                        <h4 className={Style.jobHeadline}  >Job title**</h4>
+                                        <h4 className={Style.jobHeadline}  >Title**</h4>
                                         <input maxLength="100" className={Style.inputbox} type="text" value={jobtitle} onChange={(e) => { handlejobtitle(e) }} />
                                         {/* <div className={Style.jobHeadline}>
                                         <label><input name="Job-Type" type="radio" value={other}  onClick={(e) => { setother((prev)=>!prev)} } />Select, if Job Source is from other Job Portal Site </label>
@@ -272,11 +272,11 @@ if(key==='Full Time' ||key=== 'Contract' || key==='Internship' || key==='Part Ti
                                </>
                                 :""
                                     } */}
-                                        <p className={Style.jobHeadline}>Company Name** &nbsp;<span className={Style.hint}>(Update Company Name from your Profile)</span></p>
-                                        <input maxLength="30" className={Style.inputbox} type="text" value={companyName} disabled />
+                                        {/* <h4 className={Style.jobHeadline}>Company Name** &nbsp;<span className={Style.hint}>(Update Company Name from your Profile)</span></h4>
+                                        <input maxLength="30" className={Style.inputbox} type="text" value={companyName} disabled /> */}
 
 
-                                        <h4 className={Style.jobHeadline}>Job Description**</h4>
+                                        <h4 className={Style.jobHeadline}>Bolg**</h4>
                                         {/* <input maxLength="100" className={Style.inputbox} type="text" value={jobDescription} onChange={(e) => { setJobDescription(e.target.value) }} /> */}
                                         <Editor
                                             toolbarClassName="toolbarClassName"
@@ -286,7 +286,7 @@ if(key==='Full Time' ||key=== 'Contract' || key==='Internship' || key==='Part Ti
                                             className={Style.inputbox}
                                             onChange={(e) => { setJobDescription(e.blocks) }}
                                         />
-                                        <p className={Style.jobHeadline}>Job Tags <span className={Style.hint}>(Select multiple Tags to reach the best Matching Candidates)</span></p>
+                                        <p className={Style.jobHeadline}>Blog Tags <span className={Style.hint}>(Select multiple Tags to reach the best Matching Blogs)</span></p>
 
 <div className={Style.JobtitleFilterWrapper}>
             {/* <buton className={ Active.length===0? Style.active:Style.JobtitleFilter} onClick={() => { getjobs() }}>All</buton> */}
@@ -315,7 +315,7 @@ if(key==='Full Time' ||key=== 'Contract' || key==='Internship' || key==='Part Ti
           </div>
 
 
-                                        <h4 className={Style.jobHeadline}>Job Type</h4>
+                                        {/* <h4 className={Style.jobHeadline}>Job Type</h4>
 
                                         <label><input name="Job-Type" type="radio" checked={jobtype === "Full Time" || Tags.filter} value="Full Time" onChange={(e) => { setJobtype(e.target.value); handleRadioTags(e.target.value) }} />Full Time  </label>
                                         <label><input name="Job-Type" type="radio" checked={jobtype === "Part Time"} value="Part Time" onChange={(e) => { setJobtype(e.target.value); handleRadioTags(e.target.value) }} />Part Time  </label>
@@ -360,7 +360,9 @@ if(key==='Full Time' ||key=== 'Contract' || key==='Internship' || key==='Part Ti
                                         <input maxLength="3" className={Style.inputbox} type="number" value={salaryRange} onChange={(e) => { handleSalary(e); handleRadioTags(e.target.value) }} />
 
                                         <h4 className={Style.jobHeadline}>Experience Needed** &nbsp;<span className={Style.hint}>(e.g 5 or 10)</span></h4>
-                                        <input maxLength="3" className={Style.inputbox} type="number" value={experiance} onChange={(e) => { handleExperiance(e); handleExpButton(e.target.value) }} />
+                                        <input maxLength="3" className={Style.inputbox} type="number" value={experiance} onChange={(e) =>
+                                         { handleExperiance(e); handleExpButton(e.target.value) }} /> */}
+                                      
                                         {/* <h4 className={Style.jobHeadline}>Skill Tags**</h4>
                                         <div>
                                             <CreatableSelect
@@ -370,17 +372,17 @@ if(key==='Full Time' ||key=== 'Contract' || key==='Internship' || key==='Part Ti
                                                 onChange={handleChange}
                                             />
                                         </div> */}
-                                        <h4 className={Style.jobHeadline}>Skills Needed**</h4>
+                                        {/* <h4 className={Style.jobHeadline}>Skills Needed**</h4>
 
 <input maxLength="100" value={skills} className={Style.inputbox} disabled type="text"
 // onChange={(e)=>{setSkills(e.target.value)}} 
-/>
+/>*/}
 <p><input type="checkbox" onChange={()=>{setconcent((prev)=>!prev)}}/>
     I have read the terms and conditions if ITwalkin.com and i agree to all the 
-     <span style={{color:"blue", cursor:"pointer"}} onClick={()=>(window.open("/TermsAndCondition"))}> terms and conditons</span> before posting the jobs </p>
+     <span style={{color:"blue", cursor:"pointer"}} onClick={()=>(window.open("/TermsAndCondition"))}> terms and conditons</span> before posting the jobs </p> 
 
 
-                                        {Logo ? <p ><span style={{ color: "blue" }}>Note** :</span> Logo will also be posted with the Job</p> : ""}
+                                        {/* {Logo ? <p ><span style={{ color: "blue" }}>Note** :</span> Logo will also be posted with the Job</p> : ""} */}
 
                                         <button disabled={concent} className={Style.button} onClick={postJob}>Post Job</button>
                                     </div >
@@ -404,4 +406,4 @@ if(key==='Full Time' ||key=== 'Contract' || key==='Internship' || key==='Part Ti
     )
 }
 
-export default PostJobs
+export default PostBlogs

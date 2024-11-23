@@ -110,7 +110,7 @@ function AllJobs(props) {
     const headers = { authorization: userid + " " + atob(JSON.parse(localStorage.getItem("StudLog"))) };
     setclickedJobId(jobId)
     setLoader(true)
-    setTimeout(async () => {
+    // setTimeout(async () => {
 
       await axios.put(`/Careerjobpost/updatforJobApply/${jobId}`, { jobSeekerId, date }, { headers })
         .then((res) => {
@@ -121,7 +121,7 @@ function AllJobs(props) {
         }).catch((err) => {
           alert("server issue occured", err)
         })
-    }, 5000)
+    // }, 5000)
   }
 
 

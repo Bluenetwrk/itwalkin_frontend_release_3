@@ -1,30 +1,26 @@
 import React, { useState, useEffect, useRef } from 'react';
 
-import Footer from '../Footer/Footer';
-
 import styles from "./Allobs.module.css"
 import axios from "axios";
-import { Link, useNavigate, BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
-import { TailSpin, Puff } from "react-loader-spinner"
+import { Link, useNavigate } from "react-router-dom";
+import { Puff } from 'react-loader-spinner'
 import location from "../img/icons8-location-20.png"
 import graduation from "../img/icons8-graduation-cap-40.png"
-import {jobTags} from '../Tags'
-
-
 import useScreenSize from '../SizeHook';
-import socketIO from 'socket.io-client';
-
+// import {SwipeableViews} from 'react-swipeable-views-v18';
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
-const responsive = {
+import Footer from '../Footer/Footer';
+import {jobTags} from '../Tags'
 
+const responsive = {
   desktop: {
     breakpoint: { max: 3000, min: 1024 },
     items: 14
   },
   tablet: {
     breakpoint: { max: 1024, min: 464 },
-    items: 2
+    items: 1
   },
   mobile: {
     breakpoint: { max: 464, min: 0 },
@@ -32,78 +28,89 @@ const responsive = {
   }
 };
 
-// import { Bars } from  'react-loader-spinner'
-function AllJobs(props) {
-  useEffect(() => {
-    const socket = socketIO.connect(props.url, {
-      auth: {
-        token: JSON.parse(localStorage.getItem("StudId"))
-      }
-    });
-  }, [])
 
-  let JobLocationTags = ["Bangalore"]
+function Blogs() {
 
   const [jobs, setJobs] = useState([])
-  const [Filterjobs, setFilterjobs] = useState([])
 
   const [nopageFilter, setNoPageFilter] = useState(false)
   const [Filtereredjobs, setFiltereredjobs] = useState([])
 
+  const [Filterjobs, setFilterjobs] = useState([])
+
   const [isReadMore, setIsReadMore] = useState(true)
-  const [jobapplied, setjobapplied] = useState(false)
-  const [userProfile, setuserProfile] = useState([])
   const [showJobs, setshowJobs] = useState(false)
   const [showExperiance, setshowExperiance] = useState(false)
   const [showPackage, setshowPackage] = useState(false)
   const [PageLoader, setPageLoader] = useState(false)
   const [Result, setResult] = useState(false)
-  const [nojob, setnojob] = useState("")
-  const screenSize = useScreenSize();
+  const [NotFound, setNotFound] = useState("")
   const [Active, setActive] = useState([])
+  const screenSize = useScreenSize();
 
-  const [Loader, setLoader] = useState(false)
+  // let AgeTags = [
+ 
+  // let jobTags = [
 
-  const [clickedJobId, setclickedJobId] = useState() //for single job loader
-  let jobSeekerId = JSON.parse(localStorage.getItem("StudId"))
+    
+  //   ]
 
+  let JobLocationTags = ["Bangalore"]
 
-  // let menuRef = useRef();
-  // let imgRef = useRef();
+  let navigate = useNavigate()
 
-  // window.addEventListener("click", (e) => {
-  //   if (e.target !== menuRef.current) {
-  //     setshowPosteddateJobs(false)
-  //     console.log(menuRef.current)
+  // useEffect(() => {
+  //   let EmployeeAuth = localStorage.getItem("EmpLog")
+  //   if (EmployeeAuth) {
+  //     navigate("/postedjobs")
   //   }
-  // })
+  // }, [])
 
+  // useEffect(() => {
+  //   let studentAuth = localStorage.getItem("StudLog")
+  //   if (studentAuth) {
+  //     navigate("/alljobs")
+  //   }
+  // }, [])
+  // useEffect(() => {
+  //   let adminLogin = localStorage.getItem("AdMLog")
+  //   if (adminLogin) {
+  //     navigate("/BIAddmin@Profile")
+  //   }
+  // }, [])
 
+  let recordsperpage = JSON.parse(sessionStorage.getItem("recordsperpageHome"))
 
-  const navigate = useNavigate()
-  const Location = useLocation()
+  const [currentPage, setCurrentPage] = useState(1)
+  const [recordsPerPage, setrecordsPerPage] = useState(recordsperpage ? recordsperpage : 10)
+
+  const lastIndex = currentPage * recordsPerPage //10
+  const firstIndex = lastIndex - recordsPerPage //5
+  const records = jobs.slice(firstIndex, lastIndex)//0,5
+  const npage = Math.ceil(jobs.length / recordsPerPage) // last page
+  const number = [...Array(npage + 1).keys()].slice(1)
+
 
   async function getjobs() {
     setCount(1)
     setActive([])
 
-
     setPageLoader(true)
     setNoPageFilter(false)
-
-    let userid = JSON.parse(localStorage.getItem("StudId"))
-    const headers = { authorization: userid + " " + atob(JSON.parse(localStorage.getItem("StudLog"))) };
-    await axios.get("/jobpost/getjobs", { headers })
+    const headers = { authorization: 'BlueItImpulseWalkinIn' };
+    await axios.get("/BlogRoutes/getAllBlogs", { headers })
       .then((res) => {
+
         let result = (res.data)
-        let sortedate = result.sort((a, b) => {
+        // console.log(result)
+        let sortedate = result.sort(function (a, b) {
           return new Date(b.createdAt) - new Date(a.createdAt);
         });
         setJobs(sortedate)
         setFilterjobs(sortedate)
         setPageLoader(false)
       }).catch((err) => {
-        alert("server issue occured")
+        alert("some thing went wrong")
       })
   }
 
@@ -111,41 +118,26 @@ function AllJobs(props) {
     getjobs()
   }, [])
 
+  async function applyforJob(id) {
+    navigate("/JobSeekerLogin", { state: { Jid: id } })
+    // window.open(`${Link}`)
+  }
   async function applyforOtherJob(Link) {
     // navigate("/JobSeekerLogin", { state: { Jid: id } })
     window.open(`${Link}`)
   }
 
-  async function applyforJob(jobId) {
-    let date = new Date()
-    let userid = JSON.parse(localStorage.getItem("StudId"))
-    const headers = { authorization: userid + " " + atob(JSON.parse(localStorage.getItem("StudLog"))) };
-    setclickedJobId(jobId)
-    setLoader(true)
-    // setTimeout(async () => {
-
-      await axios.put(`/jobpost/updatforJobApply/${jobId}`, { jobSeekerId, date }, { headers })
-        .then((res) => {
-          if (res.data) {
-            setLoader(false)
-            getjobs()
-          }
-        }).catch((err) => {
-          alert("server issue occured", err)
-        })
-    // }, 5000)
-  }
+  // ...................search..........
 
   // async function search(e) {
   //   let key = e.target.value
 
-  //   await axios.get(`/jobpost/searchJob/${key}`)
+  //   await axios.get(`https://itwalkin-backend.onrender.com/jobpost/searchJob/${key}`)
   //     .then((res) => {
   //       if (key) {
-  //         setJobs(res.data)
+  //         setJobs(res.data)        
   //       } else {
   //         getjobs()
-
   //       }
   //     })
   // }
@@ -170,19 +162,20 @@ function AllJobs(props) {
       setResult(false)
     }
   }
-
   async function search(e) {
+
     setNoPageFilter(true)
     let key = e.target.value
-    setsearchKey(key)
-
     setFiltereredjobs(key)
+    setsearchKey(key)
     if (key) {
       setResult(true)
       let dubmyjobs = [...Filterjobs]
-      const filteredItems = dubmyjobs.filter((user) =>
-        JSON.stringify(user).toLowerCase().includes(key.toLowerCase())
-      )
+      const filteredItems = dubmyjobs.filter((user) => {
+        if (JSON.stringify(user).includes(key.toLowerCase())) {
+          return user
+        }
+      })
       setJobs(filteredItems)
     } else {
       getjobs()
@@ -190,22 +183,25 @@ function AllJobs(props) {
     }
   }
 
+
+
   function sortbyOldjobs() {
     let newjob = [...jobs]
     let oldjobSort = newjob.sort(function (a, b) {
       return new Date(a.createdAt) - new Date(b.createdAt);
     })
     setJobs(oldjobSort)
-
   }
+
   function sortbyNewjobs() {
+
     let newjob = [...jobs]
     let newjobSort = newjob.sort(function (a, b) {
       return new Date(b.createdAt) - new Date(a.createdAt);
     })
     setJobs(newjobSort)
-
   }
+
 
   function SdescendingOrder() {
     let newJobs = [...jobs]
@@ -276,6 +272,12 @@ function AllJobs(props) {
     })
     setJobs(sorted)
   }
+  function checkEmpHalf(empId, e) {
+
+    navigate(`/CheckEmpHalfProfile/${empId}`)
+
+  }
+
 
   // const [jobTitle, setjobTitle] = useState("")
   const [jobLocation, setjobLocation] = useState("AllL")
@@ -301,7 +303,6 @@ function AllJobs(props) {
           return new Date(b.createdAt) - new Date(a.createdAt);
         });
         setJobs(sortedate)
-
       })
   }
 
@@ -325,7 +326,6 @@ function AllJobs(props) {
     await axios.post(`/jobpost/getBothjobFilter/${jobLocation}`, { jobTitle })
       .then((res) => {
         let result = (res.data)
-        console.log(result)
         let sortedate = result.sort(function (a, b) {
           return new Date(b.createdAt) - new Date(a.createdAt);
         });
@@ -337,21 +337,7 @@ function AllJobs(props) {
   }
 
 
-  // function checkEmpHalf(empId) {
-  //   navigate(`CheckEmpHalfProfile/${empId}`)
-  // }
-
-  let recordsperpage = JSON.parse(sessionStorage.getItem("recordsperpage"))
-
-  const [currentPage, setCurrentPage] = useState(1)
-  const [recordsPerPage, setrecordsPerPage] = useState(recordsperpage ? recordsperpage : 10)
-  const lastIndex = currentPage * recordsPerPage //10
-  const firstIndex = lastIndex - recordsPerPage //5
-  const records = jobs.slice(firstIndex, lastIndex)//0,5
-  const npage = Math.ceil(jobs.length / recordsPerPage) // last page
-  const number = [...Array(npage + 1).keys()].slice(1)
-
-  function firstPage(id) {
+  function firstPage() {
     setCurrentPage(1)
   }
 
@@ -371,38 +357,21 @@ function AllJobs(props) {
   function last() {
     setCurrentPage(npage)
   }
+
   function handleRecordchange(e) {
-    sessionStorage.setItem("recordsperpage", JSON.stringify(e.target.value));
-    let recordsperpage = JSON.parse(sessionStorage.getItem("recordsperpage"))
+    sessionStorage.setItem("recordsperpageHome", JSON.stringify(e.target.value));
+    let recordsperpage = JSON.parse(sessionStorage.getItem("recordsperpageHome"))
     setrecordsPerPage(recordsperpage)
     setCurrentPage(1)
   }
 
-  async function getLocation(jobLocation) {
-    setCount(1)
-    setActive([])
-
-    setFiltereredjobs(jobLocation)
-    setNoPageFilter(true)
-    await axios.get(`/jobpost/getjobLocation/${jobLocation}`)
-      .then((res) => {
-        let result = (res.data)
-        let sortedate = result.sort(function (a, b) {
-          return new Date(b.createdAt) - new Date(a.createdAt);
-        });
-        setJobs(sortedate)
-        // setPageLoader(false)
-      }).catch((err) => {
-        alert("some thing went wrong")
-      })
-  }
-
-
   const [count, setCount]=useState(1)
 
   async function filterByJobTitle(key) {
+
     if(count==1){
       setJobs("")
+
     }
     setCount(prev=>prev+1)
 
@@ -425,57 +394,82 @@ return(
     }
     if(jobs.length>0){
          let removedItems = jobs.filter((tags)=>{
-            return(     
-              !tags.Tags.includes(key)   
+            return( 
+              !tags.Tags.includes(key)
+              // !tags.Tags.map((value)=>{
+              //   return(
+              //   value.value
+              //   )
+              // }).includes(key)    
         )
       }) 
       setJobs(removedItems)
       return false
-    }}
-    // setActive(key)
+    }
+  }
+
     setNoPageFilter(true)
     setFiltereredjobs(key)
     await axios.get(`/jobpost/getTagsJobs/${key}`)
-      .then((res) => {
+      .then( (res) => {
         let result = (res.data)
-        let sortedate = result.sort((a, b) => {
+        let sortedate = result.sort( (a, b) => {
           return new Date(b.createdAt) - new Date(a.createdAt);
         });
-        // setJobs(sortedate)
         let elements=  sortedate.flatMap(element => {
           setJobs(oldArray => [...oldArray,element] )
      });
       })
   }
 
+  async function getLocation(jobLocation) {
+    setCount(1)
+    setActive(["Banglore"])
+    setFiltereredjobs(jobLocation)
+    setNoPageFilter(true)
+
+    await axios.get(`/jobpost/getjobLocation/${jobLocation}`)
+      .then((res) => {
+        let result = (res.data)
+        let sortedate = result.sort(function (a, b) {
+          return new Date(b.createdAt) - new Date(a.createdAt);
+        });
+        setJobs(sortedate)
+        // setPageLoader(false)
+      }).catch((err) => {
+        alert("some thing went wrong")
+      })
+  }
+
   return (
     <>
+
       {screenSize.width > 850 ?
         <>
         <div className={styles.NavConetenetWrapper}>
 
-<div className={styles.LocationFilterWrapper}>
-  {
-    JobLocationTags.map((location, i) => {
-      return (
-        <>
-        <label className={styles.JobLocationFilter}>
-        <input type="radio" checked disabled={location == "Chennai" ||
-        location == "Hyderabad" || location == "Mumbai" || location == "Delhi"} name="filter" onClick={() => 
-            { getjobs()}} />{location}</label><br></br>
-            </>
-      )
-    })
-  }
-</div>      
 
-<div className={styles.searchBothForNavWrapper}>
-  <input className={styles.inputboxsearchNav} type="text" placeholder='Search for a Job / Skills / Location / Experiance' onChange={(e) => { search(e) }} />
+          <div className={styles.LocationFilterWrapper}>
+            {
+              JobLocationTags.map((location, i) => {
+                return (
+                  <>
+                  <label className={styles.JobLocationFilter}>
+                  <input type="radio" checked disabled={location == "Chennai" ||
+                  location == "Hyderabad" || location == "Mumbai" || location == "Delhi"} name="filter" onClick={() => 
+                      { getjobs() }} />{location}</label><br></br>
+                      </>
+                )
+              })
+            }
+          </div>          
+          <div className={styles.searchBothForNavWrapper}>
+            <input className={styles.inputboxsearchNav} type="text" placeholder='Search for a Job / Skills / Location / Experiance' onChange={(e) => { search(e) }} />
 
-  <i style={{ color: "rgb(40, 4, 99)", fontSize: "18px", cursor: "pointer" , marginLeft:"2%"}} onClick={() => { searchIcon(searchKey) }}
-    class="fa fa-search" ></i>
-</div>
-</div>
+            <i style={{ color: "rgb(40, 4, 99)", fontSize: "18px", cursor: "pointer" , marginLeft:"2%"}} onClick={() => { searchIcon(searchKey) }}
+              class="fa fa-search" ></i>
+          </div>
+          </div>
           {Result ?
             <h4 style={{ marginLeft: "40%", marginTop: "20px" }}> {jobs.length} matching Result Found  </h4>
             : ""
@@ -484,46 +478,46 @@ return(
         : ""
       }
 
+
       {screenSize.width > 850 ?
         <>
+        <p style={{ color: " red", marginLeft: "4%" , zIndex: "100",}}>Note: this website is under development process</p>
+
 
           <div className={styles.JobtitleFilterWrapper}>
-            <buton className={Active.length===0?styles.active:styles.JobtitleFilter} onClick={() => { getjobs() }}>All</buton>
+            <buton className={ Active.length===0? styles.active:styles.JobtitleFilter} onClick={() => { getjobs() }}>All</buton>
             {
               jobTags.map((tags, i) => {
                 return (
-                  // <buton className={Active === tags.value ? styles.active : styles.JobtitleFilter} onClick={() => { filterByJobTitle(tags.value) }}>{tags.value} </buton>
+                                   
                   <button disabled={tags.value==="TECHNOLOGIES" || tags.value==="EDUCATION" || tags.value==="COLLEGE TYPE" || tags.value==="NOTICE PERIOD" || tags.value==="SALARY" || 
-                    tags.value==="EXPERIENCE" || tags.value==="Job Type" || tags.value==="INDUSTRY" || tags.value==="TOOLS/PROTOCOLS" 
-                    || tags.value==="ROLE"  || tags.value==="COMPANY TYPE" 
-                  } 
+                    tags.value==="EXPERIENCE" || tags.value==="Job Type" || tags.value==="INDUSTRY" || tags.value==="TOOLS/PROTOCOLS" || tags.value==="ROLE" || tags.value==="COMPANY TYPE" } 
                     className={tags.value==="TECHNOLOGIES" || tags.value==="EDUCATION" || tags.value==="COLLEGE TYPE" || tags.value==="NOTICE PERIOD" || tags.value==="SALARY" || 
-                    tags.value==="EXPERIENCE" || tags.value==="Job Type" || tags.value==="INDUSTRY" || tags.value==="TOOLS/PROTOCOLS"
-                     || tags.value==="COMPANY TYPE" || tags.value==="ROLE"?
-                    styles.TagHeading:
-                      // Active === tags.value ? 
-                      Active.findIndex( (present)=>{
-                        return(
-                          present===tags.value
-                        )
-                            })>=0?
-                    styles.active : styles.JobtitleFilter} onClick={() => { filterByJobTitle(tags.value) }}>{tags.value} </button>
+                    tags.value==="EXPERIENCE" || tags.value==="Job Type" || tags.value==="INDUSTRY" || tags.value==="TOOLS/PROTOCOLS" || tags.value==="COMPANY TYPE" || tags.value==="ROLE"?
+                    styles.TagHeading: 
+                    //  Active === tags.value ? 
+                    Active.findIndex(  (present)=>{
+                      return(
+                        present===tags.value
+                      )
+                          }) >=0?
+                     styles.active : styles.JobtitleFilter} onClick={ () => {  filterByJobTitle(tags.value) }}>{tags.value} </button>
                 
-                )
+                  )
               })
             }
           </div>
 
           <div style={{ display: "flex", justifyContent: "space-between" }}>
             {nopageFilter ?
-              <p style={{ fontWeight: 400, marginLeft: "10px" }}>Displaying Jobs with following matching tags: 
+              <p style={{ fontWeight: 400, marginLeft: "10px" }}>Displaying Jobs with following matching tags:
               <span style={{ color: "blue" }}>{Active.toString()}</span></p>
               :
               <p style={{ fontWeight: 400, marginLeft: "10px" }}>showing {firstIndex + 1} to {lastIndex} latest jobs</p>
             }
             <div className={styles.navigationWrapper}>
               <button disabled={currentPage === 1} style={{ display: "inline", margin: "5px" }} className={styles.navigation} onClick={firstPage}>
-                <i class='fas fa-step-backward'></i>
+                <i class='fas fa-step-backward' ></i>
               </button>
               <button disabled={currentPage === 1} style={{ display: "inline", margin: "5px" }} className={styles.navigation} onClick={previous}>
                 <i class='fas fa-caret-square-left'></i>
@@ -539,263 +533,230 @@ return(
           </div>
           <div style={{ marginBottom: "5px", marginTop: "0", marginLeft: "10px" }}>
             Show  <select onChange={(e) => { handleRecordchange(e) }}>
+              {/* <option value={""}>{recordsPerPage}</option> */}
               <option selected={lastIndex === 10} value={10}>10</option>
               <option selected={lastIndex === 25} value={25}>25</option>
               <option selected={lastIndex === 50} value={50}>50</option>
               <option selected={lastIndex === 100} value={100}>100</option>
             </select>  jobs per page
           </div>
+          {/* <button >Previous</button>
+          { number.map((job,index)=>{
+              return(
+                <button onClick={()=>{changeCurrent(job)}}>{job}</button>
+              )
+            })      }
+          <button >Next</button>  */}
 
           <div className={styles.Uiwarpper}>
             <ul className={styles.ul} style={{ color: 'white', fontWeight: "bold" }}>
-
-              <li style={{ backgroundColor: " rgb(40, 4, 99)" }} className={`${styles.li} ${styles.Jtitle}`}>Job Title</li>
+              <li style={{ backgroundColor: " rgb(40, 4, 99)" }} className={`${styles.li} ${styles.Jtitle}`}>Blog Title</li>
               <li style={{ backgroundColor: " rgb(40, 4, 99)" }} className={`${styles.li} ${styles.Source}`}>Source</li>
               <li style={{ backgroundColor: " rgb(40, 4, 99)" }} className={`${styles.li} ${styles.CompanyName}`}>Company Name</li>
-              <li style={{ backgroundColor: " rgb(40, 4, 99)" }} className={`${styles.li} ${styles.JobType}`}>JobType</li>
-              {/* <li className={`${styles.li} ${styles.HliDescription}`}><b>Job description</b></li> */}
-              <li style={{ backgroundColor: " rgb(40, 4, 99)" }} className={`${styles.li} ${styles.date}`}>Posted Date
-                <p className={styles.arrowWrapper} >
-                  <i onClick={sortbyNewjobs} className={`${styles.arrow} ${styles.up}`}> </i>
-                  <i onClick={sortbyOldjobs} className={`${styles.arrow} ${styles.down}`}></i>
-                </p >
-              </li>
+              {/* <li style={{ backgroundColor: " rgb(40, 4, 99)" }} className={`${styles.li} ${styles.JobType}`}>JobType</li> */}
 
-              <li style={{ backgroundColor: " rgb(40, 4, 99)" }} className={`${styles.li} ${styles.Location}`}>Location</li>
-              <li style={{ backgroundColor: " rgb(40, 4, 99)" }} className={`${styles.li} ${styles.Package}`} >CTC
+              <li style={{ backgroundColor: " rgb(40, 4, 99)" }} className={`${styles.li} ${styles.HliDescription}`}><b>Blog description</b></li>
+              <li style={{ backgroundColor: " rgb(40, 4, 99)", }} className={`${styles.li} ${styles.date}`}>Posted Date
+                <p className={styles.arrowWrapper} >
+                  <i onClick={sortbyNewjobs} className={`${styles.arrow} ${styles.up}`} ></i>
+                  <i onClick={sortbyOldjobs} className={`${styles.arrow} ${styles.down}`}></i>
+                </p>
+              </li>
+              {/* <li style={{ backgroundColor: " rgb(40, 4, 99)" }} className={`${styles.li} ${styles.Location}`}>Location</li>
+
+              <li style={{ backgroundColor: " rgb(40, 4, 99)", }} className={`${styles.li} ${styles.Package}`}>CTC
                 <p className={styles.arrowWrapper}>
+
                   <i onClick={SdescendingOrder} className={`${styles.arrow} ${styles.up}`}> </i>
                   <i onClick={SascendingOrder} className={`${styles.arrow} ${styles.down}`}></i>
                 </p>
               </li>
 
-              <li style={{ backgroundColor: " rgb(40, 4, 99)" }} className={`${styles.li} ${styles.experiance}`}>Expereince
+              <li style={{ backgroundColor: " rgb(40, 4, 99)", }} className={`${styles.li} ${styles.experiance}`}>Experience
                 <p className={styles.arrowWrapper}>
+
                   <i onClick={EdescendingOrder} className={`${styles.arrow} ${styles.up}`}> </i>
                   <i onClick={EascendingOrder} className={`${styles.arrow} ${styles.down}`}></i>
                 </p>
               </li>
               <li style={{ backgroundColor: " rgb(40, 4, 99)" }} className={`${styles.li} ${styles.qualification}`}>Qualification</li>
+
+
               <li style={{ backgroundColor: " rgb(40, 4, 99)" }} className={`${styles.li} ${styles.Skills}`}>Skills Required</li>
-              <li style={{ backgroundColor: " rgb(40, 4, 99)" }} className={`${styles.li} ${styles.Status}`}>Status</li>
+              */}
+              <li style={{ backgroundColor: " rgb(40, 4, 99)" }} className={`${styles.li} ${styles.Apply}`}>Check</li>
 
             </ul>
             {PageLoader ?
               <Puff height="80" width="80" color="#4fa94d" ariaLabel="bars-loading" wrapperStyle={{ marginLeft: "49%", marginTop: "50px" }} />
               : ""
             }
+            {!nopageFilter ?
+              records.length > 0 ?
+                records.map((items, i) => {
+                  return (
 
-            {
-              !nopageFilter ?
-                records.length > 0 ?
-                  records.map((items, i) => {
-                    return (
+                    <ul className={styles.ul} key={i}>
+                      {/* } */}
 
-                      <ul className={styles.ul} key={i}>
+                      <li className={`${styles.li} ${styles.Jtitle}`} onClick={() => navigate(`/Jobdetails/${btoa(items._id)}`)} style={{ cursor: "pointer", textDecoration: "underline", color: "blue" }}>{items.jobTitle}</li>
+                       <li className={`${styles.li} ${styles.Source}`} >Itwalkin</li>
+                     
+                      {
+                        !items.Source ?
 
-{/* } */}
+                          <li style={{ cursor: "pointer", textDecoration: "underline" }} className={`${styles.li} ${styles.CompanyName}`}
+                            onClick={(e) => { checkEmpHalf(btoa(items.empId)) }}  >
 
-<li className={`${styles.li} ${styles.Jtitle}`} onClick={() => navigate(`/Jobdetails/${btoa(items._id)}`)} style={{ cursor: "pointer", textDecoration: "underline", color: "blue" }}>{items.jobTitle.toUpperCase()}</li>
-                          <li className={`${styles.li} ${styles.Source}`} >Itwalkin</li>
-
-
-                        {
-                          !items.Source ?
-
-                            <li style={{ cursor: "pointer", textDecoration: "underline" }} className={`${styles.li} ${styles.CompanyName}`}
-                              onClick={() => { navigate(`/CheckEmpHalfProfile/${btoa(items.empId)}`) }}  >
-                              {/* {items.Logo ?
+                            {/* {items.Logo ?
                               < img style={{ width: "38px", height: "38px" }} src={items.Logo} />
-                              : ""}
-                              <br></br> 
+                              : ""} 
+                              <br></br>
                               */}
-                              {items.companyName}</li>
-                            :
-                            <a style={{ cursor: "pointer", textDecoration: "underline" }} className={`${styles.li} ${styles.CompanyName}`} href={items.SourceLink} target="_blank" >
-                              {/* {items.Logo ?
+                            {items.companyName}</li>
+                          :
+                          <a style={{ cursor: "pointer", textDecoration: "underline" }} className={`${styles.li} ${styles.CompanyName}`} href={items.SourceLink} target="_blank" >
+                            {/* {items.Logo ?
                               < img style={{ width: "38px", height: "38px" }} src={items.Logo} />
                               : ""}<br></br> */}
-                              {items.Source}
+                            {items.Source}
 
-                            </a>
+                          </a>
 
-                        }
+                      }
 
-                        {/* {items.Source ?
-                        <a className={`${styles.li} ${styles.Source}`} href={items.SourceLink} target="_blank">{items.Source}</a>
-                        : */}
-                      
-                        <li className={`${styles.li} ${styles.JobType}`}>{items.jobtype}</li>
+                      {/* {items.Source ?
+                        <a className={`${styles.li} ${styles.Source}`} href={items.SourceCompanyLink} target="_blank">{items.Source}</a>
+                        :                         */}
+                     
+                      {/* <li className={`${styles.li} ${styles.JobType}`}>{items.jobtype}</li> */}
 
-                        {/* <li className={`${styles.li} ${styles.liDescription}`}>
-                   
-                   {
-                    items.jobDescription.map((descrip, di) => {
-                      return (
-                        <>
+                      <li className={`${styles.li} ${styles.liDescription}`}>
                           {
-  
-                                  descrip.text.slice(0,50)            
-                          }
-                        </>
-                      )
-                    }).slice(0,1)
-                    }
-                   
-                  <span onClick={() => navigate(`/Jobdetails/${items._id}`)} className={styles.seeMore}>
-                    ...read more
-                  </span>
-                </li> */}
-                        <li className={`${styles.li} ${styles.date}`}>
-                          {new Date(items.createdAt).toLocaleString(
-                            "en-US",
-                            {
-                              month: "short",
-                              day: "2-digit",
-                              year: "numeric",
-                            }
-                          )}
-                        </li>
-                        <li className={`${styles.li} ${styles.Location}`}>
-                          {items.jobLocation[0].toUpperCase() + items.jobLocation.slice(1)}</li>
-                        <li className={`${styles.li} ${styles.Package}`}>{items.salaryRange}L</li>
-                        <li className={`${styles.li} ${styles.experiance}`}>{items.experiance}Y</li>
-                        <li className={`${styles.li} ${styles.qualification}`}>{items.qualification}</li>
-                        <li className={`${styles.li} ${styles.Skills}`}>{items.skills}</li>
-
-                        <li className={`${styles.li} ${styles.Status}`}>
-
-                          {
-                            items.jobSeekerId.find((jobseeker) => {
+                            items.jobDescription.map((descrip, di) => {
                               return (
-                                jobseeker.jobSeekerId == jobSeekerId
+                                <>
+                                  {
+                                    descrip.text.slice(0,150)
+                                  }
+                                </>
                               )
-                            })
-                              ?
-                              <button className={styles.Appliedbutton} title='HR will get in touch with you, Once they will check Your Profile' > Applied <span style={{ fontSize: '15px' }}>&#10004;</span></button>
-
-                              :
-                              // items .isApproved?
-                              items.SourceLink ?
-                                <button title='This will redirect to the source company webpage' className={styles.Applybutton} onClick={() => {
-                                  applyforOtherJob(items.SourceLink)
-                                }}>Apply</button>
-                                :
-
-                                <button className={styles.Applybutton} onClick={() => { applyforJob(items._id) }}>Apply
-                                  <span className={styles.Loader} >{Loader && items._id == clickedJobId ?
-                                    <TailSpin color="white" height={20} />
-                                    : ""}</span></button>
-                            //  : <button className={styles.Applybutton} onClick={()=>{alert("You can not Apply for the job, Your account is under Approval Process")}} > Apply </button>
+                            }).slice(0, 2)
                           }
+  
+                          <span onClick={() => navigate(`/Jobdetails/${items._id}`)} className={styles.seeMore}>
+                            ...read more
+                          </span>
                         </li>
-                      </ul>
-                    )
-                  })
-                  : <p style={{ marginLeft: "47%", color: "red" }}>No Record Found</p>
-                :
-                jobs.length > 0 ?
-                  jobs.map((items, i) => {
-                    return (
+                      <li className={`${styles.li} ${styles.date}`}>
+                        {new Date(items.createdAt).toLocaleString(
+                          "en-US",
+                          {
+                            month: "short",
+                            day: "2-digit",
+                            year: "numeric",
+                          }
+                        )}
+                      </li>
+                      {/* <li className={`${styles.li} ${styles.Location}`}>{items.jobLocation[0].toUpperCase() + items.jobLocation.slice(1)}</li>
+                      <li className={`${styles.li} ${styles.Package}`}>{items.salaryRange}L</li>
+                      <li className={`${styles.li} ${styles.experiance}`}>{items.experiance}Y</li>
+                      <li className={`${styles.li} ${styles.qualification}`}>{items.qualification}</li>
+                      <li className={`${styles.li} ${styles.Skills}`}>{items.skills} </li> */}
 
-                      <ul className={styles.ul} key={i}>
-{/* } */}
+                      <li className={`${styles.li} ${styles.Apply}`}>
+                        {items.SourceLink ?
+                          <button title='this will take to Source page' className={styles.Applybutton} onClick={() => {
+                            applyforOtherJob(items.SourceLink)
+                          }}>Apply</button>
+                          :
+                          <button className={styles.Applybutton} onClick={() => { applyforJob(items._id) }}>Check</button>
+                        }
+                      </li>
+                    </ul>
+                  )
+                })
+                : <p style={{ marginLeft: "47%", color: "red" }}>No Record Found</p>
+              :
+              jobs.length > 0 ?
+                jobs.map((items, i) => {
+                  return (
 
-<li className={`${styles.li} ${styles.Jtitle}`} onClick={() => navigate(`/Jobdetails/${btoa(items._id)}`)} style={{ cursor: "pointer", textDecoration: "underline", color: "blue" }}>{items.jobTitle.toUpperCase()}</li>
-                          <li className={`${styles.li} ${styles.Source}`} >Itwalkin</li>
+                    <ul className={styles.ul} key={i}>
 
+<li className={`${styles.li} ${styles.Jtitle}`} onClick={() => 
+  navigate(`/Jobdetails/${btoa(items._id)}`)} style={{ cursor: "pointer", textDecoration: "underline", color: "blue" }}>{items.jobTitle}</li>
+                                            <li className={`${styles.li} ${styles.Source}`} >Itwalkin</li>
 
-                        {
-                          !items.Source ?
+                      
+                      {
+                        !items.Source ?
 
-                            <li style={{ cursor: "pointer", textDecoration: "underline" }} className={`${styles.li} ${styles.CompanyName}`}
-                              onClick={() => { navigate(`/CheckEmpHalfProfile/${btoa(items.empId)}`) }}  >
-                              {/* {items.Logo ?
+                          <li style={{ cursor: "pointer", textDecoration: "underline" }} className={`${styles.li} ${styles.CompanyName}`}
+                            onClick={(e) => { checkEmpHalf(btoa(items.empId)) }}  >
+                            {/* {items.Logo ?
                               < img style={{ width: "38px", height: "38px" }} src={items.Logo} />
-                              : ""}
-                              <br></br> 
+                              : ""} 
+                              <br></br>
                               */}
-                              {items.companyName}</li>
-                            :
-                            <a style={{ cursor: "pointer", textDecoration: "underline" }} className={`${styles.li} ${styles.CompanyName}`} href={items.SourceLink} target="_blank" >
-                              {/* {items.Logo ?
+                            {items.companyName}</li>
+                          :
+                          <a style={{ cursor: "pointer", textDecoration: "underline" }} className={`${styles.li} ${styles.CompanyName}`} href={items.SourceLink} target="_blank" >
+                            {/* {items.Logo ?
                               < img style={{ width: "38px", height: "38px" }} src={items.Logo} />
                               : ""}<br></br> */}
-                              {items.Source}
+                            {items.Source}
 
-                            </a>
+                          </a>
 
-                        }
+                      }
 
-                        {/* {items.Source ?
-                        <a className={`${styles.li} ${styles.Source}`} href={items.SourceLink} target="_blank">{items.Source}</a>
+                      {/* {items.Source ?
+                        <a className={`${styles.li} ${styles.Source}`} >{items.Source}</a>
                         : */}
-                       
-                        <li className={`${styles.li} ${styles.JobType}`}>{items.jobtype}</li>
 
-                        {/* <li className={`${styles.li} ${styles.liDescription}`}>
-                   
-                   {
-                    items.jobDescription.map((descrip, di) => {
-                      return (
-                        <>
+                      {/* <li className={`${styles.li} ${styles.JobType}`}>{items.jobtype}</li> */}
+
+                      <li className={`${styles.li} ${styles.liDescription}`}>
                           {
+                            items.jobDescription.map((descrip, di) => {
+                              return (
+                                <>
+                                  {
+                                    descrip.text.slice(0,50)
+                                  }
+                                </>
+                              )
+                            }).slice(0, 1)
+                          }
   
-                                  descrip.text.slice(0,50)            
-                          }
-                        </>
-                      )
-                    }).slice(0,1)
-                    }
-                   
-                  <span onClick={() => navigate(`/Jobdetails/${items._id}`)} className={styles.seeMore}>
-                    ...read more
-                  </span>
-                </li> */}
-                        <li className={`${styles.li} ${styles.date}`}>
-                          {new Date(items.createdAt).toLocaleString(
-                            "en-US",
-                            {
-                              month: "short",
-                              day: "2-digit",
-                              year: "numeric",
-                            }
-                          )}
+                          <span onClick={() => navigate(`/Jobdetails/${items._id}`)} className={styles.seeMore}>
+                            ...read more
+                          </span>
                         </li>
-                        <li className={`${styles.li} ${styles.Location}`}>{items.jobLocation[0].toUpperCase() + items.jobLocation.slice(1)}</li>
-                        <li className={`${styles.li} ${styles.Package}`}>{items.salaryRange}L</li>
-                        <li className={`${styles.li} ${styles.experiance}`}>{items.experiance}Y</li>
-                        <li className={`${styles.li} ${styles.qualification}`}>{items.qualification}</li>
-                        <li className={`${styles.li} ${styles.Skills}`}>{items.skills}</li>
-
-                        <li className={`${styles.li} ${styles.Status}`}>
-
-                          {items.jobSeekerId.find((jobseeker) => {
-                            return (
-                              jobseeker.jobSeekerId == jobSeekerId
-                            )
-                          }) ?
-                            <button className={styles.Appliedbutton} title='HR will get in touch with you, Once they will check Your Profile' > Applied <span style={{ fontSize: '15px' }}>&#10004;</span></button>
-
-                            :
-                            // items .isApproved?
-                            items.SourceLink ?
-                              <button title='this will take to Source page' className={styles.Applybutton} onClick={() => {
-                                applyforOtherJob(items.SourceLink)
-                              }}>Apply</button>
-                              :
-
-                              <button className={styles.Applybutton} onClick={() => { applyforJob(items._id) }}>Apply
-                                <span className={styles.Loader} >{Loader && items._id == clickedJobId ?
-                                  <TailSpin color="white" height={20} />
-                                  : ""}</span></button>
-                            //  : <button className={styles.Applybutton} onClick={()=>{alert("You can not Apply for the job, Your account is under Approval Process")}} > Apply </button>
+                      <li className={`${styles.li} ${styles.date}`}>
+                        {new Date(items.createdAt).toLocaleString(
+                          "en-US",
+                          {
+                            month: "short",
+                            day: "2-digit",
+                            year: "numeric",
                           }
-                        </li>
-                      </ul>
-                    )
-                  })
-                  : <p style={{ marginLeft: "47%", color: "red" }}>No Record Found</p>
+                        )}
+                      </li>
+                      {/* <li className={`${styles.li} ${styles.Location}`}>{items.jobLocation[0].toUpperCase() + items.jobLocation.slice(1)}</li>
+                      <li className={`${styles.li} ${styles.Package}`}>{items.salaryRange}L</li>
+                      <li className={`${styles.li} ${styles.experiance}`}>{items.experiance}Y</li>
+                      <li className={`${styles.li} ${styles.qualification}`}>{items.qualification}</li>
+                      <li className={`${styles.li} ${styles.Skills}`}>{items.skills}</li> */}
+
+                      <li className={`${styles.li} ${styles.Apply}`}>
+                        <button className={styles.Applybutton} onClick={() => { applyforJob(items._id) }}>Check</button>
+                    </li>
+                  </ul>
+                  )
+                })
+                : <p style={{ marginLeft: "47%", color: "red" }}>No Record Found</p>
             }
           </div>
 
@@ -826,14 +787,14 @@ return(
             </div>
 
           </div>
-
-          {/* <div style={{marginTop:"200px", position:"sticky", bottom:0}}>
+{/*           
+          <div style={{marginTop:"200px", position:"sticky", bottom:0}}>
           <Footer/>
         </div> */}
 
         </>
-        :
         // Mobile View
+        :
         <>
           <div className={styles.searchBoth}>
             <p className={styles.p}>Search </p>
@@ -841,11 +802,10 @@ return(
           </div>
           {Result ?
             <h4 style={{ marginLeft: "18.5%", marginTop: "10px" }}> {jobs.length} matching Result Found  </h4>
-
             : ""
           }
-
-<div className={styles.MobLocationFilterWrapperLogin}>
+          {/* ...................... All Filter for Mobile */}
+          <div className={styles.MobLocationFilterWrapper}>
                 {/* <label> <input className={styles.MobJobtitleFilter} type="radio" name="filter" onClick={() => { getjobs() }} />All</label> */}
                 {
                   JobLocationTags.map((location, i) => {
@@ -857,7 +817,6 @@ return(
                 }
               </div>
 
-          {/* ...................... All Filter for Mobile */}
           <Carousel
             swipeable={true}
             draggable={false}
@@ -880,7 +839,7 @@ return(
                 {
                   jobTags.map((tags, i) => {
                     return (
-                      <label><input  disabled={tags.value==="TECHNOLOGIES" || tags.value==="EDUCATION" || tags.value==="COLLEGE TYPE" || tags.value==="NOTICE PERIOD" || tags.value==="SALARY" || 
+                      <label><input disabled={tags.value==="TECHNOLOGIES" || tags.value==="EDUCATION" || tags.value==="COLLEGE TYPE" || tags.value==="NOTICE PERIOD" || tags.value==="SALARY" || 
                         tags.value==="EXPERIENCE" || tags.value==="Job Type" || tags.value==="INDUSTRY" || tags.value==="TOOLS/PROTOCOLS" || tags.value==="ROLE" || tags.value==="COMPANY TYPE" } 
                         className={tags.value==="TECHNOLOGIES" || tags.value==="EDUCATION" || tags.value==="COLLEGE TYPE" || tags.value==="NOTICE PERIOD" || tags.value==="SALARY" || 
                         tags.value==="EXPERIENCE" || tags.value==="Job Type" || tags.value==="INDUSTRY" || tags.value==="TOOLS/PROTOCOLS" || tags.value==="COMPANY TYPE" || tags.value==="ROLE"?
@@ -1384,6 +1343,27 @@ return(
 
             
           </Carousel>
+          {/* <div style={{ display: "flex", marginLeft: "18px" }}>
+          
+            <div >
+              <label> <input type="radio" name="location" checked={jobLocation === 'AllL'} onClick={() => { getjobsAllLoc(); setjobLocation("AllL") }} />All</label><br></br>
+              <label> <input type="radio" name="location" checked={jobLocation === 'banglore'} onClick={() => { getLocation("banglore"); setjobLocation('banglore') }} />Banglore</label><br></br>
+              <label> <input type="radio" name="location" disabled checked={jobLocation === 'chennai'} onClick={() => { getLocation("chennai"); setjobLocation('chennai') }} />Chennai</label><br></br>
+              <label> <input type="radio" name="location" disabled checked={jobLocation === 'hyderabad'} onClick={() => { getLocation("hyderabad"); setjobLocation('hyderabad') }} />Hyderabad</label><br></br>
+              <label> <input type="radio" name="location" disabled checked={jobLocation === 'mumbai'} onClick={() => { getLocation("mumbai"); setjobLocation('mumbai') }} />Mumbai</label><br></br>
+              <label> <input type="radio" name="location" disabled checked={jobLocation === 'delhi'} onClick={() => { getLocation("delhi"); setjobLocation('delhi') }} />Delhi</label>
+            </div>
+            <br></br>
+
+            <div >
+              <label><input type="radio" name="jobtitle" onClick={() => { getjobTitleAll('all'); setjobTitle("all") }} />All</label>            <br></br>
+              <label><input type="radio" name="jobtitle" onClick={() => { { jobLocation !== "AllL" ? getBothFiltered('java') : JobtitleFilter('java') } }} />Java developer</label> <br></br>
+              <label><input type="radio" name="jobtitle" onClick={() => { { jobLocation !== "AllL" ? getBothFiltered('full') : JobtitleFilter('full') } }} />Full Stack Developer</label> <br></br>
+              <label><input type="radio" name="jobtitle" onClick={() => { { jobLocation !== "AllL" ? getBothFiltered('front') : JobtitleFilter('front') } }} />Frontend Developer</label><br></br>
+              <label><input type="radio" name="jobtitle" onClick={() => { { jobLocation !== "AllL" ? getBothFiltered('back') : JobtitleFilter('back') } }} />Backend developer</label> <br></br>
+              <label><input type="radio" name="jobtitle" onClick={() => { { jobLocation !== "AllL" ? getBothFiltered('python') : JobtitleFilter('python') } }} />Python Developer</label>
+            </div>
+          </div> */}
 
 
           {PageLoader ?
@@ -1391,103 +1371,109 @@ return(
             : ""
           }
           <div id={styles.JobCardWrapper} >
-
             {
               jobs.length > 0 ?
+
                 jobs.map((job, i) => {
                   return (
                     <>
                       <div className={styles.JobCard} key={i}>
+
                         <div className={styles.JobTitleDateWrapper}>
                           <p className={styles.jobTitle} onClick={() => {
                             window.scrollTo({
                               top: 0
                             })
                             navigate(`/Jobdetails/${btoa(job._id)}`)
-                          }} >{job.jobTitle.toUpperCase()}</p>
+                          }} >{job.jobTitle.toUpperCase()} </p>
                           <p className={styles.Date}>{new Date(job.createdAt).toLocaleString(
                             "en-US",
                             {
-                              month: "short",
                               day: "2-digit",
+                              month: "short",
                               year: "numeric",
                             }
-                          )} </p></div>
-                        {/* <br></br> */}
-                        <div className={styles.companyNameLocationWrapper}  >
-                          <img className={styles.logo} src={job.Logo} />
+                          )
+                          } </p>
 
+                        </div>
+
+                        {/* <br></br> */}
+                        <div className={styles.companyNameLocationWrapper}   >
+                          <img className={styles.logo} src={job.Logo} />
                           {!job.Source ?
 
-                            <> <span className={styles.companyName} onClick={() => { navigate(`/CheckEmpHalfProfile/${btoa(job.empId)}`) }} >{job.companyName} </span><br></br></>
+                            <> <span className={styles.companyName} onClick={() => { checkEmpHalf(btoa(job.empId)) }} >{job.companyName} </span><br></br></>
                             :
                             //  <> <span className={styles.companyName} onClick={()=>{checkEmpHalf(job.empId)}} >{job.companyName} </span><br></br></>
                             <> <a className={`${styles.companyName}`} href={job.SourceLink} target="_blank">{job.Source}</a><br></br> </>
                           }
-
                         </div>
-
                         <  img className={styles.jobLocationImage} src={location} />
-                        <span className={styles.jobLocation}>{job.jobLocation[0].toUpperCase() + job.jobLocation.slice(1)}</span>
+                        <span className={styles.jobLocation}>{job.jobLocation[0].toUpperCase() + job.jobLocation.slice(1)} ,</span>
                         <span className={styles.qualificationAndExperiance}>
+
                           <  img className={styles.graduationImage} src={graduation} />
 
-                          {job.qualification},   {job.experiance}Y Exp, {job.jobtype}
+                          {job.qualification}, {job.experiance}Y Exp ,   {job.jobtype}
                           {/* <span className={styles.jobtypeAndDate}> {job.jobtype}</span> */}
                         </span><br></br>
+
                         <span className={styles.jobtypeAndDate}>Source</span> :
 
-                        {/* {job.Source ?
-                          <> <a className={`${styles.skills}`} href={job.SourceLink} target="_blank">{job.Source}</a><br></br> </>
-                          : */}
                         <> <span className={styles.skills}>ItWalkin</span><br></br></>
                         {/* } */}
-
-                        {/* </div> */}
-                        {/* <div> */}
-                        {/* <span className={styles.skillsHeading}>Skills: </span><span className={styles.skills}> {job.skills}</span><br></br> */}
 
                         <div className={styles.skillWrapper}>
                           <span className={styles.skillsHeading}>Skills: </span><span className={styles.skills}>{job.skills}</span><br></br>
                         </div>
-
-
                         <div className={styles.ApplyPackage}>
                           <p className={styles.salaryRange}><span>&#8377;</span>{job.salaryRange}L</p>
-
-
-                          {job.jobSeekerId.find((jobseeker) => {
-                            return (
-                              jobseeker.jobSeekerId == jobSeekerId
-                            )
-                          }) ?
-                            <button className={styles.MobileAppliedButton} > Applied <span style={{ fontSize: '13.8px', marginBottom: "3px", marginLeft: "2px" }}>&#10004;</span></button>
+                          {job.SourceLink ?
+                            <button className={styles.ApplyMobile} onClick={() => {
+                              applyforOtherJob(job.SourceLink)
+                            }}>Apply</button>
                             :
-                            // job .isApproved?
-                            job.SourceLink ?
-                              <button className={styles.ApplyMobile} onClick={() => {
-                                applyforOtherJob(job.SourceLink)
-                              }}>Apply</button>
-                              :
-                              <button className={styles.ApplyMobile} onClick={() => { applyforJob(job._id) }}>Apply
-                                <span className={styles.Loader} >{Loader && job._id == clickedJobId ?
-                                  <TailSpin color="white" height={20} />
-                                  : ""}</span></button>
-                            // :      <button className={styles.ApplyMobile} onClick={()=>{alert("You can not Apply for the job, Your account is under Approval Process")}} > Apply </button>
-
+                            <button className={styles.ApplyMobile} onClick={() => { navigate("/JobSeekerLogin") }}><b>Apply</b></button>
                           }
                         </div>
+
                         <p className={styles.jobDescriptionHeading}>Job Description:</p>
                         <p className={styles.jobDescription}>
+                          {/* {job.jobDescription} */}
+
                           {
                             job.jobDescription.map((descrip, di) => {
                               return (
                                 <>
-                                  {
 
+                                  {
+                                    // descrip.type == "unordered-list-item" ?
+
+                                    // <ul style={{ listStyleType: "disc" }}>
+                                    //   <li style={{ marginTop: "-12px", marginLeft: "-20px" }}>
+                                    //     {descrip.text.slice(0,50)}
+
+                                    //   </li>
+                                    // </ul>
+
+                                    // : descrip.type == "ordered-list-item" ?
+
+                                    //   <ul style={{ listStyleType: "disc" }} >
+                                    //     <li style={{ marginTop: "-12px", marginLeft: "-20px" }}>
+
+                                    //       {descrip.text}
+
+                                    //     </li>
+                                    //   </ul>
+                                    //   :
+                                    //   <>
                                     descrip.text.slice(0, 50)
+                                    //     <br></br>
+                                    //   </>
 
                                   }
+
                                 </>
                               )
                             }).slice(0, 1)
@@ -1496,11 +1482,13 @@ return(
                             window.scrollTo({
                               top: 0
                             })
-                            navigate(`/Jobdetails/${job._id}`)
+                            navigate(`/Jobdetails/${btoa(job._id)}`)
                           }} className={styles.seeMore}>
                             ...read more
                           </span>
                         </p>
+
+
                       </div>
                     </>
                   )
@@ -1514,7 +1502,6 @@ return(
             <Footer/>
             </div>
         </>
-
       }
 
     </>
@@ -1522,4 +1509,33 @@ return(
   )
 }
 
-export default AllJobs
+export default Blogs
+
+// .......cards.......
+
+{/* <div className={styles.carwrapper}>
+              {jobs.map((items, i) => {
+                return (
+                  <div className={styles.card}>
+                    <div className={styles.AlltexWrapper}>
+                      <p className={styles.text}>Job Title :{items.jobTitle}</p>
+                      <p className={styles.text}>Job Location:</p><a>{items.jobLocation.toUpperCase()}</a>
+                      <p className={styles.text}> Package : {items.salaryRange}</p>
+                      <p className={styles.text}> Experiance Required :{items.experiance}</p>
+                      <p className={styles.text}> Skills Required :{items.skills}</p>
+                      <div className={styles.descriptionAndApply}>
+                        <p className={styles.description}>
+                          ......... {items.jobDescription} ........
+                          {items.jobDescription.slice(0, 60)}
+                          <span onClick={() => navigate(`/Jobdetails/${items._id}`)} className={styles.seeMore}>
+                            ...read more
+                          </span>
+                        </p>
+                        <button className={styles.button} onClick={applyforJob}>Apply </button>
+                      </div>
+                    </div>
+                  </div>
+                )
+              })
+              }
+            </div> */}

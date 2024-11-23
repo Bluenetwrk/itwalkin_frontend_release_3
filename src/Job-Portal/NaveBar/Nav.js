@@ -91,6 +91,9 @@ function Nav(props) {
   function mypostedjob() {
     navigate("/postedjobs")
   }
+  function PostBlogs() {
+    navigate("/PostBlogs")
+  }
 
   function EmployeeProfile() {
     navigate("/MyProfile")
@@ -221,6 +224,7 @@ function Nav(props) {
                           <div className={Styles.Empdropdownwrapper} ref={menuRef} >
                             <p className={Styles.text} ref={menuRef} onClick={EmployeeProfile} >My profile</p>
                             <p className={Styles.text} ref={menuRef} onClick={mypostedjob}>My posted Jobs</p>
+                            <p className={Styles.text} ref={menuRef} onClick={PostBlogs}>Post Blogs</p>
                             <p className={Styles.text} ref={menuRef} onClick={logutEmp}>Logout</p>
                           </div>
                         </div>

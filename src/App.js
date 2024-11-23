@@ -25,6 +25,7 @@ import PostedJobsByAdmin from "./Job-Portal/Jobs/AdminPostedJobs";
 import PostedCareerJobs from "./Job-Portal/Jobs/myPostedCaereerjobs";
 import EmpPrivate from "./Job-Portal/Private/OuletEmp";
 import PostJobs from "./Job-Portal/PostJobs/postJobs";
+import PostBlogs from "./Job-Portal/PostJobs/postBlogs";
 import Jobs from "./Job-Portal/Jobs/AllJobs";
 import Nav from "./Job-Portal/NaveBar/Nav";
 import Jobdetails from "./Job-Portal/Jobs/AllJobdetails"
@@ -68,6 +69,8 @@ import ArchivedUser from "./Job-Portal/Admin/ArchiveJobSeekers";
 import AdminCareerPostJobs from "./Job-Portal/Admin/AdminCareerJobPosts";
 import AllCareerJobs from "./Job-Portal/Jobs/AllCareerJobs";
 
+import Blogs from "./Job-Portal/Jobs/AllBlogs";
+
 import AboutUs from "./Job-Portal/AboutUs"
 import Contact from "./Job-Portal/Contact"
 import Services from "./Job-Portal/Services"
@@ -108,10 +111,12 @@ function App() {
           <Routes>
 
             <Route path="/" element={<Home />} />
+            <Route path="/Blogs" element={<Blogs />} />
 
             {/* ..........Employee Private component i,e can not search in URL......... */}
             <Route element={<EmpPrivate />}>
               <Route path="/PostJobs" element={<PostJobs url={axios.defaults.baseURL} />} />
+              <Route path="/PostBlogs" element={<PostBlogs url={axios.defaults.baseURL} />} />
               <Route path="/postedjobs" element={<PostedJobsbyEmp url={axios.defaults.baseURL} />} />
               <Route path="/Updatepostedjobs" element={<UpdatePostedJobs url={axios.defaults.baseURL} />} />
               <Route path="/Applied-User-Profile/:jid" element={<AppliedUserProfile url={axios.defaults.baseURL} />} />

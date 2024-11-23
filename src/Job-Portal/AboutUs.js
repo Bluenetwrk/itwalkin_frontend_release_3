@@ -13,7 +13,7 @@ function AboutUs() {
    async function getAboutUs(){
     await axios.get("/admin/getWebsiteDetails")
     .then((res)=>{
-        // console.log(res.data)
+        console.log(res.data)
         let result = res.data.result
         // console.log(result[0].AboutUs)
         setAboutUs(result[0].AboutUs)
@@ -72,6 +72,7 @@ ITWalkin works closely to bridge the gap between talent & opportunities and offe
 
 At the heart of our success and our future is innovation. We are building some of the best technology to customise our search results, keeping in mind that your job title doesn't define your potential. So much so that two of you from the same field will see completely different results for the same query. Decades of industry insights and new-age technology have come together to bring you the perfect career experience.<br></br><br></br>
         </p>
+         <div> {AboutUs} </div>
         </div>
 
         {screenSize.width > 750 ?
@@ -82,7 +83,6 @@ At the heart of our success and our future is innovation. We are building some o
 }
     </>
 
-    // <div style={{marginLeft:"2%", marginTop:"10px"}}> {AboutUs} </div>
   )
 }
 

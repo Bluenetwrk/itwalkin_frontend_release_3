@@ -142,7 +142,7 @@ color:white;
     width:75%;
     height: 25px;
     font-weight: bold;
-
+    cursor:pointer
 }
 .Status{
     width:13%;

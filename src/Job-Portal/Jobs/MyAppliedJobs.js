@@ -47,6 +47,35 @@ function AppledJobs(props) {
   // },[])
 
 
+  
+  async function getCareerjobs() {
+    let userid = JSON.parse(localStorage.getItem("StudId"))
+    const headers = { authorization: userid + " " + atob(JSON.parse(localStorage.getItem("StudLog"))) };
+    setPageLoader(true)
+    setTimeout(async () => {
+
+      await axios.get(`/Careerjobpost/getMyAppliedjobs/${jobSeekerId}`, { headers })
+        .then((res) => {
+          let result = res.data
+          let sortedate = result.sort(function (a, b) {
+            return new Date(b.createdAt) - new Date(a.createdAt);
+          });
+          setMyAppliedjob(oldData=>oldData.concat(sortedate))
+          setPageLoader(false)
+          if (res.data.length == 0) {
+            setNoJobFound("You have not applied any jobs yet")
+          }
+
+        }).catch((err) => {
+          alert("backend arror occured")
+        })
+    }, 1000)
+  }
+
+  // useEffect(() => {
+  // }, [])
+
+
   async function getjobs() {
     let userid = JSON.parse(localStorage.getItem("StudId"))
     const headers = { authorization: userid + " " + atob(JSON.parse(localStorage.getItem("StudLog"))) };
@@ -73,6 +102,9 @@ function AppledJobs(props) {
 
   useEffect(() => {
     getjobs()
+
+    getCareerjobs()
+
   }, [])
 
   async function UndoApply(id) {
@@ -94,11 +126,15 @@ function AppledJobs(props) {
       }
     }).then((result) => {
       if (result.isConfirmed) {
-        axios.put(`/jobpost/updatforUndoJobApplied/${id}`, { jobSeekerId }, { headers })
+        axios.put(`/jobpost/DeleteJobApplied/${id}`, { jobSeekerId }, { headers })
           .then((res) => {
-            getjobs()
+            if(res.data==="success"){
+              getjobs()
+              getCareerjobs()
+            }else{
+              alert("some thing wrong")
+            }
           }).catch((err) => {
-
             alert("server error occured")
           })
       }
@@ -236,7 +272,12 @@ function AppledJobs(props) {
 
       <p className={styles.h3} style={{ textAlign: "center" }}><b>My applied Jobs</b></p>
       <p className={styles.h3}><b>you have total {MyAppliedjob.length} applied jobs</b></p>
-      <button onClick={()=>{navigate("/MyCareer-Applied-Jobs")}} style={{ backgroundColor:"rgb(40, 4, 99)", marginLeft:"10px", fontWeight:600, color:"white", border:"none", cursor:"pointer", padding:"5px 10px"}}>Career Jobs</button>
+
+      {/* <button onClick={()=>{navigate("/MyCareer-Applied-Jobs")}} style={{ backgroundColor:"rgb(40, 4, 99)",
+         marginLeft:"10px", fontWeight:600, color:"white", border:"none",
+          cursor:"pointer", padding:"5px 10px"}}>Career Jobs
+      </button> */}
+
       {screenSize.width > 850 ?
         <>
           <div style={{ display: "flex", justifyContent: "space-between" }}>

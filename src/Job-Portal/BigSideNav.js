@@ -23,12 +23,13 @@ function SidebarNav(props) {
         <p onClick={()=>{navigate("/Services")}} className={`${Styles.textBigSodeBar} `}>Our Services</p>
         <p onClick={()=>{navigate("/Contact")}} className={`${Styles.textBigSodeBar} `}>Contact Us</p>
         <p onClick={()=>{navigate("/AllCareerJobs")}} className={`${Styles.textBigSodeBar} `}>ITwalkin Career</p>
+        <p onClick={()=>{navigate("/Blogs")}} className={`${Styles.textBigSodeBar} `}>Blogs</p>
         <p onClick={()=>{navigate("/TermsAndCondition")}} className={`${Styles.textBigSodeBar} `}>Terms & Conditions</p>
         <div className={Styles.brands}>
 
-        <a> <i className='fa-brands fa-facebook-square' style={{fontSize:"xx-Large" , marginBottom:"30px", marginTop:"30px"}}></i> </a>
+        <a> <i className='fa-brands fa-facebook-square' style={{fontSize:"xx-Large" , marginBottom:"30px", marginTop:"10px"}}></i> </a>
               <a> <i className='fa-brands fa-instagram-square' style={{fontSize:"xx-Large", marginBottom:"30px"}}></i> </a><br></br>
-              <a> <i className='fa-brands fa-twitter-square' style={{fontSize:"xx-Large", marginBottom:"45px", marginTop:"30px"}}></i> </a>
+              <a> <i className='fa-brands fa-twitter-square' style={{fontSize:"xx-Large", marginBottom:"45px", marginTop:"10px"}}></i> </a>
               <i class="fa-brands fa-linkedin-square" style={{fontSize:"xx-Large", marginBottom:"30px"}} onClick={Linkedin} ></i><br></br>
         </div>
         </div>
