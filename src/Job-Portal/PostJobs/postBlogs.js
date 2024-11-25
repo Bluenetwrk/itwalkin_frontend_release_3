@@ -51,7 +51,9 @@ function PostBlogs(props) {
     const [Tags, setTag] = useState([])
 
     const [skills, setSkills] = useState("")
+    const [name, setName] = useState("")
     const [concent, setconcent] = useState(true)
+    
 
     // function handleChange(tag) {
     //     setTag(tag)
@@ -91,6 +93,8 @@ function PostBlogs(props) {
         await axios.get(`/EmpProfile/getProfile/${empId}`, { headers })
             .then((res) => {
                 let result = res.data.result
+                let name = res.data.result.name
+                setName(name)
                 let companyName = res.data.result.CompanyName
                 setProfileData([result])
                 setCompanyName(companyName)
@@ -128,7 +132,7 @@ function PostBlogs(props) {
         let jobLocation = joblocation.toLowerCase()
         await axios.post("/BlogRoutes/blogpost/", {
             Logo, SourceLink, Source, empId, jobTitle, companyName,
-            jobDescription, jobtype, salaryRange, jobLocation, qualification, experiance, skills, Tags
+            jobDescription, jobtype, salaryRange, jobLocation, qualification, experiance, skills, Tags, name
         }, { headers })
             .then((res) => {
                 let result = (res.data)

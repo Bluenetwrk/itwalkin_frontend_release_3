@@ -29,6 +29,7 @@ import PostBlogs from "./Job-Portal/PostJobs/postBlogs";
 import Jobs from "./Job-Portal/Jobs/AllJobs";
 import Nav from "./Job-Portal/NaveBar/Nav";
 import Jobdetails from "./Job-Portal/Jobs/AllJobdetails"
+import Blogdetails from "./Job-Portal/Jobs/Blogdetails"
 import CareerJobdetails from "./Job-Portal/Jobs/CareerJobdetails"
 import Home from "./Job-Portal/Jobs/AllHomeJobs";
 import StudentUpdateProfile from "./Job-Portal/Profile/StudentUpdateProfile";
@@ -164,6 +165,7 @@ function App() {
             <Route path="/JobSeekerSignUp" element={<StudentSignUp />} />
             <Route path="/EmployeeSignUp" element={<EmployeeSignUp />} />
             <Route path="/JobDetails/:id" element={<Jobdetails />} />
+            <Route path="/Blogdetails/:id" element={<Blogdetails />} />
             <Route path="/CareerJobdetails/:id" element={<CareerJobdetails />} />
             <Route path="/CheckEmpHalfProfile/:empId" element={<CheckEmpHalfProfile />} />
 

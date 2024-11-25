@@ -102,7 +102,7 @@ function Blogs() {
       .then((res) => {
 
         let result = (res.data)
-        // console.log(result)
+        console.log(result)
         let sortedate = result.sort(function (a, b) {
           return new Date(b.createdAt) - new Date(a.createdAt);
         });
@@ -410,7 +410,7 @@ return(
 
     setNoPageFilter(true)
     setFiltereredjobs(key)
-    await axios.get(`/jobpost/getTagsJobs/${key}`)
+    await axios.get(`/BlogRoutes/getTagsJobs/${key}`)
       .then( (res) => {
         let result = (res.data)
         let sortedate = result.sort( (a, b) => {
@@ -553,9 +553,10 @@ return(
               <li style={{ backgroundColor: " rgb(40, 4, 99)" }} className={`${styles.li} ${styles.Jtitle}`}>Blog Title</li>
               <li style={{ backgroundColor: " rgb(40, 4, 99)" }} className={`${styles.li} ${styles.Source}`}>Source</li>
               <li style={{ backgroundColor: " rgb(40, 4, 99)" }} className={`${styles.li} ${styles.CompanyName}`}>Company Name</li>
+              <li style={{ backgroundColor: " rgb(40, 4, 99)" }} className={`${styles.li} ${styles.CompanyName}`}>Posted by</li>
               {/* <li style={{ backgroundColor: " rgb(40, 4, 99)" }} className={`${styles.li} ${styles.JobType}`}>JobType</li> */}
 
-              <li style={{ backgroundColor: " rgb(40, 4, 99)" }} className={`${styles.li} ${styles.HliDescription}`}><b>Blog description</b></li>
+              <li style={{ backgroundColor: " rgb(40, 4, 99)" }} className={`${styles.li} ${styles.BlogDescription}`}><b>Blog description</b></li>
               <li style={{ backgroundColor: " rgb(40, 4, 99)", }} className={`${styles.li} ${styles.date}`}>Posted Date
                 <p className={styles.arrowWrapper} >
                   <i onClick={sortbyNewjobs} className={`${styles.arrow} ${styles.up}`} ></i>
@@ -599,52 +600,34 @@ return(
                     <ul className={styles.ul} key={i}>
                       {/* } */}
 
-                      <li className={`${styles.li} ${styles.Jtitle}`} onClick={() => navigate(`/Jobdetails/${btoa(items._id)}`)} style={{ cursor: "pointer", textDecoration: "underline", color: "blue" }}>{items.jobTitle}</li>
+                      <li className={`${styles.li} ${styles.Jtitle}`} onClick={() => navigate(`/Blogdetails/${btoa(items._id)}`)} style={{ cursor: "pointer", textDecoration: "underline", color: "blue" }}>{items.jobTitle}</li>
                        <li className={`${styles.li} ${styles.Source}`} >Itwalkin</li>
                      
-                      {
-                        !items.Source ?
-
                           <li style={{ cursor: "pointer", textDecoration: "underline" }} className={`${styles.li} ${styles.CompanyName}`}
                             onClick={(e) => { checkEmpHalf(btoa(items.empId)) }}  >
 
-                            {/* {items.Logo ?
-                              < img style={{ width: "38px", height: "38px" }} src={items.Logo} />
-                              : ""} 
-                              <br></br>
-                              */}
-                            {items.companyName}</li>
-                          :
-                          <a style={{ cursor: "pointer", textDecoration: "underline" }} className={`${styles.li} ${styles.CompanyName}`} href={items.SourceLink} target="_blank" >
-                            {/* {items.Logo ?
-                              < img style={{ width: "38px", height: "38px" }} src={items.Logo} />
-                              : ""}<br></br> */}
-                            {items.Source}
+                            {items.companyName}
+                            </li>
+                          <li style={{ cursor: "pointer", textDecoration: "underline" }} className={`${styles.li} ${styles.CompanyName}`} >
 
-                          </a>
+                            {items.name}
+                            </li>
+                          
 
-                      }
-
-                      {/* {items.Source ?
-                        <a className={`${styles.li} ${styles.Source}`} href={items.SourceCompanyLink} target="_blank">{items.Source}</a>
-                        :                         */}
-                     
-                      {/* <li className={`${styles.li} ${styles.JobType}`}>{items.jobtype}</li> */}
-
-                      <li className={`${styles.li} ${styles.liDescription}`}>
+                      <li className={`${styles.li} ${styles.BlogDescription}`}>
                           {
                             items.jobDescription.map((descrip, di) => {
                               return (
                                 <>
                                   {
-                                    descrip.text.slice(0,150)
+                                    descrip.text.slice(0,200)
                                   }
                                 </>
                               )
-                            }).slice(0, 2)
+                            }).slice(0, 1)
                           }
   
-                          <span onClick={() => navigate(`/Jobdetails/${items._id}`)} className={styles.seeMore}>
+                          <span onClick={() => navigate(`/Blogdetails/${btoa(items._id)}`)} className={styles.seeMore}>
                             ...read more
                           </span>
                         </li>
@@ -685,31 +668,20 @@ return(
                     <ul className={styles.ul} key={i}>
 
 <li className={`${styles.li} ${styles.Jtitle}`} onClick={() => 
-  navigate(`/Jobdetails/${btoa(items._id)}`)} style={{ cursor: "pointer", textDecoration: "underline", color: "blue" }}>{items.jobTitle}</li>
+  navigate(`/Blogdetails/${btoa(items._id)}`)} style={{ cursor: "pointer", textDecoration: "underline", color: "blue" }}>{items.jobTitle}</li>
                                             <li className={`${styles.li} ${styles.Source}`} >Itwalkin</li>
 
-                      
-                      {
-                        !items.Source ?
-
-                          <li style={{ cursor: "pointer", textDecoration: "underline" }} className={`${styles.li} ${styles.CompanyName}`}
+                                            <li style={{ cursor: "pointer", textDecoration: "underline" }} className={`${styles.li} ${styles.CompanyName}`}
                             onClick={(e) => { checkEmpHalf(btoa(items.empId)) }}  >
-                            {/* {items.Logo ?
-                              < img style={{ width: "38px", height: "38px" }} src={items.Logo} />
-                              : ""} 
-                              <br></br>
-                              */}
-                            {items.companyName}</li>
-                          :
-                          <a style={{ cursor: "pointer", textDecoration: "underline" }} className={`${styles.li} ${styles.CompanyName}`} href={items.SourceLink} target="_blank" >
-                            {/* {items.Logo ?
-                              < img style={{ width: "38px", height: "38px" }} src={items.Logo} />
-                              : ""}<br></br> */}
-                            {items.Source}
 
-                          </a>
+                            {items.companyName}
+                            </li>
 
-                      }
+                    
+                          <li style={{ cursor: "pointer", textDecoration: "underline" }} className={`${styles.li} ${styles.CompanyName}`} >
+                          
+                            {items.name}</li>
+         
 
                       {/* {items.Source ?
                         <a className={`${styles.li} ${styles.Source}`} >{items.Source}</a>
@@ -717,20 +689,20 @@ return(
 
                       {/* <li className={`${styles.li} ${styles.JobType}`}>{items.jobtype}</li> */}
 
-                      <li className={`${styles.li} ${styles.liDescription}`}>
+                      <li className={`${styles.li} ${styles.BlogDescription}`}>
                           {
                             items.jobDescription.map((descrip, di) => {
                               return (
                                 <>
                                   {
-                                    descrip.text.slice(0,50)
+                                    descrip.text.slice(0,200)
                                   }
                                 </>
                               )
                             }).slice(0, 1)
                           }
   
-                          <span onClick={() => navigate(`/Jobdetails/${items._id}`)} className={styles.seeMore}>
+                          <span onClick={() => navigate(`/Blogdetails/${btoa(items._id)}`)} className={styles.seeMore}>
                             ...read more
                           </span>
                         </li>
@@ -1384,7 +1356,7 @@ return(
                             window.scrollTo({
                               top: 0
                             })
-                            navigate(`/Jobdetails/${btoa(job._id)}`)
+                            navigate(`/Blogdetails/${btoa(job._id)}`)
                           }} >{job.jobTitle.toUpperCase()} </p>
                           <p className={styles.Date}>{new Date(job.createdAt).toLocaleString(
                             "en-US",
@@ -1401,76 +1373,25 @@ return(
                         {/* <br></br> */}
                         <div className={styles.companyNameLocationWrapper}   >
                           <img className={styles.logo} src={job.Logo} />
-                          {!job.Source ?
 
-                            <> <span className={styles.companyName} onClick={() => { checkEmpHalf(btoa(job.empId)) }} >{job.companyName} </span><br></br></>
-                            :
-                            //  <> <span className={styles.companyName} onClick={()=>{checkEmpHalf(job.empId)}} >{job.companyName} </span><br></br></>
-                            <> <a className={`${styles.companyName}`} href={job.SourceLink} target="_blank">{job.Source}</a><br></br> </>
-                          }
+                             <span className={styles.companyName} onClick={() => { checkEmpHalf(btoa(job.empId)) }} >{job.companyName} </span>
+
+                             <span className={styles.jobtypeAndDate}>Posted by</span> :
+                             <> <span className={styles.skills}>{job.name}</span><br></br></>                          
+
                         </div>
-                        <  img className={styles.jobLocationImage} src={location} />
-                        <span className={styles.jobLocation}>{job.jobLocation[0].toUpperCase() + job.jobLocation.slice(1)} ,</span>
-                        <span className={styles.qualificationAndExperiance}>
-
-                          <  img className={styles.graduationImage} src={graduation} />
-
-                          {job.qualification}, {job.experiance}Y Exp ,   {job.jobtype}
-                          {/* <span className={styles.jobtypeAndDate}> {job.jobtype}</span> */}
-                        </span><br></br>
-
-                        <span className={styles.jobtypeAndDate}>Source</span> :
-
-                        <> <span className={styles.skills}>ItWalkin</span><br></br></>
-                        {/* } */}
-
-                        <div className={styles.skillWrapper}>
-                          <span className={styles.skillsHeading}>Skills: </span><span className={styles.skills}>{job.skills}</span><br></br>
-                        </div>
-                        <div className={styles.ApplyPackage}>
-                          <p className={styles.salaryRange}><span>&#8377;</span>{job.salaryRange}L</p>
-                          {job.SourceLink ?
-                            <button className={styles.ApplyMobile} onClick={() => {
-                              applyforOtherJob(job.SourceLink)
-                            }}>Apply</button>
-                            :
-                            <button className={styles.ApplyMobile} onClick={() => { navigate("/JobSeekerLogin") }}><b>Apply</b></button>
-                          }
-                        </div>
+                             <span className={styles.jobtypeAndDate}>Source</span> :
+<> <span className={styles.skills}>ItWalkin</span><br></br></>                          
 
                         <p className={styles.jobDescriptionHeading}>Job Description:</p>
-                        <p className={styles.jobDescription}>
-                          {/* {job.jobDescription} */}
+                        <p className={styles.jobDescription} style={{marginTop:"-6px"}}>
 
                           {
                             job.jobDescription.map((descrip, di) => {
                               return (
                                 <>
-
                                   {
-                                    // descrip.type == "unordered-list-item" ?
-
-                                    // <ul style={{ listStyleType: "disc" }}>
-                                    //   <li style={{ marginTop: "-12px", marginLeft: "-20px" }}>
-                                    //     {descrip.text.slice(0,50)}
-
-                                    //   </li>
-                                    // </ul>
-
-                                    // : descrip.type == "ordered-list-item" ?
-
-                                    //   <ul style={{ listStyleType: "disc" }} >
-                                    //     <li style={{ marginTop: "-12px", marginLeft: "-20px" }}>
-
-                                    //       {descrip.text}
-
-                                    //     </li>
-                                    //   </ul>
-                                    //   :
-                                    //   <>
-                                    descrip.text.slice(0, 50)
-                                    //     <br></br>
-                                    //   </>
+                                    descrip.text.slice(0, 200)
 
                                   }
 
@@ -1482,7 +1403,7 @@ return(
                             window.scrollTo({
                               top: 0
                             })
-                            navigate(`/Jobdetails/${btoa(job._id)}`)
+                            navigate(`/Blogdetails/${btoa(job._id)}`)
                           }} className={styles.seeMore}>
                             ...read more
                           </span>

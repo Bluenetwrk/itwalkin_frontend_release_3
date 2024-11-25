@@ -375,6 +375,12 @@
     text-align: center;
 
 }
+.BlogDescription{
+    width : 37%;
+    overflow-wrap:break-word;
+    text-align: center;
+
+}
 .HliDescription{
     width : 17%;
     overflow-wrap:break-word;

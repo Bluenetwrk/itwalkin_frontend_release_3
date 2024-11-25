@@ -237,6 +237,9 @@ if(key==='Full Time' ||key=== 'Contract' || key==='Internship' || key==='Part Ti
 
     return (
         <>
+                                        <button className={Style.searchButton} onClick={() => {
+                                    navigate("/Search-Candidate")
+                                }}>Search Candidate</button>
 
             {
                 profileData.map((items, i) => {
@@ -244,9 +247,7 @@ if(key==='Full Time' ||key=== 'Contract' || key==='Internship' || key==='Part Ti
                         items.isApproved ?
 
                             <div key={i}>
-                                <button className={Style.searchButton} onClick={() => {
-                                    navigate("/Search-Candidate")
-                                }}>Search Candidate</button>
+
                                 {Logo ? <img className={Style.logo} src={Logo} /> :
                                     <p style={{ color: "red", marginLeft: "5%", fontStyle: "italic" }}> Alert! You have not updated the Company logo, please update the Company Logo</p>}
                                 {/* <h3 style={{ color: "blue", marginLeft: "15%" }}>Welcome to Post job Page, Post a Job and get Connected with Job Seekers</h3> */}
