@@ -27,7 +27,7 @@ const responsive = {
     items: 2
   },
   mobile: {
-    breakpoint: { max: 464, min: 0 },
+    breakpoint: { max: 864, min: 0 },
     items: 1
   }
 };
@@ -876,7 +876,7 @@ return(
               
 
               <div className={styles.MobFilterJobTitleWrapper}>
-                <label><input className={styles.MobJobtitleFilter} type="radio" name="filter" onClick={() => { getjobs() }} />All</label>
+                <label><input className={styles.MobJobtitleFilter} type="radio" name="Rfilter" onClick={() => { getjobs() }} />All</label>
                 {
                   jobTags.map((tags, i) => {
                     return (
@@ -885,7 +885,13 @@ return(
                         className={tags.value==="TECHNOLOGIES" || tags.value==="EDUCATION" || tags.value==="COLLEGE TYPE" || tags.value==="NOTICE PERIOD" || tags.value==="SALARY" || 
                         tags.value==="EXPERIENCE" || tags.value==="Job Type" || tags.value==="INDUSTRY" || tags.value==="TOOLS/PROTOCOLS" || tags.value==="COMPANY TYPE" || tags.value==="ROLE"?
                         styles.TagHeading: styles.MobJobtitleFilter} 
-                        type= "radio" name="filter"  onClick={() => { filterByJobTitle(tags.value) }} />{tags.value}</label>
+                      checked={tags.value==="Javascript"}
+                      // {Active.findIndex( (present)=>{
+                      //     return(
+                      //       present===tags.value
+                      //     )
+                      //         })>=0}
+                        type= "radio" name="Rfilter"  onClick={() => { filterByJobTitle(tags.value) }} />{tags.value}</label>
                    
                       )
                   }).slice(0, 4)
@@ -900,7 +906,7 @@ return(
                       className={tags.value==="TECHNOLOGIES" || tags.value==="EDUCATION" || tags.value==="COLLEGE TYPE" || tags.value==="NOTICE PERIOD" || tags.value==="SALARY" || 
                       tags.value==="EXPERIENCE" || tags.value==="Job Type" || tags.value==="INDUSTRY" || tags.value==="TOOLS/PROTOCOLS" || tags.value==="COMPANY TYPE" || tags.value==="ROLE"?
                       styles.TagHeading: styles.MobJobtitleFilter} 
-                      type= "radio" name="filter"  onClick={() => { filterByJobTitle(tags.value) }} />{tags.value}</label>
+                      type= "radio" name="Rfilter"  onClick={() => { filterByJobTitle(tags.value) }} />{tags.value}</label>
                  
                   )
                 }).slice(4, 9)
@@ -914,7 +920,7 @@ return(
                       className={tags.value==="TECHNOLOGIES" || tags.value==="EDUCATION" || tags.value==="COLLEGE TYPE" || tags.value==="NOTICE PERIOD" || tags.value==="SALARY" || 
                       tags.value==="EXPERIENCE" || tags.value==="Job Type" || tags.value==="INDUSTRY" || tags.value==="TOOLS/PROTOCOLS" || tags.value==="COMPANY TYPE" || tags.value==="ROLE"?
                       styles.TagHeading: styles.MobJobtitleFilter} 
-                      type= "radio" name="filter"  onClick={() => { filterByJobTitle(tags.value) }} />{tags.value}</label>
+                      type= "radio" name="Rfilter"  onClick={() => { filterByJobTitle(tags.value) }} />{tags.value}</label>
                  
                   )
                 }).slice(9, 14)
@@ -932,7 +938,7 @@ return(
                       className={tags.value==="TECHNOLOGIES" || tags.value==="EDUCATION" || tags.value==="COLLEGE TYPE" || tags.value==="NOTICE PERIOD" || tags.value==="SALARY" || 
                       tags.value==="EXPERIENCE" || tags.value==="Job Type" || tags.value==="INDUSTRY" || tags.value==="TOOLS/PROTOCOLS" || tags.value==="COMPANY TYPE" || tags.value==="ROLE"?
                       styles.TagHeading: styles.MobJobtitleFilter} 
-                      type= "radio" name="filter"  onClick={() => { filterByJobTitle(tags.value) }} />{tags.value}</label>
+                      type= "radio" name="Rfilter"  onClick={() => { filterByJobTitle(tags.value) }} />{tags.value}</label>
                  
                   )
                 }).slice(14, 19)
@@ -946,7 +952,7 @@ return(
                       className={tags.value==="TECHNOLOGIES" || tags.value==="EDUCATION" || tags.value==="COLLEGE TYPE" || tags.value==="NOTICE PERIOD" || tags.value==="SALARY" || 
                       tags.value==="EXPERIENCE" || tags.value==="Job Type" || tags.value==="INDUSTRY" || tags.value==="TOOLS/PROTOCOLS" || tags.value==="COMPANY TYPE" || tags.value==="ROLE"?
                       styles.TagHeading: styles.MobJobtitleFilter} 
-                      type= "radio" name="filter"  onClick={() => { filterByJobTitle(tags.value) }} />{tags.value}</label>
+                      type= "radio" name="Rfilter"  onClick={() => { filterByJobTitle(tags.value) }} />{tags.value}</label>
                  
                   )
                 }).slice(19, 24)
@@ -960,7 +966,7 @@ return(
                       className={tags.value==="TECHNOLOGIES" || tags.value==="EDUCATION" || tags.value==="COLLEGE TYPE" || tags.value==="NOTICE PERIOD" || tags.value==="SALARY" || 
                       tags.value==="EXPERIENCE" || tags.value==="Job Type" || tags.value==="INDUSTRY" || tags.value==="TOOLS/PROTOCOLS" || tags.value==="COMPANY TYPE" || tags.value==="ROLE"?
                       styles.TagHeading: styles.MobJobtitleFilter} 
-                      type= "radio" name="filter"  onClick={() => { filterByJobTitle(tags.value) }} />{tags.value}</label>
+                      type= "radio" name="Rfilter"  onClick={() => { filterByJobTitle(tags.value) }} />{tags.value}</label>
                  
                   )
                 }).slice(24, 29)
@@ -977,7 +983,7 @@ return(
                       className={tags.value==="TECHNOLOGIES" || tags.value==="EDUCATION" || tags.value==="COLLEGE TYPE" || tags.value==="NOTICE PERIOD" || tags.value==="SALARY" || 
                       tags.value==="EXPERIENCE" || tags.value==="Job Type" || tags.value==="INDUSTRY" || tags.value==="TOOLS/PROTOCOLS" || tags.value==="COMPANY TYPE" || tags.value==="ROLE"?
                       styles.TagHeading: styles.MobJobtitleFilter} 
-                      type= "radio" name="filter"  onClick={() => { filterByJobTitle(tags.value) }} />{tags.value}</label>
+                      type= "radio" name="Rfilter"  onClick={() => { filterByJobTitle(tags.value) }} />{tags.value}</label>
                  
                   )
                 }).slice(29, 34)
@@ -991,7 +997,7 @@ return(
                       className={tags.value==="TECHNOLOGIES" || tags.value==="EDUCATION" || tags.value==="COLLEGE TYPE" || tags.value==="NOTICE PERIOD" || tags.value==="SALARY" || 
                       tags.value==="EXPERIENCE" || tags.value==="Job Type" || tags.value==="INDUSTRY" || tags.value==="TOOLS/PROTOCOLS" || tags.value==="COMPANY TYPE" || tags.value==="ROLE"?
                       styles.TagHeading: styles.MobJobtitleFilter} 
-                      type= "radio" name="filter"  onClick={() => { filterByJobTitle(tags.value) }} />{tags.value}</label>
+                      type= "radio" name="Rfilter"  onClick={() => { filterByJobTitle(tags.value) }} />{tags.value}</label>
                  
                   )
                 }).slice(34, 39)
@@ -1005,7 +1011,7 @@ return(
                       className={tags.value==="TECHNOLOGIES" || tags.value==="EDUCATION" || tags.value==="COLLEGE TYPE" || tags.value==="NOTICE PERIOD" || tags.value==="SALARY" || 
                       tags.value==="EXPERIENCE" || tags.value==="Job Type" || tags.value==="INDUSTRY" || tags.value==="TOOLS/PROTOCOLS" || tags.value==="COMPANY TYPE" || tags.value==="ROLE"?
                       styles.TagHeading: styles.MobJobtitleFilter} 
-                      type= "radio" name="filter"  onClick={() => { filterByJobTitle(tags.value) }} />{tags.value}</label>
+                      type= "radio" name="Rfilter"  onClick={() => { filterByJobTitle(tags.value) }} />{tags.value}</label>
                  
                   )
                 }).slice(39, 44)
@@ -1022,7 +1028,7 @@ return(
                       className={tags.value==="TECHNOLOGIES" || tags.value==="EDUCATION" || tags.value==="COLLEGE TYPE" || tags.value==="NOTICE PERIOD" || tags.value==="SALARY" || 
                       tags.value==="EXPERIENCE" || tags.value==="Job Type" || tags.value==="INDUSTRY" || tags.value==="TOOLS/PROTOCOLS" || tags.value==="COMPANY TYPE" || tags.value==="ROLE"?
                       styles.TagHeading: styles.MobJobtitleFilter} 
-                      type= "radio" name="filter"  onClick={() => { filterByJobTitle(tags.value) }} />{tags.value}</label>
+                      type= "radio" name="Rfilter"  onClick={() => { filterByJobTitle(tags.value) }} />{tags.value}</label>
                  
                   )
                 }).slice(44, 49)
@@ -1036,7 +1042,7 @@ return(
                       className={tags.value==="TECHNOLOGIES" || tags.value==="EDUCATION" || tags.value==="COLLEGE TYPE" || tags.value==="NOTICE PERIOD" || tags.value==="SALARY" || 
                       tags.value==="EXPERIENCE" || tags.value==="Job Type" || tags.value==="INDUSTRY" || tags.value==="TOOLS/PROTOCOLS" || tags.value==="COMPANY TYPE" || tags.value==="ROLE"?
                       styles.TagHeading: styles.MobJobtitleFilter} 
-                      type= "radio" name="filter"  onClick={() => { filterByJobTitle(tags.value) }} />{tags.value}</label>
+                      type= "radio" name="Rfilter"  onClick={() => { filterByJobTitle(tags.value) }} />{tags.value}</label>
                  
                   )
                 }).slice(49,54)
@@ -1050,7 +1056,7 @@ return(
                       className={tags.value==="TECHNOLOGIES" || tags.value==="EDUCATION" || tags.value==="COLLEGE TYPE" || tags.value==="NOTICE PERIOD" || tags.value==="SALARY" || 
                       tags.value==="EXPERIENCE" || tags.value==="Job Type" || tags.value==="INDUSTRY" || tags.value==="TOOLS/PROTOCOLS" || tags.value==="COMPANY TYPE" || tags.value==="ROLE"?
                       styles.TagHeading: styles.MobJobtitleFilter} 
-                      type= "radio" name="filter"  onClick={() => { filterByJobTitle(tags.value) }} />{tags.value}</label>
+                      type= "radio" name="Rfilter"  onClick={() => { filterByJobTitle(tags.value) }} />{tags.value}</label>
                  
                   )
                 }).slice(54, 59)
@@ -1070,7 +1076,7 @@ return(
                         className={tags.value==="TECHNOLOGIES" || tags.value==="EDUCATION" || tags.value==="COLLEGE TYPE" || tags.value==="NOTICE PERIOD" || tags.value==="SALARY" || 
                         tags.value==="EXPERIENCE" || tags.value==="Job Type" || tags.value==="INDUSTRY" || tags.value==="TOOLS/PROTOCOLS" || tags.value==="COMPANY TYPE" || tags.value==="ROLE"?
                         styles.TagHeading: styles.MobJobtitleFilter} 
-                        type= "radio" name="filter"  onClick={() => { filterByJobTitle(tags.value) }} />{tags.value}</label>
+                        type= "radio" name="Rfilter"  onClick={() => { filterByJobTitle(tags.value) }} />{tags.value}</label>
                    
                       )
                   }).slice(59, 64)
@@ -1085,7 +1091,7 @@ return(
                       className={tags.value==="TECHNOLOGIES" || tags.value==="EDUCATION" || tags.value==="COLLEGE TYPE" || tags.value==="NOTICE PERIOD" || tags.value==="SALARY" || 
                       tags.value==="EXPERIENCE" || tags.value==="Job Type" || tags.value==="INDUSTRY" || tags.value==="TOOLS/PROTOCOLS" || tags.value==="COMPANY TYPE" || tags.value==="ROLE"?
                       styles.TagHeading: styles.MobJobtitleFilter} 
-                      type= "radio" name="filter"  onClick={() => { filterByJobTitle(tags.value) }} />{tags.value}</label>
+                      type= "radio" name="Rfilter"  onClick={() => { filterByJobTitle(tags.value) }} />{tags.value}</label>
                  
                   )
                 }).slice(64, 69)
@@ -1099,7 +1105,7 @@ return(
                       className={tags.value==="TECHNOLOGIES" || tags.value==="EDUCATION" || tags.value==="COLLEGE TYPE" || tags.value==="NOTICE PERIOD" || tags.value==="SALARY" || 
                       tags.value==="EXPERIENCE" || tags.value==="Job Type" || tags.value==="INDUSTRY" || tags.value==="TOOLS/PROTOCOLS" || tags.value==="COMPANY TYPE" || tags.value==="ROLE"?
                       styles.TagHeading: styles.MobJobtitleFilter} 
-                      type= "radio" name="filter"  onClick={() => { filterByJobTitle(tags.value) }} />{tags.value}</label>
+                      type= "radio" name="Rfilter"  onClick={() => { filterByJobTitle(tags.value) }} />{tags.value}</label>
                  
                   )
                 }).slice(69, 74)
@@ -1117,7 +1123,7 @@ return(
                       className={tags.value==="TECHNOLOGIES" || tags.value==="EDUCATION" || tags.value==="COLLEGE TYPE" || tags.value==="NOTICE PERIOD" || tags.value==="SALARY" || 
                       tags.value==="EXPERIENCE" || tags.value==="Job Type" || tags.value==="INDUSTRY" || tags.value==="TOOLS/PROTOCOLS" || tags.value==="COMPANY TYPE" || tags.value==="ROLE"?
                       styles.TagHeading: styles.MobJobtitleFilter} 
-                      type= "radio" name="filter"  onClick={() => { filterByJobTitle(tags.value) }} />{tags.value}</label>
+                      type= "radio" name="Rfilter"  onClick={() => { filterByJobTitle(tags.value) }} />{tags.value}</label>
                  
                   )
                 }).slice(74, 79)
@@ -1131,7 +1137,7 @@ return(
                       className={tags.value==="TECHNOLOGIES" || tags.value==="EDUCATION" || tags.value==="COLLEGE TYPE" || tags.value==="NOTICE PERIOD" || tags.value==="SALARY" || 
                       tags.value==="EXPERIENCE" || tags.value==="Job Type" || tags.value==="INDUSTRY" || tags.value==="TOOLS/PROTOCOLS" || tags.value==="COMPANY TYPE" || tags.value==="ROLE"?
                       styles.TagHeading: styles.MobJobtitleFilter} 
-                      type= "radio" name="filter"  onClick={() => { filterByJobTitle(tags.value) }} />{tags.value}</label>
+                      type= "radio" name="Rfilter"  onClick={() => { filterByJobTitle(tags.value) }} />{tags.value}</label>
                  
                   )
                 }).slice(79, 84)
@@ -1145,7 +1151,7 @@ return(
                       className={tags.value==="TECHNOLOGIES" || tags.value==="EDUCATION" || tags.value==="COLLEGE TYPE" || tags.value==="NOTICE PERIOD" || tags.value==="SALARY" || 
                       tags.value==="EXPERIENCE" || tags.value==="Job Type" || tags.value==="INDUSTRY" || tags.value==="TOOLS/PROTOCOLS" || tags.value==="COMPANY TYPE" || tags.value==="ROLE"?
                       styles.TagHeading: styles.MobJobtitleFilter} 
-                      type= "radio" name="filter"  onClick={() => { filterByJobTitle(tags.value) }} />{tags.value}</label>
+                      type= "radio" name="Rfilter"  onClick={() => { filterByJobTitle(tags.value) }} />{tags.value}</label>
                  
                   )
                 }).slice(84, 89)
@@ -1162,7 +1168,7 @@ return(
                       className={tags.value==="TECHNOLOGIES" || tags.value==="EDUCATION" || tags.value==="COLLEGE TYPE" || tags.value==="NOTICE PERIOD" || tags.value==="SALARY" || 
                       tags.value==="EXPERIENCE" || tags.value==="Job Type" || tags.value==="INDUSTRY" || tags.value==="TOOLS/PROTOCOLS" || tags.value==="COMPANY TYPE" || tags.value==="ROLE"?
                       styles.TagHeading: styles.MobJobtitleFilter} 
-                      type= "radio" name="filter"  onClick={() => { filterByJobTitle(tags.value) }} />{tags.value}</label>
+                      type= "radio" name="Rfilter"  onClick={() => { filterByJobTitle(tags.value) }} />{tags.value}</label>
                  
                   )
                 }).slice(89, 94)
@@ -1176,7 +1182,7 @@ return(
                       className={tags.value==="TECHNOLOGIES" || tags.value==="EDUCATION" || tags.value==="COLLEGE TYPE" || tags.value==="NOTICE PERIOD" || tags.value==="SALARY" || 
                       tags.value==="EXPERIENCE" || tags.value==="Job Type" || tags.value==="INDUSTRY" || tags.value==="TOOLS/PROTOCOLS" || tags.value==="COMPANY TYPE" || tags.value==="ROLE"?
                       styles.TagHeading: styles.MobJobtitleFilter} 
-                      type= "radio" name="filter"  onClick={() => { filterByJobTitle(tags.value) }} />{tags.value}</label>
+                      type= "radio" name="Rfilter"  onClick={() => { filterByJobTitle(tags.value) }} />{tags.value}</label>
                  
                   )
                 }).slice(94, 99)
@@ -1190,7 +1196,7 @@ return(
                       className={tags.value==="TECHNOLOGIES" || tags.value==="EDUCATION" || tags.value==="COLLEGE TYPE" || tags.value==="NOTICE PERIOD" || tags.value==="SALARY" || 
                       tags.value==="EXPERIENCE" || tags.value==="Job Type" || tags.value==="INDUSTRY" || tags.value==="TOOLS/PROTOCOLS" || tags.value==="COMPANY TYPE" || tags.value==="ROLE"?
                       styles.TagHeading: styles.MobJobtitleFilter} 
-                      type= "radio" name="filter"  onClick={() => { filterByJobTitle(tags.value) }} />{tags.value}</label>
+                      type= "radio" name="Rfilter"  onClick={() => { filterByJobTitle(tags.value) }} />{tags.value}</label>
                  
                   )
                 }).slice(99, 104)
@@ -1207,7 +1213,7 @@ return(
                       className={tags.value==="TECHNOLOGIES" || tags.value==="EDUCATION" || tags.value==="COLLEGE TYPE" || tags.value==="NOTICE PERIOD" || tags.value==="SALARY" || 
                       tags.value==="EXPERIENCE" || tags.value==="Job Type" || tags.value==="INDUSTRY" || tags.value==="TOOLS/PROTOCOLS" || tags.value==="COMPANY TYPE" || tags.value==="ROLE"?
                       styles.TagHeading: styles.MobJobtitleFilter} 
-                      type= "radio" name="filter"  onClick={() => { filterByJobTitle(tags.value) }} />{tags.value}</label>
+                      type= "radio" name="Rfilter"  onClick={() => { filterByJobTitle(tags.value) }} />{tags.value}</label>
                  
                   )
                 }).slice(104, 109)
@@ -1221,7 +1227,7 @@ return(
                       className={tags.value==="TECHNOLOGIES" || tags.value==="EDUCATION" || tags.value==="COLLEGE TYPE" || tags.value==="NOTICE PERIOD" || tags.value==="SALARY" || 
                       tags.value==="EXPERIENCE" || tags.value==="Job Type" || tags.value==="INDUSTRY" || tags.value==="TOOLS/PROTOCOLS" || tags.value==="COMPANY TYPE" || tags.value==="ROLE"?
                       styles.TagHeading: styles.MobJobtitleFilter} 
-                      type= "radio" name="filter"  onClick={() => { filterByJobTitle(tags.value) }} />{tags.value}</label>
+                      type= "radio" name="Rfilter"  onClick={() => { filterByJobTitle(tags.value) }} />{tags.value}</label>
                  
                   )
                 }).slice(109,114)
@@ -1235,7 +1241,7 @@ return(
                       className={tags.value==="TECHNOLOGIES" || tags.value==="EDUCATION" || tags.value==="COLLEGE TYPE" || tags.value==="NOTICE PERIOD" || tags.value==="SALARY" || 
                       tags.value==="EXPERIENCE" || tags.value==="Job Type" || tags.value==="INDUSTRY" || tags.value==="TOOLS/PROTOCOLS" || tags.value==="COMPANY TYPE" || tags.value==="ROLE"?
                       styles.TagHeading: styles.MobJobtitleFilter} 
-                      type= "radio" name="filter"  onClick={() => { filterByJobTitle(tags.value) }} />{tags.value}</label>
+                      type= "radio" name="Rfilter"  onClick={() => { filterByJobTitle(tags.value) }} />{tags.value}</label>
                  
                   )
                 }).slice(114, 119)
@@ -1255,7 +1261,7 @@ return(
                         className={tags.value==="TECHNOLOGIES" || tags.value==="EDUCATION" || tags.value==="COLLEGE TYPE" || tags.value==="NOTICE PERIOD" || tags.value==="SALARY" || 
                         tags.value==="EXPERIENCE" || tags.value==="Job Type" || tags.value==="INDUSTRY" || tags.value==="TOOLS/PROTOCOLS" || tags.value==="COMPANY TYPE" || tags.value==="ROLE"?
                         styles.TagHeading: styles.MobJobtitleFilter} 
-                        type= "radio" name="filter"  onClick={() => { filterByJobTitle(tags.value) }} />{tags.value}</label>
+                        type= "radio" name="Rfilter"  onClick={() => { filterByJobTitle(tags.value) }} />{tags.value}</label>
                                          )
                   }).slice(119, 124)
                 }
@@ -1269,7 +1275,7 @@ return(
                       className={tags.value==="TECHNOLOGIES" || tags.value==="EDUCATION" || tags.value==="COLLEGE TYPE" || tags.value==="NOTICE PERIOD" || tags.value==="SALARY" || 
                       tags.value==="EXPERIENCE" || tags.value==="Job Type" || tags.value==="INDUSTRY" || tags.value==="TOOLS/PROTOCOLS" || tags.value==="COMPANY TYPE" || tags.value==="ROLE"?
                       styles.TagHeading: styles.MobJobtitleFilter} 
-                      type= "radio" name="filter"  onClick={() => { filterByJobTitle(tags.value) }} />{tags.value}</label>
+                      type= "radio" name="Rfilter"  onClick={() => { filterByJobTitle(tags.value) }} />{tags.value}</label>
                  
                   )
                 }).slice(124, 129)
@@ -1283,7 +1289,7 @@ return(
                       className={tags.value==="TECHNOLOGIES" || tags.value==="EDUCATION" || tags.value==="COLLEGE TYPE" || tags.value==="NOTICE PERIOD" || tags.value==="SALARY" || 
                       tags.value==="EXPERIENCE" || tags.value==="Job Type" || tags.value==="INDUSTRY" || tags.value==="TOOLS/PROTOCOLS" || tags.value==="COMPANY TYPE" || tags.value==="ROLE"?
                       styles.TagHeading: styles.MobJobtitleFilter} 
-                      type= "radio" name="filter"  onClick={() => { filterByJobTitle(tags.value) }} />{tags.value}</label>
+                      type= "radio" name="Rfilter"  onClick={() => { filterByJobTitle(tags.value) }} />{tags.value}</label>
                  
                   )
                 }).slice(129, 134)
@@ -1301,7 +1307,7 @@ return(
                       className={tags.value==="TECHNOLOGIES" || tags.value==="EDUCATION" || tags.value==="COLLEGE TYPE" || tags.value==="NOTICE PERIOD" || tags.value==="SALARY" || 
                       tags.value==="EXPERIENCE" || tags.value==="Job Type" || tags.value==="INDUSTRY" || tags.value==="TOOLS/PROTOCOLS" || tags.value==="COMPANY TYPE" || tags.value==="ROLE"?
                       styles.TagHeading: styles.MobJobtitleFilter} 
-                      type= "radio" name="filter"  onClick={() => { filterByJobTitle(tags.value) }} />{tags.value}</label>
+                      type= "radio" name="Rfilter"  onClick={() => { filterByJobTitle(tags.value) }} />{tags.value}</label>
                  
                   )
                 }).slice(134, 139)
@@ -1315,7 +1321,7 @@ return(
                       className={tags.value==="TECHNOLOGIES" || tags.value==="EDUCATION" || tags.value==="COLLEGE TYPE" || tags.value==="NOTICE PERIOD" || tags.value==="SALARY" || 
                       tags.value==="EXPERIENCE" || tags.value==="Job Type" || tags.value==="INDUSTRY" || tags.value==="TOOLS/PROTOCOLS" || tags.value==="COMPANY TYPE" || tags.value==="ROLE"?
                       styles.TagHeading: styles.MobJobtitleFilter} 
-                      type= "radio" name="filter"  onClick={() => { filterByJobTitle(tags.value) }} />{tags.value}</label>
+                      type= "radio" name="Rfilter"  onClick={() => { filterByJobTitle(tags.value) }} />{tags.value}</label>
                  
                   )
                 }).slice(139, 144)
@@ -1329,7 +1335,7 @@ return(
                       className={tags.value==="TECHNOLOGIES" || tags.value==="EDUCATION" || tags.value==="COLLEGE TYPE" || tags.value==="NOTICE PERIOD" || tags.value==="SALARY" || 
                       tags.value==="EXPERIENCE" || tags.value==="Job Type" || tags.value==="INDUSTRY" || tags.value==="TOOLS/PROTOCOLS" || tags.value==="COMPANY TYPE" || tags.value==="ROLE"?
                       styles.TagHeading: styles.MobJobtitleFilter} 
-                      type= "radio" name="filter"  onClick={() => { filterByJobTitle(tags.value) }} />{tags.value}</label>
+                      type= "radio" name="Rfilter"  onClick={() => { filterByJobTitle(tags.value) }} />{tags.value}</label>
                  
                   )
                 }).slice(144, 149)
@@ -1346,7 +1352,7 @@ return(
                       className={tags.value==="TECHNOLOGIES" || tags.value==="EDUCATION" || tags.value==="COLLEGE TYPE" || tags.value==="NOTICE PERIOD" || tags.value==="SALARY" || 
                       tags.value==="EXPERIENCE" || tags.value==="Job Type" || tags.value==="INDUSTRY" || tags.value==="TOOLS/PROTOCOLS" || tags.value==="COMPANY TYPE" || tags.value==="ROLE"?
                       styles.TagHeading: styles.MobJobtitleFilter} 
-                      type= "radio" name="filter"  onClick={() => { filterByJobTitle(tags.value) }} />{tags.value}</label>
+                      type= "radio" name="Rfilter"  onClick={() => { filterByJobTitle(tags.value) }} />{tags.value}</label>
                  
                   )
                 }).slice(149, 154)
@@ -1360,7 +1366,7 @@ return(
                       className={tags.value==="TECHNOLOGIES" || tags.value==="EDUCATION" || tags.value==="COLLEGE TYPE" || tags.value==="NOTICE PERIOD" || tags.value==="SALARY" || 
                       tags.value==="EXPERIENCE" || tags.value==="Job Type" || tags.value==="INDUSTRY" || tags.value==="TOOLS/PROTOCOLS" || tags.value==="COMPANY TYPE" || tags.value==="ROLE"?
                       styles.TagHeading: styles.MobJobtitleFilter} 
-                      type= "radio" name="filter"  onClick={() => { filterByJobTitle(tags.value) }} />{tags.value}</label>
+                      type= "radio" name="Rfilter"  onClick={() => { filterByJobTitle(tags.value) }} />{tags.value}</label>
                  
                   )
                 }).slice(154, 159)
@@ -1374,7 +1380,7 @@ return(
                       className={tags.value==="TECHNOLOGIES" || tags.value==="EDUCATION" || tags.value==="COLLEGE TYPE" || tags.value==="NOTICE PERIOD" || tags.value==="SALARY" || 
                       tags.value==="EXPERIENCE" || tags.value==="Job Type" || tags.value==="INDUSTRY" || tags.value==="TOOLS/PROTOCOLS" || tags.value==="COMPANY TYPE" || tags.value==="ROLE"?
                       styles.TagHeading: styles.MobJobtitleFilter} 
-                      type= "radio" name="filter"  onClick={() => { filterByJobTitle(tags.value) }} />{tags.value}</label>
+                      type= "radio" name="Rfilter"  onClick={() => { filterByJobTitle(tags.value) }} />{tags.value}</label>
                  
                   )
                 }).slice(159, 164)

@@ -4,14 +4,24 @@ import { useEffect, useState } from 'react'
 import styles from "./StudentProfile.module.css"
 import Companylogo from "../img/logo.png"
 import { Puff } from  'react-loader-spinner'
-import { useNavigate } from 'react-router-dom'
 import useScreenSize from '../SizeHook';
 import image from '../img/icons8-arrow-button-24.png'
 import Arrowimage from '../img/icons8-arrow-left-48.png'
 import socketIO from 'socket.io-client';
 import Footer from '../Footer/Footer'
+import { Link, useNavigate, NavLink } from "react-router-dom";
+
 
 function EmployeeProfile(props) {
+
+    const navLinkStyles=({isActive})=>{
+        return{
+            color: isActive? "rgb(40, 4, 99)" : "",
+            backgroundColor: isActive? "white" :""
+        }
+    }
+
+
     useEffect( ()=>{    
         const socket = socketIO.connect(props.url,{
           auth:{
@@ -52,6 +62,7 @@ let navigate = useNavigate()
 
     return (
         <>
+      
         <div style={{display:"flex"}}>
         {/* <button style={{ height:"25px", color:"grey", marginTop:"20px", marginLeft:"40px", cursor:"pointer", width:"50px"}}
          onClick={()=>{navigate(-1)}} >Back</button> */}

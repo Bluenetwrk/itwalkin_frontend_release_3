@@ -210,12 +210,9 @@ function Nav(props) {
                   
                   <div className={Styles.linkWrapper}>
 
-                    {/* <NavLink to="/postedjobs" className={Styles.link} style={navLinkStyles}> Posted jobs</NavLink> */}
                     <NavLink to="/PostJobs" className={Styles.PostJobLink} style={navLinkStyles}>Post a Job</NavLink>
-                    {/* <NavLink to="/Services" className={Styles.link} style={navLinkStyles}>Services</NavLink> */}
-                    {/* <NavLink to="/Contact" className={Styles.link} style={navLinkStyles}>Contact</NavLink> */}
+                    <NavLink to="/Search-Candidate" className={Styles.SearchCandidate} style={navLinkStyles}>Employee Home</NavLink>
                     <div className={`${Styles.link} ${Styles.EmpIconeWrapper}`}>
-                      {/* <NavLink to="/Search-Candidate" className={`${Styles.SearchCandidate}`} style={navLinkStyles}>Search Candidate</NavLink> */}
                       <img className={`${Styles.Icon} ${Styles.EmpProfileIcon}`} src={loginuser} ref={imgRef} onClick={() => setShowprofile((prev) => !prev)} />
 
                       {/* .....................drop down............ */}
@@ -224,7 +221,7 @@ function Nav(props) {
                           <div className={Styles.Empdropdownwrapper} ref={menuRef} >
                             <p className={Styles.text} ref={menuRef} onClick={EmployeeProfile} >My profile</p>
                             <p className={Styles.text} ref={menuRef} onClick={mypostedjob}>My posted Jobs</p>
-                            <p className={Styles.text} ref={menuRef} onClick={PostBlogs}>Post Blogs</p>
+                            <p className={Styles.text} ref={menuRef} onClick={PostBlogs}>Write Article</p>
                             <p className={Styles.text} ref={menuRef} onClick={logutEmp}>Logout</p>
                           </div>
                         </div>
@@ -403,32 +400,31 @@ function Nav(props) {
                   {/* </div> */}
                   <div className={Styles.linkWrapper}>
 
-                    <NavLink to="/postedjobs" className={`${Styles.Moblink} ${Styles.PostedJobs}`} > Posted jobs</NavLink>
+                    {/* <NavLink to="/postedjobs" className={`${Styles.Moblink} ${Styles.PostedJobs}`} > Posted jobs</NavLink> */}
 
                     <NavLink to="/PostJobs" className={`${Styles.Moblink} ${Styles.PostJob}`} >Post a Job</NavLink>
 
 
 
-                    <div className={`${Styles.link} ${Styles.MobileIconeWrapper}`}>
+                    <div className={`${Styles.link} ${Styles.MobileIconeWrapperEmp}`}>
 
                       {/* <NavLink to="/" className={` ${Styles.JobMobileNotificationIcon}`}><img src={JobseekerNotification} /> </NavLink> */}
 
                       <img className={`${Styles.Icon} ${Styles.EmpMobileProfileIcon}`} src={loginuser} ref={imgRef} onClick={() => setShowprofile((prev) => !prev)} />
+                      {showprofile ?
+                  <div className={Styles.EmpMobDropdownwrapper} ref={menuRef} >
+                    <p className={Styles.text} ref={menuRef} onClick={EmployeeProfile} >My profile</p>
+                    <NavLink to="/postedjobs" className={`${Styles.text} `} > Posted jobs</NavLink>
+                    <p className={Styles.text} ref={menuRef} onClick={logutEmp}>Logout</p>
+                  </div>
+                  : ""}
+
                     </div >
 
                   </div>
                 </div>
                 {/* ............Mobile View.........drop down............ */}
-                {showprofile ?
-                  <div className={Styles.EmpMobDropdownwrapper} ref={menuRef} >
-                    <p className={Styles.text} ref={menuRef} onClick={EmployeeProfile} >My profile</p>
-                    {/* <p className={Styles.text} ref={menuRef} onClick={()=>{navigate("postedjobs")}} >My Posted Jobs</p> */}
-                    {/* <p className={Styles.text} ref={menuRef} onClick={updateEmployeeProfile}>Update profile</p> */}
-
-                    <p className={Styles.text} ref={menuRef} onClick={logutEmp}>Logout</p>
-                  </div>
-                  : ""}
-
+              
 
               </>
               // ............Admin Login............Mobile View..........

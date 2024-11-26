@@ -44,7 +44,7 @@ const [message, setmessage] = useState("")
         await axios.get(`/EmpProfile/getProfile/${params.CP}`,{headers})
             .then((res) => {
                 let result = res.data.result
-                
+                console.log(result)
                 setProfileData([result])
   setPageLoader(false)
 

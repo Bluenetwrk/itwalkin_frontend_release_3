@@ -23,7 +23,7 @@ const responsive = {
     items: 8
   },
   mobile: {
-    breakpoint: { max: 464, min: 0 },
+    breakpoint: { max: 864, min: 0 },
     items: 1
   }
 };
@@ -40,7 +40,6 @@ function SearchCandidate() {
   let navigate = useNavigate()
 
   const [Candidate, setCandidate] = useState([])
-  console.log(Candidate)
   const [FilCandidate, setFilCandidate] = useState([])
 
   const [nopageFilter, setNoPageFilter] = useState(false)
@@ -709,6 +708,7 @@ return(
                         className={tags.value==="TECHNOLOGIES" || tags.value==="EDUCATION" || tags.value==="COLLEGE TYPE" || tags.value==="NOTICE PERIOD" || tags.value==="SALARY" || 
                         tags.value==="EXPERIENCE" || tags.value==="Job Type" || tags.value==="INDUSTRY" || tags.value==="TOOLS/PROTOCOLS" || tags.value==="COMPANY TYPE" || tags.value==="ROLE"?
                         styles.TagHeading: styles.MobJobtitleFilter} 
+                      
                         type= "radio" name="filter"  onClick={() => { filterByJobTitle(tags.value) }} />{tags.value}</label>
                    
                       )
@@ -1277,7 +1277,7 @@ return(
           }
 
           </div>
-          <div style={{marginTop:"10px"}}>
+          <div style={{marginTop:"50px"}}>
           <Footer/>
         </div>
         </>

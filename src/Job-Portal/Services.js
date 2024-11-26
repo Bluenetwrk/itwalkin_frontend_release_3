@@ -3,7 +3,7 @@ import axios from "axios"
 import { useState, useEffect } from 'react'
 import Footer from './Footer/Footer'
 import useScreenSize from './SizeHook';
-
+import HTMLReactParser from 'html-react-parser'
 
 function Services() {
   const screenSize = useScreenSize();
@@ -25,47 +25,12 @@ getServices()
 
   return ( 
         <>
-     
-{/* {
-        Services.map((descrip, di) => {
-          return (
-            <>
-              {
-                descrip.type == "unordered-list-item" ?
-
-                  <ul style={{ listStyleType: "disc" }}>
-                    <li>
-                      {descrip.text}
-
-                    </li>
-                  </ul>
-
-                  : descrip.type == "ordered-list-item" ?
-
-                    <ol >
-                    
-                        {descrip.text}
-
-                    </ol>
-                    :
-                    <>
-                      {descrip.text}
-                      <br></br>
-                    </>
-
-              }
-            </>
-          )
-        })} */}
         <div style={{marginLeft:"20px"}}>
-          <h2 >Our Services</h2>
-        <p>
-        The ITwalkin Platform (including any mobile based applications, website and web applications) is provided by ITwalkin is either directly or through its affiliates including but not limited to Bluenetworks. Through the ITwalkin Platform any person with a verified account can post jobs ("Job Poster") to the ITwalkin Platform, access and participate in the services provided by ITwalkin. By using ITwalkin Platform, your consent to the terms of the Terms of Service in addition to our Privacy Policy.
+        <h2 >Our Services</h2>
 
-Any Employer accessing the ITwalkin Platform shall be bound by these Terms of Service, and all other rules, regulations and terms of use referred to herein or provided by ITwalkin in relation to any services provided via the ITwalkin Platform.
-     
-        </p>
-    <div> {Services} </div>
+    <div style={{width:"93%"}}> {HTMLReactParser(Services.toString())} </div>
+       
+    {/* <div> {Services} </div> */}
         
         </div>
         {screenSize.width > 750 ?""

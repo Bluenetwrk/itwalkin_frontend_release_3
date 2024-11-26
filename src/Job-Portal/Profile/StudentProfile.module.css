@@ -1,3 +1,31 @@
+
+.NavConetenetWrapper{
+    display: flex;
+    align-items: center;
+    position: sticky;
+    top:10px;
+    z-index: 100;
+    width:50%;
+    margin-left: 28%;
+
+}
+
+.LocationFilterWrapper{
+    z-index: 100;
+    /* width:180px; */
+    padding: 8px 10px;
+    margin-top: -47.5px;
+    margin-left: 40px;
+    cursor: pointer;
+    font-weight: 600;
+    align-content: center;
+    border: none;
+    border-radius: 3px;
+    color: white;
+    /* background-color: red; */
+}
+
+
 .imageV{
     height:100px;
     width:100px;
