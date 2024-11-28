@@ -6,6 +6,7 @@ import axios from "axios";
 import { Link, useNavigate, BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import useScreenSize from '../SizeHook';
 import location from "../img/icons8-location-20.png"
+import HTMLReactParser from 'html-react-parser'
 
 
 
@@ -172,7 +173,7 @@ await axios.delete(`/jobpost/deleteCheckBoxArray/${checkBoxValue}`, {headers} )
             <li className={`${styles.li} ${styles.Jtitle}`}><b>Job Title</b></li>
             <li className={`${styles.li} ${styles.JobType}`}><b>JobType</b></li>
 
-            <li className={`${styles.li} ${styles.liDescription}`}><b>Job description</b></li>
+            {/* <li className={`${styles.li} ${styles.liDescription}`}><b>Job description</b></li> */}
             <li className={`${styles.li} ${styles.Pdate}`}><b>Posted Date</b></li>
 
             <li className={`${styles.li} ${styles.Location}`}><b>Location</b></li>
@@ -196,29 +197,21 @@ await axios.delete(`/jobpost/deleteCheckBoxArray/${checkBoxValue}`, {headers} )
                     <li className={`${styles.li} ${styles.CompanyName}`}>{items.Logo ?
                       < img style={{ width: "38px", height: "38px" }} src={items.Logo} />
                       : ""}<br></br>{items.companyName}</li>
-                    <li className={`${styles.li} ${styles.Jtitle}`}>{items.jobTitle}</li>
+                    <li className={`${styles.li} ${styles.Jtitle}`} onClick={() =>
+                       navigate(`/Jobdetails/${btoa(items._id)}`)}>{items.jobTitle}</li>
                     <li className={`${styles.li} ${styles.JobType}`}>{items.jobtype}</li>
 
-                    <li className={`${styles.li} ${styles.liDescription}`}>
-                      {/* {items.jobDescription.slice(0,60)} 
-<span style={{color:"blue"}} onClick={()=>{navigate(`/Jobdetails/${items._id}`)}}>...see more</span> */}
-                      {
-                        items.jobDescription.map((descrip, di) => {
-                          return (
-                            <>
-                              {
+                    {/* <li className={`${styles.li} ${styles.liDescription}`}>
 
-                                descrip.text.slice(0, 60)
-                              }
-                            </>
-                          )
-                        }).slice(0, 1)
+                      {
+                        items.jobDescription? HTMLReactParser(items.jobDescription.toString()) :""
+
                       }
 
                       <span onClick={() => navigate(`/Jobdetails/${btoa(items._id)}`)} style={{ color: "blue", cursor: "pointer" }} className={styles.seeMore}>
                         ...read more
                       </span>
-                    </li>
+                    </li> */}
                     <li className={`${styles.li} ${styles.Pdate}`}>
                       {new Date(items.createdAt).toLocaleString(
                         "en-US",

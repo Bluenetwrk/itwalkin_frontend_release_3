@@ -492,7 +492,7 @@ return(
 
           <div className={styles.AllUiWrapper}>
             <ul className={styles.ul} >
-              <li style={{ backgroundColor: " rgb(40, 4, 99)" }} className={`${styles.li} ${styles.nameHome}`}><b>Name</b>  </li>
+              <li style={{ backgroundColor: " rgb(40, 4, 99)" }} className={`${styles.li} ${styles.nameHome}`}><b>Jobseeker Name</b>  </li>
               <li style={{ backgroundColor: " rgb(40, 4, 99)" }} className={`${styles.li} ${styles.NoticePeriod}`}><b>Notice Period</b> 
               <p style={{ display: "inline", marginLeft:"4%"}}>
                   <i onClick={NoticeAscendingOrder} className={`${styles.arrow} ${styles.up}`}> </i>
@@ -1228,7 +1228,7 @@ return(
                         )}</p>
                     <div style={{ display: "flex", marginTop:"-20px" }}>
                       <div className={styles.LeftTable}>
-                        <span className={styles.span}>Name :  </span> <br></br>
+                        <span className={styles.span}>Jobseeker Name :  </span> <br></br>
                         {/* <span className={styles.span}><u>Last Active :  </u></span> <br></br> */}
 
                         <span className={styles.span}>Age :</span><br></br>

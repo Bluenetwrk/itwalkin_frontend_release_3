@@ -13,7 +13,7 @@ import useScreenSize from '../SizeHook';
 import Arrowimage from '../img/icons8-arrow-left-48.png'
 import profileDp from "../img/user_3177440.png"
 import "./Allobs.module.css"
-
+import HTMLReactParser from 'html-react-parser'
 
 
 function Jobdetails() {
@@ -181,36 +181,10 @@ const [Loader, setLoader] = useState(false)
     </td>
   </tr>
   <tr>
-    <td colSpan={2} style={{backgroundColor:"white"}}>
+    <td colSpan={2} style={{backgroundColor:"white", width:"10%"}} >
     {
-                jobdescription.map((descrip, di) => {
-                      return (
-                        <>
-                          {
-                            descrip.type == "unordered-list-item" ?
-            
-                              <ul style={{ listStyleType: "disc" }}>
-                                <li>
-                                  {descrip.text}
-            
-                                </li>
-                              </ul>
-            
-                              : descrip.type == "ordered-list-item" ?
-            
-                                <ol >
-                                    {descrip.text}
-            
-                                </ol>
-                                :
-                                <>
-                                  {descrip.text}
-                                  <br></br>
-                                </>            
-                          }
-                        </>
-                      )
-                    })} 
+    jobdescription? HTMLReactParser(jobdescription.toString()) :""
+             } 
     </td>
 
   </tr>
@@ -315,46 +289,9 @@ const [Loader, setLoader] = useState(false)
                   </div>
             <p className={styles.jobDescriptionHeading}>Job Description:</p>
             <p className={styles.jobDescription}> 
-            { jobdescription.map((descrip, di) => {
-                      return (
-                        <>
-                          {
-                            descrip.type == "unordered-list-item" ?
-            
-                              <ul style={{ listStyleType: "disc" }}>
-                                <li style={{marginLeft:"-5px"}} className={styles.jobDescription}>
-                                  {descrip.text}
-            
-                                </li>
-                              </ul>
-            
-                              : descrip.type == "ordered-list-item" ?
-            
-                                <ul >
-                                  <li style={{marginLeft:"-5px"}} className={styles.jobDescription}>
-                                    {descrip.text}
-            
-                                  </li>
-                                </ul>
-                                :
-                                <>
-                                 <div className={styles.jobDescription}> {descrip.text}</div>
-                                  <br></br>
-                                </>           
-                          }
-                        </>
-                      )
-                    })}
-                   
-
-
-            <span onClick={() =>{
-              window.scrollTo({
-                top:0
-              })
-               navigate(-1)}} className={styles.showLess}>
-                      ...show less
-                    </span>
+            { 
+    jobdescription? HTMLReactParser(jobdescription.toString()) :""
+            }
             
                </p>
                 </div>

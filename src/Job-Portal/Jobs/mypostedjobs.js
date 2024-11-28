@@ -10,6 +10,8 @@ import location from "../img/icons8-location-20.png"
 import graduation from "../img/icons8-graduation-cap-40.png"
 import socketIO from 'socket.io-client';
 import Footer from '../Footer/Footer';
+import HTMLReactParser from 'html-react-parser'
+
 
 
 function JoppostedByEmp(props) {
@@ -329,7 +331,7 @@ function handleRecordchange(e){
           <ul className={styles.ul}>
             <li className={styles.li}><b>Company Name</b></li>
             <li className={`${styles.li} ${styles.Jtitle}`}><b>Job Title</b></li>
-            <li className={`${styles.li} ${styles.liDescription}`}><b>Job description</b></li>
+            {/* <li className={`${styles.li} ${styles.liDescription}`}><b>Job description</b></li> */}
             <li className={`${styles.li} ${styles.Pdate}`}><b>Posted Date</b>
             <p className={styles.arrowWrapper}>
                <i onClick={sortbyNewjobs} className={`${styles.arrow} ${styles.up}`} ></i>
@@ -366,10 +368,7 @@ function handleRecordchange(e){
             records.map((items, i) => {
                 return (
 
-
-
                   <ul className={styles.ul} key={i}>
-
 
                     <li className={styles.li}>
                      {/* {items.Logo ?  < img style={{ width: "40%", height: "40px" }} src={items.Logo} />
@@ -377,47 +376,12 @@ function handleRecordchange(e){
                       {items.companyName}
                       </li>
 
-                    <li className={`${styles.li} ${styles.Jtitle}`}>{items.jobTitle.toUpperCase()}</li>
-                    <li className={`${styles.li} ${styles.liDescription}`}> 
-                    {/* {items.jobDescription.slice(0, 70)} */}
-                    {
-                    items.jobDescription.map((descrip, di) => {
-                      return (
-                        <>
-                          {
-                            // descrip.type == "unordered-list-item" ?
-            
-                            //   <ul style={{ listStyleType: "disc" }}>
-                            //     <li>
-                            //       {descrip.text}
-            
-                            //     </li>
-                            //   </ul>
-            
-                            //   : descrip.type == "ordered-list-item" ?
-            
-                            //     <ol >
-                            //       {/* <li> */}
-                            //         {descrip.text}
-            
-                            //       {/* </li> */}
-                            //     </ol>
-                            //     :
-                            //     <>
-                            //       {descrip.text}
-                            //       <br></br>
-                            //     </>
-                            descrip.text.slice(0,50)
-            
-                          }
-                        </>
-                      )
-                    }).slice(0,1)
-                    }
-                   
+                    <li className={`${styles.li} ${styles.Jtitle}`} style={{ color: "blue", cursor:"pointer" }} onClick={() =>
+                       { navigate(`/Jobdetails/${btoa(items._id)}`) }}>{items.jobTitle.toUpperCase()}</li>
+                    {/* <li className={`${styles.li} ${styles.liDescription}`}> 
+                    {items.jobDescription? HTMLReactParser(items.jobDescription.toString()) :""}
                       <span style={{ color: "blue", cursor:"pointer" }} onClick={() => { navigate(`/Jobdetails/${btoa(items._id)}`) }} >...see more</span>
-
-                    </li>
+                    </li> */}
                     <li className={`${styles.li} ${styles.Pdate}`}>
                       {new Date(items.createdAt).toLocaleString(
                         "en-US",
@@ -571,39 +535,12 @@ myjobs.map((job, i) => {
         <p className={styles.jobDescription}> 
         {/* {job.jobDescription} */}
         {
-                    job.jobDescription.map((descrip, di) => {
-                      return (
-                        <>
-                          {
-                            // descrip.type == "unordered-list-item" ?
-            
-                            //   <ul style={{ listStyleType: "disc" }}>
-                            //     <li>
-                            //       {descrip.text}
-            
-                            //     </li>
-                            //   </ul>
-            
-                            //   : descrip.type == "ordered-list-item" ?
-            
-                            //     <ol >
-                            //       {/* <li> */}
-                            //         {descrip.text}
-            
-                            //       {/* </li> */}
-                            //     </ol>
-                            //     :
-                            //     <>
-                            //       {descrip.text}
-                            //       <br></br>
-                            //     </>
-                            descrip.text.slice(0,50)
-                          }
-                        </>
-                      )
-                    }).slice(0,1)
+                    job.jobDescription? 
+                    HTMLReactParser(job.jobDescription.slice(0,100)
+                    .toString())                    
+                    :""                
                     }
-                      <span style={{ color: "blue", cursor:"pointer" }} onClick={() => { navigate(`/Jobdetails/${job._id}`) }} >...see more</span>
+                  <span style={{ color: "blue", cursor:"pointer" }} onClick={() => { navigate(`/Jobdetails/${job._id}`) }} >...see more</span>
                    
           </p>
       </div>

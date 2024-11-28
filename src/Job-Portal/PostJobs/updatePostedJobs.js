@@ -1,4 +1,4 @@
-import React from 'react'
+import React,{useRef} from 'react'
 import { useEffect, useState } from 'react'
 import axios from "axios";
 import { Link, useNavigate , useLocation,} from "react-router-dom";
@@ -9,14 +9,14 @@ import Arrowimage from '../img/icons8-arrow-left-48.png';
 import Footer from '../Footer/Footer';
 import useScreenSize from '../SizeHook';
 import {jobTags} from "../Tags"
-
+import JoditEditor from 'jodit-react'
 
 
 import Style from "./postJobs.module.css"
 
 function UpdatePostedJobs() {
   const screenSize = useScreenSize();
-
+  const editor=useRef(null)
    
   const location = useLocation()
   let Jobid = location.state.getId
@@ -171,14 +171,16 @@ window.addEventListener('keypress', function(event){
 
                     <h4 className={Style.jobHeadline}>Job Description</h4>
                     {/* <input className={Style.inputbox} type="text" value={jobDescription} onChange={(e) => { setJobDescription(e.target.value) }} /> */}
-                    <Editor
+                    {/* <Editor
          toolbarClassName="toolbarClassName"
          wrapperClassName="wrapperClassName"
          editorClassName="editorClassName"
          wrapperStyle={{ width: "100%", marginLeft:"0px", border: "1px solid black", borderRadius:"4px" }}
          className={Style.inputbox}
          onChange={(e)=>{ setJobDescription(e.blocks) }}
-      />
+      /> */}
+<JoditEditor  ref={editor} className={Style.inputbox} value={jobDescription?jobDescription.toString():""} onChange={(e)=>{setJobDescription(e)}} />
+
 
 <h4 className={Style.jobHeadline}>Job Tags (Select multiple Tags to reach the best Matching Jobs)</h4>
 

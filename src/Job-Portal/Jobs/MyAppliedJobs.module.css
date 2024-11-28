@@ -87,9 +87,16 @@ color:white;
 }
 
 .Jtitle {
-    width: 12%;
-    overflow-wrap:break-word
-
+    width: 17%;
+    overflow-wrap:break-word;
+   
+}
+.JtitleR {
+    width: 17%;
+    overflow-wrap:break-word;
+    color: blue;
+    text-decoration: underline;
+    cursor: pointer;
 }
 
 .Package {

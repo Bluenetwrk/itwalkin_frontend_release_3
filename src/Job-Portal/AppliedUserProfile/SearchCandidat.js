@@ -434,7 +434,7 @@ function SearchCandidate() {
 
           <div className={styles.AllUiWrapper}>
             <ul className={styles.ul} >
-              <li style={{ backgroundColor: " rgb(40, 4, 99)" }} className={`${styles.li} ${styles.name}`}><b>Name</b>
+              <li style={{ backgroundColor: " rgb(40, 4, 99)" }} className={`${styles.li} ${styles.name}`}><b> Jobseeker Name</b>
               </li>
               <li style={{ backgroundColor: " rgb(40, 4, 99)" }} className={`${styles.li} ${styles.NoticePeriod}`}><b>Notice Period</b>
                 <p style={{ display: "inline", marginLeft: "4%" }}>
@@ -1161,7 +1161,7 @@ function SearchCandidate() {
                     <div style={{ display: "flex" }}>
 
                       <div className={styles.LeftTable}>
-                        <span className={styles.span}>Name :  </span> <br></br>
+                        <span className={styles.span}>Jobseeker Name :  </span> <br></br>
                         <span className={styles.span}><u>Last Active :  </u></span> <br></br>
                         <span className={styles.span}>Age :</span><br></br>
                         <span className={styles.span}> Notice Period :</span><br></br>

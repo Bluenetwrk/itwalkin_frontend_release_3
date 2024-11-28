@@ -185,9 +185,10 @@
 
 .Uiwarpper {
     margin-top: 10px;
-    margin-left: -37px;
+    margin-left: -35px;
     width:102%
 }
+
 
 .ul {
     display: flex;
@@ -203,8 +204,8 @@
 
 }
 .ul:nth-child(even){
-    /* background-color: rgb(40, 4, 99);   */
-    background:rgb(242, 244, 245)
+    background-color: rgb(242,244,245);  
+    /* background:rgb(242, 244, 245) */
 
     /* color:white; */
     /* height: 60px; */
@@ -213,6 +214,8 @@
 }
 
 .li {
+    padding-top: 0.5%;
+    padding-bottom: 0.5%;
     display: inline-block;
     width: 12%;
     /* border: 1px solid rgb(9, 247, 247); */
@@ -285,7 +288,7 @@
 }
 
 .NuApplied{
-    width:8%
+    width:15%
 }
 .viewButton{
     background-color: rgb(40, 4, 99);

@@ -63,7 +63,9 @@
 }
 
 .Jtitle {
-    width: 9%
+    width: 9%;
+    text-decoration: underline;
+    cursor: pointer;
 }
 .JobType {
     width: 7.5%

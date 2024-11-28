@@ -211,7 +211,7 @@ function Nav(props) {
                   <div className={Styles.linkWrapper}>
 
                     <NavLink to="/PostJobs" className={Styles.PostJobLink} style={navLinkStyles}>Post a Job</NavLink>
-                    <NavLink to="/Search-Candidate" className={Styles.SearchCandidate} style={navLinkStyles}>Employee Home</NavLink>
+                    <NavLink to="/Search-Candidate" className={Styles.SearchCandidate} style={navLinkStyles}>Employer Home</NavLink>
                     <div className={`${Styles.link} ${Styles.EmpIconeWrapper}`}>
                       <img className={`${Styles.Icon} ${Styles.EmpProfileIcon}`} src={loginuser} ref={imgRef} onClick={() => setShowprofile((prev) => !prev)} />
 
@@ -242,7 +242,7 @@ function Nav(props) {
                       <NavLink > <img className={Styles.logo} src={logo} /> </NavLink>
                     </div>
                     <div className={Styles.linkWrapper}>
-                      <NavLink to="/BIAddmin@Profile" className={Styles.link} style={navLinkStyles}>All </NavLink>
+                      {/* <NavLink to="/BIAddmin@Profile" className={Styles.link} style={navLinkStyles}>All </NavLink> */}
 
                       <NavLink to="/AboutUs" className={`${Styles.link}`} style={navLinkStyles} >About Us</NavLink>
                       <NavLink to="/Services" className={Styles.link} style={navLinkStyles}>Services</NavLink>

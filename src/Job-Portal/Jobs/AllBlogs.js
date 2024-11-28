@@ -12,6 +12,8 @@ import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
 import Footer from '../Footer/Footer';
 import {jobTags} from '../Tags'
+import HTMLReactParser from 'html-react-parser'
+
 
 const responsive = {
   desktop: {
@@ -616,15 +618,7 @@ return(
 
                       <li className={`${styles.li} ${styles.BlogDescription}`}>
                           {
-                            items.jobDescription.map((descrip, di) => {
-                              return (
-                                <>
-                                  {
-                                    descrip.text.slice(0,200)
-                                  }
-                                </>
-                              )
-                            }).slice(0, 1)
+    items.jobDescription? HTMLReactParser(items.jobDescription.toString()) :""
                           }
   
                           <span onClick={() => navigate(`/Blogdetails/${btoa(items._id)}`)} className={styles.seeMore}>
@@ -682,24 +676,9 @@ return(
                           
                             {items.name}</li>
          
-
-                      {/* {items.Source ?
-                        <a className={`${styles.li} ${styles.Source}`} >{items.Source}</a>
-                        : */}
-
-                      {/* <li className={`${styles.li} ${styles.JobType}`}>{items.jobtype}</li> */}
-
                       <li className={`${styles.li} ${styles.BlogDescription}`}>
                           {
-                            items.jobDescription.map((descrip, di) => {
-                              return (
-                                <>
-                                  {
-                                    descrip.text.slice(0,200)
-                                  }
-                                </>
-                              )
-                            }).slice(0, 1)
+    items.jobDescription? HTMLReactParser(items.jobDescription.toString()) :""
                           }
   
                           <span onClick={() => navigate(`/Blogdetails/${btoa(items._id)}`)} className={styles.seeMore}>
@@ -1387,17 +1366,8 @@ return(
                         <p className={styles.jobDescription} style={{marginTop:"-6px"}}>
 
                           {
-                            job.jobDescription.map((descrip, di) => {
-                              return (
-                                <>
-                                  {
-                                    descrip.text.slice(0, 200)
+    job.jobDescription? HTMLReactParser(job.jobDescription.toString()) :""
 
-                                  }
-
-                                </>
-                              )
-                            }).slice(0, 1)
                           }
                           <span onClick={() => {
                             window.scrollTo({

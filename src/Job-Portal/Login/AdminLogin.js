@@ -15,7 +15,7 @@ function Admin() {
   useEffect(() => {
     let studentAuth = localStorage.getItem("StudLog")
     if (studentAuth) {
-      navigate("/alljobs")
+      navigate("/BIAddmin@AllJobs")
     }
   })
   useEffect(() => {

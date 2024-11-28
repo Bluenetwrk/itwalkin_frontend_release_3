@@ -1,10 +1,11 @@
-import React from 'react'
+import React, { useRef } from 'react'
 import { useEffect, useState } from 'react'
 import axios from "axios"
 import Companylogo from "../img/logo.png"
 import { useNavigate } from 'react-router-dom'
 import Footer from '../Footer/Footer'
-
+import JoditEditor from 'jodit-react'
+import HTMLReactParser from 'html-react-parser'
 import { Editor } from 'react-draft-wysiwyg';
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import Style from "./postJobs.module.css"
@@ -18,7 +19,7 @@ import {jobTags} from "../Tags"
 function PostJobs(props) {
     const screenSize = useScreenSize();
 
-  
+    const editor=useRef(null)
     // useEffect(() => {
     //     const socket = socketIO.connect(props.url, {
     //         auth: {
@@ -279,14 +280,17 @@ if(key==='Full Time' ||key=== 'Contract' || key==='Internship' || key==='Part Ti
 
                                         <h4 className={Style.jobHeadline}>Job Description**</h4>
                                         {/* <input maxLength="100" className={Style.inputbox} type="text" value={jobDescription} onChange={(e) => { setJobDescription(e.target.value) }} /> */}
-                                        <Editor
+                                        {/* <Editor
                                             toolbarClassName="toolbarClassName"
                                             wrapperClassName="wrapperClassName"
                                             editorClassName="editorClassName"
                                             wrapperStyle={{ width: "100%", marginLeft: "0px", border: "1px solid black", borderRadius: "4px" }}
                                             className={Style.inputbox}
                                             onChange={(e) => { setJobDescription(e.blocks) }}
-                                        />
+                                        /> */}
+<JoditEditor  ref={editor} className={Style.inputbox} value={jobDescription.toString()} onChange={(e)=>{setJobDescription(e)}} />
+
+
                                         <p className={Style.jobHeadline}>Job Tags <span className={Style.hint}>(Select multiple Tags to reach the best Matching Candidates)</span></p>
 
 <div className={Style.JobtitleFilterWrapper}>

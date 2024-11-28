@@ -10,6 +10,8 @@ import axios from "axios";
 import { Link, useNavigate, BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import socketIO from 'socket.io-client';
 import Footer from '../Footer/Footer';
+import HTMLReactParser from 'html-react-parser'
+
 
 function AppledJobs(props) {
   useEffect(() => {
@@ -318,7 +320,7 @@ function AppledJobs(props) {
               <li className={`${styles.li} ${styles.Jtitle}`}><b>Job Title</b></li>
               <li className={`${styles.li} ${styles.JobType}`}><b>JobType</b></li>
 
-              <li className={`${styles.li} ${styles.liDescription}`}><b>Job description</b></li>
+              {/* <li className={`${styles.li} ${styles.liDescription}`}><b>Job description</b></li> */}
               <li className={`${styles.li} ${styles.Pdate}`}><b>Posted Date</b>
                 <p className={styles.arrowWrapper} >
                   <i onClick={sortbyNewjobs} className={`${styles.arrow} ${styles.up}`}> </i>
@@ -365,27 +367,10 @@ function AppledJobs(props) {
                     : ""}<br></br> */}
                         {items.companyName}</li>
 
-                      <li className={`${styles.li} ${styles.Jtitle}`}>{items.jobTitle.toUpperCase()}</li>
+                      <li className={`${styles.li} ${styles.JtitleR}`}
+                      onClick={() => { navigate(`/Jobdetails/${btoa(items._id)}`) }}>{items.jobTitle.toUpperCase()}</li>
                       <li className={`${styles.li} ${styles.JobType}`}>{items.jobtype}</li>
 
-                      <li className={`${styles.li} ${styles.liDescription}`}>
-                        {/* {items.jobDescription.slice(0, 60)}
-                   */}
-                        {
-                          items.jobDescription.map((descrip, di) => {
-                            return (
-                              <>
-                                {
-                                  descrip.text.slice(0, 50)
-                                }
-                              </>
-                            )
-                          }).slice(0, 1)
-                        }
-
-                        <span style={{ color: "blue", cursor: "pointer" }} onClick={() => { navigate(`/Jobdetails/${btoa(items._id)}`) }} >...see more</span>
-
-                      </li>
                       <li className={`${styles.li} ${styles.Pdate}`}>
                         {new Date(items.createdAt).toLocaleString(
                           "en-US",
