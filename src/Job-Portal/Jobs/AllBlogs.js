@@ -96,15 +96,13 @@ function Blogs() {
   async function getjobs() {
     setCount(1)
     setActive([])
-
     setPageLoader(true)
     setNoPageFilter(false)
     const headers = { authorization: 'BlueItImpulseWalkinIn' };
     await axios.get("/BlogRoutes/getAllBlogs", { headers })
       .then((res) => {
-
-        let result = (res.data)
-        console.log(result)
+        let result = res.data
+        console.log("rree",result)
         let sortedate = result.sort(function (a, b) {
           return new Date(b.createdAt) - new Date(a.createdAt);
         });
@@ -115,7 +113,6 @@ function Blogs() {
         alert("some thing went wrong")
       })
   }
-
   useEffect(() => {
     getjobs()
   }, [])

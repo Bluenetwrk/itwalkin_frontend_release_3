@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useRef} from 'react'
 import { useEffect, useState } from 'react'
 import axios from "axios"
 import Companylogo from "../img/logo.png"
@@ -8,12 +8,14 @@ import { Editor } from 'react-draft-wysiwyg';
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css"; 
 import CreatableSelect  from "react-select/creatable"
 import Style from "../PostJobs/postJobs.module.css"
+import JoditEditor from 'jodit-react'
 
 import {jobTags} from "../Tags"
 
 
 function AdminPostJobs() {
     let adminLoginAuth= localStorage.getItem("AdMLog")
+    const editor=useRef(null)
 
 
     useEffect(()=>{
@@ -252,14 +254,16 @@ function AdminPostJobs() {
 
                                         <h4 className={Style.jobHeadline}>Job Description**</h4>
                                         {/* <input maxLength="100" className={Style.inputbox} type="text" value={jobDescription} onChange={(e) => { setJobDescription(e.target.value) }} /> */}
-                                        <Editor
+                                        {/* <Editor
          toolbarClassName="toolbarClassName"
          wrapperClassName="wrapperClassName"
          editorClassName="editorClassName"
          wrapperStyle={{ width: "100%", marginLeft:"0px", border: "1px solid black", borderRadius:"4px" }}
          className={Style.inputbox}
          onChange={(e)=>{ setJobDescription(e.blocks) }}
-      />
+      /> */}
+<JoditEditor  ref={editor} className={Style.inputbox} value={jobDescription.toString()} onChange={(e)=>{setJobDescription(e)}} />
+
                                         <h4 className={Style.jobHeadline}>Job Tags (Select multiple Tags to reach the best Matching Jobs)</h4>
 
 <div className={Style.JobtitleFilterWrapper}>
