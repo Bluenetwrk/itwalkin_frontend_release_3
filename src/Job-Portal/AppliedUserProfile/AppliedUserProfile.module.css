@@ -1,4 +1,15 @@
 
+.HomeNavConetenetWrapper{
+    display: flex;
+    margin-top: -47.5px;
+    align-items: center;
+    position: sticky;
+    top:10px;
+    z-index: 100;
+    width:45%;
+    margin-left: 28%;
+    /* background-color: red; */
+}
 .NavConetenetWrapper{
     display: flex;
     margin-top: -47.5px;
@@ -6,8 +17,8 @@
     position: sticky;
     top:10px;
     z-index: 100;
-    width:40%;
-    margin-left: 43%;
+    width:45%;
+    margin-left: 42%;
 }
 .LocationFilterWrapper{
     z-index: 100;
@@ -16,7 +27,6 @@
 }
 
 .JobLocationFilter{
-
     margin-left: 40px;
     cursor: pointer;
     font-weight: 600;
@@ -27,7 +37,7 @@
 }
 
 .searchBothForNavWrapper{
-    width:85%;
+    width:95%;
     background-color: white;
     border-radius: 3px;
     position: sticky;
@@ -43,7 +53,7 @@
 
 .inputboxsearchNav{
     padding: 10px;
-    width: 79%;
+    width: 83%;
     border : 1px solid rgb(204, 209, 211);
     border: 0px white;
     border-radius: 3px;
