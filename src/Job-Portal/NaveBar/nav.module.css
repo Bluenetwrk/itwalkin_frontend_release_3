@@ -665,6 +665,13 @@ font-weight: 400;
     cursor: pointer;
     /* margin-top: 25px; */
 }
+.active{
+    background-color: white;
+    color:rgb(40, 4, 99);
+    padding-left: 5px;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+}
 
 
 .Moblogo{

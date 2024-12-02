@@ -615,7 +615,7 @@ return(
 
                       <li className={`${styles.li} ${styles.BlogDescription}`}>
                           {
-    items.jobDescription? HTMLReactParser(items.jobDescription.toString()) :""
+    items.jobDescription? HTMLReactParser(items.jobDescription.slice(0,300).toString()) :""
                           }
   
                           <span onClick={() => navigate(`/Blogdetails/${btoa(items._id)}`)} className={styles.seeMore}>
@@ -639,13 +639,9 @@ return(
                       <li className={`${styles.li} ${styles.Skills}`}>{items.skills} </li> */}
 
                       <li className={`${styles.li} ${styles.Apply}`}>
-                        {items.SourceLink ?
-                          <button title='this will take to Source page' className={styles.Applybutton} onClick={() => {
-                            applyforOtherJob(items.SourceLink)
-                          }}>Apply</button>
-                          :
-                          <button className={styles.Applybutton} onClick={() => { applyforJob(items._id) }}>Check</button>
-                        }
+                        
+                          <button className={styles.Applybutton} onClick={() => navigate(`/Blogdetails/${btoa(items._id)}`)}>Check</button>
+                        
                       </li>
                     </ul>
                   )
@@ -1363,7 +1359,7 @@ return(
                         <p className={styles.jobDescription} style={{marginTop:"-6px"}}>
 
                           {
-    job.jobDescription? HTMLReactParser(job.jobDescription.toString()) :""
+    job.jobDescription? HTMLReactParser(job.jobDescription.slice(0,300).toString()) :""
 
                           }
                           <span onClick={() => {

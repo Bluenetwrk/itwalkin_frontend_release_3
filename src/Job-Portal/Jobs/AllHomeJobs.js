@@ -12,6 +12,8 @@ import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
 import Footer from '../Footer/Footer';
 import {jobTags} from '../Tags'
+import HTMLReactParser from 'html-react-parser'
+
 
 const responsive = {
   desktop: {
@@ -1452,43 +1454,8 @@ return(
 
                         <p className={styles.jobDescriptionHeading}>Job Description:</p>
                         <p className={styles.jobDescription}>
-                          {/* {job.jobDescription} */}
-
                           {
-                            job.jobDescription.map((descrip, di) => {
-                              return (
-                                <>
-
-                                  {
-                                    // descrip.type == "unordered-list-item" ?
-
-                                    // <ul style={{ listStyleType: "disc" }}>
-                                    //   <li style={{ marginTop: "-12px", marginLeft: "-20px" }}>
-                                    //     {descrip.text.slice(0,50)}
-
-                                    //   </li>
-                                    // </ul>
-
-                                    // : descrip.type == "ordered-list-item" ?
-
-                                    //   <ul style={{ listStyleType: "disc" }} >
-                                    //     <li style={{ marginTop: "-12px", marginLeft: "-20px" }}>
-
-                                    //       {descrip.text}
-
-                                    //     </li>
-                                    //   </ul>
-                                    //   :
-                                    //   <>
-                                    descrip.text.slice(0, 50)
-                                    //     <br></br>
-                                    //   </>
-
-                                  }
-
-                                </>
-                              )
-                            }).slice(0, 1)
+    job.jobDescription? HTMLReactParser(job.jobDescription.slice(0,100).toString()) :""
                           }
                           <span onClick={() => {
                             window.scrollTo({

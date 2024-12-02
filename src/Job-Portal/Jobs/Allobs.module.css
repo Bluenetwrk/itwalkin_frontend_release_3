@@ -212,7 +212,7 @@
 
 .arrowWrapper{
     display: inline;
-    margin-left: 7%;
+    margin-left: 4%;
     margin-top: 2px;
 }
 .arrow {
@@ -334,17 +334,20 @@
 }
 .Uiwarpper{
 
-    width:99.5%;
-    margin-left: 5px;
+    /* width:100%; */
+    margin-left: -2%;
+    /* background-color: aqua; */
 }
 
 .ul{
     display: flex;
     margin: 0px;
-    margin-left: -38px;
+    margin-left: -.2%;
+    /* width:99.5%; */
+
 }
 
-  .ul:nth-child(odd) {
+  .ul:nth-child(even) {
     background:rgb(242, 244, 245)
   }
 .li{
@@ -352,8 +355,8 @@
     padding-top: 0.5%;
     padding-bottom: 0.5%;
     width : 8%;
-    /* border : 1px solid rgb(9, 247, 247); */
     border : 1px solid rgb(215, 223, 226);
+    /* border : 1px solid rgb(221,221,221); */
     text-align: center;
     overflow-wrap:break-word;
 }
@@ -378,7 +381,7 @@
 
 }
 .BlogDescription{
-    width : 37%;
+    width : 47%;
     overflow-wrap:break-word;
     text-align: center;
 

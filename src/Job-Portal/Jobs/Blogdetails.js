@@ -125,40 +125,19 @@ const [Loader, setLoader] = useState(false)
         
         </div>
           
-          <table>
-          <tr>
-    <td colSpan={2} style={{backgroundColor:" rgb(40, 4, 99)"}}>
-    {/* <div  style={{marginLeft:"48%", color:"white", fontWeight:"550"}}>Full Job Description</div> */}
-    <div style={{marginLeft:"48%", color:"white", fontWeight:"550"}}>{jobs.jobTitle ? jobs.jobTitle[0].toUpperCase()+jobs.jobTitle.slice(1)
-    : <li style={{ display: "inline-block" }}>job Title</li>}</div>
-
-    </td>
-  </tr>
+          <table style={{marginBottom:"20px"}}>
+       
   <tr>
     <th>Company Name</th>
     <td>{jobs.companyName ? jobs.companyName : <li style={{ display: "inline-block" }}>Company name</li>}</td>
   </tr>
-  {/* <tr>
-<th>Job Title</th>
-    <td>{jobs.jobTitle ? jobs.jobTitle : <li style={{ display: "inline-block" }}>job Title</li>}</td>
-  </tr> */}
   <tr>
-    <th>Location</th>
-    <td>{jobs.jobLocation ? jobs.jobLocation : <li style={{ display: "inline-block" }}>job Location</li>}</td>
+    <th>Posted by</th>
+    <td>{jobs.name ? jobs.name : <li style={{ display: "inline-block" }}>Name</li>}</td>
   </tr>
   <tr>
-    <th>Package</th>
-    <td>{jobs.salaryRange ? jobs.salaryRange+"L" : <li style={{ display: "inline-block" }}>Salary Range</li>}</td>
-  </tr>
-  <tr>
-    <th>Experience Required</th>
-    <td>
-    {jobs.experiance ? jobs.experiance+"Y" : <li style={{ display: "inline-block" }} >Experiance</li>}
-    </td>
-  </tr>
-  <tr>
-    <th>Skills Required</th>
-    <td>{jobs.skills ? jobs.skills : <li style={{ display: "inline-block" }} >Skills</li>}</td>
+    <th>Tags</th>
+    <td>{jobs.skills ? jobs.skills : <li style={{ display: "inline-block" }} >Tags</li>}</td>
   </tr>
   <tr>
     <th>Posted Date</th>
@@ -176,7 +155,8 @@ const [Loader, setLoader] = useState(false)
   </tr>
   <tr>
     <td colSpan={2} style={{backgroundColor:" rgb(40, 4, 99)"}}>
-    <div  style={{marginLeft:"49%", color:"white", fontWeight:"550"}}>Description</div>
+    <div style={{textAlign:"center", color:"white", fontWeight:"550"}}>{jobs.jobTitle ? jobs.jobTitle[0].toUpperCase()+jobs.jobTitle.slice(1)
+    : <li style={{ display: "inline-block" }}>job Title</li>}</div>
     </td>
   </tr>
   <tr>
