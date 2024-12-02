@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import axios from "axios";
 import "./App.css"
 import { useState, createContext } from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom"
+import { BrowserRouter, Routes, Route, useSearchParams } from "react-router-dom"
 import { GoogleLogin } from '@react-oauth/google';
 import jwt_decode from "jwt-decode";
 import Styles from "./Job-Portal/NaveBar/nav.module.css"
@@ -10,7 +10,6 @@ import Styles from "./Job-Portal/NaveBar/nav.module.css"
 import Cancel from "./Job-Portal/img/icons8-cross-50.png"
 import NavIcon from "./Job-Portal/img/icons8-menu-50.png"
 
-import SidebarNav from "./Job-Portal/BigSideNav";
 
 // .......importing components......//
 // import  from "./SidebarNav"
@@ -80,8 +79,9 @@ import TermsAndCondition from "./Job-Portal/TermsAndConditions"
 import Footer from "./Job-Portal/Footer/Footer";
 import Payment from "./Job-Portal/Payment"
 import socketIO from 'socket.io-client';
+import SidebarNav from "./Job-Portal/BigSideNav";
 import useScreenSize from '../src/Job-Portal/SizeHook';
-axios.defaults.baseURL = "http://localhost:8080"
+// axios.defaults.baseURL = "http://localhost:8080"
 // axios.defaults.baseURL = "https://i-twalkin-backend-testrelease-2-0-1-0824.vercel.app"  // vercel Test
 
 axios.defaults.baseURL = "https://itwalkin-backend-testrelease-2-0-1-0824-ns0g.onrender.com" // Render Test
@@ -89,7 +89,19 @@ axios.defaults.baseURL = "https://itwalkin-backend-testrelease-2-0-1-0824-ns0g.o
 // Vercel Main Live 
 //  axios.defaults.baseURL = "https://itwalkin-backend-testrelease-2-0-1-0824.onrender.com";
 
+
 function App() {
+//   const [navalue, setNavalue]=useSearchParams()
+
+// function getUrl(){
+// let url = window.location.href
+// let currentUrl=url. substring(url. lastIndexOf('/') + 1)
+// setNavalue(currentUrl)
+// }
+
+// useEffect(()=>{
+//   getUrl()
+// },[])
 
   const screenSize = useScreenSize();
   let size = screenSize.width;

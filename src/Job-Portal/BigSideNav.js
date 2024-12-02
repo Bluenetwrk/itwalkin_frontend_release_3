@@ -5,26 +5,29 @@ import { Link, useNavigate, NavLink, useSearchParams } from "react-router-dom";
 
 function SidebarNav(props) {
   let navigate = useNavigate()
-  const [navalue, setNavalue]=useSearchParams()
 
-// function getUrl(){
-// let url = window.location.href
-// let currentUrl=url. substring(url. lastIndexOf('/') + 1)
-// setNavalue(currentUrl)
-// }
-
-// useEffect(()=>{
-//   getUrl()
-// },[])
-
-  function Linkedin(e){
-    window.open("https://www.linkedin.com/company/104886917/admin/dashboard/", '_blank');  
-  }
   const [value , setValue] = useState("")
   function update(key){
     setValue(key)
     // console.log(key)
   }
+
+  console.log(value)  
+  let url = window.location.href
+  let currentUrl=url. substring(url. lastIndexOf('/') + 1)
+  console.log("currentUrl",currentUrl)
+    function getUrl(){
+      setValue(currentUrl)
+  }
+  
+  useEffect(()=>{
+    getUrl()
+  },[url])
+
+  function Linkedin(e){
+    window.open("https://www.linkedin.com/company/104886917/admin/dashboard/", '_blank');  
+  }
+  
 
   return (
   <>

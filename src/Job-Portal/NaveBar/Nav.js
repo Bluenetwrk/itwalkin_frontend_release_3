@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Link, useNavigate, NavLink } from "react-router-dom";
+import { Link, useNavigate, NavLink, useSearchParams } from "react-router-dom";
 import Styles from "./nav.module.css"
 import logo from "../img/Blue.jpg"
 import logIn from "../img/user_3177440.png"
@@ -18,6 +18,8 @@ import Modal from "../Login/EmpLogModal";
 import StuModal from "../Login/StudLogModal";
 
 function Nav(props) {
+
+
 
   const [showprofile, setShowprofile] = useState(false)
   const [ShowSideNave, setShowSideNave] = useState(false)
@@ -199,7 +201,7 @@ function Nav(props) {
                     className={ShowBigSideNave ? "fas fa-times" : "fas fa-bars"} onClick={ChangeSideNaveBar}>
                   </i>
                   <div className="BigNavWrapper" style={ShowBigSideNave ? { marginLeft: "-5px" } : { marginLeft: "-115px" }}>
-                    <BigSidebarNav />
+                    <BigSidebarNav  />
                   </div>
                 </div>
                     {/* <NavLink to="/" > <img className={Styles.logo} src={logo} /> </NavLink> */}

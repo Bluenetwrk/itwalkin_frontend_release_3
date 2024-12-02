@@ -102,7 +102,6 @@ function Blogs() {
     await axios.get("/BlogRoutes/getAllBlogs", { headers })
       .then((res) => {
         let result = res.data
-        console.log("rree",result)
         let sortedate = result.sort(function (a, b) {
           return new Date(b.createdAt) - new Date(a.createdAt);
         });
