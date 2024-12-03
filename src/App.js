@@ -88,16 +88,18 @@ axios.defaults.baseURL = "https://itwalkin-backend-testrelease-2-0-1-0824-ns0g.o
 
 // Vercel Main Live 
 //  axios.defaults.baseURL = "https://itwalkin-backend-testrelease-2-0-1-0824.onrender.com";
-// .. not available now and company & technologies
+// .. not available now and company & 
+
 
 function App() {
-//   const [navalue, setNavalue]=useSearchParams()
-
-// function getUrl(){
-// let url = window.location.href
-// let currentUrl=url. substring(url. lastIndexOf('/') + 1)
-// setNavalue(currentUrl)
-// }
+  //   const [navalue, setNavalue]=useSearchParams()
+  
+  // function getUrl(){
+    // let url = window.location.href
+    // let currentUrl=url. substring(url. lastIndexOf('/') + 1)
+    // setNavalue(currentUrl)
+    // }
+    
 
 // useEffect(()=>{
 //   getUrl()

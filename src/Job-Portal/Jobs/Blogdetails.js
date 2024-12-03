@@ -120,12 +120,21 @@ const [Loader, setLoader] = useState(false)
       {screenSize.width>850 ?
 
         <>
-        <div>
+    <div style={{display:"flex"}}>
+
+        <div style={{marginTop:"20px", marginLeft:"30px"}}>
         <img className={styles.imageV} src={jobs.Logo?jobs.Logo : profileDp}/>
         
         </div>
+        <div>
           
-          <table style={{marginBottom:"20px"}}>
+          <table>
+          <tr>
+    <td colSpan={2} style={{backgroundColor:" rgb(40, 4, 99)"}}>
+    <div style={{textAlign:"center", color:"white", fontWeight:"550"}}>{jobs.jobTitle ? jobs.jobTitle[0].toUpperCase()+jobs.jobTitle.slice(1)
+    : <li style={{ display: "inline-block" }}>Blog Title</li>}</div>
+    </td>
+  </tr>
        
   <tr>
     <th>Company Name</th>
@@ -153,22 +162,28 @@ const [Loader, setLoader] = useState(false)
                 }
     </td>
   </tr>
-  <tr>
+  </table>
+  </div>
+  </div>
+
+  <table style={{marginLeft:"10px", marginTop:"0px", width:"902px"}}>
+          <tr>
     <td colSpan={2} style={{backgroundColor:" rgb(40, 4, 99)"}}>
     <div style={{textAlign:"center", color:"white", fontWeight:"550"}}>{jobs.jobTitle ? jobs.jobTitle[0].toUpperCase()+jobs.jobTitle.slice(1)
-    : <li style={{ display: "inline-block" }}>job Title</li>}</div>
+    : <li style={{ display: "inline-block" }}>Blog Title</li>}</div>
     </td>
   </tr>
-  <tr>
-    <td colSpan={2} style={{backgroundColor:"white"}}>
+  
+  <tr >
+    <td colSpan={2} >
     {
       jobdescription? HTMLReactParser(jobdescription.toString()) :""
      } 
     </td>
 
   </tr>
+  </table>
 
-</table>
 
 
 

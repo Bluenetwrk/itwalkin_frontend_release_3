@@ -238,9 +238,9 @@ if(key==='Full Time' ||key=== 'Contract' || key==='Internship' || key==='Part Ti
 
     return (
         <>
-                                        <button className={Style.searchButton} onClick={() => {
+                                        {/* <button className={Style.searchButton} onClick={() => {
                                     navigate("/Search-Candidate")
-                                }}>Search Candidate</button>
+                                }}>Search Candidate</button> */}
 
             {
                 profileData.map((items, i) => {
@@ -400,7 +400,7 @@ if(key==='Full Time' ||key=== 'Contract' || key==='Internship' || key==='Part Ti
            {screenSize.width > 750 ?
 ""
 :
-            <div style={{marginTop:"20px"}}>
+            <div style={{marginTop:"250px"}}>
           <Footer/>
         </div>
 }

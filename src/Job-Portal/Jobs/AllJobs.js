@@ -35,6 +35,7 @@ const responsive = {
 
 // import { Bars } from  'react-loader-spinner'
 function AllJobs(props) {
+
   useEffect(() => {
     const socket = socketIO.connect(props.url, {
       auth: {
@@ -448,10 +449,10 @@ return(
      });
       })
   }
-  
 
   return (
     <>
+
       {screenSize.width > 850 ?
         <>
         <div className={styles.NavConetenetWrapper}>
@@ -488,7 +489,6 @@ return(
 
       {screenSize.width > 850 ?
         <>
-          {/* <div className={styles.Uiwarpper}> */}
 
           <div className={styles.JobtitleFilterWrapper}>
             <buton className={Active.length===0?styles.active:styles.JobtitleFilter} onClick={() => { getjobs() }}>All</buton>
@@ -549,8 +549,8 @@ return(
             </select>  jobs per page
           </div>
 
-          {/* <div className={styles.Uiwarpper}> */}
-          {/* 
+          <div className={styles.Uiwarpper}>
+          
             <ul className={styles.ul} style={{ color: 'white', fontWeight: "bold" }}>
 
               <li style={{ backgroundColor: " rgb(40, 4, 99)" }} className={`${styles.li} ${styles.Jtitle}`}>Job Title</li>
@@ -582,70 +582,41 @@ return(
               <li style={{ backgroundColor: " rgb(40, 4, 99)" }} className={`${styles.li} ${styles.Skills}`}>Skills Required</li>
               <li style={{ backgroundColor: " rgb(40, 4, 99)" }} className={`${styles.li} ${styles.Status}`}>Status</li>
 
-            </ul> */}
+            </ul> 
             {PageLoader ?
               <Puff height="80" width="80" color="#4fa94d" ariaLabel="bars-loading" wrapperStyle={{ marginLeft: "49%", marginTop: "50px" }} />
               : ""
             }
-            <table className='table'>
-              <tr  style={{ color: 'white', fontWeight: "bold" }}>
-                  <th className='th' style={{ backgroundColor: " rgb(40, 4, 99)" }}>Job Title</th>
-                  <th className='th' style={{ backgroundColor: " rgb(40, 4, 99)" }} >Source</th>
-                  <th className='th' style={{ backgroundColor: " rgb(40, 4, 99)", textWrap:"nowrap"}} >Company Name</th>
-                  <th className='th' style={{ backgroundColor: " rgb(40, 4, 99)" , width:"5%"}} >JobType</th>
-                  <th className='th' style={{ backgroundColor: " rgb(40, 4, 99)", width:"12%", }} >Posted Date
-                  <p className={styles.arrowWrapper} >
-                  <i onClick={sortbyNewjobs} className={`${styles.arrow} ${styles.up}`}> </i>
-                  <i onClick={sortbyOldjobs} className={`${styles.arrow} ${styles.down}`}></i>
-                </p >
-                  </th>
-                  <th className='th' style={{ backgroundColor: " rgb(40, 4, 99)" }} >Location</th>
-                  <th className='th' style={{ backgroundColor: " rgb(40, 4, 99)",  width:"7%" }} >CTC
-                  <p className={styles.arrowWrapper}>
-                  <i onClick={SdescendingOrder} className={`${styles.arrow} ${styles.up}`}> </i>
-                  <i onClick={SascendingOrder} className={`${styles.arrow} ${styles.down}`}></i>
-                </p>
-                  </th>
-                  <th className='th' style={{ backgroundColor: " rgb(40, 4, 99)",  width:"11%" }} >Experience
-                  <p className={styles.arrowWrapper}>
-                  <i onClick={EdescendingOrder} className={`${styles.arrow} ${styles.up}`}> </i>
-                  <i onClick={EascendingOrder} className={`${styles.arrow} ${styles.down}`}></i>
-                </p>
-                  </th>
-                  <th className='th' style={{ backgroundColor: " rgb(40, 4, 99)" }} >Qualification</th>
-                  <th className='th' style={{ backgroundColor: " rgb(40, 4, 99)", width:"20%"}} >Skills Required</th>
-                  <th className='th' style={{ backgroundColor: " rgb(40, 4, 99)" }} >Status</th>
-                {/* </tr> */}
-              </tr>
-            {
+             {
               !nopageFilter ?
                 records.length > 0 ?
                   records.map((items, i) => {
-                    return (
-                      <tr className='tr'>
-                                                  
- <td  className="td" onClick={() => navigate(`/Jobdetails/${btoa(items._id)}`)}
- style={{ cursor: "pointer", textDecoration: "underline", color: "blue" }} 
- >{items.jobTitle.toUpperCase()}</td>
-                           <td className="td" >Itwalkin</td>
-                           <td className="td" >
-                           {
+                    return (                    
+
+                      <ul className={styles.ul} key={i}>
+
+<li className={`${styles.li} ${styles.Jtitle}`} onClick={() => navigate(`/Jobdetails/${btoa(items._id)}`)} style={{ cursor: "pointer", textDecoration: "underline", color: "blue" }}>{items.jobTitle.toUpperCase()}</li>
+                          <li className={`${styles.li} ${styles.Source}`} >Itwalkin</li>
+
+
+                        {
                           !items.Source ?
 
-                            <a 
+                            <li style={{ cursor: "pointer", textDecoration: "underline" }} className={`${styles.li} ${styles.CompanyName}`}
                               onClick={() => { navigate(`/CheckEmpHalfProfile/${btoa(items.empId)}`) }}  >
                               
-                              {items.companyName}</a>
+                              {items.companyName}</li>
                             :
-                            <a style={{ cursor: "pointer", textDecoration: "underline" }} href={items.SourceLink} target="_blank" >
+                            <a style={{ cursor: "pointer", textDecoration: "underline" }} className={`${styles.li} ${styles.CompanyName}`} href={items.SourceLink} target="_blank" >
                               {items.Source}
                             </a>
                         }
-                           </td>
-                           <td className="td" >{items.jobtype}</td>
-                           
-                           <td className="td" >
-                           {new Date(items.createdAt).toLocaleString(
+                     
+                        <li className={`${styles.li} ${styles.JobType}`}>{items.jobtype}</li>
+
+
+                        <li className={`${styles.li} ${styles.date}`}>
+                          {new Date(items.createdAt).toLocaleString(
                             "en-US",
                             {
                               month: "short",
@@ -653,18 +624,17 @@ return(
                               year: "numeric",
                             }
                           )}
-                           </td>
-                           <td className="td" >
-                           {items.jobLocation[0].toUpperCase() + items.jobLocation.slice(1)}
-                           </td>
-                           <td className="td" >{items.salaryRange}L
-                    
-                           </td>
-                           <td className="td" >{items.experiance}Y</td>
-                           <td className="td" >{items.qualification}</td>
-                           <td className="td" >{items.skills}</td>
-                           <td className="td" >
-                           {
+                        </li>
+                        <li className={`${styles.li} ${styles.Location}`}>
+                          {items.jobLocation[0].toUpperCase() + items.jobLocation.slice(1)}</li>
+                        <li className={`${styles.li} ${styles.Package}`}>{items.salaryRange}L</li>
+                        <li className={`${styles.li} ${styles.experiance}`}>{items.experiance}Y</li>
+                        <li className={`${styles.li} ${styles.qualification}`}>{items.qualification}</li>
+                        <li className={`${styles.li} ${styles.Skills}`}>{items.skills}</li>
+
+                        <li className={`${styles.li} ${styles.Status}`}>
+
+                          {
                             items.jobSeekerId.find((jobseeker) => {
                               return (
                                 jobseeker.jobSeekerId == jobSeekerId
@@ -684,74 +654,8 @@ return(
                                     <TailSpin color="white" height={20} />
                                     : ""}</span></button>
                           }
-                           </td>
-                        
-                      </tr>
-
-//                       <ul className={styles.ul} key={i}>
-
-
-// <li className={`${styles.li} ${styles.Jtitle}`} onClick={() => navigate(`/Jobdetails/${btoa(items._id)}`)} style={{ cursor: "pointer", textDecoration: "underline", color: "blue" }}>{items.jobTitle.toUpperCase()}</li>
-//                           <li className={`${styles.li} ${styles.Source}`} >Itwalkin</li>
-
-
-//                         {
-//                           !items.Source ?
-
-//                             <li style={{ cursor: "pointer", textDecoration: "underline" }} className={`${styles.li} ${styles.CompanyName}`}
-//                               onClick={() => { navigate(`/CheckEmpHalfProfile/${btoa(items.empId)}`) }}  >
-                              
-//                               {items.companyName}</li>
-//                             :
-//                             <a style={{ cursor: "pointer", textDecoration: "underline" }} className={`${styles.li} ${styles.CompanyName}`} href={items.SourceLink} target="_blank" >
-//                               {items.Source}
-//                             </a>
-//                         }
-                     
-//                         <li className={`${styles.li} ${styles.JobType}`}>{items.jobtype}</li>
-
-
-//                         <li className={`${styles.li} ${styles.date}`}>
-//                           {new Date(items.createdAt).toLocaleString(
-//                             "en-US",
-//                             {
-//                               month: "short",
-//                               day: "2-digit",
-//                               year: "numeric",
-//                             }
-//                           )}
-//                         </li>
-//                         <li className={`${styles.li} ${styles.Location}`}>
-//                           {items.jobLocation[0].toUpperCase() + items.jobLocation.slice(1)}</li>
-//                         <li className={`${styles.li} ${styles.Package}`}>{items.salaryRange}L</li>
-//                         <li className={`${styles.li} ${styles.experiance}`}>{items.experiance}Y</li>
-//                         <li className={`${styles.li} ${styles.qualification}`}>{items.qualification}</li>
-//                         <li className={`${styles.li} ${styles.Skills}`}>{items.skills}</li>
-
-//                         <li className={`${styles.li} ${styles.Status}`}>
-
-//                           {
-//                             items.jobSeekerId.find((jobseeker) => {
-//                               return (
-//                                 jobseeker.jobSeekerId == jobSeekerId
-//                               )
-//                             })
-//                               ?
-//                               <button className={styles.Appliedbutton} title='HR will get in touch with you, Once they will check Your Profile' > Applied <span style={{ fontSize: '15px' }}>&#10004;</span></button>
-//                               :
-//                               items.SourceLink ?
-//                                 <button title='This will redirect to the source company webpage' className={styles.Applybutton} onClick={() => {
-//                                   applyforOtherJob(items.SourceLink)
-//                                 }}>Apply</button>
-//                                 :
-
-//                                 <button className={styles.Applybutton} onClick={() => { applyforJob(items._id) }}>Apply
-//                                   <span className={styles.Loader} >{Loader && items._id == clickedJobId ?
-//                                     <TailSpin color="white" height={20} />
-//                                     : ""}</span></button>
-//                           }
-//                         </li>
-//                       </ul>
+                        </li>
+                      </ul>
                     )
                   })
 
@@ -894,8 +798,7 @@ style={{ cursor: "pointer", textDecoration: "underline", color: "blue" }}
                   })
                   : <p style={{ marginLeft: "47%", color: "red" }}>No Record Found</p>
             }
-                    </table>
-          {/* </div> */}
+          </div>
 
           <div style={{ display: "flex", justifyContent: "space-between" }}>
             <div style={{ marginTop: "14px", marginLeft: "10px" }} >

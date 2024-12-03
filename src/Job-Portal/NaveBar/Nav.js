@@ -351,6 +351,12 @@ function Nav(props) {
           StudentAuth ?
             <>
               <div className={Styles.fullnavewrapper}>
+              <div style={{ width:"30px"}}>
+
+<i style={{ fontSize: "Large", color: "white", zIndex: "1000",  }}
+className={ShowSideNave ? "fas fa-times" : "fas fa-bars"} ref={SimgRef} onClick={() => { setShowSideNave((prev) => !prev)}}>
+</i>
+</div>
                 {/* <div className={Styles.logoWrapper}> */}
                 {/* <NavLink to="/" > <img className={Styles.Moblogo} src={logo} /> </NavLink> */}
                 <div className={Styles.ITwalkinWrapper}>
@@ -386,6 +392,10 @@ function Nav(props) {
                   </div>
                 </div>
                 : ""}
+                <div ref={SmenuRef} className={`${Styles.MovileNavOptions} `}
+                    style={ShowSideNave ? { marginLeft: "0px" } : { marginLeft: "-380px" }} >
+                    <SidebarNav setShowSideNaveProps={setShowSideNave} />
+                  </div>
             </>
 
             // ..........................................Emplyee login......Mobile View.................................................              
@@ -393,6 +403,12 @@ function Nav(props) {
             (EmployeeAuth) ?
               <>
                 <div className={Styles.MobilEmployeeFullnavewrapper}>
+                <div style={{ width:"30px"}}>
+
+<i style={{ fontSize: "Large", color: "white", zIndex: "1000",  }}
+className={ShowSideNave ? "fas fa-times" : "fas fa-bars"} ref={SimgRef} onClick={() => { setShowSideNave((prev) => !prev)}}>
+</i>
+</div>
                   {/* <div className={Styles.logoWrapper}> */}
                   {/* <NavLink to="/"> <img className={Styles.Moblogo} src={logo} /> </NavLink> */}
                   <div className={Styles.ITwalkinWrapper}>
@@ -426,7 +442,10 @@ function Nav(props) {
                   </div>
                 </div>
                 {/* ............Mobile View.........drop down............ */}
-              
+                <div ref={SmenuRef} className={`${Styles.MovileNavOptions} `}
+                    style={ShowSideNave ? { marginLeft: "0px" } : { marginLeft: "-380px" }} >
+                    <SidebarNav setShowSideNaveProps={setShowSideNave} />
+                  </div>
 
               </>
               // ............Admin Login............Mobile View..........

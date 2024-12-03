@@ -614,7 +614,7 @@ return(
 
                       <li className={`${styles.li} ${styles.BlogDescription}`}>
                           {
-    items.jobDescription? HTMLReactParser(items.jobDescription.slice(0,300).toString()) :""
+    items.jobDescription? HTMLReactParser(items.jobDescription.slice(0,150).toString()) :""
                           }
   
                           <span onClick={() => navigate(`/Blogdetails/${btoa(items._id)}`)} className={styles.seeMore}>
@@ -670,7 +670,7 @@ return(
          
                       <li className={`${styles.li} ${styles.BlogDescription}`}>
                           {
-    items.jobDescription? HTMLReactParser(items.jobDescription.toString()) :""
+    items.jobDescription? HTMLReactParser(items.jobDescription.slice(0,150).toString()) :""
                           }
   
                           <span onClick={() => navigate(`/Blogdetails/${btoa(items._id)}`)} className={styles.seeMore}>
