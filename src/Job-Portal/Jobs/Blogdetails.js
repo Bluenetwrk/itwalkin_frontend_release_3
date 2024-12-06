@@ -169,8 +169,7 @@ const [Loader, setLoader] = useState(false)
   <table style={{marginLeft:"10px", marginTop:"0px", width:"902px"}}>
           <tr>
     <td colSpan={2} style={{backgroundColor:" rgb(40, 4, 99)"}}>
-    <div style={{textAlign:"center", color:"white", fontWeight:"550"}}>{jobs.jobTitle ? jobs.jobTitle[0].toUpperCase()+jobs.jobTitle.slice(1)
-    : <li style={{ display: "inline-block" }}>Blog Title</li>}</div>
+    <div style={{textAlign:"center", color:"white", fontWeight:"550"}}>Blog Description</div>
     </td>
   </tr>
   
@@ -218,70 +217,14 @@ const [Loader, setLoader] = useState(false)
 }  
 
         </div>
-        <  img className={styles.jobLocationImage} src={location}  /> 
-        <span className={styles.jobLocation}>{jobs.jobLocation}</span>                        
-        <span className={styles.qualificationAndExperiance}>
-        <  img className={styles.graduationImage} src={graduation}  /> 
 
-          {jobs.qualification},   {jobs.experiance}Y Exp, {jobs.jobtype}
-        {/* <span className={styles.jobtypeAndDate}> {job.jobtype}</span> */}
-        </span><br></br> 
-        <span className={styles.jobtypeAndDate}>Source</span> :
+        <span className={styles.jobtypeAndDate}>Posted By</span> : {jobs.name ? jobs.name :
+         <span >Name</span>}
 
-{jobs.Source ?
-  <> <a className={`${styles.skills}`} href={jobs.SourceLink} target="_blank">{jobs.Source}</a><br></br> </>
-  :
-  <> <span className={styles.skills}>ItWalkin</span><br></br></>
-}
 
-<div className={styles.skillWrapper}>
-          <span className={styles.skillsHeading}>Skills: </span><span className={styles.skills}>{jobs.skills}</span><br></br>
-        </div>
 
             
-            <div className={styles.ApplyPackage}>
-            <p className={styles.salaryRange}><span>&#8377;</span>{jobs.salaryRange}L</p>        
-
-
-            {
-    jobSeekerId?
-(
-            jobseekerid.find((jobseeker) => {
-  return (
-    jobseeker == jobSeekerId
-  )
-}) ?
-  <button className={styles.MobileAppliedButton}  > Applied <span style={{ fontSize: '13.8px', marginBottom:"3px", marginLeft:"2px" }}>&#10004;</span></button>
-  
-  // job .isApproved?
-
-    :
-  <button className={styles.ApplyMobile} onClick={() => { applyforJob(jobs._id) }}>Apply
-    <span className={styles.Loader} >{Loader && jobs._id == clickedJobId ?
-      <TailSpin color="white" height={20} />
-      : ""}</span></button>
-)
-      :
-      empId?
-
-  // <div className={styles.ApplyPackage}>
-  //      <span className={styles.salaryRange} style={{ marginLeft: "10px" }}><span>&#8377;</span>{job.salaryRange}</span>
-          <div className={Styles.MobileAcbuttons}>
-          <button style={{marginTop:"-10px"}} onClick={() => { update(jobs._id) }} className={` ${Styles.MobileUpdate}`}>update</button>
-          <button style={{marginTop:"-10px"}} onClick={() => { deletejob(jobs._id) }} className={` ${Styles.MobileDelete}`}>delete</button>
-               </div>
-        // </div>
-        :  jobs.SourceLink?
-        <button  className={styles.ApplyMobile} onClick={() => {
-          applyforOtherJob(jobs.SourceLink) }}>Apply</button>
-          :
-      <button className={styles.ApplyMobile} onClick={() => { navigate("/JobSeekerLogin") }}><b>Apply</b></button>
-      
-
-
-}
-                  </div>
-            <p className={styles.jobDescriptionHeading}>Job Description:</p>
+            <p className={styles.jobDescriptionHeading}>Blog Description:</p>
             <p className={styles.jobDescription}> 
             { 
     jobdescription? HTMLReactParser(jobdescription.toString()) :""

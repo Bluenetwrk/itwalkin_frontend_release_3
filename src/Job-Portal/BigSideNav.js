@@ -12,10 +12,8 @@ function SidebarNav(props) {
     // console.log(key)
   }
 
-  console.log(value)  
   let url = window.location.href
   let currentUrl=url. substring(url. lastIndexOf('/') + 1)
-  console.log("currentUrl",currentUrl)
     function getUrl(){
       setValue(currentUrl)
   }

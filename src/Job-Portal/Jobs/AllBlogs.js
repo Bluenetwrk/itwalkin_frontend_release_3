@@ -59,6 +59,9 @@ function Blogs() {
 
   let JobLocationTags = ["Bangalore"]
 
+  let EmployeeAuth = localStorage.getItem("EmpLog")
+
+
   let navigate = useNavigate()
 
   // useEffect(() => {
@@ -444,6 +447,8 @@ return(
 
       {screenSize.width > 850 ?
         <>
+        {
+         ! EmployeeAuth?
         <div className={styles.NavConetenetWrapper}>
 
 
@@ -468,6 +473,8 @@ return(
               class="fa fa-search" ></i>
           </div>
           </div>
+          :""
+          }
           {Result ?
             <h4 style={{ marginLeft: "40%", marginTop: "20px" }}> {jobs.length} matching Result Found  </h4>
             : ""
@@ -748,7 +755,8 @@ return(
             : ""
           }
           {/* ...................... All Filter for Mobile */}
-          <div className={styles.MobLocationFilterWrapper}>
+          {!EmployeeAuth?
+            <div className={styles.MobLocationFilterWrapper}>
                 {/* <label> <input className={styles.MobJobtitleFilter} type="radio" name="filter" onClick={() => { getjobs() }} />All</label> */}
                 {
                   JobLocationTags.map((location, i) => {
@@ -759,6 +767,7 @@ return(
                   })
                 }
               </div>
+              :""}
 
           <Carousel
             swipeable={true}
@@ -1328,6 +1337,7 @@ return(
                               top: 0
                             })
                             navigate(`/Blogdetails/${btoa(job._id)}`)
+                            
                           }} >{job.jobTitle.toUpperCase()} </p>
                           <p className={styles.Date}>{new Date(job.createdAt).toLocaleString(
                             "en-US",
@@ -1345,7 +1355,7 @@ return(
                         <div className={styles.companyNameLocationWrapper}   >
                           <img className={styles.logo} src={job.Logo} />
 
-                             <span className={styles.companyName} onClick={() => { checkEmpHalf(btoa(job.empId)) }} >{job.companyName} </span>
+                             <span className={styles.companyName} onClick={() => { navigate(`/Blogdetails/${btoa(job._id)}`) }} >{job.companyName} </span>
 
                              <span className={styles.jobtypeAndDate}>Posted by</span> :
                              <> <span className={styles.skills}>{job.name}</span><br></br></>                          

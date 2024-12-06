@@ -82,6 +82,8 @@ import socketIO from 'socket.io-client';
 import SidebarNav from "./Job-Portal/BigSideNav";
 import useScreenSize from '../src/Job-Portal/SizeHook';
 // axios.defaults.baseURL = "http://localhost:8080"
+// axios.defaults.baseURL = "https://i-twalkin-backend-testrelease-2-0-1-0824-zdnu.vercel.app" // new vercel
+
 // axios.defaults.baseURL = "https://i-twalkin-backend-testrelease-2-0-1-0824.vercel.app"  // vercel Test
 
 axios.defaults.baseURL = "https://itwalkin-backend-testrelease-2-0-1-0824-ns0g.onrender.com" // Render Test
@@ -92,18 +94,7 @@ axios.defaults.baseURL = "https://itwalkin-backend-testrelease-2-0-1-0824-ns0g.o
 
 
 function App() {
-  //   const [navalue, setNavalue]=useSearchParams()
-  
-  // function getUrl(){
-    // let url = window.location.href
-    // let currentUrl=url. substring(url. lastIndexOf('/') + 1)
-    // setNavalue(currentUrl)
-    // }
-    
-
-// useEffect(()=>{
-//   getUrl()
-// },[])
+ 
 
   const screenSize = useScreenSize();
   let size = screenSize.width;
@@ -200,6 +191,7 @@ function App() {
 
 
         </div>
+      
       </BrowserRouter>
     </>
   );

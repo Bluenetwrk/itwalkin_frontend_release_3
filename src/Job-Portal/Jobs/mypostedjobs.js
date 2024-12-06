@@ -290,9 +290,9 @@ function handleRecordchange(e){
      {screenSize.width>850?
        <>
        <div style={{display:"flex"}}>
-    <button className={styles.searchButton} onClick={() => {
+    {/* <button className={styles.searchButton} onClick={() => {
           navigate("/Search-Candidate")
-        }}>Search Candidate</button>
+        }}>Search Candidate</button> */}
         <p style={{marginLeft:"38%", marginTop:"30px", fontSize:"large", fontWeight:"bold"}}>My Posted Jobs</p>
         </div>
 

@@ -103,7 +103,6 @@ function Home() {
     const headers = { authorization: 'BlueItImpulseWalkinIn' };
     await axios.get("/jobpost/getHomejobs", { headers })
       .then((res) => {
-
         let result = (res.data)
         let sortedate = result.sort(function (a, b) {
           return new Date(b.createdAt) - new Date(a.createdAt);
