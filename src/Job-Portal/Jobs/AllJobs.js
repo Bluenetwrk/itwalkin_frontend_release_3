@@ -846,9 +846,8 @@ style={{ cursor: "pointer", textDecoration: "underline", color: "blue" }}
 
             : ""
           }
-
+{/* 
 <div className={styles.MobLocationFilterWrapperLogin}>
-                {/* <label> <input className={styles.MobJobtitleFilter} type="radio" name="filter" onClick={() => { getjobs() }} />All</label> */}
                 {
                   JobLocationTags.map((location, i) => {
                     return (
@@ -857,7 +856,7 @@ style={{ cursor: "pointer", textDecoration: "underline", color: "blue" }}
                     )
                   })
                 }
-              </div>
+              </div> */}
 
           {/* ...................... All Filter for Mobile */}
           <Carousel

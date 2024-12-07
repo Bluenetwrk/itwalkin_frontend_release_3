@@ -60,6 +60,8 @@ function Blogs() {
   let JobLocationTags = ["Bangalore"]
 
   let EmployeeAuth = localStorage.getItem("EmpLog")
+  let StudentAuth = localStorage.getItem("StudLog")
+
 
 
   let navigate = useNavigate()
@@ -755,19 +757,21 @@ return(
             : ""
           }
           {/* ...................... All Filter for Mobile */}
-          {!EmployeeAuth?
+          {
+          (!EmployeeAuth)?
             <div className={styles.MobLocationFilterWrapper}>
-                {/* <label> <input className={styles.MobJobtitleFilter} type="radio" name="filter" onClick={() => { getjobs() }} />All</label> */}
                 {
                   JobLocationTags.map((location, i) => {
                     return (
-                      <label> <input className={styles.MobJobtitleFilter} checked type="radio" disabled={location == "Chennai" || location == "Hyderabad" || location == "Mumbai" || location == "Delhi"} name="filter" onClick={() => { getLocation(location.toLowerCase()) }} />{location}</label>
-
+                  !StudentAuth? <label> <input className={styles.MobJobtitleFilter} checked type="radio" disabled={location == "Chennai" || location == "Hyderabad" || location == "Mumbai" || location == "Delhi"} name="filter" onClick={() => { getLocation(location.toLowerCase()) }} />{location}</label>
+                  :""
                     )
                   })
                 }
-              </div>
-              :""}
+              </div>             
+                           
+              :""
+              }
 
           <Carousel
             swipeable={true}
