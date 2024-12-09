@@ -63,8 +63,8 @@ font-weight: 400;
     margin-top: 5px;
     cursor: pointer;
 }
-.SearchCandidate{
-    margin-left: 20%;
+.HomeSearchCandidate{
+    margin-left: 6%;
     text-decoration: none;
     color: white;
     font-size: small;
@@ -175,7 +175,7 @@ font-weight: 400;
     border-radius: 5px;
 }
 .SearchCandidate {
-    margin: 6%;
+    margin-left: 53%;
     text-decoration: none;
     color: white;
     font-size: small;
@@ -183,6 +183,8 @@ font-weight: 400;
     text-wrap: nowrap;
     padding: 8px 10px;
     border-radius: 5px;
+    position: absolute;
+    background-color: red;
 }
 .AllJobJobSeeker {
     margin: 2%;
@@ -346,21 +348,20 @@ font-weight: 400;
 
 
 .EmpIconeWrapper{
-    margin-left: 60%;
+    margin-left: 80%;
     align-items: center;
     z-index: 1;
-
 }
-@media(max-width:1100px){
+/* @media(max-width:1130px){
     .EmpIconeWrapper{
-        margin-left: 53%;
+        margin-left: 81%;
     }
 }
 @media(max-width:890px){
     .EmpIconeWrapper{
         margin-left: 48%;
     }
-}
+} */
 
 .EmpProfileIcon {
     height: 35px;
@@ -372,7 +373,7 @@ font-weight: 400;
 
 .Empdropdownwrapper {
     position: absolute;    
-    margin-left: -20px;
+    margin-left: 0px;
     padding-right: 10px;
     padding-left: 10px;
     padding-bottom: 0px;
@@ -399,6 +400,16 @@ font-weight: 400;
 }
  
 
+@media(max-width:1800px){
+    .Empdropdownwrapper {
+        margin-left: -5px;
+           }
+    }
+@media(max-width:1600px){
+    .Empdropdownwrapper {
+        margin-left: -15px;
+           }
+    }
 @media(max-width:1350px){
     .Empdropdownwrapper {
         margin-left: -25px;
@@ -413,36 +424,18 @@ font-weight: 400;
         }
     @media(max-width:1190px){
         .Empdropdownwrapper {
-        margin-left: -35px;
-          
-        }
-        }
-    @media(max-width:1130px){
-        .Empdropdownwrapper {
-        margin-left: -45px;
-          
-        }
-        }
-    @media(max-width:1100px){
-        .Empdropdownwrapper {
-        margin-left: -39px;
+        margin-left: -36px;
           
         }
         }
         
-    @media(max-width:1020px){
+     @media(max-width:1020px){
         .Empdropdownwrapper {
         margin-left: -42px;
 
            }
         }
 
-    @media(max-width:945px){
-        .Empdropdownwrapper {
-        margin-left: -50px;
-
-         }
-        } 
     @media(max-width:900px){
         .Empdropdownwrapper {
         margin-left: -53px;
@@ -451,7 +444,7 @@ font-weight: 400;
         }  
     @media(max-width:850px){
         .Empdropdownwrapper {
-        margin-left: -69px;
+        margin-left: -65px;
 
          }
         }  

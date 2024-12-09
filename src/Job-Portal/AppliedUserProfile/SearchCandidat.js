@@ -346,16 +346,7 @@ function SearchCandidate() {
         <>
   <div className={styles.NavConetenetWrapper}>
 
-
-          
-<div className={styles.searchBothForNavWrapper}>
-  <input className={styles.inputboxsearchNav} type="text" placeholder='Search for a Job / Skills / Location / Experiance' onChange={(e) => { search(e) }} />
-
-  <i style={{ color: "rgb(40, 4, 99)", fontSize: "18px", cursor: "pointer" , marginLeft:"3%"}} onClick={() => { searchIcon(searchKey) }}
-    class="fa fa-search" ></i>
-</div>
-
-<div className={styles.LocationFilterWrapper}>
+  <div className={styles.LocationFilterWrapper}>
   {
     Location.map((location, i) => {
       return (
@@ -368,6 +359,13 @@ function SearchCandidate() {
       )
     })
   }
+</div>
+          
+<div className={styles.searchBothForNavWrapper}>
+  <input className={styles.inputboxsearchNav}  type="text" placeholder='Search for a Job / Skills / Location / Experiance' onChange={(e) => { search(e) }} />
+
+  <i style={{ color: "rgb(40, 4, 99)", fontSize: "18px", cursor: "pointer" , marginLeft:"3%"}} onClick={() => { searchIcon(searchKey) }}
+    class="fa fa-search" ></i>
 </div>
 
 </div>

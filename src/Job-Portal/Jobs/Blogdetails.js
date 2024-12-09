@@ -111,6 +111,11 @@ const [Loader, setLoader] = useState(false)
 
   return (
     <>
+    <tr>
+    <td colSpan={2} style={{backgroundColor:" rgb(40, 4, 99)"}}>
+    <div style={{textAlign:"center", color:"white", fontWeight:"550"}}>Blog Description</div>
+    </td>
+  </tr>
     <div style={{display:"flex"}}>
                             <img style={{ height:"25px", color:"grey", marginTop:"20px", marginLeft:"8%", cursor:"pointer",
              width:"28px"}} onClick={()=>{navigate(-1)}}  src={Arrowimage} />
@@ -166,12 +171,8 @@ const [Loader, setLoader] = useState(false)
   </div>
   </div>
 
-  <table style={{marginLeft:"10px", marginTop:"0px", width:"902px"}}>
-          <tr>
-    <td colSpan={2} style={{backgroundColor:" rgb(40, 4, 99)"}}>
-    <div style={{textAlign:"center", color:"white", fontWeight:"550"}}>Blog Description</div>
-    </td>
-  </tr>
+  <table style={{marginLeft:"6px", marginTop:"0px", width:"98.8%"}}>
+          
   
   <tr >
     <td colSpan={2} >

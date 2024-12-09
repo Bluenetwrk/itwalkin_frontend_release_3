@@ -317,7 +317,7 @@ function Nav(props) {
                       <NavLink to="/Services" className={Styles.Hlink} style={navLinkStyles}>Services</NavLink>
                       <NavLink to="/Contact" className={Styles.Hlink} style={navLinkStyles}>Contact</NavLink> */}
                       <div className={` ${Styles.LoginlinkwrapperHome}`}>
-                        <NavLink to="/Search-Candidate-Home" className={` ${Styles.SearchCandidate}`} style={navLinkStyles}>Employer </NavLink>
+                        <NavLink to="/Search-Candidate-Home" className={` ${Styles.HomeSearchCandidate}`} style={navLinkStyles}>Employer </NavLink>
 
                         <img className={` ${Styles.HomeprofileIcon}`} src={loginuser} ref={imgRef} onClick={() => setShowprofile((prev) => !prev)} />
                         {/* <NavLink to="/JobSeekerLogin" className={`${Styles.Loginlink} ${Styles.StuLogin}`} style={navLinkStyles}>Job Seeker Login</NavLink> */}
