@@ -15,22 +15,32 @@ import linkedIn from "../img/icons8-linked-in-48.png"
 import github from "../img/icons8-github-50.png"
 import {auth, provider} from "../firebase"
 import {signInWithPopup, OAuthProvider, getAuth } from "firebase/auth";
-import {PublicClientApplication} from "@azure/msal-browser"
-import * as Msal from '@azure/msal-browser';
+
+import { useMsal } from "@azure/msal-react";
+import { loginRequest } from "../Config";
 
 const Modal = ({ isStuOpen, onClose, children ,  msalInstance }) => {
-		
-	const microsoftLogin = async () => {
-		try {
-		 let res = await msalInstance.loginPopup({
-			scopes: ["User.Read"],
-			prompt: 'select_account',
-		  });
-console.log("sucess",res)
+	const { instance } = useMsal();
 
-		} catch (error) {
-		  console.error(error);
-		}
+	const microsoftLogin = async () => {
+// 		try {
+// 		 let res = await msalInstance.loginPopup({
+// 			scopes: ["User.Read"],
+// 			prompt: 'select_account',
+// 		  });
+// console.log("sucess",res)
+
+// 		} catch (error) {
+// 		  console.error(error);
+// 		}
+
+		instance.loginPopup(loginRequest)
+      .then(response => {
+        console.log("Logged in!", response);
+      })
+      .catch(error => {
+        console.log("Login error", error);
+      });
 	  }
 	  
   const [gmailuser, setGmailuser] = useState("")

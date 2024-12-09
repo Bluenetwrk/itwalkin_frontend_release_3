@@ -102,6 +102,7 @@ function Home() {
     setNoPageFilter(false)
     const headers = { authorization: 'BlueItImpulseWalkinIn' };
     await axios.get("/jobpost/getHomejobs", { headers })
+    // await axios.get(`/jobpost/getLimitJobs/${recordsPerPage}`, { headers })
       .then((res) => {
         let result = (res.data)
         let sortedate = result.sort(function (a, b) {

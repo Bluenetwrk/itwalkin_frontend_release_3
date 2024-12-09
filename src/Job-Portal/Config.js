@@ -1,8 +1,27 @@
+import { Configuration, LogLevel } from "@azure/msal-browser";
+
 export const msalConfig = {
-    auth: {
-        clientId: "6abec734-7d38-4f07-88bd-cd42ba3df720",
-        redirectUri: "http://localhost",
-        scopes: ["User.Read"]
+  auth: {
+    clientId: "097b08ff-185e-4153-aedc-0e5814e0570c",  // Replace with your Application (client) ID
+    authority: "https://login.microsoftonline.com/ae4ae520-4db7-4149-ad51-778e540d8bec",  // Replace with your Tenant ID
+    redirectUri: "http://localhost",  // Your app's redirect URI
+  },
+  cache: {
+    cacheLocation: "localStorage", // Options: sessionStorage, localStorage
+    storeAuthStateInCookie: false,  // Set to true for IE11 support
+  },
+  system: {
+    loggerOptions: {
+      logLevel: LogLevel.INFO,
+      loggerCallback: (level, message, containsPii) => {
+        // console.log(message);
+      },
     },
-    authority: "https://login.microsoftonline.com/",
-}
+  },
+};
+
+export const loginRequest = {
+  scopes: ["User.Read"],
+  
+};
+// console.log(loginRequest.scopes);
