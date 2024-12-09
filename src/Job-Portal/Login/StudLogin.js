@@ -13,12 +13,12 @@ import { useGoogleLogin } from '@react-oauth/google';
 import image from "../img/user_3177440.png"
 import { TailSpin } from "react-loader-spinner"
 import useScreenSize from '../SizeHook';
-
+import { useMsal } from "@azure/msal-react";
+import { loginRequest } from "../Config";
 // import style from "./styles.module.css"
 
-
-
 function StudentLogin(props) {
+  const { instance } = useMsal();
 
   const screenSize = useScreenSize();
 
@@ -188,6 +188,33 @@ useEffect(() => {
     setLoader(false)
   }
 
+  function microsoftLogin() {
+		instance.loginPopup(loginRequest)
+			.then(async response => {
+				// console.log(response)
+				let name = response.account.name
+				let email = response.account.username
+				let isApproved = false
+
+				await axios.post("/StudentProfile/Glogin", { ipAddress, email, name, isApproved, })
+					.then((response) => {
+						let result = response.data
+						let token = result.token
+						let Id = result.id
+						if (result.status == "success") {
+							localStorage.setItem("StudLog", JSON.stringify(btoa(token)))
+							navigate("/alljobs", { state: { name: result.name } })
+							localStorage.setItem("StudId", JSON.stringify(Id))
+						}
+					}).catch((err) => {
+						alert("server issue occured")
+					})
+			})
+			.catch(error => {
+				// console.log("Login error", error);
+				// alert("some thing went wrong")
+			});
+	}
   return (
     <>
     {/* <div className={styles.LoginpageWapper}> */}
@@ -251,19 +278,19 @@ useEffect(() => {
         </div>
        </div>
 
-      <div className={styles.signUpWrapper}  >
+      <div className={styles.signUpWrapper} onClick={microsoftLogin}  >
         <div className={styles.both}>
           <img className={styles.google} src={MicosoftImage} />
           <span className={styles.signUpwrap} >Continue with Microsoft</span>
         </div>
       </div>
 
-      <div className={styles.signUpWrapper}  >
+      {/* <div className={styles.signUpWrapper}  >
         <div className={styles.both}>
           <img className={styles.google} src={linkedIn} />
           <span className={styles.signUpwrap} >Continue with Linkedin</span>
         </div>
-      </div>
+      </div> */}
 
 
       <div className={styles.signUpWrapper}  >

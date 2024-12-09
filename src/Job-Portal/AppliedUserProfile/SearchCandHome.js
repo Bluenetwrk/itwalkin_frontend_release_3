@@ -394,10 +394,10 @@ return(
     <>
     {screenSize.width > 850 ?
         <>
-        <div className={styles.NavConetenetWrapper}>
+        <div className={styles.HomeNavConetenetWrapper}>
 
 
-<div className={styles.LocationFilterWrapper}>
+<div className={styles.HomeLocationFilterWrapper}>
   {
     Location.map((location, i) => {
       return (

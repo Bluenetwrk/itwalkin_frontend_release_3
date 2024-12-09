@@ -13,8 +13,11 @@ import { useGoogleLogin } from '@react-oauth/google';
 import { GoogleLogin } from '@react-oauth/google';
 import image from "../img/user_3177440.png"
 import { TailSpin } from "react-loader-spinner"
+import { useMsal } from "@azure/msal-react";
+import { loginRequest } from "../Config";
 
 const Modal = ({ isOpen, onClose, children }) => {
+	const { instance } = useMsal();
 	
 	const [gmailuser, setGmailuser] = useState("")
 	const [topErrorMessage, setTopErrorMessage] = useState("")
@@ -198,6 +201,35 @@ const Modal = ({ isOpen, onClose, children }) => {
 
 	if (!isOpen) return null;
 
+	function microsoftLogin() {
+		instance.loginPopup(loginRequest)
+			.then(async response => {
+				// console.log(response)
+				let name = response.account.name
+				let email = response.account.username
+				let isApproved = false
+				await axios.post("/EmpProfile/Glogin", { ipAddress, email, name, isApproved })
+				.then((response) => {
+				  let result = response.data
+				  let token = result.token
+				  let GuserId = result.id
+				  if (result.status == "success") {
+					localStorage.setItem("EmpLog", JSON.stringify(btoa(token)))
+					localStorage.setItem("EmpIdG", JSON.stringify(GuserId))
+					navigate("/Search-Candidate", { state: { gserid: GuserId } })
+					onClose()
+				  }
+
+					}).catch((err) => {
+						alert("server issue occured")
+					})
+			})
+			.catch(error => {
+				// console.log("Login error", error);
+				// alert("some thing went wrong")
+			});
+	}
+
 
 	return (
 		<>
@@ -266,7 +298,7 @@ const Modal = ({ isOpen, onClose, children }) => {
           </div>
         </div>
 
-        <div className={styles.signUpWrapper}  >
+        <div className={styles.signUpWrapper} onClick={microsoftLogin} >
           <div className={styles.both}>
             <img className={styles.google} src={MicosoftImage} />
             <p className={styles.signUpwrap} >Continue with Microsoft</p>
