@@ -387,7 +387,7 @@ if(key==='Full Time' ||key=== 'Contract' || key==='Internship' || key==='Part Ti
 
                                         {Logo ? <p ><span style={{ color: "blue" }}>Note** :</span> Logo will also be posted with the Job</p> : ""}
 
-                                        <button disabled={concent} className={Style.button} onClick={postJob}>Post Job</button>
+                                        <button disabled={concent} className={concent? Style.disableButton:Style.button} onClick={postJob}>Post Job</button>
                                     </div >
                                 </div >
                             </div>

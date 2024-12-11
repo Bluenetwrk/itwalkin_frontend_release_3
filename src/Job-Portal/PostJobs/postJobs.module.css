@@ -210,6 +210,22 @@
 
     }
 
+.disableButton{
+    border-radius:8px;
+    background-color: rgb(83, 77, 94);
+    width : 101%;   
+    height: 40px;
+    /* border: 1px solid rgb(40, 4, 99) ; */
+    margin-top: 30px; 
+    cursor:not-allowed;
+    font-weight: 500;
+    font-size:medium;
+    text-align:center;
+    color: white;
+    margin-top: 27px;
+    margin-bottom:10px
+
+        }
 .button{
     border-radius:8px;
     background-color: rgb(40, 4, 99);

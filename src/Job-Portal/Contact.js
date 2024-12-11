@@ -28,8 +28,7 @@ getContact()
     <>
 
         <div style={{marginLeft:"20px", marginTop:"20px"}}>
-        <h2 >Get in touch with Us by below contact details
-        </h2>
+        <h2 > Contact Us  </h2>
         
     <div style={{width:"93%"}}> {HTMLReactParser(Contact.toString())} </div>
 

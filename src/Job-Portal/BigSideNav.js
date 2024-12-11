@@ -7,6 +7,8 @@ function SidebarNav(props) {
   let navigate = useNavigate()
 
   const [value , setValue] = useState("")
+    // console.log(value)
+
   function update(key){
     setValue(key)
     // console.log(key)
@@ -14,8 +16,15 @@ function SidebarNav(props) {
 
   let url = window.location.href
   let currentUrl=url. substring(url. lastIndexOf('/') + 1)
+
     function getUrl(){
-      setValue(currentUrl)
+      if(currentUrl==="alljobs" || currentUrl==="My-Profile" || currentUrl==="My-Applied-Jobs" || currentUrl==="AskQuestion"
+        || currentUrl==="" || currentUrl==="PostJobs" || currentUrl==="Search-Candidate" || currentUrl==="MyProfile" ||
+        currentUrl==="PostBlogs" || currentUrl==="postedjobs" || currentUrl==="Search-Candidate-Home" || currentUrl==="EmployeeLogin"
+        || currentUrl==="JobSeekerLogin"
+      ){
+        setValue(currentUrl)
+      }
   }
   
   useEffect(()=>{

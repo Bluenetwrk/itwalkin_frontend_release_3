@@ -152,7 +152,7 @@ function PostBlogs(props) {
                     setExperiance("")
                     setSkills("")
                     setTag([])
-                    setSuccessMessage("Success! job successfully posted")
+                    setSuccessMessage("Success! successfully posted")
                 }
                 else if (result == "field are missing") {
                     setSuccessMessage("Alert!... JobTitle, CompanyName JobDescription, Experiance, JobLocation and Skills must be filled")
@@ -160,7 +160,7 @@ function PostBlogs(props) {
                 // else if (result ==="server issue")
                 else
                     {
-                    setSuccessMessage("something went wrong, Could not save your Jobs post")
+                    setSuccessMessage("something went wrong, Could not save your post")
                 }
             }).catch((err) => {
                 alert("server issue occured", err)
@@ -259,7 +259,7 @@ if(key==='Full Time' ||key=== 'Contract' || key==='Internship' || key==='Part Ti
 
                                 <div className={Style.postJobPageWrapper} >
                                     <div className={Style.postJobWrapper}>
-                                        <p className={successMessage === "Success! job successfully posted" ?
+                                        <p className={successMessage === "Success! successfully posted" ?
                                             Style.successmessage : Style.errormessage}>{successMessage} </p>
                                         {/* <p className={Style.errormessage}>{errorMessage} </p> */}
                                         <h4 className={Style.jobHeadline}  >Title**</h4>
@@ -392,7 +392,7 @@ if(key==='Full Time' ||key=== 'Contract' || key==='Internship' || key==='Part Ti
 
                                         {/* {Logo ? <p ><span style={{ color: "blue" }}>Note** :</span> Logo will also be posted with the Job</p> : ""} */}
 
-                                        <button disabled={concent} className={Style.button} onClick={postJob}>Post Job</button>
+                                        <button disabled={concent} className={concent? Style.disableButton:Style.button} onClick={postJob}>Post Blog</button>
                                     </div >
                                 </div >
                             </div>

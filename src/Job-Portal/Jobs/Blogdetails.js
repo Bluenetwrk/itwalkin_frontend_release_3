@@ -111,20 +111,25 @@ const [Loader, setLoader] = useState(false)
 
   return (
     <>
-    <tr>
+
+    <div style={{display:"flex", marginTop:"20px"}}>
+                            {/* <img style={{ height:"25px", color:"grey", marginTop:"20px", marginLeft:"8%", cursor:"pointer",
+             width:"28px"}} onClick={()=>{navigate(-1)}}  src={Arrowimage} /> */}
+             <button style={{  color:"grey", marginTop:"10px", marginLeft:"8%", cursor:"pointer",}} 
+             onClick={()=>{navigate(-1)}}>Back</button>
+              
+               <tr style={{marginLeft:"10%"}}>
     <td colSpan={2} style={{backgroundColor:" rgb(40, 4, 99)"}}>
-    <div style={{textAlign:"center", color:"white", fontWeight:"550"}}>Blog Description</div>
+    <div style={{textAlign:"center", color:"white", fontWeight:"550"}}>{jobs.jobTitle ? jobs.jobTitle[0].toUpperCase()+jobs.jobTitle.slice(1)
+    : <li style={{ display: "inline-block" }}>Blog Title</li>}</div>
     </td>
   </tr>
-    <div style={{display:"flex"}}>
-                            <img style={{ height:"25px", color:"grey", marginTop:"20px", marginLeft:"8%", cursor:"pointer",
-             width:"28px"}} onClick={()=>{navigate(-1)}}  src={Arrowimage} />
-    {/* <p style={{marginLeft:"30%"}}><b>Full Job Description</b></p> */}
     </div>
 
       {screenSize.width>850 ?
 
         <>
+       
     <div style={{display:"flex"}}>
 
         <div style={{marginTop:"20px", marginLeft:"30px"}}>
@@ -132,14 +137,14 @@ const [Loader, setLoader] = useState(false)
         
         </div>
         <div>
-          
+       
           <table>
-          <tr>
+          {/* <tr>
     <td colSpan={2} style={{backgroundColor:" rgb(40, 4, 99)"}}>
     <div style={{textAlign:"center", color:"white", fontWeight:"550"}}>{jobs.jobTitle ? jobs.jobTitle[0].toUpperCase()+jobs.jobTitle.slice(1)
     : <li style={{ display: "inline-block" }}>Blog Title</li>}</div>
     </td>
-  </tr>
+  </tr> */}
        
   <tr>
     <th>Company Name</th>

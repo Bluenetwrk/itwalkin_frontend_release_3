@@ -81,6 +81,7 @@ import Payment from "./Job-Portal/Payment"
 import socketIO from 'socket.io-client';
 import SidebarNav from "./Job-Portal/BigSideNav";
 import useScreenSize from '../src/Job-Portal/SizeHook';
+import AskQuestion from "./Job-Portal/PostJobs/AskQuesion";
 // axios.defaults.baseURL = "http://localhost:8080" 
 // axios.defaults.baseURL = "https://i-twalkin-backend-testrelease-2-0-1-0824-zdnu.vercel.app" // new vercel
 
@@ -137,6 +138,7 @@ function App() {
             {/* ..........Jobseeker Private component i,e can not search in URL......... */}
             <Route element={<StudPrivate />}>
               <Route path="/alljobs" element={<Jobs url={axios.defaults.baseURL} />} />
+              <Route path="/AskQuestion" element={<AskQuestion />} />
               <Route path="/Update-Profile" element={<StudentUpdateProfile url={axios.defaults.baseURL} />} />
               <Route path="/My-Profile" element={<StudentProfile url={axios.defaults.baseURL} />} />
               <Route path="/My-Applied-Jobs" element={<MyAppliedJobs url={axios.defaults.baseURL} />} />

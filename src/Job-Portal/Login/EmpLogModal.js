@@ -110,7 +110,7 @@ const Modal = ({ isOpen, onClose, children }) => {
 	  // let studentAuth = localStorage.getItem("StudLog")
 	  let EmployeeAuth = localStorage.getItem("EmpLog")
 	  if (EmployeeAuth) {
-		navigate("/postedjobs")
+		navigate("/Search-Candidate")
 	  }
 	}, [])
   

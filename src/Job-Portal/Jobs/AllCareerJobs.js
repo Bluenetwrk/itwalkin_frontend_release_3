@@ -427,7 +427,7 @@ return(
       {screenSize.width > 850 ?
         <>
 
-<div className={styles.NavConetenetWrapper}>
+<div className={styles.BlogNavConetenetWrapper}>
 
 
 <div className={styles.LocationFilterWrapper}>
@@ -462,6 +462,7 @@ return(
 
       {screenSize.width > 850 ?
         <>
+    <p style={{marginLeft:"5%", fontWeight:"800", marginTop:"15px", marginBottom:"-15px"}}>Career Jobs</p>
 
           <div className={styles.JobtitleFilterWrapper}>
             <buton className={Active.length===0?styles.active:styles.JobtitleFilter} onClick={() =>
@@ -809,6 +810,8 @@ return(
         :
         // Mobile View
         <>
+    <p style={{marginLeft:"5%", fontWeight:"800", marginTop:"15px", marginBottom:"-15px"}}>Career Jobs</p>
+
           <div className={styles.searchBoth}>
             <p className={styles.p}>Search </p>
             <input className={styles.inputboxsearch} type="text" placeholder='Search for a Job / Skills / Location / Experiance' onChange={(e) => { search(e) }} />

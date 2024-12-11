@@ -86,6 +86,9 @@ function Nav(props) {
   function MyJobApplied() {
     navigate("/My-Applied-Jobs")
   }
+  function AskQuestion() {
+    navigate("/AskQuestion")
+  }
 
   function updateEmployeeProfile() {
     navigate("/UpdateProfile")
@@ -159,7 +162,7 @@ function Nav(props) {
                 {/* </div> */}
                 <div className={Styles.linkWrapper}>
 
-                  <NavLink to="/alljobs" className={Styles.AllJobJobSeeker} style={navLinkStyles}>All Jobs </NavLink>
+                  <NavLink to="/alljobs" className={Styles.AllJobJobSeeker}  style={navLinkStyles}>All Jobs </NavLink>
                   {/* <NavLink to="/AboutUs" className={Styles.link} style={navLinkStyles}>About Us</NavLink>
                   <NavLink to="/Services" className={Styles.link} style={navLinkStyles}>Services</NavLink>
                   <NavLink to="/Contact" className={Styles.link} style={navLinkStyles}>Contact</NavLink> */}
@@ -176,6 +179,7 @@ function Nav(props) {
                           <p className={Styles.text} ref={menuRef} onClick={myprofile}>My profile</p>
                           {/* <p className={Styles.text} ref={menuRef} onClick={updateprofile}>Update profile</p> */}
                           <p className={Styles.text} ref={menuRef} onClick={MyJobApplied}>Jobs Applied</p>
+                          <p className={Styles.text} ref={menuRef} onClick={AskQuestion}>Ask Question</p>
                           <p className={Styles.text} ref={menuRef} onClick={StudlogOut}>Logout</p>
 
                         </div>

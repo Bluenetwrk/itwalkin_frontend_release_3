@@ -451,7 +451,7 @@ return(
         <>
         {
          ! EmployeeAuth?
-        <div className={styles.NavConetenetWrapper}>
+        <div className={styles.BlogNavConetenetWrapper}>
 
 
           <div className={styles.LocationFilterWrapper}>
@@ -488,8 +488,8 @@ return(
 
       {screenSize.width > 850 ?
         <>
-        <p style={{ color: " red", marginLeft: "4%" , zIndex: "100",}}>Note: this website is under development process</p>
-
+        {/* <p style={{ color: " red", marginLeft: "4%" , zIndex: "100",}}>Note: this website is under development process</p> */}
+        <p style={{marginLeft:"5%", fontWeight:"800", marginTop:"15px", marginBottom:"-15px"}}>Blogs</p>
 
           <div className={styles.JobtitleFilterWrapper}>
             <buton className={ Active.length===0? styles.active:styles.JobtitleFilter} onClick={() => { getjobs() }}>All</buton>
@@ -557,14 +557,12 @@ return(
 
           <div className={styles.Uiwarpper}>
             <ul className={styles.ul} style={{ color: 'white', fontWeight: "bold" }}>
-              <li style={{ backgroundColor: " rgb(40, 4, 99)" }} className={`${styles.li} ${styles.Jtitle}`}>Blog Title</li>
-              <li style={{ backgroundColor: " rgb(40, 4, 99)" }} className={`${styles.li} ${styles.Source}`}>Source</li>
-              <li style={{ backgroundColor: " rgb(40, 4, 99)" }} className={`${styles.li} ${styles.CompanyName}`}>Company Name</li>
-              <li style={{ backgroundColor: " rgb(40, 4, 99)" }} className={`${styles.li} ${styles.CompanyName}`}>Posted by</li>
-              {/* <li style={{ backgroundColor: " rgb(40, 4, 99)" }} className={`${styles.li} ${styles.JobType}`}>JobType</li> */}
-
-              <li style={{ backgroundColor: " rgb(40, 4, 99)" }} className={`${styles.li} ${styles.BlogDescription}`}><b>Blog description</b></li>
-              <li style={{ backgroundColor: " rgb(40, 4, 99)", }} className={`${styles.li} ${styles.date}`}>Posted Date
+              <li style={{ backgroundColor: " rgb(40, 4, 99)" }} className={`${styles.li} ${styles.BlogJtitle}`}>Blog Title</li>
+              <li style={{ backgroundColor: " rgb(40, 4, 99)" }} className={`${styles.li} ${styles.BlogSource}`}>Source</li>
+              <li style={{ backgroundColor: " rgb(40, 4, 99)" }} className={`${styles.li} ${styles.BlogCompanyName}`}>Company Name</li>
+              <li style={{ backgroundColor: " rgb(40, 4, 99)" }} className={`${styles.li} ${styles.BlogCompanyName}`}>Posted by</li>
+              {/* <li style={{ backgroundColor: " rgb(40, 4, 99)" }} className={`${styles.li} ${styles.BlogDescription}`}><b>Blog description</b></li> */}
+              <li style={{ backgroundColor: " rgb(40, 4, 99)", }} className={`${styles.li} ${styles.Blogdate}`}>Posted Date
                 <p className={styles.arrowWrapper} >
                   <i onClick={sortbyNewjobs} className={`${styles.arrow} ${styles.up}`} ></i>
                   <i onClick={sortbyOldjobs} className={`${styles.arrow} ${styles.down}`}></i>
@@ -592,7 +590,7 @@ return(
 
               <li style={{ backgroundColor: " rgb(40, 4, 99)" }} className={`${styles.li} ${styles.Skills}`}>Skills Required</li>
               */}
-              <li style={{ backgroundColor: " rgb(40, 4, 99)" }} className={`${styles.li} ${styles.Apply}`}>Check</li>
+              <li style={{ backgroundColor: " rgb(40, 4, 99)" }} className={`${styles.li} ${styles.BlogApply}`}>Check</li>
 
             </ul>
             {PageLoader ?
@@ -607,30 +605,29 @@ return(
                     <ul className={styles.ul} key={i}>
                       {/* } */}
 
-                      <li className={`${styles.li} ${styles.Jtitle}`} onClick={() => navigate(`/Blogdetails/${btoa(items._id)}`)} style={{ cursor: "pointer", textDecoration: "underline", color: "blue" }}>{items.jobTitle}</li>
-                       <li className={`${styles.li} ${styles.Source}`} >Itwalkin</li>
+                      <li className={`${styles.li} ${styles.BlogJtitle}`} onClick={() => navigate(`/Blogdetails/${btoa(items._id)}`)} style={{ cursor: "pointer", textDecoration: "underline", color: "blue" }}>{items.jobTitle}</li>
+                       <li className={`${styles.li} ${styles.BlogSource}`} >Itwalkin</li>
                      
-                          <li style={{ cursor: "pointer", textDecoration: "underline" }} className={`${styles.li} ${styles.CompanyName}`}
+                          <li style={{ cursor: "pointer", textDecoration: "underline" }} className={`${styles.li} ${styles.BlogCompanyName}`}
                             onClick={(e) => { checkEmpHalf(btoa(items.empId)) }}  >
 
                             {items.companyName}
                             </li>
-                          <li style={{ cursor: "pointer", textDecoration: "underline" }} className={`${styles.li} ${styles.CompanyName}`} >
+                          <li style={{ cursor: "pointer", textDecoration: "underline" }} className={`${styles.li} ${styles.BlogCompanyName}`} >
 
                             {items.name}
                             </li>
                           
 
-                      <li className={`${styles.li} ${styles.BlogDescription}`}>
+                      {/* <li className={`${styles.li} ${styles.BlogDescription}`}>
                           {
-    items.jobDescription? HTMLReactParser(items.jobDescription.slice(0,50).toString()) :""
-                          }
-  
+    items.jobDescription? HTMLReactParser(items.jobDescription.slice(0,150).toString()) :""
+                          }  
                           <span onClick={() => navigate(`/Blogdetails/${btoa(items._id)}`)} className={styles.seeMore}>
                             ...read more
                           </span>
-                        </li>
-                      <li className={`${styles.li} ${styles.date}`}>
+                        </li> */}
+                      <li className={`${styles.li} ${styles.Blogdate}`}>
                         {new Date(items.createdAt).toLocaleString(
                           "en-US",
                           {
@@ -646,9 +643,9 @@ return(
                       <li className={`${styles.li} ${styles.qualification}`}>{items.qualification}</li>
                       <li className={`${styles.li} ${styles.Skills}`}>{items.skills} </li> */}
 
-                      <li className={`${styles.li} ${styles.Apply}`}>
+                      <li className={`${styles.li} ${styles.BlogApply}`}>
                         
-                          <button className={styles.Applybutton} onClick={() => navigate(`/Blogdetails/${btoa(items._id)}`)}>Check</button>
+                          <button className={styles.BlogApplybutton} onClick={() => navigate(`/Blogdetails/${btoa(items._id)}`)}>Check</button>
                         
                       </li>
                     </ul>
@@ -662,22 +659,22 @@ return(
 
                     <ul className={styles.ul} key={i}>
 
-<li className={`${styles.li} ${styles.Jtitle}`} onClick={() => 
+<li className={`${styles.li} ${styles.BlogJtitle}`} onClick={() => 
   navigate(`/Blogdetails/${btoa(items._id)}`)} style={{ cursor: "pointer", textDecoration: "underline", color: "blue" }}>{items.jobTitle}</li>
-                                            <li className={`${styles.li} ${styles.Source}`} >Itwalkin</li>
+                                            <li className={`${styles.li} ${styles.BlogSource}`} >Itwalkin</li>
 
-                                            <li style={{ cursor: "pointer", textDecoration: "underline" }} className={`${styles.li} ${styles.CompanyName}`}
+                                            <li style={{ cursor: "pointer", textDecoration: "underline" }} className={`${styles.li} ${styles.BlogCompanyName}`}
                             onClick={(e) => { checkEmpHalf(btoa(items.empId)) }}  >
 
                             {items.companyName}
                             </li>
 
                     
-                          <li style={{ cursor: "pointer", textDecoration: "underline" }} className={`${styles.li} ${styles.CompanyName}`} >
+                          <li style={{ cursor: "pointer", textDecoration: "underline" }} className={`${styles.li} ${styles.BlogCompanyName}`} >
                           
                             {items.name}</li>
          
-                      <li className={`${styles.li} ${styles.BlogDescription}`}>
+                      {/* <li className={`${styles.li} ${styles.BlogDescription}`}>
                           {
     items.jobDescription? HTMLReactParser(items.jobDescription.slice(0,150).toString()) :""
                           }
@@ -685,8 +682,8 @@ return(
                           <span onClick={() => navigate(`/Blogdetails/${btoa(items._id)}`)} className={styles.seeMore}>
                             ...read more
                           </span>
-                        </li>
-                      <li className={`${styles.li} ${styles.date}`}>
+                        </li> */}
+                      <li className={`${styles.li} ${styles.Blogdate}`}>
                         {new Date(items.createdAt).toLocaleString(
                           "en-US",
                           {
@@ -702,8 +699,8 @@ return(
                       <li className={`${styles.li} ${styles.qualification}`}>{items.qualification}</li>
                       <li className={`${styles.li} ${styles.Skills}`}>{items.skills}</li> */}
 
-                      <li className={`${styles.li} ${styles.Apply}`}>
-                        <button className={styles.Applybutton} onClick={() => { applyforJob(items._id) }}>Check</button>
+                      <li className={`${styles.li} ${styles.BlogApply}`}>
+                        <button className={styles.BlogApplybutton} onClick={() => { applyforJob(items._id) }}>Check</button>
                     </li>
                   </ul>
                   )
@@ -748,6 +745,8 @@ return(
         // Mobile View
         :
         <>
+    <p style={{marginLeft:"5%", fontWeight:"800", marginTop:"15px", marginBottom:"-15px"}}>Blogs</p>
+
           <div className={styles.searchBoth}>
             <p className={styles.p}>Search </p>
             <input className={styles.inputboxsearch} type="text" placeholder='Search for a Job / Skills / Location / Experiance' onChange={(e) => { search(e) }} />

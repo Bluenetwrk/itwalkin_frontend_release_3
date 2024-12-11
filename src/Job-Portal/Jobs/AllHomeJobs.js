@@ -65,7 +65,7 @@ function Home() {
     // let studentAuth = localStorage.getItem("StudLog")
     let EmployeeAuth = localStorage.getItem("EmpLog")
     if (EmployeeAuth) {
-      navigate("/postedjobs")
+      navigate("/Search-Candidate")
     }
   }, [])
 
@@ -466,7 +466,7 @@ return(
               })
             }
           </div>          
-          <div className={styles.searchBothForNavWrapper}>
+          <div className={styles.HomesearchBothForNavWrapper}>
             <input className={styles.inputboxsearchNav} type="text" placeholder='Search for a Job / Skills / Location / Experiance' onChange={(e) => { search(e) }} />
 
             <i style={{ color: "rgb(40, 4, 99)", fontSize: "18px", cursor: "pointer" , marginLeft:"2%"}} onClick={() => { searchIcon(searchKey) }}
