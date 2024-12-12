@@ -25,8 +25,8 @@ getServices()
 
   return ( 
         <>
-        <div style={{marginLeft:"20px"}}>
-        <h2 >Our Services</h2>
+        <div style={{marginLeft:"10px"}}>
+        <h2 style={{marginLeft:"10px", fontWeight:"800", marginTop:"5px"}}> Our Services</h2>
 
     <div style={{width:"93%"}}> {HTMLReactParser(Services.toString())} </div>
        
@@ -37,9 +37,7 @@ getServices()
         :
         <Footer/>   
 }
-        {/* <div style={{marginTop:"330px", position:"sticky", bottom:0,}}>
-          <Footer/>
-        </div> */}
+
     </>
 
 

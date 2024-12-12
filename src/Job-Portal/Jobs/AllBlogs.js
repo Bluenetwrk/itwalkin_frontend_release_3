@@ -489,7 +489,8 @@ return(
       {screenSize.width > 850 ?
         <>
         {/* <p style={{ color: " red", marginLeft: "4%" , zIndex: "100",}}>Note: this website is under development process</p> */}
-        <p style={{marginLeft:"5%", fontWeight:"800", marginTop:"15px", marginBottom:"-15px"}}>Blogs</p>
+        <h2 style={{marginLeft:"10px", fontWeight:"800", marginTop:"15px", marginBottom:"-15px"}}> All Blogs  </h2>
+
 
           <div className={styles.JobtitleFilterWrapper}>
             <buton className={ Active.length===0? styles.active:styles.JobtitleFilter} onClick={() => { getjobs() }}>All</buton>
@@ -590,7 +591,7 @@ return(
 
               <li style={{ backgroundColor: " rgb(40, 4, 99)" }} className={`${styles.li} ${styles.Skills}`}>Skills Required</li>
               */}
-              <li style={{ backgroundColor: " rgb(40, 4, 99)" }} className={`${styles.li} ${styles.BlogApply}`}>Check</li>
+              <li style={{ backgroundColor: " rgb(40, 4, 99)" }} className={`${styles.li} ${styles.BlogApply}`}>Read/Answer</li>
 
             </ul>
             {PageLoader ?
@@ -613,7 +614,7 @@ return(
 
                             {items.companyName}
                             </li>
-                          <li style={{ cursor: "pointer", textDecoration: "underline" }} className={`${styles.li} ${styles.BlogCompanyName}`} >
+                          <li style={{ cursor: "pointer",  }} className={`${styles.li} ${styles.BlogCompanyName}`} >
 
                             {items.name}
                             </li>
@@ -645,7 +646,7 @@ return(
 
                       <li className={`${styles.li} ${styles.BlogApply}`}>
                         
-                          <button className={styles.BlogApplybutton} onClick={() => navigate(`/Blogdetails/${btoa(items._id)}`)}>Check</button>
+                          <button className={styles.BlogApplybutton} onClick={() => navigate(`/Blogdetails/${btoa(items._id)}`)}>Read/Answer</button>
                         
                       </li>
                     </ul>
@@ -670,7 +671,7 @@ return(
                             </li>
 
                     
-                          <li style={{ cursor: "pointer", textDecoration: "underline" }} className={`${styles.li} ${styles.BlogCompanyName}`} >
+                          <li style={{ cursor: "pointer" }} className={`${styles.li} ${styles.BlogCompanyName}`} >
                           
                             {items.name}</li>
          
@@ -700,7 +701,7 @@ return(
                       <li className={`${styles.li} ${styles.Skills}`}>{items.skills}</li> */}
 
                       <li className={`${styles.li} ${styles.BlogApply}`}>
-                        <button className={styles.BlogApplybutton} onClick={() => { applyforJob(items._id) }}>Check</button>
+                        <button className={styles.BlogApplybutton} onClick={() => { applyforJob(items._id) }}>Read/Answer</button>
                     </li>
                   </ul>
                   )
@@ -745,7 +746,7 @@ return(
         // Mobile View
         :
         <>
-    <p style={{marginLeft:"5%", fontWeight:"800", marginTop:"15px", marginBottom:"-15px"}}>Blogs</p>
+    <p style={{marginLeft:"3%", fontWeight:"800", marginTop:"5px", marginBottom:"-15px"}}>Blogs</p>
 
           <div className={styles.searchBoth}>
             <p className={styles.p}>Search </p>

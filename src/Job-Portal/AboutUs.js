@@ -17,6 +17,8 @@ function AboutUs() {
         let result = res.data.result
         // console.log("ddddd",result[0].AboutUs)
         setAboutUs(result[0].AboutUs)
+        // setAboutUs(result[0].Services)
+
     })
     }
 
@@ -28,8 +30,9 @@ getAboutUs()
     <>
      
 
-        <div style={{marginLeft:"20px"}}>
-          <h2>ABOUT US</h2>
+        <div style={{marginLeft:"10px"}}>
+        <h2 style={{marginLeft:"10px", fontWeight:"800", marginTop:"5px"}}> ABOUT US </h2>
+
      
          <div style={{width:"93%"}}> {HTMLReactParser(AboutUs.toString())} </div>
         </div>
@@ -40,6 +43,7 @@ getAboutUs()
 
         <Footer/>   
 }
+  
     </>
 
   )

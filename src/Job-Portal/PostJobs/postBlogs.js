@@ -127,8 +127,9 @@ function PostBlogs(props) {
 
 
     async function postJob() {
-        let userid = JSON.parse(localStorage.getItem("EmpIdG"))
-        const headers = { authorization: userid + " " + atob(JSON.parse(localStorage.getItem("EmpLog"))) };
+        // let userid = JSON.parse(localStorage.getItem("EmpIdG"))
+        // const headers = { authorization: userid + " " + atob(JSON.parse(localStorage.getItem("EmpLog"))) };
+        const headers = { authorization: 'BlueItImpulseWalkinIn' };
 
         let jobTitle = jobtitle.toLowerCase()
         let jobLocation = joblocation.toLowerCase()
@@ -386,7 +387,7 @@ if(key==='Full Time' ||key=== 'Contract' || key==='Internship' || key==='Part Ti
 // onChange={(e)=>{setSkills(e.target.value)}} 
 />*/}
 <p><input type="checkbox" onChange={()=>{setconcent((prev)=>!prev)}}/>
-    I have read the terms and conditions if ITwalkin.com and i agree to all the 
+    I have read the terms and conditions of ITwalkin.com and I agree to all the 
      <span style={{color:"blue", cursor:"pointer"}} onClick={()=>(window.open("/TermsAndCondition"))}> terms and conditons</span> before posting the jobs </p> 
 
 

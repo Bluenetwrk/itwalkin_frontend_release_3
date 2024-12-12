@@ -54,6 +54,7 @@ function AskQuestion(props) {
 
     const [skills, setSkills] = useState("")
     const [name, setName] = useState("")
+
     const [concent, setconcent] = useState(true)
 
     function handleSalary(e) {
@@ -75,28 +76,29 @@ function AskQuestion(props) {
             setExperiance(sanitizedValue)
         }
     }
+    let studId = JSON.parse(localStorage.getItem("StudId"))
 
     let navigate = useNavigate()
 
-    // async function getProfile() {
-    //     const headers = { authorization: 'BlueItImpulseWalkinIn' };
+    async function getProfile() {
+        let userid = JSON.parse(localStorage.getItem("StudId"))
+        const headers = { authorization: userid + " " + atob(JSON.parse(localStorage.getItem("StudLog"))) };
+    await axios.get(`/StudentProfile/getProfile/${studId}`, {headers})
+            .then((res) => {
+                let result = res.data.result
+                let name = res.data.result.name
+                setName(name)
+                let companyName = res.data.result.CompanyName
+                setProfileData([result])
+                setCompanyName(companyName)
+            }).catch((err) => {
+                alert("some thing went wrong")
+            })
+    }
 
-    //     await axios.get(`/EmpProfile/getProfile/${empId}`, { headers })
-    //         .then((res) => {
-    //             let result = res.data.result
-    //             let name = res.data.result.name
-    //             setName(name)
-    //             let companyName = res.data.result.CompanyName
-    //             setProfileData([result])
-    //             setCompanyName(companyName)
-    //         }).catch((err) => {
-    //             alert("some thing went wrong")
-    //         })
-    // }
-
-    // useEffect(() => {
-    //     getProfile()
-    // }, [])
+    useEffect(() => {
+        getProfile()
+    }, [])
 
     // async function getLogo() {
     //     let userid = JSON.parse(localStorage.getItem("EmpIdG"))
@@ -116,12 +118,15 @@ function AskQuestion(props) {
 
 
     async function postJob() {        
-    let userid = JSON.parse(localStorage.getItem("StudId"))
-    const headers = { authorization: userid + " " + atob(JSON.parse(localStorage.getItem("StudLog"))) };
+    // let userid = JSON.parse(localStorage.getItem("StudId"))
+    // const headers = { authorization: userid + " " + atob(JSON.parse(localStorage.getItem("StudLog"))) };
+    const headers = { authorization: 'BlueItImpulseWalkinIn' };
 
         let jobTitle = jobtitle.toLowerCase()
         let jobLocation = joblocation.toLowerCase()
-        await axios.post("/QuestionRoute/questionPost/", {
+        // await axios.post("/QuestionRoute/questionPost/", {
+            await axios.post("/BlogRoutes/blogpost/", {
+
             Logo, SourceLink, Source, empId, jobTitle, companyName,
             jobDescription, jobtype, salaryRange, jobLocation, qualification, experiance, skills, Tags, name
         }, { headers })
@@ -249,7 +254,7 @@ function AskQuestion(props) {
                                         {/* <p className={Style.errormessage}>{errorMessage} </p> */}
                                         <h4 className={Style.jobHeadline}  >Ask Question**
                                         <span className={Style.hint}> 
-                                            ( this  will be forwarded to the employers-main power consultants)</span></h4>
+                                            ( this  will be forwarded to the employers/consultants)</span></h4>
                                         <input maxLength="200" className={Style.inputbox} type="text" value={jobtitle} onChange={(e) => { handlejobtitle(e) }} />
 
                                         <p className={Style.jobHeadline}>Blog Tags  
@@ -281,13 +286,13 @@ function AskQuestion(props) {
                                         </div>
 
                                         <p><input type="checkbox" onChange={() => { setconcent((prev) => !prev) }} />
-                                            I have read the terms and conditions if ITwalkin.com and i agree to all the
+                                            I have read the terms and conditions of ITwalkin.com and I agree to all the
                                             <span style={{ color: "blue", cursor: "pointer" }} onClick={() => (window.open("/TermsAndCondition"))}> terms and conditons</span> before posting the jobs </p>
 
 
                                         {/* {Logo ? <p ><span style={{ color: "blue" }}>Note** :</span> Logo will also be posted with the Job</p> : ""} */}
 
-                                        <button disabled={concent} className={concent? Style.disableButton:Style.button} onClick={postJob}>Post Job</button>
+                                        <button disabled={concent} className={concent? Style.disableButton:Style.button} onClick={postJob}>Submit</button>
                                     </div >
                                 </div >
                             </div>

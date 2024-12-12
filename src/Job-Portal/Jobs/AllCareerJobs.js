@@ -462,7 +462,7 @@ return(
 
       {screenSize.width > 850 ?
         <>
-    <p style={{marginLeft:"5%", fontWeight:"800", marginTop:"15px", marginBottom:"-15px"}}>Career Jobs</p>
+    <h2 style={{marginLeft:"10px", fontWeight:"800", marginTop:"15px", marginBottom:"-15px"}}> Career Jobs </h2>
 
           <div className={styles.JobtitleFilterWrapper}>
             <buton className={Active.length===0?styles.active:styles.JobtitleFilter} onClick={() =>
@@ -810,7 +810,9 @@ return(
         :
         // Mobile View
         <>
-    <p style={{marginLeft:"5%", fontWeight:"800", marginTop:"15px", marginBottom:"-15px"}}>Career Jobs</p>
+    <p style={{marginLeft:"3%", fontWeight:"800", marginTop:"5px", marginBottom:"-15px"}}>Career Jobs</p>
+    {/* <h2 style={{marginLeft:"10px", fontWeight:"800", marginTop:"15px", marginBottom:"-15px"}}> Career Jobs </h2> */}
+
 
           <div className={styles.searchBoth}>
             <p className={styles.p}>Search </p>

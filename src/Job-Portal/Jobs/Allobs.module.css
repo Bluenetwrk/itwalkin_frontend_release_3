@@ -541,13 +541,13 @@
     display: flex;
     color: white;
     /* font-weight: bold; */
-    width:70px;
+    width:110px;
     padding-left: 15px;
     /* padding-right: 1px; */
     height: 25px;
     align-items: center;
     text-align: center;
-    margin-left: 27%;
+    margin-left: 15%;
     cursor:pointer;
 
 }

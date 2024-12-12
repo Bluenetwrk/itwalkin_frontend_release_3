@@ -381,7 +381,7 @@ if(key==='Full Time' ||key=== 'Contract' || key==='Internship' || key==='Part Ti
 // onChange={(e)=>{setSkills(e.target.value)}} 
 />
 <p><input type="checkbox" onChange={()=>{setconcent((prev)=>!prev)}}/>
-    I have read the terms and conditions if ITwalkin.com and i agree to all the 
+    I have read the terms and conditions of ITwalkin.com and I agree to all the 
      <span style={{color:"blue", cursor:"pointer"}} onClick={()=>(window.open("/TermsAndCondition"))}> terms and conditons</span> before posting the jobs </p>
 
 
