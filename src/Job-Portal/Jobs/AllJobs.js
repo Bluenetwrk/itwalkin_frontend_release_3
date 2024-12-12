@@ -666,134 +666,69 @@ return(
                   jobs.map((items, i) => {
                     return (
 
-//                       <ul className={styles.ul} key={i}>
+                      <ul className={styles.ul} key={i}>
 
-// <li className={`${styles.li} ${styles.Jtitle}`} onClick={() => navigate(`/Jobdetails/${btoa(items._id)}`)} style={{ cursor: "pointer", textDecoration: "underline", color: "blue" }}>{items.jobTitle.toUpperCase()}</li>
-//                           <li className={`${styles.li} ${styles.Source}`} >Itwalkin</li>
+<li className={`${styles.li} ${styles.Jtitle}`} onClick={() => navigate(`/Jobdetails/${btoa(items._id)}`)} style={{ cursor: "pointer", textDecoration: "underline", color: "blue" }}>{items.jobTitle.toUpperCase()}</li>
+                          <li className={`${styles.li} ${styles.Source}`} >Itwalkin</li>
 
 
-//                         {
-//                           !items.Source ?
+                        {
+                          !items.Source ?
 
-//                             <li style={{ cursor: "pointer", textDecoration: "underline" }} className={`${styles.li} ${styles.CompanyName}`}
-//                               onClick={() => { navigate(`/CheckEmpHalfProfile/${btoa(items.empId)}`) }}  >
+                            <li style={{ cursor: "pointer", textDecoration: "underline" }} className={`${styles.li} ${styles.CompanyName}`}
+                              onClick={() => { navigate(`/CheckEmpHalfProfile/${btoa(items.empId)}`) }}  >
                               
-//                               {items.companyName}</li>
-//                             :
-//                             <a style={{ cursor: "pointer", textDecoration: "underline" }} className={`${styles.li} ${styles.CompanyName}`} href={items.SourceLink} target="_blank" >
+                              {items.companyName}</li>
+                            :
+                            <a style={{ cursor: "pointer", textDecoration: "underline" }} className={`${styles.li} ${styles.CompanyName}`} href={items.SourceLink} target="_blank" >
                               
-//                               {items.Source}
+                              {items.Source}
 
-//                             </a>
+                            </a>
 
-// }
+}
 
-//                         <li className={`${styles.li} ${styles.JobType}`}>{items.jobtype}</li>
+                        <li className={`${styles.li} ${styles.JobType}`}>{items.jobtype}</li>
 
-//                         <li className={`${styles.li} ${styles.date}`}>
-//                           {new Date(items.createdAt).toLocaleString(
-//                             "en-US",
-//                             {
-//                               month: "short",
-//                               day: "2-digit",
-//                               year: "numeric",
-//                             }
-//                           )}
-//                         </li>
-//                         <li className={`${styles.li} ${styles.Location}`}>{items.jobLocation[0].toUpperCase() + items.jobLocation.slice(1)}</li>
-//                         <li className={`${styles.li} ${styles.Package}`}>{items.salaryRange}L</li>
-//                         <li className={`${styles.li} ${styles.experiance}`}>{items.experiance}Y</li>
-//                         <li className={`${styles.li} ${styles.qualification}`}>{items.qualification}</li>
-//                         <li className={`${styles.li} ${styles.Skills}`}>{items.skills}</li>
-
-//                         <li className={`${styles.li} ${styles.Status}`}>
-
-//                           {items.jobSeekerId.find((jobseeker) => {
-//                             return (
-//                               jobseeker.jobSeekerId == jobSeekerId
-//                             )
-//                           }) ?
-//                           <button className={styles.Appliedbutton} title='HR will get in touch with you, Once they will check Your Profile' > Applied <span style={{ fontSize: '15px' }}>&#10004;</span></button>
-                          
-//                           :
-//                           items.SourceLink ?
-//                           <button title='this will take to Source page' className={styles.Applybutton} onClick={() => {
-//                             applyforOtherJob(items.SourceLink)
-//                           }}>Apply</button>
-//                           :
-                              
-//                               <button className={styles.Applybutton} onClick={() => { applyforJob(items._id) }}>Apply
-//                                 <span className={styles.Loader} >{Loader && items._id == clickedJobId ?
-//                                   <TailSpin color="white" height={20} />
-//                                   : ""}</span></button>
-//                           }
-//                         </li>
-//                       </ul>
-<tr className='tr'>
-                                                  
-<td  className="td" onClick={() => navigate(`/Jobdetails/${btoa(items._id)}`)}
-style={{ cursor: "pointer", textDecoration: "underline", color: "blue" }} 
->{items.jobTitle.toUpperCase()}</td>
-                          <td className="td" >Itwalkin</td>
-                          <td className="td" >
-                          {
-                         !items.Source ?
-
-                           <a 
-                             onClick={() => { navigate(`/CheckEmpHalfProfile/${btoa(items.empId)}`) }}  >
-                             
-                             {items.companyName}</a>
-                           :
-                           <a style={{ cursor: "pointer", textDecoration: "underline" }} href={items.SourceLink} target="_blank" >
-                             {items.Source}
-                           </a>
-                       }
-                          </td>
-                          <td className="td" >{items.jobtype}</td>
-                          
-                          <td className="td" >
+                        <li className={`${styles.li} ${styles.date}`}>
                           {new Date(items.createdAt).toLocaleString(
-                           "en-US",
-                           {
-                             month: "short",
-                             day: "2-digit",
-                             year: "numeric",
-                           }
-                         )}
-                          </td>
-                          <td className="td" >
-                          {items.jobLocation[0].toUpperCase() + items.jobLocation.slice(1)}
-                          </td>
-                          <td className="td" >{items.salaryRange}L
-                   
-                          </td>
-                          <td className="td" >{items.experiance}Y</td>
-                          <td className="td" >{items.qualification}</td>
-                          <td className="td" >{items.skills}</td>
-                          <td className="td" >
-                          {
-                           items.jobSeekerId.find((jobseeker) => {
-                             return (
-                               jobseeker.jobSeekerId == jobSeekerId
-                             )
-                           })
-                             ?
-                             <button className={styles.Appliedbutton} title='HR will get in touch with you, Once they will check Your Profile' > Applied <span style={{ fontSize: '15px' }}>&#10004;</span></button>
-                             :
-                             items.SourceLink ?
-                               <button title='This will redirect to the source company webpage' className={styles.Applybutton} onClick={() => {
-                                 applyforOtherJob(items.SourceLink)
-                               }}>Apply</button>
-                               :
+                            "en-US",
+                            {
+                              month: "short",
+                              day: "2-digit",
+                              year: "numeric",
+                            }
+                          )}
+                        </li>
+                        <li className={`${styles.li} ${styles.Location}`}>{items.jobLocation[0].toUpperCase() + items.jobLocation.slice(1)}</li>
+                        <li className={`${styles.li} ${styles.Package}`}>{items.salaryRange}L</li>
+                        <li className={`${styles.li} ${styles.experiance}`}>{items.experiance}Y</li>
+                        <li className={`${styles.li} ${styles.qualification}`}>{items.qualification}</li>
+                        <li className={`${styles.li} ${styles.Skills}`}>{items.skills}</li>
 
-                               <button className={styles.Applybutton} onClick={() => { applyforJob(items._id) }}>Apply
-                                 <span className={styles.Loader} >{Loader && items._id == clickedJobId ?
-                                   <TailSpin color="white" height={20} />
-                                   : ""}</span></button>
-                         }
-                          </td>
-                       
-                     </tr>
+                        <li className={`${styles.li} ${styles.Status}`}>
+
+                          {items.jobSeekerId.find((jobseeker) => {
+                            return (
+                              jobseeker.jobSeekerId == jobSeekerId
+                            )
+                          }) ?
+                          <button className={styles.Appliedbutton} title='HR will get in touch with you, Once they will check Your Profile' > Applied <span style={{ fontSize: '15px' }}>&#10004;</span></button>
+                          
+                          :
+                          items.SourceLink ?
+                          <button title='this will take to Source page' className={styles.Applybutton} onClick={() => {
+                            applyforOtherJob(items.SourceLink)
+                          }}>Apply</button>
+                          :
+                              
+                              <button className={styles.Applybutton} onClick={() => { applyforJob(items._id) }}>Apply
+                                <span className={styles.Loader} >{Loader && items._id == clickedJobId ?
+                                  <TailSpin color="white" height={20} />
+                                  : ""}</span></button>
+                          }
+                        </li>
+                      </ul>
                     )
                   })
                   : <p style={{ marginLeft: "47%", color: "red" }}>No Record Found</p>

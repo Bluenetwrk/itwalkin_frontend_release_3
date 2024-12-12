@@ -391,6 +391,8 @@ className={ShowSideNave ? "fas fa-times" : "fas fa-bars"} ref={SimgRef} onClick=
                     {/* <p className={Styles.text} ref={menuRef} onClick={updateprofile}>Update profile</p> */}
 
                     <p className={Styles.text} ref={menuRef} onClick={MyJobApplied}>Jobs Applied</p>
+                    <p className={Styles.text} ref={menuRef} onClick={AskQuestion}>Ask Question</p>
+
                     <p className={Styles.text} ref={menuRef} onClick={StudlogOut}>Logout</p>
 
                   </div>
