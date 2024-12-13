@@ -541,15 +541,27 @@
     display: flex;
     color: white;
     /* font-weight: bold; */
-    width:110px;
+    width:65px;
     padding-left: 15px;
     /* padding-right: 1px; */
     height: 25px;
     align-items: center;
     text-align: center;
-    margin-left: 15%;
+    margin-left: 29%;
     cursor:pointer;
-
+}
+.AnswerApplybutton{
+    border: 1px solid rgb(40, 4, 99);
+    background-color: rgb(40, 4, 99);
+    display: flex;
+    color: white;
+    width:74px;
+    padding-left: 15px;
+    height: 25px;
+    align-items: center;
+    text-align: center;
+    margin-left: 27%;
+    cursor:pointer;
 }
 
 .Appliedbutton{

@@ -604,9 +604,14 @@ return(
                   return (
 
                     <ul className={styles.ul} key={i}>
-                      {/* } */}
-
-                      <li className={`${styles.li} ${styles.BlogJtitle}`} onClick={() => navigate(`/Blogdetails/${btoa(items._id)}`)} style={{ cursor: "pointer", textDecoration: "underline", color: "blue" }}>{items.jobTitle}</li>
+                      {/* } */}  
+                      {
+                          items.question?
+                          <li className={`${styles.li} ${styles.BlogJtitle}`} onClick={() => navigate(`/Answerdetails/${btoa(items._id)}`)} style={{ cursor: "pointer", textDecoration: "underline", color: "blue" }}>{items.jobTitle}</li>
+                          :
+                          <li className={`${styles.li} ${styles.BlogJtitle}`} onClick={() => navigate(`/Blogdetails/${btoa(items._id)}`)} style={{ cursor: "pointer", textDecoration: "underline", color: "blue" }}>{items.jobTitle}</li>
+                        }                  
+                      
                        <li className={`${styles.li} ${styles.BlogSource}`} >Itwalkin</li>
                      
                           <li style={{ cursor: "pointer", textDecoration: "underline" }} className={`${styles.li} ${styles.BlogCompanyName}`}
@@ -645,8 +650,13 @@ return(
                       <li className={`${styles.li} ${styles.Skills}`}>{items.skills} </li> */}
 
                       <li className={`${styles.li} ${styles.BlogApply}`}>
+                      {
+                          items.question?
+                          <button className={styles.AnswerApplybutton} onClick={() => { navigate(`/Answerdetails/${btoa(items._id)}`) }}>Answer</button>
+                          :
+                          <button className={styles.BlogApplybutton} onClick={() => { navigate(`/Blogdetails/${btoa(items._id)}`) }}>Read</button>
+                        }
                         
-                          <button className={styles.BlogApplybutton} onClick={() => navigate(`/Blogdetails/${btoa(items._id)}`)}>Read/Answer</button>
                         
                       </li>
                     </ul>
@@ -659,10 +669,13 @@ return(
                   return (
 
                     <ul className={styles.ul} key={i}>
-
-<li className={`${styles.li} ${styles.BlogJtitle}`} onClick={() => 
-  navigate(`/Blogdetails/${btoa(items._id)}`)} style={{ cursor: "pointer", textDecoration: "underline", color: "blue" }}>{items.jobTitle}</li>
-                                            <li className={`${styles.li} ${styles.BlogSource}`} >Itwalkin</li>
+                      {
+                          items.question?
+                          <li className={`${styles.li} ${styles.BlogJtitle}`} onClick={() => navigate(`/Answerdetails/${btoa(items._id)}`)} style={{ cursor: "pointer", textDecoration: "underline", color: "blue" }}>{items.jobTitle}</li>
+                          :
+                          <li className={`${styles.li} ${styles.BlogJtitle}`} onClick={() => navigate(`/Blogdetails/${btoa(items._id)}`)} style={{ cursor: "pointer", textDecoration: "underline", color: "blue" }}>{items.jobTitle}</li>
+                        }                      
+                               <li className={`${styles.li} ${styles.BlogSource}`} >Itwalkin</li>
 
                                             <li style={{ cursor: "pointer", textDecoration: "underline" }} className={`${styles.li} ${styles.BlogCompanyName}`}
                             onClick={(e) => { checkEmpHalf(btoa(items.empId)) }}  >
@@ -701,7 +714,13 @@ return(
                       <li className={`${styles.li} ${styles.Skills}`}>{items.skills}</li> */}
 
                       <li className={`${styles.li} ${styles.BlogApply}`}>
-                        <button className={styles.BlogApplybutton} onClick={() => { applyforJob(items._id) }}>Read/Answer</button>
+                        {
+                          items.question?
+                          <button className={styles.AnswerApplybutton} onClick={() => { navigate(`/Answerdetails/${btoa(items._id)}`) }}>Answer</button>
+                          :
+                          <button className={styles.BlogApplybutton} onClick={() => { navigate(`/Blogdetails/${btoa(items._id)}`) }}>Read</button>
+                        }
+                        
                     </li>
                   </ul>
                   )

@@ -30,6 +30,7 @@ import Jobs from "./Job-Portal/Jobs/AllJobs";
 import Nav from "./Job-Portal/NaveBar/Nav";
 import Jobdetails from "./Job-Portal/Jobs/AllJobdetails"
 import Blogdetails from "./Job-Portal/Jobs/Blogdetails"
+import Answerdetails from "./Job-Portal/Jobs/Answerdetails";
 import CareerJobdetails from "./Job-Portal/Jobs/CareerJobdetails"
 import Home from "./Job-Portal/Jobs/AllHomeJobs";
 import StudentUpdateProfile from "./Job-Portal/Profile/StudentUpdateProfile";
@@ -81,7 +82,7 @@ import Payment from "./Job-Portal/Payment"
 import socketIO from 'socket.io-client';
 import SidebarNav from "./Job-Portal/BigSideNav";
 import useScreenSize from '../src/Job-Portal/SizeHook';
-import AskQuestion from "./Job-Portal/PostJobs/AskQuesion";
+import AskQuestion from "./Job-Portal/PostJobs/postQuesion";
 // axios.defaults.baseURL = "http://localhost:8080" 
 // axios.defaults.baseURL = "https://i-twalkin-backend-testrelease-2-0-1-0824-zdnu.vercel.app" // new vercel
 
@@ -175,6 +176,7 @@ function App() {
             <Route path="/EmployeeSignUp" element={<EmployeeSignUp />} />
             <Route path="/JobDetails/:id" element={<Jobdetails />} />
             <Route path="/Blogdetails/:id" element={<Blogdetails />} />
+            <Route path="/Answerdetails/:id" element={<Answerdetails />} />
             <Route path="/CareerJobdetails/:id" element={<CareerJobdetails />} />
             <Route path="/CheckEmpHalfProfile/:empId" element={<CheckEmpHalfProfile />} />
 

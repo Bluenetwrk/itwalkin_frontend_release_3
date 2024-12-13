@@ -121,14 +121,14 @@ function AskQuestion(props) {
     // let userid = JSON.parse(localStorage.getItem("StudId"))
     // const headers = { authorization: userid + " " + atob(JSON.parse(localStorage.getItem("StudLog"))) };
     const headers = { authorization: 'BlueItImpulseWalkinIn' };
-
+let question =true
         let jobTitle = jobtitle.toLowerCase()
         let jobLocation = joblocation.toLowerCase()
         // await axios.post("/QuestionRoute/questionPost/", {
             await axios.post("/BlogRoutes/blogpost/", {
 
-            Logo, SourceLink, Source, empId, jobTitle, companyName,
-            jobDescription, jobtype, salaryRange, jobLocation, qualification, experiance, skills, Tags, name
+            Logo, SourceLink, Source, empId, jobTitle, companyName, question, jobDescription, jobtype, 
+            salaryRange, jobLocation, qualification, experiance, skills, Tags, name
         }, { headers })
             .then((res) => {
                 let result = (res.data)

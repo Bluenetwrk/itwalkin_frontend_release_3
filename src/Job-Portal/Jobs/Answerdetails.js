@@ -15,8 +15,9 @@ import profileDp from "../img/user_3177440.png"
 import "./Allobs.module.css"
 import HTMLReactParser from 'html-react-parser'
 
-function Jobdetails() {
+function Answerdetails() {
   const [jobs, setJobs] = useState([])
+  const [comments, setcomments] = useState()
   // console.log("jobs are in ", jobs)
   const [jobdescription, setjobdescription] = useState([])
   const [jobseekerid, setjobSeekerId] = useState([])
@@ -28,7 +29,20 @@ const [Loader, setLoader] = useState(false)
   let jobSeekerId = JSON.parse(localStorage.getItem("StudId"))
   let empId = JSON.parse(localStorage.getItem("EmpIdG"))
 
+function changeComments(e){
+  setcomments(e.target.value)
+}
 
+async function handleComment(){
+  const headers = { authorization: 'BlueItImpulseWalkinIn'};
+  await axios.put(`/BlogRoutes/Addcomment/${atob(params.id)}`,{comments}, {headers})
+  .then((res)=>{
+    let result=res.data
+    if(result==="success"){
+      getjobs()
+    }
+  })
+}
 
   const navigate = useNavigate()
 
@@ -43,6 +57,7 @@ const [Loader, setLoader] = useState(false)
     await axios.get(`/BlogRoutes/getjobs/${atob(params.id)}`, {headers})
       .then((res) => {
         let result = (res.data)
+        // console.log(result)
         setJobs(result)
         setjobdescription(result.jobDescription)
         setjobSeekerId(result.jobSeekerId)
@@ -111,7 +126,7 @@ const [Loader, setLoader] = useState(false)
 
   return (
     <>
-        <h2 style={{marginLeft:"10px", fontWeight:"800", marginTop:"15px", marginBottom:"-15px"}}> Blogs  </h2>
+        <h2 style={{marginLeft:"10px", fontWeight:"800", marginTop:"15px", marginBottom:"-15px"}}> Questions  </h2>
 
     <div style={{display:"flex", marginTop:"20px"}}>
                             {/* <img style={{ height:"25px", color:"grey", marginTop:"20px", marginLeft:"8%", cursor:"pointer",
@@ -175,21 +190,28 @@ const [Loader, setLoader] = useState(false)
   </tr>
   </table>
   </div>
-  </div>
-
-  <table style={{marginLeft:"6px", marginTop:"0px", width:"98.8%"}}>
-          
+  </div>        
   
-  <tr >
+
+    { jobs.comments?
+      jobs.comments.map((com)=>{
+        return(
+  <table style={{marginLeft:"6px", marginTop:"0px", width:"98.8%"}}>
+
+          <tr >
     <td colSpan={2} >
-    {
-      jobdescription? HTMLReactParser(jobdescription.toString()) :""
+          <p>{com}</p>
+          </td>
+
+          </tr>
+          </table>
+        )
+      })
+      :""
      } 
-    </td>
 
-  </tr>
-  </table>
-
+  <input style={{height:"30px", marginLeft:"6px", width:"95%"}} type='text' value={comments} onChange={(e)=>{changeComments(e)}} /><br></br>
+<button onClick={handleComment} style={{height:"30px", marginLeft:"6px"}}>Comment</button>
 
 
 
@@ -262,4 +284,4 @@ const [Loader, setLoader] = useState(false)
   )
 }
 
-      export default Jobdetails
+      export default Answerdetails

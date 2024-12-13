@@ -91,7 +91,6 @@ function PostBlogs(props) {
 
     async function getProfile() {
         const headers = { authorization: 'BlueItImpulseWalkinIn' };
-
         await axios.get(`/EmpProfile/getProfile/${empId}`, { headers })
             .then((res) => {
                 let result = res.data.result
