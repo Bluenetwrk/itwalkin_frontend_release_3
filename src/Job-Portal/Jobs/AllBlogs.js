@@ -1355,13 +1355,26 @@ return(
                       <div className={styles.JobCard} key={i}>
 
                         <div className={styles.JobTitleDateWrapper}>
-                          <p className={styles.jobTitle} onClick={() => {
-                            window.scrollTo({
-                              top: 0
-                            })
-                            navigate(`/Blogdetails/${btoa(job._id)}`)
-                            
+                   
+                            {
+                              job.question?
+                              <p className={styles.QuestionjobTitle} onClick={() => {
+                                window.scrollTo({
+                                  top: 0
+                                })
+                            navigate(`/Answerdetails/${btoa(job._id)}`)
                           }} >{job.jobTitle.toUpperCase()} </p>
+                              :
+                              <p className={styles.jobTitle} onClick={() => {
+                                window.scrollTo({
+                                  top: 0
+                                })
+                            navigate(`/Blogdetails/${btoa(job._id)}`)
+                          }} >{job.jobTitle.toUpperCase()} </p>
+                            }
+                            
+
+
                           <p className={styles.Date}>{new Date(job.createdAt).toLocaleString(
                             "en-US",
                             {
@@ -1386,7 +1399,11 @@ return(
                         </div>
                              <span className={styles.jobtypeAndDate}>Source</span> :
 <> <span className={styles.skills}>ItWalkin</span><br></br></>                          
-
+{
+                              job.question?
+                              ""
+                              :
+                              <>
                         <p className={styles.jobDescriptionHeading}>Job Description:</p>
                         <p className={styles.jobDescription} style={{marginTop:"-6px"}}>
 
@@ -1403,8 +1420,7 @@ return(
                             ...read more
                           </span>
                         </p>
-
-
+                        </>}
                       </div>
                     </>
                   )
