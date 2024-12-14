@@ -39,6 +39,7 @@ async function handleComment(){
   .then((res)=>{
     let result=res.data
     if(result==="success"){
+      setcomments("")
       getjobs()
     }
   })
@@ -134,12 +135,7 @@ async function handleComment(){
              <button style={{  color:"grey", marginTop:"10px", marginLeft:"8%", cursor:"pointer",}} 
              onClick={()=>{navigate(-1)}}>Back</button>
               
-               <tr style={{marginLeft:"10%"}}>
-    <td colSpan={2} style={{backgroundColor:" rgb(40, 4, 99)"}}>
-    <div style={{textAlign:"center", color:"white", fontWeight:"550"}}>{jobs.jobTitle ? jobs.jobTitle[0].toUpperCase()+jobs.jobTitle.slice(1)
-    : <li style={{ display: "inline-block" }}>Blog Title</li>}</div>
-    </td>
-  </tr>
+       
     </div>
 
       {screenSize.width>850 ?
@@ -191,7 +187,12 @@ async function handleComment(){
   </table>
   </div>
   </div>        
-  
+  <tr>
+    <td colSpan={2} style={{backgroundColor:" rgb(40, 4, 99)"}}>
+    <div style={{textAlign:"center", color:"white", fontWeight:"550"}}>{jobs.jobTitle ? jobs.jobTitle[0].toUpperCase()+jobs.jobTitle.slice(1)
+    : <li style={{ display: "inline-block" }}>Blog Title</li>}</div>
+    </td>
+  </tr>
 
     { jobs.comments?
       jobs.comments.map((com)=>{
@@ -210,7 +211,7 @@ async function handleComment(){
       :""
      } 
 
-  <input style={{height:"30px", marginLeft:"6px", width:"95%"}} type='text' value={comments} onChange={(e)=>{changeComments(e)}} /><br></br>
+  <input placeholder='Comment' style={{height:"30px", marginLeft:"6px", width:"95%"}} type='text' value={comments} onChange={(e)=>{changeComments(e)}} /><br></br>
 <button onClick={handleComment} style={{height:"30px", marginLeft:"6px"}}>Comment</button>
 
 
@@ -224,7 +225,7 @@ async function handleComment(){
               <>
                 <div className={styles.JobCard} >
                 <div className={styles.JobTitleDateWrapper}>
-        <p className={styles.jobTitle} >{jobs.jobTitle}</p>
+        <p className={styles.QuestionjobTitle} >{jobs.jobTitle}</p>
         <p className={styles.Date}>{new Date(jobs.createdAt).toLocaleString(
           "en-US",
           {
@@ -234,41 +235,34 @@ async function handleComment(){
           }
         )} </p></div>
 
-        <div className={styles.companyNameLocationWrapper}   >
-          <img className={styles.logo} src={jobs.Logo} />
-          {!jobs.Source ?
+        {/* <div className={styles.companyNameLocationWrapper}   > */}
+        { jobs.comments?
+      jobs.comments.map((com)=>{
+        return(
+  <table style={{marginLeft:"6px", marginTop:"0px", width:"96.8%"}}>
 
-          <span className={styles.companyName} >{jobs.companyName}  </span> 
-          :
-  <> <a className={`${styles.skills}`} href={jobs.SourceLink} target="_blank">{jobs.Source}</a><br></br> </>
+          <tr >
+    <td colSpan={2} >
+          <p>{com}</p>
+          </td>
 
+          </tr>
+          </table>
+        )
+      })
+      :""
+     } 
 
-}  
+  <input placeholder='Comment' style={{height:"30px", marginLeft:"6px", width:"95%"}} type='text' value={comments} onChange={(e)=>{changeComments(e)}} /><br></br>
+<button onClick={handleComment} style={{height:"30px", marginLeft:"6px"}}>Comment</button>
 
-        </div>
-
+          {/* <img className={styles.logo} src={jobs.Logo} />
+          <span className={styles.companyName} >{jobs.companyName}  </span>  */}
+        {/* </div> */}
+{/* 
         <span className={styles.jobtypeAndDate}>Posted By</span> : {jobs.name ? jobs.name :
-         <span >Name</span>}
-
-
-
+         <span >Name</span>} */}
             
-            <p className={styles.jobDescriptionHeading}>Blog Description:</p>
-            <p className={styles.jobDescription}> 
-            { 
-    jobdescription? HTMLReactParser(jobdescription.toString()) :""
-            }
-
-
-            <span onClick={() =>{
-              window.scrollTo({
-                top:0
-              })
-               navigate(-1)}} className={styles.showLess}>
-                      ...show less
-                    </span>
-            
-               </p>
                 </div>
               </>
 
