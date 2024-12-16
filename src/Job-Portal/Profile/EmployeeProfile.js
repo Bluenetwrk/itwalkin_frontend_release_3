@@ -20,15 +20,13 @@ function EmployeeProfile(props) {
             backgroundColor: isActive? "white" :""
         }
     }
-
-
-    useEffect( ()=>{    
-        const socket = socketIO.connect(props.url,{
-          auth:{
-            token: JSON.parse(localStorage.getItem("EmpIdG"))
-          }
-        });
-      },[])
+    // useEffect( ()=>{    
+    //     const socket = socketIO.connect(props.url,{
+    //       auth:{
+    //         token: JSON.parse(localStorage.getItem("EmpIdG"))
+    //       }
+    //     });
+    //   },[])
 
     const [profileData, setProfileData] = useState([])
 const [PageLoader, setPageLoader] = useState(false)
@@ -122,7 +120,6 @@ profileData.length>0?<button className={styles.updateProfile} onClick={updateEmp
 
                         <ul className={styles.ulR} key={i}>
  {/* <Puff  height="200"  width="200"  color="#4fa94d"  ariaLabel="bars-loading"  wrapperStyle={{marginLeft:"70%", marginTop:"80px"}}/>  */}
-
                       {item.name?         <li className={` ${styles.Hli}`}>{item.name}</li>: <li className={` ${styles.Hli} ${styles.Nli}`}>you have not updated your Name yet</li>}
                       {item.email?         <li className={` ${styles.Hli}`}>{item.email}</li>: <li className={` ${styles.Hli} ${styles.Nli}`}>you have not updated your Email yet</li>}
                       {item.phoneNumber?         <li className={` ${styles.Hli}`}>{item.phoneNumber}</li>: <li className={` ${styles.Hli} ${styles.Nli}`}>you have not updated your phone Number yet</li>}

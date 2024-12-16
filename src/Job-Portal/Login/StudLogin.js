@@ -57,7 +57,6 @@ useEffect(() => {
           }
         );
         setGmailuser(res.data)
-        console.log(res.data)
         let gtoken = response.access_token
         let userId = res.data.sub
         let Gpicture = res.data.picture
@@ -73,6 +72,8 @@ useEffect(() => {
             let result = response.data
             let token = result.token
             let Id = result.id
+        console.log(result)
+
             if (result.status == "success") {
               localStorage.setItem("StudLog", JSON.stringify(btoa(token)))
               navigate("/alljobs", {state:{name:result.name}})
@@ -199,6 +200,7 @@ useEffect(() => {
 				await axios.post("/StudentProfile/Glogin", { ipAddress, email, name, isApproved, })
 					.then((response) => {
 						let result = response.data
+            console.log(result)
 						let token = result.token
 						let Id = result.id
 						if (result.status == "success") {

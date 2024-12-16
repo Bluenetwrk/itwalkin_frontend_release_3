@@ -13,23 +13,21 @@ import Footer from '../Footer/Footer'
 
 function StudentProfile(props) {
 
-    useEffect( ()=>{    
-        const socket = socketIO.connect(props.url,{
-          auth:{
-            token: JSON.parse(localStorage.getItem("StudId"))
-          }
-        });
-      },[])
+    // useEffect( ()=>{    
+    //     const socket = socketIO.connect(props.url,{
+    //       auth:{
+    //         token: JSON.parse(localStorage.getItem("StudId"))
+    //       }
+    //     });
+    //   },[])
 
     const [profileData, setProfileData] = useState([])
 const [PageLoader, setPageLoader] = useState(false)
 const screenSize = useScreenSize();
-
-
+// props.sendingName(profileData)
 let navigate = useNavigate()
 
     let studId = JSON.parse(localStorage.getItem("StudId"))
-
     async function getProfile() {
         let userid = JSON.parse(localStorage.getItem("StudId"))
         const headers = { authorization: userid +" "+ atob(JSON.parse(localStorage.getItem("StudLog"))) };
@@ -89,12 +87,8 @@ profileData.length>0?
 :
 profileData.length>0?<button className={styles.MobupdateProfile} onClick={updateprofile}>Update Profile</button>:""
 
-        }
-
-        
-
+        }       
             {screenSize.width>850?
-
       <>      
            
 <div className={styles.uiwrapper}>
@@ -125,6 +119,7 @@ profileData.length>0?<button className={styles.MobupdateProfile} onClick={update
                 profileData.map((item, i) => {
                     return (
                         <ul className={styles.ulR} key={i}>
+                          
                             {/* <li className={`${styles.Hli}`}>{item.name}</li>
                             <li className={`${styles.Hli}`}>{item.email}</li> */}
                       {item.name?         <li className={` ${styles.Hli}`}>{item.name}</li>: <li className={` ${styles.Hli} ${styles.Nli}`}>you have not updated your phone Name yet</li>}

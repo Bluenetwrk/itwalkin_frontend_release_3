@@ -96,15 +96,12 @@ axios.defaults.baseURL = "https://itwalkin-backend-testrelease-2-0-1-0824-ns0g.o
 
 
 function App() {
+ 
 
   const screenSize = useScreenSize();
   let size = screenSize.width;
 
   const [ShowSideNave, setShowSideNave] = useState(false)
-
-  function ChangeSideNaveBar() {
-    setShowSideNave((prev) => !prev)
-  }
 
   // let jobSeekerId = JSON.parse(localStorage.getItem("StudId"))
   // let empId = JSON.parse(localStorage.getItem("EmpIdG"))
@@ -131,16 +128,16 @@ function App() {
               <Route path="/Applied-User-Profile/:jid" element={<AppliedUserProfile url={axios.defaults.baseURL} />} />
               <Route path="/Check-Profile/:CP" element={<CheckStudentProfiel url={axios.defaults.baseURL} />} />
               <Route path="/UpdateProfile" element={<EmployeeUpdateProfile url={axios.defaults.baseURL} />} />
-              <Route path="/MyProfile" element={<EmployeeProfile url={axios.defaults.baseURL} />} />
+              <Route path="/MyProfile" element={<EmployeeProfile url={axios.defaults.baseURL}/>} />
               <Route path="Search-Candidate" element={<SearchCandidate url={axios.defaults.baseURL} />} />
 
             </Route>
             {/* ..........Jobseeker Private component i,e can not search in URL......... */}
             <Route element={<StudPrivate />}>
               <Route path="/alljobs" element={<Jobs url={axios.defaults.baseURL} />} />
-              <Route path="/AskQuestion" element={<AskQuestion />} />
+              <Route path="/AskQuestion" element={<AskQuestion  />} />
               <Route path="/Update-Profile" element={<StudentUpdateProfile url={axios.defaults.baseURL} />} />
-              <Route path="/My-Profile" element={<StudentProfile url={axios.defaults.baseURL} />} />
+              <Route path="/My-Profile" element={<StudentProfile />} />
               <Route path="/My-Applied-Jobs" element={<MyAppliedJobs url={axios.defaults.baseURL} />} />
               <Route path="/MyCareer-Applied-Jobs" element={<CareerAppliedJobs url={axios.defaults.baseURL} />} />
             </Route>

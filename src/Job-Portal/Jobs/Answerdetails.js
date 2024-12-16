@@ -14,32 +14,87 @@ import Arrowimage from '../img/icons8-arrow-left-48.png'
 import profileDp from "../img/user_3177440.png"
 import "./Allobs.module.css"
 import HTMLReactParser from 'html-react-parser'
+import StProfile from "../Profile/StudentProfile"
+import EMpProfile from "../Profile/EmployeeProfile"
 
-function Answerdetails() {
-  const [jobs, setJobs] = useState([])
-  const [comments, setcomments] = useState()
-  // console.log("jobs are in ", jobs)
+function Answerdetails(props) {
+  
+  let userid = JSON.parse(localStorage.getItem("StudId")) || JSON.parse(localStorage.getItem("EmpIdG"))
+  // const [CommentName, setCommentName] = useState("")
+  let CommentName = atob(JSON.parse(localStorage.getItem("Snm")))
+  console.log(CommentName)
+
+
+  async function getProfile() {
+    let userId = JSON.parse(localStorage.getItem("StudId"))
+    const headers = { authorization: userId +" "+ atob(JSON.parse(localStorage.getItem("StudLog"))) };
+    await axios.get(`/StudentProfile/getProfile/${userId}`, {headers})
+        .then((res) => {
+            let result = res.data.result
+            // console.log(result.name)
+            localStorage.setItem("Snm", JSON.stringify(btoa(result.name)))
+
+            // setCommentName(result.name)
+        }).catch((err) => {
+            // alert("some thing went wrong")
+        })
+}
+let empId = JSON.parse(localStorage.getItem("EmpIdG"))
+
+async function getEmpProfile() {
+  const headers = { authorization: 'BlueItImpulseWalkinIn'};
+  await axios.get(`/EmpProfile/getProfile/${empId}`, {headers})
+      .then((res) => {
+          let result = res.data.result
+          // console.log(result.name)
+          // setCommentName(result.name)
+          localStorage.setItem("Snm", JSON.stringify(btoa(result.name)))
+
+      }).catch((err) => {
+          // alert("some thing went wrong")
+      })
+}
+
+useEffect(() => {
+  if(empId){
+    getEmpProfile()
+  }else{
+    getProfile()
+  }
+}, [])
+  // let empId = JSON.parse(localStorage.getItem("EmpIdG"))
   const [jobdescription, setjobdescription] = useState([])
   const [jobseekerid, setjobSeekerId] = useState([])
   const [isReadMore, setIsReadMore] = useState(true)
 const screenSize = useScreenSize();
 const [Loader, setLoader] = useState(false)
-
+  const [jobs, setJobs] = useState([])
+  const [comments, setcomments] = useState({
+    id:userid,
+    name:CommentName,
+    comment:""
+  })
   const [clickedJobId, setclickedJobId] = useState() //for single job loader
-  let jobSeekerId = JSON.parse(localStorage.getItem("StudId"))
-  let empId = JSON.parse(localStorage.getItem("EmpIdG"))
 
 function changeComments(e){
-  setcomments(e.target.value)
+  // setcomments(comments.comment=e.target.value)
+    setcomments({ ...comments, comment: e.target.value})
 }
 
 async function handleComment(){
+  console.log(CommentName)
+
+  if(!userid){
+    alert("you must login to comment on question")
+    return false
+  }
   const headers = { authorization: 'BlueItImpulseWalkinIn'};
   await axios.put(`/BlogRoutes/Addcomment/${atob(params.id)}`,{comments}, {headers})
   .then((res)=>{
     let result=res.data
     if(result==="success"){
-      setcomments("")
+      // setcomments("")
+    setcomments({ ...comments, comment: ""})
       getjobs()
     }
   })
@@ -68,65 +123,10 @@ async function handleComment(){
   useEffect(() => {
     getjobs()
   }, [])
-  function showless() {
-    navigate(-1)
-  }
-
-  async function applyforOtherJob(Link) {
-    // navigate("/JobSeekerLogin", { state: { Jid: id } })
-    window.open(`${Link}`)
-  }
-
-  // .................delete function............
-  async function deletejob(deleteid) {
-    Swal.fire({
-      title: 'Are you sure?',
-      // icon: 'warning',
-      width:"260",
-      // position:"top",
-      customClass:{
-        popup:"alertIcon"
-      },
-      showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
-      confirmButtonText: 'delete!'
-    }).then((result) => {
-      if (result.isConfirmed) {
-        axios.delete(`/jobpost/deleteProduct/${deleteid}`)
-          .then((res) => {
-            navigate("/postedjobs")
-            // getjobs()
-          })
-          .catch((err) => { alert("server error occured") })
-      }
-    })
-  }
   
-  function update(id) {
-    navigate("/Updatepostedjobs", { state: { getId: id } })
-  }
-
-
-  async function applyforJob(jobId) {
-
-    setclickedJobId(jobId)
-    setLoader(true)
-    setTimeout(async () => {
-
-      await axios.put(`/jobpost/updatforJobApply/${jobId}`, { jobSeekerId })
-        .then((res) => {
-          setLoader(false)
-          getjobs()
-
-        }).catch((err) => {
-          alert("server issue occured", err)
-        })
-    }, 1000)
-  }
-
   return (
     <>
+
         <h2 style={{marginLeft:"10px", fontWeight:"800", marginTop:"15px", marginBottom:"-15px"}}> Questions  </h2>
 
     <div style={{display:"flex", marginTop:"20px"}}>
@@ -194,14 +194,15 @@ async function handleComment(){
     </td>
   </tr>
 
-    { jobs.comments?
+    {
+     jobs.comments?
       jobs.comments.map((com)=>{
         return(
   <table style={{marginLeft:"6px", marginTop:"0px", width:"98.8%"}}>
-
           <tr >
     <td colSpan={2} >
-          <p>{com}</p>
+    
+          <p> {com.name} : {com.comment}</p>
           </td>
 
           </tr>
@@ -211,10 +212,8 @@ async function handleComment(){
       :""
      } 
 
-  <input placeholder='Comment' style={{height:"30px", marginLeft:"6px", width:"95%"}} type='text' value={comments} onChange={(e)=>{changeComments(e)}} /><br></br>
+  <input placeholder='Answer' maxLength={300} style={{height:"30px", marginLeft:"6px", width:"95%"}} type='text' value={comments.comment} onChange={(e)=>{changeComments(e)}} /><br></br>
 <button onClick={handleComment} style={{height:"30px", marginLeft:"6px"}}>Comment</button>
-
-
 
           </>
           :
@@ -253,7 +252,7 @@ async function handleComment(){
       :""
      } 
 
-  <input placeholder='Comment' style={{height:"30px", marginLeft:"6px", width:"95%"}} type='text' value={comments} onChange={(e)=>{changeComments(e)}} /><br></br>
+  <input placeholder='Comment' style={{height:"30px", marginLeft:"6px", width:"95%"}} type='text' value={comments.comment} onChange={(e)=>{changeComments(e)}} /><br></br>
 <button onClick={handleComment} style={{height:"30px", marginLeft:"6px"}}>Comment</button>
 
           {/* <img className={styles.logo} src={jobs.Logo} />
