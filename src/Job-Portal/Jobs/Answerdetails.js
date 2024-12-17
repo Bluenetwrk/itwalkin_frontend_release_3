@@ -20,9 +20,10 @@ import EMpProfile from "../Profile/EmployeeProfile"
 function Answerdetails(props) {
   
   let userid = JSON.parse(localStorage.getItem("StudId")) || JSON.parse(localStorage.getItem("EmpIdG"))
+
   const [CommentName, setCommentName] = useState("")
+  const [CommentID, setCommentID] = useState()
   // let CommentName = atob(JSON.parse(localStorage.getItem("Snm")))
-  console.log(CommentName)
 
   async function getProfile() {
     let userId = JSON.parse(localStorage.getItem("StudId"))
@@ -77,10 +78,8 @@ function changeComments(e){
   // setcomments(comments.comment=e.target.value)
     setcomments({ ...comments, comment: e.target.value, name:CommentName})
 }
-console.log(comments.name)
 
 async function handleComment(){
-console.log(comments.name)
   if(!userid){
     alert("you must login to comment on question")
     return false
@@ -96,6 +95,20 @@ console.log(comments.name)
     }
   })
 }
+
+async function deletComment(id){  
+  const headers = { authorization: 'BlueItImpulseWalkinIn'};
+  await axios.put(`/BlogRoutes/deletComment/${atob(params.id)}`,{id}, {headers})
+  .then((res)=>{
+    let result=res.data
+    if(result==="success"){
+      // setcomments("")
+    // setcomments({ ...comments, comment: ""})
+      getjobs()
+    }
+  })
+}
+
 
   const navigate = useNavigate()
 
@@ -117,6 +130,10 @@ console.log(comments.name)
   useEffect(() => {
     getjobs()
   }, [])
+
+  function deleteComment(){
+
+  }
   
   return (
     <>
@@ -194,20 +211,35 @@ console.log(comments.name)
         return(
   <table style={{marginLeft:"6px", marginTop:"0px", width:"98.8%"}}>
           <tr >
-    <td colSpan={2} >
-    
+    <td colSpan={2} > 
           <p> {com.name} : {com.comment}</p>
+{userid===com.id?
+          <button onClick={()=>{deletComment(com.id)}} >delete</button>
+          :""
+          }
           </td>
-
           </tr>
           </table>
         )
       })
       :""
      } 
-
-  <input placeholder='Answer' maxLength={300} style={{height:"30px", marginLeft:"6px", width:"95%"}} type='text' value={comments.comment} onChange={(e)=>{changeComments(e)}} /><br></br>
-<button onClick={handleComment} style={{height:"30px", marginLeft:"6px"}}>Comment</button>
+       {/* <input placeholder='Answer' maxLength={300} style={{height:"30px", marginLeft:"6px", width:"95%"}} type='text' value={comments.comment} onChange={(e)=>{changeComments(e)}} /><br></br>
+       <button onClick={handleComment} style={{height:"30px", marginLeft:"6px"}}>Comment</button> */}
+ {  
+     jobs.comments?
+     jobs.comments.filter((com)=>{
+        return(
+       userid===com.id
+      //  console.log(com.id===userid)
+        )
+      }).length<1?<>
+              <input placeholder='Answer' maxLength={300} style={{height:"30px", marginLeft:"6px", width:"95%"}} type='text' value={comments.comment} onChange={(e)=>{changeComments(e)}} /><br></br>
+       <button onClick={handleComment} style={{height:"30px", marginLeft:"6px"}}>Comment</button> 
+       </>
+       :""
+      :""
+} 
 
           </>
           :
