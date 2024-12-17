@@ -68,18 +68,19 @@ const [Loader, setLoader] = useState(false)
   const [jobs, setJobs] = useState([])
   const [comments, setcomments] = useState({
     id:userid,
-    name:CommentName,
+    name:"",
     comment:""
   })
   const [clickedJobId, setclickedJobId] = useState() //for single job loader
 
 function changeComments(e){
   // setcomments(comments.comment=e.target.value)
-    setcomments({ ...comments, comment: e.target.value})
+    setcomments({ ...comments, comment: e.target.value, name:CommentName})
 }
+console.log(comments.name)
 
 async function handleComment(){
-
+console.log(comments.name)
   if(!userid){
     alert("you must login to comment on question")
     return false
@@ -101,10 +102,7 @@ async function handleComment(){
   let params = useParams();
 
   async function getjobs() {
-    window.scrollTo({
-      top:0,
-      // behavior:"smooth"
-    })
+    
     const headers = { authorization: 'BlueItImpulseWalkinIn'};
     await axios.get(`/BlogRoutes/getjobs/${atob(params.id)}`, {headers})
       .then((res) => {
