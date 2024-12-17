@@ -1429,7 +1429,7 @@ return(
                             window.scrollTo({
                               top: 0
                             })
-                            navigate(`/Jobdetails/${job._id}`)
+                            navigate(`/Jobdetails/${btoa(job._id)}`)
                           }} className={styles.seeMore}>
                             ...read more
                           </span>

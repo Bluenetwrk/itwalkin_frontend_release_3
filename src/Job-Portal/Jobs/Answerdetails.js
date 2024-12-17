@@ -20,10 +20,9 @@ import EMpProfile from "../Profile/EmployeeProfile"
 function Answerdetails(props) {
   
   let userid = JSON.parse(localStorage.getItem("StudId")) || JSON.parse(localStorage.getItem("EmpIdG"))
-  // const [CommentName, setCommentName] = useState("")
-  let CommentName = atob(JSON.parse(localStorage.getItem("Snm")))
+  const [CommentName, setCommentName] = useState("")
+  // let CommentName = atob(JSON.parse(localStorage.getItem("Snm")))
   console.log(CommentName)
-
 
   async function getProfile() {
     let userId = JSON.parse(localStorage.getItem("StudId"))
@@ -32,23 +31,21 @@ function Answerdetails(props) {
         .then((res) => {
             let result = res.data.result
             // console.log(result.name)
-            localStorage.setItem("Snm", JSON.stringify(btoa(result.name)))
-
-            // setCommentName(result.name)
+            // localStorage.setItem("Snm", JSON.stringify(btoa(result.name)))
+            setCommentName(result.name)
         }).catch((err) => {
             // alert("some thing went wrong")
         })
 }
 let empId = JSON.parse(localStorage.getItem("EmpIdG"))
-
 async function getEmpProfile() {
   const headers = { authorization: 'BlueItImpulseWalkinIn'};
   await axios.get(`/EmpProfile/getProfile/${empId}`, {headers})
       .then((res) => {
           let result = res.data.result
           // console.log(result.name)
-          // setCommentName(result.name)
-          localStorage.setItem("Snm", JSON.stringify(btoa(result.name)))
+          setCommentName(result.name)
+          // localStorage.setItem("Snm", JSON.stringify(btoa(result.name)))
 
       }).catch((err) => {
           // alert("some thing went wrong")
@@ -82,7 +79,6 @@ function changeComments(e){
 }
 
 async function handleComment(){
-  console.log(CommentName)
 
   if(!userid){
     alert("you must login to comment on question")

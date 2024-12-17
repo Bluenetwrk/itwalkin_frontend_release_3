@@ -552,51 +552,20 @@ function AppledJobs(props) {
                       <p className={styles.jobDescriptionHeading}>Job Description:</p>
                       <p className={styles.jobDescription}>
                         {/* {job.jobDescription} */}
-
                         {
-                          job.jobDescription.map((descrip, di) => {
-                            return (
-                              <>
+    job.jobDescription? HTMLReactParser(job.jobDescription.slice(0,70).toString()) :""
 
-                                {
-                                  // descrip.type == "unordered-list-item" ?
+                          }
+                          <span onClick={() => {
+                            window.scrollTo({
+                              top: 0
+                            })
+                            navigate(`/Jobdetails/${btoa(job._id)}`)
+                          }} className={styles.seeMore} style={{color:"blue"}}>
+                            ...read more
+                          </span>
 
-                                  // <ul style={{ listStyleType: "disc" }}>
-                                  //   <li style={{ marginTop: "-12px", marginLeft: "-20px" }}>
-                                  //     {descrip.text.slice(0,50)}
-
-                                  //   </li>
-                                  // </ul>
-
-                                  // : descrip.type == "ordered-list-item" ?
-
-                                  //   <ul style={{ listStyleType: "disc" }} >
-                                  //     <li style={{ marginTop: "-12px", marginLeft: "-20px" }}>
-
-                                  //       {descrip.text}
-
-                                  //     </li>
-                                  //   </ul>
-                                  //   :
-                                  //   <>
-                                  descrip.text.slice(0, 50)
-                                  //     <br></br>
-                                  //   </>
-
-                                }
-
-                              </>
-                            )
-                          }).slice(0, 1)
-                        }
-                        <span onClick={() => {
-                          window.scrollTo({
-                            top: 0
-                          })
-                          navigate(`/Jobdetails/${btoa(job._id)}`)
-                        }} style={{ color: "blue" }}>
-                          ...read more
-                        </span>
+                       
                       </p>
 
 
