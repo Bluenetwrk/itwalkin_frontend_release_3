@@ -21,6 +21,7 @@ import StudentSignUp from "./Job-Portal/SignUp/StudSignin";
 import EmployeeSignUp from "./Job-Portal/SignUp/EmplSign";
 import StudPrivate from "./Job-Portal/Private/OutletStud";
 import PostedJobsbyEmp from "./Job-Portal/Jobs/mypostedjobs";
+import BlogpostedByEmp from "./Job-Portal/Jobs/mypostedBlogs";
 import PostedJobsByAdmin from "./Job-Portal/Jobs/AdminPostedJobs";
 import PostedCareerJobs from "./Job-Portal/Jobs/myPostedCaereerjobs";
 import EmpPrivate from "./Job-Portal/Private/OuletEmp";
@@ -38,6 +39,7 @@ import EmployeeUpdateProfile from "./Job-Portal/Profile/EmployeeUpdateProfile";
 import StudentProfile from "./Job-Portal/Profile/StudentProfile";
 import EmployeeProfile from "./Job-Portal/Profile/EmployeeProfile";
 import UpdatePostedJobs from "./Job-Portal/PostJobs/updatePostedJobs";
+import UpdatePostedBlogs from "./Job-Portal/PostJobs/updatePostedBlogs";
 import MyAppliedJobs from "./Job-Portal/Jobs/MyAppliedJobs"
 import CareerAppliedJobs from "./Job-Portal/Jobs/MyCareerAppliedJobs"
 import AppliedUserProfile from "./Job-Portal/AppliedUserProfile/AppliedUserProfile";
@@ -124,7 +126,9 @@ function App() {
               <Route path="/PostJobs" element={<PostJobs url={axios.defaults.baseURL} />} />
               <Route path="/PostBlogs" element={<PostBlogs url={axios.defaults.baseURL} />} />
               <Route path="/postedjobs" element={<PostedJobsbyEmp url={axios.defaults.baseURL} />} />
+              <Route path="/posted-Blogs" element={<BlogpostedByEmp url={axios.defaults.baseURL} />} />
               <Route path="/Updatepostedjobs" element={<UpdatePostedJobs url={axios.defaults.baseURL} />} />
+              <Route path="/UpdatePosted-Blogs" element={<UpdatePostedBlogs url={axios.defaults.baseURL} />} />
               <Route path="/Applied-User-Profile/:jid" element={<AppliedUserProfile url={axios.defaults.baseURL} />} />
               <Route path="/Check-Profile/:CP" element={<CheckStudentProfiel url={axios.defaults.baseURL} />} />
               <Route path="/UpdateProfile" element={<EmployeeUpdateProfile url={axios.defaults.baseURL} />} />

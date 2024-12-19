@@ -268,8 +268,20 @@
 .Acbuttons {
     height: 25px;
     display: flex;
-    margin-left:12%;
+    margin-left:18%;
   }
+  @media (max-width:1200px) {
+.Acbuttons {
+    margin-left:10%;    
+  }
+  }
+  @media (max-width:1050px) {
+.Acbuttons {
+    margin-left:4%;    
+  }
+  }
+
+
 .Abutton {
     border: 1px solid;
 }

@@ -489,7 +489,7 @@ return(
       {screenSize.width > 850 ?
         <>
         {/* <p style={{ color: " red", marginLeft: "4%" , zIndex: "100",}}>Note: this website is under development process</p> */}
-        <h2 style={{marginLeft:"10px", fontWeight:"800", marginTop:"15px", marginBottom:"-15px"}}> All Blogs  </h2>
+        <h2 style={{marginLeft:"10px", fontWeight:"800", marginTop:"15px", marginBottom:"-15px"}}> Blogs  </h2>
 
 
           <div className={styles.JobtitleFilterWrapper}>

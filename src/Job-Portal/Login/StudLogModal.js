@@ -226,6 +226,7 @@ const Modal = ({ isStuOpen, onClose, children, msalInstance }) => {
 			})
 	}
 
+
 	function microsoftLogin() {
 		instance.loginPopup(loginRequest)
 			.then(async response => {

@@ -79,6 +79,14 @@ function changeComments(e){
     setcomments({ ...comments, comment: e.target.value, name:CommentName})
 }
 
+// async function deletecom(){
+//   await axios.put(`/BlogRoutes/deleteComment`)
+//   .then((res)=>{
+//     console.log(res)
+//   })
+
+// }
+
 async function handleComment(){
   if(!userid){
     alert("you must login to comment on question")
@@ -138,7 +146,7 @@ async function deletComment(id){
   return (
     <>
 
-        <h2 style={{marginLeft:"10px", fontWeight:"800", marginTop:"15px", marginBottom:"-15px"}}> Questions  </h2>
+        <h2 style={{marginLeft:"10px", fontWeight:"800", marginTop:"15px", marginBottom:"-15px"}}> Blogs  </h2>
 
     <div style={{display:"flex", marginTop:"20px"}}>
                             {/* <img style={{ height:"25px", color:"grey", marginTop:"20px", marginLeft:"8%", cursor:"pointer",
@@ -146,7 +154,6 @@ async function deletComment(id){
              <button style={{  color:"grey", marginTop:"10px", marginLeft:"8%", cursor:"pointer",}} 
              onClick={()=>{navigate(-1)}}>Back</button>
               
-       
     </div>
 
       {screenSize.width>850 ?
@@ -162,12 +169,12 @@ async function deletComment(id){
         <div>
        
           <table>
-          {/* <tr>
+          <tr>
     <td colSpan={2} style={{backgroundColor:" rgb(40, 4, 99)"}}>
     <div style={{textAlign:"center", color:"white", fontWeight:"550"}}>{jobs.jobTitle ? jobs.jobTitle[0].toUpperCase()+jobs.jobTitle.slice(1)
     : <li style={{ display: "inline-block" }}>Blog Title</li>}</div>
     </td>
-  </tr> */}
+  </tr>
        
   <tr>
     <th>Company Name</th>
@@ -198,12 +205,12 @@ async function deletComment(id){
   </table>
   </div>
   </div>        
-  <tr>
+  {/* <tr>
     <td colSpan={2} style={{backgroundColor:" rgb(40, 4, 99)"}}>
     <div style={{textAlign:"center", color:"white", fontWeight:"550"}}>{jobs.jobTitle ? jobs.jobTitle[0].toUpperCase()+jobs.jobTitle.slice(1)
     : <li style={{ display: "inline-block" }}>Blog Title</li>}</div>
     </td>
-  </tr>
+  </tr> */}
 
     {
      jobs.comments?
@@ -259,27 +266,43 @@ async function deletComment(id){
             year: "numeric",
           }
         )} </p></div>
-
-        {/* <div className={styles.companyNameLocationWrapper}   > */}
-        { jobs.comments?
+     
+    {
+     jobs.comments?
       jobs.comments.map((com)=>{
         return(
-  <table style={{marginLeft:"6px", marginTop:"0px", width:"96.8%"}}>
-
+  <table style={{marginLeft:"6px", marginTop:"0px", width:"98.8%"}}>
           <tr >
-    <td colSpan={2} >
-          <p>{com}</p>
+    <td colSpan={2} > 
+          <p> {com.name} : {com.comment}</p>
+{userid===com.id?
+          <button onClick={()=>{deletComment(com.id)}} >delete</button>
+          :""
+          }
           </td>
-
           </tr>
           </table>
         )
       })
       :""
-     } 
-
+     }
+{/* 
   <input placeholder='Comment' style={{height:"30px", marginLeft:"6px", width:"95%"}} type='text' value={comments.comment} onChange={(e)=>{changeComments(e)}} /><br></br>
-<button onClick={handleComment} style={{height:"30px", marginLeft:"6px"}}>Comment</button>
+<button onClick={handleComment} style={{height:"30px", marginLeft:"6px"}}>Comment</button> */}
+
+{  
+     jobs.comments?
+     jobs.comments.filter((com)=>{
+        return(
+       userid===com.id
+        )
+      }).length<1?<>
+              <input placeholder='Answer' maxLength={300} style={{height:"30px", marginLeft:"6px", width:"95%"}} type='text' value={comments.comment} onChange={(e)=>{changeComments(e)}} /><br></br>
+       <button onClick={handleComment} style={{height:"30px", marginLeft:"6px"}}>Comment</button> 
+       </>
+       :""
+      :""
+} 
 
           {/* <img className={styles.logo} src={jobs.Logo} />
           <span className={styles.companyName} >{jobs.companyName}  </span>  */}
