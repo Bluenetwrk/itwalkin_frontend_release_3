@@ -59,7 +59,7 @@ font-weight: 400;
 
 .HomeprofileIcon{
     height: 35px;
-    margin-left: 25%;
+    /* margin-left: 10%; */
     margin-top: 5px;
     cursor: pointer;
 }
