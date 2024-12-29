@@ -200,25 +200,39 @@ const [immage, setimmage] = useState()
    }
 
    const getToken = async () => {
-		const url = "https://login.microsoftonline.com/ae4ae520-4db7-4149-ad51-778e540d8bec/oauth2/v2.0/token";
-		const data = {
-		  grant_type: "client_credentials",
-		  client_id: "097b08ff-185e-4153-aedc-0e5814e0570c",
-		  client_secret: "D1k8Q~yOxTlSdb_Lb1tW118c4827PN~c7PK6...",
-		  scope: "https://graph.microsoft.com/.default"
-		};
-	  
-		try {
-		  const response = await axios.post(url, new URLSearchParams(data), {
-			headers: {
-			  "Content-Type": "application/x-www-form-urlencoded"
-			}
-		  });
-		  console.log("Access Token Response:", response.data);
-		  return response.data;
-		} catch (error) {
-		  console.error("Error fetching access token:", error);
-		}
+		// const url = "https://login.microsoftonline.com/ae4ae520-4db7-4149-ad51-778e540d8bec/oauth2/v2.0/token";
+		// const data = {
+		//   grant_type: "client_credentials",
+		//   client_id: "097b08ff-185e-4153-aedc-0e5814e0570c",
+		//   client_secret: "D1k8Q~yOxTlSdb_LB1tW118c4827PN~c7PK6JcMr",
+		//   scope: "https://graph.microsoft.com/.default"
+		// };	  
+		// try {
+		//   const response = await axios.post(url, new URLSearchParams(data), {
+		// 	headers: {
+		// 	  "Content-Type": "application/x-www-form-urlencoded" 	}
+		//   });
+		//   console.log("Access Token Response:", response.data);
+		//   return response.data;
+		// } catch (error) {
+		//   console.error("Error fetching access token:", error);
+		// }
+    
+      const config = { 
+        method: 'post', url: 'https://login.microsoftonline.com/ae4ae520-4db7-4149-ad51-778e540d8bec/oauth2/v2.0/token', 
+       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        data: new URLSearchParams({ 
+          grant_type: 'client_credentials', 
+         client_id: '097b08ff-185e-4153-aedc-0e5814e0570c', 
+         client_secret: 'D1k8Q~yOxTlSdb_LB1tW118c4827PN~c7PK6JcMr', 
+         scope: 'https://graph.microsoft.com/.default'
+         }) }; try { const response = await axios(config);
+          //  setAccessToken(response.data.access_token); 
+           console.log(response)
+         } catch (error) { 
+          // setError(error.message);
+          console.log(error)
+          }
 	  };
 
    const register = async () => {
@@ -286,7 +300,16 @@ const [immage, setimmage] = useState()
               <h4>Phone number:</h4>
             <input maxLength="15" className={styles.input}  value={phoneNumber} onChange={(e) => { handlephoneNumber(e) }} type="number" />
             </label>
-   
+   <p>Primery user name (primary user will have the admin right for your company, primary user can add or remove multiple secondary user) </p> 
+   <p>Primery user Designation </p>
+   <p>Primery user email id </p>
+   <p>Primery user contact number </p>
+
+   <p>Secondary user name (secondary user will be able to post a job search candidates) </p>
+   <p>Secondary user Designation </p>
+   <p>Secondary user email id </p>
+   <p>Secondary user contact number </p>
+
             {/* <label className={styles.inputName}>
               <h4>Company Email id:</h4>
               <input maxLength="25" className={styles.input} value={CompanyEmail} onChange={(e) => { handleCompanyEmail(e) }} type="text" /><br></br>
@@ -311,7 +334,7 @@ const [immage, setimmage] = useState()
           </div>
         </div>
           </div>
-        {/* <button onClick={getToken}>Get Token</button> */}
+        <button onClick={getToken}>Get Token</button>
               <input placeholder='get token from postman & enter' onChange={(e)=>{setApi(e.target.value)}} 
               style={{marginLeft:"10px", width:"20%"}}/>
 

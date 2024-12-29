@@ -381,12 +381,12 @@ const register = async () => {
         </div>
 		
 		
-        <div className={styles.signUpWrapper}  >
+        {/* <div className={styles.signUpWrapper}  >
           <div className={styles.both}>
             <img className={styles.google} src={github} />
             <p className={styles.signUpwrap} >Continue with Github</p>
           </div>
-        </div>
+        </div> */}
 		
       </div>
 
