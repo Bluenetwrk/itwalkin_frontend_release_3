@@ -327,7 +327,7 @@ const Modal = ({ isStuOpen, onClose, children, msalInstance }) => {
 							</div>
 						</div>
 
-						<div className={styles.signUpWrapper}>
+						{/* <div className={styles.signUpWrapper}>
 							<div className={styles.both}>
 								<img className={styles.google} src={linkedIn} />
 								<span className={styles.signUpwrap} >Continue with Linkedin</span>
@@ -340,7 +340,7 @@ const Modal = ({ isStuOpen, onClose, children, msalInstance }) => {
 								<img className={styles.google} src={github} />
 								<span className={styles.signUpwrap} >Continue with Github</span>
 							</div>
-						</div>
+						</div> */}
 
 					</div>
 					{/* </div> */}
