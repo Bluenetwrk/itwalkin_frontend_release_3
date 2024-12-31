@@ -139,6 +139,22 @@ const [immage, setimmage] = useState()
   //     console.error("Error:", response.status, response.statusText);
   //   }
   // }
+
+  async function getToken(){
+          const config = { 
+        method: 'post', url: 'https://login.microsoftonline.com/ae4ae520-4db7-4149-ad51-778e540d8bec/oauth2/v2.0/token', 
+       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        data: new URLSearchParams({ 
+          grant_type: 'client_credentials', 
+         client_id: '097b08ff-185e-4153-aedc-0e5814e0570c', 
+         client_secret: 'D1k8Q~yOxTlSdb_LB1tW118c4827PN~c7PK6JcMr', 
+         scope: 'https://graph.microsoft.com/.default'
+         }) }; try { const response = await axios(config);
+           console.log(response)
+         } catch (error) { 
+          console.log(error)
+          }
+  }
   
   // ...............upload Image.....................
   async function uploadImage() {
@@ -426,7 +442,7 @@ const [immage, setimmage] = useState()
           </div>
         </div>
           </div>
-        {/* <button onClick={getToken}>Get Token</button> */}
+        <button onClick={getToken}>Get Token</button>
               <input placeholder='get token from postman & enter' onChange={(e)=>{setApi(e.target.value)}} 
               style={{marginLeft:"10px", width:"20%"}}/>
 
