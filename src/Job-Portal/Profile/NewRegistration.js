@@ -141,9 +141,7 @@ const [immage, setimmage] = useState()
     } else {
       console.error("Error:", response.status, response.statusText);
     }
-
   }
-
   
   // ...............upload Image.....................
   async function uploadImage() {

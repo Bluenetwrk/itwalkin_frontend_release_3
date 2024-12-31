@@ -178,7 +178,7 @@ function App() {
             <Route path="/BIAddmin@AllIds" element={<AllIds />} />
             <Route path="/BIAddmin@ArchivedUser" element={<ArchivedUser />} />
             <Route path="/JobSeekerLogin" element={<StudentLogin />} />
-            <Route path="/New-Registration" element={<NewRegistered />} />
+            {/* <Route path="/New-Registration" element={<NewRegistered />} /> */}
             <Route path="/EmployeeLogin" element={<EmployeeLogin />} />
             <Route path="/JobSeekerSignUp" element={<StudentSignUp />} />
             <Route path="/EmployeeSignUp" element={<EmployeeSignUp />} />
