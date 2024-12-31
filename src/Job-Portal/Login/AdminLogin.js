@@ -41,7 +41,7 @@ function Admin() {
         localStorage.setItem("SupAdMLog", JSON.stringify(btoa(result.token)))
         localStorage.setItem("AdMLog", JSON.stringify(btoa(result.token)))
         localStorage.setItem("IdLog", JSON.stringify(btoa(result.id)))
-        navigate("/BIAddmin@Profile")
+        navigate("/")
       }else if(result.auth===false){
           localStorage.setItem("AdMLog", JSON.stringify(btoa(result.token)))
           localStorage.setItem("IdLog", JSON.stringify(btoa(result.id)))

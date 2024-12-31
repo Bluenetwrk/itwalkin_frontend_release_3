@@ -972,6 +972,7 @@ margin-left: 10%;
     background-color: white;
     border-left: 1px solid grey;
     border-top: 1px solid grey;
+    z-index: 100;
 
 }
 

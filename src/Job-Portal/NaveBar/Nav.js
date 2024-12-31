@@ -271,7 +271,7 @@ function Nav(props) {
                   {showprofile ?
                     <div className={Styles.Alldownwrapper} >
 
-                      <div style={{ marginLeft: "-2%" }} className={Styles.Admindropdownwrapper} ref={menuRef} >
+                      <div style={{ marginLeft: "-11%" }} className={Styles.Admindropdownwrapper} ref={menuRef} >
                         {/* <p className={Styles.text} ref={menuRef} >My profile</p>
 
                       <p className={Styles.text} ref={menuRef} >Update BIAdd@PostedCareerJobs</p> */}
