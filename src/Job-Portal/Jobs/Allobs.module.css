@@ -1,4 +1,27 @@
 
+.HomeNavConetenetWrapperAdmin{
+    display: flex;
+    /* margin-top: -47.5px; */
+    align-items: center;
+    position: sticky;
+    top:10px;
+    z-index: 100;
+    width:46%;
+    margin-left: 27%;
+    /* background-color: red; */
+}
+.HomeNavConetenetWrapperAdmin .JobLocationFilter{
+    color: black;
+
+}
+.HomeNavConetenetWrapperAdmin .HomesearchBothForNavWrapper{
+    border: solid 2px black;
+
+}
+.HomeNavConetenetWrapperAdmin .searchBothForNavWrapper{
+    border: solid 2px black;
+
+}
 .HomeNavConetenetWrapper{
     display: flex;
     margin-top: -47.5px;

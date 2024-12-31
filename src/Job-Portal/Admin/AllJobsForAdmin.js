@@ -84,6 +84,7 @@ function AllJobsForAdmin() {
 
     }
   }
+  
   const [checkBoxValue, setCheckBoxValue] = useState([])
   const [check, setCheck] = useState(true)
 

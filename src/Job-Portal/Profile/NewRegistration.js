@@ -13,17 +13,51 @@ import socketIO from 'socket.io-client';
 import Arrowimage from '../img/icons8-arrow-left-48.png'
 import validator from "validator";
 import Footer from '../Footer/Footer';
+import STyles from "../Login/login.module.css"
 import GoogleImage from "../img/icons8-google-48.png"
 import MicosoftImage from "../img/icons8-windows-10-48.png"
-import STyles from "../Login/login.module.css"
 
 import { useGoogleLogin } from '@react-oauth/google';
 
 
 
 function EmployeeUpdateProfile(props) {
+  // useEffect( ()=>{    
+  //   const socket = socketIO.connect(props.url,{
+  //     auth:{
+  //       token: JSON.parse(localStorage.getItem("EmpIdG"))
+  //     }
+  //   });
+  // },[])
+  const [file, setFile] = useState()
+  const [uploaded, setUploaded] = useState()
+const screenSize = useScreenSize();
 
-    const [ipAddress, setIPAddress] = useState('')
+const [image, setimage] = useState()
+const [immage, setimmage] = useState()
+  const [name, setname] = useState("")
+  const [email, setemail] = useState("")
+  const [phoneNumber, setphoneNumber] = useState("")
+  const [Aadhar, setAadhar] = useState("")
+  const [panCard, setpanCard] = useState("")
+  const [CompanyName, setCompanyName] = useState("")
+  const [CompanyContact, setCompanyContact] = useState("")
+  const [CompanyGSTIN, setCompanyGSTIN] = useState("")
+  const [CompanyWebsite, setCompanyWebsite] = useState("")
+  const [CompanyAddress, setCompanyAddress] = useState("")
+  const [CompanyEmail, setCompanyEmail] = useState("")
+  const [TypeofOrganisation, setTypeofOrganisation] = useState("")
+  const [loader, setLoader] = useState(false)
+  const [emailError, setEmailError] = useState("");
+
+  let navigate = useNavigate()
+
+  let empId = JSON.parse(localStorage.getItem("EmpIdG"))
+
+
+  const [topMessage, settopMessage] = useState("")
+
+  const [ipAddress, setIPAddress] = useState('')
       const [gmailuser, setGmailuser] = useState("")
     
     
@@ -77,45 +111,116 @@ function EmployeeUpdateProfile(props) {
     }
   })
 
-
-
-  // useEffect( ()=>{    
-  //   const socket = socketIO.connect(props.url,{
-  //     auth:{
-  //       token: JSON.parse(localStorage.getItem("EmpIdG"))
-  //     }
-  //   });
-  // },[])
-  const [file, setFile] = useState()
-  const [uploaded, setUploaded] = useState()
-const screenSize = useScreenSize();
-
-const [image, setimage] = useState()
-const [immage, setimmage] = useState()
-  const [name, setname] = useState("")
-  const [email, setemail] = useState("")
-  const [Inemail, setInemail] = useState("")
-  const [phoneNumber, setphoneNumber] = useState("")
-  const [Aadhar, setAadhar] = useState("")
-  const [panCard, setpanCard] = useState("")
-  const [CompanyName, setCompanyName] = useState("")
-  const [CompanyContact, setCompanyContact] = useState("")
-  const [CompanyGSTIN, setCompanyGSTIN] = useState("")
-  const [CompanyWebsite, setCompanyWebsite] = useState("")
-  const [CompanyAddress, setCompanyAddress] = useState("")
-  const [CompanyEmail, setCompanyEmail] = useState("")
-  const [TypeofOrganisation, setTypeofOrganisation] = useState("")
+  const getToken = async () => {
+		// const url = "https://login.microsoftonline.com/ae4ae520-4db7-4149-ad51-778e540d8bec/oauth2/v2.0/token";
+		// const data = {
+		//   grant_type: "client_credentials",
+		//   client_id: "097b08ff-185e-4153-aedc-0e5814e0570c",
+		//   client_secret: "D1k8Q~yOxTlSdb_LB1tW118c4827PN~c7PK6JcMr",
+		//   scope: "https://graph.microsoft.com/.default"
+		// };	  
+		// try {
+		//   const response = await axios.post(url, new URLSearchParams(data), {
+		// 	headers: {
+		// 	  "Content-Type": "application/x-www-form-urlencoded" 	}
+		//   });
+		//   console.log("Access Token Response:", response.data);
+		//   return response.data;
+		// } catch (error) {
+		//   console.error("Error fetching access token:", error);
+		// }
+    
+      const config = { 
+        method: 'post', url: 'https://login.microsoftonline.com/ae4ae520-4db7-4149-ad51-778e540d8bec/oauth2/v2.0/token', 
+       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        data: new URLSearchParams({ 
+          grant_type: 'client_credentials', 
+         client_id: '097b08ff-185e-4153-aedc-0e5814e0570c', 
+         client_secret: 'D1k8Q~yOxTlSdb_LB1tW118c4827PN~c7PK6JcMr', 
+         scope: 'https://graph.microsoft.com/.default'
+         }) }; try { const response = await axios(config);
+          //  setAccessToken(response.data.access_token); 
+           console.log(response)
+         } catch (error) { 
+          // setError(error.message);
+          console.log(error)
+          }
+	  };
   const [Api, setApi] = useState("")
-  const [loader, setLoader] = useState(false)
 
-  let navigate = useNavigate()
+   const register = async () => {
+    if(!name || !email ||  !phoneNumber || !CompanyName){
+      alert("details are missing")
+      return false
+    }
+    const url = "https://graph.microsoft.com/v1.0/invitations";
+    const token = Api
+    // setInemail(email)
+    const response = await fetch(url, {
+      method: "POST",
+      headers: {
+      "Authorization": `Bearer ${token}`, // Send the Bearer Token
+      "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+      // Add your request body here
+      invitedUserEmailAddress: email,
+      // invitedUserEmailAddress: "blueimpulse9@outlook.com",
+      // inviteRedirectUrl: "http://localhost",
+      inviteRedirectUrl: "https://www.itwalkin.com/",
+      sendInvitationMessage: true,
+      }),
+    });
+    if (response.ok) {
+      const data = await response.json();
+      console.log("Response data:", data);
+    } else {
+      console.error("Error:", response.status, response.statusText);
+    }
 
-  let empId = JSON.parse(localStorage.getItem("EmpIdG"))
+  }
 
+  
+  // ...............upload Image.....................
+  async function uploadImage() {
+    const formdata = new FormData()
+    formdata.append('image', image)
 
-  const [topMessage, settopMessage] = useState("")
+    console.log(formdata)
+    await axios.put(`/EmpProfile/uploadImage/${empId}`, formdata)
+      .then((res) => {
+        window.location.reload()
+      }).catch((err) => {
+      })
+  }
 
-   const [emailError, setEmailError] = useState("");
+  async function prevewImage(e) {
+    setLoader(true)
+    setimmage("")
+    setFile(URL.createObjectURL(e.target.files[0]))
+    // setimage(e.target.files[0])
+    const imageFile = e.target.files[0];
+    const options = {
+      maxSizeMB: 0.08,
+      // maxWidthOrHeight: 2000,
+      useWebWorker: true,
+    }
+    try {
+      const compressedFile = await imageCompression(imageFile, options);
+      setLoader(false)
+      setimage(compressedFile)
+
+    } catch (error) {
+    }
+  }
+  async function deletePic() {
+    await axios.put(`/EmpProfile/deleteImage/${empId}`, { image })
+      .then((res) => {
+        window.location.reload()
+      }).catch((err) => {
+        alert("server issue occured")
+      })
+  }
 
   function handlephoneNumber(e){
 
@@ -199,128 +304,156 @@ const [immage, setimmage] = useState()
     setCompanyAddress(sanitizedValue);
    }
 
-   const getToken = async () => {
-		const url = "https://login.microsoftonline.com/ae4ae520-4db7-4149-ad51-778e540d8bec/oauth2/v2.0/token";
-		const data = {
-		  grant_type: "client_credentials",
-		  client_id: "097b08ff-185e-4153-aedc-0e5814e0570c",
-		  client_secret: "D1k8Q~yOxTlSdb_LB1tW118c4827PN~c7PK6JcMr",
-		  scope: "https://graph.microsoft.com/.default"
-		};	  
-		try {
-		  const response = await axios.post(url, new URLSearchParams(data), {
-			headers: {
-			  "Content-Type": "application/x-www-form-urlencoded" 	}
-		  });
-		  console.log("Access Token Response:", response.data);
-		  return response.data;
-		} catch (error) {
-		  console.error("Error fetching access token:", error);
-		}
-    
-      // const config = { 
-      //   method: 'post', url: 'https://login.microsoftonline.com/ae4ae520-4db7-4149-ad51-778e540d8bec/oauth2/v2.0/token', 
-      //  headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      //   data: new URLSearchParams({ 
-      //     grant_type: 'client_credentials', 
-      //    client_id: '097b08ff-185e-4153-aedc-0e5814e0570c', 
-      //    client_secret: 'D1k8Q~yOxTlSdb_LB1tW118c4827PN~c7PK6JcMr', 
-      //    scope: 'https://graph.microsoft.com/.default'
-      //    }) }; try { const response = await axios(config);
-      //     //  setAccessToken(response.data.access_token); 
-      //      console.log(response)
-      //    } catch (error) { 
-      //     // setError(error.message);
-      //     console.log(error)
-      //     }
-	  };
-
-   const register = async () => {
-    if(!name || !email ||  !phoneNumber || !CompanyName){
-      alert("details are missing")
-      return false
-    }
-    const url = "https://graph.microsoft.com/v1.0/invitations";
-    const token = Api
-    // setInemail(email)
-    const response = await fetch(url, {
-      method: "POST",
-      headers: {
-      "Authorization": `Bearer ${token}`, // Send the Bearer Token
-      "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-      // Add your request body here
-      invitedUserEmailAddress: email,
-      // invitedUserEmailAddress: "blueimpulse9@outlook.com",
-      // inviteRedirectUrl: "http://localhost",
-      inviteRedirectUrl: "https://www.itwalkin.com/",
-      sendInvitationMessage: true,
-      }),
-    });
-    if (response.ok) {
-      const data = await response.json();
-      console.log("Response data:", data);
-    } else {
-      console.error("Error:", response.status, response.statusText);
-    }
-
-  }  
-
 
   return (
     <>
 
-      {/* <div className={styles.EntireFullWrapper}> */}
-        {/* <div className={styles.EntireWrapper}> */}
+      <div className={styles.EntireFullWrapper}>
+        <div className={styles.EntireWrapper}>
         <img style={{ height:"25px", color:"grey", marginTop:"20px", marginLeft:"8%", cursor:"pointer",
              width:"28px"}} onClick={()=>{navigate(-1)}}  src={Arrowimage} />
         {/* <h3 style={{color:"rgb(40, 4, 99)", marginLeft:"2%"}}>Update your Profi</h3> */}
+
+
+          <div className={styles.EmpimageViewWrapper}>
+            {file?"":<img className={styles.EmpimageView} src={image ? image : Companylogo} />}
+            {file?<img className={styles.EmpfileView} src={file} />:""}
+
+            <div className={styles.EmpaddfileDiconwrapper}>
+              <input className={`${styles.addfile} ${styles.EmpaddfileD}`} type="file" accept='.png, .jpg, .jpeg' onChange={prevewImage} />
+              <div className={styles.Emploader}> {loader ? <TailSpin height={"40px"} /> : ""} </div>
+
+              {/* <img style ={{color:"blue" , marginTop:"4px", width:"15%"}} src={delet} onClick={deletePic}/> */}
+            </div>
+
+          </div>
+          <div className={styles.saveDelete}>
+            {file && !loader ? <button className={styles.EmpsaveImage} onClick={uploadImage}>Save</button> : ""}
+            {immage ? <button className={styles.EmpDeleteImage} onClick={deletePic}>Delete</button> : ""}
+          </div>
+
+          <p style={{ fontStyle: "italic", color: "green" }}>{topMessage}</p>
 {screenSize.width>850?
 
 <>
           <div className={styles.inputWrapper}>
 
-          <label className={styles.inputName}>
-              <h4>Company Name: </h4>
-              <input maxLength="20" className={styles.input} value={CompanyName} onChange={(e) => {handleCompanyname(e) }} type="text" />
-            </label>
+
             <label className={styles.inputName}>
-              <h4>Email Id:</h4>
+              <h4>Primary User Name : <span style={{fontWeight:800, fontSize:"medium"}} title='(primary user will have the admin right for your  <br></br>
+                company, primary user can add or remove multiple secondary user)'>i</span></h4>
+              <input maxLength="20" className={styles.input}  value={name}  onChange={(e) => { setname(e.target.value) }} type="text" />
+            </label>
+
+            <label className={styles.inputName}>
+              <h4>Primeary User Email Id:</h4>
               <input maxLength="25" className={styles.input} value={email}  onChange={(e) => { setemail(e.target.value) }} type="text" />
             </label>
 
             <label className={styles.inputName}>
-              <h4>Name:</h4>
-              <input maxLength="20" className={styles.input}  value={name}  onChange={(e) => { setname(e.target.value) }} type="text" />
+              <h4>Primery user Designation:</h4>
+              <input maxLength="90" className={styles.input} value={CompanyAddress} onChange={(e) => {handleCompanyAddress(e) }} type="text" />
             </label>
-
 
             <label className={styles.inputName}>
-              <h4>Phone number:</h4>
+              <h4>Primary User Phone number:</h4>
             <input maxLength="15" className={styles.input}  value={phoneNumber} onChange={(e) => { handlephoneNumber(e) }} type="number" />
             </label>
-   <p>Primery user name (primary user will have the admin right for your company, primary user can add or remove multiple secondary user) </p> 
-   <p>Primery user Designation </p>
-   <p>Primery user email id </p>
-   <p>Primery user contact number </p>
+            
+            <label className={styles.inputName}>
+              <h4>Aadhaar number <span style={{fontWeight:300, fontSize:"small"}}>(Applicable for individual job posters)</span>:</h4>
+              <input maxLength="12" className={styles.input} value={Aadhar} onChange={(e) => {AadharhandleChange(e)} } type="number" />
+            </label>
 
-   <p>Secondary user name (secondary user will be able to post a job search candidates) </p>
-   <p>Secondary user Designation </p>
-   <p>Secondary user email id </p>
-   <p>Secondary user contact number </p>
+            <label className={styles.inputName}>
+              <h4>Company Pan Card Number:</h4>
+              <input maxLength="12" className={styles.input} value={panCard} onChange={(e) => {PanCardhandleChange(e)} } type="text" />
+            </label>
 
-            {/* <label className={styles.inputName}>
+            <label className={styles.inputName}>
+              <h4>Company Name: </h4>
+              <input maxLength="20" className={styles.input} value={CompanyName} onChange={(e) => {handleCompanyname(e) }} type="text" />
+            </label>
+
+            <label className={styles.inputName}>
               <h4>Company Email id:</h4>
               <input maxLength="25" className={styles.input} value={CompanyEmail} onChange={(e) => { handleCompanyEmail(e) }} type="text" /><br></br>
               <span style={{color:"red", marginLeft:"5%"}}>{emailError}</span>
-              </label>
-              <label className={styles.inputName}>
+            </label>
+
+            <label className={styles.inputName}>
               <h4>Company Contact No:</h4>
               <input maxLength="15"  className={styles.input} value={CompanyContact} onChange={(e) => { handleCompanyPhoneNumber(e) }} type="number" />
-              </label> */}
+            </label>
 
-            <div className={STyles.signUpWrapper} style={{marginLeft:"10px"}} onClick={register} >
+            <label className={styles.inputName}>
+              <h4>Company GSTIN: </h4>
+              <input maxLength="15" className={styles.input} value={CompanyGSTIN} onChange={(e) => { handleGstn(e) }} type="text" />
+            </label>
+
+            <label className={styles.inputName}>
+              <h4>Company Website:</h4>
+              <input maxLength="25" className={styles.input} value={CompanyWebsite} onChange={(e) => { handleCompanyWebsite(e) }} type="text" />
+            </label>
+
+            <label className={styles.inputName}>
+              <h4>Company Address:</h4>
+              <input maxLength="90" className={styles.input} value={CompanyAddress} onChange={(e) => { handleCompanyAddress(e) }} type="text" />
+            </label>
+
+            {/* <label className={styles.inputName}>
+              <h4>Primery user name <span style={{fontWeight:300, fontSize:"small"}}>(primary user will have the admin right for your  <br></br>
+               company, primary user can add or remove multiple secondary user)</span>:</h4>
+              <input maxLength="90" className={styles.input} value={CompanyAddress} onChange={(e) => {handleCompanyAddress(e) }} type="text" />
+            </label> */}
+
+            <label className={styles.inputName}>
+              <h4>Primery user email id:</h4>
+              <input maxLength="90" className={styles.input} value={CompanyAddress} onChange={(e) => {handleCompanyAddress(e) }} type="text" />
+            </label>
+            <label className={styles.inputName}>
+              <h4>Primery user contact number:</h4>
+              <input maxLength="90" className={styles.input} value={CompanyAddress} onChange={(e) => {handleCompanyAddress(e) }} type="text" />
+            </label>
+            <label className={styles.inputName}>
+              <h4>Secondary user name <span style={{fontWeight:300, fontSize:"small"}}>(secondary user will be able to post a <br></br>job search candidates)</span> :</h4>
+              <input maxLength="90" className={styles.input} value={CompanyAddress} onChange={(e) => {handleCompanyAddress(e) }} type="text" />
+            </label>
+            <label className={styles.inputName}>
+              <h4>Secondary user Designation:</h4>
+              <input maxLength="90" className={styles.input} value={CompanyAddress} onChange={(e) => {handleCompanyAddress(e) }} type="text" />
+            </label>
+            <label className={styles.inputName}>
+              <h4>Secondary user email id:</h4>
+              <input maxLength="90" className={styles.input} value={CompanyAddress} onChange={(e) => {handleCompanyAddress(e) }} type="text" />
+            </label>
+            <label className={styles.inputName}>
+              <h4>Secondary user contact number:</h4>
+              <input maxLength="90" className={styles.input} value={CompanyAddress} onChange={(e) => {handleCompanyAddress(e) }} type="text" />
+            </label>
+            {/* <label className={styles.inputName}>
+              <h4>Type of Organisation:</h4>
+              <input className={styles.input} value={TypeofOrganisation} onChange={(e) => { setTypeofOrganisation(e.target.value) }} type="text" />
+            </label> */}
+<div className={styles.inputName}>
+              <h4>Type of Organisation :  <span style={{color:"blue"}}>{TypeofOrganisation}</span></h4>
+              {/* <input className={styles.input} value={TypeofOrganisation} onChange={(e) => { setTypeofOrganisation(e.target.value) }} type="text" /> */}
+           
+            <select className={styles.input } style={{height:"35px"}}onChange={(e)=>{setTypeofOrganisation(e.target.value)}}>
+            {TypeofOrganisation? <option style={{color:"blue"}} >{TypeofOrganisation}</option>
+            :<option value="" >Select Company type</option>
+            }
+              <option value="Pvt.Ltd.">Pvt. Ltd.</option>
+              <option value="Firm">Firm</option>
+              <option value="Consultancy">Consultancy</option> 
+              <option value="Individual">Individual</option> 
+            </select>                                 
+            </div>           
+
+            {/* <button className={styles.Save} onClick={(e) => { saveUpdate(e) }}>Save</button>
+            <button className={styles.cancel} onClick={() => { navigate(-1) }} >cancel</button> */}
+
+<div className={STyles.signUpWrapper} style={{marginLeft:"10px"}} onClick={register} >
           <div className={STyles.both}>
             <img className={STyles.google} src={MicosoftImage} />
             <p className={STyles.signUpwrap} >Rigister with Microsoft</p>
@@ -334,7 +467,7 @@ const [immage, setimmage] = useState()
           </div>
         </div>
           </div>
-        <button onClick={getToken}>Get Token</button>
+        {/* <button onClick={getToken}>Get Token</button> */}
               <input placeholder='get token from postman & enter' onChange={(e)=>{setApi(e.target.value)}} 
               style={{marginLeft:"10px", width:"20%"}}/>
 
@@ -353,6 +486,21 @@ const [immage, setimmage] = useState()
             </label>
 
             <label className={styles.MobileinputName}>
+              <h4 className={styles.MobileName}>Phone number:</h4>
+              <input className={styles.Mobileinput} value={phoneNumber} onChange={(e) => { handlephoneNumber(e) }} type="number" />
+            </label>
+            
+            <label className={styles.MobileinputName}>
+              <h4 className={styles.MobileName}>Aadhaar number:</h4>
+              <input maxLength="16" className={styles.Mobileinput} value={Aadhar} onChange={(e) => { AadharhandleChange(e) }} type="number" />
+            </label>
+
+            <label className={styles.MobileinputName}>
+              <h4 className={styles.MobileName}>Pan Card Number:</h4>
+              <input className={styles.Mobileinput} value={panCard} onChange={(e) => { PanCardhandleChange(e) }} type="text" />
+            </label>
+
+            <label className={styles.MobileinputName}>
               <h4 className={styles.MobileName}>Company Name: </h4>
               <input maxLength="25" className={styles.Mobileinput} value={CompanyName} onChange={(e) => { handleCompanyname(e) }} type="text" />
             </label>
@@ -364,15 +512,84 @@ const [immage, setimmage] = useState()
            <span style={{color:"red", marginLeft:"5%"}}>{emailError}</span>
 
             </label>
-  
+
+            <label className={styles.MobileinputName}>
+              <h4 className={styles.MobileName}>Company Contact No:</h4>
+              <input maxLength="15" className={styles.Mobileinput} value={CompanyContact} onChange={(e) => { handleCompanyPhoneNumber(e) }} type="number" />
+            </label>
+
+            <label className={styles.MobileinputName}>
+              <h4 className={styles.MobileName}>Company GSTIN: </h4>
+              <input maxLength="15" className={styles.Mobileinput} value={CompanyGSTIN} onChange={(e) => { handleGstn(e) }} type="text" />
+            </label>
+
+            <label className={styles.MobileinputName}>
+              <h4 className={styles.MobileName}>Company Website:</h4>
+              <input maxLength="25" className={styles.Mobileinput} value={CompanyWebsite} onChange={(e) => { handleCompanyWebsite(e)}} type="text" />
+            </label>
+
+            <label className={styles.MobileinputName}>
+              <h4 className={styles.MobileName}>Company Address:</h4>
+              <input maxLength="90" className={styles.Mobileinput} value={CompanyAddress} onChange={(e) => {handleCompanyAddress(e) }} type="text" />
+            </label>
+           
+            <label className={styles.MobileinputName}>
+              <h4 className={styles.MobileName}>Primery user name (primary user will have the admin right for your company, primary user can add or remove multiple secondary user):</h4>
+              <input maxLength="90" className={styles.Mobileinput} value={CompanyAddress} onChange={(e) => {handleCompanyAddress(e) }} type="text" />
+            </label>
+            <label className={styles.MobileinputName}>
+              <h4 className={styles.MobileName}>Primery user Designation:</h4>
+              <input maxLength="90" className={styles.Mobileinput} value={CompanyAddress} onChange={(e) => {handleCompanyAddress(e) }} type="text" />
+            </label>
+            <label className={styles.MobileinputName}>
+              <h4 className={styles.MobileName}>Primery user email id:</h4>
+              <input maxLength="90" className={styles.Mobileinput} value={CompanyAddress} onChange={(e) => {handleCompanyAddress(e) }} type="text" />
+            </label>
+            <label className={styles.MobileinputName}>
+              <h4 className={styles.MobileName}>Primery user contact number:</h4>
+              <input maxLength="90" className={styles.Mobileinput} value={CompanyAddress} onChange={(e) => {handleCompanyAddress(e) }} type="text" />
+            </label>
+            <label className={styles.MobileinputName}>
+              <h4 className={styles.MobileName}>Secondary user name (secondary user will be able to post a job search candidates):</h4>
+              <input maxLength="90" className={styles.Mobileinput} value={CompanyAddress} onChange={(e) => {handleCompanyAddress(e) }} type="text" />
+            </label>
+            <label className={styles.MobileinputName}>
+              <h4 className={styles.MobileName}>Secondary user Designation:</h4>
+              <input maxLength="90" className={styles.Mobileinput} value={CompanyAddress} onChange={(e) => {handleCompanyAddress(e) }} type="text" />
+            </label>
+            <label className={styles.MobileinputName}>
+              <h4 className={styles.MobileName}>Secondary user email id:</h4>
+              <input maxLength="90" className={styles.Mobileinput} value={CompanyAddress} onChange={(e) => {handleCompanyAddress(e) }} type="text" />
+            </label>
+            <label className={styles.MobileinputName}>
+              <h4 className={styles.MobileName}>Secondary user contact number:</h4>
+              <input maxLength="90" className={styles.Mobileinput} value={CompanyAddress} onChange={(e) => {handleCompanyAddress(e) }} type="text" />
+            </label>
+           
+            <div className={styles.MobileinputName}>
+              <h4 className={styles.MobileName}>Type of Organisation :  <span style={{color:"blue"}}>{TypeofOrganisation}</span></h4>          
+            <select className={styles.Mobileinput } style={{height:"35px"}}onChange={(e)=>{setTypeofOrganisation(e.target.value)}}>
+            {TypeofOrganisation? <option style={{color:"blue"}} >{TypeofOrganisation}</option>
+            :<option value="" >Select Company type</option>
+            }
+              <option value="Pvt.Ltd.">Pvt. Ltd.</option>
+              <option value="Firm">Firm</option>
+              <option value="Consultancy">Consultancy</option> 
+              <option value="Individual">Individual</option> 
+
+            </select>  
+{/*             
+            <button className={styles.MobileSave} onClick={(e) => { saveUpdate(e) }}>Save</button>
+            <button className={styles.Mobilecancel} onClick={() => { navigate(-1) }} >cancel</button>                                */}
+            </div>
             <div style={{marginTop:"60px"}}>
           <Footer/>
         </div>
           </>
 }
-        {/* </div> */}
+        </div>
 
-      {/* </div> */}
+      </div>
 
     </>
   )

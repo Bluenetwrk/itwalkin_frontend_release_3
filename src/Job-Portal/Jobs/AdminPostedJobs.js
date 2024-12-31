@@ -23,6 +23,8 @@ function AdminPostedJobs(props) {
 
   // let location = useLocation()
   // let empName= location.state.gserid 
+  let SuperAdminLogin = localStorage.getItem("SupAdMLog")
+
 
   const [myjobs, setMyjobs] = useState([])
   const [myjobsforFilter, setmyjobsforFilter] = useState([])
@@ -83,8 +85,9 @@ function AdminPostedJobs(props) {
       confirmButtonText: 'delete!'
     }).then((result) => {
       if (result.isConfirmed) {
-        axios.delete(`/Careerjobpost/deleteJobs/${deleteid}`, {headers})
+        axios.delete(`/jobpost/deleteProduct/${deleteid}`, {headers})
           .then((res) => {
+            // console.log(res.data)
             getjobs()
           })
           .catch((err) => { alert("server error occured") })
@@ -311,7 +314,7 @@ function handleRecordchange(e){
           <ul className={styles.ul}>
             <li className={styles.li}><b>Company Name</b></li>
             <li className={`${styles.li} ${styles.Jtitle}`}><b>Job Title</b></li>
-            <li className={`${styles.li} ${styles.liDescription}`}><b>Job description</b></li>
+            {/* <li className={`${styles.li} ${styles.liDescription}`}><b>Job description</b></li> */}
             <li className={`${styles.li} ${styles.Pdate}`}><b>Posted Date</b>
             <p className={styles.arrowWrapper}>
                <i onClick={sortbyNewjobs} className={`${styles.arrow} ${styles.up}`} ></i>
@@ -360,46 +363,7 @@ function handleRecordchange(e){
                       </li>
 
                     <li className={`${styles.li} ${styles.Jtitle}`}>{items.jobTitle.toUpperCase()}</li>
-                    <li className={`${styles.li} ${styles.liDescription}`}> 
-                    {/* {items.jobDescription.slice(0, 70)} */}
-                    {
-                    items.jobDescription.map((descrip, di) => {
-                      return (
-                        <>
-                          {
-                            // descrip.type == "unordered-list-item" ?
-            
-                            //   <ul style={{ listStyleType: "disc" }}>
-                            //     <li>
-                            //       {descrip.text}
-            
-                            //     </li>
-                            //   </ul>
-            
-                            //   : descrip.type == "ordered-list-item" ?
-            
-                            //     <ol >
-                            //       {/* <li> */}
-                            //         {descrip.text}
-            
-                            //       {/* </li> */}
-                            //     </ol>
-                            //     :
-                            //     <>
-                            //       {descrip.text}
-                            //       <br></br>
-                            //     </>
-                            descrip.text.slice(0,50)
-            
-                          }
-                        </>
-                      )
-                    }).slice(0,1)
-                    }
-                   
-                      <span style={{ color: "blue", cursor:"pointer" }} onClick={() => { navigate(`/Jobdetails/${btoa(items._id)}`) }} >...see more</span>
-
-                    </li>
+                    
                     <li className={`${styles.li} ${styles.Pdate}`}>
                       {new Date(items.createdAt).toLocaleString(
                         "en-US",
@@ -416,12 +380,13 @@ function handleRecordchange(e){
                     <li className={`${styles.li} ${styles.Skills}`}>{items.skills}</li>
                     <li className={`${styles.li} ${styles.Action}`}>
                       <div className={styles.Acbuttons}>
-                        {/* <button onClick={() => { update(items._id) }} className={`${styles.Abutton} ${styles.update}`}>update</button> */}
+                        <button onClick={() => { update(items._id) }} className={`${styles.Abutton} ${styles.update}`}>update</button>
                         <button onClick={() => { deletejob(items._id) }} className={`${styles.Abutton} ${styles.delete}`}>delete</button>
                       </div>
                     </li>
                     <li className={`${styles.li} ${styles.NuApplied}`}>
                       {items.jobSeekerId.length > 0 ?
+                      
                         <button className={`${styles.viewButton}`} onClick={() => { seeProfilejobSeekerId(btoa(items._id)) }}>{items.jobSeekerId.length}</button>
                         :
                         <button className={`${styles.viewButton}`} >{items.jobSeekerId.length}</button>

@@ -14,7 +14,7 @@ import JoditEditor from 'jodit-react'
 
 import Style from "./postJobs.module.css"
 
-function UpdatePostedJobs() {
+function UpdateCareerPostedJobs() {
   const screenSize = useScreenSize();
   const editor=useRef(null)
    
@@ -22,16 +22,11 @@ function UpdatePostedJobs() {
   let Jobid = location.state.getId
   let navigate= useNavigate()
 
-  // let SuperAdminLogin = localStorage.getItem("SupAdMLog")
-  let adminLogin = localStorage.getItem("AdMLog")
-
-
+    let empId = localStorage.getItem("EmpIdG")
  
     const [jobtitle, setJobTitle] = useState("")
     const [Source, setSource] = useState("")
     const [SourceLink, setSourceLink] = useState("")
-        const [SourceCompanyLink, setSourceCompanyLink] = useState("")
-    
     const [companyName, setCompanyName] = useState("")
     const [jobDescription, setJobDescription] = useState("")
     const [jobtype, setJobtype] = useState("")
@@ -83,7 +78,7 @@ function UpdatePostedJobs() {
         // const headers = { authorization: userid +" "+ atob(JSON.parse(localStorage.getItem("EmpLog"))) };
     const headers = { authorization: 'BlueItImpulseWalkinIn' };
 
-       await axios.get(`/jobpost/getJobForUpdate/${Jobid}`, {headers})
+       await axios.get(`/Careerjobpost/getJobForUpdate/${Jobid}`, {headers})
        .then((res)=>{
         let result=res.data
         // console.log(result)
@@ -98,8 +93,6 @@ function UpdatePostedJobs() {
             setJobtype(result.jobtype)
             setCompanyName(result.companyName)
             setTag(result.Tags)
-            setSource(result.Source)
-            setSourceLink(result.SourceLink)
         }
        }).catch((err)=>{
         alert("server issue occured")
@@ -114,9 +107,10 @@ function UpdatePostedJobs() {
         // let userid = JSON.parse(localStorage.getItem("EmpIdG"))
         // const headers = { authorization: userid +" "+ atob(JSON.parse(localStorage.getItem("EmpLog"))) };
     const headers = { authorization: 'BlueItImpulseWalkinIn' };
+
         let jobTitle = jobtitle.toLowerCase()
         let jobLocation = joblocation.toLowerCase()
-    await axios.put(`/jobpost/updatPostedJob/${Jobid}`,{ jobTitle, SourceLink, Source, companyName,SourceCompanyLink,
+    await axios.put(`/Careerjobpost/updatPostedJob/${Jobid}`,{ jobTitle, SourceLink, Source, companyName,
          jobDescription, jobtype, salaryRange, jobLocation, qualification, experiance, skills, Tags},{headers})
     .then((res)=>{
         let result = (res.data)
@@ -173,20 +167,7 @@ window.addEventListener('keypress', function(event){
 
      <h4 className={Style.jobHeadline}>Job title</h4>
     <input maxLength="100" className={Style.inputbox} type="text" value={jobtitle} onChange={(e) => { setJobTitle(e.target.value) }} />
-{adminLogin?
-<>
- <hr style={{marginTop:"50px"}}></hr>
-                                       <h4 className={Style.jobHeadline}  >Job Post Source &nbsp;<span className={Style.hint}>(e.g Linkedin, Noukri, indeed etc.)</span></h4>
-                                        <input maxLength="20" className={Style.inputbox} type="text" value={Source} onChange={(e) => { setSource(e.target.value) }} />
 
-                                        <h4 className={Style.jobHeadline}  > Job Post Source Link</h4>
-                                        <input className={Style.inputbox} type="text" value={SourceLink} onChange={(e) => { setSourceLink(e.target.value) }} />
-                                                                              
-                                        <hr style={{marginBottom:"50px", marginTop:"30px"}}></hr>
-                              
-</>
-:""
-}
 
                     <h4 className={Style.jobHeadline}>Company Name**</h4>
                     <input maxLength="30" className={Style.inputbox} type="text" value={companyName} onChange={(e) => { setCompanyName(e.target.value) }} />
@@ -313,4 +294,4 @@ window.addEventListener('keypress', function(event){
     )
 }
 
-export default UpdatePostedJobs
+export default UpdateCareerPostedJobs

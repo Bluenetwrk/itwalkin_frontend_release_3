@@ -9,7 +9,7 @@ import location from "../img/icons8-location-20.png"
 
 
 
-function ArchiveJobs() {
+function DeletedBlogs() {
   let navigate = useNavigate()
 
 
@@ -29,16 +29,9 @@ function ArchiveJobs() {
   async function getjobs() {
     let userid = atob(JSON.parse(localStorage.getItem("IdLog")))
     const headers = { authorization: userid + " " + atob(JSON.parse(localStorage.getItem("AdMLog"))) };
-    await axios.get("/jobpost/getArchiveJobs", { headers })
+    await axios.get("/BlogRoutes/getDeletedJobs", { headers })
       .then((res) => {
         let result = (res.data)
-  // const [date, setdate] = useState([])
-      // result.map((date)=>{
-      //   return(
-      //     console.log(date.createdAt)
-      //   )
-      // })
-
       let elements=  result.flatMap( subArray =>  subArray.Archived).forEach(  element => {
            setAllJobs(oldArray => [...oldArray,element] )
       });
@@ -139,7 +132,7 @@ function ArchiveJobs() {
                       : ""}<br></br>{items.companyName}</li>
                     <li className={`${styles.li} ${styles.Jtitle}`} onClick={() => navigate(`/Jobdetails/${btoa(items._id)}`)}>{items.jobTitle}</li>
                     <li className={`${styles.li} ${styles.JobType}`}>{items.jobtype}</li>
-
+                     
                     <li className={`${styles.li} ${styles.Pdate}`}>
                       {new Date(items.createdAt).toLocaleString(
                         "en-US",
@@ -259,4 +252,4 @@ function ArchiveJobs() {
   )
 }
 
-export default ArchiveJobs
+export default DeletedBlogs

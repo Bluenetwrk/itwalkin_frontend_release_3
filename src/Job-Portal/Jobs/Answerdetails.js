@@ -72,6 +72,7 @@ const [Loader, setLoader] = useState(false)
     name:"",
     comment:""
   })
+
   const [clickedJobId, setclickedJobId] = useState() //for single job loader
 
 function changeComments(e){
@@ -90,6 +91,9 @@ function changeComments(e){
 async function handleComment(){
   if(!userid){
     alert("you must login to comment on question")
+    return false
+  }
+  if(!comments.comment){
     return false
   }
   const headers = { authorization: 'BlueItImpulseWalkinIn'};

@@ -202,7 +202,19 @@ font-weight: 400;
     color: white;
     font-size: small;
     font-weight: 540;
-    width:12%;
+    /* width:12%; */
+    text-wrap: nowrap;
+    padding: 5px 8px;
+    border-radius: 3px;
+    text-align: center;
+}
+.Aboutlink {
+    margin-left: 10%;
+    text-decoration: none;
+    color: white;
+    font-size: small;
+    font-weight: 540;
+    /* width:12%; */
     text-wrap: nowrap;
     padding: 5px 8px;
     border-radius: 3px;

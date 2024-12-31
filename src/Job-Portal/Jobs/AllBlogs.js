@@ -50,6 +50,9 @@ function Blogs() {
   const [Active, setActive] = useState([])
   const screenSize = useScreenSize();
 
+  let adminLogin = localStorage.getItem("AdMLog")
+
+
   // let AgeTags = [
  
   // let jobTags = [
@@ -444,6 +447,49 @@ return(
       })
   }
 
+    
+  const [checkBoxValue, setCheckBoxValue] = useState([])
+  const [check, setCheck] = useState(true)
+
+ async function deleteCheckedJobs(){
+  let userid = atob(JSON.parse(localStorage.getItem("IdLog")))
+  const headers = { authorization: userid + " " + atob(JSON.parse(localStorage.getItem("AdMLog"))) };
+await axios.delete(`/BlogRoutes/deleteCheckBoxArray/${checkBoxValue}`, {headers} )
+.then((res)=>{
+  if(res.data==="success"){
+    getjobs()
+    alert("deletd succesfully")
+    window.location.reload()
+  }
+}).catch((err)=>{
+  alert("some thing went wrong")
+})
+ }
+
+  
+  function checkBoxforDelete(id) {
+
+    const checkedid = checkBoxValue.findIndex((checkedid) => {
+      return (
+        checkedid === id
+      )
+    })
+    if (checkedid < 0) {
+      setCheckBoxValue([...checkBoxValue, id])
+    } else {
+      // checkBoxValue.splice(checkedid, 1)
+      let removeId=checkBoxValue.filter((foundId)=>{
+        return(
+          foundId!==id
+        )
+      })
+      setCheckBoxValue(removeId)
+
+    }
+
+  }
+
+
   return (
     <>
 
@@ -451,7 +497,7 @@ return(
         <>
         {
          ! EmployeeAuth?
-        <div className={styles.BlogNavConetenetWrapper}>
+        <div className={adminLogin?styles.HomeNavConetenetWrapperAdmin:styles.BlogNavConetenetWrapper}>
 
 
           <div className={styles.LocationFilterWrapper}>
@@ -485,6 +531,20 @@ return(
         : ""
       }
 
+{checkBoxValue.length > 0 ?
+          <>
+              {/* <button style={{
+                backgroundColor: "blue", border: "none", color: "white",
+                padding: "5px 10px", fontWeight: "bold", cursor: "pointer"
+              }} onClick={()=>{ArchiveCheckBoxArray()}}>Archive</button> */}
+
+              <button style={{
+                backgroundColor: "red", border: "none", color: "white", marginLeft:"5px",
+                padding: "5px 10px", fontWeight: "bold", cursor: "pointer"
+              }} onClick={()=>{deleteCheckedJobs()}}>Delete</button>
+              </>
+            : ""
+          }
 
       {screenSize.width > 850 ?
         <>
@@ -593,6 +653,12 @@ return(
               */}
               <li style={{ backgroundColor: " rgb(40, 4, 99)" }} className={`${styles.li} ${styles.BlogApply}`}>Read/Answer</li>
 
+              {                  adminLogin?
+    <li style={{ backgroundColor: " rgb(40, 4, 99)" }} className={`${styles.li} ${styles.checkBox}`}>
+                                 Delete            
+                      </li>
+                      :""
+                      }
             </ul>
             {PageLoader ?
               <Puff height="80" width="80" color="#4fa94d" ariaLabel="bars-loading" wrapperStyle={{ marginLeft: "49%", marginTop: "50px" }} />
@@ -659,6 +725,15 @@ return(
                         
                         
                       </li>
+
+{                  adminLogin?
+    <li className={`${styles.li} ${styles.checkBox}`}>
+
+                      <input type="checkbox"  onClick={() => { checkBoxforDelete(items._id) }} />
+
+                      </li>
+                      :""
+                      }
                     </ul>
                   )
                 })
@@ -722,6 +797,14 @@ return(
                         }
                         
                     </li>
+
+                    {                  adminLogin?
+    <li className={`${styles.li} ${styles.checkBox}`}>
+                      <input type="checkbox"  onClick={() => { checkBoxforDelete(items._id) }} />
+                                             
+                      </li>
+                      :""
+                      }
                   </ul>
                   )
                 })

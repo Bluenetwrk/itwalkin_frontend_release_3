@@ -166,6 +166,7 @@ function AdminPostJobs() {
                     setJobTitle("")
                     setJobDescription("")
                     // setCompanyName("")
+                    setSource("")
                     setSourceLink("")
                     setSourceCompanyLink("")
                     setSalaryRange("")

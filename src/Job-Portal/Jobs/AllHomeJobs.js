@@ -61,6 +61,9 @@ function Home() {
 
   let navigate = useNavigate()
 
+  let adminLogin = localStorage.getItem("AdMLog")
+
+
   useEffect(() => {
     // let studentAuth = localStorage.getItem("StudLog")
     let EmployeeAuth = localStorage.getItem("EmpLog")
@@ -75,12 +78,12 @@ function Home() {
       navigate("/alljobs")
     }
   }, [])
-  useEffect(() => {
-    let adminLogin = localStorage.getItem("AdMLog")
-    if (adminLogin) {
-      navigate("/BIAddmin@Profile")
-    }
-  }, [])
+  // useEffect(() => {
+  //   let adminLogin = localStorage.getItem("AdMLog")
+  //   if (adminLogin) {
+  //     navigate("/BIAddmin@Profile")
+  //   }
+  // }, [])
 
   let recordsperpage = JSON.parse(sessionStorage.getItem("recordsperpageHome"))
 
@@ -444,12 +447,70 @@ return(
       })
   }
 
+  
+  const [checkBoxValue, setCheckBoxValue] = useState([])
+  const [check, setCheck] = useState(true)
+
+ async function ArchiveCheckBoxArray(){
+  let userid = atob(JSON.parse(localStorage.getItem("IdLog")))
+  const headers = { authorization: userid + " " + atob(JSON.parse(localStorage.getItem("AdMLog"))) };
+await axios.delete(`/jobpost/ArchiveCheckBoxArray/${checkBoxValue}`, {headers} )
+.then((res)=>{
+  if(res.data==="success"){
+    getjobs()
+    alert("deletd succesfully")
+    window.location.reload()
+  }
+}).catch((err)=>{
+  alert("some thing went wrong")
+})
+ }
+ async function deleteCheckedJobs(){
+  let userid = atob(JSON.parse(localStorage.getItem("IdLog")))
+  const headers = { authorization: userid + " " + atob(JSON.parse(localStorage.getItem("AdMLog"))) };
+await axios.delete(`/jobpost/deleteCheckBoxArray/${checkBoxValue}`, {headers} )
+.then((res)=>{
+  if(res.data==="success"){
+    getjobs()
+    alert("deletd succesfully")
+    window.location.reload()
+  }
+}).catch((err)=>{
+  alert("some thing went wrong")
+})
+ }
+ 
+
+  function checkBoxforDelete(id) {
+
+    const checkedid = checkBoxValue.findIndex((checkedid) => {
+      return (
+        checkedid === id
+      )
+    })
+    if (checkedid < 0) {
+      setCheckBoxValue([...checkBoxValue, id])
+    } else {
+      // checkBoxValue.splice(checkedid, 1)
+      let removeId=checkBoxValue.filter((foundId)=>{
+        return(
+          foundId!==id
+        )
+      })
+      setCheckBoxValue(removeId)
+
+    }
+
+  }
+
   return (
     <>
 
       {screenSize.width > 850 ?
+      // adminLogin?""
+      // :
         <>
-        <div className={styles.HomeNavConetenetWrapper}>
+        <div className={adminLogin?styles.HomeNavConetenetWrapperAdmin:styles.HomeNavConetenetWrapper}>
 
 
           <div className={styles.LocationFilterWrapper}>
@@ -480,7 +541,20 @@ return(
         </>
         : ""
       }
+{checkBoxValue.length > 0 ?
+          <>
+              <button style={{
+                backgroundColor: "blue", border: "none", color: "white",
+                padding: "5px 10px", fontWeight: "bold", cursor: "pointer"
+              }} onClick={()=>{ArchiveCheckBoxArray()}}>Archive</button>
 
+              <button style={{
+                backgroundColor: "red", border: "none", color: "white", marginLeft:"5px",
+                padding: "5px 10px", fontWeight: "bold", cursor: "pointer"
+              }} onClick={()=>{deleteCheckedJobs()}}>Delete</button>
+              </>
+            : ""
+          }
 
       {screenSize.width > 850 ?
         <>
@@ -669,12 +743,19 @@ return(
                       </li>
 
                       <li className={`${styles.li} ${styles.Apply}`}>
-                        {items.SourceLink ?
+                        {
+                          adminLogin?
+                          // <input type='checkbox'/>
+                      <input type="checkbox"  onClick={() => { checkBoxforDelete(items._id) }} />
+
+                          :
+                        items.SourceLink ?
                           <button title='this will take to Source page' className={styles.Applybutton} onClick={() => {
                             applyforOtherJob(items.SourceLink)
                           }}>Apply</button>
                           :
                           <button className={styles.Applybutton} onClick={() => { applyforJob(items._id) }}>Apply</button>
+                      
                         }
                       </li>
                     </ul>
@@ -755,7 +836,13 @@ return(
                       <li className={`${styles.li} ${styles.Skills}`}>{items.skills}</li>
 
                       <li className={`${styles.li} ${styles.Apply}`}>
-                        {items.SourceLink ?
+                        {
+                                                    adminLogin?
+                                                    // <input type='checkbox'/>
+                      <input type="checkbox"  onClick={() => { checkBoxforDelete(items._id) }} />
+
+                                                    :
+                        items.SourceLink ?
                           <button title='this will take to Source page' className={styles.Applybutton} onClick={() => {
                             applyforOtherJob(items.SourceLink)
                           }}>Apply</button>
