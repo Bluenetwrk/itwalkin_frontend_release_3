@@ -17,7 +17,7 @@ import NavIcon from "./Job-Portal/img/icons8-menu-50.png"
 // import SidebarNav from "./Job-Portal/NaveBar/SidebarNav";
 import StudentLogin from "./Job-Portal/Login/StudLogin";
 import EmployeeLogin from "./Job-Portal/Login/EmpLogin"
-import NewRegistered from "./Job-Portal/Profile/NewRegistration";
+// import NewRegistered from "./Job-Portal/Profile/NewRegistration";
 // import NewRegistered from "./Job-Portal/Login/NewRegistration";
 import StudentSignUp from "./Job-Portal/SignUp/StudSignin";
 import EmployeeSignUp from "./Job-Portal/SignUp/EmplSign";
