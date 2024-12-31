@@ -164,7 +164,7 @@ async function deletComment(id){
 
         <>
        
-    <div style={{display:"flex"}}>
+    {/* <div style={{display:"flex"}}>
 
         <div style={{marginTop:"20px", marginLeft:"30px"}}>
         <img className={styles.imageV} src={jobs.Logo?jobs.Logo : profileDp}/>
@@ -208,15 +208,49 @@ async function deletComment(id){
   </tr>
   </table>
   </div>
-  </div>        
-  {/* <tr>
-    <td colSpan={2} style={{backgroundColor:" rgb(40, 4, 99)"}}>
-    <div style={{textAlign:"center", color:"white", fontWeight:"550"}}>{jobs.jobTitle ? jobs.jobTitle[0].toUpperCase()+jobs.jobTitle.slice(1)
-    : <li style={{ display: "inline-block" }}>Blog Title</li>}</div>
-    </td>
-  </tr> */}
+  </div>         */}
+  {/* <h1 style={{textAlign:"center", fontSize:"xx-large"}}>{jobs.jobTitle[0].toUpperCase()+jobs.jobTitle.slice(1)}</h1> */}
+  <h1 style={{textAlign:"center", fontSize:"xx-large"}}>{jobs.jobTitle}</h1>
+<div style={{textAlign:"center"}}>
+  <span>By {jobs.name}</span>
+  <span> . {new Date(jobs.createdAt).toLocaleString(
+                  "en-US",
+                  {
+                    month: "short",
+                    day: "2-digit",
+                    year: "numeric",
+                  }
+                )}</span> . 
+  <span> 
+  {new Date(jobs.updatedAt).toLocaleString(
+                  "en-US",
+                  {
+                    month: "short",
+                    day: "2-digit",
+                    year: "numeric",
+                  }
+                )}
+  </span>
+</div>
 
-    {
+{ jobs.comments?
+      jobs.comments.map((com)=>{
+        return(
+          <>
+          {/* <p> {com.name} : {com.comment}</p> */}
+          <p style={{textAlign:"center"}}>  {com.comment} ({com.name}) {userid===com.id?
+          <button onClick={()=>{deletComment(com.id)}} >delete</button>
+          :""
+          } </p>
+
+</>
+        )
+      })
+      :""
+    }
+
+
+    {/* {
      jobs.comments?
       jobs.comments.map((com)=>{
         return(
@@ -234,7 +268,7 @@ async function deletComment(id){
         )
       })
       :""
-     } 
+     }  */}
        {/* <input placeholder='Answer' maxLength={300} style={{height:"30px", marginLeft:"6px", width:"95%"}} type='text' value={comments.comment} onChange={(e)=>{changeComments(e)}} /><br></br>
        <button onClick={handleComment} style={{height:"30px", marginLeft:"6px"}}>Comment</button> */}
  {  
@@ -245,8 +279,9 @@ async function deletComment(id){
       //  console.log(com.id===userid)
         )
       }).length<1?<>
-              <input placeholder='Answer' maxLength={300} style={{height:"30px", marginLeft:"6px", width:"95%"}} type='text' value={comments.comment} onChange={(e)=>{changeComments(e)}} /><br></br>
-       <button onClick={handleComment} style={{height:"30px", marginLeft:"6px"}}>Comment</button> 
+      <input placeholder='Answer' maxLength={300} style={{height:"30px", marginLeft:"6px", width:"90%"}} type='text' 
+      value={comments.comment} onChange={(e)=>{changeComments(e)}} />
+       <button onClick={handleComment} style={{height:"30px", marginLeft:"6px"}}>Answer</button> 
        </>
        :""
       :""

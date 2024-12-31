@@ -318,6 +318,17 @@ const [immage, setimmage] = useState()
               <h4>Company GSTIN: </h4>
               <input maxLength="15" className={styles.input} value={CompanyGSTIN} onChange={(e) => { handleGstn(e) }} type="text" />
             </label>
+            <label className={styles.inputName}>
+              <h4>About us: </h4>
+              <input maxLength="15" className={styles.input} value={CompanyGSTIN} onChange={(e) => { handleGstn(e) }} type="text" />
+            </label>
+            <label className={styles.inputName}>
+              <h4>About us: </h4>
+              <input maxLength="15" className={styles.input} value={CompanyGSTIN} onChange={(e) => { handleGstn(e) }} type="text" />
+            </label>
+
+
+            
 
             <label className={styles.inputName}>
               <h4>Company Website:</h4>
@@ -406,6 +417,10 @@ const [immage, setimmage] = useState()
 
             <label className={styles.MobileinputName}>
               <h4 className={styles.MobileName}>Company Website:</h4>
+              <input maxLength="25" className={styles.Mobileinput} value={CompanyWebsite} onChange={(e) => { handleCompanyWebsite(e)}} type="text" />
+            </label>
+            <label className={styles.MobileinputName}>
+              <h4 className={styles.MobileName}>About us:</h4>
               <input maxLength="25" className={styles.Mobileinput} value={CompanyWebsite} onChange={(e) => { handleCompanyWebsite(e)}} type="text" />
             </label>
 
