@@ -35,54 +35,7 @@ const Modal = ({ isOpen, onClose, children }) => {
 //   params.append('client_secret', 'D1k8Q~yOxTISdb_LB1tW118c4827PN~c7PK6...');
 //   params.append('scope', 'https://graph.microsoft.com/.default');
 // async function getToken(){
-	const getToken = async () => {
-		const url = "https://login.microsoftonline.com/ae4ae520-4db7-4149-ad51-778e540d8bec/oauth2/v2.0/token";
-		const data = {
-		  grant_type: "client_credentials",
-		  client_id: "097b08ff-185e-4153-aedc-0e5814e0570c",
-		  client_secret: "D1k8Q~yOxTlSdb_Lb1tW118c4827PN~c7PK6...",
-		  scope: "https://graph.microsoft.com/.default"
-		};
 	  
-		try {
-		  const response = await axios.post(url, new URLSearchParams(data), {
-			headers: {
-			  "Content-Type": "application/x-www-form-urlencoded"
-			}
-		  });
-		  console.log("Access Token Response:", response.data);
-		  return response.data;
-		} catch (error) {
-		  console.error("Error fetching access token:", error);
-		}
-	  };
-
-const register = async () => {
-	const url = "https://graph.microsoft.com/v1.0/invitations";
-	const token = "eyJ0eXAiOiJKV1QiLCJub25jZSI6Im4tYUFGNjRlSVJhdERVR3BYcWRzQ1I5QnlvQ2QzajVaeUtRMzk2RE1CZVEiLCJhbGciOiJSUzI1NiIsIng1dCI6InoxcnNZSEhKOS04bWdndDRIc1p1OEJLa0JQdyIsImtpZCI6InoxcnNZSEhKOS04bWdndDRIc1p1OEJLa0JQdyJ9.eyJhdWQiOiJodHRwczovL2dyYXBoLm1pY3Jvc29mdC5jb20iLCJpc3MiOiJodHRwczovL3N0cy53aW5kb3dzLm5ldC9hZTRhZTUyMC00ZGI3LTQxNDktYWQ1MS03NzhlNTQwZDhiZWMvIiwiaWF0IjoxNzM1MzE4NjE1LCJuYmYiOjE3MzUzMTg2MTUsImV4cCI6MTczNTMyMjUxNSwiYWlvIjoiazJCZ1lCQllubU9ST3ZuWWZYNFhiZFV0cXB2dUF3QT0iLCJhcHBfZGlzcGxheW5hbWUiOiJJVFdhbGtpbiIsImFwcGlkIjoiMDk3YjA4ZmYtMTg1ZS00MTUzLWFlZGMtMGU1ODE0ZTA1NzBjIiwiYXBwaWRhY3IiOiIxIiwiaWRwIjoiaHR0cHM6Ly9zdHMud2luZG93cy5uZXQvYWU0YWU1MjAtNGRiNy00MTQ5LWFkNTEtNzc4ZTU0MGQ4YmVjLyIsImlkdHlwIjoiYXBwIiwib2lkIjoiZWU2NDE0OTctNmRhYS00ZDQyLWJiZjAtN2RjZTYyNDUxNTIxIiwicmgiOiIxLkFjWUFJT1ZLcnJkTlNVR3RVWGVPVkEyTDdBTUFBQUFBQUFBQXdBQUFBQUFBQUFER0FBREdBQS4iLCJyb2xlcyI6WyJVc2VyLlJlYWRXcml0ZS5BbGwiLCJEaXJlY3RvcnkuUmVhZFdyaXRlLkFsbCIsIlVzZXIuSW52aXRlLkFsbCIsIk1haWwuU2VuZCJdLCJzdWIiOiJlZTY0MTQ5Ny02ZGFhLTRkNDItYmJmMC03ZGNlNjI0NTE1MjEiLCJ0ZW5hbnRfcmVnaW9uX3Njb3BlIjoiQVMiLCJ0aWQiOiJhZTRhZTUyMC00ZGI3LTQxNDktYWQ1MS03NzhlNTQwZDhiZWMiLCJ1dGkiOiJPUEpNMEVOU0lVR2laWGdjdWdYUkF3IiwidmVyIjoiMS4wIiwid2lkcyI6WyIwOTk3YTFkMC0wZDFkLTRhY2ItYjQwOC1kNWNhNzMxMjFlOTAiXSwieG1zX2lkcmVsIjoiNyAyIiwieG1zX3RjZHQiOjE3Mjc1NDEzMjh9.Etf-xtd2z4cX_g_RztE-rcnZGp2l-LVY6Xqs-NBJJATDvmnNLS1VrHc8d1-8Egzgab5E5McIMDZHyjtb7QEKIAbKRJYFNl8I9OXR1O1f6WtemwxrFo4M_8m1QNE8n4Nc-imaRw1s5VmXiUdlR75cHTglOWEVg6r2pntvYkxcP6fk3NbA9kLTcvpgzv_JGzKQYqn8eeKIExkteaNvviwweKn5_Dz1bEPQ2vVa76vInnwibtogwhuSzw1TEmVjBsU3_VWRErf8WhbO7U_dmFPp-HcHcyt2xxUIhcgDryINUc1GbNu7rqnOciI7pueu5T2hV2Q75yw3r0H_zuUfIuUYNg"
-	const response = await fetch(url, {
-	  method: "POST",
-	  headers: {
-		"Authorization": `Bearer ${token}`, // Send the Bearer Token
-		"Content-Type": "application/json",
-	  },
-	  body: JSON.stringify({
-		// Add your request body here
-		invitedUserEmailAddress: "blueimpulse9@outlook.com",
-		inviteRedirectUrl: "http://localhost",
-		sendInvitationMessage: true,
-	  }),
-	});
-  
-	if (response.ok) {
-	  const data = await response.json();
-	  console.log("Response data:", data);
-	} else {
-	  console.error("Error:", response.status, response.statusText);
-	}
-  };
-  
-  
   // ......Modal....
 	const [open, setOpen] = React.useState(false);
    
