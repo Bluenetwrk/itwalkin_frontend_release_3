@@ -112,36 +112,33 @@ const [immage, setimmage] = useState()
   })
   const [Api, setApi] = useState("")
 
-   const register = async () => {
-    if(!name || !email ||  !phoneNumber || !CompanyName){
-      alert("details are missing")
-      return false
-    }
-    const url = "https://graph.microsoft.com/v1.0/invitations";
-    const token = Api
-    // setInemail(email)
-    const response = await fetch(url, {
-      method: "POST",
-      headers: {
-      "Authorization": `Bearer ${token}`, // Send the Bearer Token
-      "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-      // Add your request body here
-      invitedUserEmailAddress: email,
-      // invitedUserEmailAddress: "blueimpulse9@outlook.com",
-      // inviteRedirectUrl: "http://localhost",
-      inviteRedirectUrl: "https://www.itwalkin.com/",
-      sendInvitationMessage: true,
-      }),
-    });
-    if (response.ok) {
-      const data = await response.json();
-      console.log("Response data:", data);
-    } else {
-      console.error("Error:", response.status, response.statusText);
-    }
-  }
+  //  const register = async () => {
+  //   if(!name || !email ||  !phoneNumber || !CompanyName){
+  //     alert("details are missing")
+  //     return false
+  //   }
+  //   const url = "https://graph.microsoft.com/v1.0/invitations";
+  //   const token = Api
+  //   const response = await fetch(url, {
+  //     method: "POST",
+  //     headers: {
+  //     "Authorization": `Bearer ${token}`, // Send the Bearer Token
+  //     "Content-Type": "application/json",
+  //     },
+  //     body: JSON.stringify({
+  //     invitedUserEmailAddress: email,
+  //     // inviteRedirectUrl: "http://localhost",
+  //     inviteRedirectUrl: "https://www.itwalkin.com/",
+  //     sendInvitationMessage: true,
+  //     }),
+  //   });
+  //   if (response.ok) {
+  //     const data = await response.json();
+  //     console.log("Response data:", data);
+  //   } else {
+  //     console.error("Error:", response.status, response.statusText);
+  //   }
+  // }
   
   // ...............upload Image.....................
   async function uploadImage() {
@@ -415,7 +412,7 @@ const [immage, setimmage] = useState()
             {/* <button className={styles.Save} onClick={(e) => { saveUpdate(e) }}>Save</button>
             <button className={styles.cancel} onClick={() => { navigate(-1) }} >cancel</button> */}
 
-<div className={STyles.signUpWrapper} style={{marginLeft:"10px"}} onClick={register} >
+<div className={STyles.signUpWrapper} style={{marginLeft:"10px"}} >
           <div className={STyles.both}>
             <img className={STyles.google} src={MicosoftImage} />
             <p className={STyles.signUpwrap} >Rigister with Microsoft</p>
