@@ -143,7 +143,11 @@ const [immage, setimmage] = useState()
   async function getToken(){
           const config = { 
         method: 'post', url: 'https://login.microsoftonline.com/ae4ae520-4db7-4149-ad51-778e540d8bec/oauth2/v2.0/token', 
-       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+       headers: { 
+        'Content-Type': 'application/x-www-form-urlencoded' ,
+        "access-control-allow-origin" : "*",
+      // "Content-type": "application/json; charset=UTF-8"
+      },
         data: new URLSearchParams({ 
           grant_type: 'client_credentials', 
          client_id: '097b08ff-185e-4153-aedc-0e5814e0570c', 
@@ -316,7 +320,7 @@ const [immage, setimmage] = useState()
 
             <label className={styles.inputName}>
               <h4>Primary User Name : <span style={{fontWeight:800, fontSize:"medium"}} title='(primary user will have the admin right for your  <br></br>
-                company, primary user can add or remove multiple secondary user)'>i</span></h4>
+                company, primary user can add or remove multiple secondary user)'><i class="fa-solid fa-circle-info"></i></span></h4>
               <input maxLength="20" className={styles.input}  value={name}  onChange={(e) => { setname(e.target.value) }} type="text" />
             </label>
 
@@ -376,20 +380,7 @@ const [immage, setimmage] = useState()
               <input maxLength="90" className={styles.input} value={CompanyAddress} onChange={(e) => { handleCompanyAddress(e) }} type="text" />
             </label>
 
-            {/* <label className={styles.inputName}>
-              <h4>Primery user name <span style={{fontWeight:300, fontSize:"small"}}>(primary user will have the admin right for your  <br></br>
-               company, primary user can add or remove multiple secondary user)</span>:</h4>
-              <input maxLength="90" className={styles.input} value={CompanyAddress} onChange={(e) => {handleCompanyAddress(e) }} type="text" />
-            </label> */}
 
-            <label className={styles.inputName}>
-              <h4>Primery user email id:</h4>
-              <input maxLength="90" className={styles.input} value={CompanyAddress} onChange={(e) => {handleCompanyAddress(e) }} type="text" />
-            </label>
-            <label className={styles.inputName}>
-              <h4>Primery user contact number:</h4>
-              <input maxLength="90" className={styles.input} value={CompanyAddress} onChange={(e) => {handleCompanyAddress(e) }} type="text" />
-            </label>
             <label className={styles.inputName}>
               <h4>Secondary user name <span style={{fontWeight:300, fontSize:"small"}}>(secondary user will be able to post a <br></br>job search candidates)</span> :</h4>
               <input maxLength="90" className={styles.input} value={CompanyAddress} onChange={(e) => {handleCompanyAddress(e) }} type="text" />
@@ -516,14 +507,7 @@ const [immage, setimmage] = useState()
               <h4 className={styles.MobileName}>Primery user Designation:</h4>
               <input maxLength="90" className={styles.Mobileinput} value={CompanyAddress} onChange={(e) => {handleCompanyAddress(e) }} type="text" />
             </label>
-            <label className={styles.MobileinputName}>
-              <h4 className={styles.MobileName}>Primery user email id:</h4>
-              <input maxLength="90" className={styles.Mobileinput} value={CompanyAddress} onChange={(e) => {handleCompanyAddress(e) }} type="text" />
-            </label>
-            <label className={styles.MobileinputName}>
-              <h4 className={styles.MobileName}>Primery user contact number:</h4>
-              <input maxLength="90" className={styles.Mobileinput} value={CompanyAddress} onChange={(e) => {handleCompanyAddress(e) }} type="text" />
-            </label>
+
             <label className={styles.MobileinputName}>
               <h4 className={styles.MobileName}>Secondary user name (secondary user will be able to post a job search candidates):</h4>
               <input maxLength="90" className={styles.Mobileinput} value={CompanyAddress} onChange={(e) => {handleCompanyAddress(e) }} type="text" />

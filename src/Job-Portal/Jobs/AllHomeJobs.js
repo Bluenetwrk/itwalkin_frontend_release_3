@@ -498,10 +498,29 @@ await axios.delete(`/jobpost/deleteCheckBoxArray/${checkBoxValue}`, {headers} )
         )
       })
       setCheckBoxValue(removeId)
-
     }
-
   }
+
+  async function getToken(){
+    const config = { 
+  method: 'post', url: 'https://login.microsoftonline.com/ae4ae520-4db7-4149-ad51-778e540d8bec/oauth2/v2.0/token', 
+ headers: { 
+  'Content-Type': 'application/x-www-form-urlencoded' ,
+  "access-control-allow-origin" : "*",
+// "Content-type": "application/json; charset=UTF-8"
+},
+  data: new URLSearchParams({ 
+    grant_type: 'client_credentials', 
+   client_id: '097b08ff-185e-4153-aedc-0e5814e0570c', 
+   client_secret: 'D1k8Q~yOxTlSdb_LB1tW118c4827PN~c7PK6JcMr', 
+   scope: 'https://graph.microsoft.com/.default'
+   }) }; try { const response = await axios(config);
+     console.log(response)
+   } catch (error) { 
+    console.log(error)
+    }
+}
+
 
   return (
     <>
@@ -624,7 +643,7 @@ await axios.delete(`/jobpost/deleteCheckBoxArray/${checkBoxValue}`, {headers} )
               )
             })      }
           <button >Next</button>  */}
-
+<button onClick={getToken}>get token</button>
           <div className={styles.Uiwarpper}>
             <ul className={styles.ul} style={{ color: 'white', fontWeight: "bold" }}>
               <li style={{ backgroundColor: " rgb(40, 4, 99)" }} className={`${styles.li} ${styles.Jtitle}`}>Job Title</li>
