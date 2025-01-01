@@ -49,6 +49,7 @@ const [immage, setimmage] = useState()
   const [TypeofOrganisation, setTypeofOrganisation] = useState("")
   const [loader, setLoader] = useState(false)
   const [emailError, setEmailError] = useState("");
+  
 
   let navigate = useNavigate()
 
@@ -112,53 +113,34 @@ const [immage, setimmage] = useState()
   })
   const [Api, setApi] = useState("")
 
-  //  const register = async () => {
-  //   if(!name || !email ||  !phoneNumber || !CompanyName){
-  //     alert("details are missing")
-  //     return false
-  //   }
-  //   const url = "https://graph.microsoft.com/v1.0/invitations";
-  //   const token = Api
-  //   const response = await fetch(url, {
-  //     method: "POST",
-  //     headers: {
-  //     "Authorization": `Bearer ${token}`, // Send the Bearer Token
-  //     "Content-Type": "application/json",
-  //     },
-  //     body: JSON.stringify({
-  //     invitedUserEmailAddress: email,
-  //     // inviteRedirectUrl: "http://localhost",
-  //     inviteRedirectUrl: "https://www.itwalkin.com/",
-  //     sendInvitationMessage: true,
-  //     }),
-  //   });
-  //   if (response.ok) {
-  //     const data = await response.json();
-  //     console.log("Response data:", data);
-  //   } else {
-  //     console.error("Error:", response.status, response.statusText);
-  //   }
-  // }
-
-  async function getToken(){
-          const config = { 
-        method: 'post', url: 'https://login.microsoftonline.com/ae4ae520-4db7-4149-ad51-778e540d8bec/oauth2/v2.0/token', 
-       headers: { 
-        'Content-Type': 'application/x-www-form-urlencoded' ,
-        "access-control-allow-origin" : "*",
-      // "Content-type": "application/json; charset=UTF-8"
+   const register = async () => {
+    if(!name || !email ||  !phoneNumber || !CompanyName){
+      alert("details are missing")
+      return false
+    }
+    const url = "https://graph.microsoft.com/v1.0/invitations";
+    const token = Api
+    const response = await fetch(url, {
+      method: "POST",
+      headers: {
+      "Authorization": `Bearer ${token}`, // Send the Bearer Token
+      "Content-Type": "application/json",
       },
-        data: new URLSearchParams({ 
-          grant_type: 'client_credentials', 
-         client_id: '097b08ff-185e-4153-aedc-0e5814e0570c', 
-         client_secret: 'D1k8Q~yOxTlSdb_LB1tW118c4827PN~c7PK6JcMr', 
-         scope: 'https://graph.microsoft.com/.default'
-         }) }; try { const response = await axios(config);
-           console.log(response)
-         } catch (error) { 
-          console.log(error)
-          }
+      body: JSON.stringify({
+      invitedUserEmailAddress: email,
+      // inviteRedirectUrl: "http://localhost",
+      inviteRedirectUrl: "https://www.itwalkin.com/",
+      sendInvitationMessage: true,
+      }),
+    });
+    if (response.ok) {
+      const data = await response.json();
+      console.log("Response data:", data);
+    } else {
+      console.error("Error:", response.status, response.statusText);
+    }
   }
+
   
   // ...............upload Image.....................
   async function uploadImage() {
@@ -251,7 +233,25 @@ const [immage, setimmage] = useState()
   } else {
       setEmailError("Enter valid Email!");
   }
+   }
+   
+  const [PrimeryuserDesignation, setPrimeryuserDesignation] = useState("");
+  const [Secondaryusername, setSecondaryusername] = useState("");
+  const [Secondaryuseremailid, setSecondaryuseremailid] = useState("");
+  const [Secondaryusercontactnumber, setSecondaryusercontactnumber] = useState("");
+  const [SecondaryuserDesignation, setSecondaryuserDesignation] = useState("");
 
+   function handlePrimeryuserDesignation(e){
+    setPrimeryuserDesignation(e.target.value)
+   }
+   function handleSecondaryusername(e){
+    setSecondaryusername(e.target.value)
+   }
+   function handleSecondaryuseremailid(e){
+    setSecondaryuseremailid(e.target.value)
+   }
+   function handleSecondaryusercontactnumber(e){
+    setSecondaryusercontactnumber(e.target.value)
    }
 
    function handleCompanyPhoneNumber(e){
@@ -283,6 +283,65 @@ const [immage, setimmage] = useState()
     setCompanyAddress(sanitizedValue);
    }
 
+   async function saveUpdate(e) {
+    if(emailError==="Enter valid Email!"){
+      return false
+    }
+    let userid = JSON.parse(localStorage.getItem("EmpIdG"))
+    const headers = { authorization: userid +" "+ atob(JSON.parse(localStorage.getItem("EmpLog"))) };
+    // e.preventDefault()
+    // console.log("before saving", empId,
+    //   name, email, phoneNumber, Aadhar, panCard,CompanyName,CompanyContact, CompanyGSTIN, CompanyWebsite, CompanyAddress,
+    //   CompanyEmail, TypeofOrganisation 
+    // )
+    await axios.post(`/EmpProfile/NewEmployeeRegistration`, { PrimeryuserDesignation, Secondaryusername, Secondaryuseremailid,
+      Secondaryusercontactnumber,  name, email, phoneNumber, Aadhar, panCard, CompanyName, CompanyContact, CompanyGSTIN,
+       CompanyWebsite,   CompanyAddress, CompanyEmail, TypeofOrganisation}, {headers})
+      .then(async (res) => {
+        let result = res.data
+        // console.log(result)
+        if(result===""){
+          alert("either primary email or Company Email id is already existed")
+        }
+        if(result.access_token){
+          const url = "https://graph.microsoft.com/v1.0/invitations";
+    const token = result.access_token
+    const response = await fetch(url, {
+      method: "POST",
+      headers: {
+      "Authorization": `Bearer ${token}`, // Send the Bearer Token
+      "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+      invitedUserEmailAddress: email,
+      // inviteRedirectUrl: "http://localhost",
+      inviteRedirectUrl: "https://www.itwalkin.com/",
+      sendInvitationMessage: true,
+      }),
+    });
+    if (response.ok) {
+      const data = await response.json();
+      // console.log("Response data:", data);
+      alert(`invitaion sent Succesfully to ${email}`)
+    } else {
+      console.error("Error:", response.status, response.statusText);
+    }
+        }
+        if (result == "success") {
+          settopMessage("Success! Profile updated successfully")
+        } else if (result == "feilds are missing") {
+          settopMessage("Alert!..name, emailAddress, NoticePeriod, phoneNumber, Qualification, Skills and Experiance should not be empty")
+        }
+
+        window.scrollTo({
+          top: 0,
+          behavior: "smooth"
+        });
+
+
+      }).catch((err) => {
+      })
+  }
 
   return (
     <>
@@ -319,19 +378,19 @@ const [immage, setimmage] = useState()
 
 
             <label className={styles.inputName}>
-              <h4>Primary User Name : <span style={{fontWeight:800, fontSize:"medium"}} title='(primary user will have the admin right for your  <br></br>
+              <h4>Primary User Name : <span style={{fontWeight:800, fontSize:"medium"}} title='(primary user will have the admin right for your
                 company, primary user can add or remove multiple secondary user)'><i class="fa-solid fa-circle-info"></i></span></h4>
               <input maxLength="20" className={styles.input}  value={name}  onChange={(e) => { setname(e.target.value) }} type="text" />
             </label>
 
             <label className={styles.inputName}>
-              <h4>Primeary User Email Id:</h4>
+              <h4>Primary User Email Id:</h4>
               <input maxLength="25" className={styles.input} value={email}  onChange={(e) => { setemail(e.target.value) }} type="text" />
             </label>
-
+            
             <label className={styles.inputName}>
-              <h4>Primery user Designation:</h4>
-              <input maxLength="90" className={styles.input} value={CompanyAddress} onChange={(e) => {handleCompanyAddress(e) }} type="text" />
+              <h4>Primary user Designation:</h4>
+              <input maxLength="90" className={styles.input} value={PrimeryuserDesignation} onChange={(e) => {handlePrimeryuserDesignation(e) }} type="text" />
             </label>
 
             <label className={styles.inputName}>
@@ -340,7 +399,9 @@ const [immage, setimmage] = useState()
             </label>
             
             <label className={styles.inputName}>
-              <h4>Aadhaar number <span style={{fontWeight:300, fontSize:"small"}}>(Applicable for individual job posters)</span>:</h4>
+              <h4>Aadhaar number:
+              <span style={{fontWeight:800, fontSize:"medium"}} title='(Applicable for individual job posters)'>
+                <i class="fa-solid fa-circle-info"></i></span> </h4>
               <input maxLength="12" className={styles.input} value={Aadhar} onChange={(e) => {AadharhandleChange(e)} } type="number" />
             </label>
 
@@ -382,20 +443,23 @@ const [immage, setimmage] = useState()
 
 
             <label className={styles.inputName}>
-              <h4>Secondary user name <span style={{fontWeight:300, fontSize:"small"}}>(secondary user will be able to post a <br></br>job search candidates)</span> :</h4>
-              <input maxLength="90" className={styles.input} value={CompanyAddress} onChange={(e) => {handleCompanyAddress(e) }} type="text" />
+              <h4>Secondary user name : <span style={{fontWeight:800, fontSize:"medium"}} 
+            title='(secondary user will be able to post a job search candidates)'><i class="fa-solid fa-circle-info"></i></span></h4>
+              <input maxLength="90" className={styles.input} value={Secondaryusername} onChange={(e) => {handleSecondaryusername(e) }} type="text" />
             </label>
-            <label className={styles.inputName}>
-              <h4>Secondary user Designation:</h4>
-              <input maxLength="90" className={styles.input} value={CompanyAddress} onChange={(e) => {handleCompanyAddress(e) }} type="text" />
-            </label>
+
+            {/*<label className={styles.inputName}>
+               <h4>Secondary user Designation:</h4>
+              <input maxLength="90" className={styles.input} value={Secondaryuseremailid} onChange={(e) => {setSecondaryuserDesignation(e) }} type="text" />
+            </label> */}
+            
             <label className={styles.inputName}>
               <h4>Secondary user email id:</h4>
-              <input maxLength="90" className={styles.input} value={CompanyAddress} onChange={(e) => {handleCompanyAddress(e) }} type="text" />
+              <input maxLength="90" className={styles.input} value={Secondaryuseremailid} onChange={(e) => {handleSecondaryuseremailid(e) }} type="text" />
             </label>
             <label className={styles.inputName}>
               <h4>Secondary user contact number:</h4>
-              <input maxLength="90" className={styles.input} value={CompanyAddress} onChange={(e) => {handleCompanyAddress(e) }} type="text" />
+              <input maxLength="90" className={styles.input} value={Secondaryusercontactnumber} onChange={(e) => {handleSecondaryusercontactnumber(e) }} type="text" />
             </label>
             {/* <label className={styles.inputName}>
               <h4>Type of Organisation:</h4>
@@ -415,8 +479,9 @@ const [immage, setimmage] = useState()
               <option value="Individual">Individual</option> 
             </select>                                 
             </div>           
+            <button className={styles.Save} onClick={(e) => { saveUpdate(e) }}>Save</button>
+            {/* 
 
-            {/* <button className={styles.Save} onClick={(e) => { saveUpdate(e) }}>Save</button>
             <button className={styles.cancel} onClick={() => { navigate(-1) }} >cancel</button> */}
 
 <div className={STyles.signUpWrapper} style={{marginLeft:"10px"}} >
@@ -433,15 +498,12 @@ const [immage, setimmage] = useState()
           </div>
         </div>
           </div>
-        <button onClick={getToken}>Get Token</button>
-              <input placeholder='get token from postman & enter' onChange={(e)=>{setApi(e.target.value)}} 
-              style={{marginLeft:"10px", width:"20%"}}/>
-
+ 
 </>
           :
           <>
            
-<label className={styles.MobileinputName}>
+           <label className={styles.MobileinputName}>
               <h4  className={styles.MobileName}>Name:</h4>
               <input maxLength="22" className={styles.Mobileinput} value={name} disabled onChange={(e) => { setname(e.target.value) }} type="text" />
             </label>
@@ -493,35 +555,13 @@ const [immage, setimmage] = useState()
               <h4 className={styles.MobileName}>Company Website:</h4>
               <input maxLength="25" className={styles.Mobileinput} value={CompanyWebsite} onChange={(e) => { handleCompanyWebsite(e)}} type="text" />
             </label>
+            <label className={styles.MobileinputName}>
+              <h4 className={styles.MobileName}>About us:</h4>
+              <input maxLength="25" className={styles.Mobileinput} value={CompanyWebsite} onChange={(e) => { handleCompanyWebsite(e)}} type="text" />
+            </label>
 
             <label className={styles.MobileinputName}>
               <h4 className={styles.MobileName}>Company Address:</h4>
-              <input maxLength="90" className={styles.Mobileinput} value={CompanyAddress} onChange={(e) => {handleCompanyAddress(e) }} type="text" />
-            </label>
-           
-            <label className={styles.MobileinputName}>
-              <h4 className={styles.MobileName}>Primery user name (primary user will have the admin right for your company, primary user can add or remove multiple secondary user):</h4>
-              <input maxLength="90" className={styles.Mobileinput} value={CompanyAddress} onChange={(e) => {handleCompanyAddress(e) }} type="text" />
-            </label>
-            <label className={styles.MobileinputName}>
-              <h4 className={styles.MobileName}>Primery user Designation:</h4>
-              <input maxLength="90" className={styles.Mobileinput} value={CompanyAddress} onChange={(e) => {handleCompanyAddress(e) }} type="text" />
-            </label>
-
-            <label className={styles.MobileinputName}>
-              <h4 className={styles.MobileName}>Secondary user name (secondary user will be able to post a job search candidates):</h4>
-              <input maxLength="90" className={styles.Mobileinput} value={CompanyAddress} onChange={(e) => {handleCompanyAddress(e) }} type="text" />
-            </label>
-            <label className={styles.MobileinputName}>
-              <h4 className={styles.MobileName}>Secondary user Designation:</h4>
-              <input maxLength="90" className={styles.Mobileinput} value={CompanyAddress} onChange={(e) => {handleCompanyAddress(e) }} type="text" />
-            </label>
-            <label className={styles.MobileinputName}>
-              <h4 className={styles.MobileName}>Secondary user email id:</h4>
-              <input maxLength="90" className={styles.Mobileinput} value={CompanyAddress} onChange={(e) => {handleCompanyAddress(e) }} type="text" />
-            </label>
-            <label className={styles.MobileinputName}>
-              <h4 className={styles.MobileName}>Secondary user contact number:</h4>
               <input maxLength="90" className={styles.Mobileinput} value={CompanyAddress} onChange={(e) => {handleCompanyAddress(e) }} type="text" />
             </label>
            
