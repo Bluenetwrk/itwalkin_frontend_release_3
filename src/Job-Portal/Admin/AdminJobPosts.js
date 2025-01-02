@@ -234,7 +234,7 @@ function AdminPostJobs() {
                                {/* { other?
                                <> */}
                                <hr style={{marginTop:"50px"}}></hr>
-                                       <h4 className={Style.jobHeadline}  >Job Post Source &nbsp;<span className={Style.hint}>(e.g Linkedin, Noukri, indeed etc.)</span></h4>
+                                       <h4 className={Style.jobHeadline}  >Job Post Source &nbsp;<span className={Style.hint}>(e.g Linkedin, Naukri, indeed etc.)</span></h4>
                                         <input maxLength="20" className={Style.inputbox} type="text" value={Source} onChange={(e) => { setSource(e.target.value) }} />
 
                                         <h4 className={Style.jobHeadline}  > Job Post Source Link</h4>

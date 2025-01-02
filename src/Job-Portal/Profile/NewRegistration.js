@@ -16,7 +16,7 @@ import Footer from '../Footer/Footer';
 import STyles from "../Login/login.module.css"
 import GoogleImage from "../img/icons8-google-48.png"
 import MicosoftImage from "../img/icons8-windows-10-48.png"
-
+// import { TailSpin, Puff } from "react-loader-spinner"
 import { useGoogleLogin } from '@react-oauth/google';
 
 
@@ -48,6 +48,7 @@ const [immage, setimmage] = useState()
   const [CompanyEmail, setCompanyEmail] = useState("")
   const [TypeofOrganisation, setTypeofOrganisation] = useState("")
   const [loader, setLoader] = useState(false)
+  const [RegLoader, setRegLoader] = useState(false)
   const [emailError, setEmailError] = useState("");
   
 
@@ -284,6 +285,11 @@ const [immage, setimmage] = useState()
    }
 
    async function saveUpdate(e) {
+    if(!email){
+      alert("email field is missing")
+      return false
+    }
+    setRegLoader(true)
     if(emailError==="Enter valid Email!"){
       return false
     }
@@ -341,12 +347,14 @@ const [immage, setimmage] = useState()
 
       }).catch((err) => {
       })
+    setRegLoader(false)
   }
 
   return (
     <>
 
       <div className={styles.EntireFullWrapper}>
+
         <div className={styles.EntireWrapper}>
         <img style={{ height:"25px", color:"grey", marginTop:"20px", marginLeft:"8%", cursor:"pointer",
              width:"28px"}} onClick={()=>{navigate(-1)}}  src={Arrowimage} />
@@ -374,7 +382,10 @@ const [immage, setimmage] = useState()
 {screenSize.width>850?
 
 <>
+
           <div className={styles.inputWrapper}>
+{!RegLoader?
+<>
 
 
             <label className={styles.inputName}>
@@ -479,25 +490,26 @@ const [immage, setimmage] = useState()
               <option value="Individual">Individual</option> 
             </select>                                 
             </div>           
-            <button className={styles.Save} onClick={(e) => { saveUpdate(e) }}>Save</button>
+            {/* <button className={styles.Save} onClick={(e) => { saveUpdate(e) }}>Save</button> */}
             {/* 
 
             <button className={styles.cancel} onClick={() => { navigate(-1) }} >cancel</button> */}
-
-<div className={STyles.signUpWrapper} style={{marginLeft:"10px"}} >
+<div className={STyles.signUpWrapper} style={{marginLeft:"10px", marginBottom:"20px"}} onClick={(e) => { saveUpdate(e) }} >
           <div className={STyles.both}>
-            <img className={STyles.google} src={MicosoftImage} />
+            <img className={STyles.google} src={ MicosoftImage}/> 
             <p className={STyles.signUpwrap} >Rigister with Microsoft</p>
           </div>
         </div>
 
-            <div className={STyles.signUpWrapper} style={{marginLeft:"10px"}} onClick={login}>
+            <div className={STyles.signUpWrapper} style={{marginLeft:"50px", marginBottom:"20px"}} onClick={login}>
           <div className={STyles.both}>
             <img className={STyles.google} src={GoogleImage} />
             <p className={STyles.signUpwrap} >Continue with Google</p>
           </div>
         </div>
-          </div>
+        </>
+        :<div style={{margin:"auto", marginTop:"80px", marginBottom:"300px"}}><TailSpin color="blue" height={100} /></div>}
+</div>
  
 </>
           :

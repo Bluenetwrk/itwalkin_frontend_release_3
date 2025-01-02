@@ -147,6 +147,8 @@
 .inputWrapper {
     display: flex;
     flex-wrap: wrap;
+    /* background-color: aqua; */
+    /* height: 90%; */
 
 }
 
