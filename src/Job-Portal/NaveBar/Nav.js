@@ -135,6 +135,11 @@ function Nav(props) {
   function ChangeSideNaveMobile() {
     setShowSideNave((prev) => !prev)
   }
+  const [ShowRegister, setShowRegister] = useState(false)
+
+  function handleOpenAccont(){
+    setShowRegister((prev)=>!prev)
+  }
 
   return (
     <>
@@ -331,8 +336,19 @@ function Nav(props) {
                       <NavLink to="/Contact" className={Styles.Hlink} style={navLinkStyles}>Contact</NavLink> */}
                       <div className={` ${Styles.LoginlinkwrapperHome}`}>
                         <NavLink to="/Search-Candidate-Home" className={` ${Styles.HomeSearchCandidate}`} style={navLinkStyles}>Employer </NavLink>
-                        <NavLink to="/New-Registration" className={` ${Styles.HomeSearchCandidate}`} style={navLinkStyles}>New Register </NavLink>
-
+                        {/* <NavLink to="/New-Registration" className={` ${Styles.HomeSearchCandidate}`} style={navLinkStyles}>New Register </NavLink> */}
+                        {/* <NavLink to="/Jobseeker-New-Registration" className={` ${Styles.HomeSearchCandidate}`} style={navLinkStyles}>Student Register </NavLink> */}
+<div>
+<p className={` ${Styles.openAccount}`} onClick={handleOpenAccont} >Open Account</p>
+{
+  ShowRegister?
+  <div className={Styles.dropdownwrapperHomeRegistration} >
+  <p onClick={()=>{navigate("/New-Registration");setShowRegister(false)}}>Employee Registration</p>
+  <p onClick={()=>{navigate("/Jobseeker-New-Registration");setShowRegister(false)}}>JobSeeker Registration</p>
+  </div>
+  :""
+}
+</div>
                         <img className={` ${Styles.HomeprofileIcon}`} src={loginuser} ref={imgRef} onClick={() => setShowprofile((prev) => !prev)} />
                         {/* <NavLink to="/JobSeekerLogin" className={`${Styles.Loginlink} ${Styles.StuLogin}`} style={navLinkStyles}>Job Seeker Login</NavLink> */}
                         {showprofile ?

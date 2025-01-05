@@ -143,7 +143,11 @@
     font-size:small;
     font-weight:500;
 }
-
+.Editor{
+    margin-top: 20px;
+    margin-left: 18px;
+    width:87%
+}
 .inputWrapper {
     display: flex;
     flex-wrap: wrap;

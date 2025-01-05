@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import styles from "./SudentUpdateProfile.module.css"
 import imageCompression from 'browser-image-compression';
 import axios from 'axios';
@@ -19,9 +19,12 @@ import MicosoftImage from "../img/icons8-windows-10-48.png"
 // import { TailSpin, Puff } from "react-loader-spinner"
 import { useGoogleLogin } from '@react-oauth/google';
 
-
+import JoditEditor from 'jodit-react'
+import Style from "../PostJobs/postJobs.module.css"
 
 function EmployeeUpdateProfile(props) {
+  const editor=useRef(null)
+
   // useEffect( ()=>{    
   //   const socket = socketIO.connect(props.url,{
   //     auth:{
@@ -50,6 +53,15 @@ const [immage, setimmage] = useState()
   const [loader, setLoader] = useState(false)
   const [RegLoader, setRegLoader] = useState(false)
   const [emailError, setEmailError] = useState("");
+  const [compemailError, setCompEmailError] = useState("");
+
+  const [PrimeryuserDesignation, setPrimeryuserDesignation] = useState("");
+  const [secondaryuserDesignation, setsecondaryuserDesignation] = useState("");
+  const [Secondaryusername, setSecondaryusername] = useState("");
+  const [Secondaryuseremailid, setSecondaryuseremailid] = useState("");
+  const [Secondaryusercontactnumber, setSecondaryusercontactnumber] = useState("");
+  const [CompanyCIN, setCompanyCIN] = useState("");
+  const [AboutCompany, setAboutCompany] = useState("");
   
 
   let navigate = useNavigate()
@@ -217,6 +229,10 @@ const [immage, setimmage] = useState()
   }
    };
 
+   function handleChangeCompanyCIN(e){
+    setCompanyCIN(e.target.value)
+   }
+
    function  handleCompanyname(e){    
     const value = e.target.value;
     const sanitizedValue = value.replace(/[^\w\s.]|_/g, ''); // Regex to remove special characters
@@ -230,29 +246,52 @@ const [immage, setimmage] = useState()
     setCompanyEmail(sanitizedValue);
 
     if (validator.isEmail(email)) {
+      setCompEmailError("");
+  } else {
+    setCompEmailError("Enter valid Email!");
+  }
+   }
+
+   function handlesetemail(event){
+    const email = event.target.value;
+    const sanitizedValue = email.replace(/[^\w\s.@]|_/g, ''); // Regex to remove special characters
+    setemail(sanitizedValue);
+
+    if (validator.isEmail(email)) {
       setEmailError("");
   } else {
       setEmailError("Enter valid Email!");
   }
    }
    
-  const [PrimeryuserDesignation, setPrimeryuserDesignation] = useState("");
-  const [Secondaryusername, setSecondaryusername] = useState("");
-  const [Secondaryuseremailid, setSecondaryuseremailid] = useState("");
-  const [Secondaryusercontactnumber, setSecondaryusercontactnumber] = useState("");
-  const [SecondaryuserDesignation, setSecondaryuserDesignation] = useState("");
-
    function handlePrimeryuserDesignation(e){
     setPrimeryuserDesignation(e.target.value)
    }
+   function handleSecondaryuserDesignation(e){
+    setsecondaryuserDesignation(e.target.value)
+   }
+   
+
+
    function handleSecondaryusername(e){
     setSecondaryusername(e.target.value)
    }
+
    function handleSecondaryuseremailid(e){
-    setSecondaryuseremailid(e.target.value)
+    const email = e.target.value;
+    const sanitizedValue = email.replace(/[^\w\s.@]|_/g, ''); // Regex to remove special characters
+    setSecondaryuseremailid(sanitizedValue)
    }
    function handleSecondaryusercontactnumber(e){
-    setSecondaryusercontactnumber(e.target.value)
+
+    const sanitizedValue = e.target.value.replace(/[A-Za-z]/g, '');
+    // if(e.target.value.includes(/[1-9]/g))
+        if (sanitizedValue.length>10){
+        return false
+    }else{
+      setSecondaryusercontactnumber(sanitizedValue)
+    }
+
    }
 
    function handleCompanyPhoneNumber(e){
@@ -286,7 +325,7 @@ const [immage, setimmage] = useState()
 
    async function saveUpdate(e) {
     if(!email){
-      alert("email field is missing")
+      alert("Primary User Email Id is mandatory to fill")
       return false
     }
     setRegLoader(true)
@@ -302,11 +341,11 @@ const [immage, setimmage] = useState()
     // )
     await axios.post(`/EmpProfile/NewEmployeeRegistration`, { PrimeryuserDesignation, Secondaryusername, Secondaryuseremailid,
       Secondaryusercontactnumber,  name, email, phoneNumber, Aadhar, panCard, CompanyName, CompanyContact, CompanyGSTIN,
-       CompanyWebsite,   CompanyAddress, CompanyEmail, TypeofOrganisation}, {headers})
+      CompanyWebsite,CompanyAddress,CompanyEmail, TypeofOrganisation,CompanyCIN, secondaryuserDesignation,AboutCompany},{headers})
       .then(async (res) => {
         let result = res.data
         // console.log(result)
-        if(result===""){
+        if(result===11000){
           alert("either primary email or Company Email id is already existed")
         }
         if(result.access_token){
@@ -325,12 +364,32 @@ const [immage, setimmage] = useState()
       sendInvitationMessage: true,
       }),
     });
+    // console.log("Response :", response);
     if (response.ok) {
       const data = await response.json();
-      // console.log("Response data:", data);
-      alert(`invitaion sent Succesfully to ${email}`)
+      alert(` you will receive a invitation email from microsoft to email address: ${email} `)
+      setname("")
+setemail("")
+setphoneNumber("")
+setAadhar("")
+setpanCard("")
+setCompanyName("")
+setCompanyContact("")
+setCompanyGSTIN("")
+setCompanyWebsite("")
+setCompanyAddress("")
+setCompanyEmail("")
+setTypeofOrganisation("")
+setPrimeryuserDesignation("")
+setsecondaryuserDesignation("")
+setSecondaryusername("")
+setSecondaryuseremailid("")
+setSecondaryusercontactnumber("")
+setCompanyCIN("")
     } else {
-      console.error("Error:", response.status, response.statusText);
+      // console.error("Error:", response.status, response.statusText);
+      alert(`some thing went wrong`)
+
     }
         }
         if (result == "success") {
@@ -387,96 +446,25 @@ const [immage, setimmage] = useState()
 {!RegLoader?
 <>
 
-
-            <label className={styles.inputName}>
+<label className={styles.inputName}>
               <h4>Primary User Name : <span style={{fontWeight:800, fontSize:"medium"}} title='(primary user will have the admin right for your
                 company, primary user can add or remove multiple secondary user)'><i class="fa-solid fa-circle-info"></i></span></h4>
-              <input maxLength="20" className={styles.input}  value={name}  onChange={(e) => { setname(e.target.value) }} type="text" />
+              <input maxLength="40" className={styles.input}  value={name}  onChange={(e) => { setname(e.target.value) }} type="text" />
             </label>
 
             <label className={styles.inputName}>
               <h4>Primary User Email Id:</h4>
-              <input maxLength="25" className={styles.input} value={email}  onChange={(e) => { setemail(e.target.value) }} type="text" />
-            </label>
-            
-            <label className={styles.inputName}>
-              <h4>Primary user Designation:</h4>
-              <input maxLength="90" className={styles.input} value={PrimeryuserDesignation} onChange={(e) => {handlePrimeryuserDesignation(e) }} type="text" />
-            </label>
-
-            <label className={styles.inputName}>
-              <h4>Primary User Phone number:</h4>
-            <input maxLength="15" className={styles.input}  value={phoneNumber} onChange={(e) => { handlephoneNumber(e) }} type="number" />
-            </label>
-            
-            <label className={styles.inputName}>
-              <h4>Aadhaar number:
-              <span style={{fontWeight:800, fontSize:"medium"}} title='(Applicable for individual job posters)'>
-                <i class="fa-solid fa-circle-info"></i></span> </h4>
-              <input maxLength="12" className={styles.input} value={Aadhar} onChange={(e) => {AadharhandleChange(e)} } type="number" />
-            </label>
-
-            <label className={styles.inputName}>
-              <h4>Company Pan Card Number:</h4>
-              <input maxLength="12" className={styles.input} value={panCard} onChange={(e) => {PanCardhandleChange(e)} } type="text" />
+              <input maxLength="25" className={styles.input} value={email}  onChange={(e) => { handlesetemail(e) }} type="text" />
+              <span style={{color:"red", marginLeft:"5%"}}>{emailError}</span>
+           
             </label>
 
             <label className={styles.inputName}>
               <h4>Company Name: </h4>
-              <input maxLength="20" className={styles.input} value={CompanyName} onChange={(e) => {handleCompanyname(e) }} type="text" />
+              <input maxLength="40" className={styles.input} value={CompanyName} onChange={(e) => {handleCompanyname(e) }} type="text" />
             </label>
 
-            <label className={styles.inputName}>
-              <h4>Company Email id:</h4>
-              <input maxLength="25" className={styles.input} value={CompanyEmail} onChange={(e) => { handleCompanyEmail(e) }} type="text" /><br></br>
-              <span style={{color:"red", marginLeft:"5%"}}>{emailError}</span>
-            </label>
-
-            <label className={styles.inputName}>
-              <h4>Company Contact No:</h4>
-              <input maxLength="15"  className={styles.input} value={CompanyContact} onChange={(e) => { handleCompanyPhoneNumber(e) }} type="number" />
-            </label>
-
-            <label className={styles.inputName}>
-              <h4>Company GSTIN: </h4>
-              <input maxLength="15" className={styles.input} value={CompanyGSTIN} onChange={(e) => { handleGstn(e) }} type="text" />
-            </label>
-
-            <label className={styles.inputName}>
-              <h4>Company Website:</h4>
-              <input maxLength="25" className={styles.input} value={CompanyWebsite} onChange={(e) => { handleCompanyWebsite(e) }} type="text" />
-            </label>
-
-            <label className={styles.inputName}>
-              <h4>Company Address:</h4>
-              <input maxLength="90" className={styles.input} value={CompanyAddress} onChange={(e) => { handleCompanyAddress(e) }} type="text" />
-            </label>
-
-
-            <label className={styles.inputName}>
-              <h4>Secondary user name : <span style={{fontWeight:800, fontSize:"medium"}} 
-            title='(secondary user will be able to post a job search candidates)'><i class="fa-solid fa-circle-info"></i></span></h4>
-              <input maxLength="90" className={styles.input} value={Secondaryusername} onChange={(e) => {handleSecondaryusername(e) }} type="text" />
-            </label>
-
-            {/*<label className={styles.inputName}>
-               <h4>Secondary user Designation:</h4>
-              <input maxLength="90" className={styles.input} value={Secondaryuseremailid} onChange={(e) => {setSecondaryuserDesignation(e) }} type="text" />
-            </label> */}
-            
-            <label className={styles.inputName}>
-              <h4>Secondary user email id:</h4>
-              <input maxLength="90" className={styles.input} value={Secondaryuseremailid} onChange={(e) => {handleSecondaryuseremailid(e) }} type="text" />
-            </label>
-            <label className={styles.inputName}>
-              <h4>Secondary user contact number:</h4>
-              <input maxLength="90" className={styles.input} value={Secondaryusercontactnumber} onChange={(e) => {handleSecondaryusercontactnumber(e) }} type="text" />
-            </label>
-            {/* <label className={styles.inputName}>
-              <h4>Type of Organisation:</h4>
-              <input className={styles.input} value={TypeofOrganisation} onChange={(e) => { setTypeofOrganisation(e.target.value) }} type="text" />
-            </label> */}
-<div className={styles.inputName}>
+            <div className={styles.inputName}>
               <h4>Type of Organisation :  <span style={{color:"blue"}}>{TypeofOrganisation}</span></h4>
               {/* <input className={styles.input} value={TypeofOrganisation} onChange={(e) => { setTypeofOrganisation(e.target.value) }} type="text" /> */}
            
@@ -489,7 +477,94 @@ const [immage, setimmage] = useState()
               <option value="Consultancy">Consultancy</option> 
               <option value="Individual">Individual</option> 
             </select>                                 
-            </div>           
+            </div>  
+
+            <label className={styles.inputName}>
+              <h4>Company Email id:</h4>
+              <input maxLength="25" className={styles.input} value={CompanyEmail} onChange={(e) => { handleCompanyEmail(e) }} type="text" /><br></br>
+              <span style={{color:"red", marginLeft:"5%"}}>{compemailError}</span>
+            </label>
+
+            <label className={styles.inputName}>
+              <h4>Company Contact No:</h4>
+              <input maxLength="15"  className={styles.input} value={CompanyContact} onChange={(e) => { handleCompanyPhoneNumber(e) }} type="number" />
+            </label>
+
+            <label className={styles.inputName}>
+              <h4>Company Pan Card Number:</h4>
+              <input maxLength="12" className={styles.input} value={panCard} onChange={(e) => {PanCardhandleChange(e)} } type="text" />
+            </label>
+            <label className={styles.inputName}>
+              <h4>Company CIN Number:</h4>
+              <input maxLength="12" className={styles.input} value={CompanyCIN} onChange={(e) => {handleChangeCompanyCIN(e)} } type="text" />
+            </label>
+
+            <label className={styles.inputName}>
+              <h4>Company GSTIN: </h4>
+              <input maxLength="15" className={styles.input} value={CompanyGSTIN} onChange={(e) => { handleGstn(e) }} type="text" />
+            </label>
+
+            <label className={styles.inputName}>
+              <h4>Company Website:</h4>
+              <input maxLength="40" className={styles.input} value={CompanyWebsite} onChange={(e) => { handleCompanyWebsite(e) }} type="text" />
+            </label>
+
+            <label className={styles.inputName}>
+              <h4>Company Address:</h4>
+              <input maxLength="200" className={styles.input} value={CompanyAddress} onChange={(e) => { handleCompanyAddress(e) }} type="text" />
+            </label>
+
+
+            
+            <label className={styles.inputName}>
+              <h4>Primary user Designation:</h4>
+              <input maxLength="90" className={styles.input} value={PrimeryuserDesignation} onChange={(e) => {handlePrimeryuserDesignation(e) }} type="text" />
+            </label>
+
+            <label className={styles.inputName}>
+              <h4>Aadhaar number:
+              <span style={{fontWeight:800, fontSize:"medium"}} title='(Applicable for individual job posters)'>
+                <i class="fa-solid fa-circle-info"></i></span> </h4>
+              <input maxLength="12" className={styles.input} value={Aadhar} onChange={(e) => {AadharhandleChange(e)} } type="number" />
+            </label>
+
+            <label className={styles.inputName}>
+              <h4>Primary User Phone number:</h4>
+            <input maxLength="15" className={styles.input}  value={phoneNumber} onChange={(e) => { handlephoneNumber(e) }} type="number" />
+            </label>
+            
+
+            <label className={styles.inputName}>
+              <h4>Secondary user name : <span style={{fontWeight:800, fontSize:"medium"}} 
+            title='(secondary user will be able to post a job search candidates)'><i class="fa-solid fa-circle-info"></i></span></h4>
+              <input maxLength="90" className={styles.input} value={Secondaryusername} onChange={(e) => {handleSecondaryusername(e) }} type="text" />
+            </label>
+
+            <label className={styles.inputName}>
+              <h4>Secondary user Designation:</h4>
+              <input maxLength="90" className={styles.input} value={PrimeryuserDesignation} onChange={(e) => {handleSecondaryuserDesignation(e) }} type="text" />
+            </label>
+
+            
+            <label className={styles.inputName}>
+              <h4>Secondary user email id:</h4>
+              <input maxLength="90" className={styles.input} value={Secondaryuseremailid} onChange={(e) => {handleSecondaryuseremailid(e) }} type="text" />
+            </label>
+            <label className={styles.inputName}>
+              <h4>Secondary user contact number:</h4>
+              <input maxLength="90" className={styles.input} value={Secondaryusercontactnumber} onChange={(e) => {handleSecondaryusercontactnumber(e) }} type="text" />
+            </label>
+
+
+<div className={styles.Editor}>
+            <h4>About Company:</h4>
+<JoditEditor  ref={editor}  value={AboutCompany.toString()} onChange={(e)=>{setAboutCompany(e)}} />
+</div>
+            {/* <label className={styles.inputName}>
+              <h4>Type of Organisation:</h4>
+              <input className={styles.input} value={TypeofOrganisation} onChange={(e) => { setTypeofOrganisation(e.target.value) }} type="text" />
+            </label> */}
+         
             {/* <button className={styles.Save} onClick={(e) => { saveUpdate(e) }}>Save</button> */}
             {/* 
 
@@ -514,20 +589,21 @@ const [immage, setimmage] = useState()
 </>
           :
           <>
-           
-           <label className={styles.MobileinputName}>
-              <h4  className={styles.MobileName}>Name:</h4>
-              <input maxLength="22" className={styles.Mobileinput} value={name} disabled onChange={(e) => { setname(e.target.value) }} type="text" />
+
+            <label className={styles.MobileinputName}>
+              <h4 className={styles.MobileName}>Primary User Name : <span style={{fontWeight:800, fontSize:"medium"}} title='(primary user will have the admin right for your
+                company, primary user can add or remove multiple secondary user)'><i class="fa-solid fa-circle-info"></i></span></h4>
+              <input maxLength="40" className={styles.Mobileinput}  value={name}  onChange={(e) => { setname(e.target.value) }} type="text" />
             </label>
 
             <label className={styles.MobileinputName}>
-              <h4  className={styles.MobileName}>Email Id:</h4>
-              <input maxLength="25" className={styles.Mobileinput} value={email} disabled onChange={(e) => { setemail(e.target.value) }} type="text" />
+              <h4 className={styles.MobileName}>Primary User Email Id:</h4>
+              <input maxLength="25" className={styles.Mobileinput} value={email}  onChange={(e) => { setemail(e.target.value) }} type="text" />
             </label>
-
+            
             <label className={styles.MobileinputName}>
-              <h4 className={styles.MobileName}>Phone number:</h4>
-              <input className={styles.Mobileinput} value={phoneNumber} onChange={(e) => { handlephoneNumber(e) }} type="number" />
+              <h4 className={styles.MobileName}>Primary user Designation:</h4>
+              <input maxLength="90" className={styles.Mobileinput} value={PrimeryuserDesignation} onChange={(e) => {handlePrimeryuserDesignation(e) }} type="text" />
             </label>
             
             <label className={styles.MobileinputName}>
@@ -576,6 +652,27 @@ const [immage, setimmage] = useState()
               <h4 className={styles.MobileName}>Company Address:</h4>
               <input maxLength="90" className={styles.Mobileinput} value={CompanyAddress} onChange={(e) => {handleCompanyAddress(e) }} type="text" />
             </label>
+
+            <label className={styles.MobileinputName}>
+              <h4 className={styles.MobileName}>Secondary user name : <span style={{fontWeight:800, fontSize:"medium"}} 
+            title='(secondary user will be able to post a job search candidates)'><i class="fa-solid fa-circle-info"></i></span></h4>
+              <input maxLength="90" className={styles.Mobileinput} value={Secondaryusername} onChange={(e) => {handleSecondaryusername(e) }} type="text" />
+            </label>
+
+            <label className={styles.MobileinputName}>
+              <h4 className={styles.MobileName}>Secondary user Designation:</h4>
+              <input maxLength="90" className={styles.Mobileinput} value={PrimeryuserDesignation} onChange={(e) => {handleSecondaryuserDesignation(e) }} type="text" />
+            </label>
+
+            
+            <label className={styles.MobileinputName}>
+              <h4 className={styles.MobileName}>Secondary user email id:</h4>
+              <input maxLength="90" className={styles.Mobileinput} value={Secondaryuseremailid} onChange={(e) => {handleSecondaryuseremailid(e) }} type="text" />
+            </label>
+            <label className={styles.MobileinputName}>
+              <h4 className={styles.MobileName}>Secondary user contact number:</h4>
+              <input maxLength="90" className={styles.Mobileinput} value={Secondaryusercontactnumber} onChange={(e) => {handleSecondaryusercontactnumber(e) }} type="text" />
+            </label>
            
             <div className={styles.MobileinputName}>
               <h4 className={styles.MobileName}>Type of Organisation :  <span style={{color:"blue"}}>{TypeofOrganisation}</span></h4>          
@@ -589,10 +686,27 @@ const [immage, setimmage] = useState()
               <option value="Individual">Individual</option> 
 
             </select>  
-{/*             
-            <button className={styles.MobileSave} onClick={(e) => { saveUpdate(e) }}>Save</button>
-            <button className={styles.Mobilecancel} onClick={() => { navigate(-1) }} >cancel</button>                                */}
             </div>
+            
+<div className={styles.Editor}>
+            <h4>About Company:</h4>
+<JoditEditor  ref={editor}  value={AboutCompany.toString()} onChange={(e)=>{setAboutCompany(e)}} />
+</div>
+
+            <div className={STyles.signUpWrapper} style={{marginLeft:"10px", marginBottom:"20px"}} onClick={(e) => { saveUpdate(e) }} >
+          <div className={STyles.both}>
+            <img className={STyles.google} src={ MicosoftImage}/> 
+            <p className={STyles.signUpwrap} >Rigister with Microsoft</p>
+          </div>
+        </div>
+
+            <div className={STyles.signUpWrapper} style={{marginLeft:"10px", marginBottom:"20px"}} onClick={login}>
+          <div className={STyles.both}>
+            <img className={STyles.google} src={GoogleImage} />
+            <p className={STyles.signUpwrap} >Continue with Google</p>
+          </div>
+        </div>
+
             <div style={{marginTop:"60px"}}>
           <Footer/>
         </div>

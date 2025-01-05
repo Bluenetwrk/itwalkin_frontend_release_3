@@ -29,7 +29,7 @@
     position: sticky;
     top:10px;
     z-index: 100;
-    width:46%;
+    width:40%;
     margin-left: 27%;
     /* background-color: red; */
 }
@@ -40,9 +40,9 @@
     position: sticky;
     top:10px;
     z-index: 100;
-    width:45%;
+    width:40%;
     margin-left: 28%;
-    /* background-color: aqua; */
+    background-color: aqua;
 }
 .NavConetenetWrapper{
     display: flex;
@@ -108,7 +108,7 @@
 
 }
 .HomesearchBothForNavWrapper{
-    width:74%;
+    width:68%;
     background-color: white;
     border-radius: 3px;
     position: sticky;
@@ -116,7 +116,7 @@
 
 }
 .searchBothForNavWrapper{
-    width:74%;
+    width:68%;
     background-color: white;
     border-radius: 3px;
     position: sticky;

@@ -18,7 +18,7 @@ import NavIcon from "./Job-Portal/img/icons8-menu-50.png"
 import StudentLogin from "./Job-Portal/Login/StudLogin";
 import EmployeeLogin from "./Job-Portal/Login/EmpLogin"
 import NewRegistered from "./Job-Portal/Profile/NewRegistration";
-// import NewRegistered from "./Job-Portal/Login/NewRegistration";
+import StuNewRegistered from "./Job-Portal/Profile/StudentRegistration";
 import StudentSignUp from "./Job-Portal/SignUp/StudSignin";
 import EmployeeSignUp from "./Job-Portal/SignUp/EmplSign";
 import StudPrivate from "./Job-Portal/Private/OutletStud";
@@ -179,6 +179,7 @@ function App() {
             <Route path="/BIAddmin@ArchivedUser" element={<ArchivedUser />} />
             <Route path="/JobSeekerLogin" element={<StudentLogin />} />
             <Route path="/New-Registration" element={<NewRegistered />} />
+            <Route path="/Jobseeker-New-Registration" element={<StuNewRegistered />} />
             <Route path="/EmployeeLogin" element={<EmployeeLogin />} />
             <Route path="/JobSeekerSignUp" element={<StudentSignUp />} />
             <Route path="/EmployeeSignUp" element={<EmployeeSignUp />} />
