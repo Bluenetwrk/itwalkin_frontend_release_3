@@ -446,19 +446,6 @@ setCompanyCIN("")
 {!RegLoader?
 <>
 
-<label className={styles.inputName}>
-              <h4>Primary User Name : <span style={{fontWeight:800, fontSize:"medium"}} title='(primary user will have the admin right for your
-                company, primary user can add or remove multiple secondary user)'><i class="fa-solid fa-circle-info"></i></span></h4>
-              <input maxLength="40" className={styles.input}  value={name}  onChange={(e) => { setname(e.target.value) }} type="text" />
-            </label>
-
-            <label className={styles.inputName}>
-              <h4>Primary User Email Id:</h4>
-              <input maxLength="25" className={styles.input} value={email}  onChange={(e) => { handlesetemail(e) }} type="text" />
-              <span style={{color:"red", marginLeft:"5%"}}>{emailError}</span>
-           
-            </label>
-
             <label className={styles.inputName}>
               <h4>Company Name: </h4>
               <input maxLength="40" className={styles.input} value={CompanyName} onChange={(e) => {handleCompanyname(e) }} type="text" />
@@ -514,7 +501,17 @@ setCompanyCIN("")
               <input maxLength="200" className={styles.input} value={CompanyAddress} onChange={(e) => { handleCompanyAddress(e) }} type="text" />
             </label>
 
+            <label className={styles.inputName}>
+              <h4>Primary User Name : <span style={{fontWeight:800, fontSize:"medium"}} title='(primary user will have the admin right for your
+                company, primary user can add or remove multiple secondary user)'><i class="fa-solid fa-circle-info"></i></span></h4>
+              <input maxLength="40" className={styles.input}  value={name}  onChange={(e) => { setname(e.target.value) }} type="text" />
+            </label>
 
+            <label className={styles.inputName}>
+              <h4>Primary User Email Id:</h4>
+              <input maxLength="25" className={styles.input} value={email}  onChange={(e) => { handlesetemail(e) }} type="text" />
+              <span style={{color:"red", marginLeft:"5%"}}>{emailError}</span>           
+            </label>
             
             <label className={styles.inputName}>
               <h4>Primary user Designation:</h4>
