@@ -520,18 +520,13 @@ await axios.delete(`/jobpost/deleteCheckBoxArray/${checkBoxValue}`, {headers} )
     console.log(error)
     }
 }
-
-
   return (
     <>
-
       {screenSize.width > 850 ?
       // adminLogin?""
       // :
         <>
         <div className={adminLogin?styles.HomeNavConetenetWrapperAdmin:styles.HomeNavConetenetWrapper}>
-
-
           <div className={styles.LocationFilterWrapper}>
             {
               JobLocationTags.map((location, i) => {
