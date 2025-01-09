@@ -8,8 +8,7 @@ import location from "../img/icons8-location-20.png"
 import graduation from "../img/icons8-graduation-cap-40.png"
 import Footer from '../Footer/Footer';
 import {jobTags} from '../Tags'
-
-
+import HTMLReactParser from 'html-react-parser'
 import useScreenSize from '../SizeHook';
 import socketIO from 'socket.io-client';
 
@@ -1450,7 +1449,7 @@ return(
                           <button className={styles.ApplyMobile} onClick={() => { navigate("/JobSeekerLogin") }}><b>Apply</b></button>
                           }
                         </div>
-                        <p className={styles.jobDescriptionHeading}>Job Description:</p>
+                        {/* <p className={styles.jobDescriptionHeading}>Job Description:</p>
                         <p className={styles.jobDescription}>
                           {
                             job.jobDescription.map((descrip, di) => {
@@ -1473,7 +1472,22 @@ return(
                           }} className={styles.seeMore}>
                             ...read more
                           </span>
-                        </p>
+                        </p> */}
+                         <p className={styles.jobDescriptionHeading}>Job Description:</p>
+                                                <p className={styles.jobDescription}>
+                                                  {
+                            job.jobDescription? HTMLReactParser(job.jobDescription.slice(0,100).toString()) :""
+                                                  }
+                                                  <span onClick={() => {
+                                                    window.scrollTo({
+                                                      top: 0
+                                                    })
+                                                    navigate(`/Jobdetails/${btoa(job._id)}`)
+                                                  }} className={styles.seeMore}>
+                                                    ...read more
+                                                  </span>
+                                                </p>
+                        
                       </div>
                     </>
                   )

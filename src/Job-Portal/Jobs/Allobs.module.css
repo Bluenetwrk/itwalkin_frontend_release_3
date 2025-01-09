@@ -40,9 +40,9 @@
     position: sticky;
     top:10px;
     z-index: 100;
-    width:40%;
-    margin-left: 28%;
-    background-color: aqua;
+    width:43%;
+    margin-left: 25%;
+    /* background-color: aqua; */
 }
 .NavConetenetWrapper{
     display: flex;

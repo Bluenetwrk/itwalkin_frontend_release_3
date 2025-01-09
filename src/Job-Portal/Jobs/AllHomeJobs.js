@@ -34,7 +34,7 @@ const responsive = {
 function Home() {
 
   const [jobs, setJobs] = useState([])
-
+console.log(jobs)
   const [nopageFilter, setNoPageFilter] = useState(false)
   const [Filtereredjobs, setFiltereredjobs] = useState([])
 
@@ -78,12 +78,8 @@ function Home() {
       navigate("/alljobs")
     }
   }, [])
-  // useEffect(() => {
-  //   let adminLogin = localStorage.getItem("AdMLog")
-  //   if (adminLogin) {
-  //     navigate("/BIAddmin@Profile")
-  //   }
-  // }, [])
+
+ 
 
   let recordsperpage = JSON.parse(sessionStorage.getItem("recordsperpageHome"))
 
@@ -369,17 +365,15 @@ function Home() {
     setrecordsPerPage(recordsperpage)
     setCurrentPage(1)
   }
-
+  
   const [count, setCount]=useState(1)
+  const [jobTagIds, setjobTagIds]=useState([])
 
   async function filterByJobTitle(key) {
-console.log(key)
     if(count==1){
-      setJobs("")
-
+      setJobs([])
     }
     setCount(prev=>prev+1)
-
     const isIndex=Active.findIndex((present)=>{
 return(
   present===key
@@ -400,19 +394,13 @@ return(
     if(jobs.length>0){
          let removedItems = jobs.filter((tags)=>{
             return( 
-              !tags.Tags.includes(key)
-              // !tags.Tags.map((value)=>{
-              //   return(
-              //   value.value
-              //   )
-              // }).includes(key)    
+              !tags.Tags.includes(key)   
         )
       }) 
       setJobs(removedItems)
       return false
     }
   }
-
     setNoPageFilter(true)
     setFiltereredjobs(key)
     await axios.get(`/jobpost/getTagsJobs/${key}`)
@@ -421,12 +409,31 @@ return(
         let sortedate = result.sort( (a, b) => {
           return new Date(b.createdAt) - new Date(a.createdAt);
         });
+          
+  // let presentIds=jobTagIds.map((id)=>{
+  //   return(
+  //     id._id
+  //   )
+  // })
+
+  let tags=jobTagIds.map((id)=>{
+    return(
+     id.Tags
+    )
+  })
+  let presentIds= tags.flat(Infinity)
 
         let elements=  sortedate.flatMap(element => {
-          setJobs(oldArray => [...oldArray,element] )
-     });
+          let comingTagid=element._id
+              // setJobs(oldArray => [...oldArray,element] )
+          if(!presentIds.includes(comingTagid)){
+            setJobs(oldArray => [...oldArray,element] )
+            setjobTagIds(oldArray => [...oldArray,element] )
+            }
+        });
       })
   }
+
 
   async function getLocation(jobLocation) {
     setCount(1)
@@ -501,25 +508,7 @@ await axios.delete(`/jobpost/deleteCheckBoxArray/${checkBoxValue}`, {headers} )
     }
   }
 
-  async function getToken(){
-    const config = { 
-  method: 'post', url: 'https://login.microsoftonline.com/ae4ae520-4db7-4149-ad51-778e540d8bec/oauth2/v2.0/token', 
- headers: { 
-  'Content-Type': 'application/x-www-form-urlencoded' ,
-  "access-control-allow-origin" : "*",
-// "Content-type": "application/json; charset=UTF-8"
-},
-  data: new URLSearchParams({ 
-    grant_type: 'client_credentials', 
-   client_id: '097b08ff-185e-4153-aedc-0e5814e0570c', 
-   client_secret: 'D1k8Q~yOxTlSdb_LB1tW118c4827PN~c7PK6JcMr', 
-   scope: 'https://graph.microsoft.com/.default'
-   }) }; try { const response = await axios(config);
-     console.log(response)
-   } catch (error) { 
-    console.log(error)
-    }
-}
+
   return (
     <>
       {screenSize.width > 850 ?
@@ -638,7 +627,6 @@ await axios.delete(`/jobpost/deleteCheckBoxArray/${checkBoxValue}`, {headers} )
               )
             })      }
           <button >Next</button>  */}
-<button onClick={getToken}>get token</button>
           <div className={styles.Uiwarpper}>
             <ul className={styles.ul} style={{ color: 'white', fontWeight: "bold" }}>
               <li style={{ backgroundColor: " rgb(40, 4, 99)" }} className={`${styles.li} ${styles.Jtitle}`}>Job Title</li>
