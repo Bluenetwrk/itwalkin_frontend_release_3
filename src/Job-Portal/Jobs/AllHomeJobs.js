@@ -34,7 +34,6 @@ const responsive = {
 function Home() {
 
   const [jobs, setJobs] = useState([])
-console.log(jobs)
   const [nopageFilter, setNoPageFilter] = useState(false)
   const [Filtereredjobs, setFiltereredjobs] = useState([])
 
@@ -50,19 +49,11 @@ console.log(jobs)
   const [Active, setActive] = useState([])
   const screenSize = useScreenSize();
 
-  // let AgeTags = [
- 
-  // let jobTags = [
-
-    
-  //   ]
-
   let JobLocationTags = ["Bangalore"]
 
   let navigate = useNavigate()
 
   let adminLogin = localStorage.getItem("AdMLog")
-
 
   useEffect(() => {
     // let studentAuth = localStorage.getItem("StudLog")
@@ -410,18 +401,18 @@ return(
           return new Date(b.createdAt) - new Date(a.createdAt);
         });
           
-  // let presentIds=jobTagIds.map((id)=>{
-  //   return(
-  //     id._id
-  //   )
-  // })
-
-  let tags=jobTagIds.map((id)=>{
+  let presentIds=jobTagIds.map((id)=>{
     return(
-     id.Tags
+      id._id
     )
   })
-  let presentIds= tags.flat(Infinity)
+
+  // let tags=jobTagIds.map((id)=>{
+  //   return(
+  //    id.Tags
+  //   )
+  // })
+  // let presentIds= tags.flat(Infinity)
 
         let elements=  sortedate.flatMap(element => {
           let comingTagid=element._id
