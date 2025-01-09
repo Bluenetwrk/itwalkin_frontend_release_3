@@ -91,10 +91,11 @@ function Home() {
     setPageLoader(true)
     setNoPageFilter(false)
     const headers = { authorization: 'BlueItImpulseWalkinIn' };
-    await axios.get("/jobpost/getHomejobs", { headers })
-    // await axios.get(`/jobpost/getLimitJobs/${recordsPerPage}`, { headers })
+    // await axios.get("/jobpost/getHomejobs", { headers })
+    await axios.get(`/jobpost/getLimitJobs/${recordsPerPage}`,{ params: { currentPage }, headers })
       .then((res) => {
         let result = (res.data)
+        // console.log(result)
         let sortedate = result.sort(function (a, b) {
           return new Date(b.createdAt) - new Date(a.createdAt);
         });
@@ -102,13 +103,15 @@ function Home() {
         setFilterjobs(sortedate)
         setPageLoader(false)
       }).catch((err) => {
+        console.log(err)
+
         alert("some thing went wrong")
       })
   }
 
   useEffect(() => {
     getjobs()
-  }, [])
+  }, [recordsPerPage])
 
   async function applyforJob(id) {
     navigate("/JobSeekerLogin", { state: { Jid: id } })
@@ -361,6 +364,7 @@ function Home() {
   const [jobTagIds, setjobTagIds]=useState([])
 
   async function filterByJobTitle(key) {
+
     if(count==1){
       setJobs([])
     }
@@ -413,10 +417,10 @@ return(
   //   )
   // })
   // let presentIds= tags.flat(Infinity)
+  // console.log(presentIds)
 
         let elements=  sortedate.flatMap(element => {
           let comingTagid=element._id
-              // setJobs(oldArray => [...oldArray,element] )
           if(!presentIds.includes(comingTagid)){
             setJobs(oldArray => [...oldArray,element] )
             setjobTagIds(oldArray => [...oldArray,element] )
