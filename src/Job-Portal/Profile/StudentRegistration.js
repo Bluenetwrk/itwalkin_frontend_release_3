@@ -595,7 +595,7 @@ border:"none",padding: "4px 8px"}} onClick={DeleteProfile}>Delete</button>
               <div className={STyles.signUpWrapper} style={{marginLeft:"50px", marginBottom:"20px"}} onClick={login}>
           <div className={STyles.both}>
             <img className={STyles.google} src={GoogleImage} />
-            <p className={STyles.signUpwrap} >Continue with Google</p>
+            <p className={STyles.signUpwrap} >Register with Google</p>
           </div>
         </div>
 

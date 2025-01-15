@@ -49,20 +49,24 @@ function Nav(props) {
 
   let SmenuRef = useRef();
   let SimgRef = useRef();
+  let newReg = useRef();
+  let Reg = useRef();
 
+  window.addEventListener("click", (e) => {
+    if (e.target !== newReg.current && e.target !== Reg.current) {
+      setShowRegister(false)
+    }
+  })
   window.addEventListener("click", (e) => {
     if (e.target !== menuRef.current && e.target !== imgRef.current) {
       setShowprofile(false)
-
     }
   })
 
   window.addEventListener("click", (e) => {
     if (e.target !== SmenuRef.current && e.target !== SimgRef.current) {
       setShowSideNave(false)
-
     }
-
   })
 
   const navLinkStyles = ({ isActive }) => {
@@ -339,10 +343,10 @@ function Nav(props) {
                         {/* <NavLink to="/New-Registration" className={` ${Styles.HomeSearchCandidate}`} style={navLinkStyles}>New Register </NavLink> */}
                         {/* <NavLink to="/Jobseeker-New-Registration" className={` ${Styles.HomeSearchCandidate}`} style={navLinkStyles}>Student Register </NavLink> */}
 <div>
-<p className={` ${Styles.openAccount}`} onClick={handleOpenAccont} >Open Account</p>
+<p className={` ${Styles.openAccount}`} onClick={handleOpenAccont} ref={Reg} >Open Account</p>
 {
   ShowRegister?
-  <div className={Styles.dropdownwrapperHomeRegistration} >
+  <div className={Styles.dropdownwrapperHomeRegistration} ref={newReg} >
   <p onClick={()=>{navigate("/New-Registration");setShowRegister(false)}}>Employee Registration</p>
   <p onClick={()=>{navigate("/Jobseeker-New-Registration");setShowRegister(false)}}>JobSeeker Registration</p>
   </div>

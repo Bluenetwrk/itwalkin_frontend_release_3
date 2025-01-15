@@ -34,7 +34,7 @@ const responsive = {
 function Home() {
 
   const [jobs, setJobs] = useState([])
-  const [nopageFilter, setNoPageFilter] = useState(false)
+  const [nopageFilter, setNoPageFilter] = useState(true)
   const [Filtereredjobs, setFiltereredjobs] = useState([])
 
   const [Filterjobs, setFilterjobs] = useState([])
@@ -70,8 +70,7 @@ function Home() {
     }
   }, [])
 
- 
-
+  const [totalCount, settotalCount] = useState()
   let recordsperpage = JSON.parse(sessionStorage.getItem("recordsperpageHome"))
 
   const [currentPage, setCurrentPage] = useState(1)
@@ -80,9 +79,21 @@ function Home() {
   const lastIndex = currentPage * recordsPerPage //10
   const firstIndex = lastIndex - recordsPerPage //5
   const records = jobs.slice(firstIndex, lastIndex)//0,5
-  const npage = Math.ceil(jobs.length / recordsPerPage) // last page
-  const number = [...Array(npage + 1).keys()].slice(1)
 
+  // const npage = Math.ceil(jobs.length / recordsPerPage) // last page
+  const npage = Math.ceil(totalCount / recordsPerPage) // last page
+  // const number = [...Array(npage + 1).keys()].slice(1)
+
+  async function gettotalcount() { 
+    const headers = { authorization: 'BlueItImpulseWalkinIn' };
+    await axios.get("/jobpost/getTotalCount", { headers })
+    .then((res)=>{
+// console.log(res.data.result)
+settotalCount(res.data.result)
+    }).catch((err)=>{
+      alert("something went wrong")
+    })
+  }
 
   async function getjobs() {
     setCount(1)
@@ -95,23 +106,26 @@ function Home() {
     await axios.get(`/jobpost/getLimitJobs/${recordsPerPage}`,{ params: { currentPage }, headers })
       .then((res) => {
         let result = (res.data)
-        // console.log(result)
         let sortedate = result.sort(function (a, b) {
           return new Date(b.createdAt) - new Date(a.createdAt);
         });
+        // console.log("result from backend", sortedate)
         setJobs(sortedate)
         setFilterjobs(sortedate)
         setPageLoader(false)
       }).catch((err) => {
         console.log(err)
-
         alert("some thing went wrong")
       })
   }
 
   useEffect(() => {
     getjobs()
-  }, [recordsPerPage])
+  },[currentPage])
+  
+  useEffect(() => {
+    gettotalcount()
+  }, [])
 
   async function applyforJob(id) {
     navigate("/JobSeekerLogin", { state: { Jid: id } })
@@ -177,8 +191,6 @@ function Home() {
       setResult(false)
     }
   }
-
-
 
   function sortbyOldjobs() {
     let newjob = [...jobs]
@@ -420,11 +432,13 @@ return(
   // console.log(presentIds)
 
         let elements=  sortedate.flatMap(element => {
-          let comingTagid=element._id
-          if(!presentIds.includes(comingTagid)){
-            setJobs(oldArray => [...oldArray,element] )
-            setjobTagIds(oldArray => [...oldArray,element] )
-            }
+          setJobs(oldArray => [...oldArray,element] )
+          setjobTagIds(oldArray => [...oldArray,element] )
+          // let comingTagid=element._id
+          // if(!presentIds.includes(comingTagid)){
+          //   setJobs(oldArray => [...oldArray,element] )
+          //   setjobTagIds(oldArray => [...oldArray,element] )
+          //   }
         });
       })
   }
@@ -665,9 +679,9 @@ await axios.delete(`/jobpost/deleteCheckBoxArray/${checkBoxValue}`, {headers} )
               <Puff height="80" width="80" color="#4fa94d" ariaLabel="bars-loading" wrapperStyle={{ marginLeft: "49%", marginTop: "50px" }} />
               : ""
             }
-            {!nopageFilter ?
-              records.length > 0 ?
-                records.map((items, i) => {
+            {
+              jobs.length > 0 ?
+              jobs.map((items, i) => {
                   return (
 
                     <ul className={styles.ul} key={i}>
@@ -753,98 +767,6 @@ await axios.delete(`/jobpost/deleteCheckBoxArray/${checkBoxValue}`, {headers} )
                           :
                           <button className={styles.Applybutton} onClick={() => { applyforJob(items._id) }}>Apply</button>
                       
-                        }
-                      </li>
-                    </ul>
-                  )
-                })
-                : <p style={{ marginLeft: "47%", color: "red" }}>No Record Found</p>
-              :
-              jobs.length > 0 ?
-                jobs.map((items, i) => {
-                  return (
-
-                    <ul className={styles.ul} key={i}>
-
-<li className={`${styles.li} ${styles.Jtitle}`} onClick={() => 
-  navigate(`/Jobdetails/${btoa(items._id)}`)} style={{ cursor: "pointer", textDecoration: "underline", color: "blue" }}>{items.jobTitle}</li>
-                                            <li className={`${styles.li} ${styles.Source}`} >Itwalkin</li>
-
-                      
-                      {
-                        !items.Source ?
-
-                          <li style={{ cursor: "pointer", textDecoration: "underline" }} className={`${styles.li} ${styles.CompanyName}`}
-                            onClick={(e) => { checkEmpHalf(btoa(items.empId)) }}  >
-                            {/* {items.Logo ?
-                              < img style={{ width: "38px", height: "38px" }} src={items.Logo} />
-                              : ""} 
-                              <br></br>
-                              */}
-                            {items.companyName}</li>
-                          :
-                          <a style={{ cursor: "pointer", textDecoration: "underline" }} className={`${styles.li} ${styles.CompanyName}`} href={items.SourceLink} target="_blank" >
-                            {/* {items.Logo ?
-                              < img style={{ width: "38px", height: "38px" }} src={items.Logo} />
-                              : ""}<br></br> */}
-                            {items.Source}
-
-                          </a>
-
-                      }
-
-                      {/* {items.Source ?
-                        <a className={`${styles.li} ${styles.Source}`} >{items.Source}</a>
-                        : */}
-
-                      <li className={`${styles.li} ${styles.JobType}`}>{items.jobtype}</li>
-
-                      {/* <li className={`${styles.li} ${styles.liDescription}`}>
-                          {
-                            items.jobDescription.map((descrip, di) => {
-                              return (
-                                <>
-                                  {
-                                    descrip.text.slice(0,50)
-                                  }
-                                </>
-                              )
-                            }).slice(0, 1)
-                          }
-  
-                          <span onClick={() => navigate(`/Jobdetails/${items._id}`)} className={styles.seeMore}>
-                            ...read more
-                          </span>
-                        </li> */}
-                      <li className={`${styles.li} ${styles.date}`}>
-                        {new Date(items.createdAt).toLocaleString(
-                          "en-US",
-                          {
-                            month: "short",
-                            day: "2-digit",
-                            year: "numeric",
-                          }
-                        )}
-                      </li>
-                      <li className={`${styles.li} ${styles.Location}`}>{items.jobLocation[0].toUpperCase() + items.jobLocation.slice(1)}</li>
-                      <li className={`${styles.li} ${styles.Package}`}>{items.salaryRange}L</li>
-                      <li className={`${styles.li} ${styles.experiance}`}>{items.experiance}Y</li>
-                      <li className={`${styles.li} ${styles.qualification}`}>{items.qualification}</li>
-                      <li className={`${styles.li} ${styles.Skills}`}>{items.skills}</li>
-
-                      <li className={`${styles.li} ${styles.Apply}`}>
-                        {
-                                                    adminLogin?
-                                                    // <input type='checkbox'/>
-                      <input type="checkbox"  onClick={() => { checkBoxforDelete(items._id) }} />
-
-                                                    :
-                        items.SourceLink ?
-                          <button title='this will take to Source page' className={styles.Applybutton} onClick={() => {
-                            applyforOtherJob(items.SourceLink)
-                          }}>Apply</button>
-                          :
-                          <button className={styles.Applybutton} onClick={() => { applyforJob(items._id) }}>Apply</button>
                         }
                       </li>
                     </ul>
