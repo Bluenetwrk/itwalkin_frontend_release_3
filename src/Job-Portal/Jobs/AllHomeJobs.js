@@ -76,6 +76,8 @@ function Home() {
   const [currentPage, setCurrentPage] = useState(1)
   const [recordsPerPage, setrecordsPerPage] = useState(recordsperpage ? recordsperpage : 10)
 
+  // console.log(recordsPerPage)
+
   const lastIndex = currentPage * recordsPerPage //10
   const firstIndex = lastIndex - recordsPerPage //5
   const records = jobs.slice(firstIndex, lastIndex)//0,5
@@ -121,7 +123,7 @@ settotalCount(res.data.result)
 
   useEffect(() => {
     getjobs()
-  },[currentPage])
+  },[currentPage, recordsPerPage])
   
   useEffect(() => {
     gettotalcount()
@@ -680,8 +682,9 @@ await axios.delete(`/jobpost/deleteCheckBoxArray/${checkBoxValue}`, {headers} )
               : ""
             }
             {
-              jobs.length > 0 ?
-              jobs.map((items, i) => {
+                      jobs.length > 0 ?
+                jobs
+                .map((items, i) => {
                   return (
 
                     <ul className={styles.ul} key={i}>
