@@ -100,9 +100,7 @@ axios.defaults.baseURL = "https://itwalkin-backend-testrelease-2-0-1-0824-ns0g.o
 //  axios.defaults.baseURL = "https://itwalkin-backend-testrelease-2-0-1-0824.onrender.com";
 // .. not available now and company & 
 
-
 function App() {
- 
 
   const screenSize = useScreenSize();
   let size = screenSize.width;

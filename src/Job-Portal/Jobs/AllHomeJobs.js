@@ -100,6 +100,7 @@ settotalCount(res.data.result)
   async function getjobs() {
     setCount(1)
     setActive([])
+    setJobTagsIds([])
 
     setPageLoader(true)
     setNoPageFilter(false)
@@ -108,6 +109,8 @@ settotalCount(res.data.result)
     await axios.get(`/jobpost/getLimitJobs/${recordsPerPage}`,{ params: { currentPage }, headers })
       .then((res) => {
         let result = (res.data)
+    gettotalcount()
+
         let sortedate = result.sort(function (a, b) {
           return new Date(b.createdAt) - new Date(a.createdAt);
         });
@@ -122,12 +125,14 @@ settotalCount(res.data.result)
   }
 
   useEffect(() => {
-    getjobs()
+    if(jobTagsIds.length<1){
+      getjobs()
+    }else{
+    getTagId();
+    }
   },[currentPage, recordsPerPage])
   
-  useEffect(() => {
-    gettotalcount()
-  }, [])
+ 
 
   async function applyforJob(id) {
     navigate("/JobSeekerLogin", { state: { Jid: id } })
@@ -139,6 +144,7 @@ settotalCount(res.data.result)
   }
 
   // ...................search..........
+// 5350
 
   // async function search(e) {
   //   let key = e.target.value
@@ -173,8 +179,10 @@ settotalCount(res.data.result)
       setResult(false)
     }
   }
-  async function search(e) {
 
+
+
+  async function search(e) {
     setNoPageFilter(true)
     let key = e.target.value
     setFiltereredjobs(key)
@@ -377,8 +385,36 @@ settotalCount(res.data.result)
   const [count, setCount]=useState(1)
   const [jobTagIds, setjobTagIds]=useState([])
 
-  async function filterByJobTitle(key) {
+  
+const[jobTagsIds, setJobTagsIds]=useState([])
 
+useEffect(()=>{
+  if (jobTagsIds.length > 0) {
+    getTagId();
+  }
+},[jobTagsIds])
+
+let ids=jobTagsIds.map((id)=>{
+  return(
+    id._id
+  )
+})
+const uniqueList = [...new Set(ids)];
+async function getTagId(){
+  settotalCount(uniqueList.length) 
+  await axios.get(`/jobpost/jobTagsIds/${uniqueList}`,{
+    params: { currentPage, recordsPerPage }})
+  .then((res)=>{
+    console.log("data from uique id's",res.data)
+    let result = res.data
+    let sortedate = result.sort( (a, b) => {
+      return new Date(b.createdAt) - new Date(a.createdAt);
+    });
+    setJobs(sortedate)
+
+  })
+}
+  async function filterByJobTitle(key) {
     if(count==1){
       setJobs([])
     }
@@ -400,42 +436,31 @@ return(
                 if(Active.length===0){
       getjobs()
     }
-    if(jobs.length>0){
-         let removedItems = jobs.filter((tags)=>{
-            return( 
-              !tags.Tags.includes(key)   
-        )
-      }) 
-      setJobs(removedItems)
-      return false
-    }
+    // if(jobs.length>0){
+    //      let removedItems = jobs.filter((tags)=>{
+    //         return( 
+    //           !tags.Tags.includes(key)   
+    //     )
+    //   }) 
+    //   setJobs(removedItems)
+    //   return false
+    // }
   }
     setNoPageFilter(true)
     setFiltereredjobs(key)
+   
     await axios.get(`/jobpost/getTagsJobs/${key}`)
       .then( (res) => {
         let result = (res.data)
+        console.log("the total id's are",result)
         let sortedate = result.sort( (a, b) => {
           return new Date(b.createdAt) - new Date(a.createdAt);
         });
-          
-  let presentIds=jobTagIds.map((id)=>{
-    return(
-      id._id
-    )
-  })
-
-  // let tags=jobTagIds.map((id)=>{
-  //   return(
-  //    id.Tags
-  //   )
-  // })
-  // let presentIds= tags.flat(Infinity)
-  // console.log(presentIds)
+        setJobTagsIds(oldjobTagsIds => [...oldjobTagsIds, ...sortedate])
+        // getTagId(sortedate)
 
         let elements=  sortedate.flatMap(element => {
-          setJobs(oldArray => [...oldArray,element] )
-          setjobTagIds(oldArray => [...oldArray,element] )
+          // setJobs(oldArray => [...oldArray,element] )
           // let comingTagid=element._id
           // if(!presentIds.includes(comingTagid)){
           //   setJobs(oldArray => [...oldArray,element] )
@@ -601,7 +626,8 @@ await axios.delete(`/jobpost/deleteCheckBoxArray/${checkBoxValue}`, {headers} )
 
           <div style={{ display: "flex", justifyContent: "space-between" }}>
             {nopageFilter ?
-              <p style={{ fontWeight: 400, marginLeft: "10px" }}>Displaying Jobs with following matching tags:
+              <p style={{ fontWeight: 400, marginLeft: "10px" }}>Displaying <span style={{ color: "blue" }}>
+                {uniqueList.length} </span>Jobs with following matching tags:
               <span style={{ color: "blue" }}>{Active.toString()}</span></p>
               :
               <p style={{ fontWeight: 400, marginLeft: "10px" }}>showing {firstIndex + 1} to {lastIndex} latest jobs</p>
