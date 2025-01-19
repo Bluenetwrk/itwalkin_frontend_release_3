@@ -11,7 +11,7 @@ import useScreenSize from '../SizeHook';
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
 import Footer from '../Footer/Footer';
-import {jobTags} from '../Tags'
+import { jobTags } from '../Tags'
 import HTMLReactParser from 'html-react-parser'
 
 
@@ -86,15 +86,15 @@ function Home() {
   const npage = Math.ceil(totalCount / recordsPerPage) // last page
   // const number = [...Array(npage + 1).keys()].slice(1)
 
-  async function gettotalcount() { 
+  async function gettotalcount() {
     const headers = { authorization: 'BlueItImpulseWalkinIn' };
     await axios.get("/jobpost/getTotalCount", { headers })
-    .then((res)=>{
-// console.log(res.data.result)
-settotalCount(res.data.result)
-    }).catch((err)=>{
-      alert("something went wrong")
-    })
+      .then((res) => {
+        // console.log(res.data.result)
+        settotalCount(res.data.result)
+      }).catch((err) => {
+        alert("something went wrong")
+      })
   }
 
   async function getjobs() {
@@ -106,10 +106,10 @@ settotalCount(res.data.result)
     setNoPageFilter(false)
     const headers = { authorization: 'BlueItImpulseWalkinIn' };
     // await axios.get("/jobpost/getHomejobs", { headers })
-    await axios.get(`/jobpost/getLimitJobs/${recordsPerPage}`,{ params: { currentPage }, headers })
+    await axios.get(`/jobpost/getLimitJobs/${recordsPerPage}`, { params: { currentPage }, headers })
       .then((res) => {
         let result = (res.data)
-    gettotalcount()
+        gettotalcount()
 
         let sortedate = result.sort(function (a, b) {
           return new Date(b.createdAt) - new Date(a.createdAt);
@@ -125,14 +125,14 @@ settotalCount(res.data.result)
   }
 
   useEffect(() => {
-    if(jobTagsIds.length<1){
+    if (jobTagsIds.length < 1) {
       getjobs()
-    }else{
-    getTagId();
+    } else {
+      getTagId();
     }
-  },[currentPage, recordsPerPage])
-  
- 
+  }, [currentPage, recordsPerPage])
+
+
 
   async function applyforJob(id) {
     navigate("/JobSeekerLogin", { state: { Jid: id } })
@@ -144,7 +144,7 @@ settotalCount(res.data.result)
   }
 
   // ...................search..........
-// 5350
+  // 5350
 
   // async function search(e) {
   //   let key = e.target.value
@@ -381,85 +381,104 @@ settotalCount(res.data.result)
     setrecordsPerPage(recordsperpage)
     setCurrentPage(1)
   }
-  
-  const [count, setCount]=useState(1)
-  const [jobTagIds, setjobTagIds]=useState([])
 
-  
-const[jobTagsIds, setJobTagsIds]=useState([])
+  const [count, setCount] = useState(1)
+  const [jobTagIds, setjobTagIds] = useState([])
 
-useEffect(()=>{
-  if (jobTagsIds.length > 0) {
-    getTagId();
-  }
-},[jobTagsIds])
+  const [jobTagsIds, setJobTagsIds] = useState([])
+  // console.log("all dublicate ids", jobTagsIds)
 
-let ids=jobTagsIds.map((id)=>{
-  return(
-    id._id
-  )
-})
-const uniqueList = [...new Set(ids)];
-async function getTagId(){
-  settotalCount(uniqueList.length) 
-  await axios.get(`/jobpost/jobTagsIds/${uniqueList}`,{
-    params: { currentPage, recordsPerPage }})
-  .then((res)=>{
-    console.log("data from uique id's",res.data)
-    let result = res.data
-    let sortedate = result.sort( (a, b) => {
-      return new Date(b.createdAt) - new Date(a.createdAt);
-    });
-    setJobs(sortedate)
+  useEffect(() => {
+    if (jobTagsIds.length > 0) {
+      getTagId();
+    }
+  }, [jobTagsIds])
 
+  let ids = jobTagsIds.map((id) => {
+    return (
+      id._id
+    )
   })
-}
-  async function filterByJobTitle(key) {
-    if(count==1){
-      setJobs([])
-    }
-    setCount(prev=>prev+1)
-    const isIndex=Active.findIndex((present)=>{
-return(
-  present===key
-)
+  const uniqueList = [...new Set(ids)];
+  async function getTagId() {
+    settotalCount(uniqueList.length)
+    await axios.get(`/jobpost/jobTagsIds/${uniqueList}`, {
+      params: { currentPage, recordsPerPage }
     })
-    if(isIndex<0){
-    setActive([...Active, key])
-    }else{
-      const IndexId=Active.findIndex((present)=>{
-        return(
-          present==key
-        )
-            })
-            Active.splice(IndexId,1)
-                if(Active.length===0){
-      getjobs()
-    }
-    // if(jobs.length>0){
-    //      let removedItems = jobs.filter((tags)=>{
-    //         return( 
-    //           !tags.Tags.includes(key)   
-    //     )
-    //   }) 
-    //   setJobs(removedItems)
-    //   return false
-    // }
-  }
-    setNoPageFilter(true)
-    setFiltereredjobs(key)
-   
-    await axios.get(`/jobpost/getTagsJobs/${key}`)
-      .then( (res) => {
-        let result = (res.data)
-        console.log("the total id's are",result)
-        let sortedate = result.sort( (a, b) => {
+      .then((res) => {
+        // console.log("data from uique id's",res.data)
+        let result = res.data
+        let sortedate = result.sort((a, b) => {
           return new Date(b.createdAt) - new Date(a.createdAt);
         });
-        setJobTagsIds(oldjobTagsIds => [...oldjobTagsIds, ...sortedate])
+        setJobs(sortedate)
+
+      })
+  }
+
+  useEffect(()=>{
+    if(Active.length>0){
+      changeTags()
+    }
+  },[Active])
+
+
+  async function filterByJobTitle(key) {
+
+    if (count == 1) {
+      setJobs([])
+    }
+    setCount(prev => prev + 1)
+    const isIndex = Active.findIndex((present) => {
+      return (
+        present === key
+      )
+    })
+    if (isIndex < 0) {
+      // setActive([...Active, key])
+      
+      var updatedActive = [...Active, key]; // Add the new key to the array
+      setActive(updatedActive);
+
+    } else {
+      const IndexId = Active.findIndex((present) => {
+        return (
+          present == key
+        )
+      })
+      Active.splice(IndexId, 1)
+      if (Active.length === 0) {
+        getjobs()
+      }
+      // if(jobs.length>0){
+      //      let removedItems = jobs.filter((tags)=>{
+      //         return( 
+      //           !tags.Tags.includes(key)   
+      //     )
+      //   }) 
+      //   setJobs(removedItems)
+      //   return false
+      // }
+      changeTags()
+      // console.log("in change",Active)
+    }}
+    async function changeTags(key){
+      // console.log("in APi",Active)
+
+    setNoPageFilter(true)
+    setFiltereredjobs(key)
+    await axios.get(`/jobpost/getTagsJobs/${Active}`)
+      .then((res) => {
+        let result = (res.data)
+        console.log("the total id's are", result)
+        let sortedate = result.sort((a, b) => {
+          return new Date(b.createdAt) - new Date(a.createdAt);
+        });
+        // setJobTagsIds(oldjobTagsIds => [...oldjobTagsIds, ...sortedate])
+        setJobTagsIds(sortedate)
         // getTagId(sortedate)
 
-        let elements=  sortedate.flatMap(element => {
+        let elements = sortedate.flatMap(element => {
           // setJobs(oldArray => [...oldArray,element] )
           // let comingTagid=element._id
           // if(!presentIds.includes(comingTagid)){
@@ -469,6 +488,8 @@ return(
         });
       })
   }
+
+
 
 
   async function getLocation(jobLocation) {
@@ -490,39 +511,39 @@ return(
       })
   }
 
-  
+
   const [checkBoxValue, setCheckBoxValue] = useState([])
   const [check, setCheck] = useState(true)
 
- async function ArchiveCheckBoxArray(){
-  let userid = atob(JSON.parse(localStorage.getItem("IdLog")))
-  const headers = { authorization: userid + " " + atob(JSON.parse(localStorage.getItem("AdMLog"))) };
-await axios.delete(`/jobpost/ArchiveCheckBoxArray/${checkBoxValue}`, {headers} )
-.then((res)=>{
-  if(res.data==="success"){
-    getjobs()
-    alert("deletd succesfully")
-    window.location.reload()
+  async function ArchiveCheckBoxArray() {
+    let userid = atob(JSON.parse(localStorage.getItem("IdLog")))
+    const headers = { authorization: userid + " " + atob(JSON.parse(localStorage.getItem("AdMLog"))) };
+    await axios.delete(`/jobpost/ArchiveCheckBoxArray/${checkBoxValue}`, { headers })
+      .then((res) => {
+        if (res.data === "success") {
+          getjobs()
+          alert("deletd succesfully")
+          window.location.reload()
+        }
+      }).catch((err) => {
+        alert("some thing went wrong")
+      })
   }
-}).catch((err)=>{
-  alert("some thing went wrong")
-})
- }
- async function deleteCheckedJobs(){
-  let userid = atob(JSON.parse(localStorage.getItem("IdLog")))
-  const headers = { authorization: userid + " " + atob(JSON.parse(localStorage.getItem("AdMLog"))) };
-await axios.delete(`/jobpost/deleteCheckBoxArray/${checkBoxValue}`, {headers} )
-.then((res)=>{
-  if(res.data==="success"){
-    getjobs()
-    alert("deletd succesfully")
-    window.location.reload()
+  async function deleteCheckedJobs() {
+    let userid = atob(JSON.parse(localStorage.getItem("IdLog")))
+    const headers = { authorization: userid + " " + atob(JSON.parse(localStorage.getItem("AdMLog"))) };
+    await axios.delete(`/jobpost/deleteCheckBoxArray/${checkBoxValue}`, { headers })
+      .then((res) => {
+        if (res.data === "success") {
+          getjobs()
+          alert("deletd succesfully")
+          window.location.reload()
+        }
+      }).catch((err) => {
+        alert("some thing went wrong")
+      })
   }
-}).catch((err)=>{
-  alert("some thing went wrong")
-})
- }
- 
+
 
   function checkBoxforDelete(id) {
 
@@ -535,9 +556,9 @@ await axios.delete(`/jobpost/deleteCheckBoxArray/${checkBoxValue}`, {headers} )
       setCheckBoxValue([...checkBoxValue, id])
     } else {
       // checkBoxValue.splice(checkedid, 1)
-      let removeId=checkBoxValue.filter((foundId)=>{
-        return(
-          foundId!==id
+      let removeId = checkBoxValue.filter((foundId) => {
+        return (
+          foundId !== id
         )
       })
       setCheckBoxValue(removeId)
@@ -548,30 +569,29 @@ await axios.delete(`/jobpost/deleteCheckBoxArray/${checkBoxValue}`, {headers} )
   return (
     <>
       {screenSize.width > 850 ?
-      // adminLogin?""
-      // :
+        // adminLogin?""
+        // :
         <>
-        <div className={adminLogin?styles.HomeNavConetenetWrapperAdmin:styles.HomeNavConetenetWrapper}>
-          <div className={styles.LocationFilterWrapper}>
-            {
-              JobLocationTags.map((location, i) => {
-                return (
-                  <>
-                  <label className={styles.JobLocationFilter}>
-                  <input type="radio" checked disabled={location == "Chennai" ||
-                  location == "Hyderabad" || location == "Mumbai" || location == "Delhi"} name="filter" onClick={() => 
-                      { getjobs() }} />{location}</label><br></br>
-                      </>
-                )
-              })
-            }
-          </div>          
-          <div className={styles.HomesearchBothForNavWrapper}>
-            <input className={styles.inputboxsearchNav} type="text" placeholder='Search for a Job / Skills / Location / Experiance' onChange={(e) => { search(e) }} />
+          <div className={adminLogin ? styles.HomeNavConetenetWrapperAdmin : styles.HomeNavConetenetWrapper}>
+            <div className={styles.LocationFilterWrapper}>
+              {
+                JobLocationTags.map((location, i) => {
+                  return (
+                    <>
+                      <label className={styles.JobLocationFilter}>
+                        <input type="radio" checked disabled={location == "Chennai" ||
+                          location == "Hyderabad" || location == "Mumbai" || location == "Delhi"} name="filter" onClick={() => { getjobs() }} />{location}</label><br></br>
+                    </>
+                  )
+                })
+              }
+            </div>
+            <div className={styles.HomesearchBothForNavWrapper}>
+              <input className={styles.inputboxsearchNav} type="text" placeholder='Search for a Job / Skills / Location / Experiance' onChange={(e) => { search(e) }} />
 
-            <i style={{ color: "rgb(40, 4, 99)", fontSize: "18px", cursor: "pointer" , marginLeft:"2%"}} onClick={() => { searchIcon(searchKey) }}
-              class="fa fa-search" ></i>
-          </div>
+              <i style={{ color: "rgb(40, 4, 99)", fontSize: "18px", cursor: "pointer", marginLeft: "2%" }} onClick={() => { searchIcon(searchKey) }}
+                class="fa fa-search" ></i>
+            </div>
           </div>
           {Result ?
             <h4 style={{ marginLeft: "40%", marginTop: "20px" }}> {jobs.length} matching Result Found  </h4>
@@ -580,46 +600,46 @@ await axios.delete(`/jobpost/deleteCheckBoxArray/${checkBoxValue}`, {headers} )
         </>
         : ""
       }
-{checkBoxValue.length > 0 ?
-          <>
-              <button style={{
-                backgroundColor: "blue", border: "none", color: "white",
-                padding: "5px 10px", fontWeight: "bold", cursor: "pointer"
-              }} onClick={()=>{ArchiveCheckBoxArray()}}>Archive</button>
+      {checkBoxValue.length > 0 ?
+        <>
+          <button style={{
+            backgroundColor: "blue", border: "none", color: "white",
+            padding: "5px 10px", fontWeight: "bold", cursor: "pointer"
+          }} onClick={() => { ArchiveCheckBoxArray() }}>Archive</button>
 
-              <button style={{
-                backgroundColor: "red", border: "none", color: "white", marginLeft:"5px",
-                padding: "5px 10px", fontWeight: "bold", cursor: "pointer"
-              }} onClick={()=>{deleteCheckedJobs()}}>Delete</button>
-              </>
-            : ""
-          }
+          <button style={{
+            backgroundColor: "red", border: "none", color: "white", marginLeft: "5px",
+            padding: "5px 10px", fontWeight: "bold", cursor: "pointer"
+          }} onClick={() => { deleteCheckedJobs() }}>Delete</button>
+        </>
+        : ""
+      }
 
       {screenSize.width > 850 ?
         <>
-        <p style={{ color: " red", marginLeft: "4%" , zIndex: "100",}}>Note: this website is under development process</p>
+          <p style={{ color: " red", marginLeft: "4%", zIndex: "100", }}>Note: this website is under development process</p>
 
 
           <div className={styles.JobtitleFilterWrapper}>
-            <buton className={ Active.length===0? styles.active:styles.JobtitleFilter} onClick={() => { getjobs() }}>All</buton>
+            <buton className={Active.length === 0 ? styles.active : styles.JobtitleFilter} onClick={() => { getjobs() }}>All</buton>
             {
               jobTags.map((tags, i) => {
                 return (
-                                   
-                  <button disabled={tags.value==="TECHNOLOGIES" || tags.value==="EDUCATION" || tags.value==="COLLEGE TYPE" || tags.value==="NOTICE PERIOD" || tags.value==="SALARY" || 
-                    tags.value==="EXPERIENCE" || tags.value==="Job Type" || tags.value==="INDUSTRY" || tags.value==="TOOLS/PROTOCOLS" || tags.value==="ROLE" || tags.value==="COMPANY TYPE" } 
-                    className={tags.value==="TECHNOLOGIES" || tags.value==="EDUCATION" || tags.value==="COLLEGE TYPE" || tags.value==="NOTICE PERIOD" || tags.value==="SALARY" || 
-                    tags.value==="EXPERIENCE" || tags.value==="Job Type" || tags.value==="INDUSTRY" || tags.value==="TOOLS/PROTOCOLS" || tags.value==="COMPANY TYPE" || tags.value==="ROLE"?
-                    styles.TagHeading: 
-                    //  Active === tags.value ? 
-                    Active.findIndex(  (present)=>{
-                      return(
-                        present===tags.value
-                      )
-                          }) >=0?
-                     styles.active : styles.JobtitleFilter} onClick={ () => {  filterByJobTitle(tags.value) }}>{tags.value} </button>
-                
-                  )
+
+                  <button disabled={tags.value === "TECHNOLOGIES" || tags.value === "EDUCATION" || tags.value === "COLLEGE TYPE" || tags.value === "NOTICE PERIOD" || tags.value === "SALARY" ||
+                    tags.value === "EXPERIENCE" || tags.value === "Job Type" || tags.value === "INDUSTRY" || tags.value === "TOOLS/PROTOCOLS" || tags.value === "ROLE" || tags.value === "COMPANY TYPE"}
+                    className={tags.value === "TECHNOLOGIES" || tags.value === "EDUCATION" || tags.value === "COLLEGE TYPE" || tags.value === "NOTICE PERIOD" || tags.value === "SALARY" ||
+                      tags.value === "EXPERIENCE" || tags.value === "Job Type" || tags.value === "INDUSTRY" || tags.value === "TOOLS/PROTOCOLS" || tags.value === "COMPANY TYPE" || tags.value === "ROLE" ?
+                      styles.TagHeading :
+                      //  Active === tags.value ? 
+                      Active.findIndex((present) => {
+                        return (
+                          present === tags.value
+                        )
+                      }) >= 0 ?
+                        styles.active : styles.JobtitleFilter} onClick={() => { filterByJobTitle(tags.value) }}>{tags.value} </button>
+
+                )
               })
             }
           </div>
@@ -628,7 +648,7 @@ await axios.delete(`/jobpost/deleteCheckBoxArray/${checkBoxValue}`, {headers} )
             {nopageFilter ?
               <p style={{ fontWeight: 400, marginLeft: "10px" }}>Displaying <span style={{ color: "blue" }}>
                 {uniqueList.length} </span>Jobs with following matching tags:
-              <span style={{ color: "blue" }}>{Active.toString()}</span></p>
+                <span style={{ color: "blue" }}>{Active.toString()}</span></p>
               :
               <p style={{ fontWeight: 400, marginLeft: "10px" }}>showing {firstIndex + 1} to {lastIndex} latest jobs</p>
             }
@@ -708,47 +728,47 @@ await axios.delete(`/jobpost/deleteCheckBoxArray/${checkBoxValue}`, {headers} )
               : ""
             }
             {
-                      jobs.length > 0 ?
+              jobs.length > 0 ?
                 jobs
-                .map((items, i) => {
-                  return (
+                  .map((items, i) => {
+                    return (
 
-                    <ul className={styles.ul} key={i}>
-                      {/* } */}
+                      <ul className={styles.ul} key={i}>
+                        {/* } */}
 
-                      <li className={`${styles.li} ${styles.Jtitle}`} onClick={() => navigate(`/Jobdetails/${btoa(items._id)}`)} style={{ cursor: "pointer", textDecoration: "underline", color: "blue" }}>{items.jobTitle}</li>
-                       <li className={`${styles.li} ${styles.Source}`} >Itwalkin</li>
-                     
-                      {
-                        !items.Source ?
+                        <li className={`${styles.li} ${styles.Jtitle}`} onClick={() => navigate(`/Jobdetails/${btoa(items._id)}`)} style={{ cursor: "pointer", textDecoration: "underline", color: "blue" }}>{items.jobTitle}</li>
+                        <li className={`${styles.li} ${styles.Source}`} >Itwalkin</li>
 
-                          <li style={{ cursor: "pointer", textDecoration: "underline" }} className={`${styles.li} ${styles.CompanyName}`}
-                            onClick={(e) => { checkEmpHalf(btoa(items.empId)) }}  >
+                        {
+                          !items.Source ?
 
-                            {/* {items.Logo ?
+                            <li style={{ cursor: "pointer", textDecoration: "underline" }} className={`${styles.li} ${styles.CompanyName}`}
+                              onClick={(e) => { checkEmpHalf(btoa(items.empId)) }}  >
+
+                              {/* {items.Logo ?
                               < img style={{ width: "38px", height: "38px" }} src={items.Logo} />
                               : ""} 
                               <br></br>
                               */}
-                            {items.companyName}</li>
-                          :
-                          <a style={{ cursor: "pointer", textDecoration: "underline" }} className={`${styles.li} ${styles.CompanyName}`} href={items.SourceLink} target="_blank" >
-                            {/* {items.Logo ?
+                              {items.companyName}</li>
+                            :
+                            <a style={{ cursor: "pointer", textDecoration: "underline" }} className={`${styles.li} ${styles.CompanyName}`} href={items.SourceLink} target="_blank" >
+                              {/* {items.Logo ?
                               < img style={{ width: "38px", height: "38px" }} src={items.Logo} />
                               : ""}<br></br> */}
-                            {items.Source}
+                              {items.Source}
 
-                          </a>
+                            </a>
 
-                      }
+                        }
 
-                      {/* {items.Source ?
+                        {/* {items.Source ?
                         <a className={`${styles.li} ${styles.Source}`} href={items.SourceCompanyLink} target="_blank">{items.Source}</a>
                         :                         */}
-                     
-                      <li className={`${styles.li} ${styles.JobType}`}>{items.jobtype}</li>
 
-                      {/* <li className={`${styles.li} ${styles.liDescription}`}>
+                        <li className={`${styles.li} ${styles.JobType}`}>{items.jobtype}</li>
+
+                        {/* <li className={`${styles.li} ${styles.liDescription}`}>
                           {
                             items.jobDescription.map((descrip, di) => {
                               return (
@@ -765,42 +785,42 @@ await axios.delete(`/jobpost/deleteCheckBoxArray/${checkBoxValue}`, {headers} )
                             ...read more
                           </span>
                         </li> */}
-                      <li className={`${styles.li} ${styles.date}`}>
-                        {new Date(items.createdAt).toLocaleString(
-                          "en-US",
+                        <li className={`${styles.li} ${styles.date}`}>
+                          {new Date(items.createdAt).toLocaleString(
+                            "en-US",
+                            {
+                              month: "short",
+                              day: "2-digit",
+                              year: "numeric",
+                            }
+                          )}
+                        </li>
+                        <li className={`${styles.li} ${styles.Location}`}>{items.jobLocation[0].toUpperCase() + items.jobLocation.slice(1)}</li>
+                        <li className={`${styles.li} ${styles.Package}`}>{items.salaryRange}L</li>
+                        <li className={`${styles.li} ${styles.experiance}`}>{items.experiance}Y</li>
+                        <li className={`${styles.li} ${styles.qualification}`}>{items.qualification}</li>
+                        <li className={`${styles.li} ${styles.Skills}`}>{items.skills}
+                        </li>
+
+                        <li className={`${styles.li} ${styles.Apply}`}>
                           {
-                            month: "short",
-                            day: "2-digit",
-                            year: "numeric",
+                            adminLogin ?
+                              // <input type='checkbox'/>
+                              <input type="checkbox" onClick={() => { checkBoxforDelete(items._id) }} />
+
+                              :
+                              items.SourceLink ?
+                                <button title='this will take to Source page' className={styles.Applybutton} onClick={() => {
+                                  applyforOtherJob(items.SourceLink)
+                                }}>Apply</button>
+                                :
+                                <button className={styles.Applybutton} onClick={() => { applyforJob(items._id) }}>Apply</button>
+
                           }
-                        )}
-                      </li>
-                      <li className={`${styles.li} ${styles.Location}`}>{items.jobLocation[0].toUpperCase() + items.jobLocation.slice(1)}</li>
-                      <li className={`${styles.li} ${styles.Package}`}>{items.salaryRange}L</li>
-                      <li className={`${styles.li} ${styles.experiance}`}>{items.experiance}Y</li>
-                      <li className={`${styles.li} ${styles.qualification}`}>{items.qualification}</li>
-                      <li className={`${styles.li} ${styles.Skills}`}>{items.skills}
-                      </li>
-
-                      <li className={`${styles.li} ${styles.Apply}`}>
-                        {
-                          adminLogin?
-                          // <input type='checkbox'/>
-                      <input type="checkbox"  onClick={() => { checkBoxforDelete(items._id) }} />
-
-                          :
-                        items.SourceLink ?
-                          <button title='this will take to Source page' className={styles.Applybutton} onClick={() => {
-                            applyforOtherJob(items.SourceLink)
-                          }}>Apply</button>
-                          :
-                          <button className={styles.Applybutton} onClick={() => { applyforJob(items._id) }}>Apply</button>
-                      
-                        }
-                      </li>
-                    </ul>
-                  )
-                })
+                        </li>
+                      </ul>
+                    )
+                  })
                 : <p style={{ marginLeft: "47%", color: "red" }}>No Record Found</p>
             }
           </div>
@@ -832,7 +852,7 @@ await axios.delete(`/jobpost/deleteCheckBoxArray/${checkBoxValue}`, {headers} )
             </div>
 
           </div>
-{/*           
+          {/*           
           <div style={{marginTop:"200px", position:"sticky", bottom:0}}>
           <Footer/>
         </div> */}
@@ -851,16 +871,16 @@ await axios.delete(`/jobpost/deleteCheckBoxArray/${checkBoxValue}`, {headers} )
           }
           {/* ...................... All Filter for Mobile */}
           <div className={styles.MobLocationFilterWrapper}>
-                {/* <label> <input className={styles.MobJobtitleFilter} type="radio" name="filter" onClick={() => { getjobs() }} />All</label> */}
-                {
-                  JobLocationTags.map((location, i) => {
-                    return (
-                      <label> <input className={styles.MobJobtitleFilter} checked type="radio" disabled={location == "Chennai" || location == "Hyderabad" || location == "Mumbai" || location == "Delhi"} name="filter" onClick={() => { getLocation(location.toLowerCase()) }} />{location}</label>
+            {/* <label> <input className={styles.MobJobtitleFilter} type="radio" name="filter" onClick={() => { getjobs() }} />All</label> */}
+            {
+              JobLocationTags.map((location, i) => {
+                return (
+                  <label> <input className={styles.MobJobtitleFilter} checked type="radio" disabled={location == "Chennai" || location == "Hyderabad" || location == "Mumbai" || location == "Delhi"} name="filter" onClick={() => { getLocation(location.toLowerCase()) }} />{location}</label>
 
-                    )
-                  })
-                }
-              </div>
+                )
+              })
+            }
+          </div>
 
           <Carousel
             swipeable={true}
@@ -877,23 +897,23 @@ await axios.delete(`/jobpost/deleteCheckBoxArray/${checkBoxValue}`, {headers} )
           >
 
             <div style={{ display: "flex" }}>
-              
+
 
               <div className={styles.MobFilterJobTitleWrapper}>
                 <label><input className={styles.MobJobtitleFilter} type="radio" name="Rfilter" onClick={() => { getjobs() }} />All</label>
                 {
                   jobTags.map((tags, i) => {
                     return (
-                      <label><input disabled={tags.value==="TECHNOLOGIES" || tags.value==="EDUCATION" || tags.value==="COLLEGE TYPE" || tags.value==="NOTICE PERIOD" || tags.value==="SALARY" || 
-                        tags.value==="EXPERIENCE" || tags.value==="Job Type" || tags.value==="INDUSTRY" || tags.value==="TOOLS/PROTOCOLS" || tags.value==="ROLE" || tags.value==="COMPANY TYPE" } 
-                        className={tags.value==="TECHNOLOGIES" || tags.value==="EDUCATION" || tags.value==="COLLEGE TYPE" || tags.value==="NOTICE PERIOD" || tags.value==="SALARY" || 
-                        tags.value==="EXPERIENCE" || tags.value==="Job Type" || tags.value==="INDUSTRY" || tags.value==="TOOLS/PROTOCOLS" || tags.value==="COMPANY TYPE" || tags.value==="ROLE"?
-                        styles.TagHeading: styles.MobJobtitleFilter} 
-                        type= "radio" name="Rfilter"  
-                        onClick={() => { filterByJobTitle(tags.value) }} 
-                        />{tags.value}</label>
-                   
-                      )
+                      <label><input disabled={tags.value === "TECHNOLOGIES" || tags.value === "EDUCATION" || tags.value === "COLLEGE TYPE" || tags.value === "NOTICE PERIOD" || tags.value === "SALARY" ||
+                        tags.value === "EXPERIENCE" || tags.value === "Job Type" || tags.value === "INDUSTRY" || tags.value === "TOOLS/PROTOCOLS" || tags.value === "ROLE" || tags.value === "COMPANY TYPE"}
+                        className={tags.value === "TECHNOLOGIES" || tags.value === "EDUCATION" || tags.value === "COLLEGE TYPE" || tags.value === "NOTICE PERIOD" || tags.value === "SALARY" ||
+                          tags.value === "EXPERIENCE" || tags.value === "Job Type" || tags.value === "INDUSTRY" || tags.value === "TOOLS/PROTOCOLS" || tags.value === "COMPANY TYPE" || tags.value === "ROLE" ?
+                          styles.TagHeading : styles.MobJobtitleFilter}
+                        type="radio" name="Rfilter"
+                        onClick={() => { filterByJobTitle(tags.value) }}
+                      />{tags.value}</label>
+
+                    )
                   }).slice(0, 4)
                 }
 
@@ -902,13 +922,13 @@ await axios.delete(`/jobpost/deleteCheckBoxArray/${checkBoxValue}`, {headers} )
               <div className={styles.MobFilterJobTitleWrapper}>
                 {jobTags.map((tags, i) => {
                   return (
-                    <label><input disabled={tags.value==="TECHNOLOGIES" || tags.value==="EDUCATION" || tags.value==="COLLEGE TYPE" || tags.value==="NOTICE PERIOD" || tags.value==="SALARY" || 
-                      tags.value==="EXPERIENCE" || tags.value==="Job Type" || tags.value==="INDUSTRY" || tags.value==="TOOLS/PROTOCOLS" || tags.value==="ROLE" || tags.value==="COMPANY TYPE" } 
-                      className={tags.value==="TECHNOLOGIES" || tags.value==="EDUCATION" || tags.value==="COLLEGE TYPE" || tags.value==="NOTICE PERIOD" || tags.value==="SALARY" || 
-                      tags.value==="EXPERIENCE" || tags.value==="Job Type" || tags.value==="INDUSTRY" || tags.value==="TOOLS/PROTOCOLS" || tags.value==="COMPANY TYPE" || tags.value==="ROLE"?
-                      styles.TagHeading: styles.MobJobtitleFilter} 
-                      type= "radio" name="Rfilter"  onClick={() => { filterByJobTitle(tags.value) }} />{tags.value}</label>
-                 
+                    <label><input disabled={tags.value === "TECHNOLOGIES" || tags.value === "EDUCATION" || tags.value === "COLLEGE TYPE" || tags.value === "NOTICE PERIOD" || tags.value === "SALARY" ||
+                      tags.value === "EXPERIENCE" || tags.value === "Job Type" || tags.value === "INDUSTRY" || tags.value === "TOOLS/PROTOCOLS" || tags.value === "ROLE" || tags.value === "COMPANY TYPE"}
+                      className={tags.value === "TECHNOLOGIES" || tags.value === "EDUCATION" || tags.value === "COLLEGE TYPE" || tags.value === "NOTICE PERIOD" || tags.value === "SALARY" ||
+                        tags.value === "EXPERIENCE" || tags.value === "Job Type" || tags.value === "INDUSTRY" || tags.value === "TOOLS/PROTOCOLS" || tags.value === "COMPANY TYPE" || tags.value === "ROLE" ?
+                        styles.TagHeading : styles.MobJobtitleFilter}
+                      type="radio" name="Rfilter" onClick={() => { filterByJobTitle(tags.value) }} />{tags.value}</label>
+
                   )
                 }).slice(4, 9)
                 }
@@ -916,13 +936,13 @@ await axios.delete(`/jobpost/deleteCheckBoxArray/${checkBoxValue}`, {headers} )
               <div className={styles.MobFilterJobTitleWrapper}>
                 {jobTags.map((tags, i) => {
                   return (
-                    <label><input disabled={tags.value==="TECHNOLOGIES" || tags.value==="EDUCATION" || tags.value==="COLLEGE TYPE" || tags.value==="NOTICE PERIOD" || tags.value==="SALARY" || 
-                      tags.value==="EXPERIENCE" || tags.value==="Job Type" || tags.value==="INDUSTRY" || tags.value==="TOOLS/PROTOCOLS" || tags.value==="ROLE" || tags.value==="COMPANY TYPE" } 
-                      className={tags.value==="TECHNOLOGIES" || tags.value==="EDUCATION" || tags.value==="COLLEGE TYPE" || tags.value==="NOTICE PERIOD" || tags.value==="SALARY" || 
-                      tags.value==="EXPERIENCE" || tags.value==="Job Type" || tags.value==="INDUSTRY" || tags.value==="TOOLS/PROTOCOLS" || tags.value==="COMPANY TYPE" || tags.value==="ROLE"?
-                      styles.TagHeading: styles.MobJobtitleFilter} 
-                      type= "radio" name="Rfilter"  onClick={() => { filterByJobTitle(tags.value) }} />{tags.value}</label>
-                 
+                    <label><input disabled={tags.value === "TECHNOLOGIES" || tags.value === "EDUCATION" || tags.value === "COLLEGE TYPE" || tags.value === "NOTICE PERIOD" || tags.value === "SALARY" ||
+                      tags.value === "EXPERIENCE" || tags.value === "Job Type" || tags.value === "INDUSTRY" || tags.value === "TOOLS/PROTOCOLS" || tags.value === "ROLE" || tags.value === "COMPANY TYPE"}
+                      className={tags.value === "TECHNOLOGIES" || tags.value === "EDUCATION" || tags.value === "COLLEGE TYPE" || tags.value === "NOTICE PERIOD" || tags.value === "SALARY" ||
+                        tags.value === "EXPERIENCE" || tags.value === "Job Type" || tags.value === "INDUSTRY" || tags.value === "TOOLS/PROTOCOLS" || tags.value === "COMPANY TYPE" || tags.value === "ROLE" ?
+                        styles.TagHeading : styles.MobJobtitleFilter}
+                      type="radio" name="Rfilter" onClick={() => { filterByJobTitle(tags.value) }} />{tags.value}</label>
+
                   )
                 }).slice(9, 14)
                 }
@@ -934,13 +954,13 @@ await axios.delete(`/jobpost/deleteCheckBoxArray/${checkBoxValue}`, {headers} )
               <div className={styles.MobFilterJobTitleWrapper}>
                 {jobTags.map((tags, i) => {
                   return (
-                    <label><input disabled={tags.value==="TECHNOLOGIES" || tags.value==="EDUCATION" || tags.value==="COLLEGE TYPE" || tags.value==="NOTICE PERIOD" || tags.value==="SALARY" || 
-                      tags.value==="EXPERIENCE" || tags.value==="Job Type" || tags.value==="INDUSTRY" || tags.value==="TOOLS/PROTOCOLS" || tags.value==="ROLE" || tags.value==="COMPANY TYPE" } 
-                      className={tags.value==="TECHNOLOGIES" || tags.value==="EDUCATION" || tags.value==="COLLEGE TYPE" || tags.value==="NOTICE PERIOD" || tags.value==="SALARY" || 
-                      tags.value==="EXPERIENCE" || tags.value==="Job Type" || tags.value==="INDUSTRY" || tags.value==="TOOLS/PROTOCOLS" || tags.value==="COMPANY TYPE" || tags.value==="ROLE"?
-                      styles.TagHeading: styles.MobJobtitleFilter} 
-                      type= "radio" name="Rfilter"  onClick={() => { filterByJobTitle(tags.value) }} />{tags.value}</label>
-                 
+                    <label><input disabled={tags.value === "TECHNOLOGIES" || tags.value === "EDUCATION" || tags.value === "COLLEGE TYPE" || tags.value === "NOTICE PERIOD" || tags.value === "SALARY" ||
+                      tags.value === "EXPERIENCE" || tags.value === "Job Type" || tags.value === "INDUSTRY" || tags.value === "TOOLS/PROTOCOLS" || tags.value === "ROLE" || tags.value === "COMPANY TYPE"}
+                      className={tags.value === "TECHNOLOGIES" || tags.value === "EDUCATION" || tags.value === "COLLEGE TYPE" || tags.value === "NOTICE PERIOD" || tags.value === "SALARY" ||
+                        tags.value === "EXPERIENCE" || tags.value === "Job Type" || tags.value === "INDUSTRY" || tags.value === "TOOLS/PROTOCOLS" || tags.value === "COMPANY TYPE" || tags.value === "ROLE" ?
+                        styles.TagHeading : styles.MobJobtitleFilter}
+                      type="radio" name="Rfilter" onClick={() => { filterByJobTitle(tags.value) }} />{tags.value}</label>
+
                   )
                 }).slice(14, 19)
                 }
@@ -948,13 +968,13 @@ await axios.delete(`/jobpost/deleteCheckBoxArray/${checkBoxValue}`, {headers} )
               <div className={styles.MobFilterJobTitleWrapper}>
                 {jobTags.map((tags, i) => {
                   return (
-                    <label><input disabled={tags.value==="TECHNOLOGIES" || tags.value==="EDUCATION" || tags.value==="COLLEGE TYPE" || tags.value==="NOTICE PERIOD" || tags.value==="SALARY" || 
-                      tags.value==="EXPERIENCE" || tags.value==="Job Type" || tags.value==="INDUSTRY" || tags.value==="TOOLS/PROTOCOLS" || tags.value==="ROLE" || tags.value==="COMPANY TYPE" } 
-                      className={tags.value==="TECHNOLOGIES" || tags.value==="EDUCATION" || tags.value==="COLLEGE TYPE" || tags.value==="NOTICE PERIOD" || tags.value==="SALARY" || 
-                      tags.value==="EXPERIENCE" || tags.value==="Job Type" || tags.value==="INDUSTRY" || tags.value==="TOOLS/PROTOCOLS" || tags.value==="COMPANY TYPE" || tags.value==="ROLE"?
-                      styles.TagHeading: styles.MobJobtitleFilter} 
-                      type= "radio" name="Rfilter"  onClick={() => { filterByJobTitle(tags.value) }} />{tags.value}</label>
-                 
+                    <label><input disabled={tags.value === "TECHNOLOGIES" || tags.value === "EDUCATION" || tags.value === "COLLEGE TYPE" || tags.value === "NOTICE PERIOD" || tags.value === "SALARY" ||
+                      tags.value === "EXPERIENCE" || tags.value === "Job Type" || tags.value === "INDUSTRY" || tags.value === "TOOLS/PROTOCOLS" || tags.value === "ROLE" || tags.value === "COMPANY TYPE"}
+                      className={tags.value === "TECHNOLOGIES" || tags.value === "EDUCATION" || tags.value === "COLLEGE TYPE" || tags.value === "NOTICE PERIOD" || tags.value === "SALARY" ||
+                        tags.value === "EXPERIENCE" || tags.value === "Job Type" || tags.value === "INDUSTRY" || tags.value === "TOOLS/PROTOCOLS" || tags.value === "COMPANY TYPE" || tags.value === "ROLE" ?
+                        styles.TagHeading : styles.MobJobtitleFilter}
+                      type="radio" name="Rfilter" onClick={() => { filterByJobTitle(tags.value) }} />{tags.value}</label>
+
                   )
                 }).slice(19, 24)
                 }
@@ -962,13 +982,13 @@ await axios.delete(`/jobpost/deleteCheckBoxArray/${checkBoxValue}`, {headers} )
               <div className={styles.MobFilterJobTitleWrapper}>
                 {jobTags.map((tags, i) => {
                   return (
-                    <label><input disabled={tags.value==="TECHNOLOGIES" || tags.value==="EDUCATION" || tags.value==="COLLEGE TYPE" || tags.value==="NOTICE PERIOD" || tags.value==="SALARY" || 
-                      tags.value==="EXPERIENCE" || tags.value==="Job Type" || tags.value==="INDUSTRY" || tags.value==="TOOLS/PROTOCOLS" || tags.value==="ROLE" || tags.value==="COMPANY TYPE" } 
-                      className={tags.value==="TECHNOLOGIES" || tags.value==="EDUCATION" || tags.value==="COLLEGE TYPE" || tags.value==="NOTICE PERIOD" || tags.value==="SALARY" || 
-                      tags.value==="EXPERIENCE" || tags.value==="Job Type" || tags.value==="INDUSTRY" || tags.value==="TOOLS/PROTOCOLS" || tags.value==="COMPANY TYPE" || tags.value==="ROLE"?
-                      styles.TagHeading: styles.MobJobtitleFilter} 
-                      type= "radio" name="Rfilter"  onClick={() => { filterByJobTitle(tags.value) }} />{tags.value}</label>
-                 
+                    <label><input disabled={tags.value === "TECHNOLOGIES" || tags.value === "EDUCATION" || tags.value === "COLLEGE TYPE" || tags.value === "NOTICE PERIOD" || tags.value === "SALARY" ||
+                      tags.value === "EXPERIENCE" || tags.value === "Job Type" || tags.value === "INDUSTRY" || tags.value === "TOOLS/PROTOCOLS" || tags.value === "ROLE" || tags.value === "COMPANY TYPE"}
+                      className={tags.value === "TECHNOLOGIES" || tags.value === "EDUCATION" || tags.value === "COLLEGE TYPE" || tags.value === "NOTICE PERIOD" || tags.value === "SALARY" ||
+                        tags.value === "EXPERIENCE" || tags.value === "Job Type" || tags.value === "INDUSTRY" || tags.value === "TOOLS/PROTOCOLS" || tags.value === "COMPANY TYPE" || tags.value === "ROLE" ?
+                        styles.TagHeading : styles.MobJobtitleFilter}
+                      type="radio" name="Rfilter" onClick={() => { filterByJobTitle(tags.value) }} />{tags.value}</label>
+
                   )
                 }).slice(24, 29)
                 }
@@ -979,13 +999,13 @@ await axios.delete(`/jobpost/deleteCheckBoxArray/${checkBoxValue}`, {headers} )
               <div className={styles.MobFilterJobTitleWrapper}>
                 {jobTags.map((tags, i) => {
                   return (
-                    <label><input disabled={tags.value==="TECHNOLOGIES" || tags.value==="EDUCATION" || tags.value==="COLLEGE TYPE" || tags.value==="NOTICE PERIOD" || tags.value==="SALARY" || 
-                      tags.value==="EXPERIENCE" || tags.value==="Job Type" || tags.value==="INDUSTRY" || tags.value==="TOOLS/PROTOCOLS" || tags.value==="ROLE" || tags.value==="COMPANY TYPE" } 
-                      className={tags.value==="TECHNOLOGIES" || tags.value==="EDUCATION" || tags.value==="COLLEGE TYPE" || tags.value==="NOTICE PERIOD" || tags.value==="SALARY" || 
-                      tags.value==="EXPERIENCE" || tags.value==="Job Type" || tags.value==="INDUSTRY" || tags.value==="TOOLS/PROTOCOLS" || tags.value==="COMPANY TYPE" || tags.value==="ROLE"?
-                      styles.TagHeading: styles.MobJobtitleFilter} 
-                      type= "radio" name="Rfilter"  onClick={() => { filterByJobTitle(tags.value) }} />{tags.value}</label>
-                 
+                    <label><input disabled={tags.value === "TECHNOLOGIES" || tags.value === "EDUCATION" || tags.value === "COLLEGE TYPE" || tags.value === "NOTICE PERIOD" || tags.value === "SALARY" ||
+                      tags.value === "EXPERIENCE" || tags.value === "Job Type" || tags.value === "INDUSTRY" || tags.value === "TOOLS/PROTOCOLS" || tags.value === "ROLE" || tags.value === "COMPANY TYPE"}
+                      className={tags.value === "TECHNOLOGIES" || tags.value === "EDUCATION" || tags.value === "COLLEGE TYPE" || tags.value === "NOTICE PERIOD" || tags.value === "SALARY" ||
+                        tags.value === "EXPERIENCE" || tags.value === "Job Type" || tags.value === "INDUSTRY" || tags.value === "TOOLS/PROTOCOLS" || tags.value === "COMPANY TYPE" || tags.value === "ROLE" ?
+                        styles.TagHeading : styles.MobJobtitleFilter}
+                      type="radio" name="Rfilter" onClick={() => { filterByJobTitle(tags.value) }} />{tags.value}</label>
+
                   )
                 }).slice(29, 34)
                 }
@@ -993,13 +1013,13 @@ await axios.delete(`/jobpost/deleteCheckBoxArray/${checkBoxValue}`, {headers} )
               <div className={styles.MobFilterJobTitleWrapper}>
                 {jobTags.map((tags, i) => {
                   return (
-                    <label><input disabled={tags.value==="TECHNOLOGIES" || tags.value==="EDUCATION" || tags.value==="COLLEGE TYPE" || tags.value==="NOTICE PERIOD" || tags.value==="SALARY" || 
-                      tags.value==="EXPERIENCE" || tags.value==="Job Type" || tags.value==="INDUSTRY" || tags.value==="TOOLS/PROTOCOLS" || tags.value==="ROLE" || tags.value==="COMPANY TYPE" } 
-                      className={tags.value==="TECHNOLOGIES" || tags.value==="EDUCATION" || tags.value==="COLLEGE TYPE" || tags.value==="NOTICE PERIOD" || tags.value==="SALARY" || 
-                      tags.value==="EXPERIENCE" || tags.value==="Job Type" || tags.value==="INDUSTRY" || tags.value==="TOOLS/PROTOCOLS" || tags.value==="COMPANY TYPE" || tags.value==="ROLE"?
-                      styles.TagHeading: styles.MobJobtitleFilter} 
-                      type= "radio" name="Rfilter"  onClick={() => { filterByJobTitle(tags.value) }} />{tags.value}</label>
-                 
+                    <label><input disabled={tags.value === "TECHNOLOGIES" || tags.value === "EDUCATION" || tags.value === "COLLEGE TYPE" || tags.value === "NOTICE PERIOD" || tags.value === "SALARY" ||
+                      tags.value === "EXPERIENCE" || tags.value === "Job Type" || tags.value === "INDUSTRY" || tags.value === "TOOLS/PROTOCOLS" || tags.value === "ROLE" || tags.value === "COMPANY TYPE"}
+                      className={tags.value === "TECHNOLOGIES" || tags.value === "EDUCATION" || tags.value === "COLLEGE TYPE" || tags.value === "NOTICE PERIOD" || tags.value === "SALARY" ||
+                        tags.value === "EXPERIENCE" || tags.value === "Job Type" || tags.value === "INDUSTRY" || tags.value === "TOOLS/PROTOCOLS" || tags.value === "COMPANY TYPE" || tags.value === "ROLE" ?
+                        styles.TagHeading : styles.MobJobtitleFilter}
+                      type="radio" name="Rfilter" onClick={() => { filterByJobTitle(tags.value) }} />{tags.value}</label>
+
                   )
                 }).slice(34, 39)
                 }
@@ -1007,13 +1027,13 @@ await axios.delete(`/jobpost/deleteCheckBoxArray/${checkBoxValue}`, {headers} )
               <div className={styles.MobFilterJobTitleWrapper}>
                 {jobTags.map((tags, i) => {
                   return (
-                    <label><input disabled={tags.value==="TECHNOLOGIES" || tags.value==="EDUCATION" || tags.value==="COLLEGE TYPE" || tags.value==="NOTICE PERIOD" || tags.value==="SALARY" || 
-                      tags.value==="EXPERIENCE" || tags.value==="Job Type" || tags.value==="INDUSTRY" || tags.value==="TOOLS/PROTOCOLS" || tags.value==="ROLE" || tags.value==="COMPANY TYPE" } 
-                      className={tags.value==="TECHNOLOGIES" || tags.value==="EDUCATION" || tags.value==="COLLEGE TYPE" || tags.value==="NOTICE PERIOD" || tags.value==="SALARY" || 
-                      tags.value==="EXPERIENCE" || tags.value==="Job Type" || tags.value==="INDUSTRY" || tags.value==="TOOLS/PROTOCOLS" || tags.value==="COMPANY TYPE" || tags.value==="ROLE"?
-                      styles.TagHeading: styles.MobJobtitleFilter} 
-                      type= "radio" name="Rfilter"  onClick={() => { filterByJobTitle(tags.value) }} />{tags.value}</label>
-                 
+                    <label><input disabled={tags.value === "TECHNOLOGIES" || tags.value === "EDUCATION" || tags.value === "COLLEGE TYPE" || tags.value === "NOTICE PERIOD" || tags.value === "SALARY" ||
+                      tags.value === "EXPERIENCE" || tags.value === "Job Type" || tags.value === "INDUSTRY" || tags.value === "TOOLS/PROTOCOLS" || tags.value === "ROLE" || tags.value === "COMPANY TYPE"}
+                      className={tags.value === "TECHNOLOGIES" || tags.value === "EDUCATION" || tags.value === "COLLEGE TYPE" || tags.value === "NOTICE PERIOD" || tags.value === "SALARY" ||
+                        tags.value === "EXPERIENCE" || tags.value === "Job Type" || tags.value === "INDUSTRY" || tags.value === "TOOLS/PROTOCOLS" || tags.value === "COMPANY TYPE" || tags.value === "ROLE" ?
+                        styles.TagHeading : styles.MobJobtitleFilter}
+                      type="radio" name="Rfilter" onClick={() => { filterByJobTitle(tags.value) }} />{tags.value}</label>
+
                   )
                 }).slice(39, 44)
                 }
@@ -1024,13 +1044,13 @@ await axios.delete(`/jobpost/deleteCheckBoxArray/${checkBoxValue}`, {headers} )
               <div className={styles.MobFilterJobTitleWrapper}>
                 {jobTags.map((tags, i) => {
                   return (
-                    <label><input disabled={tags.value==="TECHNOLOGIES" || tags.value==="EDUCATION" || tags.value==="COLLEGE TYPE" || tags.value==="NOTICE PERIOD" || tags.value==="SALARY" || 
-                      tags.value==="EXPERIENCE" || tags.value==="Job Type" || tags.value==="INDUSTRY" || tags.value==="TOOLS/PROTOCOLS" || tags.value==="ROLE" || tags.value==="COMPANY TYPE" } 
-                      className={tags.value==="TECHNOLOGIES" || tags.value==="EDUCATION" || tags.value==="COLLEGE TYPE" || tags.value==="NOTICE PERIOD" || tags.value==="SALARY" || 
-                      tags.value==="EXPERIENCE" || tags.value==="Job Type" || tags.value==="INDUSTRY" || tags.value==="TOOLS/PROTOCOLS" || tags.value==="COMPANY TYPE" || tags.value==="ROLE"?
-                      styles.TagHeading: styles.MobJobtitleFilter} 
-                      type= "radio" name="Rfilter"  onClick={() => { filterByJobTitle(tags.value) }} />{tags.value}</label>
-                 
+                    <label><input disabled={tags.value === "TECHNOLOGIES" || tags.value === "EDUCATION" || tags.value === "COLLEGE TYPE" || tags.value === "NOTICE PERIOD" || tags.value === "SALARY" ||
+                      tags.value === "EXPERIENCE" || tags.value === "Job Type" || tags.value === "INDUSTRY" || tags.value === "TOOLS/PROTOCOLS" || tags.value === "ROLE" || tags.value === "COMPANY TYPE"}
+                      className={tags.value === "TECHNOLOGIES" || tags.value === "EDUCATION" || tags.value === "COLLEGE TYPE" || tags.value === "NOTICE PERIOD" || tags.value === "SALARY" ||
+                        tags.value === "EXPERIENCE" || tags.value === "Job Type" || tags.value === "INDUSTRY" || tags.value === "TOOLS/PROTOCOLS" || tags.value === "COMPANY TYPE" || tags.value === "ROLE" ?
+                        styles.TagHeading : styles.MobJobtitleFilter}
+                      type="radio" name="Rfilter" onClick={() => { filterByJobTitle(tags.value) }} />{tags.value}</label>
+
                   )
                 }).slice(44, 49)
                 }
@@ -1038,27 +1058,27 @@ await axios.delete(`/jobpost/deleteCheckBoxArray/${checkBoxValue}`, {headers} )
               <div className={styles.MobFilterJobTitleWrapper}>
                 {jobTags.map((tags, i) => {
                   return (
-                    <label><input disabled={tags.value==="TECHNOLOGIES" || tags.value==="EDUCATION" || tags.value==="COLLEGE TYPE" || tags.value==="NOTICE PERIOD" || tags.value==="SALARY" || 
-                      tags.value==="EXPERIENCE" || tags.value==="Job Type" || tags.value==="INDUSTRY" || tags.value==="TOOLS/PROTOCOLS" || tags.value==="ROLE" || tags.value==="COMPANY TYPE" } 
-                      className={tags.value==="TECHNOLOGIES" || tags.value==="EDUCATION" || tags.value==="COLLEGE TYPE" || tags.value==="NOTICE PERIOD" || tags.value==="SALARY" || 
-                      tags.value==="EXPERIENCE" || tags.value==="Job Type" || tags.value==="INDUSTRY" || tags.value==="TOOLS/PROTOCOLS" || tags.value==="COMPANY TYPE" || tags.value==="ROLE"?
-                      styles.TagHeading: styles.MobJobtitleFilter} 
-                      type= "radio" name="Rfilter"  onClick={() => { filterByJobTitle(tags.value) }} />{tags.value}</label>
-                 
+                    <label><input disabled={tags.value === "TECHNOLOGIES" || tags.value === "EDUCATION" || tags.value === "COLLEGE TYPE" || tags.value === "NOTICE PERIOD" || tags.value === "SALARY" ||
+                      tags.value === "EXPERIENCE" || tags.value === "Job Type" || tags.value === "INDUSTRY" || tags.value === "TOOLS/PROTOCOLS" || tags.value === "ROLE" || tags.value === "COMPANY TYPE"}
+                      className={tags.value === "TECHNOLOGIES" || tags.value === "EDUCATION" || tags.value === "COLLEGE TYPE" || tags.value === "NOTICE PERIOD" || tags.value === "SALARY" ||
+                        tags.value === "EXPERIENCE" || tags.value === "Job Type" || tags.value === "INDUSTRY" || tags.value === "TOOLS/PROTOCOLS" || tags.value === "COMPANY TYPE" || tags.value === "ROLE" ?
+                        styles.TagHeading : styles.MobJobtitleFilter}
+                      type="radio" name="Rfilter" onClick={() => { filterByJobTitle(tags.value) }} />{tags.value}</label>
+
                   )
-                }).slice(49,54)
+                }).slice(49, 54)
                 }
               </div>
               <div className={styles.MobFilterJobTitleWrapper}>
                 {jobTags.map((tags, i) => {
                   return (
-                    <label><input disabled={tags.value==="TECHNOLOGIES" || tags.value==="EDUCATION" || tags.value==="COLLEGE TYPE" || tags.value==="NOTICE PERIOD" || tags.value==="SALARY" || 
-                      tags.value==="EXPERIENCE" || tags.value==="Job Type" || tags.value==="INDUSTRY" || tags.value==="TOOLS/PROTOCOLS" || tags.value==="ROLE" || tags.value==="COMPANY TYPE" } 
-                      className={tags.value==="TECHNOLOGIES" || tags.value==="EDUCATION" || tags.value==="COLLEGE TYPE" || tags.value==="NOTICE PERIOD" || tags.value==="SALARY" || 
-                      tags.value==="EXPERIENCE" || tags.value==="Job Type" || tags.value==="INDUSTRY" || tags.value==="TOOLS/PROTOCOLS" || tags.value==="COMPANY TYPE" || tags.value==="ROLE"?
-                      styles.TagHeading: styles.MobJobtitleFilter} 
-                      type= "radio" name="Rfilter"  onClick={() => { filterByJobTitle(tags.value) }} />{tags.value}</label>
-                 
+                    <label><input disabled={tags.value === "TECHNOLOGIES" || tags.value === "EDUCATION" || tags.value === "COLLEGE TYPE" || tags.value === "NOTICE PERIOD" || tags.value === "SALARY" ||
+                      tags.value === "EXPERIENCE" || tags.value === "Job Type" || tags.value === "INDUSTRY" || tags.value === "TOOLS/PROTOCOLS" || tags.value === "ROLE" || tags.value === "COMPANY TYPE"}
+                      className={tags.value === "TECHNOLOGIES" || tags.value === "EDUCATION" || tags.value === "COLLEGE TYPE" || tags.value === "NOTICE PERIOD" || tags.value === "SALARY" ||
+                        tags.value === "EXPERIENCE" || tags.value === "Job Type" || tags.value === "INDUSTRY" || tags.value === "TOOLS/PROTOCOLS" || tags.value === "COMPANY TYPE" || tags.value === "ROLE" ?
+                        styles.TagHeading : styles.MobJobtitleFilter}
+                      type="radio" name="Rfilter" onClick={() => { filterByJobTitle(tags.value) }} />{tags.value}</label>
+
                   )
                 }).slice(54, 59)
                 }
@@ -1066,20 +1086,20 @@ await axios.delete(`/jobpost/deleteCheckBoxArray/${checkBoxValue}`, {headers} )
             </div>
             {/* .................from down here is 5th div..i.e 5th display....................... */}
 
-            <div style={{ display: "flex" }}>              
+            <div style={{ display: "flex" }}>
 
               <div className={styles.MobFilterJobTitleWrapper}>
                 {
                   jobTags.map((tags, i) => {
                     return (
-                      <label><input disabled={tags.value==="TECHNOLOGIES" || tags.value==="EDUCATION" || tags.value==="COLLEGE TYPE" || tags.value==="NOTICE PERIOD" || tags.value==="SALARY" || 
-                        tags.value==="EXPERIENCE" || tags.value==="Job Type" || tags.value==="INDUSTRY" || tags.value==="TOOLS/PROTOCOLS" || tags.value==="ROLE" || tags.value==="COMPANY TYPE" } 
-                        className={tags.value==="TECHNOLOGIES" || tags.value==="EDUCATION" || tags.value==="COLLEGE TYPE" || tags.value==="NOTICE PERIOD" || tags.value==="SALARY" || 
-                        tags.value==="EXPERIENCE" || tags.value==="Job Type" || tags.value==="INDUSTRY" || tags.value==="TOOLS/PROTOCOLS" || tags.value==="COMPANY TYPE" || tags.value==="ROLE"?
-                        styles.TagHeading: styles.MobJobtitleFilter} 
-                        type= "radio" name="Rfilter"  onClick={() => { filterByJobTitle(tags.value) }} />{tags.value}</label>
-                   
-                      )
+                      <label><input disabled={tags.value === "TECHNOLOGIES" || tags.value === "EDUCATION" || tags.value === "COLLEGE TYPE" || tags.value === "NOTICE PERIOD" || tags.value === "SALARY" ||
+                        tags.value === "EXPERIENCE" || tags.value === "Job Type" || tags.value === "INDUSTRY" || tags.value === "TOOLS/PROTOCOLS" || tags.value === "ROLE" || tags.value === "COMPANY TYPE"}
+                        className={tags.value === "TECHNOLOGIES" || tags.value === "EDUCATION" || tags.value === "COLLEGE TYPE" || tags.value === "NOTICE PERIOD" || tags.value === "SALARY" ||
+                          tags.value === "EXPERIENCE" || tags.value === "Job Type" || tags.value === "INDUSTRY" || tags.value === "TOOLS/PROTOCOLS" || tags.value === "COMPANY TYPE" || tags.value === "ROLE" ?
+                          styles.TagHeading : styles.MobJobtitleFilter}
+                        type="radio" name="Rfilter" onClick={() => { filterByJobTitle(tags.value) }} />{tags.value}</label>
+
+                    )
                   }).slice(59, 64)
                 }
               </div>
@@ -1087,13 +1107,13 @@ await axios.delete(`/jobpost/deleteCheckBoxArray/${checkBoxValue}`, {headers} )
               <div className={styles.MobFilterJobTitleWrapper}>
                 {jobTags.map((tags, i) => {
                   return (
-                    <label><input disabled={tags.value==="TECHNOLOGIES" || tags.value==="EDUCATION" || tags.value==="COLLEGE TYPE" || tags.value==="NOTICE PERIOD" || tags.value==="SALARY" || 
-                      tags.value==="EXPERIENCE" || tags.value==="Job Type" || tags.value==="INDUSTRY" || tags.value==="TOOLS/PROTOCOLS" || tags.value==="ROLE" || tags.value==="COMPANY TYPE" } 
-                      className={tags.value==="TECHNOLOGIES" || tags.value==="EDUCATION" || tags.value==="COLLEGE TYPE" || tags.value==="NOTICE PERIOD" || tags.value==="SALARY" || 
-                      tags.value==="EXPERIENCE" || tags.value==="Job Type" || tags.value==="INDUSTRY" || tags.value==="TOOLS/PROTOCOLS" || tags.value==="COMPANY TYPE" || tags.value==="ROLE"?
-                      styles.TagHeading: styles.MobJobtitleFilter} 
-                      type= "radio" name="Rfilter"  onClick={() => { filterByJobTitle(tags.value) }} />{tags.value}</label>
-                 
+                    <label><input disabled={tags.value === "TECHNOLOGIES" || tags.value === "EDUCATION" || tags.value === "COLLEGE TYPE" || tags.value === "NOTICE PERIOD" || tags.value === "SALARY" ||
+                      tags.value === "EXPERIENCE" || tags.value === "Job Type" || tags.value === "INDUSTRY" || tags.value === "TOOLS/PROTOCOLS" || tags.value === "ROLE" || tags.value === "COMPANY TYPE"}
+                      className={tags.value === "TECHNOLOGIES" || tags.value === "EDUCATION" || tags.value === "COLLEGE TYPE" || tags.value === "NOTICE PERIOD" || tags.value === "SALARY" ||
+                        tags.value === "EXPERIENCE" || tags.value === "Job Type" || tags.value === "INDUSTRY" || tags.value === "TOOLS/PROTOCOLS" || tags.value === "COMPANY TYPE" || tags.value === "ROLE" ?
+                        styles.TagHeading : styles.MobJobtitleFilter}
+                      type="radio" name="Rfilter" onClick={() => { filterByJobTitle(tags.value) }} />{tags.value}</label>
+
                   )
                 }).slice(64, 69)
                 }
@@ -1101,13 +1121,13 @@ await axios.delete(`/jobpost/deleteCheckBoxArray/${checkBoxValue}`, {headers} )
               <div className={styles.MobFilterJobTitleWrapper}>
                 {jobTags.map((tags, i) => {
                   return (
-                    <label><input disabled={tags.value==="TECHNOLOGIES" || tags.value==="EDUCATION" || tags.value==="COLLEGE TYPE" || tags.value==="NOTICE PERIOD" || tags.value==="SALARY" || 
-                      tags.value==="EXPERIENCE" || tags.value==="Job Type" || tags.value==="INDUSTRY" || tags.value==="TOOLS/PROTOCOLS" || tags.value==="ROLE" || tags.value==="COMPANY TYPE" } 
-                      className={tags.value==="TECHNOLOGIES" || tags.value==="EDUCATION" || tags.value==="COLLEGE TYPE" || tags.value==="NOTICE PERIOD" || tags.value==="SALARY" || 
-                      tags.value==="EXPERIENCE" || tags.value==="Job Type" || tags.value==="INDUSTRY" || tags.value==="TOOLS/PROTOCOLS" || tags.value==="COMPANY TYPE" || tags.value==="ROLE"?
-                      styles.TagHeading: styles.MobJobtitleFilter} 
-                      type= "radio" name="Rfilter"  onClick={() => { filterByJobTitle(tags.value) }} />{tags.value}</label>
-                 
+                    <label><input disabled={tags.value === "TECHNOLOGIES" || tags.value === "EDUCATION" || tags.value === "COLLEGE TYPE" || tags.value === "NOTICE PERIOD" || tags.value === "SALARY" ||
+                      tags.value === "EXPERIENCE" || tags.value === "Job Type" || tags.value === "INDUSTRY" || tags.value === "TOOLS/PROTOCOLS" || tags.value === "ROLE" || tags.value === "COMPANY TYPE"}
+                      className={tags.value === "TECHNOLOGIES" || tags.value === "EDUCATION" || tags.value === "COLLEGE TYPE" || tags.value === "NOTICE PERIOD" || tags.value === "SALARY" ||
+                        tags.value === "EXPERIENCE" || tags.value === "Job Type" || tags.value === "INDUSTRY" || tags.value === "TOOLS/PROTOCOLS" || tags.value === "COMPANY TYPE" || tags.value === "ROLE" ?
+                        styles.TagHeading : styles.MobJobtitleFilter}
+                      type="radio" name="Rfilter" onClick={() => { filterByJobTitle(tags.value) }} />{tags.value}</label>
+
                   )
                 }).slice(69, 74)
                 }
@@ -1119,13 +1139,13 @@ await axios.delete(`/jobpost/deleteCheckBoxArray/${checkBoxValue}`, {headers} )
               <div className={styles.MobFilterJobTitleWrapper}>
                 {jobTags.map((tags, i) => {
                   return (
-                    <label><input disabled={tags.value==="TECHNOLOGIES" || tags.value==="EDUCATION" || tags.value==="COLLEGE TYPE" || tags.value==="NOTICE PERIOD" || tags.value==="SALARY" || 
-                      tags.value==="EXPERIENCE" || tags.value==="Job Type" || tags.value==="INDUSTRY" || tags.value==="TOOLS/PROTOCOLS" || tags.value==="ROLE" || tags.value==="COMPANY TYPE" } 
-                      className={tags.value==="TECHNOLOGIES" || tags.value==="EDUCATION" || tags.value==="COLLEGE TYPE" || tags.value==="NOTICE PERIOD" || tags.value==="SALARY" || 
-                      tags.value==="EXPERIENCE" || tags.value==="Job Type" || tags.value==="INDUSTRY" || tags.value==="TOOLS/PROTOCOLS" || tags.value==="COMPANY TYPE" || tags.value==="ROLE"?
-                      styles.TagHeading: styles.MobJobtitleFilter} 
-                      type= "radio" name="Rfilter"  onClick={() => { filterByJobTitle(tags.value) }} />{tags.value}</label>
-                 
+                    <label><input disabled={tags.value === "TECHNOLOGIES" || tags.value === "EDUCATION" || tags.value === "COLLEGE TYPE" || tags.value === "NOTICE PERIOD" || tags.value === "SALARY" ||
+                      tags.value === "EXPERIENCE" || tags.value === "Job Type" || tags.value === "INDUSTRY" || tags.value === "TOOLS/PROTOCOLS" || tags.value === "ROLE" || tags.value === "COMPANY TYPE"}
+                      className={tags.value === "TECHNOLOGIES" || tags.value === "EDUCATION" || tags.value === "COLLEGE TYPE" || tags.value === "NOTICE PERIOD" || tags.value === "SALARY" ||
+                        tags.value === "EXPERIENCE" || tags.value === "Job Type" || tags.value === "INDUSTRY" || tags.value === "TOOLS/PROTOCOLS" || tags.value === "COMPANY TYPE" || tags.value === "ROLE" ?
+                        styles.TagHeading : styles.MobJobtitleFilter}
+                      type="radio" name="Rfilter" onClick={() => { filterByJobTitle(tags.value) }} />{tags.value}</label>
+
                   )
                 }).slice(74, 79)
                 }
@@ -1133,13 +1153,13 @@ await axios.delete(`/jobpost/deleteCheckBoxArray/${checkBoxValue}`, {headers} )
               <div className={styles.MobFilterJobTitleWrapper}>
                 {jobTags.map((tags, i) => {
                   return (
-                    <label><input disabled={tags.value==="TECHNOLOGIES" || tags.value==="EDUCATION" || tags.value==="COLLEGE TYPE" || tags.value==="NOTICE PERIOD" || tags.value==="SALARY" || 
-                      tags.value==="EXPERIENCE" || tags.value==="Job Type" || tags.value==="INDUSTRY" || tags.value==="TOOLS/PROTOCOLS" || tags.value==="ROLE" || tags.value==="COMPANY TYPE" } 
-                      className={tags.value==="TECHNOLOGIES" || tags.value==="EDUCATION" || tags.value==="COLLEGE TYPE" || tags.value==="NOTICE PERIOD" || tags.value==="SALARY" || 
-                      tags.value==="EXPERIENCE" || tags.value==="Job Type" || tags.value==="INDUSTRY" || tags.value==="TOOLS/PROTOCOLS" || tags.value==="COMPANY TYPE" || tags.value==="ROLE"?
-                      styles.TagHeading: styles.MobJobtitleFilter} 
-                      type= "radio" name="Rfilter"  onClick={() => { filterByJobTitle(tags.value) }} />{tags.value}</label>
-                 
+                    <label><input disabled={tags.value === "TECHNOLOGIES" || tags.value === "EDUCATION" || tags.value === "COLLEGE TYPE" || tags.value === "NOTICE PERIOD" || tags.value === "SALARY" ||
+                      tags.value === "EXPERIENCE" || tags.value === "Job Type" || tags.value === "INDUSTRY" || tags.value === "TOOLS/PROTOCOLS" || tags.value === "ROLE" || tags.value === "COMPANY TYPE"}
+                      className={tags.value === "TECHNOLOGIES" || tags.value === "EDUCATION" || tags.value === "COLLEGE TYPE" || tags.value === "NOTICE PERIOD" || tags.value === "SALARY" ||
+                        tags.value === "EXPERIENCE" || tags.value === "Job Type" || tags.value === "INDUSTRY" || tags.value === "TOOLS/PROTOCOLS" || tags.value === "COMPANY TYPE" || tags.value === "ROLE" ?
+                        styles.TagHeading : styles.MobJobtitleFilter}
+                      type="radio" name="Rfilter" onClick={() => { filterByJobTitle(tags.value) }} />{tags.value}</label>
+
                   )
                 }).slice(79, 84)
                 }
@@ -1147,13 +1167,13 @@ await axios.delete(`/jobpost/deleteCheckBoxArray/${checkBoxValue}`, {headers} )
               <div className={styles.MobFilterJobTitleWrapper}>
                 {jobTags.map((tags, i) => {
                   return (
-                    <label><input disabled={tags.value==="TECHNOLOGIES" || tags.value==="EDUCATION" || tags.value==="COLLEGE TYPE" || tags.value==="NOTICE PERIOD" || tags.value==="SALARY" || 
-                      tags.value==="EXPERIENCE" || tags.value==="Job Type" || tags.value==="INDUSTRY" || tags.value==="TOOLS/PROTOCOLS" || tags.value==="ROLE" || tags.value==="COMPANY TYPE" } 
-                      className={tags.value==="TECHNOLOGIES" || tags.value==="EDUCATION" || tags.value==="COLLEGE TYPE" || tags.value==="NOTICE PERIOD" || tags.value==="SALARY" || 
-                      tags.value==="EXPERIENCE" || tags.value==="Job Type" || tags.value==="INDUSTRY" || tags.value==="TOOLS/PROTOCOLS" || tags.value==="COMPANY TYPE" || tags.value==="ROLE"?
-                      styles.TagHeading: styles.MobJobtitleFilter} 
-                      type= "radio" name="Rfilter"  onClick={() => { filterByJobTitle(tags.value) }} />{tags.value}</label>
-                 
+                    <label><input disabled={tags.value === "TECHNOLOGIES" || tags.value === "EDUCATION" || tags.value === "COLLEGE TYPE" || tags.value === "NOTICE PERIOD" || tags.value === "SALARY" ||
+                      tags.value === "EXPERIENCE" || tags.value === "Job Type" || tags.value === "INDUSTRY" || tags.value === "TOOLS/PROTOCOLS" || tags.value === "ROLE" || tags.value === "COMPANY TYPE"}
+                      className={tags.value === "TECHNOLOGIES" || tags.value === "EDUCATION" || tags.value === "COLLEGE TYPE" || tags.value === "NOTICE PERIOD" || tags.value === "SALARY" ||
+                        tags.value === "EXPERIENCE" || tags.value === "Job Type" || tags.value === "INDUSTRY" || tags.value === "TOOLS/PROTOCOLS" || tags.value === "COMPANY TYPE" || tags.value === "ROLE" ?
+                        styles.TagHeading : styles.MobJobtitleFilter}
+                      type="radio" name="Rfilter" onClick={() => { filterByJobTitle(tags.value) }} />{tags.value}</label>
+
                   )
                 }).slice(84, 89)
                 }
@@ -1164,13 +1184,13 @@ await axios.delete(`/jobpost/deleteCheckBoxArray/${checkBoxValue}`, {headers} )
               <div className={styles.MobFilterJobTitleWrapper}>
                 {jobTags.map((tags, i) => {
                   return (
-                    <label><input disabled={tags.value==="TECHNOLOGIES" || tags.value==="EDUCATION" || tags.value==="COLLEGE TYPE" || tags.value==="NOTICE PERIOD" || tags.value==="SALARY" || 
-                      tags.value==="EXPERIENCE" || tags.value==="Job Type" || tags.value==="INDUSTRY" || tags.value==="TOOLS/PROTOCOLS" || tags.value==="ROLE" || tags.value==="COMPANY TYPE" } 
-                      className={tags.value==="TECHNOLOGIES" || tags.value==="EDUCATION" || tags.value==="COLLEGE TYPE" || tags.value==="NOTICE PERIOD" || tags.value==="SALARY" || 
-                      tags.value==="EXPERIENCE" || tags.value==="Job Type" || tags.value==="INDUSTRY" || tags.value==="TOOLS/PROTOCOLS" || tags.value==="COMPANY TYPE" || tags.value==="ROLE"?
-                      styles.TagHeading: styles.MobJobtitleFilter} 
-                      type= "radio" name="Rfilter"  onClick={() => { filterByJobTitle(tags.value) }} />{tags.value}</label>
-                 
+                    <label><input disabled={tags.value === "TECHNOLOGIES" || tags.value === "EDUCATION" || tags.value === "COLLEGE TYPE" || tags.value === "NOTICE PERIOD" || tags.value === "SALARY" ||
+                      tags.value === "EXPERIENCE" || tags.value === "Job Type" || tags.value === "INDUSTRY" || tags.value === "TOOLS/PROTOCOLS" || tags.value === "ROLE" || tags.value === "COMPANY TYPE"}
+                      className={tags.value === "TECHNOLOGIES" || tags.value === "EDUCATION" || tags.value === "COLLEGE TYPE" || tags.value === "NOTICE PERIOD" || tags.value === "SALARY" ||
+                        tags.value === "EXPERIENCE" || tags.value === "Job Type" || tags.value === "INDUSTRY" || tags.value === "TOOLS/PROTOCOLS" || tags.value === "COMPANY TYPE" || tags.value === "ROLE" ?
+                        styles.TagHeading : styles.MobJobtitleFilter}
+                      type="radio" name="Rfilter" onClick={() => { filterByJobTitle(tags.value) }} />{tags.value}</label>
+
                   )
                 }).slice(89, 94)
                 }
@@ -1178,13 +1198,13 @@ await axios.delete(`/jobpost/deleteCheckBoxArray/${checkBoxValue}`, {headers} )
               <div className={styles.MobFilterJobTitleWrapper}>
                 {jobTags.map((tags, i) => {
                   return (
-                    <label><input disabled={tags.value==="TECHNOLOGIES" || tags.value==="EDUCATION" || tags.value==="COLLEGE TYPE" || tags.value==="NOTICE PERIOD" || tags.value==="SALARY" || 
-                      tags.value==="EXPERIENCE" || tags.value==="Job Type" || tags.value==="INDUSTRY" || tags.value==="TOOLS/PROTOCOLS" || tags.value==="ROLE" || tags.value==="COMPANY TYPE" } 
-                      className={tags.value==="TECHNOLOGIES" || tags.value==="EDUCATION" || tags.value==="COLLEGE TYPE" || tags.value==="NOTICE PERIOD" || tags.value==="SALARY" || 
-                      tags.value==="EXPERIENCE" || tags.value==="Job Type" || tags.value==="INDUSTRY" || tags.value==="TOOLS/PROTOCOLS" || tags.value==="COMPANY TYPE" || tags.value==="ROLE"?
-                      styles.TagHeading: styles.MobJobtitleFilter} 
-                      type= "radio" name="Rfilter"  onClick={() => { filterByJobTitle(tags.value) }} />{tags.value}</label>
-                 
+                    <label><input disabled={tags.value === "TECHNOLOGIES" || tags.value === "EDUCATION" || tags.value === "COLLEGE TYPE" || tags.value === "NOTICE PERIOD" || tags.value === "SALARY" ||
+                      tags.value === "EXPERIENCE" || tags.value === "Job Type" || tags.value === "INDUSTRY" || tags.value === "TOOLS/PROTOCOLS" || tags.value === "ROLE" || tags.value === "COMPANY TYPE"}
+                      className={tags.value === "TECHNOLOGIES" || tags.value === "EDUCATION" || tags.value === "COLLEGE TYPE" || tags.value === "NOTICE PERIOD" || tags.value === "SALARY" ||
+                        tags.value === "EXPERIENCE" || tags.value === "Job Type" || tags.value === "INDUSTRY" || tags.value === "TOOLS/PROTOCOLS" || tags.value === "COMPANY TYPE" || tags.value === "ROLE" ?
+                        styles.TagHeading : styles.MobJobtitleFilter}
+                      type="radio" name="Rfilter" onClick={() => { filterByJobTitle(tags.value) }} />{tags.value}</label>
+
                   )
                 }).slice(94, 99)
                 }
@@ -1192,13 +1212,13 @@ await axios.delete(`/jobpost/deleteCheckBoxArray/${checkBoxValue}`, {headers} )
               <div className={styles.MobFilterJobTitleWrapper}>
                 {jobTags.map((tags, i) => {
                   return (
-                    <label><input disabled={tags.value==="TECHNOLOGIES" || tags.value==="EDUCATION" || tags.value==="COLLEGE TYPE" || tags.value==="NOTICE PERIOD" || tags.value==="SALARY" || 
-                      tags.value==="EXPERIENCE" || tags.value==="Job Type" || tags.value==="INDUSTRY" || tags.value==="TOOLS/PROTOCOLS" || tags.value==="ROLE" || tags.value==="COMPANY TYPE" } 
-                      className={tags.value==="TECHNOLOGIES" || tags.value==="EDUCATION" || tags.value==="COLLEGE TYPE" || tags.value==="NOTICE PERIOD" || tags.value==="SALARY" || 
-                      tags.value==="EXPERIENCE" || tags.value==="Job Type" || tags.value==="INDUSTRY" || tags.value==="TOOLS/PROTOCOLS" || tags.value==="COMPANY TYPE" || tags.value==="ROLE"?
-                      styles.TagHeading: styles.MobJobtitleFilter} 
-                      type= "radio" name="Rfilter"  onClick={() => { filterByJobTitle(tags.value) }} />{tags.value}</label>
-                 
+                    <label><input disabled={tags.value === "TECHNOLOGIES" || tags.value === "EDUCATION" || tags.value === "COLLEGE TYPE" || tags.value === "NOTICE PERIOD" || tags.value === "SALARY" ||
+                      tags.value === "EXPERIENCE" || tags.value === "Job Type" || tags.value === "INDUSTRY" || tags.value === "TOOLS/PROTOCOLS" || tags.value === "ROLE" || tags.value === "COMPANY TYPE"}
+                      className={tags.value === "TECHNOLOGIES" || tags.value === "EDUCATION" || tags.value === "COLLEGE TYPE" || tags.value === "NOTICE PERIOD" || tags.value === "SALARY" ||
+                        tags.value === "EXPERIENCE" || tags.value === "Job Type" || tags.value === "INDUSTRY" || tags.value === "TOOLS/PROTOCOLS" || tags.value === "COMPANY TYPE" || tags.value === "ROLE" ?
+                        styles.TagHeading : styles.MobJobtitleFilter}
+                      type="radio" name="Rfilter" onClick={() => { filterByJobTitle(tags.value) }} />{tags.value}</label>
+
                   )
                 }).slice(99, 104)
                 }
@@ -1209,13 +1229,13 @@ await axios.delete(`/jobpost/deleteCheckBoxArray/${checkBoxValue}`, {headers} )
               <div className={styles.MobFilterJobTitleWrapper}>
                 {jobTags.map((tags, i) => {
                   return (
-                    <label><input disabled={tags.value==="TECHNOLOGIES" || tags.value==="EDUCATION" || tags.value==="COLLEGE TYPE" || tags.value==="NOTICE PERIOD" || tags.value==="SALARY" || 
-                      tags.value==="EXPERIENCE" || tags.value==="Job Type" || tags.value==="INDUSTRY" || tags.value==="TOOLS/PROTOCOLS" || tags.value==="ROLE" || tags.value==="COMPANY TYPE" } 
-                      className={tags.value==="TECHNOLOGIES" || tags.value==="EDUCATION" || tags.value==="COLLEGE TYPE" || tags.value==="NOTICE PERIOD" || tags.value==="SALARY" || 
-                      tags.value==="EXPERIENCE" || tags.value==="Job Type" || tags.value==="INDUSTRY" || tags.value==="TOOLS/PROTOCOLS" || tags.value==="COMPANY TYPE" || tags.value==="ROLE"?
-                      styles.TagHeading: styles.MobJobtitleFilter} 
-                      type= "radio" name="Rfilter"  onClick={() => { filterByJobTitle(tags.value) }} />{tags.value}</label>
-                 
+                    <label><input disabled={tags.value === "TECHNOLOGIES" || tags.value === "EDUCATION" || tags.value === "COLLEGE TYPE" || tags.value === "NOTICE PERIOD" || tags.value === "SALARY" ||
+                      tags.value === "EXPERIENCE" || tags.value === "Job Type" || tags.value === "INDUSTRY" || tags.value === "TOOLS/PROTOCOLS" || tags.value === "ROLE" || tags.value === "COMPANY TYPE"}
+                      className={tags.value === "TECHNOLOGIES" || tags.value === "EDUCATION" || tags.value === "COLLEGE TYPE" || tags.value === "NOTICE PERIOD" || tags.value === "SALARY" ||
+                        tags.value === "EXPERIENCE" || tags.value === "Job Type" || tags.value === "INDUSTRY" || tags.value === "TOOLS/PROTOCOLS" || tags.value === "COMPANY TYPE" || tags.value === "ROLE" ?
+                        styles.TagHeading : styles.MobJobtitleFilter}
+                      type="radio" name="Rfilter" onClick={() => { filterByJobTitle(tags.value) }} />{tags.value}</label>
+
                   )
                 }).slice(104, 109)
                 }
@@ -1223,27 +1243,27 @@ await axios.delete(`/jobpost/deleteCheckBoxArray/${checkBoxValue}`, {headers} )
               <div className={styles.MobFilterJobTitleWrapper}>
                 {jobTags.map((tags, i) => {
                   return (
-                    <label><input disabled={tags.value==="TECHNOLOGIES" || tags.value==="EDUCATION" || tags.value==="COLLEGE TYPE" || tags.value==="NOTICE PERIOD" || tags.value==="SALARY" || 
-                      tags.value==="EXPERIENCE" || tags.value==="Job Type" || tags.value==="INDUSTRY" || tags.value==="TOOLS/PROTOCOLS" || tags.value==="ROLE" || tags.value==="COMPANY TYPE" } 
-                      className={tags.value==="TECHNOLOGIES" || tags.value==="EDUCATION" || tags.value==="COLLEGE TYPE" || tags.value==="NOTICE PERIOD" || tags.value==="SALARY" || 
-                      tags.value==="EXPERIENCE" || tags.value==="Job Type" || tags.value==="INDUSTRY" || tags.value==="TOOLS/PROTOCOLS" || tags.value==="COMPANY TYPE" || tags.value==="ROLE"?
-                      styles.TagHeading: styles.MobJobtitleFilter} 
-                      type= "radio" name="Rfilter"  onClick={() => { filterByJobTitle(tags.value) }} />{tags.value}</label>
-                 
+                    <label><input disabled={tags.value === "TECHNOLOGIES" || tags.value === "EDUCATION" || tags.value === "COLLEGE TYPE" || tags.value === "NOTICE PERIOD" || tags.value === "SALARY" ||
+                      tags.value === "EXPERIENCE" || tags.value === "Job Type" || tags.value === "INDUSTRY" || tags.value === "TOOLS/PROTOCOLS" || tags.value === "ROLE" || tags.value === "COMPANY TYPE"}
+                      className={tags.value === "TECHNOLOGIES" || tags.value === "EDUCATION" || tags.value === "COLLEGE TYPE" || tags.value === "NOTICE PERIOD" || tags.value === "SALARY" ||
+                        tags.value === "EXPERIENCE" || tags.value === "Job Type" || tags.value === "INDUSTRY" || tags.value === "TOOLS/PROTOCOLS" || tags.value === "COMPANY TYPE" || tags.value === "ROLE" ?
+                        styles.TagHeading : styles.MobJobtitleFilter}
+                      type="radio" name="Rfilter" onClick={() => { filterByJobTitle(tags.value) }} />{tags.value}</label>
+
                   )
-                }).slice(109,114)
+                }).slice(109, 114)
                 }
               </div>
               <div className={styles.MobFilterJobTitleWrapper}>
                 {jobTags.map((tags, i) => {
                   return (
-                    <label><input disabled={tags.value==="TECHNOLOGIES" || tags.value==="EDUCATION" || tags.value==="COLLEGE TYPE" || tags.value==="NOTICE PERIOD" || tags.value==="SALARY" || 
-                      tags.value==="EXPERIENCE" || tags.value==="Job Type" || tags.value==="INDUSTRY" || tags.value==="TOOLS/PROTOCOLS" || tags.value==="ROLE" || tags.value==="COMPANY TYPE" } 
-                      className={tags.value==="TECHNOLOGIES" || tags.value==="EDUCATION" || tags.value==="COLLEGE TYPE" || tags.value==="NOTICE PERIOD" || tags.value==="SALARY" || 
-                      tags.value==="EXPERIENCE" || tags.value==="Job Type" || tags.value==="INDUSTRY" || tags.value==="TOOLS/PROTOCOLS" || tags.value==="COMPANY TYPE" || tags.value==="ROLE"?
-                      styles.TagHeading: styles.MobJobtitleFilter} 
-                      type= "radio" name="Rfilter"  onClick={() => { filterByJobTitle(tags.value) }} />{tags.value}</label>
-                 
+                    <label><input disabled={tags.value === "TECHNOLOGIES" || tags.value === "EDUCATION" || tags.value === "COLLEGE TYPE" || tags.value === "NOTICE PERIOD" || tags.value === "SALARY" ||
+                      tags.value === "EXPERIENCE" || tags.value === "Job Type" || tags.value === "INDUSTRY" || tags.value === "TOOLS/PROTOCOLS" || tags.value === "ROLE" || tags.value === "COMPANY TYPE"}
+                      className={tags.value === "TECHNOLOGIES" || tags.value === "EDUCATION" || tags.value === "COLLEGE TYPE" || tags.value === "NOTICE PERIOD" || tags.value === "SALARY" ||
+                        tags.value === "EXPERIENCE" || tags.value === "Job Type" || tags.value === "INDUSTRY" || tags.value === "TOOLS/PROTOCOLS" || tags.value === "COMPANY TYPE" || tags.value === "ROLE" ?
+                        styles.TagHeading : styles.MobJobtitleFilter}
+                      type="radio" name="Rfilter" onClick={() => { filterByJobTitle(tags.value) }} />{tags.value}</label>
+
                   )
                 }).slice(114, 119)
                 }
@@ -1252,18 +1272,18 @@ await axios.delete(`/jobpost/deleteCheckBoxArray/${checkBoxValue}`, {headers} )
             {/* .................from down here is 9th div..i.e 9th display....................... */}
 
             <div style={{ display: "flex" }}>
-              
+
               <div className={styles.MobFilterJobTitleWrapper}>
                 {
                   jobTags.map((tags, i) => {
                     return (
-                      <label><input disabled={tags.value==="TECHNOLOGIES" || tags.value==="EDUCATION" || tags.value==="COLLEGE TYPE" || tags.value==="NOTICE PERIOD" || tags.value==="SALARY" || 
-                        tags.value==="EXPERIENCE" || tags.value==="Job Type" || tags.value==="INDUSTRY" || tags.value==="TOOLS/PROTOCOLS" || tags.value==="ROLE" || tags.value==="COMPANY TYPE" } 
-                        className={tags.value==="TECHNOLOGIES" || tags.value==="EDUCATION" || tags.value==="COLLEGE TYPE" || tags.value==="NOTICE PERIOD" || tags.value==="SALARY" || 
-                        tags.value==="EXPERIENCE" || tags.value==="Job Type" || tags.value==="INDUSTRY" || tags.value==="TOOLS/PROTOCOLS" || tags.value==="COMPANY TYPE" || tags.value==="ROLE"?
-                        styles.TagHeading: styles.MobJobtitleFilter} 
-                        type= "radio" name="Rfilter"  onClick={() => { filterByJobTitle(tags.value) }} />{tags.value}</label>
-                                         )
+                      <label><input disabled={tags.value === "TECHNOLOGIES" || tags.value === "EDUCATION" || tags.value === "COLLEGE TYPE" || tags.value === "NOTICE PERIOD" || tags.value === "SALARY" ||
+                        tags.value === "EXPERIENCE" || tags.value === "Job Type" || tags.value === "INDUSTRY" || tags.value === "TOOLS/PROTOCOLS" || tags.value === "ROLE" || tags.value === "COMPANY TYPE"}
+                        className={tags.value === "TECHNOLOGIES" || tags.value === "EDUCATION" || tags.value === "COLLEGE TYPE" || tags.value === "NOTICE PERIOD" || tags.value === "SALARY" ||
+                          tags.value === "EXPERIENCE" || tags.value === "Job Type" || tags.value === "INDUSTRY" || tags.value === "TOOLS/PROTOCOLS" || tags.value === "COMPANY TYPE" || tags.value === "ROLE" ?
+                          styles.TagHeading : styles.MobJobtitleFilter}
+                        type="radio" name="Rfilter" onClick={() => { filterByJobTitle(tags.value) }} />{tags.value}</label>
+                    )
                   }).slice(119, 124)
                 }
               </div>
@@ -1271,13 +1291,13 @@ await axios.delete(`/jobpost/deleteCheckBoxArray/${checkBoxValue}`, {headers} )
               <div className={styles.MobFilterJobTitleWrapper}>
                 {jobTags.map((tags, i) => {
                   return (
-                    <label><input disabled={tags.value==="TECHNOLOGIES" || tags.value==="EDUCATION" || tags.value==="COLLEGE TYPE" || tags.value==="NOTICE PERIOD" || tags.value==="SALARY" || 
-                      tags.value==="EXPERIENCE" || tags.value==="Job Type" || tags.value==="INDUSTRY" || tags.value==="TOOLS/PROTOCOLS" || tags.value==="ROLE" || tags.value==="COMPANY TYPE" } 
-                      className={tags.value==="TECHNOLOGIES" || tags.value==="EDUCATION" || tags.value==="COLLEGE TYPE" || tags.value==="NOTICE PERIOD" || tags.value==="SALARY" || 
-                      tags.value==="EXPERIENCE" || tags.value==="Job Type" || tags.value==="INDUSTRY" || tags.value==="TOOLS/PROTOCOLS" || tags.value==="COMPANY TYPE" || tags.value==="ROLE"?
-                      styles.TagHeading: styles.MobJobtitleFilter} 
-                      type= "radio" name="Rfilter"  onClick={() => { filterByJobTitle(tags.value) }} />{tags.value}</label>
-                 
+                    <label><input disabled={tags.value === "TECHNOLOGIES" || tags.value === "EDUCATION" || tags.value === "COLLEGE TYPE" || tags.value === "NOTICE PERIOD" || tags.value === "SALARY" ||
+                      tags.value === "EXPERIENCE" || tags.value === "Job Type" || tags.value === "INDUSTRY" || tags.value === "TOOLS/PROTOCOLS" || tags.value === "ROLE" || tags.value === "COMPANY TYPE"}
+                      className={tags.value === "TECHNOLOGIES" || tags.value === "EDUCATION" || tags.value === "COLLEGE TYPE" || tags.value === "NOTICE PERIOD" || tags.value === "SALARY" ||
+                        tags.value === "EXPERIENCE" || tags.value === "Job Type" || tags.value === "INDUSTRY" || tags.value === "TOOLS/PROTOCOLS" || tags.value === "COMPANY TYPE" || tags.value === "ROLE" ?
+                        styles.TagHeading : styles.MobJobtitleFilter}
+                      type="radio" name="Rfilter" onClick={() => { filterByJobTitle(tags.value) }} />{tags.value}</label>
+
                   )
                 }).slice(124, 129)
                 }
@@ -1285,13 +1305,13 @@ await axios.delete(`/jobpost/deleteCheckBoxArray/${checkBoxValue}`, {headers} )
               <div className={styles.MobFilterJobTitleWrapper}>
                 {jobTags.map((tags, i) => {
                   return (
-                    <label><input disabled={tags.value==="TECHNOLOGIES" || tags.value==="EDUCATION" || tags.value==="COLLEGE TYPE" || tags.value==="NOTICE PERIOD" || tags.value==="SALARY" || 
-                      tags.value==="EXPERIENCE" || tags.value==="Job Type" || tags.value==="INDUSTRY" || tags.value==="TOOLS/PROTOCOLS" || tags.value==="ROLE" || tags.value==="COMPANY TYPE" } 
-                      className={tags.value==="TECHNOLOGIES" || tags.value==="EDUCATION" || tags.value==="COLLEGE TYPE" || tags.value==="NOTICE PERIOD" || tags.value==="SALARY" || 
-                      tags.value==="EXPERIENCE" || tags.value==="Job Type" || tags.value==="INDUSTRY" || tags.value==="TOOLS/PROTOCOLS" || tags.value==="COMPANY TYPE" || tags.value==="ROLE"?
-                      styles.TagHeading: styles.MobJobtitleFilter} 
-                      type= "radio" name="Rfilter"  onClick={() => { filterByJobTitle(tags.value) }} />{tags.value}</label>
-                 
+                    <label><input disabled={tags.value === "TECHNOLOGIES" || tags.value === "EDUCATION" || tags.value === "COLLEGE TYPE" || tags.value === "NOTICE PERIOD" || tags.value === "SALARY" ||
+                      tags.value === "EXPERIENCE" || tags.value === "Job Type" || tags.value === "INDUSTRY" || tags.value === "TOOLS/PROTOCOLS" || tags.value === "ROLE" || tags.value === "COMPANY TYPE"}
+                      className={tags.value === "TECHNOLOGIES" || tags.value === "EDUCATION" || tags.value === "COLLEGE TYPE" || tags.value === "NOTICE PERIOD" || tags.value === "SALARY" ||
+                        tags.value === "EXPERIENCE" || tags.value === "Job Type" || tags.value === "INDUSTRY" || tags.value === "TOOLS/PROTOCOLS" || tags.value === "COMPANY TYPE" || tags.value === "ROLE" ?
+                        styles.TagHeading : styles.MobJobtitleFilter}
+                      type="radio" name="Rfilter" onClick={() => { filterByJobTitle(tags.value) }} />{tags.value}</label>
+
                   )
                 }).slice(129, 134)
                 }
@@ -1303,13 +1323,13 @@ await axios.delete(`/jobpost/deleteCheckBoxArray/${checkBoxValue}`, {headers} )
               <div className={styles.MobFilterJobTitleWrapper}>
                 {jobTags.map((tags, i) => {
                   return (
-                    <label><input disabled={tags.value==="TECHNOLOGIES" || tags.value==="EDUCATION" || tags.value==="COLLEGE TYPE" || tags.value==="NOTICE PERIOD" || tags.value==="SALARY" || 
-                      tags.value==="EXPERIENCE" || tags.value==="Job Type" || tags.value==="INDUSTRY" || tags.value==="TOOLS/PROTOCOLS" || tags.value==="ROLE" || tags.value==="COMPANY TYPE" } 
-                      className={tags.value==="TECHNOLOGIES" || tags.value==="EDUCATION" || tags.value==="COLLEGE TYPE" || tags.value==="NOTICE PERIOD" || tags.value==="SALARY" || 
-                      tags.value==="EXPERIENCE" || tags.value==="Job Type" || tags.value==="INDUSTRY" || tags.value==="TOOLS/PROTOCOLS" || tags.value==="COMPANY TYPE" || tags.value==="ROLE"?
-                      styles.TagHeading: styles.MobJobtitleFilter} 
-                      type= "radio" name="Rfilter"  onClick={() => { filterByJobTitle(tags.value) }} />{tags.value}</label>
-                 
+                    <label><input disabled={tags.value === "TECHNOLOGIES" || tags.value === "EDUCATION" || tags.value === "COLLEGE TYPE" || tags.value === "NOTICE PERIOD" || tags.value === "SALARY" ||
+                      tags.value === "EXPERIENCE" || tags.value === "Job Type" || tags.value === "INDUSTRY" || tags.value === "TOOLS/PROTOCOLS" || tags.value === "ROLE" || tags.value === "COMPANY TYPE"}
+                      className={tags.value === "TECHNOLOGIES" || tags.value === "EDUCATION" || tags.value === "COLLEGE TYPE" || tags.value === "NOTICE PERIOD" || tags.value === "SALARY" ||
+                        tags.value === "EXPERIENCE" || tags.value === "Job Type" || tags.value === "INDUSTRY" || tags.value === "TOOLS/PROTOCOLS" || tags.value === "COMPANY TYPE" || tags.value === "ROLE" ?
+                        styles.TagHeading : styles.MobJobtitleFilter}
+                      type="radio" name="Rfilter" onClick={() => { filterByJobTitle(tags.value) }} />{tags.value}</label>
+
                   )
                 }).slice(134, 139)
                 }
@@ -1317,13 +1337,13 @@ await axios.delete(`/jobpost/deleteCheckBoxArray/${checkBoxValue}`, {headers} )
               <div className={styles.MobFilterJobTitleWrapper}>
                 {jobTags.map((tags, i) => {
                   return (
-                    <label><input disabled={tags.value==="TECHNOLOGIES" || tags.value==="EDUCATION" || tags.value==="COLLEGE TYPE" || tags.value==="NOTICE PERIOD" || tags.value==="SALARY" || 
-                      tags.value==="EXPERIENCE" || tags.value==="Job Type" || tags.value==="INDUSTRY" || tags.value==="TOOLS/PROTOCOLS" || tags.value==="ROLE" || tags.value==="COMPANY TYPE" } 
-                      className={tags.value==="TECHNOLOGIES" || tags.value==="EDUCATION" || tags.value==="COLLEGE TYPE" || tags.value==="NOTICE PERIOD" || tags.value==="SALARY" || 
-                      tags.value==="EXPERIENCE" || tags.value==="Job Type" || tags.value==="INDUSTRY" || tags.value==="TOOLS/PROTOCOLS" || tags.value==="COMPANY TYPE" || tags.value==="ROLE"?
-                      styles.TagHeading: styles.MobJobtitleFilter} 
-                      type= "radio" name="Rfilter"  onClick={() => { filterByJobTitle(tags.value) }} />{tags.value}</label>
-                 
+                    <label><input disabled={tags.value === "TECHNOLOGIES" || tags.value === "EDUCATION" || tags.value === "COLLEGE TYPE" || tags.value === "NOTICE PERIOD" || tags.value === "SALARY" ||
+                      tags.value === "EXPERIENCE" || tags.value === "Job Type" || tags.value === "INDUSTRY" || tags.value === "TOOLS/PROTOCOLS" || tags.value === "ROLE" || tags.value === "COMPANY TYPE"}
+                      className={tags.value === "TECHNOLOGIES" || tags.value === "EDUCATION" || tags.value === "COLLEGE TYPE" || tags.value === "NOTICE PERIOD" || tags.value === "SALARY" ||
+                        tags.value === "EXPERIENCE" || tags.value === "Job Type" || tags.value === "INDUSTRY" || tags.value === "TOOLS/PROTOCOLS" || tags.value === "COMPANY TYPE" || tags.value === "ROLE" ?
+                        styles.TagHeading : styles.MobJobtitleFilter}
+                      type="radio" name="Rfilter" onClick={() => { filterByJobTitle(tags.value) }} />{tags.value}</label>
+
                   )
                 }).slice(139, 144)
                 }
@@ -1331,13 +1351,13 @@ await axios.delete(`/jobpost/deleteCheckBoxArray/${checkBoxValue}`, {headers} )
               <div className={styles.MobFilterJobTitleWrapper}>
                 {jobTags.map((tags, i) => {
                   return (
-                    <label><input disabled={tags.value==="TECHNOLOGIES" || tags.value==="EDUCATION" || tags.value==="COLLEGE TYPE" || tags.value==="NOTICE PERIOD" || tags.value==="SALARY" || 
-                      tags.value==="EXPERIENCE" || tags.value==="Job Type" || tags.value==="INDUSTRY" || tags.value==="TOOLS/PROTOCOLS" || tags.value==="ROLE" || tags.value==="COMPANY TYPE" } 
-                      className={tags.value==="TECHNOLOGIES" || tags.value==="EDUCATION" || tags.value==="COLLEGE TYPE" || tags.value==="NOTICE PERIOD" || tags.value==="SALARY" || 
-                      tags.value==="EXPERIENCE" || tags.value==="Job Type" || tags.value==="INDUSTRY" || tags.value==="TOOLS/PROTOCOLS" || tags.value==="COMPANY TYPE" || tags.value==="ROLE"?
-                      styles.TagHeading: styles.MobJobtitleFilter} 
-                      type= "radio" name="Rfilter"  onClick={() => { filterByJobTitle(tags.value) }} />{tags.value}</label>
-                 
+                    <label><input disabled={tags.value === "TECHNOLOGIES" || tags.value === "EDUCATION" || tags.value === "COLLEGE TYPE" || tags.value === "NOTICE PERIOD" || tags.value === "SALARY" ||
+                      tags.value === "EXPERIENCE" || tags.value === "Job Type" || tags.value === "INDUSTRY" || tags.value === "TOOLS/PROTOCOLS" || tags.value === "ROLE" || tags.value === "COMPANY TYPE"}
+                      className={tags.value === "TECHNOLOGIES" || tags.value === "EDUCATION" || tags.value === "COLLEGE TYPE" || tags.value === "NOTICE PERIOD" || tags.value === "SALARY" ||
+                        tags.value === "EXPERIENCE" || tags.value === "Job Type" || tags.value === "INDUSTRY" || tags.value === "TOOLS/PROTOCOLS" || tags.value === "COMPANY TYPE" || tags.value === "ROLE" ?
+                        styles.TagHeading : styles.MobJobtitleFilter}
+                      type="radio" name="Rfilter" onClick={() => { filterByJobTitle(tags.value) }} />{tags.value}</label>
+
                   )
                 }).slice(144, 149)
                 }
@@ -1348,13 +1368,13 @@ await axios.delete(`/jobpost/deleteCheckBoxArray/${checkBoxValue}`, {headers} )
               <div className={styles.MobFilterJobTitleWrapper}>
                 {jobTags.map((tags, i) => {
                   return (
-                    <label><input disabled={tags.value==="TECHNOLOGIES" || tags.value==="EDUCATION" || tags.value==="COLLEGE TYPE" || tags.value==="NOTICE PERIOD" || tags.value==="SALARY" || 
-                      tags.value==="EXPERIENCE" || tags.value==="Job Type" || tags.value==="INDUSTRY" || tags.value==="TOOLS/PROTOCOLS" || tags.value==="ROLE" || tags.value==="COMPANY TYPE" } 
-                      className={tags.value==="TECHNOLOGIES" || tags.value==="EDUCATION" || tags.value==="COLLEGE TYPE" || tags.value==="NOTICE PERIOD" || tags.value==="SALARY" || 
-                      tags.value==="EXPERIENCE" || tags.value==="Job Type" || tags.value==="INDUSTRY" || tags.value==="TOOLS/PROTOCOLS" || tags.value==="COMPANY TYPE" || tags.value==="ROLE"?
-                      styles.TagHeading: styles.MobJobtitleFilter} 
-                      type= "radio" name="Rfilter"  onClick={() => { filterByJobTitle(tags.value) }} />{tags.value}</label>
-                 
+                    <label><input disabled={tags.value === "TECHNOLOGIES" || tags.value === "EDUCATION" || tags.value === "COLLEGE TYPE" || tags.value === "NOTICE PERIOD" || tags.value === "SALARY" ||
+                      tags.value === "EXPERIENCE" || tags.value === "Job Type" || tags.value === "INDUSTRY" || tags.value === "TOOLS/PROTOCOLS" || tags.value === "ROLE" || tags.value === "COMPANY TYPE"}
+                      className={tags.value === "TECHNOLOGIES" || tags.value === "EDUCATION" || tags.value === "COLLEGE TYPE" || tags.value === "NOTICE PERIOD" || tags.value === "SALARY" ||
+                        tags.value === "EXPERIENCE" || tags.value === "Job Type" || tags.value === "INDUSTRY" || tags.value === "TOOLS/PROTOCOLS" || tags.value === "COMPANY TYPE" || tags.value === "ROLE" ?
+                        styles.TagHeading : styles.MobJobtitleFilter}
+                      type="radio" name="Rfilter" onClick={() => { filterByJobTitle(tags.value) }} />{tags.value}</label>
+
                   )
                 }).slice(149, 154)
                 }
@@ -1362,13 +1382,13 @@ await axios.delete(`/jobpost/deleteCheckBoxArray/${checkBoxValue}`, {headers} )
               <div className={styles.MobFilterJobTitleWrapper}>
                 {jobTags.map((tags, i) => {
                   return (
-                    <label><input disabled={tags.value==="TECHNOLOGIES" || tags.value==="EDUCATION" || tags.value==="COLLEGE TYPE" || tags.value==="NOTICE PERIOD" || tags.value==="SALARY" || 
-                      tags.value==="EXPERIENCE" || tags.value==="Job Type" || tags.value==="INDUSTRY" || tags.value==="TOOLS/PROTOCOLS" || tags.value==="ROLE" || tags.value==="COMPANY TYPE" } 
-                      className={tags.value==="TECHNOLOGIES" || tags.value==="EDUCATION" || tags.value==="COLLEGE TYPE" || tags.value==="NOTICE PERIOD" || tags.value==="SALARY" || 
-                      tags.value==="EXPERIENCE" || tags.value==="Job Type" || tags.value==="INDUSTRY" || tags.value==="TOOLS/PROTOCOLS" || tags.value==="COMPANY TYPE" || tags.value==="ROLE"?
-                      styles.TagHeading: styles.MobJobtitleFilter} 
-                      type= "radio" name="Rfilter"  onClick={() => { filterByJobTitle(tags.value) }} />{tags.value}</label>
-                 
+                    <label><input disabled={tags.value === "TECHNOLOGIES" || tags.value === "EDUCATION" || tags.value === "COLLEGE TYPE" || tags.value === "NOTICE PERIOD" || tags.value === "SALARY" ||
+                      tags.value === "EXPERIENCE" || tags.value === "Job Type" || tags.value === "INDUSTRY" || tags.value === "TOOLS/PROTOCOLS" || tags.value === "ROLE" || tags.value === "COMPANY TYPE"}
+                      className={tags.value === "TECHNOLOGIES" || tags.value === "EDUCATION" || tags.value === "COLLEGE TYPE" || tags.value === "NOTICE PERIOD" || tags.value === "SALARY" ||
+                        tags.value === "EXPERIENCE" || tags.value === "Job Type" || tags.value === "INDUSTRY" || tags.value === "TOOLS/PROTOCOLS" || tags.value === "COMPANY TYPE" || tags.value === "ROLE" ?
+                        styles.TagHeading : styles.MobJobtitleFilter}
+                      type="radio" name="Rfilter" onClick={() => { filterByJobTitle(tags.value) }} />{tags.value}</label>
+
                   )
                 }).slice(154, 159)
                 }
@@ -1376,20 +1396,20 @@ await axios.delete(`/jobpost/deleteCheckBoxArray/${checkBoxValue}`, {headers} )
               <div className={styles.MobFilterJobTitleWrapper}>
                 {jobTags.map((tags, i) => {
                   return (
-                    <label><input disabled={tags.value==="TECHNOLOGIES" || tags.value==="EDUCATION" || tags.value==="COLLEGE TYPE" || tags.value==="NOTICE PERIOD" || tags.value==="SALARY" || 
-                      tags.value==="EXPERIENCE" || tags.value==="Job Type" || tags.value==="INDUSTRY" || tags.value==="TOOLS/PROTOCOLS" || tags.value==="ROLE" || tags.value==="COMPANY TYPE" } 
-                      className={tags.value==="TECHNOLOGIES" || tags.value==="EDUCATION" || tags.value==="COLLEGE TYPE" || tags.value==="NOTICE PERIOD" || tags.value==="SALARY" || 
-                      tags.value==="EXPERIENCE" || tags.value==="Job Type" || tags.value==="INDUSTRY" || tags.value==="TOOLS/PROTOCOLS" || tags.value==="COMPANY TYPE" || tags.value==="ROLE"?
-                      styles.TagHeading: styles.MobJobtitleFilter} 
-                      type= "radio" name="Rfilter"  onClick={() => { filterByJobTitle(tags.value) }} />{tags.value}</label>
-                 
+                    <label><input disabled={tags.value === "TECHNOLOGIES" || tags.value === "EDUCATION" || tags.value === "COLLEGE TYPE" || tags.value === "NOTICE PERIOD" || tags.value === "SALARY" ||
+                      tags.value === "EXPERIENCE" || tags.value === "Job Type" || tags.value === "INDUSTRY" || tags.value === "TOOLS/PROTOCOLS" || tags.value === "ROLE" || tags.value === "COMPANY TYPE"}
+                      className={tags.value === "TECHNOLOGIES" || tags.value === "EDUCATION" || tags.value === "COLLEGE TYPE" || tags.value === "NOTICE PERIOD" || tags.value === "SALARY" ||
+                        tags.value === "EXPERIENCE" || tags.value === "Job Type" || tags.value === "INDUSTRY" || tags.value === "TOOLS/PROTOCOLS" || tags.value === "COMPANY TYPE" || tags.value === "ROLE" ?
+                        styles.TagHeading : styles.MobJobtitleFilter}
+                      type="radio" name="Rfilter" onClick={() => { filterByJobTitle(tags.value) }} />{tags.value}</label>
+
                   )
                 }).slice(159, 164)
                 }
               </div>
             </div>
 
-            
+
           </Carousel>
           {/* <div style={{ display: "flex", marginLeft: "18px" }}>
           
@@ -1489,7 +1509,7 @@ await axios.delete(`/jobpost/deleteCheckBoxArray/${checkBoxValue}`, {headers} )
                         <p className={styles.jobDescriptionHeading}>Job Description:</p>
                         <p className={styles.jobDescription}>
                           {
-    job.jobDescription? HTMLReactParser(job.jobDescription.slice(0,100).toString()) :""
+                            job.jobDescription ? HTMLReactParser(job.jobDescription.slice(0, 100).toString()) : ""
                           }
                           <span onClick={() => {
                             window.scrollTo({
@@ -1511,9 +1531,9 @@ await axios.delete(`/jobpost/deleteCheckBoxArray/${checkBoxValue}`, {headers} )
             }
 
           </div>
-          <div style={{marginTop:"20px",}}>
-            <Footer/>
-            </div>
+          <div style={{ marginTop: "20px", }}>
+            <Footer />
+          </div>
         </>
       }
 

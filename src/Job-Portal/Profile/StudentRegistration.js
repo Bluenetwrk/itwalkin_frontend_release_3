@@ -592,14 +592,14 @@ border:"none",padding: "4px 8px"}} onClick={DeleteProfile}>Delete</button>
               </label>
               <div style={{display:"flex", marginLeft:"50%", marginTop:"-50px"}}>
 
-              <div className={STyles.signUpWrapper} style={{marginLeft:"50px", marginBottom:"20px"}} onClick={login}>
+              <div className={STyles.signUpWrapper} style={{marginLeft:"50px", marginBottom:"20px"}} onClick={saveUpdate}>
           <div className={STyles.both}>
             <img className={STyles.google} src={GoogleImage} />
             <p className={STyles.signUpwrap} >Register with Google</p>
           </div>
         </div>
 
-              <button className={styles.Save} onClick={(e) => { saveUpdate(e) }}>Save</button>
+              {/* <button className={styles.Save} onClick={(e) => { saveUpdate(e) }}>Save</button> */}
               {/* <button className={styles.cancel} onClick={() => { navigate(-1) }} >cancel</button> */}
               </div>
             </div>
@@ -731,11 +731,19 @@ border:"none",padding: "4px 8px"}} onClick={DeleteProfile}>Delete</button>
                          </div>
               </label>
 
-<div style={{marginTop:"10px"}}>
+              <div style={{marginTop:"20px"}}>
+{/* 
               <button className={styles.MobileSave} onClick={(e) => { saveUpdate(e) }}>Save</button>
               <button className={styles.Mobilecancel} onClick={() => { navigate(-1) }} >cancel</button>
               </div>
-              <div style={{marginTop:"60px"}}>
+              <div style={{marginTop:"60px"}}> */}
+
+              <div className={STyles.signUpWrapper} style={{marginLeft:"50px", marginBottom:"20px"}} onClick={saveUpdate}>
+          <div className={STyles.both}>
+            <img className={STyles.google} src={GoogleImage} />
+            <p className={STyles.signUpwrap} >Register with Google</p>
+          </div>
+        </div>
           <Footer/>
         </div>
             </>
