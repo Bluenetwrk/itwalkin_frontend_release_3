@@ -260,6 +260,15 @@
     overflow-wrap:break-word
 
 }
+.BJtitle{
+    width:40%
+}
+.BPdate{
+    width:40%
+}
+.BAction{
+    width:30%
+}
 .Action{
     width:13%;
     overflow-wrap:break-word;
@@ -269,6 +278,11 @@
     height: 25px;
     display: flex;
     margin-left:18%;
+  }
+.BAcbuttons {
+    height: 25px;
+    display: flex;
+    margin-left:28%;
   }
   @media (max-width:1200px) {
 .Acbuttons {

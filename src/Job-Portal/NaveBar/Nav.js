@@ -343,11 +343,11 @@ function Nav(props) {
                         {/* <NavLink to="/New-Registration" className={` ${Styles.HomeSearchCandidate}`} style={navLinkStyles}>New Register </NavLink> */}
                         {/* <NavLink to="/Jobseeker-New-Registration" className={` ${Styles.HomeSearchCandidate}`} style={navLinkStyles}>Student Register </NavLink> */}
 <div>
-<p className={` ${Styles.openAccount}`} onClick={handleOpenAccont} ref={Reg} >Open Account</p>
+<p className={` ${Styles.openAccount}`} onClick={handleOpenAccont} ref={Reg} >Open an Account</p>
 {
   ShowRegister?
   <div className={Styles.dropdownwrapperHomeRegistration} ref={newReg} >
-  <p onClick={()=>{navigate("/New-Registration");setShowRegister(false)}}>Employee Registration</p>
+  <p onClick={()=>{navigate("/New-Registration");setShowRegister(false)}}>Employer Registration</p>
   <p onClick={()=>{navigate("/Jobseeker-New-Registration");setShowRegister(false)}}>JobSeeker Registration</p>
   </div>
   :""

@@ -111,9 +111,9 @@ const [immage, setimmage] = useState()
     //   name, email, phoneNumber, Aadhar, panCard,CompanyName,CompanyContact, CompanyGSTIN, CompanyWebsite, CompanyAddress,
     //   CompanyEmail, TypeofOrganisation 
     // )
-    await axios.put(`/EmpProfile/updatProfile/${empId}`, {
-      name, email, phoneNumber, Aadhar, panCard, CompanyName, CompanyContact, CompanyGSTIN, CompanyWebsite,
-      CompanyAddress, CompanyEmail, TypeofOrganisation}, {headers})
+    await axios.put(`/EmpProfile/updatProfile/${empId}`, { PrimeryuserDesignation, secondaryuserDesignation, Secondaryusername,
+      Secondaryuseremailid, Secondaryusercontactnumber, CompanyCIN, AboutCompany, name, email, phoneNumber, Aadhar, panCard, 
+      CompanyName, CompanyContact, CompanyGSTIN, CompanyWebsite, CompanyAddress, CompanyEmail, TypeofOrganisation}, {headers})
       .then(async (res) => {
         let result = res.data
         if (result == "success") {
@@ -424,7 +424,7 @@ const [immage, setimmage] = useState()
             </label>
             <label className={styles.inputName}>
               <h4>Company CIN Number:</h4>
-              <input maxLength="12" className={styles.input} value={CompanyCIN} onChange={(e) => {handleChangeCompanyCIN(e)} } type="text" />
+              <input maxLength="22" className={styles.input} value={CompanyCIN} onChange={(e) => {handleChangeCompanyCIN(e)} } type="text" />
             </label>
 
             <label className={styles.inputName}>
@@ -480,7 +480,7 @@ const [immage, setimmage] = useState()
 
             <label className={styles.inputName}>
               <h4>Secondary user Designation:</h4>
-              <input maxLength="90" className={styles.input} value={PrimeryuserDesignation} onChange={(e) => {handleSecondaryuserDesignation(e) }} type="text" />
+              <input maxLength="90" className={styles.input} value={secondaryuserDesignation} onChange={(e) => {handleSecondaryuserDesignation(e) }} type="text" />
             </label>
 
             
@@ -497,9 +497,11 @@ const [immage, setimmage] = useState()
 <JoditEditor  ref={editor}  value={AboutCompany.toString()} onChange={(e)=>{setAboutCompany(e)}} />
 </div>
 
+<div style={{ display:"flex", margin:"10px 20px"}}>
 
             <button className={styles.Save} onClick={(e) => { saveUpdate(e) }}>Save</button>
             <button className={styles.cancel} onClick={() => { navigate(-1) }} >cancel</button>
+</div>
 
           </div>
 

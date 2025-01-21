@@ -477,7 +477,7 @@ setCompanyCIN("")
               <input maxLength="15"  className={styles.input} value={CompanyContact} onChange={(e) => { handleCompanyPhoneNumber(e) }} type="number" />
             </label>
 
-            <label className={styles.inputName}>
+            {/* <label className={styles.inputName}>
               <h4>Company Pan Card Number:</h4>
               <input maxLength="12" className={styles.input} value={panCard} onChange={(e) => {PanCardhandleChange(e)} } type="text" />
             </label>
@@ -494,7 +494,7 @@ setCompanyCIN("")
             <label className={styles.inputName}>
               <h4>Company Website:</h4>
               <input maxLength="40" className={styles.input} value={CompanyWebsite} onChange={(e) => { handleCompanyWebsite(e) }} type="text" />
-            </label>
+            </label> */}
 
             <label className={styles.inputName}>
               <h4>Company Address:</h4>
@@ -510,14 +510,14 @@ setCompanyCIN("")
             <label className={styles.inputName}>
               <h4>Primary User Email Id:</h4>
               <input maxLength="25" className={styles.input} value={email}  onChange={(e) => { handlesetemail(e) }} type="text" />
-              <span style={{color:"red", marginLeft:"5%"}}>{emailError}</span>           
+             <br></br> <span style={{color:"red", marginLeft:"5%"}}>{emailError}</span>           
             </label>
             
             <label className={styles.inputName}>
               <h4>Primary user Designation:</h4>
               <input maxLength="90" className={styles.input} value={PrimeryuserDesignation} onChange={(e) => {handlePrimeryuserDesignation(e) }} type="text" />
             </label>
-
+{/* 
             <label className={styles.inputName}>
               <h4>Aadhaar number:
               <span style={{fontWeight:800, fontSize:"medium"}} title='(Applicable for individual job posters)'>
@@ -528,9 +528,9 @@ setCompanyCIN("")
             <label className={styles.inputName}>
               <h4>Primary User Phone number:</h4>
             <input maxLength="15" className={styles.input}  value={phoneNumber} onChange={(e) => { handlephoneNumber(e) }} type="number" />
-            </label>
+            </label> */}
             
-
+{/* 
             <label className={styles.inputName}>
               <h4>Secondary user name : <span style={{fontWeight:800, fontSize:"medium"}} 
             title='(secondary user will be able to post a job search candidates)'><i class="fa-solid fa-circle-info"></i></span></h4>
@@ -550,7 +550,7 @@ setCompanyCIN("")
             <label className={styles.inputName}>
               <h4>Secondary user contact number:</h4>
               <input maxLength="90" className={styles.input} value={Secondaryusercontactnumber} onChange={(e) => {handleSecondaryusercontactnumber(e) }} type="text" />
-            </label>
+            </label> */}
 
 
 <div className={styles.Editor}>
@@ -576,7 +576,7 @@ setCompanyCIN("")
             <div className={STyles.signUpWrapper} style={{marginLeft:"50px", marginBottom:"20px"}} onClick={login}>
           <div className={STyles.both}>
             <img className={STyles.google} src={GoogleImage} />
-            <p className={STyles.signUpwrap} >Continue with Google</p>
+            <p className={STyles.signUpwrap} >Rigister with Google</p>
           </div>
         </div>
         </>

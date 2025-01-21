@@ -191,10 +191,13 @@ h4 {
     background-color: rgb(40, 4, 99);
     color: white;
     font-weight: bold;
+    cursor: pointer;
     /* margin-left: 2.8%; */
 }
 
 .cancel {
+    cursor: pointer;
+    
     height: 30px;
     margin: 2%;
     /* margin-left: 70%; */

@@ -329,9 +329,9 @@ function handleRecordchange(e){
    <div className={styles.Uiwarpper}>
           <ul className={styles.ul}>
             {/* <li className={styles.li}><b>Company Name</b></li> */}
-            <li className={`${styles.li} ${styles.Jtitle}`}><b>Job Title</b></li>
+            <li className={`${styles.li} ${styles.BJtitle}`}><b>Job Title</b></li>
             {/* <li className={`${styles.li} ${styles.liDescription}`}><b>Job description</b></li> */}
-            <li className={`${styles.li} ${styles.Pdate}`}><b>Posted Date</b>
+            <li className={`${styles.li} ${styles.BPdate}`}><b>Posted Date</b>
             <p className={styles.arrowWrapper}>
                <i onClick={sortbyNewjobs} className={`${styles.arrow} ${styles.up}`} ></i>
                 <i onClick={sortbyOldjobs} className={`${styles.arrow} ${styles.down}`}></i>
@@ -353,7 +353,7 @@ function handleRecordchange(e){
             </p>
             </li>
             <li className={`${styles.li} ${styles.Skills}`}><b>Skills Required</b></li> */}
-            <li className={`${styles.li} ${styles.Action}`}><b>Action</b></li>
+            <li className={`${styles.li} ${styles.BAction}`}><b>Action</b></li>
             {/* <li className={`${styles.li} ${styles.NuApplied}`}><b>No of JobSeeker Applied</b></li> */}
 
           </ul>
@@ -374,10 +374,10 @@ function handleRecordchange(e){
                       {items.companyName}
                       </li> */}
 
-                    <li className={`${styles.li} ${styles.Jtitle}`} style={{ color: "blue", cursor:"pointer" }} onClick={() =>
-                       { navigate(`/Jobdetails/${btoa(items._id)}`) }}>{items.jobTitle.toUpperCase()}</li>
+                    <li className={`${styles.li} ${styles.BJtitle}`} style={{ color: "blue", cursor:"pointer" }} onClick={() =>
+                       { navigate(`/Blogdetails/${btoa(items._id)}`) }}>{items.jobTitle.toUpperCase()}</li>
                    
-                    <li className={`${styles.li} ${styles.Pdate}`}>
+                    <li className={`${styles.li} ${styles.BPdate}`}>
                       {new Date(items.createdAt).toLocaleString(
                         "en-US",
                         {
@@ -391,8 +391,8 @@ function handleRecordchange(e){
                     <li className={`${styles.li} ${styles.Package}`}>{items.salaryRange}L</li>
                     <li className={`${styles.li} ${styles.experiance}`}>{items.experiance}Y</li>
                     <li className={`${styles.li} ${styles.Skills}`}>{items.skills}</li> */}
-                    <li className={`${styles.li} ${styles.Action}`}>
-                      <div className={styles.Acbuttons}>
+                    <li className={`${styles.li} ${styles.BAction}`}>
+                      <div className={styles.BAcbuttons}>
                         <button onClick={() => { update(items._id) }} className={`${styles.Abutton} ${styles.update}`}>update</button>
                         <button onClick={() => { deletejob(items._id) }} className={`${styles.Abutton} ${styles.delete}`}>delete</button>
                       </div>
@@ -473,7 +473,7 @@ myjobs.map((job, i) => {
   window.scrollTo({
     top:0
   })
-  navigate(`/Jobdetails/${btoa(job._id)}`)}} >{job.jobTitle.toUpperCase()} </p>                      
+  navigate(`/Blogdetails/${btoa(job._id)}`)}} >{job.jobTitle.toUpperCase()} </p>                      
         <p className={styles.Date}>{new Date(job.createdAt).toLocaleString(
           "en-US",
           {
@@ -492,42 +492,10 @@ myjobs.map((job, i) => {
           <span className={styles.companyName} >{job.companyName} </span><br></br>
           </div>
           
-        <  img className={styles.jobLocationImage} src={location}  /> 
-        <span className={styles.jobLocation}>{job.jobLocation[0].toUpperCase()+job.jobLocation.slice(1)} ,</span>
-        <span className={styles.qualificationAndExperiance}>
-        
-        <  img className={styles.graduationImage} src={graduation}  /> 
-
-          {job.qualification}, {job.experiance}Y Exp ,   {job.jobtype}
-        {/* <span className={styles.jobtypeAndDate}> {job.jobtype}</span> */}
-        </span><br></br>
-        
- 
-                                     
-                        <div className={styles.skillWrapper}>
-                          <span className={styles.skillsHeading}>Skills: </span><span className={styles.skills}>{job.skills}</span><br></br>
-                        </div>
-
-        <span className={styles.NoOfJobSeekersApplied}> No. of Job Seekers Applied:
-        {job.jobSeekerId.length > 0 ?
-                          <button className={`${styles.MobileviewButton}`} onClick={() => { seeProfilejobSeekerId(btoa(job._id)) }}>{job.jobSeekerId.length}</button>
-                          :
-                          <button className={`${styles.MobileZeroViewButton}`} >{job.jobSeekerId.length}</button>
-
-                        }
-        </span><br></br>
-
-
-        <div className={styles.ApplyPackage}>
-          <span className={styles.salaryRange} style={{ marginLeft: "10px" }}><span>&#8377;</span>{job.salaryRange}L</span>
-          <div className={styles.MobileAcbuttons}>
-          <button onClick={() => { update(job._id) }} className={` ${styles.MobileUpdate}`}>update</button>
-          <button onClick={() => { deletejob(job._id) }} className={` ${styles.MobileDelete}`}>delete</button>
-               </div>
-        </div>
+       
     <p className={styles.jobDescriptionHeading}>Job Description:</p>
 
-        <p className={styles.jobDescription}> 
+        <p className={styles.jobDescription} style={{marginTop:"1px"}}> 
         {/* {job.jobDescription} */}
         {
                     job.jobDescription? 
@@ -535,7 +503,7 @@ myjobs.map((job, i) => {
                     .toString())                    
                     :""                
                     }
-                  <span style={{ color: "blue", cursor:"pointer" }} onClick={() => { navigate(`/Jobdetails/${job._id}`) }} >...see more</span>
+                  <span style={{ color: "blue", cursor:"pointer" }} onClick={() => { navigate(`/Blogdetails/${job._id}`) }} >...see more</span>
                    
           </p>
       </div>

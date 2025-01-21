@@ -412,6 +412,9 @@ function Home() {
           return new Date(b.createdAt) - new Date(a.createdAt);
         });
         setJobs(sortedate)
+        if (count == 2) {
+          setCurrentPage(1)
+        }
 
       })
   }
@@ -449,6 +452,7 @@ function Home() {
       Active.splice(IndexId, 1)
       if (Active.length === 0) {
         getjobs()
+        return false
       }
       // if(jobs.length>0){
       //      let removedItems = jobs.filter((tags)=>{
@@ -470,7 +474,7 @@ function Home() {
     await axios.get(`/jobpost/getTagsJobs/${Active}`)
       .then((res) => {
         let result = (res.data)
-        console.log("the total id's are", result)
+        // console.log("the total id's are", result)
         let sortedate = result.sort((a, b) => {
           return new Date(b.createdAt) - new Date(a.createdAt);
         });

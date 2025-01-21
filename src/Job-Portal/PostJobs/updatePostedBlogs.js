@@ -79,7 +79,7 @@ function UpdatePostedBlogs() {
        await axios.get(`/BlogRoutes/getJobForUpdate/${Jobid}`, {headers})
        .then((res)=>{
         let result=res.data
-        console.log(result)
+        // console.log(result)
         if(result){
         setJobTitle(result.jobTitle)
             setJobDescription(result.jobDescription)

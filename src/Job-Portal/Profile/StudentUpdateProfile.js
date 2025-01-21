@@ -26,6 +26,7 @@ function StudentUpdateProfile(props) {
   }, [])
 
   let colleges=[
+    {value:'Others', label: 'Others'},
     {value:'Indian Institute Of Technology, Kharagpur', label: 'Indian Institute Of Technology, Kharagpur'},
     {value:'Indian Institute Of Engineering Science And Technology, Shibpur', label:'Indian Institute Of Engineering Science And Technology, Shibpur' },
     {value:'National Institute Of Technology, Durgapur', label:'National Institute Of Technology, Durgapur' },

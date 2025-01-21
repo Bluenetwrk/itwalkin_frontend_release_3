@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useRef } from 'react'
 import styles from "./Allobs.module.css"
 import { useEffect, useState } from 'react'
 import axios from "axios";
@@ -16,8 +16,12 @@ import "./Allobs.module.css"
 import HTMLReactParser from 'html-react-parser'
 import StProfile from "../Profile/StudentProfile"
 import EMpProfile from "../Profile/EmployeeProfile"
+import JoditEditor from 'jodit-react'
+// import HTMLReactParser from 'html-react-parser'
+
 
 function Answerdetails(props) {
+  const editor=useRef(null)
   
   let userid = JSON.parse(localStorage.getItem("StudId")) || JSON.parse(localStorage.getItem("EmpIdG"))
 
@@ -77,7 +81,7 @@ const [Loader, setLoader] = useState(false)
 
 function changeComments(e){
   // setcomments(comments.comment=e.target.value)
-    setcomments({ ...comments, comment: e.target.value, name:CommentName})
+    setcomments({ ...comments, comment: e, name:CommentName})
 }
 
 // async function deletecom(){
@@ -238,8 +242,11 @@ async function deletComment(id){
         return(
           <>
           {/* <p> {com.name} : {com.comment}</p> */}
-          <p style={{textAlign:"center"}}>  {com.comment} ({com.name}) {userid===com.id?
-          <button onClick={()=>{deletComment(com.id)}} >delete</button>
+          <p style={{textAlign:"center",}}> 
+             {/* {com.comment} */}
+             {HTMLReactParser(com.comment.toString())}  
+             ({com.name}) 
+             {userid===com.id?<button onClick={()=>{deletComment(com.id)}} >delete</button>
           :""
           } </p>
 
@@ -279,8 +286,10 @@ async function deletComment(id){
       //  console.log(com.id===userid)
         )
       }).length<1?<>
-      <input placeholder='Answer' maxLength={300} style={{height:"30px", marginLeft:"6px", width:"90%"}} type='text' 
-      value={comments.comment} onChange={(e)=>{changeComments(e)}} />
+      {/* <input placeholder='Answer' maxLength={300} style={{height:"30px", marginLeft:"6px", width:"90%"}} type='text' 
+      value={comments.comment} onChange={(e)=>{changeComments(e)}} /> */}
+<JoditEditor  ref={editor}   onChange={(e)=>{changeComments(e)}} />
+
        <button onClick={handleComment} style={{height:"30px", marginLeft:"6px"}}>Answer</button> 
        </>
        :""

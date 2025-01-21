@@ -143,9 +143,7 @@ async function deletComment(id){
     getjobs()
   }, [])
 
-  function deleteComment(){
 
-  }
   
   return (
     <>
@@ -211,9 +209,9 @@ async function deletComment(id){
   </div>         */}
   {/* <h1 style={{textAlign:"center", fontSize:"xx-large"}}>{jobs.jobTitle[0].toUpperCase()+jobs.jobTitle.slice(1)}</h1> */}
   <h1 style={{textAlign:"center", fontSize:"xx-large"}}>{jobs.jobTitle}</h1>
-<div style={{textAlign:"center"}}>
-  <span>Posted by {jobs.name}</span>
-  <span> . {new Date(jobs.createdAt).toLocaleString(
+<div style={{marginLeft:"30px"}}>
+  <span>Posted by {jobs.name}</span> |  
+  <span> Posted on : {new Date(jobs.createdAt).toLocaleString(
                   "en-US",
                   {
                     month: "short",
@@ -225,10 +223,10 @@ async function deletComment(id){
 </div>
 
 
-  <table style={{marginLeft:"6px", marginTop:"0px", width:"98.8%"}}>         
+  <table style={{marginLeft:"6px", marginTop:"0px", width:"98.8%", borderCollapse: "collapse",border:"none"}}>         
   
-  <tr >
-    <td colSpan={2} >
+  <tr style={{border:"none"}}>
+    <td colSpan={2} style={{border:"none"}}>
     {
       jobdescription? HTMLReactParser(jobdescription.toString()) :""
      } 
