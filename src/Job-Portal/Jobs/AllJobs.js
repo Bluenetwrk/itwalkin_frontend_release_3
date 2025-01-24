@@ -69,6 +69,17 @@ function AllJobs(props) {
   const [clickedJobId, setclickedJobId] = useState() //for single job loader
   let jobSeekerId = JSON.parse(localStorage.getItem("StudId"))
 
+  const [totalCount, settotalCount] = useState()
+
+  let recordsperpage = JSON.parse(sessionStorage.getItem("recordsperpage"))
+
+  const [currentPage, setCurrentPage] = useState(1)
+  const [recordsPerPage, setrecordsPerPage] = useState(recordsperpage ? recordsperpage : 10)
+  const lastIndex = currentPage * recordsPerPage //10
+  const firstIndex = lastIndex - recordsPerPage //5
+  const records = jobs.slice(firstIndex, lastIndex)//0,5
+  // const npage = Math.ceil(jobs.length / recordsPerPage) // last page
+  const npage = Math.ceil(totalCount / recordsPerPage) // last page
 
   // let menuRef = useRef();
   // let imgRef = useRef();
@@ -79,7 +90,16 @@ function AllJobs(props) {
   //     console.log(menuRef.current)
   //   }
   // })
-
+  async function gettotalcount() {
+    const headers = { authorization: 'BlueItImpulseWalkinIn' };
+    await axios.get("/jobpost/getTotalCount", { headers })
+      .then((res) => {
+        // console.log(res.data.result)
+        settotalCount(res.data.result)
+      }).catch((err) => {
+        alert("something went wrong")
+      })
+  }
 
 
   const navigate = useNavigate()
@@ -88,8 +108,7 @@ function AllJobs(props) {
   async function getjobs() {
     setCount(1)
     setActive([])
-
-
+    setJobTagsIds([])
     setPageLoader(true)
     setNoPageFilter(false)
 
@@ -98,6 +117,8 @@ function AllJobs(props) {
     await axios.get("/jobpost/getjobs", { headers })
       .then((res) => {
         let result = (res.data)
+        gettotalcount()
+
         let sortedate = result.sort((a, b) => {
           return new Date(b.createdAt) - new Date(a.createdAt);
         });
@@ -109,9 +130,14 @@ function AllJobs(props) {
       })
   }
 
-  useEffect(() => {
-    getjobs()
-  }, [])
+
+    useEffect(() => {
+      if (jobTagsIds.length < 1) {
+        getjobs()
+      } else {
+        getTagId();
+      }
+    }, [currentPage, recordsPerPage])
 
   async function applyforOtherJob(Link) {
     // navigate("/JobSeekerLogin", { state: { Jid: id } })
@@ -343,15 +369,8 @@ function AllJobs(props) {
   //   navigate(`CheckEmpHalfProfile/${empId}`)
   // }
 
-  let recordsperpage = JSON.parse(sessionStorage.getItem("recordsperpage"))
 
-  const [currentPage, setCurrentPage] = useState(1)
-  const [recordsPerPage, setrecordsPerPage] = useState(recordsperpage ? recordsperpage : 10)
-  const lastIndex = currentPage * recordsPerPage //10
-  const firstIndex = lastIndex - recordsPerPage //5
-  const records = jobs.slice(firstIndex, lastIndex)//0,5
-  const npage = Math.ceil(jobs.length / recordsPerPage) // last page
-  const number = [...Array(npage + 1).keys()].slice(1)
+  // const number = [...Array(npage + 1).keys()].slice(1)
 
   function firstPage(id) {
     setCurrentPage(1)
@@ -399,54 +418,114 @@ function AllJobs(props) {
       })
   }
 
+  const [count, setCount] = useState(1)
+  const [jobTagIds, setjobTagIds] = useState([])
 
-  const [count, setCount]=useState(1)
+  const [jobTagsIds, setJobTagsIds] = useState([])
+  // console.log("all dublicate ids", jobTagsIds)
 
-  async function filterByJobTitle(key) {
-    if(count==1){
-      setJobs("")
+  useEffect(() => {
+    if (jobTagsIds.length > 0) {
+      getTagId();
     }
-    setCount(prev=>prev+1)
+  }, [jobTagsIds])
 
-    const isIndex=Active.findIndex((present)=>{
-return(
-  present===key
-)
+  let ids = jobTagsIds.map((id) => {
+    return (
+      id._id
+    )
+  })
+  const uniqueList = [...new Set(ids)];
+  async function getTagId() {
+    settotalCount(uniqueList.length)
+    await axios.get(`/jobpost/jobTagsIds/${uniqueList}`, {
+      params: { currentPage, recordsPerPage }
     })
-    if(isIndex<0){
-    setActive([...Active, key])
-    }else{
-      const IndexId=Active.findIndex((present)=>{
-        return(
-          present==key
-        )
-            })
-            Active.splice(IndexId,1)
-                if(Active.length===0){
-      getjobs()
-    }
-    if(jobs.length>0){
-         let removedItems = jobs.filter((tags)=>{
-            return(     
-              !tags.Tags.includes(key)   
-        )
-      }) 
-      setJobs(removedItems)
-      return false
-    }}
-    // setActive(key)
-    setNoPageFilter(true)
-    setFiltereredjobs(key)
-    await axios.get(`/jobpost/getTagsJobs/${key}`)
       .then((res) => {
-        let result = (res.data)
+        // console.log("data from uique id's",res.data)
+        let result = res.data
         let sortedate = result.sort((a, b) => {
           return new Date(b.createdAt) - new Date(a.createdAt);
         });
-        // setJobs(sortedate)
-        let elements=  sortedate.flatMap(element => {
-          setJobs(oldArray => [...oldArray,element] )
-     });
+        setJobs(sortedate)
+        if (count == 2) {
+          setCurrentPage(1)
+        }
+
+      })
+  }
+
+  useEffect(()=>{
+    if(Active.length>0){
+      changeTags()
+    }
+  },[Active])
+
+
+  async function filterByJobTitle(key) {
+
+    if (count == 1) {
+      setJobs([])
+    }
+    setCount(prev => prev + 1)
+    const isIndex = Active.findIndex((present) => {
+      return (
+        present === key
+      )
+    })
+    if (isIndex < 0) {
+      // setActive([...Active, key])
+      
+      var updatedActive = [...Active, key]; // Add the new key to the array
+      setActive(updatedActive);
+
+    } else {
+      const IndexId = Active.findIndex((present) => {
+        return (
+          present == key
+        )
+      })
+      Active.splice(IndexId, 1)
+      if (Active.length === 0) {
+        getjobs()
+        return false
+      }
+      // if(jobs.length>0){
+      //      let removedItems = jobs.filter((tags)=>{
+      //         return( 
+      //           !tags.Tags.includes(key)   
+      //     )
+      //   }) 
+      //   setJobs(removedItems)
+      //   return false
+      // }
+      changeTags()
+      // console.log("in change",Active)
+    }}
+    async function changeTags(key){
+      // console.log("in APi",Active)
+
+    setNoPageFilter(true)
+    setFiltereredjobs(key)
+    await axios.get(`/jobpost/getTagsJobs/${Active}`)
+      .then((res) => {
+        let result = (res.data)
+        // console.log("the total id's are", result)
+        let sortedate = result.sort((a, b) => {
+          return new Date(b.createdAt) - new Date(a.createdAt);
+        });
+        // setJobTagsIds(oldjobTagsIds => [...oldjobTagsIds, ...sortedate])
+        setJobTagsIds(sortedate)
+        // getTagId(sortedate)
+
+        let elements = sortedate.flatMap(element => {
+          // setJobs(oldArray => [...oldArray,element] )
+          // let comingTagid=element._id
+          // if(!presentIds.includes(comingTagid)){
+          //   setJobs(oldArray => [...oldArray,element] )
+          //   setjobTagIds(oldArray => [...oldArray,element] )
+          //   }
+        });
       })
   }
 
@@ -518,9 +597,10 @@ return(
           </div>
 
           <div style={{ display: "flex", justifyContent: "space-between" }}>
-            {nopageFilter ?
-              <p style={{ fontWeight: 400, marginLeft: "10px" }}>Displaying Jobs with following matching tags: 
-              <span style={{ color: "blue" }}>{Active.toString()}</span></p>
+          {nopageFilter ?
+              <p style={{ fontWeight: 400, marginLeft: "10px" }}>Displaying <span style={{ color: "blue" }}>
+                {uniqueList.length} </span>Jobs with following matching tags:
+                <span style={{ color: "blue" }}>{Active.toString()}</span></p>
               :
               <p style={{ fontWeight: 400, marginLeft: "10px" }}>showing {firstIndex + 1} to {lastIndex} latest jobs</p>
             }
@@ -595,10 +675,9 @@ return(
 
                       <ul className={styles.ul} key={i}>
 
-<li className={`${styles.li} ${styles.Jtitle}`} onClick={() => navigate(`/Jobdetails/${btoa(items._id)}`)} style={{ cursor: "pointer", textDecoration: "underline", color: "blue" }}>{items.jobTitle.toUpperCase()}</li>
+<li className={`${styles.li} ${styles.Jtitle}`} onClick={() => navigate(`/Jobdetails/${btoa(items._id)}`)} 
+style={{ cursor: "pointer", textDecoration: "underline", color: "blue" }}>{items.jobTitle.toUpperCase()}</li>
                           <li className={`${styles.li} ${styles.Source}`} >Itwalkin</li>
-
-
                         {
                           !items.Source ?
 
@@ -626,7 +705,8 @@ return(
                           )}
                         </li>
                         <li className={`${styles.li} ${styles.Location}`}>
-                          {items.jobLocation[0].toUpperCase() + items.jobLocation.slice(1)}</li>
+                          {items.jobLocation[0].toUpperCase() + items.jobLocation.slice(1)}
+                          </li>
                         <li className={`${styles.li} ${styles.Package}`}>{items.salaryRange}L</li>
                         <li className={`${styles.li} ${styles.experiance}`}>{items.experiance}Y</li>
                         <li className={`${styles.li} ${styles.qualification}`}>{items.qualification}</li>
@@ -668,7 +748,8 @@ return(
 
                       <ul className={styles.ul} key={i}>
 
-<li className={`${styles.li} ${styles.Jtitle}`} onClick={() => navigate(`/Jobdetails/${btoa(items._id)}`)} style={{ cursor: "pointer", textDecoration: "underline", color: "blue" }}>{items.jobTitle.toUpperCase()}</li>
+             <li className={`${styles.li} ${styles.Jtitle}`} onClick={() => navigate(`/Jobdetails/${btoa(items._id)}`)} 
+             style={{ cursor: "pointer", textDecoration: "underline", color: "blue" }}>{items.jobTitle.toUpperCase()}</li>
                           <li className={`${styles.li} ${styles.Source}`} >Itwalkin</li>
 
 

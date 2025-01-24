@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Link, useNavigate, NavLink, useSearchParams } from "react-router-dom";
 import Styles from "./nav.module.css"
 import logo from "../img/Blue.jpg"
+import Itwalkinlogo from "../img/ItwalkInLogo.jpg"
 import logIn from "../img/user_3177440.png"
 import NavIcon from "../img/icons8-menu-50.png"
 import Cancel from "../img/icons8-cross-50.png"
@@ -166,9 +167,10 @@ function Nav(props) {
                 </div>
                 {/* <div className={Styles.logoWrapper}> */}
                 <div className={Styles.ITwalkinWrapper}>
-
+                <img className={Styles.IwalkinLogologo} src={Itwalkinlogo} />
+{/* 
                   <p className={Styles.ITwalkin}>ITwalkin</p>
-                  <p className={Styles.onlyforITjobs}>Only for IT jobs</p>
+                  <p className={Styles.onlyforITjobs}>Only for IT jobs</p> */}
                 </div>
                 {/* <NavLink to="/" > <img className={Styles.logo} src={logo} /> </NavLink> */}
                 {/* </div> */}
@@ -222,8 +224,10 @@ function Nav(props) {
                 </div>
                     {/* <NavLink to="/" > <img className={Styles.logo} src={logo} /> </NavLink> */}
                     <div className={Styles.ITwalkinWrapper}>
-                      <p className={Styles.ITwalkin}>ITwalkin</p>
-                      <p className={Styles.onlyforITjobs}>Only for IT jobs</p>
+                      {/* <p className={Styles.ITwalkin}>ITwalkin</p>
+                      <p className={Styles.onlyforITjobs}>Only for IT jobs</p> */}
+                        <img className={Styles.IwalkinLogologo} src={Itwalkinlogo} />
+
                     </div>
                   
                   <div className={Styles.linkWrapper}>
@@ -329,8 +333,9 @@ function Nav(props) {
 
 
                       <div className={Styles.ITwalkinWrapper}>
-                        <p className={Styles.ITwalkin}>ITwalkin</p>
-                        <p className={Styles.onlyforITjobs}>Only for IT jobs</p>
+                        {/* <p className={Styles.ITwalkin}>ITwalkin</p>
+                        <p className={Styles.onlyforITjobs}>Only for IT jobs</p> */}
+                        <img className={Styles.IwalkinLogologo} src={Itwalkinlogo} />
                       </div>
                     <div className={Styles.linkWrapper}>
 

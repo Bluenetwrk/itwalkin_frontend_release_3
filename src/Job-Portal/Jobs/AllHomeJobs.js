@@ -493,9 +493,6 @@ function Home() {
       })
   }
 
-
-
-
   async function getLocation(jobLocation) {
     setCount(1)
     setActive(["Banglore"])
@@ -526,7 +523,7 @@ function Home() {
       .then((res) => {
         if (res.data === "success") {
           getjobs()
-          alert("deletd succesfully")
+          alert("Archived succesfully")
           window.location.reload()
         }
       }).catch((err) => {
@@ -540,7 +537,7 @@ function Home() {
       .then((res) => {
         if (res.data === "success") {
           getjobs()
-          alert("deletd succesfully")
+          alert("deleted succesfully")
           window.location.reload()
         }
       }).catch((err) => {
@@ -568,7 +565,6 @@ function Home() {
       setCheckBoxValue(removeId)
     }
   }
-
 
   return (
     <>

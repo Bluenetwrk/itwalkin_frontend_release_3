@@ -24,7 +24,7 @@ import Style from "../PostJobs/postJobs.module.css"
 
 function EmployeeUpdateProfile(props) {
   const editor=useRef(null)
-
+// primery email id should be gmail acc
   // useEffect( ()=>{    
   //   const socket = socketIO.connect(props.url,{
   //     auth:{
@@ -82,11 +82,14 @@ const [immage, setimmage] = useState()
           .catch(error => console.log(error))
       }, []);
   
-  
+  function alertshow(){
+      alert("primary email field must be filled")
+  }
   const login= useGoogleLogin({
+    
     onSuccess: async (response) => {
       try {
-
+        
         const res = await axios.get("https://www.googleapis.com/oauth2/v3/userinfo",
           {
             headers: {
@@ -326,6 +329,9 @@ const [immage, setimmage] = useState()
    async function saveUpdate(e) {
     if(!email){
       alert("Primary User Email Id is mandatory to fill")
+      return false
+    }else if(emailError){
+      alert("invalid Primary User Email id ")
       return false
     }
     setRegLoader(true)
@@ -573,7 +579,7 @@ setCompanyCIN("")
           </div>
         </div>
 
-            <div className={STyles.signUpWrapper} style={{marginLeft:"50px", marginBottom:"20px"}} onClick={login}>
+            <div className={STyles.signUpWrapper} style={{marginLeft:"50px", marginBottom:"20px"}} onClick={!email? alertshow :login}>
           <div className={STyles.both}>
             <img className={STyles.google} src={GoogleImage} />
             <p className={STyles.signUpwrap} >Rigister with Google</p>
@@ -697,7 +703,7 @@ setCompanyCIN("")
           </div>
         </div>
 
-            <div className={STyles.signUpWrapper} style={{marginLeft:"10px", marginBottom:"20px"}} onClick={login}>
+            <div className={STyles.signUpWrapper} style={{marginLeft:"10px", marginBottom:"20px"}} onClick={!email? alertshow :login}>
           <div className={STyles.both}>
             <img className={STyles.google} src={GoogleImage} />
             <p className={STyles.signUpwrap} >Continue with Google</p>

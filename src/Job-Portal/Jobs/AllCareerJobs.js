@@ -64,15 +64,41 @@ function AllJobs(props) {
 
   const [Loader, setLoader] = useState(false)
 
+  const [totalCount, settotalCount] = useState()
   const [clickedJobId, setclickedJobId] = useState() //for single job loader
   let jobSeekerId = JSON.parse(localStorage.getItem("StudId"))
+
+  let recordsperpage = JSON.parse(sessionStorage.getItem("recordsperpage"))
+
+  const [currentPage, setCurrentPage] = useState(1)
+  const [recordsPerPage, setrecordsPerPage] = useState(recordsperpage ? recordsperpage : 10)
+  const lastIndex = currentPage * recordsPerPage //10
+  const firstIndex = lastIndex - recordsPerPage //5
+  const records = jobs.slice(firstIndex, lastIndex)//0,5
+  // const npage = Math.ceil(jobs.length / recordsPerPage) // last page
+  const npage = Math.ceil(totalCount / recordsPerPage) // last page
+
+  // const number = [...Array(npage + 1).keys()].slice(1)
 
   const navigate = useNavigate()
   const Location = useLocation()
 
+  
+  async function gettotalcount() {
+    const headers = { authorization: 'BlueItImpulseWalkinIn' };
+    await axios.get("/Careerjobpost/getTotalCount")
+      .then((res) => {
+        console.log(res.data)
+        settotalCount(res.data.result)
+      }).catch((err) => {
+        alert("something went wrong")
+      })
+  }
+
   async function getjobs() {
     setCount(1)
     setActive([])
+    setJobTagsIds([])
 
     setPageLoader(true)
     setNoPageFilter(false)
@@ -83,6 +109,8 @@ function AllJobs(props) {
     await axios.get("/Careerjobpost/getCareerjobs", { headers })
       .then((res) => {
         let result = (res.data)
+        gettotalcount()
+
         let sortedate = result.sort((a, b) => {
           return new Date(b.createdAt) - new Date(a.createdAt);
         });
@@ -95,8 +123,12 @@ function AllJobs(props) {
   }
 
   useEffect(() => {
-    getjobs()
-  }, [])
+    if (jobTagsIds.length < 1) {
+      getjobs()
+    } else {
+      getTagId();
+    }
+  }, [currentPage, recordsPerPage])
 
   async function applyforOtherJob(Link) {
     // navigate("/JobSeekerLogin", { state: { Jid: id } })
@@ -315,15 +347,7 @@ function AllJobs(props) {
   //   navigate(`CheckEmpHalfProfile/${empId}`)
   // }
 
-  let recordsperpage = JSON.parse(sessionStorage.getItem("recordsperpage"))
 
-  const [currentPage, setCurrentPage] = useState(1)
-  const [recordsPerPage, setrecordsPerPage] = useState(recordsperpage ? recordsperpage : 10)
-  const lastIndex = currentPage * recordsPerPage //10
-  const firstIndex = lastIndex - recordsPerPage //5
-  const records = jobs.slice(firstIndex, lastIndex)//0,5
-  const npage = Math.ceil(jobs.length / recordsPerPage) // last page
-  const number = [...Array(npage + 1).keys()].slice(1)
 
   function firstPage(id) {
     setCurrentPage(1)
@@ -368,59 +392,117 @@ function AllJobs(props) {
       })
   }
 
-  const [count, setCount]=useState(1)
+  const [count, setCount] = useState(1)
+  const [jobTagIds, setjobTagIds] = useState([])
+
+  const [jobTagsIds, setJobTagsIds] = useState([])
+  // console.log("all dublicate ids", jobTagsIds)
+
+  useEffect(() => {
+    if (jobTagsIds.length > 0) {
+      getTagId();
+    }
+  }, [jobTagsIds])
+
+  let ids = jobTagsIds.map((id) => {
+    return (
+      id._id
+    )
+  })
+  const uniqueList = [...new Set(ids)];
+  async function getTagId() {
+    settotalCount(uniqueList.length)
+    await axios.get(`/Careerjobpost/jobTagsIds/${uniqueList}`, {
+      params: { currentPage, recordsPerPage }
+    })
+      .then((res) => {
+        // console.log("data from uique id's",res.data)
+        let result = res.data
+        let sortedate = result.sort((a, b) => {
+          return new Date(b.createdAt) - new Date(a.createdAt);
+        });
+        setJobs(sortedate)
+        if (count == 2) {
+          setCurrentPage(1)
+        }
+
+      })
+  }
+
+  useEffect(()=>{
+    if(Active.length>0){
+      changeTags()
+    }
+  },[Active])
 
 
   async function filterByJobTitle(key) {
 
-    if(count==1){
-      setJobs("")
+    if (count == 1) {
+      setJobs([])
     }
-    setCount(prev=>prev+1)
-
-    const isIndex=Active.findIndex((present)=>{
-return(
-  present===key
-)
+    setCount(prev => prev + 1)
+    const isIndex = Active.findIndex((present) => {
+      return (
+        present === key
+      )
     })
-    if(isIndex<0){
-    setActive([...Active, key])
-    }else{
-      const IndexId=Active.findIndex((present)=>{
-        return(
-          present==key
-        )
-            })
-            Active.splice(IndexId,1)
-                if(Active.length===0){
-      getjobs()
-    }
-    if(jobs.length>0){
-         let removedItems = jobs.filter((tags)=>{
-            return(     
-              !tags.Tags.includes(key)   
-        )
-      }) 
-      setJobs(removedItems)
-      return false
-    }}
+    if (isIndex < 0) {
+      // setActive([...Active, key])
+      
+      var updatedActive = [...Active, key]; // Add the new key to the array
+      setActive(updatedActive);
 
+    } else {
+      const IndexId = Active.findIndex((present) => {
+        return (
+          present == key
+        )
+      })
+      Active.splice(IndexId, 1)
+      if (Active.length === 0) {
+        getjobs()
+        return false
+      }
+      // if(jobs.length>0){
+      //      let removedItems = jobs.filter((tags)=>{
+      //         return( 
+      //           !tags.Tags.includes(key)   
+      //     )
+      //   }) 
+      //   setJobs(removedItems)
+      //   return false
+      // }
+      changeTags()
+      // console.log("in change",Active)
+    }}
+    async function changeTags(key){
+      // console.log("in APi",Active)
 
     setNoPageFilter(true)
     setFiltereredjobs(key)
-    await axios.get(`/Careerjobpost/getTagsJobs/${key}`)
+    await axios.get(`/Careerjobpost/getTagsJobs/${Active}`)
+
       .then((res) => {
         let result = (res.data)
+        // console.log("the total id's are", result)
         let sortedate = result.sort((a, b) => {
           return new Date(b.createdAt) - new Date(a.createdAt);
         });
-        // setJobs(sortedate)
-        let elements=  sortedate.flatMap(element => {
-          setJobs(oldArray => [...oldArray,element] )
-     });
+        // setJobTagsIds(oldjobTagsIds => [...oldjobTagsIds, ...sortedate])
+        setJobTagsIds(sortedate)
+        // getTagId(sortedate)
+
+        let elements = sortedate.flatMap(element => {
+          // setJobs(oldArray => [...oldArray,element] )
+          // let comingTagid=element._id
+          // if(!presentIds.includes(comingTagid)){
+          //   setJobs(oldArray => [...oldArray,element] )
+          //   setjobTagIds(oldArray => [...oldArray,element] )
+          //   }
+        });
       })
   }
-
   return (
     <>
       {screenSize.width > 850 ?
@@ -491,8 +573,11 @@ return(
           </div>
 
           <div style={{ display: "flex", justifyContent: "space-between" }}>
-            {nopageFilter ?
-              <p style={{ fontWeight: 400, marginLeft: "10px" }}>Displaying <span style={{ color: "blue" }}>{Filtereredjobs}</span> from All Jobs</p>
+            
+             {nopageFilter ?
+              <p style={{ fontWeight: 400, marginLeft: "10px" }}>Displaying <span style={{ color: "blue" }}>
+                {uniqueList.length} </span>Jobs with following matching tags:
+                <span style={{ color: "blue" }}>{Active.toString()}</span></p>
               :
               <p style={{ fontWeight: 400, marginLeft: "10px" }}>showing {firstIndex + 1} to {lastIndex} latest jobs</p>
             }
@@ -524,9 +609,9 @@ return(
           <div className={styles.Uiwarpper}>
             <ul className={styles.ul} style={{ color: 'white', fontWeight: "bold" }}>
 
+              <li style={{ backgroundColor: " rgb(40, 4, 99)" }} className={`${styles.li} ${styles.Jtitle}`}>Job Title</li>
               <li style={{ backgroundColor: " rgb(40, 4, 99)" }} className={`${styles.li} ${styles.CompanyName}`}>Company Name</li>
               <li style={{ backgroundColor: " rgb(40, 4, 99)" }} className={`${styles.li} ${styles.Source}`}>Source</li>
-              <li style={{ backgroundColor: " rgb(40, 4, 99)" }} className={`${styles.li} ${styles.Jtitle}`}>Job Title</li>
               <li style={{ backgroundColor: " rgb(40, 4, 99)" }} className={`${styles.li} ${styles.JobType}`}>JobType</li>
               {/* <li className={`${styles.li} ${styles.HliDescription}`}><b>Job description</b></li> */}
               <li style={{ backgroundColor: " rgb(40, 4, 99)" }} className={`${styles.li} ${styles.date}`}>Posted Date
@@ -567,6 +652,7 @@ return(
                     return (
 
                       <ul className={styles.ul} key={i}>
+                        <li className={`${styles.li} ${styles.Jtitle}`} onClick={() => navigate(`/CareerJobdetails/${btoa(items._id)}`)} style={{ cursor: "pointer", textDecoration: "underline", color: "blue" }}>{items.jobTitle.toUpperCase()}</li>
 
                         {
                           !items.Source ?
@@ -598,7 +684,6 @@ return(
 
                         {/* } */}
 
-                        <li className={`${styles.li} ${styles.Jtitle}`} onClick={() => navigate(`/CareerJobdetails/${btoa(items._id)}`)} style={{ cursor: "pointer", textDecoration: "underline", color: "blue" }}>{items.jobTitle.toUpperCase()}</li>
                         <li className={`${styles.li} ${styles.JobType}`}>{items.jobtype}</li>
 
                         {/* <li className={`${styles.li} ${styles.liDescription}`}>
@@ -673,6 +758,7 @@ return(
                     return (
 
                       <ul className={styles.ul} key={i}>
+                        <li className={`${styles.li} ${styles.Jtitle}`} onClick={() => navigate(`/CareerJobdetails/${btoa(items._id)}`)} style={{ cursor: "pointer", textDecoration: "underline", color: "blue" }}>{items.jobTitle.toUpperCase()}</li>
 
                         {
                           !items.Source ?
@@ -704,7 +790,6 @@ return(
 
                         {/* } */}
 
-                        <li className={`${styles.li} ${styles.Jtitle}`} onClick={() => navigate(`/CareerJobdetails/${btoa(items._id)}`)} style={{ cursor: "pointer", textDecoration: "underline", color: "blue" }}>{items.jobTitle.toUpperCase()}</li>
                         <li className={`${styles.li} ${styles.JobType}`}>{items.jobtype}</li>
 
                         {/* <li className={`${styles.li} ${styles.liDescription}`}>

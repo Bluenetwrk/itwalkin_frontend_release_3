@@ -31,7 +31,7 @@ import PostJobs from "./Job-Portal/PostJobs/postJobs";
 import PostBlogs from "./Job-Portal/PostJobs/postBlogs";
 import Jobs from "./Job-Portal/Jobs/AllJobs";
 import Nav from "./Job-Portal/NaveBar/Nav";
-import Jobdetails from "./Job-Portal/Jobs/AllJobdetails"
+import Jobdetails from "./Job-Portal/Jobs/AllJobdetail"
 import Blogdetails from "./Job-Portal/Jobs/Blogdetail"
 import Answerdetails from "./Job-Portal/Jobs/Answerdetails";
 import CareerJobdetails from "./Job-Portal/Jobs/CareerJobdetails"

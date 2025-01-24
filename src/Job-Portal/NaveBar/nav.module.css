@@ -22,8 +22,14 @@ font-size: xx-large;
     }
 
 .ITwalkinWrapper{
-    margin-top: -25px;
 margin-left: 4%;
+/* background-color: red; */
+width:140px;
+    height:60px
+}
+.IwalkinLogologo{
+    width:100%;
+    margin-top: 10px;
 
 }
 .ITwalkin{
