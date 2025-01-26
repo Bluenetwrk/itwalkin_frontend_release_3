@@ -88,7 +88,7 @@ function AllJobs(props) {
     const headers = { authorization: 'BlueItImpulseWalkinIn' };
     await axios.get("/Careerjobpost/getTotalCount")
       .then((res) => {
-        console.log(res.data)
+        console.log(res.data.result)
         settotalCount(res.data.result)
       }).catch((err) => {
         alert("something went wrong")
@@ -396,7 +396,7 @@ function AllJobs(props) {
   const [jobTagIds, setjobTagIds] = useState([])
 
   const [jobTagsIds, setJobTagsIds] = useState([])
-  // console.log("all dublicate ids", jobTagsIds)
+  console.log("all dublicate ids", jobTagsIds)
 
   useEffect(() => {
     if (jobTagsIds.length > 0) {
@@ -416,7 +416,7 @@ function AllJobs(props) {
       params: { currentPage, recordsPerPage }
     })
       .then((res) => {
-        // console.log("data from uique id's",res.data)
+        console.log("data from uique id's",res.data)
         let result = res.data
         let sortedate = result.sort((a, b) => {
           return new Date(b.createdAt) - new Date(a.createdAt);

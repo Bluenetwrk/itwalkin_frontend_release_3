@@ -87,41 +87,6 @@ function changeComments(e){
 //   })
 
 // }
-
-async function handleComment(){
-  if(!userid){
-    alert("you must login to comment on question")
-    return false
-  }
-  if(!comments.comment){
-    return false
-  }
-  const headers = { authorization: 'BlueItImpulseWalkinIn'};
-  await axios.put(`/BlogRoutes/Addcomment/${atob(params.id)}`,{comments}, {headers})
-  .then((res)=>{
-    let result=res.data
-    if(result==="success"){
-      // setcomments("")
-    setcomments({ ...comments, comment: ""})
-      getjobs()
-    }
-  })
-}
-
-async function deletComment(id){  
-  const headers = { authorization: 'BlueItImpulseWalkinIn'};
-  await axios.put(`/BlogRoutes/deletComment/${atob(params.id)}`,{id}, {headers})
-  .then((res)=>{
-    let result=res.data
-    if(result==="success"){
-      // setcomments("")
-    // setcomments({ ...comments, comment: ""})
-      getjobs()
-    }
-  })
-}
-
-
   const navigate = useNavigate()
 
   let params = useParams();
@@ -210,18 +175,26 @@ async function deletComment(id){
   {/* <h1 style={{textAlign:"center", fontSize:"xx-large"}}>{jobs.jobTitle[0].toUpperCase()+jobs.jobTitle.slice(1)}</h1> */}
   <h1 style={{textAlign:"center", fontSize:"xx-large"}}>{jobs.jobTitle}</h1>
 <div style={{marginLeft:"30px"}}>
-  <span>Posted by {jobs.name}</span> |  
-  <span> Posted on : {new Date(jobs.createdAt).toLocaleString(
+  <span>Posted by {jobs.Source}</span> &nbsp;|  
+  &nbsp; <span> Posted on : {new Date(jobs.createdAt).toLocaleString(
                   "en-US",
                   {
                     month: "short",
                     day: "2-digit",
                     year: "numeric",
                   }
-                )}</span> . 
-  
-</div>
+                )}</span> &nbsp; |
+  &nbsp; <span>Posted by {jobs.experiance}</span> &nbsp;|  
+  &nbsp; <span>Posted by {jobs.jobLocation}</span>&nbsp; |  
+  &nbsp; <span>Posted by {jobs.jobtype}</span>&nbsp; |  
+  &nbsp; <span>Posted by {jobs.qualification}</span>&nbsp; |  
+  &nbsp; <span>Posted by {jobs.salaryRange}</span> 
+  {/* <span>Posted by {jobs.qualification}</span> |   */}
+  {/* <span>Posted by {jobs.qualification}</span> |   */}
 
+  
+<p>Skills : {jobs.skills} </p>
+</div>
 
   <table style={{marginLeft:"6px", marginTop:"0px", width:"98.8%", borderCollapse: "collapse",border:"none"}}>         
   

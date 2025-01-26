@@ -82,9 +82,14 @@ const [immage, setimmage] = useState()
           .catch(error => console.log(error))
       }, []);
   
-  function alertshow(){
+  function NoEmailAlert(){
       alert("primary email field must be filled")
   }
+  
+ function InvalidEmailAlert(){
+  alert("Invalid Primary email id")
+ }
+
   const login= useGoogleLogin({
     
     onSuccess: async (response) => {
@@ -108,16 +113,22 @@ const [immage, setimmage] = useState()
         // console.log("decoded name :", gemail)
         // console.log(" decoded id :", gname)
 
-        await axios.post("/EmpProfile/Glogin", { ipAddress, userId, email, name, gtoken, isApproved })
+        await axios.post("/EmpProfile/Glogin", { ipAddress, userId, email, name, gtoken, isApproved ,
+          PrimeryuserDesignation, Secondaryusername, Secondaryuseremailid,
+      Secondaryusercontactnumber, phoneNumber, Aadhar, panCard, CompanyName, CompanyContact, CompanyGSTIN,
+      CompanyWebsite,CompanyAddress,CompanyEmail, TypeofOrganisation,CompanyCIN, secondaryuserDesignation,AboutCompany
+        })
           .then((response) => {
             let result = response.data
             let token = result.token
             let GuserId = result.id
-            if (result.status == "success") {
-              localStorage.setItem("EmpLog", JSON.stringify(btoa(token)))
-              localStorage.setItem("EmpIdG", JSON.stringify(GuserId))
-              navigate("/Search-Candidate", { state: { gserid: GuserId } })
-            }
+            // console.log(result)
+            if (result.action == "registered") {
+              alert("Registered Successfully")
+              }else if(result.action == "login"){
+                alert("Primary email id is already registered please try different email id")
+
+              }
           }).catch((err) => {
             alert("server issue occured")
           })
@@ -326,7 +337,7 @@ const [immage, setimmage] = useState()
     setCompanyAddress(sanitizedValue);
    }
 
-   async function saveUpdate(e) {
+   async function saveMicrosoft(e) {
     if(!email){
       alert("Primary User Email Id is mandatory to fill")
       return false
@@ -352,7 +363,7 @@ const [immage, setimmage] = useState()
         let result = res.data
         // console.log(result)
         if(result===11000){
-          alert("either primary email or Company Email id is already existed")
+          alert("Primary email id is already registered please try different email id")
         }
         if(result.access_token){
           const url = "https://graph.microsoft.com/v1.0/invitations";
@@ -373,7 +384,7 @@ const [immage, setimmage] = useState()
     // console.log("Response :", response);
     if (response.ok) {
       const data = await response.json();
-      alert(` you will receive a invitation email from microsoft to email address: ${email} `)
+      alert(` You will receive an invitation email from microsoft to your primary email address: ${email} `)
       setname("")
 setemail("")
 setphoneNumber("")
@@ -572,14 +583,14 @@ setCompanyCIN("")
             {/* 
 
             <button className={styles.cancel} onClick={() => { navigate(-1) }} >cancel</button> */}
-<div className={STyles.signUpWrapper} style={{marginLeft:"10px", marginBottom:"20px"}} onClick={(e) => { saveUpdate(e) }} >
+<div className={STyles.signUpWrapper} style={{marginLeft:"10px", marginBottom:"20px"}} onClick={(e) => { saveMicrosoft(e) }} >
           <div className={STyles.both}>
             <img className={STyles.google} src={ MicosoftImage}/> 
             <p className={STyles.signUpwrap} >Rigister with Microsoft</p>
           </div>
         </div>
 
-            <div className={STyles.signUpWrapper} style={{marginLeft:"50px", marginBottom:"20px"}} onClick={!email? alertshow :login}>
+            <div className={STyles.signUpWrapper} style={{marginLeft:"50px", marginBottom:"20px"}} onClick={!email? NoEmailAlert : emailError? InvalidEmailAlert :login}>
           <div className={STyles.both}>
             <img className={STyles.google} src={GoogleImage} />
             <p className={STyles.signUpwrap} >Rigister with Google</p>
@@ -696,14 +707,14 @@ setCompanyCIN("")
 <JoditEditor  ref={editor}  value={AboutCompany.toString()} onChange={(e)=>{setAboutCompany(e)}} />
 </div>
 
-            <div className={STyles.signUpWrapper} style={{marginLeft:"10px", marginBottom:"20px"}} onClick={(e) => { saveUpdate(e) }} >
+            <div className={STyles.signUpWrapper} style={{marginLeft:"10px", marginBottom:"20px"}} onClick={(e) => { saveMicrosoft(e) }} >
           <div className={STyles.both}>
             <img className={STyles.google} src={ MicosoftImage}/> 
             <p className={STyles.signUpwrap} >Rigister with Microsoft</p>
           </div>
         </div>
 
-            <div className={STyles.signUpWrapper} style={{marginLeft:"10px", marginBottom:"20px"}} onClick={!email? alertshow :login}>
+            <div className={STyles.signUpWrapper} style={{marginLeft:"10px", marginBottom:"20px"}} onClick={!email? NoEmailAlert : emailError? InvalidEmailAlert :login}>
           <div className={STyles.both}>
             <img className={STyles.google} src={GoogleImage} />
             <p className={STyles.signUpwrap} >Continue with Google</p>

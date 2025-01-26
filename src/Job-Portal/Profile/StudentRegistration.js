@@ -3,6 +3,7 @@ import styles from "./SudentUpdateProfile.module.css"
 import Style  from "../Jobs/Allobs.module.css"
 import STyles from "../Login/login.module.css"
 import { useGoogleLogin } from '@react-oauth/google';
+import validator from "validator";
 
 import imageCompression from 'browser-image-compression';
 import axios from 'axios';
@@ -144,6 +145,8 @@ function StudentUpdateProfile(props) {
      const [college, setcollege] = useState([])
      const [Resulttag, setResulttagTag] = useState()
      const [Skills, setSkills] = useState([])
+       const [emailError, setEmailError] = useState("");
+     
 
        const [ipAddress, setIPAddress] = useState('')
            const [gmailuser, setGmailuser] = useState("")
@@ -179,15 +182,19 @@ function StudentUpdateProfile(props) {
           // console.log("decoded name :", gemail)
           // console.log(" decoded id :", gname)
   
-          await axios.post("/EmpProfile/Glogin", { ipAddress, userId, email, name, gtoken, isApproved })
+          await axios.post("/StudentProfile/Glogin", {
+             ipAddress, userId, email, name, gtoken, isApproved, phoneNumber, Aadhar, panCard, city, NoticePeriod, 
+             ExpectedSalary, currentCTC, age, Qualification, Skills, Experiance, Tags, college})
             .then((response) => {
               let result = response.data
               let token = result.token
               let GuserId = result.id
-              if (result.status == "success") {
-                localStorage.setItem("EmpLog", JSON.stringify(btoa(token)))
-                localStorage.setItem("EmpIdG", JSON.stringify(GuserId))
-                navigate("/Search-Candidate", { state: { gserid: GuserId } })
+              // console.log(result)
+              if (result.action == "registered") {
+              alert("Registered Successfully")
+              }else if(result.action == "login"){
+                alert("Primary email id is already registered please try different email id")
+
               }
             }).catch((err) => {
               alert("server issue occured")
@@ -244,42 +251,7 @@ function StudentUpdateProfile(props) {
   const [topMessage, settopMessage] = useState("")
   const [stuId, setstuId] = useState()
 
-  async function getUser() {
-    let userid = JSON.parse(localStorage.getItem("StudId"))
-    const headers = { authorization: userid + " " + atob(JSON.parse(localStorage.getItem("StudLog"))) };
-    await axios.get(`/StudentProfile/getProfile/${studId}`, { headers })
-      .then((res) => {
-        let result = res.data.result
-        if (result) {
-          setResulttagTag(result.Tags)
-          setname(result.name)
-          setemail(result.email)
-          setimage(result.image)
-          setimmage(result.image)
-          setphoneNumber(result.phoneNumber)
-          setAadhar(result.Aadhar)
-          setpanCard(result.panCard)
-          setcity(result.city)          
-          setcollege(result.college)          
-          setNoticePeriod(result.NoticePeriod)
-          setExpectedSalary(result.ExpectedSalary)
-          setcurrentCTC(result.currentCTC)
-          setQualification(result.Qualification)
-          setSkills(result.Skills)
-          setExperiance(result.Experiance)
-          setage(result.age)
-          setTag(result.Tags)
-          setstuId(result._id)
-        }
-      }).catch((err) => {
-        alert("server issue occured", err)
-      })
-  }
-  useEffect(() => {
-    getUser()
-  }, [])
-
-
+ 
   // ...............upload Image.....................
   async function uploadImage() {
     const formdata = new FormData()
@@ -292,6 +264,16 @@ function StudentUpdateProfile(props) {
       }).catch((err) => {
       })
   }
+
+  function NoEmailAlert(){
+    alert("primary email field must be filled")
+}
+
+function InvalidEmailAlert(){
+alert("Invalid Primary email id")
+}
+
+
   async function saveUpdate(e) {
     let userid = JSON.parse(localStorage.getItem("StudId"))
     const headers = { authorization: userid + " " + atob(JSON.parse(localStorage.getItem("StudLog"))) };
@@ -385,6 +367,17 @@ if(confirm){
   setphoneNumber(e.target.value)
   }
   }
+  function handlesetemail(email){
+      // const email = event.target.value;
+      const sanitizedValue = email.replace(/[^\w\s.@]|_/g, ''); // Regex to remove special characters
+      setemail(sanitizedValue);
+  
+      if (validator.isEmail(email)) {
+        setEmailError("");
+    } else {
+        setEmailError("Enter valid Email!");
+    }
+     }
 
   const AadharhandleChange = (event) => {
     if (event.target.value.length>12){
@@ -479,7 +472,10 @@ border:"none",padding: "4px 8px"}} onClick={DeleteProfile}>Delete</button>
 
               <label className={styles.inputName}>
                 <h4>Email Address:</h4>
-                <input maxLength="25" className={styles.input} value={email}  onChange={(e) => { setemail(e.target.value) }} type="text" />
+                <input placeholder='Enter gmail address' maxLength="30" className={styles.input} value={email}  
+                onChange={(e) => { handlesetemail(e.target.value) }} type="text" />
+                <br></br> <span style={{color:"red", marginLeft:"5%"}}>{emailError}</span>           
+             
               </label>
               <label className={styles.inputName}>
                 <h4>City: 
@@ -508,12 +504,12 @@ border:"none",padding: "4px 8px"}} onClick={DeleteProfile}>Delete</button>
               </label>
 
               <label className={styles.inputName}>
-                <h4>Aadhaar number:</h4>
+                <h4>Aadhaar number: &nbsp;<span className={styles.hint}>(Optional)</span></h4>
                 <input maxLength="12" className={styles.input} value={Aadhar} onChange={(e) => { AadharhandleChange(e) }} type="number" />
               </label>
 
               <label className={styles.inputName}>
-                <h4>Pan Card Number:</h4>
+                <h4>Pan Card Number: &nbsp;<span className={styles.hint}>(Optional)</span></h4>
                 <input maxLength="10" className={styles.input} value={panCard} onChange={(e) => { PanCardhandleChange(e) }} type="text" />
               </label>
 
@@ -593,7 +589,15 @@ border:"none",padding: "4px 8px"}} onClick={DeleteProfile}>Delete</button>
               </label>
               <div style={{display:"flex", marginLeft:"50%", marginTop:"-50px"}}>
 
-              <div className={STyles.signUpWrapper} style={{marginLeft:"50px", marginBottom:"20px"}} onClick={saveUpdate}>
+              {/* <div className={STyles.signUpWrapper} style={{marginLeft:"50px", marginBottom:"20px"}} onClick={saveUpdate}>
+          <div className={STyles.both}>
+            <img className={STyles.google} src={GoogleImage} />
+            <p className={STyles.signUpwrap} >Register with Google</p>
+          </div>
+        </div> */}
+
+              <div className={STyles.signUpWrapper} style={{marginLeft:"50px", marginBottom:"20px"}} 
+              onClick={!email? NoEmailAlert : emailError? InvalidEmailAlert :login}>
           <div className={STyles.both}>
             <img className={STyles.google} src={GoogleImage} />
             <p className={STyles.signUpwrap} >Register with Google</p>
@@ -618,7 +622,9 @@ border:"none",padding: "4px 8px"}} onClick={DeleteProfile}>Delete</button>
 
               <label className={styles.MobileinputName}>
                 <h4 className={styles.MobileName}>Email Address:</h4>
-                <input maxLength="25" className={styles.Mobileinput} disabled value={email} onChange={(e) => { setemail(e.target.value) }} type="text" />
+                <input maxLength="25" className={styles.Mobileinput}  value={email}
+                 onChange={(e) => { handlesetemail(e.target.value) }} type="text" />
+                 <br></br> <span style={{color:"red", marginLeft:"5%"}}>{emailError}</span>           
               </label>
 
               <label className={styles.MobileinputName}>
@@ -739,7 +745,8 @@ border:"none",padding: "4px 8px"}} onClick={DeleteProfile}>Delete</button>
               </div>
               <div style={{marginTop:"60px"}}> */}
 
-              <div className={STyles.signUpWrapper} style={{marginLeft:"50px", marginBottom:"20px"}} onClick={saveUpdate}>
+              <div className={STyles.signUpWrapper} style={{marginLeft:"50px", marginBottom:"20px"}}
+               onClick={!email? NoEmailAlert : emailError? InvalidEmailAlert :login}>
           <div className={STyles.both}>
             <img className={STyles.google} src={GoogleImage} />
             <p className={STyles.signUpwrap} >Register with Google</p>
