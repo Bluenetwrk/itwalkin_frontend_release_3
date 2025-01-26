@@ -225,7 +225,7 @@ async function deletComment(id){
                     year: "numeric",
                   }
                 )}</span> . 
-  <span> 
+  {/* <span> 
   {new Date(jobs.updatedAt).toLocaleString(
                   "en-US",
                   {
@@ -234,7 +234,7 @@ async function deletComment(id){
                     year: "numeric",
                   }
                 )}
-  </span>
+  </span> */}
 </div>
 
 { jobs.comments?
