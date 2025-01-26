@@ -97,7 +97,7 @@ function changeComments(e){
     await axios.get(`/jobpost/getjobs/${atob(params.id)}`, {headers})
       .then((res) => {
         let result = (res.data)
-        // console.log(result)
+        console.log(result)
         setJobs(result)
         setjobdescription(result.jobDescription)
         setjobSeekerId(result.jobSeekerId)
@@ -175,7 +175,7 @@ function changeComments(e){
   {/* <h1 style={{textAlign:"center", fontSize:"xx-large"}}>{jobs.jobTitle[0].toUpperCase()+jobs.jobTitle.slice(1)}</h1> */}
   <h1 style={{textAlign:"center", fontSize:"xx-large"}}>{jobs.jobTitle}</h1>
 <div style={{marginLeft:"30px"}}>
-  <span>Posted by {jobs.Source}</span> &nbsp;|  
+  <span>Posted by : {jobs.companyName}</span> &nbsp;|  
   &nbsp; <span> Posted on : {new Date(jobs.createdAt).toLocaleString(
                   "en-US",
                   {
@@ -184,11 +184,11 @@ function changeComments(e){
                     year: "numeric",
                   }
                 )}</span> &nbsp; |
-  &nbsp; <span>Posted by {jobs.experiance}</span> &nbsp;|  
-  &nbsp; <span>Posted by {jobs.jobLocation}</span>&nbsp; |  
-  &nbsp; <span>Posted by {jobs.jobtype}</span>&nbsp; |  
-  &nbsp; <span>Posted by {jobs.qualification}</span>&nbsp; |  
-  &nbsp; <span>Posted by {jobs.salaryRange}</span> 
+  &nbsp; <span>Experience : {jobs.experiance}</span> &nbsp;|  
+  &nbsp; <span>Location : {jobs.jobLocation}</span>&nbsp; |  
+  &nbsp; <span>Job Type : {jobs.jobtype}</span>&nbsp; |  
+  &nbsp; <span>Qualification : {jobs.qualification}</span>&nbsp; |  
+  &nbsp; <span>Salary : {jobs.salaryRange}</span> 
   {/* <span>Posted by {jobs.qualification}</span> |   */}
   {/* <span>Posted by {jobs.qualification}</span> |   */}
 
