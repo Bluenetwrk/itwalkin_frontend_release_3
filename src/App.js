@@ -31,7 +31,7 @@ import PostJobs from "./Job-Portal/PostJobs/postJobs";
 import PostBlogs from "./Job-Portal/PostJobs/postBlogs";
 import Jobs from "./Job-Portal/Jobs/AllJobs";
 import Nav from "./Job-Portal/NaveBar/Nav";
-import Jobdetails from "./Job-Portal/Jobs/AllJobdetail"
+import Jobdetails from "./Job-Portal/Jobs/AllJobdetails"
 import Blogdetails from "./Job-Portal/Jobs/Blogdetail"
 import Answerdetails from "./Job-Portal/Jobs/Answerdetails";
 import CareerJobdetails from "./Job-Portal/Jobs/CareerJobdetails"
@@ -89,12 +89,12 @@ import socketIO from 'socket.io-client';
 import SidebarNav from "./Job-Portal/BigSideNav";
 import useScreenSize from '../src/Job-Portal/SizeHook';
 import AskQuestion from "./Job-Portal/PostJobs/postQuesion";
-// axios.defaults.baseURL = "http://localhost:8080" 
+axios.defaults.baseURL = "http://localhost:8080" 
 // axios.defaults.baseURL = "https://i-twalkin-backend-testrelease-2-0-1-0824-zdnu.vercel.app" // new vercel
 
 // axios.defaults.baseURL = "https://i-twalkin-backend-testrelease-2-0-1-0824.vercel.app"  // vercel Test
 
-axios.defaults.baseURL = "https://itwalkin-backend-testrelease-2-0-1-0824-ns0g.onrender.com" // Render Test
+// axios.defaults.baseURL = "https://itwalkin-backend-testrelease-2-0-1-0824-ns0g.onrender.com" // Render Test
 
 // Vercel Main Live 
 //  axios.defaults.baseURL = "https://itwalkin-backend-testrelease-2-0-1-0824.onrender.com";

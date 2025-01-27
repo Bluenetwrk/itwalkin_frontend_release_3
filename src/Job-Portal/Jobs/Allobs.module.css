@@ -910,3 +910,9 @@ table {
     color:rgb(148, 112, 216)
 }
 
+.tableDesWrapper{
+    word-wrap: break-word;
+       white-space: normal;
+       overflow: hidden;
+       box-sizing: border-box;
+}

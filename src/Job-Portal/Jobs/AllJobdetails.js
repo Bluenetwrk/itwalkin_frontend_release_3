@@ -44,6 +44,7 @@ const [Loader, setLoader] = useState(false)
     await axios.get(`/jobpost/getjobs/${atob(params.id)}`, {headers})
       .then((res) => {
         let result = (res.data)
+        console.log(result)
         setJobs(result)
         setjobdescription(result.jobDescription)
         setjobSeekerId(result.jobSeekerId)
@@ -126,10 +127,10 @@ const [Loader, setLoader] = useState(false)
         
         </div>
           
-          <table>
+          {/* <table>
           <tr>
     <td colSpan={2} style={{backgroundColor:" rgb(40, 4, 99)"}}>
-    {/* <div  style={{marginLeft:"48%", color:"white", fontWeight:"550"}}>Full Job Description</div> */}
+
     <div style={{marginLeft:"48%", color:"white", fontWeight:"550"}}>{jobs.jobTitle ? jobs.jobTitle[0].toUpperCase()+jobs.jobTitle.slice(1)
     : <li style={{ display: "inline-block" }}>job Title</li>}</div>
 
@@ -139,10 +140,7 @@ const [Loader, setLoader] = useState(false)
     <th>Company Name</th>
     <td>{jobs.companyName ? jobs.companyName : <li style={{ display: "inline-block" }}>Company name</li>}</td>
   </tr>
-  {/* <tr>
-<th>Job Title</th>
-    <td>{jobs.jobTitle ? jobs.jobTitle : <li style={{ display: "inline-block" }}>job Title</li>}</td>
-  </tr> */}
+
   <tr>
     <th>Location</th>
     <td>{jobs.jobLocation ? jobs.jobLocation : <li style={{ display: "inline-block" }}>job Location</li>}</td>
@@ -189,10 +187,42 @@ const [Loader, setLoader] = useState(false)
 
   </tr>
 
-</table>
+</table> */}
 
+<h1 style={{textAlign:"center", fontSize:"xx-large"}}>{jobs.jobTitle}</h1>
+<div style={{marginLeft:"30px"}}>
+  <span>Posted by : {jobs.companyName}</span> &nbsp;|  
+  &nbsp; <span> Posted on : {new Date(jobs.createdAt).toLocaleString(
+                  "en-US",
+                  {
+                    month: "short",
+                    day: "2-digit",
+                    year: "numeric",
+                  }
+                )}</span> &nbsp; |
+  &nbsp; <span>Experience : {jobs.experiance}</span> &nbsp;|  
+  &nbsp; <span>Location : {jobs.jobLocation}</span>&nbsp; |  
+  &nbsp; <span>Job Type : {jobs.jobtype}</span>&nbsp; |  
+  &nbsp; <span>Qualification : {jobs.qualification}</span>&nbsp; |  
+  &nbsp; <span>Salary : {jobs.salaryRange}</span> 
+  {/* <span>Posted by {jobs.qualification}</span> |   */}
+  {/* <span>Posted by {jobs.qualification}</span> |   */}
 
+  
+<p>Skills : {jobs.skills} </p>
+</div>
 
+  <table className={styles.tableDesWrapper} style={{marginLeft:"6px", marginTop:"0px", flexWrap:"wrap", width:"98.8%", borderCollapse: "collapse",border:"none"}}>         
+  
+  <tr style={{border:"none"}}>
+    <td colSpan={2} style={{border:"none"}}>
+    {
+      jobdescription? HTMLReactParser(jobdescription.toString()) :""
+     } 
+    </td>
+
+  </tr>
+  </table>
           </>
           :
           <>
