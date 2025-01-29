@@ -90,6 +90,8 @@ import SidebarNav from "./Job-Portal/BigSideNav";
 import useScreenSize from '../src/Job-Portal/SizeHook';
 import AskQuestion from "./Job-Portal/PostJobs/postQuesion";
 // axios.defaults.baseURL = "http://localhost:8080" 
+
+// simillry i want to show table on months condition if i select  yearly only 1 input column and 3 rows should be displayed and if  i select quarterly jan -march , april-jun , july-sep, oct-dec should be displayed and if i select half yearly then jan-jun, and july to dec shouldbe displayed and if i select monthly then all months from jan to dec should be displayed
 // axios.defaults.baseURL = "https://i-twalkin-backend-testrelease-2-0-1-0824-zdnu.vercel.app" // new vercel
 
 // axios.defaults.baseURL = "https://i-twalkin-backend-testrelease-2-0-1-0824.vercel.app"  // vercel Test

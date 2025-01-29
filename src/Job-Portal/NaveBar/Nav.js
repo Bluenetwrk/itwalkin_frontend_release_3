@@ -398,9 +398,11 @@ className={ShowSideNave ? "fas fa-times" : "fas fa-bars"} ref={SimgRef} onClick=
 </div>
                 {/* <div className={Styles.logoWrapper}> */}
                 {/* <NavLink to="/" > <img className={Styles.Moblogo} src={logo} /> </NavLink> */}
-                <div className={Styles.ITwalkinWrapper}>
-                  <p className={Styles.ITwalkin}>ITwalkin</p>
-                  <p className={Styles.onlyforITjobs}>Only for IT jobs</p>
+                <div className={Styles.ITwalkinWrapper} style={{marginTop:"10px"}}>
+                  {/* <p className={Styles.ITwalkin}>ITwalkin</p>
+                  <p className={Styles.onlyforITjobs}>Only for IT jobs</p> */}
+                        <img className={Styles.MobIwalkinLogologo} src={Itwalkinlogo} />
+
                 </div>
                 {/* </div> */}
                 <div className={Styles.linkWrapper}>
@@ -452,9 +454,11 @@ className={ShowSideNave ? "fas fa-times" : "fas fa-bars"} ref={SimgRef} onClick=
 </div>
                   {/* <div className={Styles.logoWrapper}> */}
                   {/* <NavLink to="/"> <img className={Styles.Moblogo} src={logo} /> </NavLink> */}
-                  <div className={Styles.ITwalkinWrapper}>
-                    <p className={Styles.ITwalkin}>ITwalkin</p>
-                    <p className={Styles.onlyforITjobs}>Only for IT jobs</p>
+                  <div className={Styles.ITwalkinWrapper} style={{marginTop:"10px"}}>
+                    {/* <p className={Styles.ITwalkin}>ITwalkin</p>
+                    <p className={Styles.onlyforITjobs}>Only for IT jobs</p> */}
+                        <img className={Styles.MobIwalkinLogologo} src={Itwalkinlogo} />
+
                   </div>
                   {/* </div> */}
                   <div className={Styles.linkWrapper}>
@@ -497,8 +501,10 @@ className={ShowSideNave ? "fas fa-times" : "fas fa-bars"} ref={SimgRef} onClick=
                     {/* <div className={Styles.logoWrapper}> */}
                     {/* <NavLink to="/" > <img className={Styles.Moblogo} src={logo} /> </NavLink> */}
                     <div className={Styles.ITwalkinWrapper}>
-                      <p className={Styles.ITwalkin}>ITwalkin</p>
-                      <p className={Styles.onlyforITjobs}>Only for IT jobs</p>
+                      {/* <p className={Styles.ITwalkin}>ITwalkin</p>
+                      <p className={Styles.onlyforITjobs}>Only for IT jobs</p> */}
+                        <img className={Styles.MobIwalkinLogologo} src={Itwalkinlogo} />
+
                     </div>
                     {/* </div> */}
                     <div className={Styles.linkWrapper}>
@@ -540,8 +546,10 @@ className={ShowSideNave ? "fas fa-times" : "fas fa-bars"} ref={SimgRef} onClick=
                 </div>
 
                     <div className={Styles.ITwalkinWrapperHomeMobile}>
-                      <p className={Styles.ITwalkinMob}>ITwalkin</p>
-                      <p className={Styles.onlyforITjobsMob}>Only for IT jobs</p>
+                      {/* <p className={Styles.ITwalkinMob}>ITwalkin</p>
+                      <p className={Styles.onlyforITjobsMob}>Only for IT jobs</p> */}
+                        <img className={Styles.MobIwalkinLogologo} src={Itwalkinlogo} />
+
                     </div>
 
                     {/* <NavLink to="/" > <img className={Styles.MobHomelogo} src={logo} /> </NavLink> */}
