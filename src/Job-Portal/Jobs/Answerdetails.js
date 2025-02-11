@@ -154,7 +154,7 @@ async function deletComment(id){
   return (
     <>
 
-        <h2 style={{marginLeft:"10px", fontWeight:"800", marginTop:"15px", marginBottom:"-15px"}}> Blogs  </h2>
+        <p style={{marginLeft:"20px", fontWeight:"800", marginTop:"10px", marginBottom:"-15px"}}> Blogs  </p>
 
     <div style={{display:"flex", marginTop:"20px"}}>
                             {/* <img style={{ height:"25px", color:"grey", marginTop:"20px", marginLeft:"8%", cursor:"pointer",
@@ -322,7 +322,11 @@ async function deletComment(id){
   <table style={{marginLeft:"6px", marginTop:"0px", width:"98.8%"}}>
           <tr >
     <td colSpan={2} > 
-          <p> {com.name} : {com.comment}</p>
+          <p> {com.name} : 
+          {/* {com.comment} */}
+          {HTMLReactParser(com.comment.toString())}  
+
+          </p>
 {userid===com.id?
           <button onClick={()=>{deletComment(com.id)}} >delete</button>
           :""
@@ -345,7 +349,13 @@ async function deletComment(id){
        userid===com.id
         )
       }).length<1?<>
-              <input placeholder='Answer' maxLength={300} style={{height:"30px", marginLeft:"6px", width:"95%"}} type='text' value={comments.comment} onChange={(e)=>{changeComments(e)}} /><br></br>
+              {/* <input placeholder='Answer' maxLength={300} style={{height:"30px", marginLeft:"6px", width:"95%"}} type='text' 
+              value={HTMLReactParser(com.comment.toString())}              
+
+              onChange={(e)=>{changeComments(e)}} /><br></br> */}
+<JoditEditor  ref={editor}   onChange={(e)=>{changeComments(e)}} />
+
+
        <button onClick={handleComment} style={{height:"30px", marginLeft:"6px"}}>Comment</button> 
        </>
        :""
