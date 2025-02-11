@@ -585,10 +585,33 @@ font-weight: 400;
 
 }
 .textinMobileSodeBar{
-    padding-top: 15px;
-    padding-bottom: 15px;
+    padding-top:9px;
+    padding-bottom: 9px;
     margin-left: 15px;
     cursor: pointer;
+}
+.arrow {
+    border: solid black;
+    border-width: 0 2px 2px 0;
+    display: inline-block;
+    padding: 2.3px;
+    margin-left: 5px;
+  }  
+  .up {
+    transform: rotate(315deg);
+    -webkit-transform: rotate(315deg);
+}
+.up:hover{
+    transform: rotate(315deg);
+    -webkit-transform: rotate(315deg);
+}
+  .down {
+    transform: rotate(90deg);
+    -webkit-transform: rotate(45deg);
+}
+  .down:hover {
+    transform: rotate(90deg);
+    -webkit-transform: rotate(45deg);
 }
 .textBigSodeBar{
     padding-top: 15px;

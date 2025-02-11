@@ -14,19 +14,20 @@
 }
 
 .footerWraper{
-    background-color: rgb(29, 1, 75);
+    background-color:rgb(39,4,98);
+    /* background-color: rgb(29, 1, 75); */
     width: 100%;
-    /* position: sticky;
-    bottom: 0; */
-    /* height: 60px; */
+
     align-items: center;
 }
-
-.footer{
-    color:white;
-    margin-left: 8.5%;
+.Bottom{
     display: flex;
-    flex-wrap: wrap;
+    margin-left: 10px;
+    /* justify-content: space-between; */
+}
+
+h4{
+    color:white
 }
 
 i{
@@ -42,77 +43,12 @@ i:hover{
     /* margin-left: 10%; */
     /* background-color: blue; */
     display: flex;
-    margin-top: 12px;
-margin-left:12%; 
+    /* margin-top: 12px; */
+margin-left:10%; 
+color: white;
 
 }
 
-.Bottom{
-    display: flex;
-    /* flex-wrap: wrap; */
-margin-left: 5%; 
-width:50%
-}
-.Bottom h4{
-    color:white;
-    font-weight: 700;
-
-}
-.Bottom a{
-cursor: pointer;
-
-/* margin-top: 7px; */
-}
-.Bottom div{
-    display: flex;
-    /* flex-wrap: wrap; */
-    margin-left: 6%; 
-    white-space: nowrap;
-}
-@media screen and (max-width:850px){
-    
-    .brands{
-        font-size:xx-large;
-        margin-left: 15%;
-        /* background-color: blue; */
-    }
-    .Bottom{
-        flex-wrap: wrap;
-   
-    }
-
-}
-@media screen and (max-width:550px){
-    .footer{
-        color:white;
-        margin-left: 8.5%;
-        display: flex;
-        flex-direction: column;
-        flex-wrap: wrap;
-    }
-    .top{
-        margin-left: 1%;
-    }
-    /* .top{
-        align-items: center;
-        display: block;
-    }
-    .AddYour{
-        margin: 0;
-        width:200%
-    }
-    .footCart{
-        margin: 0;
-        width:200%;
-        } */
-        .brands{
-            font-size:xx-large;
-            /* margin-left: -15px; */
-            /* background-color: red; */
-    
-        }
-    
-}
 
 
 

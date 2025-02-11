@@ -64,11 +64,11 @@ function Nav(props) {
     }
   })
 
-  window.addEventListener("click", (e) => {
-    if (e.target !== SmenuRef.current && e.target !== SimgRef.current) {
-      setShowSideNave(false)
-    }
-  })
+  // window.addEventListener("click", (e) => {
+  //   if (e.target !== SmenuRef.current && e.target !== SimgRef.current) {
+  //     setShowSideNave(false)
+  //   }
+  // })
 
   const navLinkStyles = ({ isActive }) => {
     return {

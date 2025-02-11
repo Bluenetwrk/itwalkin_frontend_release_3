@@ -2,6 +2,8 @@ import React from 'react'
 // import './footer.css'
 import Styles from "./footer.module.css"
 import { Link, useNavigate, BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
+import Itwalkinlogo from "../img/ItwalkInLogo.jpg"
+
 
 
 
@@ -17,16 +19,23 @@ function Footer() {
   return (
     <>
       <div className={Styles.footerWraper}>
-        <div className={Styles.footer}>
 
-          <div className={Styles.top}>
-              <p className={Styles.ITwalkin}>ITwalkin.com</p>
-              <p  className={Styles.OnlyforIT}>Only for IT jobs</p>
+          <div style={{display:"flex", marginLeft:"20px", flexWrap:"wrap"}}>
+          <div style={{}}>
+             <img className={Styles.MobIwalkinLogologo} style={{width:"140px"}} src={Itwalkinlogo} />
+            </div>
+            <div className={Styles.brands}>
+              <a> <i className='fa-brands fa-facebook-square'></i> </a>
+              {/* <a> <i className='fa-brands fa-instagram-square'></i> </a> */}
+              <a> <i className='fa-brands fa-twitter-square'></i> </a>
+              <a onClick={Linkedin}> <i class='fa-brands fa-linkedin'></i> </a>
+            </div>
             </div>
 
 
             <div className={Styles.Bottom}>
-            <div>
+<div>
+
               <h4>   
                  <a onClick={()=>{
       window.scrollTo({
@@ -35,8 +44,7 @@ function Footer() {
       })
       navigate ("/Services")}}>Our Services</a></h4>
               
-            </div>
-            <div>
+
               <h4>
                 <a onClick={()=>{
       window.scrollTo({
@@ -45,8 +53,6 @@ function Footer() {
       })
       navigate ("/AboutUs")}}>About us</a></h4>
               
-            </div>
-            <div>
               <h4> <a
               onClick={()=>{
                 window.scrollTo({
@@ -54,9 +60,8 @@ function Footer() {
                   behavior:"smooth"
                 })
                 navigate ("/Contact")}}>Contact Us</a></h4>
-              
-            </div>
-            <div>
+</div>
+<div style={{marginLeft:"25%"}}>
               <h4> <a
               onClick={()=>{
                 window.scrollTo({
@@ -65,9 +70,6 @@ function Footer() {
                 })
                 navigate ("/AllCareerJobs")}}>Career</a></h4>
               
-            </div>
-
-            <div>
               <h4> 
               <a
               onClick={()=>{
@@ -76,21 +78,19 @@ function Footer() {
                   // behavior:"smooth"
                 })
                 navigate ("/TermsAndCondition")}}>Terms and Conditions</a></h4>
-              
+              <h4> 
+              <a
+              onClick={()=>{
+                window.scrollTo({
+                  top:0,
+                  // behavior:"smooth"
+                })
+                navigate ("/Blogs")}}>Blogs</a></h4>              
             </div>
-            </div>
-
-
-            <div className={Styles.brands}>
-              <a> <i className='fa-brands fa-facebook-square'></i> </a>
-              <a> <i className='fa-brands fa-instagram-square'></i> </a>
-              <a> <i className='fa-brands fa-twitter-square'></i> </a>
-              <i class="fa-brands fa-linkedin-square" onClick={Linkedin} ></i>
             </div>
           </div>
 
 
-          </div>
 
     </>
   )

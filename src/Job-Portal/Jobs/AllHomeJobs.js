@@ -617,7 +617,7 @@ function Home() {
 
       {screenSize.width > 850 ?
         <>
-          <p style={{ color: " red", marginLeft: "4%", zIndex: "100", }}>Note: this website is under development process</p>
+          {/* <p style={{ color: " red", marginLeft: "4%", zIndex: "100", }}>Note: this website is under development process</p> */}
 
 
           <div className={styles.JobtitleFilterWrapper}>
