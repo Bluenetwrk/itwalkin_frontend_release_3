@@ -46,20 +46,51 @@ function SearchCandidate() {
   const [NotFound, setNotFound] = useState("")
   const [Result, setResult] = useState(false)
   const screenSize = useScreenSize();
-  const [Active, setActive] = useState("")
+  const [Active, setActive] = useState([])
   
   const Location = ['Bangalore']
+  const [totalCount, settotalCount] = useState()
+
+  let recordsperpage = JSON.parse(sessionStorage.getItem("recordsperpageSerachCand"))
+
+  const [currentPage, setCurrentPage] = useState(1)
+  const [recordsPerPage, setrecordsPerPage] = useState(recordsperpage?recordsperpage:10)
+
+  const lastIndex = currentPage * recordsPerPage //10
+  const firstIndex = lastIndex - recordsPerPage //0
+  const records = Candidate.slice(firstIndex, lastIndex)//0,5
+  const npage = Math.ceil(totalCount / recordsPerPage) // last page
+
+  // const number = [...Array(npage + 1).keys()].slice(1)
+
+
+
+  async function gettotalcount() {
+    const headers = { authorization: 'BlueItImpulseWalkinIn' };
+    await axios.get("/StudentProfile/getTotalCount", { headers })
+      .then((res) => {
+        // console.log(res.data.result)
+        settotalCount(res.data.result)
+      }).catch((err) => {
+        alert("something went wrong")
+      })
+  }
 
   async function getAllJobSeekers() {
     setNoPageFilter(false)
+    setActive([])
+    setJobTagsIds([])
 
     // let userid = JSON.parse(localStorage.getItem("EmpIdG"))
     // const headers = { authorization: userid +" "+ atob(JSON.parse(localStorage.getItem("EmpLog"))) };
     const headers = { authorization: 'BlueItImpulseWalkinIn' };
 
-    await axios.get("StudentProfile/getAllJobseekers", { headers })
+    // await axios.get("StudentProfile/getAllJobseekers", { headers })
+    await axios.get(`/StudentProfile/getLimitJobs/${recordsPerPage}`, { params: { currentPage }, headers })
+
       .then((res) => {
         let result = (res.data)
+        gettotalcount()
         let sortedate = result.sort(function (a, b) {
           return new Date(b.createdAt) - new Date(a.createdAt);
         });
@@ -68,9 +99,18 @@ function SearchCandidate() {
       })
   }
 
-  useEffect(() => {
-    getAllJobSeekers()
-  }, [])
+  // useEffect(() => {
+  //   getAllJobSeekers()
+  // }, [])
+
+      useEffect(() => {
+        if (jobTagsIds.length < 1) {
+      getAllJobSeekers()
+  
+        } else {
+          getTagId();
+        }
+      }, [currentPage, recordsPerPage])
 
   const [searchKey, setsearchKey] = useState()
 
@@ -133,18 +173,6 @@ function SearchCandidate() {
       })
   }
 
-  let recordsperpage = JSON.parse(sessionStorage.getItem("recordsperpageSerachCand"))
-
-
-  const [currentPage, setCurrentPage] = useState(1)
-  const [recordsPerPage, setrecordsPerPage] = useState(recordsperpage?recordsperpage:10)
-
-  const lastIndex = currentPage * recordsPerPage //10
-  const firstIndex = lastIndex - recordsPerPage //0
-  const records = Candidate.slice(firstIndex, lastIndex)//0,5
-  const npage = Math.ceil(Candidate.length / recordsPerPage) // last page
-  const number = [...Array(npage + 1).keys()].slice(1)
-
   function firstPage() {
     setCurrentPage(1)
   }
@@ -172,20 +200,124 @@ function SearchCandidate() {
     setrecordsPerPage(recordsperpage) 
     setCurrentPage(1)
   }
+    const [count, setCount]=useState(1)
+  
+      const [jobTagsIds, setJobTagsIds] = useState([])
+
+      useEffect(() => {
+        if (jobTagsIds.length > 0) {
+          getTagId();
+        }
+      }, [jobTagsIds])
+
+      let ids = jobTagsIds.map((id) => {
+        return (
+          id._id
+        )
+      })
+      const uniqueList = [...new Set(ids)];
+      async function getTagId() {
+        settotalCount(uniqueList.length)
+        await axios.get(`/StudentProfile/jobTagsIds/${uniqueList}`, {
+          params: { currentPage, recordsPerPage }
+        })
+          .then((res) => {
+            // console.log("data from uique id's",res.data)
+            let result = res.data
+            let sortedate = result.sort((a, b) => {
+              return new Date(b.createdAt) - new Date(a.createdAt);
+            });
+            setCandidate(sortedate)
+            if (count == 2) {
+              setCurrentPage(1)
+            }
+    
+          })
+      }
+    
+      useEffect(()=>{
+        if(Active.length>0){
+          changeTags()
+        }
+      },[Active])
+    
+  
 
   async function filterByJobTitle(key) {
+    if(count==1){
+      setCandidate([])
+    }
+    setCount(prev=>prev+1)
+    const isIndex=Active.findIndex((present)=>{
+return(
+  present===key
+)
+    })
+    if(isIndex<0){
+    var updatedActive = [...Active, key]; // Add the new key to the array
+    setActive(updatedActive);
+    }else{
+      const IndexId=Active.findIndex((present)=>{
+        return(
+          present==key
+        )
+            })
+            Active.splice(IndexId,1)
+                if(Active.length===0){
+                  getAllJobSeekers()
+                  return false
+    }
+    changeTags()
+  }}
+  //   if(Candidate.length>0){
+  //        let removedItems = Candidate.filter((tags)=>{
+  //           return( 
+  //             !tags.Tags.map((value)=>{
+  //               return(
+  //               value.value
+  //               )
+  //             }).includes(key)    
+  //       )
+  //     }) 
+  //     setCandidate(removedItems)
+  //     return false
+  //   }
+  // }
+
+  async function changeTags(key){
+
     setNoPageFilter(true)
     setFiltereredjobs(key)
-    setActive(key)
-    await axios.get(`/StudentProfile/getSkillTags/${key}`)
+    await axios.get(`/StudentProfile/getTagsJobs/${Active}`)
       .then((res) => {
         let result = (res.data)
+        // console.log(result)
         let sortedate = result.sort((a, b) => {
           return new Date(b.createdAt) - new Date(a.createdAt);
         });
-        setCandidate(sortedate)
+        setJobTagsIds(sortedate)
+    //     let elements=  sortedate.flatMap(element => {
+    //       setCandidate(oldArray => [...oldArray,element] )
+    //  });
+        // setCandidate(sortedate)
       })
   }
+
+      
+
+  // async function filterByJobTitle(key) {
+  //   setNoPageFilter(true)
+  //   setFiltereredjobs(key)
+  //   setActive(key)
+  //   await axios.get(`/StudentProfile/getSkillTags/${key}`)
+  //     .then((res) => {
+  //       let result = (res.data)
+  //       let sortedate = result.sort((a, b) => {
+  //         return new Date(b.createdAt) - new Date(a.createdAt);
+  //       });
+  //       setCandidate(sortedate)
+  //     })
+  // }
   // .........Notice Period sorting....
   function NoticeAscendingOrder() {
     let newjob = [...FilCandidate]
@@ -381,8 +513,8 @@ function SearchCandidate() {
         <>
          
             <div className={styles.JobtitleFilterWrapper}>
-              <buton className={styles.active } onClick={() => 
-                { getAllJobSeekers(); setActive("All") }}>All</buton>
+                   <buton className={Active.length===0?styles.active:styles.JobtitleFilter} onClick={() => 
+                { getAllJobSeekers() }}>All</buton>
               {
                 jobTags.map((tags, i) => {
                   return (
@@ -390,19 +522,34 @@ function SearchCandidate() {
                       tags.value==="EXPERIENCE" || tags.value==="Job Type" || tags.value==="INDUSTRY" || tags.value==="TOOLS/PROTOCOLS" || tags.value==="ROLE" || tags.value==="COMPANY TYPE" } 
                       className={tags.value==="TECHNOLOGIES" || tags.value==="EDUCATION" || tags.value==="COLLEGE TYPE" || tags.value==="NOTICE PERIOD" || tags.value==="SALARY" || 
                       tags.value==="EXPERIENCE" || tags.value==="Job Type" || tags.value==="INDUSTRY" || tags.value==="TOOLS/PROTOCOLS" || tags.value==="COMPANY TYPE" || tags.value==="ROLE"?
-                      styles.TagHeading:  Active === tags.value ? 
-                      styles.active : styles.JobtitleFilter} onClick={() => { filterByJobTitle(tags.value) }}>{tags.value} </button>
+                      styles.TagHeading: 
+                      //  Active === tags.value ? 
+                      Active.findIndex(  (present)=>{
+                        return(
+                          present===tags.value
+                        )
+                            }) >=0?
+                      styles.active : styles.JobtitleFilter} onClick={() => 
+                        { filterByJobTitle(tags.value) }}>{tags.value} </button>
                   
                   )
                 })
               }
               </div>
           <div style={{ display: "flex", justifyContent: "space-between" }}>
-            {nopageFilter ?
+            {/* {nopageFilter ?
               <p style={{ fontWeight: 400, marginLeft: "10px" }}>Displaying Candidates with with following matching tags
                <span style={{ color: "blue" }}>{Filtereredjobs}</span></p>
               :
               <p style={{ fontWeight: 400, marginLeft: "10px" }}>showing {firstIndex + 1} to {lastIndex} latest Candidates</p>
+            } */}
+              
+{nopageFilter ?
+              <p style={{ fontWeight: 400, marginLeft: "10px" }}>Displaying <span style={{ color: "blue" }}>
+                {uniqueList.length} </span>Jobs with following matching tags:
+                <span style={{ color: "blue" }}>{Active.toString()}</span></p>
+              :
+              <p style={{ fontWeight: 400, marginLeft: "10px" }}>showing {firstIndex + 1} to {lastIndex} latest jobs</p>
             }
             <div className={styles.navigationWrapper}>
               <button disabled={currentPage === 1} style={{ display: "inline", margin: "5px" }} className={styles.navigation} onClick={firstPage}>
@@ -478,51 +625,7 @@ function SearchCandidate() {
             </ul>
 
             {
-              !nopageFilter ?
-
-                records.length > 0 ?
-                  records.map((Applieduser, i) => {
-                    return (
-                      <>
-
-                        <ul className={styles.ul} key={i}>
-                          <li className={`${styles.li} ${styles.name} ${styles.onclick}`} onClick={() => { CheckProfile(btoa(Applieduser._id)) }} >
-                            {Applieduser.name ? <a className={styles.namelink} title="Click to check the Contact Details">
-                              {Applieduser.name}</a> : <li className={styles.Nli}>N/A</li>} </li>
-
-                          <li className={`${styles.li} ${styles.NoticePeriod}`}> {Applieduser.NoticePeriod ?
-                            Applieduser.NoticePeriod : <li className={styles.Nli}>N/A</li>} </li>
-                          <li className={`${styles.li} ${styles.age}`}> {Applieduser.age ?
-                            Applieduser.age : <li className={styles.Nli}>N/A</li>} </li>
-                          <li className={`${styles.li} ${styles.Qualification}`}> {Applieduser.Qualification ?
-                            Applieduser.Qualification : <li className={styles.Nli}>N/A</li>} </li>
-                          <li className={`${styles.li} ${styles.Experiance}`}> {Applieduser.Experiance ?
-                            Applieduser.Experiance : <li className={styles.Nli}>N/A</li>} </li>
-                          <li className={`${styles.li} ${styles.Skills}`}> {Applieduser.Skills ?
-                            Applieduser.Skills : <li className={styles.Nli}>N/A</li>} </li>
-                          <li className={`${styles.li} ${styles.currentCTC}`}> {Applieduser.currentCTC ?
-                            Applieduser.currentCTC : <li className={styles.Nli}>N/A</li>} </li>
-                          <li className={`${styles.li} ${styles.ExpectedSalary}`}> {Applieduser.ExpectedSalary ?
-                            Applieduser.ExpectedSalary : <li className={styles.Nli}>N/A</li>} </li>
-                          <li className={`${styles.li} ${styles.LastActive}`}>
-                            {new Date(Applieduser.updatedAt).toLocaleString(
-                              "en-US",
-                              {
-                                month: "short",
-                                day: "2-digit",
-                                year: "numeric",
-                              }
-                            )}
-                          </li>
-
-                        </ul>
-                      </>
-
-                    )
-                  })
-                  :
-                  <p style={{ marginLeft: "45%", color: "red" }}>No Record found</p>
-                :
+              
                 Candidate.length > 0 ?
                   Candidate.map((Applieduser, i) => {
                     return (

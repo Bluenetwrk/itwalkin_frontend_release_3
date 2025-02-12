@@ -454,17 +454,8 @@ function Home() {
         getjobs()
         return false
       }
-      // if(jobs.length>0){
-      //      let removedItems = jobs.filter((tags)=>{
-      //         return( 
-      //           !tags.Tags.includes(key)   
-      //     )
-      //   }) 
-      //   setJobs(removedItems)
-      //   return false
-      // }
+    
       changeTags()
-      // console.log("in change",Active)
     }}
     async function changeTags(key){
       // console.log("in APi",Active)
@@ -478,18 +469,9 @@ function Home() {
         let sortedate = result.sort((a, b) => {
           return new Date(b.createdAt) - new Date(a.createdAt);
         });
-        // setJobTagsIds(oldjobTagsIds => [...oldjobTagsIds, ...sortedate])
         setJobTagsIds(sortedate)
-        // getTagId(sortedate)
-
-        let elements = sortedate.flatMap(element => {
-          // setJobs(oldArray => [...oldArray,element] )
-          // let comingTagid=element._id
-          // if(!presentIds.includes(comingTagid)){
-          //   setJobs(oldArray => [...oldArray,element] )
-          //   setjobTagIds(oldArray => [...oldArray,element] )
-          //   }
-        });
+        // let elements = sortedate.flatMap(element => {
+        // });
       })
   }
 
@@ -809,11 +791,11 @@ function Home() {
                               <input type="checkbox" onClick={() => { checkBoxforDelete(items._id) }} />
 
                               :
-                              items.SourceLink ?
-                                <button title='this will take to Source page' className={styles.Applybutton} onClick={() => {
-                                  applyforOtherJob(items.SourceLink)
-                                }}>Apply</button>
-                                :
+                              // items.SourceLink ?
+                              //   <button title='this will take to Source page' className={styles.Applybutton} onClick={() => {
+                              //     applyforOtherJob(items.SourceLink)
+                              //   }}>Apply</button>
+                              //   :
                                 <button className={styles.Applybutton} onClick={() => { applyforJob(items._id) }}>Apply</button>
 
                           }
@@ -1497,11 +1479,12 @@ function Home() {
                         </div>
                         <div className={styles.ApplyPackage}>
                           <p className={styles.salaryRange}><span>&#8377;</span>{job.salaryRange}L</p>
-                          {job.SourceLink ?
-                            <button className={styles.ApplyMobile} onClick={() => {
-                              applyforOtherJob(job.SourceLink)
-                            }}>Apply</button>
-                            :
+                          {
+                          // job.SourceLink ?
+                          //   <button className={styles.ApplyMobile} onClick={() => {
+                          //     applyforOtherJob(job.SourceLink)
+                          //   }}>Apply</button>
+                          //   :
                             <button className={styles.ApplyMobile} onClick={() => { navigate("/JobSeekerLogin") }}><b>Apply</b></button>
                           }
                         </div>
