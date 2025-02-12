@@ -34,7 +34,7 @@ function Footer() {
 
 
             <div className={Styles.Bottom}>
-<div>
+<div className={Styles.h4Wrapper}>
 
               <h4>   
                  <a onClick={()=>{

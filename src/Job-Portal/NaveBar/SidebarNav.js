@@ -20,7 +20,6 @@ function SidebarNav(props) {
         <p onClick={()=>{navigate("/Blogs"); props.setShowSideNaveProps(false)}} className={`${Styles.textinMobileSodeBar} `}>Blogs </p>
         <p onClick={()=>{navigate("/TermsAndCondition"); props.setShowSideNaveProps(false)}} className={`${Styles.textinMobileSodeBar} `}>Terms & Conditions</p>
         <p onClick={()=>{setShow(prev=>!prev)}} className={`${Styles.textinMobileSodeBar} `}>New Registration
-          {/* <i  className={`${Styles.arrow} ${Styles.up}`} ></i>      */}
        {
         show?
         <i  className={`${Styles.arrow} ${Styles.down}`} ></i>
@@ -31,8 +30,8 @@ function SidebarNav(props) {
        {
         show?
         <div style={{marginLeft:"10px"}}>
-<p onClick={() => { navigate("/EmployeeLogin");props.setShowSideNaveProps(false) }} className={`${Styles.textinMobileSodeBar} `}>Employer Login </p>
-<p onClick={() => { navigate("/JobSeekerLogin");props.setShowSideNaveProps(false) }}className={`${Styles.textinMobileSodeBar} `} >Job Seeker Login</p>
+<p onClick={() => { navigate("/New-Registration");props.setShowSideNaveProps(false);setShow(false); window.scrollTo({top:0}) }} className={`${Styles.textinMobileSodeBar} `}>Employer Login </p>
+<p onClick={() => { navigate("/Jobseeker-New-Registration");props.setShowSideNaveProps(false);setShow(false); window.scrollTo({top:0}) }}className={`${Styles.textinMobileSodeBar} `} >Job Seeker Login</p>
         </div>
         :""
        }
