@@ -150,11 +150,11 @@ function App() {
               <Route path="/MyCareer-Applied-Jobs" element={<CareerAppliedJobs url={axios.defaults.baseURL} />} />
             </Route>
             <Route path="/AllCareerJobs" element={<AllCareerJobs />} />
+            <Route path="/BIAdd@Logg" element={<AdminLogin />} />
             <Route path="/BIAdd@Applied-User-Profile/:jid" element={<AppliedUserForAdminJobs url={axios.defaults.baseURL} />} />
             <Route path="/BIAdd@Applied-CareerUser-Profile/:jid" element={<AppliedUserForCareerJobs url={axios.defaults.baseURL} />} />
             <Route path="/BIAdd@PostedCareerJobs" element={<PostedCareerJobs url={axios.defaults.baseURL} />} />
             <Route path="/BIAdd@AdminPostedJobs" element={<PostedJobsByAdmin url={axios.defaults.baseURL} />} />
-            <Route path="/BIAdd@Logg" element={<AdminLogin />} />
             <Route path="/BIAddAdminAccess" element={<AdminAccess />} />
             <Route path="/BIAdd@Gmail" element={<SearchParams />} />
             <Route path="/BIAdd@GmailEmp" element={<SearchParamsEmp />} />

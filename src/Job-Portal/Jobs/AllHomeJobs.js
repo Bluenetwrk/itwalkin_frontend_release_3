@@ -603,7 +603,8 @@ function Home() {
 
 
           <div className={styles.JobtitleFilterWrapper}>
-            <buton className={Active.length === 0 ? styles.active : styles.JobtitleFilter} onClick={() => { getjobs() }}>All</buton>
+            <buton className={Active.length === 0 ? styles.active : styles.JobtitleFilter}
+             onClick={() => { getjobs() }}>All</buton>
             {
               jobTags.map((tags, i) => {
                 return (
@@ -880,9 +881,11 @@ function Home() {
 
             <div style={{ display: "flex" }}>
 
-
               <div className={styles.MobFilterJobTitleWrapper}>
-                <label><input className={styles.MobJobtitleFilter} type="radio" name="Rfilter" onClick={() => { getjobs() }} />All</label>
+                <label>
+                  <input className={styles.MobJobtitleFilter} type="radio" name="Rfilter" 
+                // checked={Active.length==0}
+                onClick={() => { getjobs() }} />All</label>
                 {
                   jobTags.map((tags, i) => {
                     return (
@@ -1393,29 +1396,31 @@ function Home() {
 
 
           </Carousel>
-          {/* <div style={{ display: "flex", marginLeft: "18px" }}>
-          
-            <div >
-              <label> <input type="radio" name="location" checked={jobLocation === 'AllL'} onClick={() => { getjobsAllLoc(); setjobLocation("AllL") }} />All</label><br></br>
-              <label> <input type="radio" name="location" checked={jobLocation === 'banglore'} onClick={() => { getLocation("banglore"); setjobLocation('banglore') }} />Banglore</label><br></br>
-              <label> <input type="radio" name="location" disabled checked={jobLocation === 'chennai'} onClick={() => { getLocation("chennai"); setjobLocation('chennai') }} />Chennai</label><br></br>
-              <label> <input type="radio" name="location" disabled checked={jobLocation === 'hyderabad'} onClick={() => { getLocation("hyderabad"); setjobLocation('hyderabad') }} />Hyderabad</label><br></br>
-              <label> <input type="radio" name="location" disabled checked={jobLocation === 'mumbai'} onClick={() => { getLocation("mumbai"); setjobLocation('mumbai') }} />Mumbai</label><br></br>
-              <label> <input type="radio" name="location" disabled checked={jobLocation === 'delhi'} onClick={() => { getLocation("delhi"); setjobLocation('delhi') }} />Delhi</label>
+          <div style={{ display: "flex", justifyContent: "space-between", marginBottom:"-20px" }} >
+            {/* {nopageFilter ?
+              <p style={{ fontWeight: 400, marginLeft: "10px" }}>Displaying <span style={{ color: "blue" }}>
+                {uniqueList.length} </span>Jobs with following matching tags:
+                <span style={{ color: "blue" }}>{Active.toString()}</span></p>
+              :
+              <p style={{ fontWeight: 400, marginLeft: "10px" }}>showing {firstIndex + 1} to {lastIndex} latest jobs</p>
+            } */}
+            <div className={styles.navigationWrapper}>
+              <button disabled={currentPage === 1} style={{ display: "inline", margin: "5px" }} className={styles.navigation} onClick={firstPage}>
+                <i class='fas fa-step-backward' ></i>
+              </button>
+              <button disabled={currentPage === 1} style={{ display: "inline", margin: "5px" }} className={styles.navigation} onClick={previous}>
+                <i class='fas fa-caret-square-left'></i>
+              </button>
+              <span>{currentPage}</span>
+              <button disabled={currentPage === npage} style={{ display: "inline", margin: "5px" }} className={styles.navigation} onClick={next}>
+                <i class='fas fa-caret-square-right'></i>
+              </button>
+              <button disabled={currentPage === npage} style={{ display: "inline", margin: "5px" }} className={styles.navigation} onClick={last}>
+                <i class='fas fa-step-forward'></i>
+              </button>
             </div>
-            <br></br>
-
-            <div >
-              <label><input type="radio" name="jobtitle" onClick={() => { getjobTitleAll('all'); setjobTitle("all") }} />All</label>            <br></br>
-              <label><input type="radio" name="jobtitle" onClick={() => { { jobLocation !== "AllL" ? getBothFiltered('java') : JobtitleFilter('java') } }} />Java developer</label> <br></br>
-              <label><input type="radio" name="jobtitle" onClick={() => { { jobLocation !== "AllL" ? getBothFiltered('full') : JobtitleFilter('full') } }} />Full Stack Developer</label> <br></br>
-              <label><input type="radio" name="jobtitle" onClick={() => { { jobLocation !== "AllL" ? getBothFiltered('front') : JobtitleFilter('front') } }} />Frontend Developer</label><br></br>
-              <label><input type="radio" name="jobtitle" onClick={() => { { jobLocation !== "AllL" ? getBothFiltered('back') : JobtitleFilter('back') } }} />Backend developer</label> <br></br>
-              <label><input type="radio" name="jobtitle" onClick={() => { { jobLocation !== "AllL" ? getBothFiltered('python') : JobtitleFilter('python') } }} />Python Developer</label>
-            </div>
-          </div> */}
-
-
+          </div>
+         
           {PageLoader ?
             <Puff height="80" width="80" color="#4fa94d" ariaLabel="bars-loading" wrapperStyle={{ marginLeft: "40%", marginTop: "50px" }} />
             : ""
