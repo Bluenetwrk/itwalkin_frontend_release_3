@@ -298,21 +298,32 @@ function Nav(props) {
                     : ""}
                   {/* .........only for Super Admin */}
                   {SuperAdminLogin ?
+                  <>
                     <div className={Styles.Supfullnavewrapper}>
                       <div className={Styles.linkWrapper} style={{ marginLeft: "1%" }}>
 
                         {/* <NavLink to="/BIAddmin@AllJobs" style={navLinkStyles} className={Styles.linkSuperAdmin}>All Jobs </NavLink> */}
                         <NavLink to="BIAddmin@AllEmployees" className={Styles.linkSuperAdmin} style={navLinkStyles}>All Employers</NavLink>
+                        <NavLink to="BIAddmin@AllEmployeeAdmin" className={Styles.linkSuperAdmin} style={navLinkStyles}>New All Jobseeker</NavLink>
                         <NavLink to="BIAddmin@AllJobSeekers" className={Styles.linkSuperAdmin} style={navLinkStyles}>All Jobseekers</NavLink>
                         <NavLink to="BIAddmin@AdminUpdate" className={Styles.linkSuperAdmin} style={navLinkStyles}> UpdateWebsite</NavLink>
                         <NavLink to="BIAddmin@AllIds" className={Styles.linkSuperAdmin} style={navLinkStyles}> All Email Id's</NavLink>
                         <NavLink to="BIAddAdminAccess" className={Styles.linkSuperAdmin} style={navLinkStyles}> Admin Access</NavLink>
+                      
+                      </div>
+                    </div>
+                    <div className={Styles.Supfullnavewrapper}>
+                      <div className={Styles.linkWrapper} style={{ marginLeft: "1%" }}>
+
+                        {/* <NavLink to="/BIAddmin@AllJobs" style={navLinkStyles} className={Styles.linkSuperAdmin}>All Jobs </NavLink> */}
+                  
                         <NavLink to="BIAddmin@ArchivedUser" className={Styles.linkSuperAdmin} style={navLinkStyles}> Archive Jobseeker</NavLink>
                         <NavLink to="BIAddmin@ArchiveJobs" className={Styles.linkSuperAdmin} style={navLinkStyles}> Archived Jobs</NavLink>
                         <NavLink to="BIAddmin@DeletedJobs" className={Styles.linkSuperAdmin} style={navLinkStyles}> Deleted Jobs</NavLink>
                         <NavLink to="BIAddmin@DeletedBlogs" className={Styles.linkSuperAdmin} style={navLinkStyles}> Deleted Blogs</NavLink>
                       </div>
                     </div>
+                    </>
                     : ""}
 
                 </>

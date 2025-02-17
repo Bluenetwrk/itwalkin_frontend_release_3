@@ -33,7 +33,7 @@ const responsive = {
 // import AutoplaySlider from 'react-awesome-slider'
 // import Slider from "react-slick";
 
-function SearchCandidate() {
+function AllEmployeeAdmin() {
   let params = useParams()
   let navigate = useNavigate()
 
@@ -476,14 +476,14 @@ return(
     <>
       {screenSize.width > 850 ?
         <>
-  <div className={styles.NavConetenetWrapper}>
+  <div className={styles.AdminNavConetenetWrapper}>
 
   <div className={styles.LocationFilterWrapper}>
   {
     Location.map((location, i) => {
       return (
         <>
-        <label className={styles.JobLocationFilter}>
+        <label className={styles.JobLocationFilterAdmin}>
         <input type="radio"  disabled={location == "Chennai" ||
         location == "Hyderabad" || location == "Mumbai" || location == "Delhi"} name="filter" onClick={() => 
             { getLocation(location.toLowerCase()); setActive("Bangalore") }} />{location}</label><br></br>
@@ -581,11 +581,11 @@ return(
             <ul className={styles.ul} >
               <li style={{ backgroundColor: " rgb(40, 4, 99)" }} className={`${styles.li} ${styles.name}`}><b> Jobseeker Name</b>
               </li>
-              <li style={{ backgroundColor: " rgb(40, 4, 99)" }} className={`${styles.li} ${styles.NoticePeriod}`}><b>Notice Period</b>
-                <p style={{ display: "inline", marginLeft: "4%" }}>
+              <li style={{ backgroundColor: " rgb(40, 4, 99)" }} className={`${styles.li} ${styles.NoticePeriod}`}><b>Phone number</b>
+                {/* <p style={{ display: "inline", marginLeft: "4%" }}>
                   <i onClick={NoticeAscendingOrder} className={`${styles.arrow} ${styles.up}`}> </i>
                   <i onClick={NoticeDescendingOrder} className={`${styles.arrow} ${styles.down}`}></i>
-                </p>
+                </p> */}
               </li>
               <li style={{ backgroundColor: " rgb(40, 4, 99)" }} className={`${styles.li} ${styles.age}`}> <b>Age</b>
                 <p style={{ display: "inline", marginLeft: "7%" }}>
@@ -636,8 +636,8 @@ return(
                             {Applieduser.name ? <a className={styles.namelink} title="Click to check the Contact Details">
                               {Applieduser.name}</a> : <li className={styles.Nli}>N/A</li>} </li>
 
-                          <li className={`${styles.li} ${styles.NoticePeriod}`}> {Applieduser.NoticePeriod ?
-                            Applieduser.NoticePeriod : <li className={styles.Nli}>N/A</li>} </li>
+                          <li className={`${styles.li} ${styles.NoticePeriod}`}> {Applieduser.phoneNumber ?
+                            Applieduser.phoneNumber : <li className={styles.Nli}>N/A</li>} </li>
                           <li className={`${styles.li} ${styles.age}`}> {Applieduser.age ?
                             Applieduser.age : <li className={styles.Nli}>N/A</li>} </li>
                           <li className={`${styles.li} ${styles.Qualification}`}> {Applieduser.Qualification ?
@@ -1336,4 +1336,4 @@ return(
   )
 }
 
-export default SearchCandidate
+export default AllEmployeeAdmin

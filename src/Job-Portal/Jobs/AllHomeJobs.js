@@ -129,8 +129,10 @@ function Home() {
       getjobs()
     } else {
       getTagId();
+      console.log("EFREFB")
     }
   }, [currentPage, recordsPerPage])
+// },[] )
 
 
 
@@ -180,8 +182,6 @@ function Home() {
     }
   }
 
-
-
   async function search(e) {
     setNoPageFilter(true)
     let key = e.target.value
@@ -200,6 +200,144 @@ function Home() {
       getjobs()
       setResult(false)
     }
+  }
+
+    
+  function firstPage() {
+    setCurrentPage(1)
+  }
+
+  function previous() {
+    if (currentPage !== 1) {
+      setCurrentPage(currentPage - 1)
+    }
+  }
+  function changeCurrent(id) {
+    setCurrentPage(id)
+  }
+  function next() {
+    if (currentPage !== npage) {
+      setCurrentPage(currentPage + 1)
+    }
+  }
+  function last() {
+    setCurrentPage(npage)
+  }
+
+  function handleRecordchange(e) {
+    sessionStorage.setItem("recordsperpageHome", JSON.stringify(e.target.value));
+    let recordsperpage = JSON.parse(sessionStorage.getItem("recordsperpageHome"))
+    setrecordsPerPage(recordsperpage)
+    setCurrentPage(1)
+  }
+
+  const [count, setCount] = useState(1)
+  const [jobTagsIds, setJobTagsIds] = useState([])
+
+  useEffect(() => {
+    if (jobTagsIds.length > 0) {
+      getTagId();
+    }
+  }, [jobTagsIds])
+
+  let ids = jobTagsIds.map((id) => {
+    return (
+      id._id
+    )
+  })
+  const uniqueList = [...new Set(ids)];
+  async function getTagId() {
+    settotalCount(uniqueList.length)
+    await axios.get(`/jobpost/jobTagsIds/${uniqueList}`, {
+      params: { currentPage, recordsPerPage }
+    })
+      .then((res) => {
+        // console.log("data from uique id's",res.data)
+        let result = res.data
+        let sortedate = result.sort((a, b) => {
+          return new Date(b.createdAt) - new Date(a.createdAt);
+        });
+        setJobs(sortedate)
+        if (count == 2) {
+          setCurrentPage(1)
+        }
+
+      })
+  }
+
+  useEffect(()=>{
+    if(Active.length>0){
+      getSelectedTagIds()
+    }
+  },[Active])
+
+
+  async function filterByJobTitle(key) {
+
+    if (count == 1) {
+      setJobs([])
+    }
+    setCount(prev => prev + 1)
+    const isIndex = Active.findIndex((present) => {
+      return (
+        present === key
+      )
+    })
+    if (isIndex < 0) {
+      // setActive([...Active, key])
+      
+      var updatedActive = [...Active, key]; // Add the new key to the array
+      setActive(updatedActive);
+
+    } else {
+      const IndexId = Active.findIndex((present) => {
+        return (
+          present == key
+        )
+      })
+      Active.splice(IndexId, 1)
+      if (Active.length === 0) {
+        getjobs()
+        return false
+      }
+    
+      getSelectedTagIds()
+    }}
+    async function getSelectedTagIds(key){
+      // console.log("in APi",Active)
+
+    setNoPageFilter(true)
+    setFiltereredjobs(key)
+    await axios.get(`/jobpost/getTagsJobs/${Active}`)
+      .then((res) => {
+        let result = (res.data)
+        console.log("the total id's are", result)
+        let sortedate = result.sort((a, b) => {
+          return new Date(b.createdAt) - new Date(a.createdAt);
+        });
+        setJobTagsIds(sortedate)
+        // let elements = sortedate.flatMap(element => {
+        // });
+      })
+  }
+
+  async function getLocation(jobLocation) {
+    setCount(1)
+    setActive(["Banglore"])
+    setFiltereredjobs(jobLocation)
+    setNoPageFilter(true)
+
+    await axios.get(`/jobpost/getjobLocation/${jobLocation}`)
+      .then((res) => {
+        let result = (res.data)
+        let sortedate = result.sort(function (a, b) {
+          return new Date(b.createdAt) - new Date(a.createdAt);
+        });
+        setJobs(sortedate)
+        // setPageLoader(false)
+      }).catch((err) => {
+        alert("some thing went wrong")
+      })
   }
 
   function sortbyOldjobs() {
@@ -293,205 +431,6 @@ function Home() {
 
     navigate(`/CheckEmpHalfProfile/${empId}`)
 
-  }
-
-
-  // const [jobTitle, setjobTitle] = useState("")
-  const [jobLocation, setjobLocation] = useState("AllL")
-  const [jobTitle, setjobTitle] = useState("")
-  // const [getJobTitle, setgetJobTitle] = useState(true)
-
-  async function getjobTitleAll(all) {
-    await axios.get("/jobpost/getjobs")
-      .then((res) => {
-        let result = (res.data)
-        let sortedate = result.sort((a, b) => {
-          return new Date(b.createdAt) - new Date(a.createdAt);
-        });
-        setJobs(sortedate)
-
-      })
-  }
-  async function getjobsAllLoc(all) {
-    await axios.get("/jobpost/getjobs")
-      .then((res) => {
-        let result = (res.data)
-        let sortedate = result.sort((a, b) => {
-          return new Date(b.createdAt) - new Date(a.createdAt);
-        });
-        setJobs(sortedate)
-      })
-  }
-
-  async function JobtitleFilter(jobTitle) {
-    await axios.get(`/jobpost/getjobTitle/${jobTitle}`)
-      .then((res) => {
-        let result = (res.data)
-        let sortedate = result.sort(function (a, b) {
-          return new Date(b.createdAt) - new Date(a.createdAt);
-        });
-        setJobs(sortedate)
-        // setPageLoader(false)
-      }).catch((err) => {
-        alert("some thing went wrong")
-      })
-  }
-
-
-  async function getBothFiltered(jobTitle) {
-
-    await axios.post(`/jobpost/getBothjobFilter/${jobLocation}`, { jobTitle })
-      .then((res) => {
-        let result = (res.data)
-        let sortedate = result.sort(function (a, b) {
-          return new Date(b.createdAt) - new Date(a.createdAt);
-        });
-        setJobs(sortedate)
-        // setPageLoader(false)
-      }).catch((err) => {
-        alert("some thing went wrong")
-      })
-  }
-
-
-  function firstPage() {
-    setCurrentPage(1)
-  }
-
-  function previous() {
-    if (currentPage !== 1) {
-      setCurrentPage(currentPage - 1)
-    }
-  }
-  function changeCurrent(id) {
-    setCurrentPage(id)
-  }
-  function next() {
-    if (currentPage !== npage) {
-      setCurrentPage(currentPage + 1)
-    }
-  }
-  function last() {
-    setCurrentPage(npage)
-  }
-
-  function handleRecordchange(e) {
-    sessionStorage.setItem("recordsperpageHome", JSON.stringify(e.target.value));
-    let recordsperpage = JSON.parse(sessionStorage.getItem("recordsperpageHome"))
-    setrecordsPerPage(recordsperpage)
-    setCurrentPage(1)
-  }
-
-  const [count, setCount] = useState(1)
-  const [jobTagIds, setjobTagIds] = useState([])
-
-  const [jobTagsIds, setJobTagsIds] = useState([])
-  // console.log("all dublicate ids", jobTagsIds)
-
-  useEffect(() => {
-    if (jobTagsIds.length > 0) {
-      getTagId();
-    }
-  }, [jobTagsIds])
-
-  let ids = jobTagsIds.map((id) => {
-    return (
-      id._id
-    )
-  })
-  const uniqueList = [...new Set(ids)];
-  async function getTagId() {
-    settotalCount(uniqueList.length)
-    await axios.get(`/jobpost/jobTagsIds/${uniqueList}`, {
-      params: { currentPage, recordsPerPage }
-    })
-      .then((res) => {
-        // console.log("data from uique id's",res.data)
-        let result = res.data
-        let sortedate = result.sort((a, b) => {
-          return new Date(b.createdAt) - new Date(a.createdAt);
-        });
-        setJobs(sortedate)
-        if (count == 2) {
-          setCurrentPage(1)
-        }
-
-      })
-  }
-
-  useEffect(()=>{
-    if(Active.length>0){
-      changeTags()
-    }
-  },[Active])
-
-
-  async function filterByJobTitle(key) {
-
-    if (count == 1) {
-      setJobs([])
-    }
-    setCount(prev => prev + 1)
-    const isIndex = Active.findIndex((present) => {
-      return (
-        present === key
-      )
-    })
-    if (isIndex < 0) {
-      // setActive([...Active, key])
-      
-      var updatedActive = [...Active, key]; // Add the new key to the array
-      setActive(updatedActive);
-
-    } else {
-      const IndexId = Active.findIndex((present) => {
-        return (
-          present == key
-        )
-      })
-      Active.splice(IndexId, 1)
-      if (Active.length === 0) {
-        getjobs()
-        return false
-      }
-    
-      changeTags()
-    }}
-    async function changeTags(key){
-      // console.log("in APi",Active)
-
-    setNoPageFilter(true)
-    setFiltereredjobs(key)
-    await axios.get(`/jobpost/getTagsJobs/${Active}`)
-      .then((res) => {
-        let result = (res.data)
-        // console.log("the total id's are", result)
-        let sortedate = result.sort((a, b) => {
-          return new Date(b.createdAt) - new Date(a.createdAt);
-        });
-        setJobTagsIds(sortedate)
-        // let elements = sortedate.flatMap(element => {
-        // });
-      })
-  }
-
-  async function getLocation(jobLocation) {
-    setCount(1)
-    setActive(["Banglore"])
-    setFiltereredjobs(jobLocation)
-    setNoPageFilter(true)
-
-    await axios.get(`/jobpost/getjobLocation/${jobLocation}`)
-      .then((res) => {
-        let result = (res.data)
-        let sortedate = result.sort(function (a, b) {
-          return new Date(b.createdAt) - new Date(a.createdAt);
-        });
-        setJobs(sortedate)
-        // setPageLoader(false)
-      }).catch((err) => {
-        alert("some thing went wrong")
-      })
   }
 
 
@@ -735,7 +674,8 @@ function Home() {
                               */}
                               {items.companyName}</li>
                             :
-                            <a style={{ cursor: "pointer", textDecoration: "underline" }} className={`${styles.li} ${styles.CompanyName}`} href={items.SourceLink} target="_blank" >
+                            <a style={{ cursor: "pointer", textDecoration: "underline" }} className={`${styles.li} ${styles.CompanyName}`}
+                            onClick={()=>{applyforJob(items._id)}} >
                               {/* {items.Logo ?
                               < img style={{ width: "38px", height: "38px" }} src={items.Logo} />
                               : ""}<br></br> */}
@@ -864,7 +804,10 @@ function Home() {
               })
             }
           </div>
-
+          <label>
+                  <input  style={{marginLeft:"9px"}} type="radio" name="Rfilter" 
+                checked={Active.length===0}
+                onClick={() => { getjobs() }} />All</label>
           <Carousel
             swipeable={true}
             draggable={false}
@@ -882,10 +825,7 @@ function Home() {
             <div style={{ display: "flex" }}>
 
               <div className={styles.MobFilterJobTitleWrapper}>
-                <label>
-                  <input className={styles.MobJobtitleFilter} type="radio" name="Rfilter" 
-                // checked={Active.length==0}
-                onClick={() => { getjobs() }} />All</label>
+             
                 {
                   jobTags.map((tags, i) => {
                     return (
@@ -1397,13 +1337,7 @@ function Home() {
 
           </Carousel>
           <div style={{ display: "flex", justifyContent: "space-between", marginBottom:"-20px" }} >
-            {/* {nopageFilter ?
-              <p style={{ fontWeight: 400, marginLeft: "10px" }}>Displaying <span style={{ color: "blue" }}>
-                {uniqueList.length} </span>Jobs with following matching tags:
-                <span style={{ color: "blue" }}>{Active.toString()}</span></p>
-              :
-              <p style={{ fontWeight: 400, marginLeft: "10px" }}>showing {firstIndex + 1} to {lastIndex} latest jobs</p>
-            } */}
+           
             <div className={styles.navigationWrapper}>
               <button disabled={currentPage === 1} style={{ display: "inline", margin: "5px" }} className={styles.navigation} onClick={firstPage}>
                 <i class='fas fa-step-backward' ></i>
@@ -1461,7 +1395,8 @@ function Home() {
                             <> <span className={styles.companyName} onClick={() => { checkEmpHalf(btoa(job.empId)) }} >{job.companyName} </span><br></br></>
                             :
                             //  <> <span className={styles.companyName} onClick={()=>{checkEmpHalf(job.empId)}} >{job.companyName} </span><br></br></>
-                            <> <a className={`${styles.companyName}`} href={job.SourceLink} target="_blank">{job.Source}</a><br></br> </>
+                            <> <a className={`${styles.companyName}`}  onClick={()=>{applyforJob()}}>
+                              {job.Source}</a><br></br> </>
                           }
                         </div>
                         <  img className={styles.jobLocationImage} src={location} />
@@ -1517,7 +1452,25 @@ function Home() {
                 : <p style={{ marginLeft: "35%", color: "red" }}>No Record Found</p>
 
             }
-
+ <div style={{ display: "flex", justifyContent: "space-between", marginBottom:"-20px" }} >
+           
+           <div className={styles.navigationWrapper}>
+             <button disabled={currentPage === 1} style={{ display: "inline", margin: "5px" }} className={styles.navigation} onClick={firstPage}>
+               <i class='fas fa-step-backward' ></i>
+             </button>
+             <button disabled={currentPage === 1} style={{ display: "inline", margin: "5px" }} className={styles.navigation} onClick={previous}>
+               <i class='fas fa-caret-square-left'></i>
+             </button>
+             <span>{currentPage}</span>
+             <button disabled={currentPage === npage} style={{ display: "inline", margin: "5px" }} className={styles.navigation} onClick={next}>
+               <i class='fas fa-caret-square-right'></i>
+             </button>
+             <button disabled={currentPage === npage} style={{ display: "inline", margin: "5px" }} className={styles.navigation} onClick={last}>
+               <i class='fas fa-step-forward'></i>
+             </button>
+           </div>
+         </div>
+        
           </div>
           <div style={{ marginTop: "20px", }}>
             <Footer />

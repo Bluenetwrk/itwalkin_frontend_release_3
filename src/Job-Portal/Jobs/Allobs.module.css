@@ -756,8 +756,8 @@ table {
     margin-top: -10px;
 }
 .jobTitle{
-    font-weight: 500;
-    font-size:medium;
+    /* font-weight: 500; */
+    /* font-size:medium; */
     display: inline;
     text-decoration: underline;
     width:90%;

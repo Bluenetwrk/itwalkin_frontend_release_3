@@ -42,7 +42,7 @@
 }
 .NavConetenetWrapper{
     display: flex;
-    margin-top: -47.5px;
+    /* margin-top: -47.5px; */
     align-items: center;
     position: sticky;
     top:10px;
@@ -50,6 +50,18 @@
     width:41%;
     margin-left: 28%;
     /* background-color: red; */
+}
+.AdminNavConetenetWrapper{
+    display: flex;
+    /* margin-top: -47.5px; */
+    align-items: center;
+    position: sticky;
+    top:10px;
+    z-index: 100;
+    width:41%;
+    margin-left: 28%;
+    /* background-color: red; */
+    border: 1px black solid;
 }
 .LocationFilterWrapper{
     z-index: 100;
@@ -66,6 +78,15 @@
     border: none;
     border-radius: 3px;
     color: white
+}
+.JobLocationFilterAdmin{
+    /* margin-left: 40px; */
+    cursor: pointer;
+    font-weight: 600;
+    align-content: center;
+    border: none;
+    border-radius: 3px;
+    
 }
 
 .searchBothForNavWrapper{
@@ -511,7 +532,7 @@ text-wrap: nowrap;
 }
 .span{
     font-weight: 500;
-    font-size: small;
+    font-size:smaller;
 
 }
 .Down{

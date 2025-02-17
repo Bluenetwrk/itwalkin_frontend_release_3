@@ -50,6 +50,8 @@ import AppliedUserForAdminJobs from "./Job-Portal/AppliedUserProfile/AdminJobsAp
 import AppliedUserForCareerJobs from "./Job-Portal/AppliedUserProfile/AdminCareerJobsAppliedUser ";
 import CheckStudentProfiel from "./Job-Portal/Profile/CheckStudentProfiel";
 import CheckEmpHalfProfile from "./Job-Portal/Profile/CheckEmpHalfProf";
+
+import AllJobSeekerAdmin from "./Job-Portal/AppliedUserProfile/AllJobSeekerAdmin";
 // admin
 import AdminLogin from "./Job-Portal/Login/AdminLogin"
 import AdminAccess from "./Job-Portal/Admin/AdminAccess"
@@ -167,6 +169,9 @@ function App() {
             <Route path="/BIAddmin@DeletedBlogs" element={<DeletedBlogs />} />
             <Route path="/BIAddmin@AllJobSeekers" element={<AllJobSeekers />} />
             <Route path="/BIAddmin@AllEmployees" element={<AllEmployees />} />
+
+
+            <Route path="/BIAddmin@AllEmployeeAdmin" element={<AllJobSeekerAdmin />} />
             <Route path="/BIAddmin@CheckEmpProfile/:CP" element={<CheckEmpProfileForAdmin />} />
             <Route path="/BIAddmin@CheckStudentProfile/:CP" element={<CheckStudentProfileForAdmin />} />
             <Route path="/BIAddmin@CheckStudentArchived/:CP" element={<CheckArchivedJobSeeker />} />

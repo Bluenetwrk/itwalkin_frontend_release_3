@@ -361,6 +361,7 @@ async function RecentLogin(e){
     {screenSize.width>850?
 
     <div style={{marginLeft:"7px"}} className={styles.Uiwarpper}>
+      {/* <div> */}
               <ul className={styles.ul}>
                 <li className={`${styles.li} ${styles.name}`}><b>Name</b></li>
                 <li className={`${styles.li} ${styles.phoneNumber}`}><b>Phone Number</b></li>
@@ -368,10 +369,7 @@ async function RecentLogin(e){
 
                 <li className={`${styles.li} ${styles.Aadhar}`}><b>Aadhar</b></li>
                 <li className={`${styles.li} ${styles.Pdate}`}><b>Reg. Date</b></li>
-                <li className={`${styles.li} ${styles.Pdate}`}><b>Last Log</b>
-                {/* <span style={{display:"block"}}><span onClick={TopToBottonOnline} style={{ fontSize:"20px", cursor:"pointer", marginRight:"20px"}}>&darr;</span>
-                                                            <span style={{ fontSize:"20px", cursor:"pointer"}} onClick={BottonToTopOnline}>&uarr;</span></span> */}
-                                                            </li>
+                <li className={`${styles.li} ${styles.Pdate}`}><b>Last Log</b></li>
                 <li className={`${styles.li} ${styles.Qualification}`}><b>Qualif.</b></li>
                 <li className={`${styles.li} ${styles.Skills}`}><b>Skills </b></li>
                 <li className={`${styles.li} ${styles.Approval}`}><b>Approval </b></li>
@@ -379,6 +377,64 @@ async function RecentLogin(e){
 
 
               </ul>
+              <table  >
+                <thead >
+                <tr >
+                  <th >Name</th>
+                  <th>Phone Number</th>
+                  <th>Age</th>
+                  <th>Aadhar</th>
+                  <th>Reg. Date</th>
+                  <th>Last Log</th>
+                  <th>Qualif.</th>
+                  <th>Skills</th>
+                  <th>Approval</th>
+                  <th style={{textAlign:"center"}}>Message</th>
+                </tr>
+                </thead>
+                <tbody>
+                  {
+                    jobSeekers.length > 0 ?
+
+                    jobSeekers.map((items, i) => {
+                                 return (
+                  
+                  <tr>
+                    <td onClick={()=>{navigate(`/BIAddmin@CheckStudentProfile/${items._id}`)}}><Link style={{color:"blue"}}>
+                    {items.online ? <span className={styles.dot}></span> :""} {items.name}</Link></td>
+                    <td>{items.phoneNumber}</td>
+                    <td>{items.age}</td>
+                    <td>{items.Aadhar}</td>
+                    <td> {new Date(items.createdAt).toLocaleString(
+                          "en-US",
+                          {
+                            month: "short",
+                            day: "2-digit",
+                            year: "numeric",
+                          }
+                        )}</td>
+                    <td>{      items.LogedInTime?    new Date(items.LogedInTime).toLocaleString('en-US', {
+        year: 'numeric',
+        month: 'short',
+        day: '2-digit',
+        hour: '2-digit',
+    minute: '2-digit',
+    second: '2-digit'
+    })
+    :"Only Reg. Yet"
+  }</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td  style={{textAlign:"center"}}>{items.message}</td>
+                  </tr>
+                    )
+                  })
+            : <p style={{ color: "red", marginLeft: "42%" }}>No Record Found</p>
+
+                }
+                </tbody>
+              </table>
               {
      jobSeekers.length > 0 ?
 
@@ -443,10 +499,7 @@ async function RecentLogin(e){
                   </li>
                   
                   <li className={`${styles.li} ${styles.Message}`} >{items.message}
-                  {/* <textarea style={{height:"50px", width:"80%", marginLeft:"-11px"}} value ={currentBox == items._id ?message:""} onChange={(e)=>{
-                     handleChange(e, items._id )}}> </textarea><br></br>
-                     <button onClick={()=>{sendMessage(items._id)}}>Send</button> */}
-
+              
                   </li>
 
                      
