@@ -697,6 +697,60 @@ return(
   
     }  
       }
+
+      const [checkBoxValue, setCheckBoxValue] = useState([])
+  const [check, setCheck] = useState(true)
+
+  async function ArchiveCheckBoxArray() {
+    let userid = atob(JSON.parse(localStorage.getItem("IdLog")))
+    const headers = { authorization: userid + " " + atob(JSON.parse(localStorage.getItem("AdMLog"))) };
+    await axios.delete(`/jobpost/ArchiveCheckBoxArray/${checkBoxValue}`, { headers })
+      .then((res) => {
+        if (res.data === "success") {
+          getAllJobSeekers()
+          alert("Archived succesfully")
+          window.location.reload()
+        }
+      }).catch((err) => {
+        alert("some thing went wrong")
+      })
+  }
+  async function deleteCheckedJobs() {
+    let userid = atob(JSON.parse(localStorage.getItem("IdLog")))
+    const headers = { authorization: userid + " " + atob(JSON.parse(localStorage.getItem("AdMLog"))) };
+    await axios.delete(`/jobpost/deleteCheckBoxArray/${checkBoxValue}`, { headers })
+      .then((res) => {
+        if (res.data === "success") {
+          getAllJobSeekers()
+          alert("deleted succesfully")
+          window.location.reload()
+        }
+      }).catch((err) => {
+        alert("some thing went wrong")
+      })
+  }
+
+
+  function checkBoxforDelete(id) {
+
+    const checkedid = checkBoxValue.findIndex((checkedid) => {
+      return (
+        checkedid === id
+      )
+    })
+    if (checkedid < 0) {
+      setCheckBoxValue([...checkBoxValue, id])
+    } else {
+      // checkBoxValue.splice(checkedid, 1)
+      let removeId = checkBoxValue.filter((foundId) => {
+        return (
+          foundId !== id
+        )
+      })
+      setCheckBoxValue(removeId)
+    }
+  }
+
     
 
   return (
@@ -732,6 +786,21 @@ return(
             <h4 style={{ marginLeft: "40%", marginTop: "20px" }}> {Candidate.length} matching Result Found  </h4>
             : ""
           }
+        </>
+        : ""
+      }
+
+{checkBoxValue.length > 0 ?
+        <>
+          <button style={{
+            backgroundColor: "blue", border: "none", color: "white",
+            padding: "5px 10px", fontWeight: "bold", cursor: "pointer"
+          }} onClick={() => { ArchiveCheckBoxArray() }}>Archive</button>
+
+          <button style={{
+            backgroundColor: "red", border: "none", color: "white", marginLeft: "5px",
+            padding: "5px 10px", fontWeight: "bold", cursor: "pointer"
+          }} onClick={() => { deleteCheckedJobs() }}>Delete</button>
         </>
         : ""
       }
@@ -855,7 +924,8 @@ return(
               <li style={{ backgroundColor: " rgb(40, 4, 99)" }} className={`${styles.li} ${styles.LastActive}`}><b>Approval</b>
               
               </li>
-              <li style={{ backgroundColor: " rgb(40, 4, 99)", width:"37%" }} className={`${styles.li}`}>Message</li>
+              <li style={{ backgroundColor: " rgb(40, 4, 99)", width:"37%" }} className={`${styles.li}`}><b>Message</b></li>
+              <li style={{ backgroundColor: " rgb(40, 4, 99)", width:"50px" }} className={`${styles.li}`}><b>Action</b></li>
 
 
             </ul>
@@ -924,7 +994,12 @@ return(
                                       }
               </li>
       <li style={{ width:"37%" }} className={`${styles.li}`}>{Applieduser.message}</li>
-                       
+      <li style={{width:"50px" }} className={`${styles.li}`}>
+      <input type="checkbox" onClick={() => { checkBoxforDelete(Applieduser._id) }}/>
+
+
+      </li>
+
                         </ul>
                       </>
 

@@ -60,7 +60,7 @@
     z-index: 1000;
     width:41%;
     margin-left: 28%;
-    /* background-color: white; */
+    background-color: white;
     border: 1px black solid;
     border-radius: 5px;
 }
