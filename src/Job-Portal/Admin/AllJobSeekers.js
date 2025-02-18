@@ -377,64 +377,7 @@ async function RecentLogin(e){
 
 
               </ul>
-              <table  >
-                <thead >
-                <tr >
-                  <th >Name</th>
-                  <th>Phone Number</th>
-                  <th>Age</th>
-                  <th>Aadhar</th>
-                  <th>Reg. Date</th>
-                  <th>Last Log</th>
-                  <th>Qualif.</th>
-                  <th>Skills</th>
-                  <th>Approval</th>
-                  <th style={{textAlign:"center"}}>Message</th>
-                </tr>
-                </thead>
-                <tbody>
-                  {
-                    jobSeekers.length > 0 ?
-
-                    jobSeekers.map((items, i) => {
-                                 return (
-                  
-                  <tr>
-                    <td onClick={()=>{navigate(`/BIAddmin@CheckStudentProfile/${items._id}`)}}><Link style={{color:"blue"}}>
-                    {items.online ? <span className={styles.dot}></span> :""} {items.name}</Link></td>
-                    <td>{items.phoneNumber}</td>
-                    <td>{items.age}</td>
-                    <td>{items.Aadhar}</td>
-                    <td> {new Date(items.createdAt).toLocaleString(
-                          "en-US",
-                          {
-                            month: "short",
-                            day: "2-digit",
-                            year: "numeric",
-                          }
-                        )}</td>
-                    <td>{      items.LogedInTime?    new Date(items.LogedInTime).toLocaleString('en-US', {
-        year: 'numeric',
-        month: 'short',
-        day: '2-digit',
-        hour: '2-digit',
-    minute: '2-digit',
-    second: '2-digit'
-    })
-    :"Only Reg. Yet"
-  }</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td  style={{textAlign:"center"}}>{items.message}</td>
-                  </tr>
-                    )
-                  })
-            : <p style={{ color: "red", marginLeft: "42%" }}>No Record Found</p>
-
-                }
-                </tbody>
-              </table>
+              
               {
      jobSeekers.length > 0 ?
 

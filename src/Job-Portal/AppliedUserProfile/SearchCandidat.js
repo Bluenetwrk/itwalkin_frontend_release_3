@@ -486,7 +486,7 @@ return(
         <label className={styles.JobLocationFilter}>
         <input type="radio"  disabled={location == "Chennai" ||
         location == "Hyderabad" || location == "Mumbai" || location == "Delhi"} name="filter" onClick={() => 
-            { getLocation(location.toLowerCase()); setActive("Bangalore") }} />{location}</label><br></br>
+            {getAllJobSeekers() }} />{location}</label><br></br>
             </>
       )
     })

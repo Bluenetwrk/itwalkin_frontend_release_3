@@ -9,6 +9,7 @@ import profileDp from "../img/user_3177440.png"
 import Arrowimage from '../img/icons8-arrow-left-48.png'
 import Footer from '../Footer/Footer';
 import {jobTags} from '../Tags'
+import Swal from "sweetalert2";
 
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
@@ -63,7 +64,12 @@ function AllEmployeeAdmin() {
 
   // const number = [...Array(npage + 1).keys()].slice(1)
 
-
+  useEffect(()=>{
+    let adminLogin= localStorage.getItem("SupAdMLog")
+        if(!adminLogin){
+            navigate("/")
+        }
+    },[])
 
   async function gettotalcount() {
     const headers = { authorization: 'BlueItImpulseWalkinIn' };
@@ -155,14 +161,21 @@ function AllEmployeeAdmin() {
     window.open(`/Check-Profile/${StudID}`, '_blank')
   }
 
-
+  useEffect(()=>{
+    let adminLogin= localStorage.getItem("SupAdMLog")
+        if(!adminLogin){
+            navigate("/")
+        }
+    },[])
 
   async function getLocation(jobLocation) {
     setFiltereredjobs(jobLocation)
     setNoPageFilter(true)
+    console.log(jobLocation)
     await axios.get(`/StudentProfile/getStuLocation/${jobLocation}`)
       .then((res) => {
         let result = (res.data)
+        console.log(result)
         let sortedate = result.sort(function (a, b) {
           return new Date(b.createdAt) - new Date(a.createdAt);
         });
@@ -382,7 +395,7 @@ return(
       sensitivity: 'base'
     });
     const sorted = newjob.sort((a, b) => {
-      return collator.compare(a.Experiance, b.Experiance)
+      return collator.compare(a.createdAt, b.createdAt)
     })
     setCandidate(sorted)
   }
@@ -393,7 +406,7 @@ return(
       sensitivity: 'base'
     });
     const sorted = newjob.sort((a, b) => {
-      return collator.compare(b.Experiance, a.Experiance)
+      return collator.compare(b.createdAt, a.createdAt)
     })
     setCandidate(sorted)
   }
@@ -471,6 +484,220 @@ return(
     setCandidate(sorted)
   }
 
+  function  Hold(Empid , status){
+    let userid = atob(JSON.parse(localStorage.getItem("IdLog")))
+    const headers = { authorization: userid +" "+ atob(JSON.parse(localStorage.getItem("AdMLog"))) };
+    const isOnhold=status
+    Swal.fire({
+      title: "Are You sure?",
+    // position:"top",
+    width:"260",
+
+    customClass:{
+      popup:"alertIcon"
+    },
+      icon:"question",
+      showCancelButton:true
+    }).then( async (res)=>{
+      if(res.isConfirmed){
+        await axios.put(`/StudentProfile/isOnhold/${Empid}`,{isOnhold}, {headers})
+        .then((res)=>{
+    getAllJobSeekers()
+
+
+
+        }).catch((err)=>{
+          alert("backend error occured")
+        })
+      }
+    })
+  }    
+
+  function  unHold(Empid , status){
+    const isOnhold=status
+    let userid = atob(JSON.parse(localStorage.getItem("IdLog")))
+    const headers = { authorization: userid +" "+ atob(JSON.parse(localStorage.getItem("AdMLog"))) };
+    Swal.fire({
+      title: "Are You sure?",
+      // icon:"question",
+    // position:"top",
+    width:"260",
+    customClass:{
+      popup:"alertIcon"
+    },
+      showCancelButton:true
+    }).then( async (res)=>{
+      if(res.isConfirmed){
+        await axios.put(`/StudentProfile/isOnhold/${Empid}`,{isOnhold}, {headers})
+        .then((res)=>{
+          getAllJobSeekers()
+
+        }).catch((err)=>{
+          alert("backend error occured")
+        })
+      }
+    })
+  }
+  
+  function Reject(Empid , status){
+    let userid = atob(JSON.parse(localStorage.getItem("IdLog")))
+    const headers = { authorization: userid +" "+ atob(JSON.parse(localStorage.getItem("AdMLog"))) };
+    const isReject=status
+    Swal.fire({
+      title: "Are You sure?",
+    // position:"top",
+    width:"260",
+
+    customClass:{
+      popup:"alertIcon"
+    },
+      icon:"question",
+      showCancelButton:true
+    }).then( async (res)=>{
+      if(res.isConfirmed){
+        await axios.put(`/StudentProfile/isReject/${Empid}`,{isReject}, {headers})
+        .then((res)=>{
+
+    getAllJobSeekers()
+
+        }).catch((err)=>{
+          alert("backend error occured")
+        })
+      }
+    })
+  }    
+
+  function unReject(Empid , status){
+    const isReject=status
+    let userid = atob(JSON.parse(localStorage.getItem("IdLog")))
+    const headers = { authorization: userid +" "+ atob(JSON.parse(localStorage.getItem("AdMLog"))) };
+
+    Swal.fire({
+      title: "Are You sure?",
+      // icon:"question",
+    // position:"top",
+    width:"260",
+
+    customClass:{
+      popup:"alertIcon"
+    },
+      showCancelButton:true
+    }).then( async (res)=>{
+      if(res.isConfirmed){
+        await axios.put(`/StudentProfile/isReject/${Empid}`,{isReject}, {headers})
+        .then((res)=>{
+          getAllJobSeekers()
+
+        }).catch((err)=>{
+          alert("backend error occured")
+        })
+      }
+    })
+  }
+  function Approve(Empid , status){
+    let userid = atob(JSON.parse(localStorage.getItem("IdLog")))
+    const headers = { authorization: userid +" "+ atob(JSON.parse(localStorage.getItem("AdMLog"))) };
+    const isApproved = status
+    Swal.fire({
+      title: "Are You sure?",
+      // icon:"question"
+    width:"260",
+
+      customClass:{
+        popup:"alertIcon"
+      },
+      showCancelButton:true
+    }).then( async (res)=>{
+      if(res.isConfirmed){
+        await axios.put(`/StudentProfile/setApproval/${Empid}`,{isApproved}, {headers})
+        .then((res)=>{
+    getAllJobSeekers()   
+
+        }).catch((err)=>{
+          alert("backend error occured")
+        })
+      }
+    })
+
+  }
+
+  function DisApprove(Empid , status){
+    let userid = atob(JSON.parse(localStorage.getItem("IdLog")))
+    const headers = { authorization: userid +" "+ atob(JSON.parse(localStorage.getItem("AdMLog"))) };
+    const isApproved = status
+    Swal.fire({
+      title: "Are You sure?",
+      // icon:"question",
+
+    width:"260",
+
+      // position:"top",
+      customClass:{
+        popup:"alertIcon"
+      },
+      showCancelButton:true
+    }).then( async (res)=>{
+      if(res.isConfirmed){
+        await axios.put(`/StudentProfile/setApproval/${Empid}`,{isApproved}, {headers})
+        .then((res)=>{
+    getAllJobSeekers()
+
+        }).catch((err)=>{
+          alert("backend error occured")
+        })
+      }
+    })
+  }
+
+  async function Approvedjobseekers() {
+    let userid = atob(JSON.parse(localStorage.getItem("IdLog")))
+    const headers = { authorization: userid +" "+ atob(JSON.parse(localStorage.getItem("AdMLog"))) };
+    await axios.get("/StudentProfile/getApprovedStu", {headers})
+      .then((res) => {
+        let result = (res.data)
+
+        setCandidate(result)
+      })
+      .catch((err) => {
+        alert("server issue occured")
+      })
+  }
+  
+  
+  async function NotApprovedjobseekers() {
+    let userid = atob(JSON.parse(localStorage.getItem("IdLog")))
+    const headers = { authorization: userid +" "+ atob(JSON.parse(localStorage.getItem("AdMLog"))) };
+    await axios.get("/StudentProfile/getNotApprovedStu", {headers})
+      .then((res) => {
+        let result = (res.data)
+        // console.log(result)        
+        setCandidate(result)
+      })
+      .catch((err) => {
+        alert("server issue occured")
+      })
+  }
+  async function RecentLogin(e){
+    let userid = atob(JSON.parse(localStorage.getItem("IdLog")))
+    const headers = { authorization: userid +" "+ atob(JSON.parse(localStorage.getItem("AdMLog"))) };
+    if(e.target.checked){
+    await axios.get("/StudentProfile/RecentLogin", {headers})
+    .then((res) => {
+      let result = (res.data)
+      let sortresult = result.sort((a,b)=>{
+        return new Date(b.LogedInTime) - new Date(a.LogedInTime);      
+      })
+      setCandidate(sortresult)
+    })
+    .catch((err) => {
+      alert("server issue occured")
+    })
+  }else{
+      getAllJobSeekers()
+  
+    }  
+      }
+    
 
   return (
     <>
@@ -486,7 +713,7 @@ return(
         <label className={styles.JobLocationFilterAdmin}>
         <input type="radio"  disabled={location == "Chennai" ||
         location == "Hyderabad" || location == "Mumbai" || location == "Delhi"} name="filter" onClick={() => 
-            { getLocation(location.toLowerCase()); setActive("Bangalore") }} />{location}</label><br></br>
+            { getAllJobSeekers() }} />{location}</label><br></br>
             </>
       )
     })
@@ -511,6 +738,12 @@ return(
 
       {screenSize.width > 850 ?
         <>
+        <div style={{marginLeft:"10px", marginBottom:"10px"}}>
+      {/* <label><input id="checkApproved" name="checkApproved" type="radio" onChange={(e)=>{getAllJobSeekers(e)}} /><span>All Joseeker</span></label><br></br> */}
+      <label><input id="checkApproved" name="checkApproved" type="radio" onChange={(e)=>{Approvedjobseekers(e)}} /><span>Approved Joseeker</span></label><br></br>
+      <label><input id="checkApproved" name="checkApproved" type="radio" onChange={(e)=>{NotApprovedjobseekers(e)}} /><span>Joseeker who are yet to be approved</span></label><br></br>
+      <label><input id="checkApproved" name="checkApproved" type="radio" onChange={RecentLogin} /><span>Recent Login</span></label><br></br>
+      </div>
          
             <div className={styles.JobtitleFilterWrapper}>
                    <buton className={Active.length===0?styles.active:styles.JobtitleFilter} onClick={() => 
@@ -593,33 +826,36 @@ return(
                   <i onClick={AgeDescendingOrder} className={`${styles.arrow} ${styles.down}`}></i>
                 </p>
               </li>
-              <li style={{ backgroundColor: " rgb(40, 4, 99)" }} className={`${styles.li} ${styles.Qualification}`}>  <b>Qualif</b>
+              <li style={{ backgroundColor: " rgb(40, 4, 99)" }} className={`${styles.li} ${styles.NoticePeriod}`}>  <b>Aadhar</b>
               </li>
-              <li style={{ backgroundColor: " rgb(40, 4, 99)" }} className={`${styles.li} ${styles.Experiance}`}><b>Experience</b>
+              <li style={{ backgroundColor: " rgb(40, 4, 99)" }} className={`${styles.li} ${styles.Experiance}`}><b>Reg.date</b>
                 <p style={{ display: "inline", marginLeft: "1%" }}>
                   <i onClick={ExpAscendingOrder} className={`${styles.arrow} ${styles.up}`}> </i>
                   <i onClick={ExpDescendingOrder} className={`${styles.arrow} ${styles.down}`}></i>
                 </p>
               </li>
-              <li style={{ backgroundColor: " rgb(40, 4, 99)" }} className={`${styles.li} ${styles.Skills}`}> <b>Skills</b> </li>
-              <li style={{ backgroundColor: " rgb(40, 4, 99)" }} className={`${styles.li} ${styles.currentCTC}`}> <b>Curr. CTC</b>
+              {/* <li style={{ backgroundColor: " rgb(40, 4, 99)" }} className={`${styles.li} ${styles.currentCTC}`}> <b>Last Log.</b>
                 <p style={{ display: "inline", marginLeft: "2%" }}>
                   <i onClick={CurrCTCAscendingOrder} className={`${styles.arrow} ${styles.up}`}> </i>
                   <i onClick={CurrCTCDescendingOrder} className={`${styles.arrow} ${styles.down}`}></i>
                 </p>
-              </li>
-              <li style={{ backgroundColor: " rgb(40, 4, 99)" }} className={`${styles.li} ${styles.ExpectedSalary}`}><b>Exp. CTC</b>
+              </li> */}
+              {/* <li style={{ backgroundColor: " rgb(40, 4, 99)" }} className={`${styles.li} ${styles.ExpectedSalary}`}><b>Exp. CTC</b>
                 <p style={{ display: "inline", marginLeft: "2%" }}>
                   <i onClick={ExpCTCAscendingOrder} className={`${styles.arrow} ${styles.up}`}> </i>
                   <i onClick={ExpCTCDescendingOrder} className={`${styles.arrow} ${styles.down}`}></i>
                 </p>
-              </li>
+              </li> */}
               <li style={{ backgroundColor: " rgb(40, 4, 99)" }} className={`${styles.li} ${styles.LastActive}`}><b>Last Active</b>
                 <p style={{ display: "inline", marginLeft: "1%" }}>
                   <i onClick={LastActAscendingOrder} className={`${styles.arrow} ${styles.up}`}> </i>
                   <i onClick={LastActDescendingOrder} className={`${styles.arrow} ${styles.down}`}></i>
                 </p>
               </li>
+              <li style={{ backgroundColor: " rgb(40, 4, 99)" }} className={`${styles.li} ${styles.LastActive}`}><b>Approval</b>
+              
+              </li>
+              <li style={{ backgroundColor: " rgb(40, 4, 99)", width:"37%" }} className={`${styles.li}`}>Message</li>
 
 
             </ul>
@@ -632,7 +868,10 @@ return(
                       <>
 
                         <ul className={styles.ul} key={i}>
-                          <li className={`${styles.li} ${styles.name} ${styles.onclick}`} onClick={() => { CheckProfile(btoa(Applieduser._id)) }} >
+                          <li className={`${styles.li} ${styles.name} ${styles.onclick}`} 
+                           onClick={()=>{navigate(`/BIAddmin@CheckStudentProfile/${Applieduser._id}`)}}>
+                               {Applieduser.online ? <span className={styles.dot}></span> :""}
+                                
                             {Applieduser.name ? <a className={styles.namelink} title="Click to check the Contact Details">
                               {Applieduser.name}</a> : <li className={styles.Nli}>N/A</li>} </li>
 
@@ -640,28 +879,52 @@ return(
                             Applieduser.phoneNumber : <li className={styles.Nli}>N/A</li>} </li>
                           <li className={`${styles.li} ${styles.age}`}> {Applieduser.age ?
                             Applieduser.age : <li className={styles.Nli}>N/A</li>} </li>
-                          <li className={`${styles.li} ${styles.Qualification}`}> {Applieduser.Qualification ?
-                            Applieduser.Qualification : <li className={styles.Nli}>N/A</li>} </li>
-                          <li className={`${styles.li} ${styles.Experiance}`}> {Applieduser.Experiance ?
-                            Applieduser.Experiance : <li className={styles.Nli}>N/A</li>} </li>
-                          <li className={`${styles.li} ${styles.Skills}`}> {Applieduser.Skills ?
-                            Applieduser.Skills : <li className={styles.Nli}>N/A</li>} </li>
-                          <li className={`${styles.li} ${styles.currentCTC}`}> {Applieduser.currentCTC ?
-                            Applieduser.currentCTC : <li className={styles.Nli}>N/A</li>} </li>
-                          <li className={`${styles.li} ${styles.ExpectedSalary}`}> {Applieduser.ExpectedSalary ?
-                            Applieduser.ExpectedSalary : <li className={styles.Nli}>N/A</li>} </li>
-
-                          <li className={`${styles.li} ${styles.LastActive}`}>
-                            {new Date(Applieduser.updatedAt).toLocaleString(
+                          <li className={`${styles.li} ${styles.NoticePeriod}`}> {Applieduser.Aadhar ?
+                            Applieduser.Aadhar : <li className={styles.Nli}>N/A</li>} </li>
+                          <li className={`${styles.li} ${styles.Experiance}`}> 
+                            
+                            {new Date(Applieduser.createdAt).toLocaleString(
                               "en-US",
                               {
                                 month: "short",
                                 day: "2-digit",
                                 year: "numeric",
                               }
-                            )}
-                          </li>
-
+                            )} 
+                             </li>
+                          <li className={`${styles.li} ${styles.LastActive}`}> 
+                          {      Applieduser.LogedInTime?    new Date(Applieduser.LogedInTime).toLocaleString('en-US', {
+        year: 'numeric',
+        month: 'short',
+        day: '2-digit',
+        hour: '2-digit',
+    minute: '2-digit',
+    second: '2-digit'
+    })
+    :"Only Reg. Yet"
+  }</li>
+  <li style={{  }} className={`${styles.li} ${styles.LastActive}`}>
+              {
+                                      Applieduser.isApproved?
+                                <button className={styles.Approved} onClick={()=>{DisApprove(Applieduser._id, false)}}>Approved</button>
+                                  :
+                                
+                               Applieduser.isReject?
+                                <button className={styles.Rejected} onClick={()=>{unReject(Applieduser._id, false)}}>Rejected&#10004;</button>
+                                :
+                        Applieduser.isOnhold ?
+                                <button className={styles.OnHold} onClick={()=>{unHold(Applieduser._id, false)}}>OnHold&#10004;</button>
+                                :
+                                <>
+                                <button className={styles.Approve} onClick={()=>{Reject(Applieduser._id, true)}}>Reject</button>
+                                <button className={styles.Approve} onClick={()=>{Approve(Applieduser._id, true)}}>Approve</button>
+              
+                                <button className={styles.Approve} onClick={()=>{Hold(Applieduser._id, true)}}>Hold</button>
+                                </>
+                                      }
+              </li>
+      <li style={{ width:"37%" }} className={`${styles.li}`}>{Applieduser.message}</li>
+                       
                         </ul>
                       </>
 

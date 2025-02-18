@@ -42,7 +42,7 @@
 }
 .NavConetenetWrapper{
     display: flex;
-    /* margin-top: -47.5px; */
+    margin-top: -47.5px;
     align-items: center;
     position: sticky;
     top:10px;
@@ -56,12 +56,13 @@
     /* margin-top: -47.5px; */
     align-items: center;
     position: sticky;
-    top:10px;
-    z-index: 100;
+    top:60px;
+    z-index: 1000;
     width:41%;
     margin-left: 28%;
-    /* background-color: red; */
+    /* background-color: white; */
     border: 1px black solid;
+    border-radius: 5px;
 }
 .LocationFilterWrapper{
     z-index: 100;
@@ -441,6 +442,44 @@
     font-weight: bold;
     height: 20px;
 } */
+
+.Approved{
+    background-color: green;
+    color: white;
+    font-weight: bold;
+    width:80%;
+    border: 1px solid green;
+    height: 23px;
+}
+
+.Rejected{
+    background-color: red;
+    color: white;
+    font-weight: bold;
+    width:82px;
+    border: 1px solid green;
+    height: 23px;
+    margin-top:3px;
+}
+.OnHold{
+    background-color: blue;
+    color: white;
+    font-weight: bold;
+    width:82px;
+    border: 1px solid green;
+    height: 23px;
+    margin-top:3px;
+}
+
+.Approve{
+    background-color: rgb(40, 4, 99);
+    height: 23px;
+    color: white;
+    font-weight: bold;
+    width:80%;
+
+    border: 1px solid green;
+}
 
 /* .....For Mobile....... */
 
