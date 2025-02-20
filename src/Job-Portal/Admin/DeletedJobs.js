@@ -32,6 +32,7 @@ function DeletedJobs() {
     await axios.get("/jobpost/getDeletedJobs", { headers })
       .then((res) => {
         let result = (res.data)
+        // console.log(result)
       let elements=  result.flatMap( subArray =>  subArray.Archived).forEach(  element => {
            setAllJobs(oldArray => [...oldArray,element] )
       });

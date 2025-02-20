@@ -75,7 +75,8 @@ import SearchCandHome from "./Job-Portal/AppliedUserProfile/SearchCandHome";
 import AdminUpdate from "./Job-Portal/Admin/AdminUpdate"
 import AdminPostJobs from "./Job-Portal/Admin/AdminJobPosts";
 import AllIds from "./Job-Portal/Admin/Allid'sStudent";
-import ArchivedUser from "./Job-Portal/Admin/ArchiveJobSeekers";
+import DeletedJobSeekers from "./Job-Portal/Admin/DeletedJobSeekers";
+import ArchiveJobSeekers from "./Job-Portal/Admin/ArchiveJobSeekers";
 import AdminCareerPostJobs from "./Job-Portal/Admin/AdminCareerJobPosts";
 import AllCareerJobs from "./Job-Portal/Jobs/AllCareerJobs";
 
@@ -181,7 +182,9 @@ function App() {
 
             <Route path="/BIAddmin@AdminCareerPostJobs" element={<AdminCareerPostJobs />} />
             <Route path="/BIAddmin@AllIds" element={<AllIds />} />
-            <Route path="/BIAddmin@ArchivedUser" element={<ArchivedUser />} />
+            <Route path="/BIAddmin@DeletedJobSeekers" element={<DeletedJobSeekers />} />
+            <Route path="/BIAddmin@ArchiveJobSeekers" element={<ArchiveJobSeekers />} />
+          
             <Route path="/JobSeekerLogin" element={<StudentLogin />} />
             <Route path="/New-Registration" element={<NewRegistered />} />
             <Route path="/Jobseeker-New-Registration" element={<StuNewRegistered />} />

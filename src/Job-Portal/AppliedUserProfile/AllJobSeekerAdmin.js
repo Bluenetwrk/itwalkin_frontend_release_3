@@ -135,56 +135,7 @@ function AllEmployeeAdmin() {
     }
   }
 
-  // const [status, setstatus] = useState({select})
-  async function search(e) {
-    let key = e.target.value
-    setsearchKey(key)
-    setFiltereredjobs(key)
-
-    if (key) {
-      setResult(true)
-      let dubmyjobs = [...FilCandidate]
-
-      const filteredItems = dubmyjobs.filter((user) =>
-        JSON.stringify(user).toLowerCase().includes(key.toLowerCase())
-      )
-      setCandidate(filteredItems)
-    } else {
-      getAllJobSeekers()
-      setResult(false)
-
-    }
-  }
-
-  function CheckProfile(StudID) {
-    // navigate(`/Check-Profile/${StudID}`)
-    window.open(`/Check-Profile/${StudID}`, '_blank')
-  }
-
-  useEffect(()=>{
-    let adminLogin= localStorage.getItem("SupAdMLog")
-        if(!adminLogin){
-            navigate("/")
-        }
-    },[])
-
-  async function getLocation(jobLocation) {
-    setFiltereredjobs(jobLocation)
-    setNoPageFilter(true)
-    console.log(jobLocation)
-    await axios.get(`/StudentProfile/getStuLocation/${jobLocation}`)
-      .then((res) => {
-        let result = (res.data)
-        console.log(result)
-        let sortedate = result.sort(function (a, b) {
-          return new Date(b.createdAt) - new Date(a.createdAt);
-        });
-        setCandidate(sortedate)
-        // setPageLoader(false)
-      }).catch((err) => {
-        alert("some thing went wrong")
-      })
-  }
+  
 
   function firstPage() {
     setCurrentPage(1)
@@ -331,6 +282,56 @@ return(
   //       setCandidate(sortedate)
   //     })
   // }
+  // const [status, setstatus] = useState({select})
+  async function search(e) {
+    let key = e.target.value
+    setsearchKey(key)
+    setFiltereredjobs(key)
+
+    if (key) {
+      setResult(true)
+      let dubmyjobs = [...FilCandidate]
+
+      const filteredItems = dubmyjobs.filter((user) =>
+        JSON.stringify(user).toLowerCase().includes(key.toLowerCase())
+      )
+      setCandidate(filteredItems)
+    } else {
+      getAllJobSeekers()
+      setResult(false)
+
+    }
+  }
+
+  function CheckProfile(StudID) {
+    // navigate(`/Check-Profile/${StudID}`)
+    window.open(`/Check-Profile/${StudID}`, '_blank')
+  }
+
+  useEffect(()=>{
+    let adminLogin= localStorage.getItem("SupAdMLog")
+        if(!adminLogin){
+            navigate("/")
+        }
+    },[])
+
+  async function getLocation(jobLocation) {
+    setFiltereredjobs(jobLocation)
+    setNoPageFilter(true)
+    console.log(jobLocation)
+    await axios.get(`/StudentProfile/getStuLocation/${jobLocation}`)
+      .then((res) => {
+        let result = (res.data)
+        console.log(result)
+        let sortedate = result.sort(function (a, b) {
+          return new Date(b.createdAt) - new Date(a.createdAt);
+        });
+        setCandidate(sortedate)
+        // setPageLoader(false)
+      }).catch((err) => {
+        alert("some thing went wrong")
+      })
+  }
   // .........Notice Period sorting....
   function NoticeAscendingOrder() {
     let newjob = [...FilCandidate]
@@ -704,7 +705,7 @@ return(
   async function ArchiveCheckBoxArray() {
     let userid = atob(JSON.parse(localStorage.getItem("IdLog")))
     const headers = { authorization: userid + " " + atob(JSON.parse(localStorage.getItem("AdMLog"))) };
-    await axios.delete(`/jobpost/ArchiveCheckBoxArray/${checkBoxValue}`, { headers })
+    await axios.delete(`/StudentProfile/ArchiveCheckBoxArray/${checkBoxValue}`, { headers })
       .then((res) => {
         if (res.data === "success") {
           getAllJobSeekers()
@@ -718,7 +719,7 @@ return(
   async function deleteCheckedJobs() {
     let userid = atob(JSON.parse(localStorage.getItem("IdLog")))
     const headers = { authorization: userid + " " + atob(JSON.parse(localStorage.getItem("AdMLog"))) };
-    await axios.delete(`/jobpost/deleteCheckBoxArray/${checkBoxValue}`, { headers })
+    await axios.delete(`/StudentProfile/deleteCheckBoxArray/${checkBoxValue}`, { headers })
       .then((res) => {
         if (res.data === "success") {
           getAllJobSeekers()
@@ -797,10 +798,10 @@ return(
             padding: "5px 10px", fontWeight: "bold", cursor: "pointer"
           }} onClick={() => { ArchiveCheckBoxArray() }}>Archive</button>
 
-          <button style={{
+          {/* <button style={{
             backgroundColor: "red", border: "none", color: "white", marginLeft: "5px",
             padding: "5px 10px", fontWeight: "bold", cursor: "pointer"
-          }} onClick={() => { deleteCheckedJobs() }}>Delete</button>
+          }} onClick={() => { deleteCheckedJobs() }}>Delete</button> */}
         </>
         : ""
       }
@@ -996,7 +997,6 @@ return(
       <li style={{ width:"37%" }} className={`${styles.li}`}>{Applieduser.message}</li>
       <li style={{width:"50px" }} className={`${styles.li}`}>
       <input type="checkbox" onClick={() => { checkBoxforDelete(Applieduser._id) }}/>
-
 
       </li>
 
