@@ -119,7 +119,7 @@ function Home() {
         setFilterjobs(sortedate)
         setPageLoader(false)
       }).catch((err) => {
-        console.log(err)
+        // console.log(err)
         alert("some thing went wrong")
       })
   }

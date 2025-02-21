@@ -35,7 +35,6 @@ const [message, setmessage] = useState("")
 const [currentBox, setcurrentBox] = useState("")
 
 const [Candidate, setCandidate] = useState([])
-  const [FilCandidate, setFilCandidate] = useState([])
   const [nopageFilter, setNoPageFilter] = useState(false)
   const [Filtereredjobs, setFiltereredjobs] = useState([])
 
@@ -52,7 +51,7 @@ const [Candidate, setCandidate] = useState([])
 
   const lastIndex = currentPage * recordsPerPage //10
   const firstIndex = lastIndex - recordsPerPage //0
-  const records = jobSeekers.slice(firstIndex, lastIndex)//0,5
+  // const records = jobSeekers.slice(firstIndex, lastIndex)//0,5
   const npage = Math.ceil(totalCount / recordsPerPage) // last page
 
   // const number = [...Array(npage + 1).keys()].slice(1)
@@ -69,6 +68,7 @@ const [Candidate, setCandidate] = useState([])
   }
 
   async function getAllJobSeekers() {
+    // setjobSeekers([])
     setNoPageFilter(false)
     setActive([])
     setJobTagsIds([])
@@ -82,13 +82,16 @@ const [Candidate, setCandidate] = useState([])
 
       .then((res) => {
         let result = (res.data)
-        // console.log(result)
+        console.log("all jobs",result)
         gettotalcount()
         let sortedate = result.sort(function (a, b) {
           return new Date(b.createdAt) - new Date(a.createdAt);
         });
         let elements=  sortedate.flatMap( subArray =>  subArray.Archived).forEach(  element => {
-           setjobSeekers(oldArray => [...oldArray,element] )
+          //  setjobSeekers(oldArray => [...oldArray,element] )
+           setjobSeekers([element])
+          //  setjobSeekers(oldArray => [...oldArray, ...sortedate.flatMap(subArray => subArray.Archived)]);
+
         })
         
       })
@@ -139,21 +142,19 @@ const [Candidate, setCandidate] = useState([])
           getTagId();
         }
       }, [jobTagsIds])
+      // let ids = jobTagsIds.map((id) => {
+      //   return (
+      //     id._id
+      //   )
+      // })
+      const uniqueList = [...new Set(jobTagsIds)];
 
-      let ids = jobTagsIds.map((id) => {
-        return (
-          id._id
-        )
-      })
-      const uniqueList = [...new Set(ids)];
-      // console.log(uniqueList)
       async function getTagId() {
-        settotalCount(uniqueList.length)
+        settotalCount(jobTagsIds.length)
         await axios.get(`/StudentProfile/ArchiveJobseekerTagsIds/${uniqueList}`, {
           params: { currentPage, recordsPerPage }
         })
           .then((res) => {
-            console.log("data from uique id's",res.data)
             let result = res.data
             let sortedate = result.sort((a, b) => {
               return new Date(b.createdAt) - new Date(a.createdAt);
@@ -179,7 +180,7 @@ const [Candidate, setCandidate] = useState([])
 
   async function filterByJobTitle(key) {
     if(count==1){
-      setCandidate([])
+      setjobSeekers([])
     }
     setCount(prev=>prev+1)
     const isIndex=Active.findIndex((present)=>{
@@ -205,13 +206,12 @@ return(
   }}
 
   async function changeTags(key){
-
     setNoPageFilter(true)
     setFiltereredjobs(key)
     await axios.get(`/StudentProfile/getTagsArchiveJobseekers/${Active}`)
       .then((res) => {
         let result = (res.data)
-        // console.log(result)
+        // console.log('hkjkjk',result)
         let sortedate = result.sort((a, b) => {
           return new Date(b.createdAt) - new Date(a.createdAt);
         });
@@ -281,7 +281,7 @@ return(
                                 
                   {nopageFilter ?
                                 <p style={{ fontWeight: 400, marginLeft: "10px" }}>Displaying <span style={{ color: "blue" }}>
-                                  {uniqueList.length} </span>Jobs with following matching tags:
+                                  {jobTagsIds.length} </span>Jobs with following matching tags:
                                   <span style={{ color: "blue" }}>{Active.toString()}</span></p>
                                 :
                                 <p style={{ fontWeight: 400, marginLeft: "10px" }}>showing {firstIndex + 1} to {lastIndex} latest jobs</p>
