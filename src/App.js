@@ -62,14 +62,23 @@ import SearchParamsDub from "./Job-Portal/Login/SearchParamsDupStuD";
 import SearchParamsDubEmp from "./Job-Portal/Login/SearchParamsDupEmp";
 import AdminProfile from "./Job-Portal/Admin/AdminProfile"
 import AllJobsForAdmin from "./Job-Portal/Admin/AllJobsForAdmin"
-import ArchiveJobs from "./Job-Portal/Admin/ArchiveJobs";
-import DeletedJobs from "./Job-Portal/Admin/DeletedJobs";
-import DeletedBlogs from "./Job-Portal/Admin/DeletedBlogs";
+import ArchiveJobs from "./Job-Portal/Jobs/ArchiveJobs";
+// import ArchiveJobs from "./Job-Portal/Admin/ArchiveJobs";
+// import DeletedJobs from "./Job-Portal/Admin/DeletedJobs";
+import DeletedJobs from './Job-Portal/Jobs/DeletedJobsAdmin';
+
+// import DeletedBlogs from "./Job-Portal/Admin/DeletedBlogs";
+import DeletedBlogs from "./Job-Portal/Jobs/DeletedBlogs"
 import AllJobSeekers from "./Job-Portal/Admin/AllJobSeekers"
 import AllEmployees from "./Job-Portal/Admin/AllEmployees"
 import CheckEmpProfileForAdmin from "./Job-Portal/Profile/CheckEmplProfileForAdmin";
 import CheckStudentProfileForAdmin from "./Job-Portal/Profile/CheckStuForAdmin";
+import CheckDeletedJobSeeker from "./Job-Portal/Profile/CheckDeletedJobseeker";
 import CheckArchivedJobSeeker from "./Job-Portal/Profile/CheckArchivedStud";
+import CheckArchivedJob from './Job-Portal/Jobs/CheckArchiveJobs';
+import CheckDeletedJob from './Job-Portal/Jobs/CheckDeletedJovs';
+import CheckDeletedBlog from './Job-Portal/Jobs/CheckDeletedBlogs';
+import CheckDeletedQuestions from './Job-Portal/Jobs/CheckDeletedQuestions';
 import SearchCandidate from "./Job-Portal/AppliedUserProfile/SearchCandidat";
 import SearchCandHome from "./Job-Portal/AppliedUserProfile/SearchCandHome";
 import AdminUpdate from "./Job-Portal/Admin/AdminUpdate"
@@ -175,7 +184,12 @@ function App() {
             <Route path="/BIAddmin@AllEmployeeAdmin" element={<AllJobSeekerAdmin />} />
             <Route path="/BIAddmin@CheckEmpProfile/:CP" element={<CheckEmpProfileForAdmin />} />
             <Route path="/BIAddmin@CheckStudentProfile/:CP" element={<CheckStudentProfileForAdmin />} />
+            <Route path="/BIAddmin@CheckStudentDeleted/:CP" element={<CheckDeletedJobSeeker />} />
             <Route path="/BIAddmin@CheckStudentArchived/:CP" element={<CheckArchivedJobSeeker />} />
+            <Route path="/BIAddmin@CheckArchivedJob/:CP" element={<CheckArchivedJob />} />
+            <Route path="/BIAddmin@CheckDeletedJob/:CP" element={<CheckDeletedJob />} />
+            <Route path="/BIAddmin@CheckDeletedBlog/:CP" element={<CheckDeletedBlog />} />
+            <Route path="/BIAddmin@CheckDeletedQuestions/:CP" element={<CheckDeletedQuestions />} />
             <Route path="/BIAddmin@AdminUpdate" element={<AdminUpdate />} />
             <Route path="/BIAddmin@PostJob" element={<AdminPostJobs />} />
             <Route path="/BIAddmin@UpdateCareer postedjobs" element={<UpdateCareerPostedJobs url={axios.defaults.baseURL} />} />

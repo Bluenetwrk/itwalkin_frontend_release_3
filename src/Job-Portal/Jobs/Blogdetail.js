@@ -16,6 +16,8 @@ import "./Allobs.module.css"
 import HTMLReactParser from 'html-react-parser'
 import StProfile from "../Profile/StudentProfile"
 import EMpProfile from "../Profile/EmployeeProfile"
+import Down from '../img/icons8-down-button-24.png'
+import Up from '../img/icons8-arrow-button-24.png'
 
 function Answerdetails(props) {
   
@@ -31,8 +33,7 @@ function Answerdetails(props) {
     await axios.get(`/StudentProfile/getProfile/${userId}`, {headers})
         .then((res) => {
             let result = res.data.result
-            // console.log(result.name)
-            // localStorage.setItem("Snm", JSON.stringify(btoa(result.name)))
+           
             setCommentName(result.name)
         }).catch((err) => {
             // alert("some thing went wrong")
@@ -80,13 +81,6 @@ function changeComments(e){
     setcomments({ ...comments, comment: e.target.value, name:CommentName})
 }
 
-// async function deletecom(){
-//   await axios.put(`/BlogRoutes/deleteComment`)
-//   .then((res)=>{
-//     console.log(res)
-//   })
-
-// }
 
 async function handleComment(){
   if(!userid){
@@ -143,75 +137,49 @@ async function deletComment(id){
     getjobs()
   }, [])
 
+  function goUp(){
+    window.scrollTo({
+      top:0,
+      behavior:"smooth"
+    })
+  }
+  function goDown(){
+    window.scrollTo(50,5000000)
 
+    }      
   
   return (
     <>
-
-        <h2 style={{marginLeft:"10px", fontWeight:"800", marginTop:"15px", marginBottom:"-15px"}}> Blogs  </h2>
-
-    <div style={{display:"flex", marginTop:"20px"}}>
+        
+    {/* <div style={{display:"flex", marginTop:"20px"}}> */}
                             {/* <img style={{ height:"25px", color:"grey", marginTop:"20px", marginLeft:"8%", cursor:"pointer",
              width:"28px"}} onClick={()=>{navigate(-1)}}  src={Arrowimage} /> */}
-             <button style={{  color:"grey", marginTop:"10px", marginLeft:"8%", cursor:"pointer",}} 
-             onClick={()=>{navigate(-1)}}>Back</button>
+             {/* <button style={{  color:"grey", marginTop:"10px", marginLeft:"8%", cursor:"pointer",}} 
+             onClick={()=>{navigate(-1)}}>Back</button> */}
+             {/* <button class={styles.jobdetailBackBtn} onClick={()=>{navigate(-1)}}>Back</button> */}
               
-    </div>
+    {/* </div> */}
 
       {screenSize.width>850 ?
 
         <>
-       
-    {/* <div style={{display:"flex"}}>
-
-        <div style={{marginTop:"20px", marginLeft:"30px"}}>
-        <img className={styles.imageV} src={jobs.Logo?jobs.Logo : profileDp}/>
-        
+    <div class={ styles.blogArrow} style={{display:"flex", height:"50px", alignItems:"center"}}>
+           <h2 style={{fontSize:"25px",marginLeft:"120px", fontWeight:"800", marginTop:"-15px", marginBottom:"-15px"}}> Blogs  </h2>
+          <img style={{marginLeft:"35%", height: "30px"}}  onClick={()=>{goDown()}} src={Down}/>
         </div>
-        <div>
-       
-          <table>
-          <tr>
-    <td colSpan={2} style={{backgroundColor:" rgb(40, 4, 99)"}}>
-    <div style={{textAlign:"center", color:"white", fontWeight:"550"}}>{jobs.jobTitle ? jobs.jobTitle[0].toUpperCase()+jobs.jobTitle.slice(1)
-    : <li style={{ display: "inline-block" }}>Blog Title</li>}</div>
-    </td>
-  </tr>
-       
-  <tr>
-    <th>Company Name</th>
-    <td>{jobs.companyName ? jobs.companyName : <li style={{ display: "inline-block" }}>Company name</li>}</td>
-  </tr>
-  <tr>
-    <th>Posted by</th>
-    <td>{jobs.name ? jobs.name : <li style={{ display: "inline-block" }}>Name</li>}</td>
-  </tr>
-  <tr>
-    <th>Tags</th>
-    <td>{jobs.skills ? jobs.skills : <li style={{ display: "inline-block" }} >Tags</li>}</td>
-  </tr>
-  <tr>
-    <th>Posted Date</th>
-    <td>
-    {jobs.updatedAt ? new Date(jobs.updatedAt).toLocaleString(
-                  "en-US",
-                  {
-                    month: "short",
-                    day: "2-digit",
-                    year: "numeric",
-                  }
-                ) : <li style={{ display: "inline-block" }}>Date</li>
-                }
-    </td>
-  </tr>
-  </table>
-  </div>
-  </div>         */}
-  {/* <h1 style={{textAlign:"center", fontSize:"xx-large"}}>{jobs.jobTitle[0].toUpperCase()+jobs.jobTitle.slice(1)}</h1> */}
-  <h1 style={{textAlign:"center", fontSize:"xx-large"}}>{jobs.jobTitle}</h1>
-<div style={{marginLeft:"30px"}}>
-  <span>Posted by {jobs.name}</span> |  
-  <span> Posted on : {new Date(jobs.createdAt).toLocaleString(
+        
+    <div class={styles.readPageContainer}>
+       <div class={styles.ReadPageBtnTitleContainer} style={{display:"flex"}}>
+           <button class={styles.readPageBackBtn} onClick={()=>{navigate(-1)}}>Back</button>
+     
+              <h1 style={{textAlign:"center", fontSize:"40px", whiteSpace:"no", marginTop:"10px",marginRight:"120px"}}>{jobs?.jobTitle?jobs.jobTitle.charAt(0).toUpperCase()+jobs.jobTitle.substring(1):"Loading..."}</h1>
+           
+           {/* <button class={styles.readPageBackBtn} onClick={()=>{navigate(-1)}} style={{display:"none"}}>Share</button> */}
+
+      </div>    
+              <div style={{marginLeft:"12px"}}>
+                <span>Posted by {jobs.name}</span> |  
+                <span> Posted on : {new Date(jobs.createdAt).toLocaleString(
                   "en-US",
                   {
                     month: "short",
@@ -219,8 +187,8 @@ async function deletComment(id){
                     year: "numeric",
                   }
                 )}</span> . 
-  
-</div>
+              
+     </div>
 
 
   <table style={{marginLeft:"6px", marginTop:"0px", width:"98.8%", borderCollapse: "collapse",border:"none"}}>         
@@ -234,6 +202,8 @@ async function deletComment(id){
 
   </tr>
   </table>
+  </div>
+  <img style={{marginLeft:"50%",height:"30px",marginBottom:"20px" }}  onClick={()=>{goUp()}} src={Up}/>
           </>
           :
           <>
@@ -241,17 +211,30 @@ async function deletComment(id){
 
 
               <>
+              <div class={styles.mobileReadTopbtnsContainer}>
+              <button class={styles.readPageBackBtn} onClick={()=>{navigate(-1)}}>Back</button>
+              <img style={{marginLeft:"20%",height:"30px",marginTop:"10px" }}  onClick={()=>{goDown()}} src={Down}/>
+              </div>
                 <div className={styles.JobCard} >
-                <div className={styles.JobTitleDateWrapper}>
-        <p className={styles.QuestionjobTitle} >{jobs.jobTitle}</p>
-        <p className={styles.Date}>{new Date(jobs.createdAt).toLocaleString(
+                <p className={`${styles.Date} ${styles.readPageDate}`}>{new Date(jobs.createdAt).toLocaleString(
           "en-US",
           {
             month: "short",
             day: "2-digit",
             year: "numeric",
           }
-        )} </p></div>
+        )} </p>
+                <div className={styles.JobTitleDateWrapper}>
+        <p className={styles.QuestionjobTitle} style={{fontSize:"26px", width:"100%" , marginTop:"2px"}}>{jobs?.jobTitle?jobs.jobTitle.charAt(0).toUpperCase()+jobs.jobTitle.substring(1):"Loading..."}</p>
+        {/* <p className={styles.Date}>{new Date(jobs.createdAt).toLocaleString(
+          "en-US",
+          {
+            month: "short",
+            day: "2-digit",
+            year: "numeric",
+          }
+        )} </p> */}
+        </div>
      
      <table style={{marginLeft:"6px", marginTop:"0px", width:"95.5%"}}>         
   
@@ -262,9 +245,13 @@ async function deletComment(id){
      } 
     </td>
 
+
   </tr>
-  </table>           
+  </table>  
+
                 </div>
+                <img style={{marginLeft:"50%",height:"30px",marginTop:"10px" }}  onClick={()=>{goUp()}} src={Up}/>
+             
               </>
 
             </div>

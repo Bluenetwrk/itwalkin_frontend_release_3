@@ -530,7 +530,7 @@ border:"none",padding: "4px 8px"}} onClick={DeleteProfile}>Delete</button>
               </label>
 <div style={{display:"flex", marginLeft:"80%"}}>
               <button className={styles.Save} onClick={(e) => { saveUpdate(e) }}>Save</button>
-              <button className={styles.cancel} onClick={() => { navigate(-1) }} >cancel</button>
+              <button className={styles.cancel} onClick={() => { navigate(-1) }} >Cancel</button>
               </div>
             </div>
              
@@ -661,7 +661,7 @@ border:"none",padding: "4px 8px"}} onClick={DeleteProfile}>Delete</button>
 
 <div style={{marginTop:"10px"}}>
               <button className={styles.MobileSave} onClick={(e) => { saveUpdate(e) }}>Save</button>
-              <button className={styles.Mobilecancel} onClick={() => { navigate(-1) }} >cancel</button>
+              <button className={styles.Mobilecancel} onClick={() => { navigate(-1) }} >Cancel</button>
               </div>
               <div style={{marginTop:"60px"}}>
           <Footer/>

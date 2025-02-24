@@ -42,7 +42,7 @@ getAboutUs()
           <img style={{marginLeft:"50%",}}  onClick={()=>{goDown()}} src = {Down}/>
      
         <div style={{marginLeft:"10px"}}>
-        <h2 style={{marginLeft:"10px", fontWeight:"800", marginTop:"5px"}}> Terms & Condition</h2>
+        <h2 style={{marginLeft:"1px", fontWeight:"800", marginTop:"5px"}}> Terms & Condition</h2>
 
         <p>
           WE DO NOT GUARANTEE OR OFFER ANY WARRANTY OF ANY INTERVIEW CALLS OR ASSURE ANY JOB OFFERS WITH ANY OF OUR SERVICES OR FROM ANY PROSPECTIVE EMPLOYER/ORGANIZATION WHICH DOWNLOADS THE RESUME/ INSERTION OR INFORMATION/DATA AND USES IT TO CONTACT THE USER. THE USER IS ADVISED TO BE CAUTIOUS OF CALLS/EMAILS ASKING FOR PAYMENT FROM OTHER WEBSITES THAT CLAIM TO OFFER SIMILAR SERVICES UNDER THE NAME OF ITWALKIN ”<br></br><br></br>
@@ -384,4 +384,3 @@ We does not take responsibility or liability for the actions, products, content 
 }
 
 export default TermsAndCondition
-

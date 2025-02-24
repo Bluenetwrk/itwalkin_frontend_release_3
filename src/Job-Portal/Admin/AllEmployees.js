@@ -387,19 +387,19 @@ async function search(e) {
 
       <div className={styles.Uiwarpper}>
         <ul className={styles.ul}>
-          <li className={`${styles.li} ${styles.Name}`}><b>Emp. Name</b></li>
-          <li className={`${styles.li} ${styles.phoneNumber}`}><b>Emp. Phone Number</b></li>
+          <li style={{ backgroundColor: " rgb(40, 4, 99)" , color:"white"}} className={`${styles.li} ${styles.Name}`}><b>Emp. Name</b></li>
+          <li style={{ backgroundColor: " rgb(40, 4, 99)" , color:"white"}} className={`${styles.li} ${styles.phoneNumber}`}><b>Emp. Phone Number</b></li>
 
-          <li className={`${styles.li} ${styles.CompanyName}`}><b>Company Name</b></li>
-          <li className={`${styles.li} ${styles.CompanyAddress}`}><b>Company Address</b></li>
-          <li className={`${styles.li} ${styles.Date}`}><b>RegDate</b></li>
-          <li className={`${styles.li} ${styles.Date}`} ><b >Last Log</b>
+          <li style={{ backgroundColor: " rgb(40, 4, 99)" , color:"white"}} className={`${styles.li} ${styles.CompanyName}`}><b>Company Name</b></li>
+          <li style={{ backgroundColor: " rgb(40, 4, 99)" , color:"white"}} className={`${styles.li} ${styles.CompanyAddress}`}><b>Company Address</b></li>
+          <li style={{ backgroundColor: " rgb(40, 4, 99)" , color:"white"}} className={`${styles.li} ${styles.Date}`}><b>RegDate</b></li>
+          <li style={{ backgroundColor: " rgb(40, 4, 99)" , color:"white"}} className={`${styles.li} ${styles.Date}`} ><b >Last Log</b>
           {/* <span style={{display:"block"}}><span onClick={TopToBottonOnline} style={{ fontSize:"20px", cursor:"pointer", marginRight:"20px"}}>&darr;</span>
                                                             <span style={{ fontSize:"20px", cursor:"pointer"}} onClick={BottonToTopOnline}>&uarr;</span></span> */}
                                                             </li>
-          <li className={`${styles.li} ${styles.CompanyWebsite}`}><b>Company Website </b></li>
-          <li className={`${styles.li} ${styles.Approval}`} ><b>Approval</b></li>
-          <li className={`${styles.li} ${styles.Message}`} ><b>Message</b></li>
+          <li style={{ backgroundColor: " rgb(40, 4, 99)", color:"white" }} className={`${styles.li} ${styles.CompanyWebsite}`}><b>Company Website </b></li>
+          <li style={{ backgroundColor: " rgb(40, 4, 99)", color:"white" }} className={`${styles.li} ${styles.Approval}`} ><b>Approval</b></li>
+          <li style={{ backgroundColor: " rgb(40, 4, 99)", color:"white" }} className={`${styles.li} ${styles.Message}`} ><b>Message</b></li>
         </ul>
         {
           AllEmployees.length > 0 ?

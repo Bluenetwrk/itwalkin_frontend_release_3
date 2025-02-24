@@ -27,9 +27,12 @@
     margin-left: -42px;
 
 }
-.dot{
-    height: 8px;
-  width: 8px;
+.ul:nth-child(even) {
+    background:rgb(242, 244, 245)
+  }
+  .dot{
+      height: 8px;
+      width: 8px;
   /* background-color:rgb(0, 255, 255); */
   background-color:rgb(7, 252, 7);
 
@@ -39,7 +42,9 @@
 
 .li{
     display: inline-block;
-    border: 1px solid aqua;
+    /* border: 1px solid aqua; */
+    border : 1px solid rgb(215, 223, 226);
+
     width:8%;
     overflow-wrap: break-word;
 

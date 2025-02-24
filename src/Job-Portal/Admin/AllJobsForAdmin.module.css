@@ -46,12 +46,17 @@
     margin: 0px;
     margin-left: -30px;
 }
+.ul:nth-child(even) {
+    background:rgb(242, 244, 245)
+  }
 .li {
     display: inline-block;
     padding-top: 0.5%;
     padding-bottom: 0.5%;
     width: 8%;
-    border: 1px solid rgb(9, 247, 247);
+    /* border: 1px solid rgb(9, 247, 247); */
+    border : 1px solid rgb(215, 223, 226);
+
     text-align: center;
 }
 .CompanyName{

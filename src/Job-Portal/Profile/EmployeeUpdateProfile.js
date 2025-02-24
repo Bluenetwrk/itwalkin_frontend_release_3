@@ -500,7 +500,7 @@ const [immage, setimmage] = useState()
 <div style={{ display:"flex", margin:"10px 20px"}}>
 
             <button className={styles.Save} onClick={(e) => { saveUpdate(e) }}>Save</button>
-            <button className={styles.cancel} onClick={() => { navigate(-1) }} >cancel</button>
+            <button className={styles.cancel} onClick={() => { navigate(-1) }} >Cancel</button>
 </div>
 
           </div>
@@ -607,7 +607,7 @@ const [immage, setimmage] = useState()
             </select>  
             {/* </div> */}
             <button className={styles.MobileSave} onClick={(e) => { saveUpdate(e) }}>Save</button>
-            <button className={styles.Mobilecancel} onClick={() => { navigate(-1) }} >cancel</button>                               
+            <button className={styles.Mobilecancel} onClick={() => { navigate(-1) }} >Cancel</button>                               
             </div>
             <div style={{marginTop:"60px"}}>
           <Footer/>

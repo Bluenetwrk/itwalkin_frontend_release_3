@@ -44,11 +44,13 @@ const[JobSeekerLogin,setJobSeekerLogin]=useState(false);
       // behavior:"smooth"
     })
     const headers = { authorization: 'BlueItImpulseWalkinIn'};
-    await axios.get(`/jobpost/getjobs/${atob(params.id)}`, {headers})
+    await axios.get(`/jobpost/getDeletedProfile/${params.CP}`, {headers})
       .then((res) => {
         let result = (res.data)
-        console.log(result)
-        setJobs(result)
+        // console.log(result)
+        // setJobs(result)
+        setJobs(result.Archived[0])           
+
         setjobdescription(result.jobDescription)
         setjobSeekerId(result.jobSeekerId)
       })
@@ -111,24 +113,6 @@ const[JobSeekerLogin,setJobSeekerLogin]=useState(false);
     navigate("/Updatepostedjobs", { state: { getId: id } })
   }
 
-
-  async function applyforJob(jobId) {
-
-    setclickedJobId(jobId)
-    setLoader(true)
-    setTimeout(async () => {
-
-      await axios.put(`/jobpost/updatforJobApply/${jobId}`, { jobSeekerId })
-        .then((res) => {
-          setLoader(false)
-          getjobs()
-
-        }).catch((err) => {
-          alert("server issue occured", err)
-        })
-    }, 1000)
-  }
-
   function goUp(){
     window.scrollTo({
       top:0,
@@ -159,7 +143,6 @@ const[JobSeekerLogin,setJobSeekerLogin]=useState(false);
 
         <div class={styles.jobdetailBtnContainer} style={{display:"flex"}}>
            <button class={styles.jobdetailBackBtn} onClick={()=>{navigate(-1)}}>Back</button>
-           <button class={styles.jobdetailApplyBtn} onClick={()=>applyforJobasjobseeker(jobs._id,jobs.SourceLink)}>Apply</button>
         </div>
         <div class={styles.jobDetailsHeading}>
              <div class={styles.jobDetailsImage}>
@@ -170,7 +153,8 @@ const[JobSeekerLogin,setJobSeekerLogin]=useState(false);
           
           
 <div class={styles.jobDetailsPosterDesc}>
-<h1 style={{textAlign:"center", fontSize:"xx-large"}}>{jobs?.jobTitle?jobs.jobTitle.charAt(0).toUpperCase()+jobs.jobTitle.substring(1):"Loading...."}</h1>
+<h1 style={{textAlign:"center", fontSize:"xx-large"}}>{jobs?.jobTitle?
+jobs.jobTitle.charAt(0).toUpperCase()+jobs.jobTitle.substring(1):"Loading...."}</h1>
 <div style={{marginLeft:"30px"}}>
   <span>Posted by : {jobs.companyName}</span> &nbsp;|  
   &nbsp; <span> Posted on : {new Date(jobs.createdAt).toLocaleString(

@@ -1,262 +1,469 @@
+
+
 import React from 'react'
 import { useEffect, useState } from 'react'
-import styles from "./AllJobsForAdmin.module.css"
+import styles from "./AllJobSeekers.module.css"
+import Styles from "../AppliedUserProfile/AppliedUserProfile.module.css"
 import Swal from "sweetalert2";
 import axios from "axios";
 import { Link, useNavigate, BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import useScreenSize from '../SizeHook';
-import location from "../img/icons8-location-20.png"
+import {jobTags} from '../Tags'
 
 
+// const [PageLoader, setPageLoader] = useState(false)
+// import { Puff } from 'react-loader-spinner'
 
-function ArchiveJobs() {
+
+function ArchivedUser() {
   let navigate = useNavigate()
 
+  useEffect(()=>{
+    let adminLogin= localStorage.getItem("SupAdMLog")
+        if(!adminLogin){
+            navigate("/")
+        }
+    },[])
 
-  useEffect(() => {
-    let adminLogin = localStorage.getItem("SupAdMLog")
-    if (!adminLogin) {
-      navigate("/")
-    }
-  }, [])
+  const [jobSeekers , setjobSeekers] = useState([])
+  console.log(jobSeekers)
 
-  const [AllJobs, setAllJobs] = useState([])
-  const [date, setdate] = useState([])
-  const [Result, setResult] = useState(false)
-  let jobSeekerId = JSON.parse(localStorage.getItem("StudId"))
-  const screenSize = useScreenSize();
+const screenSize = useScreenSize();
 
-  async function getjobs() {
-    let userid = atob(JSON.parse(localStorage.getItem("IdLog")))
-    const headers = { authorization: userid + " " + atob(JSON.parse(localStorage.getItem("AdMLog"))) };
-    await axios.get("/jobpost/getArchiveJobs", { headers })
+  const [nopageFilter, setNoPageFilter] = useState(false)
+  const [Filtereredjobs, setFiltereredjobs] = useState([])
+
+  const [NotFound, setNotFound] = useState("")
+  const [Active, setActive] = useState([])
+  
+  const Location = ['Bangalore']
+  const [totalCount, settotalCount] = useState()
+
+  let recordsperpage = JSON.parse(sessionStorage.getItem("recordsperpageSerachCand"))
+
+  const [currentPage, setCurrentPage] = useState(1)
+  const [recordsPerPage, setrecordsPerPage] = useState(recordsperpage?recordsperpage:10)
+
+  const lastIndex = currentPage * recordsPerPage //10
+  const firstIndex = lastIndex - recordsPerPage //0
+  // const records = jobSeekers.slice(firstIndex, lastIndex)//0,5
+  const npage = Math.ceil(totalCount / recordsPerPage) // last page
+
+  // const number = [...Array(npage + 1).keys()].slice(1)
+
+  async function gettotalcount() {
+    const headers = { authorization: 'BlueItImpulseWalkinIn' };
+    await axios.get("/jobpost/getTotalCountArchiveJobseeker", { headers })
+      .then((res) => {
+        // console.log(res.data.result)
+        settotalCount(res.data.result)
+      }).catch((err) => {
+        alert("something went wrong")
+      })
+  }
+
+  async function getAllJobSeekers() {
+    // setjobSeekers([])
+    setNoPageFilter(false)
+    setActive([])
+    setJobTagsIds([])
+
+    // let userid = JSON.parse(localStorage.getItem("EmpIdG"))
+    // const headers = { authorization: userid +" "+ atob(JSON.parse(localStorage.getItem("EmpLog"))) };
+    const headers = { authorization: 'BlueItImpulseWalkinIn' };
+
+    await axios.get(`/jobpost/getLimitArchiveJobseeker/${recordsPerPage}`, { params: { currentPage }, headers })
+
       .then((res) => {
         let result = (res.data)
-  // const [date, setdate] = useState([])
-      // result.map((date)=>{
-      //   return(
-      //     console.log(date.createdAt)
-      //   )
-      // })
+        gettotalcount()
+        let sortedate = result.sort(function (a, b) {
+          return new Date(b.createdAt) - new Date(a.createdAt);
+        });
+        let elements=  sortedate.flatMap( subArray =>  subArray.Archived).forEach(  element => {
+           setjobSeekers(oldArray => [...oldArray,element] )
+          //  setjobSeekers([element])
+          //  setjobSeekers(oldArray => [...oldArray, ...sortedate.flatMap(subArray => subArray.Archived)]);
 
-      let elements=  result.flatMap( subArray =>  subArray.Archived).forEach(  element => {
-           setAllJobs(oldArray => [...oldArray,element] )
-      });
-  })
-
+        })
+        
+      })
   }
 
-  useEffect(() => {
-    getjobs()
-  }, [])
+      useEffect(() => {
+        if (jobTagsIds.length < 1) {
+      getAllJobSeekers()
+  
+        } else {
+          getTagId();
+        }
+      }, [currentPage, recordsPerPage])
 
-  async function DeleteJob(id) {
-
-    Swal.fire({
-      title: 'Are you sure?',
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
-      confirmButtonText: 'Yes, delete it!'
-    }).then((result) => {
-      if (result.isConfirmed) {
-
-        axios.delete(`/jobpost/deleteJob/${id}`)
-          .then((res) => {
-
-            getjobs()
-          }).catch((err) => {
-            alert("server error occured")
-          })
-      }
-    })
+  function firstPage() {
+    setCurrentPage(1)
   }
 
-  async function search(e) {
-    let key = e.target.value
-    if (key) {
-      setResult(true)
-      let dubmyjobs = [...AllJobs]
-
-      const filteredItems = dubmyjobs.filter((user) =>
-        JSON.stringify(user).toLowerCase().includes(key.toLowerCase())
-      )
-      setAllJobs(filteredItems)
-    } else {
-      getjobs()
-      setResult(false)
-
+  function previous() {
+    if (currentPage !== 1) {
+      setCurrentPage(currentPage - 1)
     }
   }
-  const [checkBoxValue, setCheckBoxValue] = useState([])
-  function checkBox(e) {
-    console.log(e)
+  function changeCurrent(id) {
+    setCurrentPage(id)
   }
+  function next() {
+    if (currentPage !== npage) {
+      setCurrentPage(currentPage + 1)
+    }
+  }
+  function last() {
+    setCurrentPage(npage)
+  }
+
+  function handleRecordchange(e){  
+    sessionStorage.setItem("recordsperpageSerachCand", JSON.stringify(e.target.value));
+    let recordsperpage = JSON.parse(sessionStorage.getItem("recordsperpageSerachCand"))
+    setrecordsPerPage(recordsperpage) 
+    setCurrentPage(1)
+  }
+    const [count, setCount]=useState(1)
+  
+      const [jobTagsIds, setJobTagsIds] = useState([])
+
+      useEffect(() => {
+        if (jobTagsIds.length > 0) {
+          getTagId();
+        }
+      }, [jobTagsIds])
+      let ids = jobTagsIds.map((id) => {
+        return (
+          id.Archived._id
+        )
+      })
+      // console.log(ids)
+
+      const uniqueList = [...new Set(ids)];
+
+      async function getTagId() {
+        settotalCount(jobTagsIds.length)
+        await axios.get(`/jobpost/ArchiveJobseekerTagsIds/${uniqueList}`, {
+          params: { currentPage, recordsPerPage }
+        })
+          .then((res) => {
+            let result = res.data
+            let sortedate = result.sort((a, b) => {
+              return new Date(b.createdAt) - new Date(a.createdAt);
+            });
+            // setjobSeekers(sortedate)
+            let elements=  sortedate.flatMap( subArray =>  subArray.Archived).forEach(  element => {
+              setjobSeekers(oldArray => [...oldArray,element] )
+           })
+            if (count == 2) {
+              setCurrentPage(1)
+            }
+    
+          })
+      }
+    
+      useEffect(()=>{
+        if(Active.length>0){
+          changeTags()
+        }
+      },[Active])
+    
+  
+
+  async function filterByJobTitle(key) {
+    if(count==1){
+    }
+    setjobSeekers([])
+    setCount(prev=>prev+1)
+    const isIndex=Active.findIndex((present)=>{
+return(
+  present===key
+)
+    })
+    if(isIndex<0){
+    var updatedActive = [...Active, key]; // Add the new key to the array
+    setActive(updatedActive);
+    }else{
+      const IndexId=Active.findIndex((present)=>{
+        return(
+          present==key
+        )
+            })
+            Active.splice(IndexId,1)
+                if(Active.length===0){
+                  getAllJobSeekers()
+                  return false
+    }
+    changeTags()
+  }}
+
+  async function changeTags(key){
+    setNoPageFilter(true)
+    setFiltereredjobs(key)
+    await axios.get(`/jobpost/getTagsArchiveJobseekers/${Active}`)
+      .then((res) => {
+        let result = (res.data)
+        // console.log('hkjkjk',result)
+        let sortedate = result.sort((a, b) => {
+          return new Date(b.createdAt) - new Date(a.createdAt);
+        });
+        setJobTagsIds(sortedate)
+    //     let elements=  sortedate.flatMap(element => {
+    //       setCandidate(oldArray => [...oldArray,element] )
+    //  });
+        // setCandidate(sortedate)
+      })
+  }
+
+      
 
   return (
     <>
-      <div className={styles.searchBoth}>
-        <p className={styles.p}>Search </p>
-        <input className={styles.inputboxsearch} type="text" placeholder='Search for a Job / Skills / Location / Experiance' onChange={(e) => { search(e) }} />
-      </div>
-      {Result ?
-        <h4 style={{ marginLeft: "18%", marginTop: "10px" }}> {AllJobs.length} matching Result Found  </h4>
-        : ""
-      }
 
-      {screenSize.width > 850 ?
+    {screenSize.width>850?
+<>
+                <div className={Styles.JobtitleFilterWrapper}>
+                       <buton className={Active.length===0?Styles.active:Styles.JobtitleFilter} onClick={() => 
+                    { getAllJobSeekers() }}>All</buton>
+                  {
+                    jobTags.map((tags, i) => {
+                      return (
+                        <button disabled={tags.value==="TECHNOLOGIES" || tags.value==="EDUCATION" || tags.value==="COLLEGE TYPE" || tags.value==="NOTICE PERIOD" || tags.value==="SALARY" || 
+                          tags.value==="EXPERIENCE" || tags.value==="Job Type" || tags.value==="INDUSTRY" || tags.value==="TOOLS/PROTOCOLS" || tags.value==="ROLE" || tags.value==="COMPANY TYPE" } 
+                          className={tags.value==="TECHNOLOGIES" || tags.value==="EDUCATION" || tags.value==="COLLEGE TYPE" || tags.value==="NOTICE PERIOD" || tags.value==="SALARY" || 
+                          tags.value==="EXPERIENCE" || tags.value==="Job Type" || tags.value==="INDUSTRY" || tags.value==="TOOLS/PROTOCOLS" || tags.value==="COMPANY TYPE" || tags.value==="ROLE"?
+                          Styles.TagHeading: 
+                          //  Active === tags.value ? 
+                          Active.findIndex(  (present)=>{
+                            return(
+                              present===tags.value
+                            )
+                                }) >=0?
+                          Styles.active : Styles.JobtitleFilter} onClick={() => 
+                            { filterByJobTitle(tags.value) }}>{tags.value} </button>
+                      
+                      )
+                    })
+                  }
+                  </div>
+                            <div style={{ display: "flex", justifyContent: "space-between" }}>
+                              {/* {nopageFilter ?
+                                <p style={{ fontWeight: 400, marginLeft: "10px" }}>Displaying Candidates with with following matching tags
+                                 <span style={{ color: "blue" }}>{Filtereredjobs}</span></p>
+                                :
+                                <p style={{ fontWeight: 400, marginLeft: "10px" }}>showing {firstIndex + 1} to {lastIndex} latest Candidates</p>
+                              } */}
+                                
+                  {nopageFilter ?
+                                <p style={{ fontWeight: 400, marginLeft: "10px" }}>Displaying <span style={{ color: "blue" }}>
+                                  {jobTagsIds.length} </span>Jobs with following matching tags:
+                                  <span style={{ color: "blue" }}>{Active.toString()}</span></p>
+                                :
+                                <p style={{ fontWeight: 400, marginLeft: "10px" }}>showing {firstIndex + 1} to {lastIndex} latest jobs</p>
+                              }
+                              <div className={styles.navigationWrapper}>
+                                <button disabled={currentPage === 1} style={{ display: "inline", margin: "5px" }} className={styles.navigation} onClick={firstPage}>
+                                  <i class='fas fa-step-backward' ></i>
+                                </button>
+                                <button disabled={currentPage === 1} style={{ display: "inline", margin: "5px" }} className={styles.navigation} onClick={previous}>
+                                  <i class='fas fa-caret-square-left'></i>
+                                </button>
+                                <span>{currentPage}</span>
+                                <button disabled={currentPage === npage} style={{ display: "inline", margin: "5px" }} className={styles.navigation} onClick={next}>
+                                  <i class='fas fa-caret-square-right'></i>
+                                </button>
+                                <button disabled={currentPage === npage} style={{ display: "inline", margin: "5px" }} className={styles.navigation} onClick={last}>
+                                  <i class='fas fa-step-forward'></i>
+                                </button>
+                              </div>
+                            </div>
+                  
+                            <div style={{marginBottom:"5px", marginTop:"0", marginLeft:"10px"}}>
+                              Show  <select onChange={(e) => { handleRecordchange(e) }}>
+                                <option selected = {lastIndex === 10} value={1}>1</option>
+                                <option selected = {lastIndex === 10} value={10}>10</option>
+                                <option selected = {lastIndex === 25} value={25}>25</option>
+                                <option selected = {lastIndex === 50} value={50}>50</option>
+                                <option selected = {lastIndex === 100} value={100}>100</option>
+                              </select>  jobs per page
+                              </div>
 
-        <div style={{ marginLeft: "7px" }} className={styles.Uiwarpper}>
-          <ul className={styles.ul}>
-            <li className={`${styles.li} ${styles.CompanyName}`}><b>Company Name</b></li>
-            <li className={`${styles.li} ${styles.Jtitle}`}><b>Job Title</b></li>
-            <li className={`${styles.li} ${styles.JobType}`}><b>JobType</b></li>
+    <div style={{marginLeft:"7px"}} className={styles.Uiwarpper}>
+              <ul className={styles.ul}>
+                <li className={`${styles.li} ${styles.name}`}><b>Name</b></li>
+                <li className={`${styles.li} ${styles.phoneNumber}`}><b>Phone Number</b></li>
+                <li className={`${styles.li} ${styles.age}`}><b>Age</b></li>
 
-            {/* <li className={`${styles.li} ${styles.liDescription}`}><b>Job description</b></li> */}
-            <li className={`${styles.li} ${styles.Pdate}`}><b>Posted Date</b></li>
-
-            <li className={`${styles.li} ${styles.Location}`}><b>Location</b></li>
-            <li className={`${styles.li} ${styles.Package}`}><b>Salary /Year </b></li>
-            <li className={`${styles.li} ${styles.experiance}`}><b>Exp </b></li>
-            <li className={`${styles.li} ${styles.Qualif}`}><b>Qualif </b></li>
-
-            <li className={`${styles.li} ${styles.Skills}`}><b>Skills Required</b></li>
-            {/* <li className={`${styles.li} ${styles.DeleteAction}`} ><b>Arch. Date</b></li> */}
-
-
-          </ul>
-          {
-            AllJobs.length > 0 ?
-
-              AllJobs.map((items, i) => {
-                return (
-
-                  <ul className={styles.ul}>
-
-                    <li className={`${styles.li} ${styles.CompanyName}`}>{items.Logo ?
-                      < img style={{ width: "38px", height: "38px" }} src={items.Logo} />
-                      : ""}<br></br>{items.companyName}</li>
-                    <li className={`${styles.li} ${styles.Jtitle}`} onClick={() => navigate(`/Jobdetails/${btoa(items._id)}`)}>{items.jobTitle}</li>
-                    <li className={`${styles.li} ${styles.JobType}`}>{items.jobtype}</li>
-
-                    <li className={`${styles.li} ${styles.Pdate}`}>
-                      {new Date(items.createdAt).toLocaleString(
-                        "en-US",
-                        {
-                          month: "short",
-                          day: "2-digit",
-                          year: "numeric",
-                        }
-                      )}
-                    </li>
-                    <li className={`${styles.li} ${styles.Location}`}>{items.jobLocation}</li>
-                    <li className={`${styles.li} ${styles.Package}`}>{items.salaryRange}</li>
-                    <li className={`${styles.li} ${styles.experiance}`}>{items.experiance}</li>
-                    <li className={`${styles.li} ${styles.Qualif}`}>{items.qualification} </li>
-
-                    <li className={`${styles.li} ${styles.Skills}`}>{items.skills}</li>
-                    {/* <li className={`${styles.li} ${styles.DeleteAction}`} >
-                      <button className={styles.DeleteButton} onClick={() =>
-                       { DeleteJob(items._id) }} >Delete</button></li> */}
-                  </ul>
-                )
-              })
-              :
-              <>
-                <p style={{ color: "red", marginLeft: "42%" }}>No Record Found</p>
-              </>
-          }
+                <li className={`${styles.li} ${styles.Aadhar}`}><b>Aadhar</b></li>
+                <li className={`${styles.li} ${styles.Pdate}`}><b>Reg. Date</b></li>
+                <li className={`${styles.li} ${styles.Pdate}`}><b>Last Log</b>
+                {/* <span style={{display:"block"}}><span onClick={TopToBottonOnline} style={{ fontSize:"20px", cursor:"pointer", marginRight:"20px"}}>&darr;</span>
+                                                            <span style={{ fontSize:"20px", cursor:"pointer"}} onClick={BottonToTopOnline}>&uarr;</span></span> */}
+                                                            </li>
+                <li className={`${styles.li} ${styles.Qualification}`}><b>Qualif.</b></li>
+                <li className={`${styles.li} ${styles.Skills}`}><b>Skills </b></li>
+                <li className={`${styles.li} ${styles.Approval}`}><b>Approval </b></li>
+                <li className={`${styles.li} ${styles.Message}`}>Message</li>
 
 
-        </div>
-        :
-        <>
+              </ul>
+              {
+     jobSeekers.length > 0 ?
 
-          <div id={styles.JobCardWrapper} >
-
-            {
-              AllJobs.length > 0 ?
-
-                AllJobs.map((job, i) => {
+     jobSeekers.map((items, i) => {
                   return (
-                    <>
-                      <div className={styles.JobCard} key={i}>
-                        <div style={{ display: "flex", marginTop: "5px" }}>
-                          <img className={styles.logo} src={job.Logo} />
-                          <span className={styles.companyName}>{job.companyName}</span>
-                        </div>
-                        <  img className={styles.jobLocationImage} src={location} /> <span className={styles.jobLocation}>{job.jobLocation}</span><br></br>
-                        <span className={styles.jobTitle}>{job.jobTitle}</span><br></br>
-                        <span className={styles.jobtypeAndDate}> {job.jobtype}, {new Date(job.createdAt).toLocaleString(
+<>
+                    <ul className={styles.ul}>
+
+                      <li className={`${styles.li} ${styles.name}`} 
+    onClick={()=>{navigate(`/BIAddmin@CheckStudentArchived/${items._id}`)}}><Link style={{color:"blue"}}>
+     {items.name?items.name:"nnn"}
+      </Link></li>
+                <li className={`${styles.li} ${styles.phoneNumber}`}>{items.phoneNumber?items.phoneNumber:"not available"}</li>
+                <li className={`${styles.li} ${styles.age}`}>{items.age?items.age:"not availabel"}</li>
+
+                      <li className={`${styles.li} ${styles.Aadhar}`}> {items.Aadhar?items.Aadhar:"No aadhar available"}</li>
+                      <li className={`${styles.li} ${styles.Pdate}`}>
+                        {new Date(items.createdAt).toLocaleString(
                           "en-US",
                           {
                             month: "short",
                             day: "2-digit",
                             year: "numeric",
                           }
-                        )} </span><br></br>
-                        <span className={styles.qualificationAndExperiance}>{job.qualification}, {job.experiance} Experience </span><br></br>
-                        <div className={styles.skillWrapper}>
-                          <span className={styles.skillsHeading}>Skills: </span><span className={styles.skills}> {job.skills}</span><br></br>
-                        </div>
-                        <p className={styles.salaryRange}>Package : <span>&#8377;</span>{job.salaryRange}</p>
-                        <p className={styles.jobDescriptionHeading}>Job Description:</p>
-                        <p className={styles.jobDescription}>
-                          {/* {job.jobDescription} */}
-                          {
-                            job.jobDescription.map((descrip, di) => {
-                              return (
-                                <>
-                                  {
-                                    descrip.type == "unordered-list-item" ?
+                        )}
+                      </li>
 
-                                      <ul style={{ listStyleType: "disc" }}>
-                                        <li>
-                                          {descrip.text}
+                      <li className={`${styles.li} ${styles.Pdate}`}>
+      {      items.LogedInTime?    new Date(items.LogedInTime).toLocaleString('en-US', {
+        year: 'numeric',
+        month: 'short',
+        day: '2-digit',
+        hour: '2-digit',
+    minute: '2-digit',
+    second: '2-digit'
+    })
+    :"Only Reg. Yet"
+  }
+                  </li>
 
-                                        </li>
-                                      </ul>
+                      <li className={`${styles.li} ${styles.Qualification}`}>{items.Qualification?items.Qualification:"no quali. available"}</li>
+                      <li className={`${styles.li} ${styles.Skills}`}>{items.Skills?items.Skills:"no kills available"}</li>
+                      <li className={`${styles.li} ${styles.Approval}`}>
+                        {
+                        items.isApproved?
+                  <button className={styles.Approved}>Approved</button>
+                    :
+                  
+                 items.isReject?
+                  <button className={styles.Rejected}>Rejected&#10004;</button>
+                  :
+          items.isOnhold ?
+                  <button className={styles.OnHold} >OnHold&#10004;</button>
+                  :
+                  <>
+                  <button className={styles.Approve}>Reject</button>
+                  <button className={styles.Approve} >Approve</button>
 
-                                      : descrip.type == "ordered-list-item" ?
+                  <button className={styles.Approve}>Hold</button>
+                  </>
+                        }
+                  </li>
+                  
+                  <li className={`${styles.li} ${styles.Message}`} >{items.message?items.message:"no message was sent"}
+                  {/* <textarea style={{height:"50px", width:"80%", marginLeft:"-11px"}} value ={currentBox == items._id ?message:""} onChange={(e)=>{
+                     handleChange(e, items._id )}}> </textarea><br></br>
+                     <button onClick={()=>{sendMessage(items._id)}}>Send</button> */}
 
-                                        <ol >
-                                          {/* <li> */}
-                                          {descrip.text}
+                  </li>
 
-                                          {/* </li> */}
-                                        </ol>
-                                        :
-                                        <>
-                                          {descrip.text}
-                                          <br></br>
-                                        </>
-
-                                  }
-                                </>
-                              )
-                            }).slice(0, 3)
-                          }
-
-                          <span onClick={() => navigate(`/Jobdetails/${job._id}`)} style={{ color: "blue" }} className={styles.seeMore}>
-                            ...read more
-                          </span>
-
-
-                        </p>
-                      </div>
-                    </>
+                     
+                          </ul>
+                          </>
                   )
                 })
-                : <p style={{ color: "red", marginLeft: "32%" }}>No Record Found</p>
+                : <p style={{ color: "red", marginLeft: "42%" }}>No Record Found</p>
+                
+                
+              }
 
-            }
 
-          </div>
-        </>
-      }
+            </div>
+              </>
+            :
+            
+            <div id={styles.JobCardWrapper} >
+
+            {
+     jobSeekers.length > 0 ?
+
+            jobSeekers.map((job, i) => {
+              return (
+                <>
+                  <div className={styles.JobCard} key={i}>
+                  <div style={{display:"flex"}}>
+        <div className={styles.LeftTable}>
+                        <span className={styles.span}>Name :  </span> <br></br>
+                        <span className={styles.span}>Age :</span><br></br>
+                        <span className={styles.span}> Email Id :</span><br></br>
+                        <span className={styles.span}> Phone number :</span><br></br>
+                        <span className={styles.span}> Notice Period :</span><br></br>
+                        <span className={styles.span}>Qualification :</span><br></br>
+                        <span className={styles.span}>Experience : </span><br></br>
+                        <span className={styles.span}> Current CTC :</span><br></br>
+                        <span className={styles.span}>Expected CTC : </span><br></br>
+                        <span className={styles.span}>Registered On : </span><br></br>
+                    </div>
+            
+                    <div className={styles.RightTable}>
+                    <span className={styles.span} onClick={()=>{navigate(`/BIAddmin@CheckStudentProfile/${job._id}`)}}><span style={{color:"blue", textDecoration:"underline"}}  >{job.name}</span></span><br></br>      
+                    <span className={styles.span}>{job.age? <span style={{ color: "blue" }}>{job.age} </span>:<span style={{color:"red"}}>Not updated</span> }</span><br></br>
+                    <span className={styles.span}> {job.email?<span style={{ color: "blue" }}>{job.email} </span>: <span style={{color:"red"}}>Not updated</span>}</span><br></br>
+                    <span className={styles.span}> {job.phoneNumber?<span style={{ color: "blue" }}>{job.phoneNumber} </span>: <span style={{color:"red"}}>Not updated</span>}</span><br></br>
+                    <span className={styles.span}> {job.NoticePeriod?<span style={{ color: "blue" }}>{job.NoticePeriod} </span>: <span style={{color:"red"}}>Not updated</span>}</span><br></br>
+                    <span className={styles.span}> {job.Qualification?<span style={{ color: "blue" }}>{job.Qualification} </span>:<span style={{color:"red"}}>Not updated</span>}</span><br></br>
+                    <span className={styles.span}> {job.Experiance?<span style={{ color: "blue" }}>{job.Experiance} </span>:<span style={{color:"red"}}>Not updated</span>}   </span><br></br>
+                    <span className={styles.span}>{job.currentCTC?<span style={{ color: "blue" }}>{job.currentCTC} </span>:<span style={{color:"red"}}>Not updated</span>} </span><br></br>
+                    <span className={styles.span}> {job.ExpectedSalary?<span style={{ color: "blue" }}>{job.ExpectedSalary} </span>:<span style={{color:"red"}}>Not updated</span>}</span><br></br>          
+                    <span className={styles.span} style={{ color: "blue" }}>{new Date(job.createdAt).toLocaleString(
+                      "en-US",
+                      {
+                        month: "short",
+                        day: "2-digit",
+                        year: "numeric",
+                      }
+                    )} </span>
+                    </div>
+            
+                  </div>
+
+                  <div className={styles.Down}>
+                  <span className={styles.span}> Skills : {job.Skills?<span style={{ color: "blue" }}>{job.Skills} </span>:<span style={{color:"red"}}>Not updated</span>}</span><br></br>
+                  <span className={styles.span}> Account Status:  {job.isApproved?
+  <button style={{  marginLeft:"20px" }} className={styles.MoApproved} >Approved</button>
+  :<button  style={{  marginLeft:"20px" }} className={styles.MoApprove}>Approve</button>}</span><br></br>
+  <span className={`${styles.span} ${styles.LastDown}`}> Message:  {job.message ? <span className={styles.span} style={{ color: "blue", marginLeft:"5px" }}  >{job.message} </span> : <span style={{ color: "red", marginLeft:"5px" }} >No message Sent yet</span>}</span><br></br>
+                    
+                  </div>
+
+      
+                  </div>
+                </>
+              )
+            })
+            : <p style={{ color: "red", marginLeft: "32%" }}>No Record Found</p>
+
+          }
+            
+            </div>
+            
+}
     </>
   )
 }
 
-export default ArchiveJobs
+
+export default ArchivedUser

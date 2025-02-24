@@ -32,23 +32,26 @@
     display: flex;
     margin: 0px;
     margin-left: -35px;
-
 }
-.dot{
-    height: 8px;
-  width: 8px;
-  background-color:rgb(7, 252, 7);
-
-  border-radius: 50%;
-  display: inline-block;
-}
-
-.li {
-    display: inline-block;
-    padding-top: 0.5%;
-    padding-bottom: 0.5%;
-    width:8%;
-    border: 1px solid rgb(9, 247, 247);
+.ul:nth-child(even) {
+    background:rgb(242, 244, 245)
+  }
+  .dot{
+      height: 8px;
+      width: 8px;
+      background-color:rgb(7, 252, 7);
+      
+      border-radius: 50%;
+      display: inline-block;
+    }
+    
+    .li {
+        display: inline-block;
+        padding-top: 0.5%;
+        padding-bottom: 0.5%;
+        width:8%;
+        border : 1px solid rgb(215, 223, 226);
+    /* border: 1px solid rgb(9, 247, 247); */
     text-align: center;
 }
 .Name{

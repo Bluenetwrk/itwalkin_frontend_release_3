@@ -28,7 +28,7 @@ getContact()
     <>
 
         <div style={{marginLeft:"10px"}}>
-        <h2 style={{marginLeft:"10px", fontWeight:"800", marginTop:"5px"}}> Contact Us </h2>
+        <h2 style={{marginLeft:"1px", fontWeight:"800", marginTop:"5px"}}> Contact Us </h2>
 
         
     <div style={{width:"93%"}}> {HTMLReactParser(Contact.toString())} </div>
@@ -50,4 +50,3 @@ getContact()
 }
 
 export default Contact
-

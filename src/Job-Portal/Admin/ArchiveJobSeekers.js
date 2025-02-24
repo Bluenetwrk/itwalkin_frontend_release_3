@@ -77,7 +77,6 @@ const [Candidate, setCandidate] = useState([])
     // const headers = { authorization: userid +" "+ atob(JSON.parse(localStorage.getItem("EmpLog"))) };
     const headers = { authorization: 'BlueItImpulseWalkinIn' };
 
-    // await axios.get("StudentProfile/getAllJobseekers", { headers })
     await axios.get(`/StudentProfile/getLimitArchiveJobseeker/${recordsPerPage}`, { params: { currentPage }, headers })
 
       .then((res) => {
@@ -88,8 +87,8 @@ const [Candidate, setCandidate] = useState([])
           return new Date(b.createdAt) - new Date(a.createdAt);
         });
         let elements=  sortedate.flatMap( subArray =>  subArray.Archived).forEach(  element => {
-          //  setjobSeekers(oldArray => [...oldArray,element] )
-           setjobSeekers([element])
+           setjobSeekers(oldArray => [...oldArray,element] )
+          //  setjobSeekers([element])
           //  setjobSeekers(oldArray => [...oldArray, ...sortedate.flatMap(subArray => subArray.Archived)]);
 
         })
@@ -142,12 +141,14 @@ const [Candidate, setCandidate] = useState([])
           getTagId();
         }
       }, [jobTagsIds])
-      // let ids = jobTagsIds.map((id) => {
-      //   return (
-      //     id._id
-      //   )
-      // })
-      const uniqueList = [...new Set(jobTagsIds)];
+      let ids = jobTagsIds.map((id) => {
+        return (
+          id.Archived._id
+        )
+      })
+      // console.log(ids)
+
+      const uniqueList = [...new Set(ids)];
 
       async function getTagId() {
         settotalCount(jobTagsIds.length)
@@ -180,8 +181,8 @@ const [Candidate, setCandidate] = useState([])
 
   async function filterByJobTitle(key) {
     if(count==1){
-      setjobSeekers([])
     }
+    setjobSeekers([])
     setCount(prev=>prev+1)
     const isIndex=Active.findIndex((present)=>{
 return(
@@ -224,23 +225,6 @@ return(
   }
 
       
-  // async function getAllJobSeekers() {
-  //   const headers = { authorization: 'BlueItImpulseWalkinIn' };
-  //   await axios.get("/StudentProfile/getArchiveJobs", {headers})
-  //     .then((res) => {
-  //       let result = (res.data)
-  //       let sortedate = result.sort(function (a, b) {
-  //         return new Date(a.updatedAt) - new Date(b.updatedAt);
-  //       });
-  //       let elements=  sortedate.flatMap( subArray =>  subArray.Archived).forEach(  element => {
-  //         setjobSeekers(oldArray => [...oldArray,element] )
-  //     })
-  //     })
-  // }
-
-  // useEffect(()=>{
-  //   getAllJobSeekers()
-  // },[])
 
   return (
     <>
@@ -315,20 +299,20 @@ return(
 
     <div style={{marginLeft:"7px"}} className={styles.Uiwarpper}>
               <ul className={styles.ul}>
-                <li className={`${styles.li} ${styles.name}`}><b>Name</b></li>
-                <li className={`${styles.li} ${styles.phoneNumber}`}><b>Phone Number</b></li>
-                <li className={`${styles.li} ${styles.age}`}><b>Age</b></li>
+                <li style={{ backgroundColor: " rgb(40, 4, 99)", color:"white" }} className={`${styles.li} ${styles.name}`}><b>Name</b></li>
+                <li style={{ backgroundColor: " rgb(40, 4, 99)", color:"white" }} className={`${styles.li} ${styles.phoneNumber}`}><b>Phone Number</b></li>
+                <li style={{ backgroundColor: " rgb(40, 4, 99)", color:"white" }} className={`${styles.li} ${styles.age}`}><b>Age</b></li>
 
-                <li className={`${styles.li} ${styles.Aadhar}`}><b>Aadhar</b></li>
-                <li className={`${styles.li} ${styles.Pdate}`}><b>Reg. Date</b></li>
-                <li className={`${styles.li} ${styles.Pdate}`}><b>Last Log</b>
+                <li style={{ backgroundColor: " rgb(40, 4, 99)", color:"white" }} className={`${styles.li} ${styles.Aadhar}`}><b>Aadhar</b></li>
+                <li style={{ backgroundColor: " rgb(40, 4, 99)", color:"white" }} className={`${styles.li} ${styles.Pdate}`}><b>Reg. Date</b></li>
+                <li style={{ backgroundColor: " rgb(40, 4, 99)", color:"white" }} className={`${styles.li} ${styles.Pdate}`}><b>Last Log</b>
                 {/* <span style={{display:"block"}}><span onClick={TopToBottonOnline} style={{ fontSize:"20px", cursor:"pointer", marginRight:"20px"}}>&darr;</span>
                                                             <span style={{ fontSize:"20px", cursor:"pointer"}} onClick={BottonToTopOnline}>&uarr;</span></span> */}
                                                             </li>
-                <li className={`${styles.li} ${styles.Qualification}`}><b>Qualif.</b></li>
-                <li className={`${styles.li} ${styles.Skills}`}><b>Skills </b></li>
-                <li className={`${styles.li} ${styles.Approval}`}><b>Approval </b></li>
-                <li className={`${styles.li} ${styles.Message}`}>Message</li>
+                <li style={{ backgroundColor: " rgb(40, 4, 99)", color:"white" }} className={`${styles.li} ${styles.Qualification}`}><b>Qualif.</b></li>
+                <li style={{ backgroundColor: " rgb(40, 4, 99)", color:"white" }} className={`${styles.li} ${styles.Skills}`}><b>Skills </b></li>
+                <li style={{ backgroundColor: " rgb(40, 4, 99)", color:"white" }} className={`${styles.li} ${styles.Approval}`}><b>Approval </b></li>
+                <li style={{ backgroundColor: " rgb(40, 4, 99)", color:"white" }} className={`${styles.li} ${styles.Message}`}>Message</li>
 
 
               </ul>
@@ -342,7 +326,7 @@ return(
 
                       <li className={`${styles.li} ${styles.name}`} 
     onClick={()=>{navigate(`/BIAddmin@CheckStudentArchived/${items._id}`)}}><Link style={{color:"blue"}}>
-     {items.name}
+     {items.name?items.name:"nnn"}
       </Link></li>
                 <li className={`${styles.li} ${styles.phoneNumber}`}>{items.phoneNumber?items.phoneNumber:"not available"}</li>
                 <li className={`${styles.li} ${styles.age}`}>{items.age?items.age:"not availabel"}</li>

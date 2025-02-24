@@ -84,13 +84,6 @@ function changeComments(e){
     setcomments({ ...comments, comment: e, name:CommentName})
 }
 
-// async function deletecom(){
-//   await axios.put(`/BlogRoutes/deleteComment`)
-//   .then((res)=>{
-//     console.log(res)
-//   })
-
-// }
 
 async function handleComment(){
   if(!userid){
@@ -154,12 +147,12 @@ async function deletComment(id){
   return (
     <>
 
-        <p style={{marginLeft:"20px", fontWeight:"800", marginTop:"10px", marginBottom:"-15px"}}> Blogs  </p>
+        <p class={styles.blogHeading} style={{fontWeight:"800", marginTop:"15px", marginBottom:"25px", fontSize:"30px"}}> Blogs  </p>
 
-    <div style={{display:"flex", marginTop:"20px"}}>
+    <div class={styles.blogButtonContainer} style={{display:"flex", marginTop:"20px"}}>
                             {/* <img style={{ height:"25px", color:"grey", marginTop:"20px", marginLeft:"8%", cursor:"pointer",
              width:"28px"}} onClick={()=>{navigate(-1)}}  src={Arrowimage} /> */}
-             <button style={{  color:"grey", marginTop:"10px", marginLeft:"8%", cursor:"pointer",}} 
+             <button class={styles.blogBackButton} style={{marginTop:"10px", marginLeft:"0%", cursor:"pointer",}} 
              onClick={()=>{navigate(-1)}}>Back</button>
               
     </div>
@@ -167,55 +160,10 @@ async function deletComment(id){
       {screenSize.width>850 ?
 
         <>
-       
-    {/* <div style={{display:"flex"}}>
-
-        <div style={{marginTop:"20px", marginLeft:"30px"}}>
-        <img className={styles.imageV} src={jobs.Logo?jobs.Logo : profileDp}/>
-        
-        </div>
-        <div>
-       
-          <table>
-          <tr>
-    <td colSpan={2} style={{backgroundColor:" rgb(40, 4, 99)"}}>
-    <div style={{textAlign:"center", color:"white", fontWeight:"550"}}>{jobs.jobTitle ? jobs.jobTitle[0].toUpperCase()+jobs.jobTitle.slice(1)
-    : <li style={{ display: "inline-block" }}>Blog Title</li>}</div>
-    </td>
-  </tr>
-       
-  <tr>
-    <th>Company Name</th>
-    <td>{jobs.companyName ? jobs.companyName : <li style={{ display: "inline-block" }}>Company name</li>}</td>
-  </tr>
-  <tr>
-    <th>Posted by</th>
-    <td>{jobs.name ? jobs.name : <li style={{ display: "inline-block" }}>Name</li>}</td>
-  </tr>
-  <tr>
-    <th>Tags</th>
-    <td>{jobs.skills ? jobs.skills : <li style={{ display: "inline-block" }} >Tags</li>}</td>
-  </tr>
-  <tr>
-    <th>Posted Date</th>
-    <td>
-    {jobs.updatedAt ? new Date(jobs.updatedAt).toLocaleString(
-                  "en-US",
-                  {
-                    month: "short",
-                    day: "2-digit",
-                    year: "numeric",
-                  }
-                ) : <li style={{ display: "inline-block" }}>Date</li>
-                }
-    </td>
-  </tr>
-  </table>
-  </div>
-  </div>         */}
-  {/* <h1 style={{textAlign:"center", fontSize:"xx-large"}}>{jobs.jobTitle[0].toUpperCase()+jobs.jobTitle.slice(1)}</h1> */}
-  <h1 style={{textAlign:"center", fontSize:"xx-large"}}>{jobs.jobTitle}</h1>
+    
+  <h1 class={styles.answerTitle} style={{textAlign:"start", fontSize:"xx-large"}}>{jobs?.jobTitle?jobs.jobTitle.charAt(0).toUpperCase()+jobs.jobTitle.substring(1):"Loading...."}</h1>
 <div style={{textAlign:"center"}}>
+  <div class={styles.ansPostedDetails}>
   <span>By {jobs.name}</span>
   <span> . {new Date(jobs.createdAt).toLocaleString(
                   "en-US",
@@ -225,16 +173,8 @@ async function deletComment(id){
                     year: "numeric",
                   }
                 )}</span> . 
-  {/* <span> 
-  {new Date(jobs.updatedAt).toLocaleString(
-                  "en-US",
-                  {
-                    month: "short",
-                    day: "2-digit",
-                    year: "numeric",
-                  }
-                )}
-  </span> */}
+</div>
+  
 </div>
 
 { jobs.comments?
@@ -242,10 +182,14 @@ async function deletComment(id){
         return(
           <>
           {/* <p> {com.name} : {com.comment}</p> */}
-          <p style={{textAlign:"center",}}> 
+          <p class={styles.submittedAnsdiv} style={{textAlign:"center",}}> 
              {/* {com.comment} */}
-             {HTMLReactParser(com.comment.toString())}  
+             <div class={styles.submittedAnsDetail}>
+             {HTMLReactParser(com.comment.toString())} 
+             </div>
+             <div class={styles.submittedAnsBy}>
              ({com.name}) 
+             </div> 
              {userid===com.id?<button onClick={()=>{deletComment(com.id)}} >delete</button>
           :""
           } </p>
@@ -257,27 +201,7 @@ async function deletComment(id){
     }
 
 
-    {/* {
-     jobs.comments?
-      jobs.comments.map((com)=>{
-        return(
-  <table style={{marginLeft:"6px", marginTop:"0px", width:"98.8%"}}>
-          <tr >
-    <td colSpan={2} > 
-          <p> {com.name} : {com.comment}</p>
-{userid===com.id?
-          <button onClick={()=>{deletComment(com.id)}} >delete</button>
-          :""
-          }
-          </td>
-          </tr>
-          </table>
-        )
-      })
-      :""
-     }  */}
-       {/* <input placeholder='Answer' maxLength={300} style={{height:"30px", marginLeft:"6px", width:"95%"}} type='text' value={comments.comment} onChange={(e)=>{changeComments(e)}} /><br></br>
-       <button onClick={handleComment} style={{height:"30px", marginLeft:"6px"}}>Comment</button> */}
+<div class={styles.ansCommentSection}>   
  {  
      jobs.comments?
      jobs.comments.filter((com)=>{
@@ -290,12 +214,12 @@ async function deletComment(id){
       value={comments.comment} onChange={(e)=>{changeComments(e)}} /> */}
 <JoditEditor  ref={editor}   onChange={(e)=>{changeComments(e)}} />
 
-       <button onClick={handleComment} style={{height:"30px", marginLeft:"6px"}}>Answer</button> 
+       <button class={styles.ansBtn} onClick={handleComment} style={{height:"30px", marginLeft:"6px"}}>Answer</button> 
        </>
        :""
       :""
 } 
-
+</div>
           </>
           :
           <>
@@ -305,7 +229,7 @@ async function deletComment(id){
               <>
                 <div className={styles.JobCard} >
                 <div className={styles.JobTitleDateWrapper}>
-        <p className={styles.QuestionjobTitle} >{jobs.jobTitle}</p>
+        <p className={styles.QuestionjobTitle} >{jobs?.jobTitle?jobs.jobTitle.charAt(0).toUpperCase()+jobs.jobTitle.substring(1):"Loading...."}</p>
         <p className={styles.Date}>{new Date(jobs.createdAt).toLocaleString(
           "en-US",
           {
@@ -338,9 +262,7 @@ async function deletComment(id){
       })
       :""
      }
-{/* 
-  <input placeholder='Comment' style={{height:"30px", marginLeft:"6px", width:"95%"}} type='text' value={comments.comment} onChange={(e)=>{changeComments(e)}} /><br></br>
-<button onClick={handleComment} style={{height:"30px", marginLeft:"6px"}}>Comment</button> */}
+
 
 {  
      jobs.comments?
@@ -349,26 +271,18 @@ async function deletComment(id){
        userid===com.id
         )
       }).length<1?<>
-              {/* <input placeholder='Answer' maxLength={300} style={{height:"30px", marginLeft:"6px", width:"95%"}} type='text' 
-              value={HTMLReactParser(com.comment.toString())}              
-
-              onChange={(e)=>{changeComments(e)}} /><br></br> */}
+             
 <JoditEditor  ref={editor}   onChange={(e)=>{changeComments(e)}} />
 
 
-       <button onClick={handleComment} style={{height:"30px", marginLeft:"6px"}}>Comment</button> 
+       <button onClick={handleComment} style={{height:"30px", marginLeft:"6px"}} class={styles.ansBtn}>Comment</button> 
        </>
        :""
       :""
 } 
 
-          {/* <img className={styles.logo} src={jobs.Logo} />
-          <span className={styles.companyName} >{jobs.companyName}  </span>  */}
-        {/* </div> */}
-{/* 
-        <span className={styles.jobtypeAndDate}>Posted By</span> : {jobs.name ? jobs.name :
-         <span >Name</span>} */}
-            
+
+        
                 </div>
               </>
 

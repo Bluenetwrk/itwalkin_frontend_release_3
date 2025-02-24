@@ -31,7 +31,7 @@ getAboutUs()
      
 
         <div style={{marginLeft:"10px"}}>
-        <h2 style={{marginLeft:"10px", fontWeight:"800", marginTop:"5px"}}> About Us </h2>
+        <h2 style={{marginLeft:"2px", fontWeight:"800", marginTop:"5px"}}> About Us </h2>
 
      
          <div style={{width:"93%"}}> {HTMLReactParser(AboutUs.toString())} </div>
@@ -50,4 +50,3 @@ getAboutUs()
 }
 
 export default AboutUs
-

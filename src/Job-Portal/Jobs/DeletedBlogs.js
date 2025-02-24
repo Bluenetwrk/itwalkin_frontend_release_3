@@ -49,6 +49,10 @@ function Blogs() {
   const [NotFound, setNotFound] = useState("")
   const [Active, setActive] = useState([])
   const screenSize = useScreenSize();
+  
+    const [jobTagIds, setjobTagIds] = useState([])
+  
+    const [jobTagsIds, setJobTagsIds] = useState([])
 
   let adminLogin = localStorage.getItem("AdMLog")
 
@@ -60,6 +64,7 @@ function Blogs() {
 
 
   let navigate = useNavigate()
+  const [totalCount, settotalCount] = useState()
 
   let recordsperpage = JSON.parse(sessionStorage.getItem("recordsperpageHome"))
 
@@ -74,36 +79,169 @@ function Blogs() {
   const number = [...Array(npage + 1).keys()].slice(1)
 
 
-  async function getjobs() {
-    setCount(1)
-    setActive([])
-    setPageLoader(true)
-    setNoPageFilter(false)
+  async function gettotalcount() {
     const headers = { authorization: 'BlueItImpulseWalkinIn' };
-    await axios.get("/BlogRoutes/getAllBlogs", { headers })
+    await axios.get("/BlogRoutes/getTotalCountDeletedJobseeker", { headers })
       .then((res) => {
-        let result = res.data
+        // console.log(res.data.result)
+        settotalCount(res.data.result)
+      }).catch((err) => {
+        alert("something went wrong")
+      })
+  }
+
+  async function getjobs() {
+    // setjobSeekers([])
+    setNoPageFilter(false)
+    setActive([])
+    setJobTagsIds([])
+
+    // let userid = JSON.parse(localStorage.getItem("EmpIdG"))
+    // const headers = { authorization: userid +" "+ atob(JSON.parse(localStorage.getItem("EmpLog"))) };
+    const headers = { authorization: 'BlueItImpulseWalkinIn' };
+
+    await axios.get(`/BlogRoutes/getLimitDeletedBlogs/${recordsPerPage}`, { params: { currentPage }, headers })
+
+      .then((res) => {
+        let result = (res.data)
+        // console.log(result)
+        gettotalcount()
         let sortedate = result.sort(function (a, b) {
           return new Date(b.createdAt) - new Date(a.createdAt);
         });
-        setJobs(sortedate)
-        setFilterjobs(sortedate)
-        setPageLoader(false)
-      }).catch((err) => {
-        alert("some thing went wrong")
+        let elements=  sortedate.flatMap( subArray =>  subArray.Archived).forEach(  element => {
+           setJobs(oldArray => [...oldArray,element] )
+          //  setjobSeekers([element])
+          //  setjobSeekers(oldArray => [...oldArray, ...sortedate.flatMap(subArray => subArray.Archived)]);
+
+        })
+        
       })
   }
-  useEffect(() => {
-    getjobs()
-  }, [])
 
-  async function applyforJob(id) {
-    navigate("/JobSeekerLogin", { state: { Jid: id } })
-   
+      useEffect(() => {
+        if (jobTagsIds.length < 1) {
+      getjobs()
+  
+        } else {
+          getTagId();
+        }
+      }, [currentPage, recordsPerPage])
+
+  function firstPage() {
+    setCurrentPage(1)
   }
-  async function applyforOtherJob(Link) {
 
-    window.open(`${Link}`)
+  function previous() {
+    if (currentPage !== 1) {
+      setCurrentPage(currentPage - 1)
+    }
+  }
+  function changeCurrent(id) {
+    setCurrentPage(id)
+  }
+  function next() {
+    if (currentPage !== npage) {
+      setCurrentPage(currentPage + 1)
+    }
+  }
+  function last() {
+    setCurrentPage(npage)
+  }
+
+  function handleRecordchange(e){  
+    sessionStorage.setItem("recordsperpageSerachCand", JSON.stringify(e.target.value));
+    let recordsperpage = JSON.parse(sessionStorage.getItem("recordsperpageSerachCand"))
+    setrecordsPerPage(recordsperpage) 
+    setCurrentPage(1)
+  }
+
+      useEffect(() => {
+        if (jobTagsIds.length > 0) {
+          getTagId();
+        }
+      }, [jobTagsIds])
+      let ids = jobTagsIds.map((id) => {
+        return (
+          id.Archived._id
+        )
+      })
+      // console.log(ids)
+
+      const uniqueList = [...new Set(ids)];
+
+      async function getTagId() {
+        settotalCount(jobTagsIds.length)
+        await axios.get(`/BlogRoutes/DeletedBlogsTagsIds/${uniqueList}`, {
+          params: { currentPage, recordsPerPage }
+        })
+          .then((res) => {
+            let result = res.data
+            let sortedate = result.sort((a, b) => {
+              return new Date(b.createdAt) - new Date(a.createdAt);
+            });
+            // setjobSeekers(sortedate)
+            let elements=  sortedate.flatMap( subArray =>  subArray.Archived).forEach(  element => {
+              setJobs(oldArray => [...oldArray,element] )
+           })
+            if (count == 2) {
+              setCurrentPage(1)
+            }
+    
+          })
+      }
+    
+      useEffect(()=>{
+        if(Active.length>0){
+          changeTags()
+        }
+      },[Active])
+    
+  
+
+  async function filterByJobTitle(key) {
+    if(count==1){
+    }
+    setJobs([])
+    setCount(prev=>prev+1)
+    const isIndex=Active.findIndex((present)=>{
+return(
+  present===key
+)
+    })
+    if(isIndex<0){
+    var updatedActive = [...Active, key]; // Add the new key to the array
+    setActive(updatedActive);
+    }else{
+      const IndexId=Active.findIndex((present)=>{
+        return(
+          present==key
+        )
+            })
+            Active.splice(IndexId,1)
+                if(Active.length===0){
+                  getjobs()
+                  return false
+    }
+    changeTags()
+  }}
+
+  async function changeTags(key){
+    setNoPageFilter(true)
+    setFiltereredjobs(key)
+    await axios.get(`/BlogRoutes/getTagsDeletedBlogs/${Active}`)
+      .then((res) => {
+        let result = (res.data)
+        // console.log('hkjkjk',result)
+        let sortedate = result.sort((a, b) => {
+          return new Date(b.createdAt) - new Date(a.createdAt);
+        });
+        setJobTagsIds(sortedate)
+    //     let elements=  sortedate.flatMap(element => {
+    //       setCandidate(oldArray => [...oldArray,element] )
+    //  });
+        // setCandidate(sortedate)
+      })
   }
 
   const [searchKey, setsearchKey] = useState()
@@ -314,57 +452,7 @@ function Blogs() {
 
   const [count, setCount]=useState(1)
 
-  async function filterByJobTitle(key) {
-
-    if(count==1){
-      setJobs("")
-
-    }
-    setCount(prev=>prev+1)
-
-    const isIndex=Active.findIndex((present)=>{
-return(
-  present===key
-)
-    })
-    if(isIndex<0){
-    setActive([...Active, key])
-    }else{
-      const IndexId=Active.findIndex((present)=>{
-        return(
-          present==key
-        )
-            })
-            Active.splice(IndexId,1)
-                if(Active.length===0){
-      getjobs()
-    }
-    if(jobs.length>0){
-         let removedItems = jobs.filter((tags)=>{
-            return(
-              !tags.Tags.includes(key)
-               
-        )
-      })
-      setJobs(removedItems)
-      return false
-    }
-  }
-
-    setNoPageFilter(true)
-    setFiltereredjobs(key)
-    await axios.get(`/BlogRoutes/getTagsJobs/${key}`)
-      .then( (res) => {
-        let result = (res.data)
-        let sortedate = result.sort( (a, b) => {
-          return new Date(b.createdAt) - new Date(a.createdAt);
-        });
-        let elements=  sortedate.flatMap(element => {
-          setJobs(oldArray => [...oldArray,element] )
-     });
-      })
-  }
-
+  
   async function getLocation(jobLocation) {
     setCount(1)
     setActive(["Banglore"])
@@ -561,28 +649,22 @@ await axios.delete(`/BlogRoutes/deleteCheckBoxArray/${checkBoxValue}`, {headers}
              
               <li style={{ backgroundColor: " rgb(40, 4, 99)" }} className={`${styles.li} ${styles.BlogApply}`}>Read/Answer</li>
 
-              {                  adminLogin?
-    <li style={{ backgroundColor: " rgb(40, 4, 99)" }} className={`${styles.li} ${styles.checkBox}`}>
-                                 Delete            
-                      </li>
-                      :""
-                      }
+
             </ul>
             {PageLoader ?
               <Puff height="80" width="80" color="#4fa94d" ariaLabel="bars-loading" wrapperStyle={{ marginLeft: "49%", marginTop: "50px" }} />
               : ""
             }
-            {
-              jobs.length > 0 ?
+          {   jobs.length > 0 ?
                 jobs.map((items, i) => {
                   return (
 
                     <ul className={styles.ul} key={i}>
                       {
                           items.question?
-                          <li className={`${styles.li} ${styles.BlogJtitle}`} onClick={() => navigate(`/Answerdetails/${btoa(items._id)}`)} style={{ cursor: "pointer", textDecoration: "underline", color: "blue" }}>{items.jobTitle}</li>
+                          <li className={`${styles.li} ${styles.BlogJtitle}`} onClick={() => navigate(`/BIAddmin@CheckDeletedQuestions/${(items._id)}`)} style={{ cursor: "pointer", textDecoration: "underline", color: "blue" }}>{items.jobTitle}</li>
                           :
-                          <li className={`${styles.li} ${styles.BlogJtitle}`} onClick={() => navigate(`/Blogdetails/${btoa(items._id)}`)} style={{ cursor: "pointer", textDecoration: "underline", color: "blue" }}>{items.jobTitle}</li>
+                          <li className={`${styles.li} ${styles.BlogJtitle}`} onClick={() => navigate(`/BIAddmin@CheckDeletedBlog/${(items._id)}`)} style={{ cursor: "pointer", textDecoration: "underline", color: "blue" }}>{items.jobTitle}</li>
                         }                      
                                <li className={`${styles.li} ${styles.BlogSource}`} >Itwalkin</li>
 
@@ -611,20 +693,14 @@ await axios.delete(`/BlogRoutes/deleteCheckBoxArray/${checkBoxValue}`, {headers}
                       <li className={`${styles.li} ${styles.BlogApply}`}>
                         {
                           items.question?
-                          <button className={styles.AnswerApplybutton} onClick={() => { navigate(`/Answerdetails/${btoa(items._id)}`) }}>Answer</button>
+                          <button className={styles.AnswerApplybutton} onClick={() => { navigate(`/BIAddmin@CheckDeletedQuestions/${items._id}`) }}>Answer</button>
                           :
-                          <button className={styles.BlogApplybutton} onClick={() => { navigate(`/Blogdetails/${btoa(items._id)}`) }}>Read</button>
+                          <button className={styles.BlogApplybutton} onClick={() => { navigate(`/BIAddmin@CheckDeletedBlog/${items._id}`) }}>Read</button>
                         }
                        
                     </li>
 
-                    {                  adminLogin?
-    <li className={`${styles.li} ${styles.checkBox}`}>
-                      <input type="checkbox"  onClick={() => { checkBoxforDelete(items._id) }} />
-                                             
-                      </li>
-                      :""
-                      }
+
                   </ul>
                   )
                 })

@@ -1,3 +1,28 @@
+/* ------------------------Employer registration back button starts-------------------- */
+.empRegBackBtnContainer{
+    background-color: red;
+
+}
+.empRegBackButton{
+    background-color: rgb(40, 4, 99);
+    color: white;
+    border: none;
+    padding: 10px 15px 10px 15px;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-top: 10px;
+    font-weight: 500;
+    font-size: 1.0rem; 
+    margin-left: 25px;
+}
+.empRegBackButton:hover{
+    background-color: white;
+    color: rgb(40, 4, 99);
+    border: 2px solid  rgb(40, 4, 99);
+}
+
+
+/* ----------Employer registration back button ends---------------- */
 .EntireFullWrapper {
     background-color: rgb(240, 240, 241);
     padding-top: 2%;
@@ -11,7 +36,11 @@
     border-radius: 10px;
     background-color: white;
 }
-
+@media(max-width:1200px){
+    .empRegBackButton{
+        margin-left:15px;
+    }
+}
 @media (max-width:650px){
     .EntireWrapper {
         margin-left: 9%;  
@@ -65,6 +94,10 @@
     /* background-color: rgb(168, 168, 224); */
 }
 @media(max-width:500px){
+    .empRegBackButton{
+        margin-left:10px;
+        margin-bottom:10px;
+    }
     
 .imageView {
     height: 110px;
@@ -218,7 +251,7 @@ h4 {
     width:95%;
     margin-left: 2%;
     margin-top: 2%;
-
+        
 
 }
 
@@ -233,6 +266,7 @@ h4 {
     width: 110px;
     /* background-color: red; */
     border:none;
+    z-index:999;
 }
 .EmpfileView {
     height: 100px;

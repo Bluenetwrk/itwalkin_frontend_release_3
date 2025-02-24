@@ -26,7 +26,7 @@ getServices()
   return ( 
         <>
         <div style={{marginLeft:"10px"}}>
-        <h2 style={{marginLeft:"10px", fontWeight:"800", marginTop:"5px"}}> Our Services</h2>
+        <h2 style={{marginLeft:"1px", fontWeight:"800", marginTop:"5px"}}> Our Services</h2>
 
     <div style={{width:"93%"}}> {HTMLReactParser(Services.toString())} </div>
        
@@ -45,4 +45,3 @@ getServices()
 }
 
 export default Services
-

@@ -33,11 +33,11 @@ const [message, setmessage] = useState("")
       setPageLoader(true)
       let userid = atob(JSON.parse(localStorage.getItem("IdLog")))
       const headers = { authorization: userid +" "+ atob(JSON.parse(localStorage.getItem("AdMLog"))) };
-        await axios.get(`/StudentProfile/getArchivedProfile/${params.CP}`,{headers})
+        await axios.get(`/StudentProfile/getDeletedProfile/${params.CP}`,{headers})
             .then((res) => {
                 let result = res.data
-                // console.log(result)
-                  setProfileData([result.Archived[0]])           
+                console.log(result)
+                  setProfileData([result])             
         setPageLoader(false)
 
             }).catch((err) => {
@@ -62,7 +62,7 @@ const [message, setmessage] = useState("")
 profileData.map((item, i) => {
     return (
         <div key={i}>
-        <img className={styles.imageV} src={item.image?item.image : profileDp}/>
+        <img className={styles.imageV} src={item.Archived.image?item.Archived.image : profileDp}/>
         
         </div>
     )
@@ -103,19 +103,19 @@ profileData.map((item, i) => {
                 profileData.map((item, i) => {
                     return (
                         <ul className={styles.ulR} key={i}>
-                            <li className={`${styles.Hli}`}>{item.name?item.name:<li className={styles.Nli}>Not Updated</li>}</li>
-                            <li className={`${styles.Hli}`}>{item.email?item.email:<li className={styles.Nli}>Not Updated</li>}</li>
-                       <li className={` ${styles.Hli}`}>{item.phoneNumber?item.phoneNumber:<li className={styles.Nli}>Not Updated</li>}</li>
-                       <li className={` ${styles.Hli}`}>{item.Aadhar?item.Aadhar:<li className={styles.Nli}>Not Updated</li>}</li>
-                       <li className={` ${styles.Hli}`}>{item.panCard?item.panCard:<li className={styles.Nli}>Not Updated</li>}</li>
-                       <li className={` ${styles.Hli}`}>{item.age?item.age:<li className={styles.Nli}>Not Updated</li>}</li>
-                       <li className={` ${styles.Hli}`}>{item.NoticePeriod?item.NoticePeriod:<li className={styles.Nli}>Not Updated</li>}</li>
-                       <li className={` ${styles.Hli}`}>{item.ExpectedSalary?item.ExpectedSalary:<li className={styles.Nli}>Not Updated</li>}</li>
-                       <li className={` ${styles.Hli}`}>{item.currentCTC?item.currentCTC:<li className={styles.Nli}>Not Updated</li>}</li>
-                       <li className={` ${styles.Hli}`}>{item.Qualification?item.Qualification:<li className={styles.Nli}>Not Updated</li>}</li>
-                       <li className={` ${styles.Hli}`}>{item.Skills?item.Skills:<li className={styles.Nli}>Not Updated</li>}</li>
-                       <li className={` ${styles.Hli}`}>{item.Experiance?item.Experiance:<li className={styles.Nli}>Not Updated</li>}</li>
-                       <li className={` ${styles.Hli}`}>{item.ipAddress?item.ipAddress:<li className={styles.Nli}>could not fetch the Ip Address</li>}</li>
+                            <li className={`${styles.Hli}`}>{item.Archived.name?item.Archived.name:<li className={styles.Nli}>Not Updated</li>}</li>
+                            <li className={`${styles.Hli}`}>{item.Archived.email?item.Archived.email:<li className={styles.Nli}>Not Updated</li>}</li>
+                       <li className={` ${styles.Hli}`}>{item.Archived.phoneNumber?item.Archived.phoneNumber:<li className={styles.Nli}>Not Updated</li>}</li>
+                       <li className={` ${styles.Hli}`}>{item.Archived.Aadhar?item.Archived.Aadhar:<li className={styles.Nli}>Not Updated</li>}</li>
+                       <li className={` ${styles.Hli}`}>{item.Archived.panCard?item.Archived.panCard:<li className={styles.Nli}>Not Updated</li>}</li>
+                       <li className={` ${styles.Hli}`}>{item.Archived.age?item.Archived.age:<li className={styles.Nli}>Not Updated</li>}</li>
+                       <li className={` ${styles.Hli}`}>{item.Archived.NoticePeriod?item.Archived.NoticePeriod:<li className={styles.Nli}>Not Updated</li>}</li>
+                       <li className={` ${styles.Hli}`}>{item.Archived.ExpectedSalary?item.Archived.ExpectedSalary:<li className={styles.Nli}>Not Updated</li>}</li>
+                       <li className={` ${styles.Hli}`}>{item.Archived.currentCTC?item.Archived.currentCTC:<li className={styles.Nli}>Not Updated</li>}</li>
+                       <li className={` ${styles.Hli}`}>{item.Archived.Qualification?item.Archived.Qualification:<li className={styles.Nli}>Not Updated</li>}</li>
+                       <li className={` ${styles.Hli}`}>{item.Archived.Skills?item.Archived.Skills:<li className={styles.Nli}>Not Updated</li>}</li>
+                       <li className={` ${styles.Hli}`}>{item.Archived.Experiance?item.Archived.Experiance:<li className={styles.Nli}>Not Updated</li>}</li>
+                       <li className={` ${styles.Hli}`}>{item.Archived.ipAddress?item.Archived.ipAddress:<li className={styles.Nli}>could not fetch the Ip Address</li>}</li>
                       
                        {/* <li className={` ${styles.Hli} ${styles.Approval}`}>
                         {

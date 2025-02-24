@@ -32,8 +32,8 @@ const responsive = {
 
 
 function Home() {
-
   const [jobs, setJobs] = useState([])
+
   const [nopageFilter, setNoPageFilter] = useState(true)
   const [Filtereredjobs, setFiltereredjobs] = useState([])
 
@@ -48,6 +48,12 @@ function Home() {
   const [NotFound, setNotFound] = useState("")
   const [Active, setActive] = useState([])
   const screenSize = useScreenSize();
+
+  const [count, setCount] = useState(1)
+  const [jobTagIds, setjobTagIds] = useState([])
+
+  const [jobTagsIds, setJobTagsIds] = useState([])
+
 
   let JobLocationTags = ["Bangalore"]
 
@@ -82,66 +88,174 @@ function Home() {
   const records = jobs.slice(firstIndex, lastIndex)//0,5
 
   const npage = Math.ceil(totalCount / recordsPerPage) // last page
- 
 
-  async function gettotalcount() {
-    const headers = { authorization: 'BlueItImpulseWalkinIn' };
-    await axios.get("/jobpost/getTotalCount", { headers })
-      .then((res) => {
-        // console.log(res.data.result)
-        settotalCount(res.data.result)
-      }).catch((err) => {
-        alert("something went wrong")
-      })
-  }
+    const [jobSeekers , setjobSeekers] = useState([])
 
-  async function getjobs() {
-    setCount(1)
-    setActive([])
-    setJobTagsIds([])
-
-    setPageLoader(true)
-    setNoPageFilter(false)
-    const headers = { authorization: 'BlueItImpulseWalkinIn' };
-    // await axios.get("/jobpost/getHomejobs", { headers })
-    await axios.get(`/jobpost/getLimitJobs/${recordsPerPage}`, { params: { currentPage }, headers })
-      .then((res) => {
-        let result = (res.data)
-        gettotalcount()
-
-        let sortedate = result.sort(function (a, b) {
-          return new Date(b.createdAt) - new Date(a.createdAt);
-        });
-     
-        setJobs(sortedate)
-        setFilterjobs(sortedate)
-        setPageLoader(false)
-      }).catch((err) => {
-        console.log(err)
-        alert("some thing went wrong")
-      })
-  }
-
-  useEffect(() => {
-    if (jobTagsIds.length < 1) {
-      getjobs()
-    } else {
-      getTagId();
+  
+    async function gettotalcount() {
+      const headers = { authorization: 'BlueItImpulseWalkinIn' };
+      await axios.get("/jobpost/getTotalCountArchiveJobseeker", { headers })
+        .then((res) => {
+          // console.log(res.data.result)
+          settotalCount(res.data.result)
+        }).catch((err) => {
+          alert("something went wrong")
+        })
     }
-  }, [currentPage, recordsPerPage])
-
-
-
-  async function applyforJob(id) {
-    navigate("/JobSeekerLogin", { state: { Jid: id } })
-   
-  }
-  async function applyforOtherJob(Link) {
-   
-    window.open(`${Link}`)
-  }
-
-
+  
+    async function getjobs() {
+      // setjobSeekers([])
+      setNoPageFilter(false)
+      setActive([])
+      setJobTagsIds([])
+  
+      // let userid = JSON.parse(localStorage.getItem("EmpIdG"))
+      // const headers = { authorization: userid +" "+ atob(JSON.parse(localStorage.getItem("EmpLog"))) };
+      const headers = { authorization: 'BlueItImpulseWalkinIn' };
+  
+      await axios.get(`/jobpost/getLimitArchiveJobseeker/${recordsPerPage}`, { params: { currentPage }, headers })
+  
+        .then((res) => {
+          let result = (res.data)
+          gettotalcount()
+          let sortedate = result.sort(function (a, b) {
+            return new Date(b.createdAt) - new Date(a.createdAt);
+          });
+          let elements=  sortedate.flatMap( subArray =>  subArray.Archived).forEach(  element => {
+             setJobs(oldArray => [...oldArray,element] )
+            //  setjobSeekers([element])
+            //  setjobSeekers(oldArray => [...oldArray, ...sortedate.flatMap(subArray => subArray.Archived)]);
+  
+          })
+          
+        })
+    }
+  
+        useEffect(() => {
+          if (jobTagsIds.length < 1) {
+        getjobs()
+    
+          } else {
+            getTagId();
+          }
+        }, [currentPage, recordsPerPage])
+  
+    function firstPage() {
+      setCurrentPage(1)
+    }
+  
+    function previous() {
+      if (currentPage !== 1) {
+        setCurrentPage(currentPage - 1)
+      }
+    }
+    function changeCurrent(id) {
+      setCurrentPage(id)
+    }
+    function next() {
+      if (currentPage !== npage) {
+        setCurrentPage(currentPage + 1)
+      }
+    }
+    function last() {
+      setCurrentPage(npage)
+    }
+  
+    function handleRecordchange(e){  
+      sessionStorage.setItem("recordsperpageSerachCand", JSON.stringify(e.target.value));
+      let recordsperpage = JSON.parse(sessionStorage.getItem("recordsperpageSerachCand"))
+      setrecordsPerPage(recordsperpage) 
+      setCurrentPage(1)
+    }
+  
+        useEffect(() => {
+          if (jobTagsIds.length > 0) {
+            getTagId();
+          }
+        }, [jobTagsIds])
+        let ids = jobTagsIds.map((id) => {
+          return (
+            id.Archived._id
+          )
+        })
+        // console.log(ids)
+  
+        const uniqueList = [...new Set(ids)];
+  
+        async function getTagId() {
+          settotalCount(jobTagsIds.length)
+          await axios.get(`/jobpost/ArchiveJobseekerTagsIds/${uniqueList}`, {
+            params: { currentPage, recordsPerPage }
+          })
+            .then((res) => {
+              let result = res.data
+              let sortedate = result.sort((a, b) => {
+                return new Date(b.createdAt) - new Date(a.createdAt);
+              });
+              // setjobSeekers(sortedate)
+              let elements=  sortedate.flatMap( subArray =>  subArray.Archived).forEach(  element => {
+                setJobs(oldArray => [...oldArray,element] )
+             })
+              if (count == 2) {
+                setCurrentPage(1)
+              }
+      
+            })
+        }
+      
+        useEffect(()=>{
+          if(Active.length>0){
+            changeTags()
+          }
+        },[Active])
+      
+    
+  
+    async function filterByJobTitle(key) {
+      if(count==1){
+      }
+      setJobs([])
+      setCount(prev=>prev+1)
+      const isIndex=Active.findIndex((present)=>{
+  return(
+    present===key
+  )
+      })
+      if(isIndex<0){
+      var updatedActive = [...Active, key]; // Add the new key to the array
+      setActive(updatedActive);
+      }else{
+        const IndexId=Active.findIndex((present)=>{
+          return(
+            present==key
+          )
+              })
+              Active.splice(IndexId,1)
+                  if(Active.length===0){
+                    getjobs()
+                    return false
+      }
+      changeTags()
+    }}
+  
+    async function changeTags(key){
+      setNoPageFilter(true)
+      setFiltereredjobs(key)
+      await axios.get(`/jobpost/getTagsArchiveJobseekers/${Active}`)
+        .then((res) => {
+          let result = (res.data)
+          // console.log('hkjkjk',result)
+          let sortedate = result.sort((a, b) => {
+            return new Date(b.createdAt) - new Date(a.createdAt);
+          });
+          setJobTagsIds(sortedate)
+      //     let elements=  sortedate.flatMap(element => {
+      //       setCandidate(oldArray => [...oldArray,element] )
+      //  });
+          // setCandidate(sortedate)
+        })
+    }
+  
   const [searchKey, setsearchKey] = useState()
   // const [jobs, setJobs] = useState([])  
   async function searchIcon(key) {
@@ -266,58 +380,6 @@ function Home() {
   const [jobLocation, setjobLocation] = useState("AllL")
   const [jobTitle, setjobTitle] = useState("")
  
-  async function getjobTitleAll(all) {
-    await axios.get("/jobpost/getjobs")
-      .then((res) => {
-        let result = (res.data)
-        let sortedate = result.sort((a, b) => {
-          return new Date(b.createdAt) - new Date(a.createdAt);
-        });
-        setJobs(sortedate)
-
-      })
-  }
-  async function getjobsAllLoc(all) {
-    await axios.get("/jobpost/getjobs")
-      .then((res) => {
-        let result = (res.data)
-        let sortedate = result.sort((a, b) => {
-          return new Date(b.createdAt) - new Date(a.createdAt);
-        });
-        setJobs(sortedate)
-      })
-  }
-
-  async function JobtitleFilter(jobTitle) {
-    await axios.get(`/jobpost/getjobTitle/${jobTitle}`)
-      .then((res) => {
-        let result = (res.data)
-        let sortedate = result.sort(function (a, b) {
-          return new Date(b.createdAt) - new Date(a.createdAt);
-        });
-        setJobs(sortedate)
-       
-      }).catch((err) => {
-        alert("some thing went wrong")
-      })
-  }
-
-
-  async function getBothFiltered(jobTitle) {
-
-    await axios.post(`/jobpost/getBothjobFilter/${jobLocation}`, { jobTitle })
-      .then((res) => {
-        let result = (res.data)
-        let sortedate = result.sort(function (a, b) {
-          return new Date(b.createdAt) - new Date(a.createdAt);
-        });
-        setJobs(sortedate)
-       
-      }).catch((err) => {
-        alert("some thing went wrong")
-      })
-  }
-
 
   function firstPage() {
     setCurrentPage(1)
@@ -348,98 +410,25 @@ function Home() {
     setCurrentPage(1)
   }
 
-  const [count, setCount] = useState(1)
-  const [jobTagIds, setjobTagIds] = useState([])
+  
 
-  const [jobTagsIds, setJobTagsIds] = useState([])
+  const [checkBoxValue, setCheckBoxValue] = useState([])
+  const [check, setCheck] = useState(true)
 
-
-  useEffect(() => {
-    if (jobTagsIds.length > 0) {
-      getTagId();
-    }
-  }, [jobTagsIds])
-
-  let ids = jobTagsIds.map((id) => {
-    return (
-      id._id
-    )
-  })
-  const uniqueList = [...new Set(ids)];
-  async function getTagId() {
-    settotalCount(uniqueList.length)
-    await axios.get(`/jobpost/jobTagsIds/${uniqueList}`, {
-      params: { currentPage, recordsPerPage }
-    })
+  async function ArchiveCheckBoxArray() {
+    let userid = atob(JSON.parse(localStorage.getItem("IdLog")))
+    const headers = { authorization: userid + " " + atob(JSON.parse(localStorage.getItem("AdMLog"))) };
+    await axios.delete(`/jobpost/ArchiveCheckBoxArray/${checkBoxValue}`, { headers })
       .then((res) => {
-       
-        let result = res.data
-        let sortedate = result.sort((a, b) => {
-          return new Date(b.createdAt) - new Date(a.createdAt);
-        });
-        setJobs(sortedate)
-        if (count == 2) {
-          setCurrentPage(1)
+        if (res.data === "success") {
+          getjobs()
+          alert("Archived succesfully")
+          window.location.reload()
         }
-
+      }).catch((err) => {
+        alert("some thing went wrong")
       })
   }
-
-  useEffect(()=>{
-    if(Active.length>0){
-      changeTags()
-    }
-  },[Active])
-
-
-  async function filterByJobTitle(key) {
-
-    if (count == 1) {
-      setJobs([])
-    }
-    setCount(prev => prev + 1)
-    const isIndex = Active.findIndex((present) => {
-      return (
-        present === key
-      )
-    })
-    if (isIndex < 0) {
-     
-     
-      var updatedActive = [...Active, key];
-      setActive(updatedActive);
-
-    } else {
-      const IndexId = Active.findIndex((present) => {
-        return (
-          present == key
-        )
-      })
-      Active.splice(IndexId, 1)
-      if (Active.length === 0) {
-        getjobs()
-        return false
-      }
-   
-      changeTags()
-    }}
-    async function changeTags(key){
-     
-
-    setNoPageFilter(true)
-    setFiltereredjobs(key)
-    await axios.get(`/jobpost/getTagsJobs/${Active}`)
-      .then((res) => {
-        let result = (res.data)
-       
-        let sortedate = result.sort((a, b) => {
-          return new Date(b.createdAt) - new Date(a.createdAt);
-        });
-        setJobTagsIds(sortedate)
-       
-      })
-  }
-
   async function getLocation(jobLocation) {
     setCount(1)
     setActive(["Banglore"])
@@ -459,24 +448,6 @@ function Home() {
       })
   }
 
-
-  const [checkBoxValue, setCheckBoxValue] = useState([])
-  const [check, setCheck] = useState(true)
-
-  async function ArchiveCheckBoxArray() {
-    let userid = atob(JSON.parse(localStorage.getItem("IdLog")))
-    const headers = { authorization: userid + " " + atob(JSON.parse(localStorage.getItem("AdMLog"))) };
-    await axios.delete(`/jobpost/ArchiveCheckBoxArray/${checkBoxValue}`, { headers })
-      .then((res) => {
-        if (res.data === "success") {
-          getjobs()
-          alert("Archived succesfully")
-          window.location.reload()
-        }
-      }).catch((err) => {
-        alert("some thing went wrong")
-      })
-  }
   async function deleteCheckedJobs() {
     let userid = atob(JSON.parse(localStorage.getItem("IdLog")))
     const headers = { authorization: userid + " " + atob(JSON.parse(localStorage.getItem("AdMLog"))) };
@@ -665,7 +636,7 @@ function Home() {
 
 
               <li style={{ backgroundColor: " rgb(40, 4, 99)" }} className={`${styles.li} ${styles.Skills}`}>Skills Required</li>
-              <li style={{ backgroundColor: " rgb(40, 4, 99)" }} className={`${styles.li} ${styles.Apply}`}>Apply</li>
+              {/* <li style={{ backgroundColor: " rgb(40, 4, 99)" }} className={`${styles.li} ${styles.Apply}`}>Apply</li> */}
 
             </ul>
             {PageLoader ?
@@ -681,7 +652,7 @@ function Home() {
                       <ul className={styles.ul} key={i}>
                         {/* } */}
 
-                        <li className={`${styles.li} ${styles.Jtitle}`} onClick={() => navigate(`/Jobdetails/${btoa(items._id)}`)} style={{ cursor: "pointer", textDecoration: "underline", color: "blue" }}>{items.jobTitle.charAt(0).toUpperCase()+items.jobTitle.substring(1)}</li>
+                        <li className={`${styles.li} ${styles.Jtitle}`} onClick={() => navigate(`/BIAddmin@CheckArchivedJob/${items._id}`)} style={{ cursor: "pointer", textDecoration: "underline", color: "blue" }}>{items.jobTitle.charAt(0).toUpperCase()+items.jobTitle.substring(1)}</li>
                         <li className={`${styles.li} ${styles.Source}`} >Itwalkin</li>
 
                         {
@@ -723,18 +694,6 @@ function Home() {
                         <li className={`${styles.li} ${styles.Skills}`}>{items.skills}
                         </li>
 
-                        <li className={`${styles.li} ${styles.Apply}`}>
-                          {
-                            adminLogin ?
-                             
-                              <input type="checkbox" onClick={() => { checkBoxforDelete(items._id) }} />
-
-                              :
-                           
-                                <button className={styles.Applybutton} onClick={() => { applyforJob(items._id) }}>Apply</button>
-
-                          }
-                        </li>
                       </ul>
                     )
                   })
