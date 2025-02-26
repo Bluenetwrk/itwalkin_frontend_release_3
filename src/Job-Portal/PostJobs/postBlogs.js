@@ -126,6 +126,10 @@ function PostBlogs(props) {
 
 
     async function postJob() {
+        if(!jobtitle){
+            alert("fields are missing")
+            return false
+        }
         // let userid = JSON.parse(localStorage.getItem("EmpIdG"))
         // const headers = { authorization: userid + " " + atob(JSON.parse(localStorage.getItem("EmpLog"))) };
         const headers = { authorization: 'BlueItImpulseWalkinIn' };

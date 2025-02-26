@@ -256,7 +256,7 @@ function Nav(props) {
                 </div>
 
               </>
-              // ............Admin Login...................... SuperAdminLogin
+              // ............Admin Login....................
               :
               (adminLogin) ?
                 <>
@@ -272,7 +272,6 @@ function Nav(props) {
                       <NavLink to="/Services" className={Styles.link} style={navLinkStyles}>Services</NavLink>
                       <NavLink to="/BIAddmin@PostJob" className={Styles.link} style={navLinkStyles}> Post Job</NavLink>
                       <NavLink to="/BIAddmin@AdminCareerPostJobs" className={Styles.link} style={navLinkStyles}>Career Job Post</NavLink>
-                      <NavLink to="/Blogs" className={Styles.link} style={navLinkStyles}>Blogs</NavLink>
         {/* <p onClick={()=>{navigate("/Blogs")}} className={`${Styles.textinMobileSodeBar} `}>Blogs </p> */}
 
                       <div className={`${Styles.link} ${Styles.IconeWrapper}`}>
@@ -306,6 +305,7 @@ function Nav(props) {
                         <NavLink to="BIAddmin@AllEmployees" className={Styles.linkSuperAdmin} style={navLinkStyles}>All Employers</NavLink>
                         <NavLink to="BIAddmin@AllEmployeeAdmin" className={Styles.linkSuperAdmin} style={navLinkStyles}>All Jobseeker</NavLink>
                         {/* <NavLink to="BIAddmin@AllJobSeekers" className={Styles.linkSuperAdmin} style={navLinkStyles}>All old design Jobseekers</NavLink> */}
+                        <NavLink to="/Blogs" className={Styles.link} style={navLinkStyles}>All Blogs</NavLink>
                         <NavLink to="BIAddmin@AdminUpdate" className={Styles.linkSuperAdmin} style={navLinkStyles}> UpdateWebsite</NavLink>
                         <NavLink to="BIAddmin@AllIds" className={Styles.linkSuperAdmin} style={navLinkStyles}> All Email Id's</NavLink>
                         <NavLink to="BIAddAdminAccess" className={Styles.linkSuperAdmin} style={navLinkStyles}> Admin Access</NavLink>

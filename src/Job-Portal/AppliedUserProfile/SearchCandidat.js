@@ -39,16 +39,17 @@ function SearchCandidate() {
 
   const [Candidate, setCandidate] = useState([])
   const [FilCandidate, setFilCandidate] = useState([])
-  const [nopageFilter, setNoPageFilter] = useState(false)
   const [Filtereredjobs, setFiltereredjobs] = useState([])
-
+  
   const [jobSeekers, setjobSeekers] = useState([])
   const [NotFound, setNotFound] = useState("")
   const [Result, setResult] = useState(false)
   const screenSize = useScreenSize();
+  const [nopageFilter, setNoPageFilter] = useState(false)
   const [Active, setActive] = useState([])
   
   const Location = ['Bangalore']
+
   const [totalCount, settotalCount] = useState()
 
   let recordsperpage = JSON.parse(sessionStorage.getItem("recordsperpageSerachCand"))

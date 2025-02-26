@@ -115,7 +115,7 @@ function DeletedBlogs() {
             <li className={`${styles.li} ${styles.Qualif}`}><b>Qualif </b></li>
 
             <li className={`${styles.li} ${styles.Skills}`}><b>Skills Required</b></li>
-            {/* <li className={`${styles.li} ${styles.DeleteAction}`} ><b>Arch. Date</b></li> */}
+            <li className={`${styles.li} ${styles.DeleteAction}`} ><b>Arch. Date</b></li>
 
 
           </ul>
@@ -149,9 +149,9 @@ function DeletedBlogs() {
                     <li className={`${styles.li} ${styles.Qualif}`}>{items.qualification} </li>
 
                     <li className={`${styles.li} ${styles.Skills}`}>{items.skills}</li>
-                    {/* <li className={`${styles.li} ${styles.DeleteAction}`} >
+                    <li className={`${styles.li} ${styles.DeleteAction}`} >
                       <button className={styles.DeleteButton} onClick={() =>
-                       { DeleteJob(items._id) }} >Delete</button></li> */}
+                       { DeleteJob(items._id) }} >Delete</button></li>
                   </ul>
                 )
               })

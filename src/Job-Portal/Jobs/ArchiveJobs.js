@@ -636,7 +636,7 @@ function Home() {
 
 
               <li style={{ backgroundColor: " rgb(40, 4, 99)" }} className={`${styles.li} ${styles.Skills}`}>Skills Required</li>
-              {/* <li style={{ backgroundColor: " rgb(40, 4, 99)" }} className={`${styles.li} ${styles.Apply}`}>Apply</li> */}
+              <li style={{ backgroundColor: " rgb(40, 4, 99)" }} className={`${styles.li} ${styles.Apply}`}>Delete</li>
 
             </ul>
             {PageLoader ?
@@ -693,6 +693,11 @@ function Home() {
                         <li className={`${styles.li} ${styles.qualification}`}>{items.qualification}</li>
                         <li className={`${styles.li} ${styles.Skills}`}>{items.skills}
                         </li>
+              <li  className={`${styles.li} ${styles.Apply}`}>
+              {/* <input type="checkbox" onClick={() => { checkBoxforDelete(items._id) }} /> */}
+
+                </li>
+
 
                       </ul>
                     )

@@ -227,27 +227,78 @@ function ArchivedUser() {
           // setCandidate(sortedate)
         })
     }
-  
-      
-  // async function getAllJobSeekers() {
-  //   // let userid = atob(JSON.parse(localStorage.getItem("IdLog")))
-  //   // const headers = { authorization: userid +" "+ atob(JSON.parse(localStorage.getItem("AdMLog"))) };
-  //   const headers = { authorization: 'BlueItImpulseWalkinIn' };
-  //   await axios.get("/StudentProfile/getAllArchivedJobseekers", {headers})
-  //     .then((res) => {
-  //       let result = (res.data)
-  //   // console.log(result)
-  //       let sortedate = result.sort(function (a, b) {
-  //         return new Date(a.updatedAt) - new Date(b.updatedAt);
-  //       });
-    //       setjobSeekers(sortedate)  
-  //     })
-  // }
+// .......Last Active Sorting.......
+function LastActDescendingOrder (){
+  let newjob = [...jobSeekers]
+  const collator = new Intl.Collator(undefined, {
+    numeric: true,
+    sensitivity: 'base'
+  });
+  const sorted = newjob.sort((a, b) => {
+    return collator.compare(a.Archived.updatedAt, b.Archived.updatedAt)
+  })
+  setjobSeekers(sorted)
+}
 
-  // useEffect(()=>{
-  //   getAllJobSeekers()
-  // },[])
+function LastActAscendingOrder (){
+  let newjob = [...jobSeekers]
+  const collator = new Intl.Collator(undefined, {
+    numeric: true,
+    sensitivity: 'base'
+  });
+  const sorted = newjob.sort((a, b) => {
+    return collator.compare(b.Archived.updatedAt, a.Archived.updatedAt)
+  })
+  setjobSeekers(sorted)
+}
+    // ......Registration Sort......
+function RegDescendingOrder (){
+  let newjob = [...jobSeekers]
+  const collator = new Intl.Collator(undefined, {
+    numeric: true,
+    sensitivity: 'base'
+  });
+  const sorted = newjob.sort((a, b) => {
+    return collator.compare(a.Archived.createdAt, b.Archived.createdAt)
+  })
+  setjobSeekers(sorted)
+}
 
+function RegAscendingOrder (){
+  let newjob = [...jobSeekers]
+  const collator = new Intl.Collator(undefined, {
+    numeric: true,
+    sensitivity: 'base'
+  });
+  const sorted = newjob.sort((a, b) => {
+    return collator.compare(b.Archived.createdAt, a.Archived.createdAt)
+  })
+  setjobSeekers(sorted)
+}
+    // ......deleted  Sort......
+function DeleteDescendingOrder (){
+  let newjob = [...jobSeekers]
+  const collator = new Intl.Collator(undefined, {
+    numeric: true,
+    sensitivity: 'base'
+  });
+  const sorted = newjob.sort((a, b) => {
+    return collator.compare(a.createdAt, b.createdAt)
+  })
+  setjobSeekers(sorted)
+}
+
+function DeleteAscendingOrder (){
+  let newjob = [...jobSeekers]
+  const collator = new Intl.Collator(undefined, {
+    numeric: true,
+    sensitivity: 'base'
+  });
+  const sorted = newjob.sort((a, b) => {
+    return collator.compare(b.createdAt, a.createdAt)
+  })
+  setjobSeekers(sorted)
+}
   return (
     <>
 
@@ -327,12 +378,26 @@ function ArchivedUser() {
                 <li style={{ backgroundColor: " rgb(40, 4, 99)", color:"white" }} className={`${styles.li} ${styles.age}`}><b>Age</b></li>
 
                 <li style={{ backgroundColor: " rgb(40, 4, 99)", color:"white" }} className={`${styles.li} ${styles.Aadhar}`}><b>Aadhar</b></li>
-                <li style={{ backgroundColor: " rgb(40, 4, 99)", color:"white" }} className={`${styles.li} ${styles.Pdate}`}><b>Reg. Date</b></li>
-                <li style={{ backgroundColor: " rgb(40, 4, 99)", color:"white" }} className={`${styles.li} ${styles.Pdate}`}><b>Last Log</b></li>
-                <li style={{ backgroundColor: " rgb(40, 4, 99)", color:"white" }} className={`${styles.li} ${styles.Pdate}`}><b>Delete Date</b></li>
-                {/* <span style={{display:"block"}}><span onClick={TopToBottonOnline} style={{ fontSize:"20px", cursor:"pointer", marginRight:"20px"}}>&darr;</span>
-                                                            <span style={{ fontSize:"20px", cursor:"pointer"}} onClick={BottonToTopOnline}>&uarr;</span></span> */}
-                                                            
+                <li style={{ backgroundColor: " rgb(40, 4, 99)", color:"white" }} className={`${styles.li} ${styles.Pdate}`}><b>Reg. Date</b>
+                <p style={{ marginTop:"-0px", marginLeft:"-35px"}}>
+                                              <i onClick={RegAscendingOrder} className={`${styles.arrow} ${styles.up}`}> </i>
+                                              <i onClick={RegDescendingOrder} className={`${styles.arrow} ${styles.down}`}></i>
+                                          </p> 
+                </li>
+                <li style={{ backgroundColor: " rgb(40, 4, 99)", color:"white" }} className={`${styles.li} ${styles.Pdate}`}><b>Last Log</b>
+                <p style={{ marginTop:"-0px", marginLeft:"-35px"}}>
+                                              <i onClick={LastActAscendingOrder} className={`${styles.arrow} ${styles.up}`}> </i>
+                                              <i onClick={LastActDescendingOrder} className={`${styles.arrow} ${styles.down}`}></i>
+                                          </p> 
+                </li>
+                <li style={{ backgroundColor: " rgb(40, 4, 99)", color:"white" }} className={`${styles.li} ${styles.Pdate}`}><b>Delete Date</b>
+                <p style={{ marginTop:"-0px", marginLeft:"-35px"}}>
+                                              <i onClick={DeleteAscendingOrder} className={`${styles.arrow} ${styles.up}`}> </i>
+                                              <i onClick={DeleteDescendingOrder} className={`${styles.arrow} ${styles.down}`}></i>
+                                          </p> 
+                </li>
+
+
                 <li style={{ backgroundColor: " rgb(40, 4, 99)", color:"white" }} className={`${styles.li} ${styles.Qualification}`}><b>Qualif.</b></li>
                 <li style={{ backgroundColor: " rgb(40, 4, 99)", color:"white" }} className={`${styles.li} ${styles.Skills}`}><b>Skills </b></li>
                 <li style={{ backgroundColor: " rgb(40, 4, 99)", color:"white" }} className={`${styles.li} ${styles.Approval}`}><b>Approval </b></li>

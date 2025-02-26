@@ -36,6 +36,7 @@ function PostJobs(props) {
     const [jobDescription, setJobDescription] = useState("")
     const [jobtype, setJobtype] = useState("")
     const [salaryRange, setSalaryRange] = useState("")
+    // console.log(salaryRange)
     const [joblocation, setJobLocation] = useState("")
     const [qualification, setQualification] = useState("")
     const [experiance, setExperiance] = useState("")
@@ -318,7 +319,7 @@ if(key==='Full Time' ||key=== 'Contract' || key==='Internship' || key==='Part Ti
               })
             }
           </div>
-
+<div style={{}}>
 
                                         <h4 className={Style.jobHeadline}>Job Type</h4>
 
@@ -327,7 +328,7 @@ if(key==='Full Time' ||key=== 'Contract' || key==='Internship' || key==='Part Ti
                                         <label><input name="Job-Type" type="radio" checked={jobtype === "Internship"} value="Internship" onChange={(e) => { setJobtype(e.target.value); handleRadioTags(e.target.value) }} />Internship </label>
                                         <label><input name="Job-Type" type="radio" checked={jobtype === "Contract"} value="Contract" onChange={(e) => { setJobtype(e.target.value); handleRadioTags(e.target.value) }} />Contract   </label>
 
-                                        <h4 className={Style.jobHeadline}>Job Location**</h4>
+                                        <h4 className={Style.jobHeadline} style={{}}>Job Location**</h4>
                                         <div style={{ marginTop: "-10px" }}>
                                             <label><input name="Location" type="radio" checked={joblocation === "Bangalore"} value="Bangalore" onChange={(e) => { setJobLocation(e.target.value); setotherJobLocation(false) }} />Bangalore </label>
                                             <label><input name="Location" type="radio" checked={joblocation === "Hyderabad"} value="Hyderabad" onChange={(e) => { setJobLocation(e.target.value); setotherJobLocation(false) }} disabled />Hyderabad </label>
@@ -360,9 +361,10 @@ if(key==='Full Time' ||key=== 'Contract' || key==='Internship' || key==='Part Ti
                                                 : ""
 
                                         }
-
-                                        <h4 className={Style.jobHeadline}>Salary Per Annum in Lakhs** &nbsp;<span className={Style.hint}>(e.g 5 or 10)</span></h4>
-                                        <input maxLength="3" className={Style.inputbox} type="number" value={salaryRange} onChange={(e) => { handleSalary(e); handleRadioTags(e.target.value) }} />
+</div>
+                                        <h4 className={Style.jobHeadline}>Salary Per Annum in Lakhs** &nbsp;<span className={Style.hint}>(e.g 5 or 10)</span>&nbsp;&nbsp;
+                                        <label style={{fontWeight:"400"}}><input type='radio' checked={salaryRange=="Not disclosed"} value="Not disclosed" onChange={(e) => { setSalaryRange(e.target.value)}}/>Not disclose</label></h4>
+                                        <input maxLength="3" className={Style.inputbox}  value={salaryRange} onChange={(e) => { handleSalary(e); handleRadioTags(e.target.value) }} />
 
                                         <h4 className={Style.jobHeadline}>Experience Needed** &nbsp;<span className={Style.hint}>(e.g 5 or 10)</span></h4>
                                         <input maxLength="3" className={Style.inputbox} type="number" value={experiance} onChange={(e) => { handleExperiance(e); handleExpButton(e.target.value) }} />

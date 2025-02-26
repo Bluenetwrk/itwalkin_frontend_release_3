@@ -17,6 +17,7 @@ import { jobTags } from "../Tags"
 // import CreatableSelect  from 'react-select/creatable';
 
 function AskQuestion(props) {
+    
     const screenSize = useScreenSize();
     const editor = useRef(null)
 
@@ -117,7 +118,11 @@ function AskQuestion(props) {
     // }, [])
 
 
-    async function postJob() {        
+    async function postJob() {
+        if(!jobtitle){
+            alert("fields are missing")
+            return false
+        }        
     // let userid = JSON.parse(localStorage.getItem("StudId"))
     // const headers = { authorization: userid + " " + atob(JSON.parse(localStorage.getItem("StudLog"))) };
     const headers = { authorization: 'BlueItImpulseWalkinIn' };
