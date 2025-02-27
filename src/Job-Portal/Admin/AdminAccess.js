@@ -4,6 +4,8 @@ import { useState, useEffect } from 'react'
 import { useNavigate } from "react-router-dom"
 import axios from 'axios'
 
+import Swal from "sweetalert2";
+
 
 function AdminAccess() {
 
@@ -60,9 +62,64 @@ function AdminAccess() {
     const [email, setEmail] = useState("")  //Impulse@Admin321
     const [password, setPassword] = useState("") //Impulse@Admin123
     const [showPassword, setshowPassword] = useState(false)
+    // const [isSuperAdmin, setIsSuperAdmin] = useState(false)
     const [Error, setError] = useState("")
     const [AllAdmin, setAllAdmin] = useState([])
 
+    
+    async function deletejob(deleteid) {
+        let userid = atob(JSON.parse(localStorage.getItem("IdLog")))
+        const headers = { authorization: userid +" "+ atob(JSON.parse(localStorage.getItem("AdMLog"))) };
+        Swal.fire({
+          title: 'Are you sure?',
+          // icon: 'warning',
+          width:"260",
+          // position:"top",
+          customClass:{
+            popup:"alertIcon"
+          },
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'delete!'
+        }).then((result) => {
+          if (result.isConfirmed) {
+            axios.delete(`/admin/deleteAdmin/${deleteid}`, {headers})
+              .then((res) => {
+                // getjobs()
+                getAllAdmin()
+              })
+              .catch((err) => { alert("server error occured") })
+          }
+        })
+      }
+    async function giveAccess(id, isSuperAdmin){
+        // console.log(isSuperAdmin)
+        let userid = atob(JSON.parse(localStorage.getItem("IdLog")))
+        const headers = { authorization: userid +" "+ atob(JSON.parse(localStorage.getItem("AdMLog"))) };
+        Swal.fire({
+          title: 'Are you sure?',
+          // icon: 'warning',
+          width:"260",
+          // position:"top",
+          customClass:{
+            popup:"alertIcon"
+          },
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'to give SuperAdmin Access!'
+        }).then((result) => {
+          if (result.isConfirmed) {
+            axios.put(`/admin/giveAccess/${id}`,{isSuperAdmin},{headers})
+              .then((res) => {
+                // getjobs()
+                getAllAdmin()
+              })
+              .catch((err) => { alert("server error occured") })
+          }
+        })
+      }
     async function AdminRegister() {
         await axios.post("/admin/adminRegister", { email, password })
             .then((res) => {
@@ -96,7 +153,7 @@ function AdminAccess() {
 
     return (
         <>
-            <div style={{ display: "flex" }}>
+            {/* <div style={{ display: "flex" }}> */}
                 <div style={{ marginTop: "10px", marginLeft: "3%" }}>
                     <h3 id={styles.Loginpage}>Admin Super Admin Access</h3>
                     <p style={{ color: "red", fontStyle: "italic" }}>{Error}</p>
@@ -114,16 +171,40 @@ function AdminAccess() {
                     <button className={`${styles.button} ${styles.inputs}`} onClick={()=>{AdminRegister()}}>Register</button>
                 </div>
                 {/* Right Side */}
-                <div style={{marginLeft:"20%"}}>
-                    {
+                <div style={{}}>
+                    
+                                {/* <p  style={{  color:user.isSuperAdmin?"rgb(23, 209, 23)":"blue"}} key={i}>{user.email} {user.isSuperAdmin?<span> (Super Admin)</span>:""}</p> */}
+                           
+         <table >
+           <tr>
+    <th style={{ backgroundColor: " rgb(40, 4, 99)" , color:"white",textAlign:"center"}}>Email</th>
+    <th style={{ backgroundColor: " rgb(40, 4, 99)" , color:"white",textAlign:"center"}}>Admin Type</th>
+    <th style={{ backgroundColor: " rgb(40, 4, 99)" , color:"white",textAlign:"center"}}>Give super admin Access</th>
+    <th style={{ backgroundColor: " rgb(40, 4, 99)" , color:"white",textAlign:"center"}}>Delete</th>
+         </tr>
+                                    {
                         AllAdmin.map((user, i)=>{
                             return(
-                                <p  style={{  color:user.isSuperAdmin?"rgb(23, 209, 23)":"blue"}} key={i}>{user.email} {user.isSuperAdmin?<span> (Super Admin)</span>:""}</p>
+                                <>
+                                    {/* <tr style={user.isSuperAdmin?{backgroundColor:"green"}:""}> */}
+                                <tr style={user.isSuperAdmin ? { backgroundColor: "#3ef222" } :{}}>
+
+                                       <td style={{textAlign:"center"}} >{user.email}</td>
+                                       <td style={{textAlign:"center"}}>{user.isSuperAdmin===true?"Super Admin":"Admin"}</td>
+                                       <td style={{textAlign:"center"}}>
+                                        <button onClick={()=>{giveAccess(user._id, !user.isSuperAdmin)}}>Give Access</button>
+                                       </td>
+                                       <td style={{textAlign:"center"}}>
+                                        <button onClick={()=>{deletejob(user._id)}}>Delete</button>
+                                       </td>
+                                    </tr>
+                                </>
                             )
                         })
                     }                
+                    </table>
                 </div>
-            </div>
+            {/* </div> */}
         </>
     )
 }

@@ -446,7 +446,7 @@ function handleRecordchange(e){
       :
       <> 
 
-<p style={{marginLeft:"45%"}}>My Posted Jobs</p>
+<p style={{marginLeft:"45%"}}>My Posted Articles</p>
 <button className={styles.searchButton} onClick={() => {
           navigate("/Search-Candidate")
         }}>Search Candidate</button>

@@ -12,15 +12,15 @@ import socketIO from 'socket.io-client';
 
 
 function AdminPostedJobs(props) {
-  
+  let adminLogin = localStorage.getItem("AdMLog")
+    
+    useEffect(()=>{
+          if(!adminLogin){
+              navigate("/")
+          }
+      },[])
 
-  useEffect(()=>{
-    let adminLogin= localStorage.getItem("SupAdMLog")
-        if(!adminLogin){
-            navigate("/")
-        }
-    },[])
-
+ 
   // let location = useLocation()
   // let empName= location.state.gserid 
   let SuperAdminLogin = localStorage.getItem("SupAdMLog")

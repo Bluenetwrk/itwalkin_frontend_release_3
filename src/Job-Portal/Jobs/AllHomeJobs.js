@@ -14,6 +14,15 @@ import Footer from '../Footer/Footer';
 import { jobTags } from '../Tags'
 import HTMLReactParser from 'html-react-parser'
 
+const options = [
+  { value: "bangalore", label: "Bangalore, India", img:location},
+  { value: "San Francisco,USA", label: "San Francisco, USA", img:location},
+  { value: "berlin", label: "Berlin, Germany", img:location},
+  { value: "sydney", label: "Sydney, Australia", img:location},
+  { value: "london", label: "London, UK", img:  location},
+  { value: "berlin", label: "Berlin, Germany", img:location},
+];
+
 
 const responsive = {
   desktop: {
@@ -34,8 +43,12 @@ const responsive = {
 function Home() {
 
   const [jobs, setJobs] = useState([])
+  // const [selectedOption, setSelectedOption] = useState("");
+  const [selectedOption, setSelectedOption] = useState(options[0]);
+  const [isOpen, setIsOpen] = useState(false);
   const [nopageFilter, setNoPageFilter] = useState(true)
   const [Filtereredjobs, setFiltereredjobs] = useState([])
+  
 
   const [Filterjobs, setFilterjobs] = useState([])
 
@@ -82,7 +95,7 @@ function Home() {
   const records = jobs.slice(firstIndex, lastIndex)//0,5
 
   const npage = Math.ceil(totalCount / recordsPerPage) // last page
- 
+  
 
   async function gettotalcount() {
     const headers = { authorization: 'BlueItImpulseWalkinIn' };
@@ -112,7 +125,7 @@ function Home() {
         let sortedate = result.sort(function (a, b) {
           return new Date(b.createdAt) - new Date(a.createdAt);
         });
-     
+      
         setJobs(sortedate)
         setFilterjobs(sortedate)
         setPageLoader(false)
@@ -137,7 +150,7 @@ function Home() {
    
   }
   async function applyforOtherJob(Link) {
-   
+    
     window.open(`${Link}`)
   }
 
@@ -205,7 +218,7 @@ function Home() {
 
   function SdescendingOrder() {
     let newJobs = [...jobs]
- 
+  
     const collator = new Intl.Collator(undefined, {
       numeric: true,
       sensitivity: 'base'
@@ -218,7 +231,7 @@ function Home() {
 
   function SascendingOrder() {
     let newJObs = [...jobs]
-   
+    
     const collator = new Intl.Collator(undefined, {
       numeric: true,
       sensitivity: 'base'
@@ -231,7 +244,7 @@ function Home() {
 
   function EdescendingOrder() {
     let newjob = [...jobs]
-   
+    
     const collator = new Intl.Collator(undefined, {
       numeric: true,
       sensitivity: 'base'
@@ -245,7 +258,7 @@ function Home() {
 
   function EascendingOrder() {
     let newjob = [...jobs]
-   
+    
     const collator = new Intl.Collator(undefined, {
       numeric: true,
       sensitivity: 'base'
@@ -262,10 +275,10 @@ function Home() {
   }
 
 
- 
+  
   const [jobLocation, setjobLocation] = useState("AllL")
   const [jobTitle, setjobTitle] = useState("")
- 
+  
   async function getjobTitleAll(all) {
     await axios.get("/jobpost/getjobs")
       .then((res) => {
@@ -296,7 +309,7 @@ function Home() {
           return new Date(b.createdAt) - new Date(a.createdAt);
         });
         setJobs(sortedate)
-       
+        
       }).catch((err) => {
         alert("some thing went wrong")
       })
@@ -312,7 +325,7 @@ function Home() {
           return new Date(b.createdAt) - new Date(a.createdAt);
         });
         setJobs(sortedate)
-       
+        
       }).catch((err) => {
         alert("some thing went wrong")
       })
@@ -372,7 +385,7 @@ function Home() {
       params: { currentPage, recordsPerPage }
     })
       .then((res) => {
-       
+        
         let result = res.data
         let sortedate = result.sort((a, b) => {
           return new Date(b.createdAt) - new Date(a.createdAt);
@@ -404,9 +417,9 @@ function Home() {
       )
     })
     if (isIndex < 0) {
-     
-     
-      var updatedActive = [...Active, key];
+      
+      
+      var updatedActive = [...Active, key]; 
       setActive(updatedActive);
 
     } else {
@@ -420,7 +433,7 @@ function Home() {
         getjobs()
         return false
       }
-   
+    
       changeTags()
     }}
     async function changeTags(key){
@@ -431,12 +444,12 @@ function Home() {
     await axios.get(`/jobpost/getTagsJobs/${Active}`)
       .then((res) => {
         let result = (res.data)
-       
+        
         let sortedate = result.sort((a, b) => {
           return new Date(b.createdAt) - new Date(a.createdAt);
         });
         setJobTagsIds(sortedate)
-       
+        
       })
   }
 
@@ -453,7 +466,7 @@ function Home() {
           return new Date(b.createdAt) - new Date(a.createdAt);
         });
         setJobs(sortedate)
-     
+      
       }).catch((err) => {
         alert("some thing went wrong")
       })
@@ -503,7 +516,7 @@ function Home() {
     if (checkedid < 0) {
       setCheckBoxValue([...checkBoxValue, id])
     } else {
-     
+      
       let removeId = checkBoxValue.filter((foundId) => {
         return (
           foundId !== id
@@ -512,25 +525,126 @@ function Home() {
       setCheckBoxValue(removeId)
     }
   }
+ 
 
+  const dropdownRef = useRef(null);
+
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setIsOpen(false);
+      }
+    }
+ 
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
+  const handleSelect = (option) => {
+    setSelectedOption(option);
+    setIsOpen(false);
+  };
+  
   return (
     <>
       {screenSize.width > 850 ?
 
         <>
+        
           <div className={adminLogin ? styles.HomeNavConetenetWrapperAdmin : styles.HomeNavConetenetWrapper}>
             <div className={styles.LocationFilterWrapper}>
-              {
+              {/* {
                 JobLocationTags.map((location, i) => {
                   return (
-                    <>
-                      <label className={styles.JobLocationFilter}>
+                    <> */}
+        <div ref={dropdownRef} style={{ position: "relative" }}>
+      
+      <div style={{ display: "flex", marginLeft: "-40px", marginTop: "-5px" }}>
+        <button
+          onClick={() => setIsOpen((prev) => !prev)}
+          style={{
+            background: "none",
+            border: "none",
+            cursor: "pointer",
+            fontSize: "24px",
+            color: "#007bff",
+          }}
+        >
+          <img className={styles.jobLocationImage} src={location} alt="Location" />
+        </button>
+        <p style={{ marginTop: "17px", fontWeight: "bold", color: "white" }}>
+          {selectedOption?.label}
+        </p>
+      </div>
+
+     
+      {isOpen && (
+        <div
+          style={{
+            position: "absolute",
+            top: "45px",
+            left: "-43px",
+            background: "white",
+            color: "black",
+            borderRadius: "20px",
+            width: "160px",
+            padding: "15px",
+            boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.2)",
+            animation: "fadeIn 0.2s ease-in-out",
+          }}
+        >
+         
+          <div
+            style={{
+              position: "absolute",
+              top: "-9px",
+              left: "25px",
+              width: "0",
+              height: "0",
+              borderLeft: "10px solid transparent",
+              borderRight: "10px solid transparent",
+              borderBottom: "10px solid white",
+            }}
+          ></div>
+
+        
+          <ul style={{ listStyle: "none", padding: 0, margin: 0 }}>
+            {options.map((option) => (
+              <li
+                key={option.value}
+                onClick={() => handleSelect(option)}
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  padding: "10px",
+                  cursor: "pointer",
+                  borderRadius: "10px",
+                }}
+              >
+                <img
+                  src={option.img}
+                  alt={option.label}
+                  style={{ width: "22px", height: "22px", marginRight: "12px" }}
+                />
+                <span>{option.label}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+    </div>
+
+      {/* <p style={{ marginTop: "10px", fontWeight: "bold" }}>{selectedOption.label}</p> */}
+   
+                      {/* <label className={styles.JobLocationFilter}>
                         <input type="radio" checked disabled={location == "Chennai" ||
-                          location == "Hyderabad" || location == "Mumbai" || location == "Delhi"} name="filter" onClick={() => { getjobs() }} />{location}</label><br></br>
-                    </>
+                          location == "Hyderabad" || location == "Mumbai" || location == "Delhi"} name="filter" onClick={() => { getjobs() }} />{location}</label><br></br> */}
+                    {/* </>
                   )
                 })
-              }
+              } */}
             </div>
             <div className={styles.HomesearchBothForNavWrapper}>
               <input className={styles.inputboxsearchNav} type="text" placeholder='Search for a Job / Skills / Location / Experiance' onChange={(e) => { search(e) }} />
@@ -578,7 +692,7 @@ function Home() {
                     className={tags.value === "TECHNOLOGIES" || tags.value === "EDUCATION" || tags.value === "COLLEGE TYPE" || tags.value === "NOTICE PERIOD" || tags.value === "SALARY" ||
                       tags.value === "EXPERIENCE" || tags.value === "Job Type" || tags.value === "INDUSTRY" || tags.value === "TOOLS/PROTOCOLS" || tags.value === "COMPANY TYPE" || tags.value === "ROLE" ?
                       styles.TagHeading :
-                      //  Active === tags.value ?
+                      //  Active === tags.value ? 
                       Active.findIndex((present) => {
                         return (
                           present === tags.value
@@ -617,7 +731,7 @@ function Home() {
           </div>
           <div style={{ marginBottom: "5px", marginTop: "0", marginLeft: "10px" }}>
             Show  <select onChange={(e) => { handleRecordchange(e) }}>
-   
+    
               {/* <option selected={lastIndex === 10} value={10}>10</option>
               <option selected={lastIndex === 25} value={25}>25</option>
               <option selected={lastIndex === 50} value={50}>50</option>
@@ -643,7 +757,7 @@ function Home() {
                   <i onClick={sortbyOldjobs} className={`${styles.arrow} ${styles.down}`}></i>
                 </p>
               </li>
-             
+              
               <li style={{ backgroundColor: " rgb(40, 4, 99)" }} className={`${styles.li} ${styles.Location}`}>Location</li>
 
               <li style={{ backgroundColor: " rgb(40, 4, 99)", }} className={`${styles.li} ${styles.Package}`}>CTC
@@ -705,7 +819,7 @@ function Home() {
 
                         <li className={`${styles.li} ${styles.JobType}`}>{items.jobtype}</li>
 
-                       
+                        
                         <li className={`${styles.li} ${styles.date}`}>
                           {new Date(items.createdAt).toLocaleString(
                             "en-US",
@@ -717,7 +831,7 @@ function Home() {
                           )}
                         </li>
                         <li className={`${styles.li} ${styles.Location}`}>{items.jobLocation[0].toUpperCase() + items.jobLocation.slice(1)}</li>
-                        <li className={`${styles.li} ${styles.Package}`}>{items.salaryRange==="Not disclosed"?items.salaryRange:items.salaryRange+"L"}</li>
+                        <li className={`${styles.li} ${styles.Package}`}>{items.salaryRange==="Not disclosed"?"Not disclosed":items.salaryRange+"L"}</li>
                         <li className={`${styles.li} ${styles.experiance}`}>{items.experiance}Y</li>
                         <li className={`${styles.li} ${styles.qualification}`}>{items.qualification}</li>
                         <li className={`${styles.li} ${styles.Skills}`}>{items.skills}
@@ -726,16 +840,16 @@ function Home() {
                         <li className={`${styles.li} ${styles.Apply}`}>
                           {
                             adminLogin ?
-                             
+                              
                               <input type="checkbox" onClick={() => { checkBoxforDelete(items._id) }} />
 
                               :
-                           
+                            
                                 <button className={styles.Applybutton} onClick={() => { applyforJob(items._id) }}>Apply</button>
 
                           }
                         </li>
-                      </ul>
+                      </ul>          
                     )
                   })
                 : <p style={{ marginLeft: "47%", color: "red" }}>No Record Found</p>
@@ -788,21 +902,87 @@ function Home() {
             : ""
           }
           {/* ...................... All Filter for Mobile */}
-          <div className={styles.MobLocationFilterWrapper}>
-           
-            {
+<div className={styles.MobLocationFilterWrapper}>
+   <div ref={dropdownRef} style={{ position: "relative" }}>
+      <div style={{ display: "flex", marginLeft: "-45px", marginTop: "-19px" }}>
+        <button
+          onClick={() => setIsOpen((prev) => !prev)}
+          style={{background: "none",border: "none",cursor: "pointer",fontSize: "24px",color: "#007bff",}}>
+          <img className={styles.jobLocationImage} src={location} alt="Location" />
+        </button>
+        <p style={{ marginTop: "17px", fontWeight: "bold", color: "white",width:"113px" }}>
+          {selectedOption?.label}
+        </p>
+      </div>
+
+     
+      {isOpen && (
+        <div
+          style={{
+            position: "absolute",
+            top: "45px",
+            left: "-43px",
+            background: "white",
+            color: "black",
+            borderRadius: "20px",
+            width: "160px",
+            padding: "15px",
+            boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.2)",
+            animation: "fadeIn 0.2s ease-in-out",
+          }}
+        >
+          
+          <div
+            style={{
+              position: "absolute",
+              top: "-9px",
+              left: "25px",
+              width: "0",
+              height: "0",
+              borderLeft: "10px solid transparent",
+              borderRight: "10px solid transparent",
+              borderBottom: "10px solid white",
+            }}
+          ></div>
+
+        
+          <ul style={{ listStyle: "none", padding: 0, margin: 0 }}>
+            {options.map((option) => (
+              <li
+                key={option.value}
+                onClick={() => handleSelect(option)}
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  padding: "10px",
+                  cursor: "pointer",
+                  borderRadius: "10px",
+                }}
+              >
+                <img
+                  src={option.img}
+                  alt={option.label}
+                  style={{ width: "22px", height: "22px", marginRight: "12px" }}
+                />
+                <span>{option.label}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+    </div>
+
+         
+            {/* {
               JobLocationTags.map((location, i) => {
                 return (
                   <label> <input className={styles.MobJobtitleFilter} checked type="radio" disabled={location == "Chennai" || location == "Hyderabad" || location == "Mumbai" || location == "Delhi"} name="filter" onClick={() => { getLocation(location.toLowerCase()) }} />{location}</label>
 
                 )
               })
-            }
+            } */}
           </div>
-
-
-         
-          <div className={styles.JobtitleFilterWrapper} style={{marginLeft:"10px"}}>
+          <div className={styles.JobtitleFilterWrapper} style={{height:"101px", marginLeft:"9px"}}>
             <buton className={Active.length === 0 ? styles.active : styles.JobtitleFilter} onClick={() => { getjobs() }}>All</buton>
             {
               jobTags.map((tags, i) => {
@@ -813,7 +993,7 @@ function Home() {
                     className={tags.value === "TECHNOLOGIES" || tags.value === "EDUCATION" || tags.value === "COLLEGE TYPE" || tags.value === "NOTICE PERIOD" || tags.value === "SALARY" ||
                       tags.value === "EXPERIENCE" || tags.value === "Job Type" || tags.value === "INDUSTRY" || tags.value === "TOOLS/PROTOCOLS" || tags.value === "COMPANY TYPE" || tags.value === "ROLE" ?
                       styles.TagHeading :
-                      //  Active === tags.value ?
+                      //  Active === tags.value ? 
                       Active.findIndex((present) => {
                         return (
                           present === tags.value
@@ -825,8 +1005,8 @@ function Home() {
               })
             }
           </div>
-
-         
+          
+          
           <div class={styles.homeMobileNextPrevBtn} style={{ diplay:"flex",flexDirection:"column",marginTop:"15px"}}>
           <div style={{ marginBottom: "5px", marginTop: "0", marginLeft: "10px" }}>
             Show  <select onChange={(e) => { handleRecordchange(e) }}>
@@ -841,7 +1021,7 @@ function Home() {
               <option selected={jobsPerPageValue==100} value={100}>100</option>
             </select>  jobs per page
           </div>
-         
+          
           <div className={styles.navigationWrapper} style={{textAlign:"left",marginLeft:"6px"}}>
               <button disabled={currentPage === 1} style={{ display: "inline", marginLeft: "5px" }} className={styles.navigation} onClick={firstPage}>
                 <i class='fas fa-step-backward' ></i>
@@ -901,17 +1081,16 @@ function Home() {
                          
                        
                         <div className={styles.JobPagecompanyNameLocationWrapper}   >
-                          
-                         <img className={styles.homePageCompanyLogo} src={job.Logo?job.Logo:CompanyLogo} />
-                          
-                          {/* <img className={styles.homePageCompanyLogo} src={ CompanyLogo} /> */}
+                          {/* <img className={styles.logo} src={job.Logo} /> */}
+                          {/* {console.log("home obj",job)} */}
+                          <img className={styles.homePageCompanyLogo} src={ CompanyLogo} />
 
                           <div class={styles.jobTitleCompanyName}>
                           {!job.Source ?
-                           
+                            
                             <> <span className={styles.companyName} onClick={() => { checkEmpHalf(btoa(job.empId)) }} >{job.companyName} </span><br></br></>
                             :
-                           
+                            
                             <> <a className={`${styles.companyName}`} href={job.SourceLink} target="_blank">{job.Source}</a><br></br> </>
                           }
                           </div>
@@ -935,9 +1114,12 @@ function Home() {
                           <span className={styles.skillsHeading}>Skills: </span><span className={styles.skills}>{job.skills}</span><br></br>
                         </div>
                         <div className={styles.ApplyPackage}>
-                          <p className={styles.salaryRange}><span>&#8377;</span>{job.salaryRange}L</p>
+                          <p className={styles.salaryRange}><span>&#8377;
+                            </span>{job.salaryRange==="Not disclosed"?
+                            <span style={{fontWeight:"500", fontSize:'smaller'}}>N.D</span>
+                            :job.salaryRange+"L"}</p>
                           {
-                         
+                          
                             <button className={styles.ApplyMobile} onClick={() => { navigate("/JobSeekerLogin") }}><b>Apply</b></button>
                           }
                         </div>
@@ -982,7 +1164,7 @@ function Home() {
               <option selected={jobsPerPageValue==100} value={100}>100</option>
             </select>  jobs per page
           </div>
-         
+          
           <div className={styles.navigationWrapper} style={{textAlign:"left",marginLeft:"6px"}}>
               <button disabled={currentPage === 1} style={{ display: "inline", marginLeft: "5px" }} className={styles.navigation} onClick={firstPage}>
                 <i class='fas fa-step-backward' ></i>

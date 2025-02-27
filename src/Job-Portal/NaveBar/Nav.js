@@ -490,7 +490,12 @@ className={ShowSideNave ? "fas fa-times" : "fas fa-bars"} ref={SimgRef} onClick=
                       {showprofile ?
                   <div className={Styles.EmpMobDropdownwrapper} ref={menuRef} >
                     <p className={Styles.text} ref={menuRef} onClick={EmployeeProfile} >My profile</p>
+                    {/* <NavLink to="/postedjobs" className={`${Styles.text} `} > Posted jobs</NavLink> */}
                     <NavLink to="/postedjobs" className={`${Styles.text} `} > Posted jobs</NavLink>
+                    <p className={Styles.text} ref={menuRef} onClick={PostBlogs}>Write Article</p>
+
+                    <p className={Styles.text} ref={menuRef} onClick={mypostedArticle}>My Articles</p>
+
                     <p className={Styles.text} ref={menuRef} onClick={logutEmp}>Logout</p>
                   </div>
                   : ""}

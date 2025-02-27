@@ -39,29 +39,3 @@
 }
 
 
-.table {
-  /* border-collapse: collapse; */
-/*  */
-
-/* width:99.5%; */
-
-  width: 99.5%;
-  margin-left: 6px;
-  /* background-color: #61dafb; */
-}
-
-.td, .th {
-
-  /* border-collapse: collapse; */
-  
-  /* border: 1px solid #dddddd; */
-  text-align: center;
-  /* padding: 8px; */
-}
-
-.tr:nth-child(even) {
-  /* background-color: #dddddd; */
-  /* background:rgb(242, 244, 245) */
-
-
-}
