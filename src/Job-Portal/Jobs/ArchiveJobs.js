@@ -410,25 +410,6 @@ function Home() {
     setCurrentPage(1)
   }
 
-  
-
-  const [checkBoxValue, setCheckBoxValue] = useState([])
-  const [check, setCheck] = useState(true)
-
-  async function ArchiveCheckBoxArray() {
-    let userid = atob(JSON.parse(localStorage.getItem("IdLog")))
-    const headers = { authorization: userid + " " + atob(JSON.parse(localStorage.getItem("AdMLog"))) };
-    await axios.delete(`/jobpost/ArchiveCheckBoxArray/${checkBoxValue}`, { headers })
-      .then((res) => {
-        if (res.data === "success") {
-          getjobs()
-          alert("Archived succesfully")
-          window.location.reload()
-        }
-      }).catch((err) => {
-        alert("some thing went wrong")
-      })
-  }
   async function getLocation(jobLocation) {
     setCount(1)
     setActive(["Banglore"])
@@ -447,21 +428,28 @@ function Home() {
         alert("some thing went wrong")
       })
   }
+  
 
+  const [checkBoxValue, setCheckBoxValue] = useState([])
+  const [check, setCheck] = useState(true)
+// console.log(checkBoxValue)
+ 
   async function deleteCheckedJobs() {
     let userid = atob(JSON.parse(localStorage.getItem("IdLog")))
     const headers = { authorization: userid + " " + atob(JSON.parse(localStorage.getItem("AdMLog"))) };
-    await axios.delete(`/jobpost/deleteCheckBoxArray/${checkBoxValue}`, { headers })
+    await axios.delete(`/jobpost/deleteArchivedJobs/${checkBoxValue}`, { headers })
       .then((res) => {
-        if (res.data === "success") {
-          getjobs()
+        // console.log(res.data)
+        if (res.data.message === "Archived items deleted successfully") {
           alert("deleted succesfully")
+          getjobs()
           window.location.reload()
         }
       }).catch((err) => {
         alert("some thing went wrong")
       })
   }
+  
 
 
   function checkBoxforDelete(id) {
@@ -518,20 +506,7 @@ function Home() {
         : ""
       }
       {/* <h1>Nikita is working on this development</h1> */}
-      {checkBoxValue.length > 0 ?
-        <>
-          <button style={{
-            backgroundColor: "blue", border: "none", color: "white",
-            padding: "5px 10px", fontWeight: "bold", cursor: "pointer"
-          }} onClick={() => { ArchiveCheckBoxArray() }}>Archive</button>
-
-          <button style={{
-            backgroundColor: "red", border: "none", color: "white", marginLeft: "5px",
-            padding: "5px 10px", fontWeight: "bold", cursor: "pointer"
-          }} onClick={() => { deleteCheckedJobs() }}>Delete</button>
-        </>
-        : ""
-      }
+    
 
       {screenSize.width > 850 ?
         <>
@@ -586,6 +561,8 @@ function Home() {
               </button>
             </div>
           </div>
+      <div style={{display:"flex", justifyContent:"space-between"}}>
+       
           <div style={{ marginBottom: "5px", marginTop: "0", marginLeft: "10px" }}>
             Show  <select onChange={(e) => { handleRecordchange(e) }}>
    
@@ -599,6 +576,21 @@ function Home() {
               <option selected={jobsPerPageValue==100} value={100}>100</option>
             </select>  jobs per page
           </div>
+          {checkBoxValue.length > 0 ?
+        <>
+          {/* <button style={{
+            backgroundColor: "blue", border: "none", color: "white",
+            padding: "5px 10px", fontWeight: "bold", cursor: "pointer"
+          }} onClick={() => { ArchiveCheckBoxArray() }}>Archive</button> */}
+
+          <button style={{
+            backgroundColor: "red", border: "none", color: "white", marginLeft: "5px",
+            padding: "5px 10px", fontWeight: "bold", cursor: "pointer"
+          }} onClick={() => { deleteCheckedJobs() }}>Delete</button>
+        </>
+        : ""
+      }
+      </div>
          
           <div className={styles.Uiwarpper}>
             <ul className={styles.ul} style={{ color: 'white', fontWeight: "bold" }}>
@@ -694,7 +686,7 @@ function Home() {
                         <li className={`${styles.li} ${styles.Skills}`}>{items.skills}
                         </li>
               <li  className={`${styles.li} ${styles.Apply}`}>
-              {/* <input type="checkbox" onClick={() => { checkBoxforDelete(items._id) }} /> */}
+              <input type="checkbox" onClick={() => { checkBoxforDelete(items._id) }} />
 
                 </li>
 

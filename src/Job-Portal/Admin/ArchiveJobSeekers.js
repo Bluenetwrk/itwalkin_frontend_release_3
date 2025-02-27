@@ -81,7 +81,7 @@ const [Candidate, setCandidate] = useState([])
 
       .then((res) => {
         let result = (res.data)
-        console.log("all jobs",result)
+        // console.log("all jobs",result)
         gettotalcount()
         let sortedate = result.sort(function (a, b) {
           return new Date(b.createdAt) - new Date(a.createdAt);

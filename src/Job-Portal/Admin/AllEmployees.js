@@ -72,7 +72,7 @@ async function gettotalcount() {
   const headers = { authorization: 'BlueItImpulseWalkinIn' };
   await axios.get("/EmpProfile/getTotalCount", { headers })
     .then((res) => {
-      console.log(res.data.result)
+      // console.log(res.data.result)
       settotalCount(res.data.result)
     }).catch((err) => {
       alert("something went wrong")
@@ -589,6 +589,61 @@ async function search(e) {
     setAllEmployees(sorted)
   }
 
+
+        const [checkBoxValue, setCheckBoxValue] = useState([])
+  
+
+  async function ArchiveCheckBoxArray() {
+    let userid = atob(JSON.parse(localStorage.getItem("IdLog")))
+    const headers = { authorization: userid + " " + atob(JSON.parse(localStorage.getItem("AdMLog"))) };
+    await axios.delete(`/EmpProfile/ArchiveCheckBoxArray/${checkBoxValue}`, { headers })
+      .then((res) => {
+        console.log(res.data)
+        if (res.data === "success") {
+          getEmployees()
+          alert("Archived succesfully")
+          window.location.reload()
+        }
+      }).catch((err) => {
+        alert("some thing went wrong")
+      })
+  }
+  async function deleteCheckedJobs() {
+    let userid = atob(JSON.parse(localStorage.getItem("IdLog")))
+    const headers = { authorization: userid + " " + atob(JSON.parse(localStorage.getItem("AdMLog"))) };
+    await axios.delete(`/StudentProfile/deleteCheckBoxArray/${checkBoxValue}`, { headers })
+      .then((res) => {
+        if (res.data === "success") {
+          getEmployees()
+          alert("deleted succesfully")
+          window.location.reload()
+        }
+      }).catch((err) => {
+        alert("some thing went wrong")
+      })
+  }
+
+
+  function checkBoxforDelete(id) {
+
+    const checkedid = checkBoxValue.findIndex((checkedid) => {
+      return (
+        checkedid === id
+      )
+    })
+    if (checkedid < 0) {
+      setCheckBoxValue([...checkBoxValue, id])
+    } else {
+      // checkBoxValue.splice(checkedid, 1)
+      let removeId = checkBoxValue.filter((foundId) => {
+        return (
+          foundId !== id
+        )
+      })
+      setCheckBoxValue(removeId)
+    }
+  }
+
   return (
     <>     
 
@@ -664,6 +719,7 @@ async function search(e) {
                     </button>
                   </div>
                 </div>
+                <div style={{display:"flex", justifyContent:"space-between"}}>
       
                 <div style={{marginBottom:"5px", marginTop:"0", marginLeft:"10px"}}>
                   Show  <select onChange={(e) => { handleRecordchange(e) }}>
@@ -673,6 +729,22 @@ async function search(e) {
                     <option selected = {lastIndex === 100} value={100}>100</option>
                   </select>  jobs per page
                   </div>
+
+                  {checkBoxValue.length > 0 ?
+        <>
+          <button style={{
+            backgroundColor: "blue", border: "none", color: "white",
+            padding: "5px 10px", fontWeight: "bold", cursor: "pointer"
+            }} onClick={() => { ArchiveCheckBoxArray() }}>Archive</button>
+
+          {/* <button style={{
+            backgroundColor: "red", border: "none", color: "white", marginLeft: "5px",
+            padding: "5px 10px", fontWeight: "bold", cursor: "pointer"
+          }} onClick={() => { deleteCheckedJobs() }}>Delete</button> */}
+        </>
+        : ""
+      }
+      </div>
       
       {screenSize.width>850?
 
@@ -700,6 +772,8 @@ async function search(e) {
           <li style={{ backgroundColor: " rgb(40, 4, 99)", color:"white" }} className={`${styles.li} ${styles.CompanyWebsite}`}><b>Company Website </b></li>
           <li style={{ backgroundColor: " rgb(40, 4, 99)", color:"white" }} className={`${styles.li} ${styles.Approval}`} ><b>Approval</b></li>
           <li style={{ backgroundColor: " rgb(40, 4, 99)", color:"white" }} className={`${styles.li} ${styles.Message}`} ><b>Message</b></li>
+          <li  style={{ backgroundColor: " rgb(40, 4, 99)", color:"white" }}className={`${styles.li} ${styles.DeletdeAction}`} ><b>Action</b></li>
+      
         </ul>
         {
           AllEmployees.length > 0 ?
@@ -768,6 +842,11 @@ items.isOnhold ?
                      <button onClick={()=>{sendMessage(items._id)}}>Send</button> */}
 
                   </li>
+          <li  style={{}}className={`${styles.li} ${styles.DeletdeAction}`} >
+          <input type="checkbox" onClick={() => { checkBoxforDelete(items._id) }} />
+
+          </li>
+
 
 
                 </ul>

@@ -475,21 +475,22 @@ return(
    
   const [checkBoxValue, setCheckBoxValue] = useState([])
   const [check, setCheck] = useState(true)
-
- async function deleteCheckedJobs(){
-  let userid = atob(JSON.parse(localStorage.getItem("IdLog")))
-  const headers = { authorization: userid + " " + atob(JSON.parse(localStorage.getItem("AdMLog"))) };
-await axios.delete(`/BlogRoutes/deleteCheckBoxArray/${checkBoxValue}`, {headers} )
-.then((res)=>{
-  if(res.data==="success"){
-    getjobs()
-    alert("deletd succesfully")
-    window.location.reload()
+// console.log(checkBoxValue)
+  async function deleteCheckedJobs() {
+    let userid = atob(JSON.parse(localStorage.getItem("IdLog")))
+    const headers = { authorization: userid + " " + atob(JSON.parse(localStorage.getItem("AdMLog"))) };
+    await axios.delete(`/BlogRoutes/deleteDeleteddBlogs/${checkBoxValue}`, { headers })
+      .then((res) => {
+        // console.log(res.data)
+        if (res.data.message === "Archived items deleted successfully") {
+          alert("deleted succesfully")
+          getjobs()
+          window.location.reload()
+        }
+      }).catch((err) => {
+        alert("some thing went wrong")
+      })
   }
-}).catch((err)=>{
-  alert("some thing went wrong")
-})
- }
 
  
   function checkBoxforDelete(id) {
@@ -556,17 +557,6 @@ await axios.delete(`/BlogRoutes/deleteCheckBoxArray/${checkBoxValue}`, {headers}
         : ""
       }
 
-{checkBoxValue.length > 0 ?
-          <>
-             
-              <button style={{
-                backgroundColor: "red", border: "none", color: "white", marginLeft:"5px",
-                padding: "5px 10px", fontWeight: "bold", cursor: "pointer"
-              }} onClick={()=>{deleteCheckedJobs()}}>Delete</button>
-              </>
-            : ""
-          }
-
       {screenSize.width > 850 ?
         <>
      
@@ -620,6 +610,8 @@ await axios.delete(`/BlogRoutes/deleteCheckBoxArray/${checkBoxValue}`, {headers}
               </button>
             </div>
           </div>
+          <div style={{display:"flex", justifyContent:"space-between"}}>
+
           <div style={{ marginBottom: "5px", marginTop: "0", marginLeft: "10px" }}>
             Show  <select onChange={(e) => { handleRecordchange(e) }}>
               {/* <option selected={lastIndex === 10} value={10}>10</option>
@@ -631,6 +623,18 @@ await axios.delete(`/BlogRoutes/deleteCheckBoxArray/${checkBoxValue}`, {headers}
               <option selected={jobsPerPageValue==50} value={50}>50</option>
               <option selected={jobsPerPageValue==100} value={100}>100</option>
             </select>  blogs per page
+          </div>
+
+          {checkBoxValue.length > 0 ?
+          <>
+             
+              <button style={{
+                backgroundColor: "red", border: "none", color: "white", marginLeft:"5px",
+                padding: "5px 10px", fontWeight: "bold", cursor: "pointer"
+              }} onClick={()=>{deleteCheckedJobs()}}>Delete</button>
+              </>
+            : ""
+          }
           </div>
 
           <div className={styles.Uiwarpper}>
@@ -648,6 +652,7 @@ await axios.delete(`/BlogRoutes/deleteCheckBoxArray/${checkBoxValue}`, {headers}
               </li>
              
               <li style={{ backgroundColor: " rgb(40, 4, 99)" }} className={`${styles.li} ${styles.BlogApply}`}>Read/Answer</li>
+              <li style={{ backgroundColor: " rgb(40, 4, 99)" }} className={`${styles.li} ${styles.Apply}`}>Delete</li>
 
 
             </ul>
@@ -699,7 +704,11 @@ await axios.delete(`/BlogRoutes/deleteCheckBoxArray/${checkBoxValue}`, {headers}
                         }
                        
                     </li>
+<li  className={`${styles.li} ${styles.Apply}`}>
+                          
+                          <input type="checkbox" onClick={() => { checkBoxforDelete(items._id) }} />
 
+                          </li>
 
                   </ul>
                   )
