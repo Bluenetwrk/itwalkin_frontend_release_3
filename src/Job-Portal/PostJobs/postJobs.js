@@ -126,7 +126,7 @@ function PostJobs(props) {
         let userid = JSON.parse(localStorage.getItem("EmpIdG"))
         const headers = { authorization: userid + " " + atob(JSON.parse(localStorage.getItem("EmpLog"))) };
 
-        let jobTitle = jobtitle.toLowerCase()
+        let jobTitle = jobtitle
         let jobLocation = joblocation.toLowerCase()
         await axios.post("/jobpost/jobpost/", {
             Logo, SourceLink, Source, empId, jobTitle, companyName,

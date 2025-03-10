@@ -107,7 +107,7 @@ function UpdatePostedBlogs() {
         let userid = JSON.parse(localStorage.getItem("EmpIdG"))
         const headers = { authorization: userid +" "+ atob(JSON.parse(localStorage.getItem("EmpLog"))) };
         console.log("updated")
-        let jobTitle = jobtitle.toLowerCase()
+        let jobTitle = jobtitle
         let jobLocation = joblocation.toLowerCase()
     await axios.put(`/BlogRoutes/updatPostedJob/${Jobid}`,{ jobTitle, SourceLink, Source, companyName,
          jobDescription, jobtype, salaryRange, jobLocation, qualification, experiance, skills, Tags},{headers})

@@ -134,7 +134,7 @@ function PostBlogs(props) {
         // const headers = { authorization: userid + " " + atob(JSON.parse(localStorage.getItem("EmpLog"))) };
         const headers = { authorization: 'BlueItImpulseWalkinIn' };
 
-        let jobTitle = jobtitle.toLowerCase()
+        let jobTitle = jobtitle
         let jobLocation = joblocation.toLowerCase()
         await axios.post("/BlogRoutes/blogpost/", {
             Logo, SourceLink, Source, empId, jobTitle, companyName,

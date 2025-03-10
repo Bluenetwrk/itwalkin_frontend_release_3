@@ -127,7 +127,7 @@ function AskQuestion(props) {
     // const headers = { authorization: userid + " " + atob(JSON.parse(localStorage.getItem("StudLog"))) };
     const headers = { authorization: 'BlueItImpulseWalkinIn' };
 let question =true
-        let jobTitle = jobtitle.toLowerCase()
+        let jobTitle = jobtitle
         let jobLocation = joblocation.toLowerCase()
         // await axios.post("/QuestionRoute/questionPost/", {
             await axios.post("/BlogRoutes/blogpost/", {

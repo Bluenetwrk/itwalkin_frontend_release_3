@@ -156,7 +156,7 @@ function AdminPostJobs() {
         let userid = atob(JSON.parse(localStorage.getItem("IdLog")))
         const headers = { authorization: userid +" "+ atob(JSON.parse(localStorage.getItem("AdMLog"))) };
         let adminLogin = true
-       let jobTitle = jobtitle.toLowerCase()
+       let jobTitle = jobtitle
        let jobLocation = joblocation.toLowerCase()
         await axios.post("/jobpost/jobpost/", { Logo, SourceLink, Source, SourceCompanyLink, Adminpost, adminLogin, jobTitle,
     companyName, jobDescription, jobtype, salaryRange, jobLocation, qualification, experiance, skills, Tags }, {headers})

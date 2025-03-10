@@ -108,7 +108,7 @@ function UpdateCareerPostedJobs() {
         // const headers = { authorization: userid +" "+ atob(JSON.parse(localStorage.getItem("EmpLog"))) };
     const headers = { authorization: 'BlueItImpulseWalkinIn' };
 
-        let jobTitle = jobtitle.toLowerCase()
+        let jobTitle = jobtitle
         let jobLocation = joblocation.toLowerCase()
     await axios.put(`/Careerjobpost/updatPostedJob/${Jobid}`,{ jobTitle, SourceLink, Source, companyName,
          jobDescription, jobtype, salaryRange, jobLocation, qualification, experiance, skills, Tags},{headers})
