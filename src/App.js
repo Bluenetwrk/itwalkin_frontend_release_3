@@ -98,7 +98,6 @@ import Services from "./Job-Portal/Services"
 import TermsAndCondition from "./Job-Portal/TermsAndConditions"
 import Footer from "./Job-Portal/Footer/Footer";
 import Payment from "./Job-Portal/Payment"
-<<<<<<< Test
 import socketIO from 'socket.io-client';
 import SidebarNav from "./Job-Portal/BigSideNav";
 import useScreenSize from '../src/Job-Portal/SizeHook';
@@ -125,11 +124,6 @@ function App() {
   // let jobSeekerId = JSON.parse(localStorage.getItem("StudId"))
   // let empId = JSON.parse(localStorage.getItem("EmpIdG"))
  
-
-=======
-//axios.defaults.baseURL = "http://localhost:8080"
-axios.defaults.baseURL = "https://itwalkin-backend-dev-release-08062024.onrender.com";
-const App = () => {
 
   return (
     <>
