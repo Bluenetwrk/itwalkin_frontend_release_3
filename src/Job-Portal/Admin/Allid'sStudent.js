@@ -2,6 +2,7 @@ import React from 'react'
 import { useEffect, useState } from 'react'
 import axios from "axios"
 import AllEmpIda from "./Allid'sEmployee"
+import { useNavigate } from 'react-router-dom'
 
 function Allid() {
   const [ids, setids] = useState([])
@@ -9,6 +10,14 @@ function Allid() {
   const allIds = ids.map((ids, i) => {
     return ids.email
   })
+
+  const navigate=useNavigate()
+  useEffect(()=>{
+    let adminLogin= localStorage.getItem("SupAdMLog")
+        if(!adminLogin){
+            navigate("/")
+        }
+    },[])
 
 
   async function JobSeekerNoticePeriod() {
@@ -23,6 +32,7 @@ function Allid() {
         alert("server issue occured")
       })
   }
+
   useEffect(() => {
     JobSeekerNoticePeriod()
   }, [])

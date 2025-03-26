@@ -1,21 +1,77 @@
+.navigationWrapper{
+    text-align:right;
+    margin:10px;
+
+}
+.navigation{
+    background-color:rgb(214, 212, 212);
+    padding:3px;
+    padding-right:10px; 
+    border:none;
+}
+
+.arrowWrapper{
+    display: inline;
+}
+.arrow {
+    border: solid white;
+    border-width: 0 2px 2px 0;
+    display: inline-block;
+    padding: 2.3px;
+    /* margin-left: 0.5%; */
+  }  
+  .up {
+    transform: rotate(-135deg);
+    -webkit-transform: rotate(-135deg);
+    position: absolute;
+}
+.down {
+    transform: rotate(90deg);
+    -webkit-transform: rotate(45deg);
+
+  }
+  .up:hover {
+    transform: rotate(-135deg);
+    -webkit-transform: rotate(-135deg);
+    /* background-color: blue; */
+    position: absolute;
+    margin-top: 0px;
+  }
+  .down:hover {
+    transform: rotate(90deg);
+    -webkit-transform: rotate(45deg);
+   
+  }
+  .arrow:hover{
+    border: solid grey;
+    border-width: 0 2px 2px 0;
+    display: inline-block;
+    padding: 2.3px;
+  }
 
 .Uiwarpper {
-    margin-left: -20px;
+    margin-left: -40px;
 }
 .h3{
-    color: blue;
+    /* color: blue; */
     margin-left: 4%;
+
 }
 .ul {
     display: flex;
     margin: 0px;
+}
+.ul:nth-child(1){
+    background-color: rgb(40, 4, 99);    
+color:white;
+
 }
 
 .li {
     display: inline-block;
     padding-top: 0.5%;
     padding-bottom: 0.5%;
-    width: 8%;
+    width: 14%;
     /* border: 1px solid rgb(9, 247, 247); */
     border : 1px solid rgb(208, 210, 211);
 
@@ -28,55 +84,59 @@
     width: 18%;
     overflow-wrap:break-word;
     text-align: center;
-
-
-
 }
 
 .Jtitle {
+    width: 17%;
+    overflow-wrap:break-word;
+   
+}
+.JtitleR {
+    width: 17%;
+    overflow-wrap:break-word;
+    color: blue;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.Package {
     width: 9%;
     overflow-wrap:break-word
 
 }
-
-.Package {
-    width: 5%;
-    overflow-wrap:break-word
-
-}
 .Pdate{
-    width:6.5%;
+    width:15%;
     overflow-wrap:break-word
 
 }
 .experiance {
-    width: 3%;
+    width: 15%;
     overflow-wrap:break-word
 
 }
 
 .Location {
-    width: 8%;
+    width: 9%;
     overflow-wrap:break-word
 
 }
 
 .JobType {
-    width: 7%;
+    width: 9%;
     overflow-wrap:break-word
 
 }
 
 .Qualif {
-    width: 6%;
+    width: 12%;
     overflow-wrap:break-word;
 }
 .Skills{
-    width:10%
+    width:14%
 }
 .DeleteAction{
     /* overflow-wrap:break-word; */
-    width:7%
+    width:10%
 
 
 }
@@ -86,31 +146,25 @@
     background-color: red;
     border:1px solid red;
     color: white;
-    width:82%;
+    width:75%;
     height: 25px;
     font-weight: bold;
-
+    cursor:pointer
 }
 .Status{
-    width:9%;
+    width:13%;
 }
 
 /* .....Mobile View... */
 
 #JobCardWrapper {
-    /* display: flex; */
-    /* flex-wrap: wrap; */
     padding: 10px;
-    /* background-color: rgb(204, 103, 103); */
     border-radius: 10px;
-    /* margin-left: 40px;     */
     width: 85%;
-
 }
 
 .JobCard {
     /* display: flex; */
-    /* background-color: aqua;    */
     margin-top: 10px;
     margin-bottom: 10px;
     margin-left: 8px;
@@ -146,12 +200,12 @@
 }
 .companyNameLocationWrapper{
     margin-left: 15px;
+    margin-top: -6px;
 }
 .logo{
     width:25px;
     height:20px;
-    margin-top: -50px;
-
+    margin-top: -6px;
 }
 
 .companyName{
@@ -159,7 +213,9 @@
     font-weight: 400;
     text-decoration: underline;  
     font-size: medium;
-    width:100%
+    width:100%;
+    margin-top: -5px;
+    position: absolute;
 }
 
 .jobLocation{
@@ -211,10 +267,10 @@
 .jobDescriptionHeading{
     margin-left: 15px;
     font-weight: 600;
-    margin-top: 5px;
+    margin-top: -8px;
 }
 .jobDescription{
-    margin-top: -15px;
+    margin-top: -12px;
     margin-left: 15px;
     width:94%;
     font-size: small;
@@ -266,6 +322,7 @@ margin-left: 15px;
 
 }
 .MobileStatus{
+
     margin-left: 18px;
     margin-top: -15px;
     font-size: small;

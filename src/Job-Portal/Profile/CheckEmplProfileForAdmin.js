@@ -7,6 +7,8 @@ import profileDp from "../img/user_3177440.png"
 import Swal from "sweetalert2";
 import { Puff } from  'react-loader-spinner'
 import useScreenSize from '../SizeHook';
+import Arrowimage from '../img/icons8-arrow-left-48.png'
+
 
 function CheckEmpProfileForAdmin() {
     useEffect(()=>{
@@ -42,7 +44,7 @@ const [message, setmessage] = useState("")
         await axios.get(`/EmpProfile/getProfile/${params.CP}`,{headers})
             .then((res) => {
                 let result = res.data.result
-                
+                console.log(result)
                 setProfileData([result])
   setPageLoader(false)
 
@@ -181,6 +183,8 @@ const [message, setmessage] = useState("")
 
     return (
         <>
+                                <img style={{ height:"25px", color:"grey", marginTop:"20px", marginLeft:"8%", cursor:"pointer",
+             width:"28px"}} onClick={()=>{navigate(-1)}}  src={Arrowimage} />
 
 {
 

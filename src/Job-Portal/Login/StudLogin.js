@@ -2,21 +2,26 @@ import { useState, useEffect } from "react"
 import React from 'react'
 import styles from "./login.module.css"
 import axios from "axios"
+import Footer from "../Footer/Footer"
 import { useNavigate, Link, useLocation } from "react-router-dom";
 import GoogleImage from "../img/icons8-google-48.png"
 import MicosoftImage from "../img/icons8-windows-10-48.png"
+import linkedIn from "../img/icons8-linked-in-48.png"
+import github from "../img/icons8-github-50.png"
+
 import { useGoogleLogin } from '@react-oauth/google';
 import image from "../img/user_3177440.png"
 import { TailSpin } from "react-loader-spinner"
-
-
-
-
+import useScreenSize from '../SizeHook';
+import { useMsal } from "@azure/msal-react";
+import { loginRequest } from "../Config";
 // import style from "./styles.module.css"
 
-
-
 function StudentLogin(props) {
+  const { instance } = useMsal();
+
+  const screenSize = useScreenSize();
+
 
   const [gmailuser, setGmailuser] = useState("")
   const [topErrorMessage, setTopErrorMessage] = useState("")
@@ -25,7 +30,6 @@ function StudentLogin(props) {
   
   const [showotp, setshowotp] = useState(false)
   const [Loader, setLoader] = useState(false)
-
   
 const [ipAddress, setIPAddress] = useState('')
 
@@ -55,6 +59,7 @@ useEffect(() => {
         setGmailuser(res.data)
         let gtoken = response.access_token
         let userId = res.data.sub
+        let Gpicture = res.data.picture
         let email = res.data.email
         let name = res.data.name
         let isApproved=false
@@ -62,15 +67,17 @@ useEffect(() => {
         // console.log("decoded name :", gemail)
         // console.log(" decoded id :", gname)
 
-        await axios.post("/StudentProfile/Glogin", {ipAddress, userId, email, name, gtoken, isApproved })
+        await axios.post("/StudentProfile/Glogin", {ipAddress, userId, email, name, gtoken, isApproved, Gpicture })
           .then((response) => {
             let result = response.data
             let token = result.token
             let Id = result.id
+        console.log(result)
+
             if (result.status == "success") {
               localStorage.setItem("StudLog", JSON.stringify(btoa(token)))
               navigate("/alljobs", {state:{name:result.name}})
-              localStorage.setItem("StudId", JSON.stringify(Id))             
+              localStorage.setItem("StudId", JSON.stringify(Id))   
             }
           }).catch((err) => {
             alert("server issue occured")
@@ -182,6 +189,34 @@ useEffect(() => {
     setLoader(false)
   }
 
+  function microsoftLogin() {
+    instance.loginPopup(loginRequest)
+      .then(async response => {
+        // console.log(response)
+        let name = response.account.name
+        let email = response.account.username
+        let isApproved = false
+
+        await axios.post("/StudentProfile/Glogin", { ipAddress, email, name, isApproved, })
+          .then((response) => {
+            let result = response.data
+            console.log(result)
+            let token = result.token
+            let Id = result.id
+            if (result.status == "success") {
+              localStorage.setItem("StudLog", JSON.stringify(btoa(token)))
+              navigate("/alljobs", { state: { name: result.name } })
+              localStorage.setItem("StudId", JSON.stringify(Id))
+            }
+          }).catch((err) => {
+            alert("server issue occured")
+          })
+      })
+      .catch(error => {
+        // console.log("Login error", error);
+        // alert("some thing went wrong")
+      });
+  }
   return (
     <>
     {/* <div className={styles.LoginpageWapper}> */}
@@ -203,16 +238,12 @@ useEffect(() => {
         </div>
       </div>
  */}
+ 
 <div className={styles.BothsignUpWrapper}>
-<h3 className={styles.Loginpage}> Job Seeker Login page  </h3>
+<p className={styles.Loginpage}> Job Seeker Login page  </p>
 
-      
-{/* <div id={styles.inputWrapper}> */}
-
-          <input maxLength="10" className={styles.inputs} type="number" placeholder='enter phone Number'
+          {/* <input maxLength="10" className={styles.inputs} type="number" placeholder='enter phone Number'
             value={PhoneNumber} autoComplete="on" onChange={(e) => { setPhoneNumber(e.target.value) }} />
-          {/* {error && !email ? <p >field is missing</p> : ""} */}
-
 
           {showotp ?
             <>
@@ -236,10 +267,8 @@ useEffect(() => {
                         <TailSpin color=" rgb(40, 4, 99)" height={40} />
                         </div>
                         :""}
-{/* 
-        </div>
-      </div> */}
-            <h4 className={styles.OR}>OR</h4>
+
+            <h4 className={styles.OR}>OR</h4> */}
 
 
 
@@ -251,14 +280,43 @@ useEffect(() => {
         </div>
        </div>
 
-      <div className={styles.signUpWrapper}  >
+      <div className={styles.signUpWrapper} onClick={microsoftLogin}  >
         <div className={styles.both}>
           <img className={styles.google} src={MicosoftImage} />
           <span className={styles.signUpwrap} >Continue with Microsoft</span>
         </div>
       </div>
+
+      {/* <div className={styles.signUpWrapper}  >
+        <div className={styles.both}>
+          <img className={styles.google} src={linkedIn} />
+          <span className={styles.signUpwrap} >Continue with Linkedin</span>
+        </div>
+      </div> */}
+
+
+      {/* <div className={styles.signUpWrapper}  >
+        <div className={styles.both}>
+          <img className={styles.google} src={github} />
+          <span className={styles.signUpwrap} >Continue with Github</span>
+        </div>
+      </div> */}
+
+
       </div>
-      {/* </div> */}
+
+      {screenSize.width > 750 ?
+  // <div style={{marginTop:"330px", position:"sticky", bottom:0}}>
+  //         <Footer/>
+  //       </div>
+  ""
+        :
+  <div style={{marginTop:"50px",}}>
+
+        <Footer/>   
+        </div>
+}
+
     </>
 
   )

@@ -15,7 +15,7 @@ function Admin() {
   useEffect(() => {
     let studentAuth = localStorage.getItem("StudLog")
     if (studentAuth) {
-      navigate("/alljobs")
+      navigate("/BIAddmin@AllJobs")
     }
   })
   useEffect(() => {
@@ -37,10 +37,15 @@ function Admin() {
     await axios.post("/admin/adminLogin",{email, password})
     .then((res)=>{
       let result = res.data
-      if(result.status=="success"){
+      if(result.auth===true){
+        localStorage.setItem("SupAdMLog", JSON.stringify(btoa(result.token)))
         localStorage.setItem("AdMLog", JSON.stringify(btoa(result.token)))
         localStorage.setItem("IdLog", JSON.stringify(btoa(result.id)))
-        navigate("/BIAddmin@Profile")
+        navigate("/")
+      }else if(result.auth===false){
+          localStorage.setItem("AdMLog", JSON.stringify(btoa(result.token)))
+          localStorage.setItem("IdLog", JSON.stringify(btoa(result.id)))
+          navigate("/BIAddmin@Profile")
       }else if(result=="no user found"){
         setError("No user found")
       }else if(result=="incorrect password"){
@@ -56,10 +61,13 @@ function Admin() {
   async function AdminRegister(){
     await axios.post("/admin/adminRegister",{email, password})
     .then((res)=>{
-      console.log(res)
+      if(res.data==="success"){
+        alert("User registered successfully")
+      }
     })
     .catch((err)=>{
-      console.log(err)
+      alert("some thing went wrong")
+
     })
   }
 
@@ -77,9 +85,7 @@ function Admin() {
 
 
 <label> <input  type="checkbox" value={showPassword} onClick={()=>{setshowPassword((prev)=>!prev)}}/><span>show password</span></label>
-     
-
-          <button className={`${styles.button} ${styles.inputs}`} onClick={Adminlogin}>Login</button>
+        <button className={`${styles.button} ${styles.inputs}`} onClick={Adminlogin}>Login</button>
           {/* <button className={`${styles.button} ${styles.inputs}`} onClick={AdminRegister}>Register</button> */}
         </div>
       </div>

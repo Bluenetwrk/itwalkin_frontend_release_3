@@ -6,20 +6,28 @@ import profileDp from "../img/user_3177440.png"
 import { Puff } from  'react-loader-spinner'
 import { useNavigate } from 'react-router-dom'
 import useScreenSize from '../SizeHook';
+import Arrowimage from '../img/icons8-arrow-left-48.png'
+import socketIO from 'socket.io-client';
+import Footer from '../Footer/Footer'
 
- 
 
-function StudentProfile() {
+function StudentProfile(props) {
+
+    // useEffect( ()=>{    
+    //     const socket = socketIO.connect(props.url,{
+    //       auth:{
+    //         token: JSON.parse(localStorage.getItem("StudId"))
+    //       }
+    //     });
+    //   },[])
 
     const [profileData, setProfileData] = useState([])
 const [PageLoader, setPageLoader] = useState(false)
 const screenSize = useScreenSize();
-
-
+// props.sendingName(profileData)
 let navigate = useNavigate()
 
     let studId = JSON.parse(localStorage.getItem("StudId"))
-
     async function getProfile() {
         let userid = JSON.parse(localStorage.getItem("StudId"))
         const headers = { authorization: userid +" "+ atob(JSON.parse(localStorage.getItem("StudLog"))) };
@@ -39,11 +47,19 @@ let navigate = useNavigate()
         getProfile()
     }, [])
 
+    function updateprofile() {
+        navigate("/Update-Profile")
+      }
+         
     return (
         <>
         <div style={{display:"flex"}}>
-        <button style={{ height:"25px", color:"grey", marginTop:"20px", marginLeft:"40px", cursor:"pointer", width:"50px"}} onClick={()=>{
-            navigate(-1)}} >back</button>
+        {/* <button style={{ height:"25px", color:"grey", marginTop:"20px", marginLeft:"40px", cursor:"pointer", width:"50px"}} onClick={()=>{
+            navigate(-1)}} >back</button> */}
+            
+                        <img style={{ height:"25px", color:"grey", marginTop:"20px", marginLeft:"8%", cursor:"pointer",
+             width:"28px"}} onClick={()=>{navigate(-1)}}  src={Arrowimage} />
+
         <h3 style={{color:"rgb(40, 4, 99)", marginLeft:"40%"}}>My Profile</h3>
         </div>
         
@@ -55,25 +71,40 @@ profileData.map((item, i) => {
         <img className={styles.imageV} src={item.image?item.image : profileDp}/>
         
         </div>
-    )
-
-})
+    )})
     }
+
+    {screenSize.width>800?
+
+profileData.length>0?
+<>
+<button className={styles.updateProfile} onClick={updateprofile}>Update Profile</button><br></br>
+
+</>
+
+:""
+
+:
+profileData.length>0?<button className={styles.MobupdateProfile} onClick={updateprofile}>Update Profile</button>:""
+
+        }       
             {screenSize.width>850?
+      <>      
            
 <div className={styles.uiwrapper}>
             <ul className={styles.ul}>
                 <li className={styles.li}><b>Name </b></li>
                 <li className={styles.li}><b>Email Address</b></li>
+                <li className={styles.li}><b>City</b></li>
                 <li className={styles.li}><b>Phone Number</b></li>
-                <li className={styles.li}><b>Aadhar Id</b></li>
+                <li className={styles.li}><b>Aadhaar Id</b></li>
                 <li className={styles.li}><b>Pan Card Id</b></li>
                 <li className={styles.li}><b>Age</b></li>
                 <li className={styles.li}><b>Notice  Period</b></li>
                 <li className={styles.li}><b>Expected  Salary</b></li>
                 <li className={styles.li}><b>Current  CTC</b></li>
                 <li className={styles.li}><b>Qualification</b></li>
-                <li className={styles.li}><b>Skills</b></li>
+                <li className={styles.li}><b>Skill Tags</b></li>
                 <li className={styles.li}><b>Experience</b></li>
                 <li className={styles.li}><b>Account status</b></li>
 
@@ -88,28 +119,36 @@ profileData.map((item, i) => {
                 profileData.map((item, i) => {
                     return (
                         <ul className={styles.ulR} key={i}>
+                          
                             {/* <li className={`${styles.Hli}`}>{item.name}</li>
                             <li className={`${styles.Hli}`}>{item.email}</li> */}
                       {item.name?         <li className={` ${styles.Hli}`}>{item.name}</li>: <li className={` ${styles.Hli} ${styles.Nli}`}>you have not updated your phone Name yet</li>}
                       {item.email?         <li className={` ${styles.Hli}`}>{item.email}</li>: <li className={` ${styles.Hli} ${styles.Nli}`}>you have not updated your Email yet</li>}
+                      {item.city?         <li className={` ${styles.Hli}`}>{item.city.value}</li>: <li className={` ${styles.Hli} ${styles.Nli}`}>you have not updated your City yet</li>}
                       {item.phoneNumber?         <li className={` ${styles.Hli}`}>{item.phoneNumber}</li>: <li className={` ${styles.Hli} ${styles.Nli}`}>you have not updated your phone Number yet</li>}
                          {item.Aadhar?           <li className={` ${styles.Hli}`}>{item.Aadhar}</li>: <li className={` ${styles.Hli} ${styles.Nli}`}>you have not updated your Aadhar Id yet</li>}
                          {item.panCard?          <li className={` ${styles.Hli}`}>{item.panCard}</li>: <li className={` ${styles.Hli} ${styles.Nli}`}>you have not updated your pan Id yet</li>}
                          {item.age?              <li className={` ${styles.Hli}`}>{item.age}</li>: <li className={` ${styles.Hli} ${styles.Nli}`}>you have not updated your age yet</li>}
                          {item.NoticePeriod?     <li className={` ${styles.Hli}`}>{item.NoticePeriod}</li>: <li className={` ${styles.Hli} ${styles.Nli}`}>you have not updated your NoticePeriod yet</li>}
-                         {item.ExpectedSalary?   <li className={` ${styles.Hli}`}>{item.ExpectedSalary}</li>: <li className={` ${styles.Hli} ${styles.Nli}`}>you have not updated your Expected Salary yet</li>}
+                         {item.ExpectedSalary?  <li className={` ${styles.Hli}`}>{item.ExpectedSalary}</li>: <li className={` ${styles.Hli} ${styles.Nli}`}>you have not updated your Expected Salary yet</li>}
                          {item.currentCTC?       <li className={` ${styles.Hli}`}>{item.currentCTC}</li>: <li className={` ${styles.Hli} ${styles.Nli}`}>you have not updated your current CTC yet</li>}
                          {item.Qualification?    <li className={` ${styles.Hli}`}>{item.Qualification}</li>: <li className={` ${styles.Hli} ${styles.Nli}`}>you have not updated your Qualification yet</li>}
-                         {item.Skills?           <li className={` ${styles.Hli}`}>{item.Skills}</li>: <li className={` ${styles.Hli} ${styles.Nli}`}>you have not updated your Skills yet</li>}
+                         {item.Skills?           <li className={` ${styles.Hli}`}>{item.Skills}&nbsp;
+                         {/* => typeof e === 'string' */}
+                         </li>: <li className={` ${styles.Hli} ${styles.Nli}`}>you have not updated your Skills yet</li>}
                          {item.Experiance?       <li className={` ${styles.Hli}`}>{item.Experiance}</li>:  <li className={` ${styles.Hli} ${styles.Nli}`}>you have not updated your experiance yet</li> }
                          {item.isApproved?   <li className={` ${styles.Hli}`} style={{color:"blue"}}>Congrates! Your account has been Approved</li>: <li className={` ${styles.Hli} ${styles.Nli}`} style={{fontStyle:"italic"}}>"Your account is in under Verfication process"</li>}                        
                          {item.message?<p style={{width:"450%",  marginLeft:"-70%"}}><b> Message :</b><span style={{color:"red"}}> {item.message}! </span></p>:""}
                         </ul>
                     )
+
                 })
 
             }
+
          </div>
+
+        </>
 
             :
             <>
@@ -162,8 +201,12 @@ profileData.map((item, i) => {
 })}
 
 </div>
+<div style={{marginTop:"30px"}}>
+<Footer/>
+</div>
             </>
       }
+
 
         </>
     )

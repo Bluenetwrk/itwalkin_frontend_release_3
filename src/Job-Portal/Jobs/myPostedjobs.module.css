@@ -1,4 +1,39 @@
 
+.searchBothForNavWrapper{
+    width:40%;
+    margin-left: 34%;
+    margin-top: -47.5px;
+    background-color: white;
+    border-radius: 3px;
+
+}
+
+
+.navigationWrapper{
+    text-align:right;
+    margin:10px;
+
+}
+.navigation{
+    background-color:rgb(214, 212, 212);
+    padding:3px;
+    padding-right:10px; 
+    border:none;
+}
+
+.inputboxsearchNav{
+    padding: 10px;
+    /* margin-left: 2%; */
+    width: 86%;
+    border : 1px solid rgb(204, 209, 211);
+    /* background-color: red; */
+    border: 0px white;
+    border-radius: 3px;
+    /* background-color: red; */
+} 
+
+
+
 .searchButton{
     background-color: rgb(40, 4, 99);
     color: white;
@@ -100,29 +135,49 @@
 } */
 
 /* ...................................Li......................... */
-
-.searchBoth {
-    margin-left: 15%;
-    display: flex;
+.arrowWrapper{
+    display: inline;
+    margin-left: 7%;
+    margin-top: 2px;
 }
-
-.p {
-    font-weight: bold;
-    margin-top: 20px;
+.arrow {
+    border: solid white;
+    border-width: 0 2px 2px 0;
+    display: inline-block;
+    padding: 2.3px;
+    /* margin-left: 0.5%; */
+  }  
+  .up {
+    transform: rotate(-135deg);
+    -webkit-transform: rotate(-135deg);
+    margin-top: 2px;
+    position: absolute;
 }
+.down {
+    transform: rotate(90deg);
+    -webkit-transform: rotate(45deg);
+    margin-top: 8px;
+    /* position: absolute; */
 
-.inputboxsearch {
-    display: inline-flex;
-
-    height: 35px;
-    margin-top: 10px;
-    margin-left: 2%;
-    width: 55%;
-    border-radius: 5px;
-    /* border: 1.5px solid rgb(9, 247, 247); */
-    border : 1px solid rgb(190, 191, 192);
-
-}
+  }
+  .up:hover {
+    transform: rotate(-135deg);
+    -webkit-transform: rotate(-135deg);
+    /* background-color: blue; */
+    position: absolute;
+    margin-top: 0px;
+  }
+  .down:hover {
+    transform: rotate(90deg);
+    -webkit-transform: rotate(45deg);
+   
+  }
+  .arrow:hover{
+    border: solid grey;
+    border-width: 0 2px 2px 0;
+    display: inline-block;
+    padding: 2.3px;
+  }
 
 .seeMore {
     color: blue;
@@ -130,25 +185,44 @@
 
 .Uiwarpper {
     margin-top: 10px;
-    margin-left: -30px;
+    margin-left: -35px;
+    width:102%
 }
+
 
 .ul {
     display: flex;
     margin: 0px;
+    /* padding-top: 35px; */
+    /* padding-bottom:35px ; */
+}
+.ul:nth-child(1){
+    background-color: rgb(40, 4, 99);    
+    color:white;
+    /* height: 60px; */
+    /* padding: 0%; */
+
+}
+.ul:nth-child(even){
+    background-color: rgb(242,244,245);  
+    /* background:rgb(242, 244, 245) */
+
+    /* color:white; */
+    /* height: 60px; */
+    /* padding: 0%; */
+
 }
 
 .li {
+    padding-top: 0.5%;
+    padding-bottom: 0.5%;
     display: inline-block;
-
-    padding: 0.5%;
-    width: 8%;
+    width: 12%;
     /* border: 1px solid rgb(9, 247, 247); */
-    border : 1px solid rgb(238,241,242);
-
+    border : 1px solid rgb(238,241,242);    
     text-align: center;
-    overflow-wrap:break-word
-
+    align-content: center;
+    overflow-wrap:break-word;
 }
 
 .liDescription {
@@ -158,7 +232,7 @@
 }
 
 .Jtitle {
-    width: 8.5%;
+    width: 11%;
     overflow-wrap:break-word
 }
 
@@ -168,56 +242,79 @@
 
 }
 .Pdate{
-    width:6%;
+    width:11%;
     overflow-wrap:break-word
 
 }
 .experiance {
-    width: 3%;
+    width: 10%;
     overflow-wrap:break-word
 
 }
 .Skills{
-    width:12%
+    width:15%
 }
 
 .Location {
-    width: 7.4%;
+    width: 9%;
     overflow-wrap:break-word
 
 }
+.BJtitle{
+    width:40%
+}
+.BPdate{
+    width:40%
+}
+.BAction{
+    width:30%
+}
 .Action{
-    width:115px;
-    overflow-wrap:break-word
-
+    width:13%;
+    overflow-wrap:break-word;
 }
 
 .Acbuttons {
-    height: 28px;
+    height: 25px;
     display: flex;
+    margin-left:18%;
   }
+.BAcbuttons {
+    height: 25px;
+    display: flex;
+    margin-left:28%;
+  }
+  @media (max-width:1200px) {
+.Acbuttons {
+    margin-left:10%;    
+  }
+  }
+  @media (max-width:1050px) {
+.Acbuttons {
+    margin-left:4%;    
+  }
+  }
+
+
 .Abutton {
     border: 1px solid;
-    font-weight: 550;
-    font-size: small;
 }
 .update {
     background-color: rgb(40, 4, 99);
     color: white;
-    width:230%;
-
+    cursor: pointer;
+    /* margin-left:2%; */
 }
 .delete {
     background-color: rgb(252, 56, 56);
     color: white;
-    margin-left: 4%;
-    width:230%;
+    cursor: pointer;
+    margin-left:2%;
 
 }
 
-
 .NuApplied{
-    width:8%
+    width:15%
 }
 .viewButton{
     background-color: rgb(40, 4, 99);
@@ -226,6 +323,7 @@
     font-size: medium;
     width:40%;
     border:1px solid rgb(40, 4, 99);
+    cursor: pointer;
 }
 
 .text {
@@ -234,13 +332,31 @@
 
 /* For mobile View  */
 
+.searchBoth {
+    margin-left: 15%;
+    display: flex;
+}
+
+.p {
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+.inputboxsearch {
+    display: inline-flex;
+    height: 35px;
+    margin-left: 2%;
+    width: 55%;
+    border-radius: 5px;
+    border : 1px solid rgb(190, 191, 192);
+}
+
 #JobCardWrapper {
     /* display: flex; */
     /* flex-wrap: wrap; */
     padding: 10px;
     /* background-color: rgb(204, 103, 103); */
     border-radius: 10px;
-    /* margin-left: 40px;     */
     width: 90%;
 
 }
@@ -248,7 +364,7 @@
 .JobCard {
     /* display: flex; */
     /* background-color: aqua;    */
-    margin-top: 10px;
+    margin-top: 25px;
     margin-bottom: 10px;
     margin-left: 8px;
     /* height: 250px; */

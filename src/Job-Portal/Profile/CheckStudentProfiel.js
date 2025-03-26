@@ -6,13 +6,17 @@ import { Link, useNavigate, useLocation, useParams } from "react-router-dom";
 import profileDp from "../img/user_3177440.png"
 import { Puff } from  'react-loader-spinner'
 import useScreenSize from '../SizeHook';
+import Arrowimage from '../img/icons8-arrow-left-48.png'
+import Footer from '../Footer/Footer';
 
 function CheckStudentProfile() {
 
     const [profileData, setProfileData] = useState([])
+    const [approved, setapproved] = useState()
 const [PageLoader, setPageLoader] = useState(false)
 const screenSize = useScreenSize();
 
+let navigate = useNavigate()
 
 
     let studId = JSON.parse(localStorage.getItem("StudId"))
@@ -23,9 +27,11 @@ const screenSize = useScreenSize();
         let userid = JSON.parse(localStorage.getItem("EmpIdG"))
         const headers = { authorization: userid +" "+ atob(JSON.parse(localStorage.getItem("EmpLog"))) };
         setPageLoader(true)
-        await axios.get(`/StudentProfile/getProfile/${params.CP}`,{headers})
+        await axios.get(`/StudentProfile/getProfile/${atob(params.CP)}`,{headers})
             .then((res) => {
                 let result = res.data.result
+        console.log(result)
+
                 setProfileData([result])
         setPageLoader(false)
 
@@ -36,10 +42,35 @@ const screenSize = useScreenSize();
 
     useEffect(() => {
         getProfile()
+        getEmpProfile()
     }, [])
+
+    let empId = JSON.parse(localStorage.getItem("EmpIdG"))
+
+
+    async function getEmpProfile() {
+        const headers = { authorization: 'BlueItImpulseWalkinIn' };
+
+        await axios.get(`/EmpProfile/getProfile/${empId}`, { headers })
+            .then((res) => {
+                let result = res.data.result
+                console.log(result.isApproved)
+                const approved = result.isApproved
+                setapproved(approved)
+            }).catch((err) => {
+                alert("some thing went wrong")
+            })
+    }
+
+
 
     return (
         <>
+<div style={{display:"flex"}}>
+                             <img style={{ height:"25px", color:"grey", marginTop:"20px", marginLeft:"8%", cursor:"pointer",
+             width:"28px"}} onClick={()=>{navigate("/Search-Candidate")}}  src={Arrowimage} />
+    <p style={{marginLeft:"40%"}}><b>JobSeeker Profile </b></p>
+    </div>
  {
 profileData.map((item, i) => {
     return (
@@ -77,13 +108,13 @@ profileData.map((item, i) => {
   }
 
             {
-
+            
                 profileData.map((item, i) => {
                     return (
                         <ul className={styles.ulR} key={i}>
                             <li className={`${styles.Hli}`}>{item.name?item.name:<li className={styles.Nli}>Not Updated</li>}</li>
-                            <li className={`${styles.Hli}`}>{item.email?item.email:<li className={styles.Nli}>Not Updated</li>}</li>
-                       <li className={` ${styles.Hli}`}>{item.phoneNumber?item.phoneNumber:<li className={styles.Nli}>Not Updated</li>}</li>
+                            <li className={`${styles.Hli}`}>{approved?item.email?item.email:<li className={styles.Nli}>Not Updated</li>:<li className={styles.Nli}>please wait for your account Approval</li>}</li>
+                       <li className={` ${styles.Hli}`}>{approved?item.phoneNumber?item.phoneNumber:<li className={styles.Nli}>Not Updated</li> : <li className={styles.Nli}>please wait for your account Approval</li>}</li>
                        <li className={` ${styles.Hli}`}>{item.Aadhar?<li className={styles.Nli}>###########</li>:<li className={styles.Nli}>Not Updated</li>}</li>
                        <li className={` ${styles.Hli}`}>{item.panCard?<li className={styles.Nli}>###########</li>:<li className={styles.Nli}>Not Updated</li>}</li>
                        <li className={` ${styles.Hli}`}>{item.age?item.age:<li className={styles.Nli}>Not Updated</li>}</li>
@@ -92,7 +123,7 @@ profileData.map((item, i) => {
                        <li className={` ${styles.Hli}`}>{item.currentCTC?item.currentCTC:<li className={styles.Nli}>Not Updated</li>}</li>
                        <li className={` ${styles.Hli}`}>{item.Qualification?item.Qualification:<li className={styles.Nli}>Not Updated</li>}</li>
                        <li className={` ${styles.Hli}`}>{item.Skills?item.Skills:<li className={styles.Nli}>Not Updated</li>}</li>
-                       <li className={` ${styles.Hli}`}>{item.Experiance?item.email:<li className={styles.Nli}>Not Updated</li>}</li>
+                       <li className={` ${styles.Hli}`}>{item.Experiance?item.Experiance:<li className={styles.Nli}>Not Updated</li>}</li>
                         </ul>
                     )
                 })
@@ -123,8 +154,8 @@ profileData.map((item, i) => {
                     <div className={styles.RightTable}>
                     <span className={styles.span}><span style={{color:"blue"}}  >{job.name}</span></span><br></br>      
                     <span className={styles.span}>{job.age? <span style={{ color: "blue" }}>{job.age} </span>:<span style={{color:"red"}}>Not updated</span> }</span><br></br>
-                    <span className={styles.span}> {job.email?<span style={{ color: "blue" }}>{job.email} </span>: <span style={{color:"red"}}>Not updated</span>}</span><br></br>
-                    <span className={styles.span}> {job.phoneNumber?<span style={{ color: "blue" }}>{job.phoneNumber} </span>: <span style={{color:"red"}}>Not updated</span>}</span><br></br>
+                    <span className={styles.span}> {job.email?<span style={{ color: "blue" }}>{approved?job.email:<span style={{color:"red", fontWeight:400}}>please wait for your account Approval</span>} </span>: <span style={{color:"red"}}>Not updated</span>}</span><br></br>
+                    <span className={styles.span}> {job.phoneNumber?<span style={{ color: "blue" }}>{approved?job.phoneNumber:<span style={{color:"red", fontWeight:400}}>please wait for your account Approval</span>} </span>: <span style={{color:"red"}}>Not updated</span>}</span><br></br>
                     <span className={styles.span}> {job.NoticePeriod?<span style={{ color: "blue" }}>{job.NoticePeriod} </span>: <span style={{color:"red"}}>Not updated</span>}</span><br></br>
                     <span className={styles.span}> {job.Qualification?<span style={{ color: "blue" }}>{job.Qualification} </span>:<span style={{color:"red"}}>Not updated</span>}</span><br></br>
                     <span className={styles.span}> {job.Experiance?<span style={{ color: "blue" }}>{job.Experiance} </span>:<span style={{color:"red"}}>Not updated</span>}   </span><br></br>
@@ -144,8 +175,12 @@ profileData.map((item, i) => {
 })}
 
 </div>
+<div style={{marginTop:"50px"}}>
+                      <Footer/>
+                    </div>
             </>
 }
+
         </>
     )
 }

@@ -2,23 +2,28 @@ import { useState, useEffect, createContext } from "react"
 import React from 'react'
 import styles from "./login.module.css"
 import axios from "axios"
+import Footer from "../Footer/Footer"
 import GoogleImage from "../img/icons8-google-48.png"
 import MicosoftImage from "../img/icons8-windows-10-48.png"
-
+import linkedIn from "../img/icons8-linked-in-48.png"
+import github from "../img/icons8-github-50.png"
 import { useNavigate, Link } from "react-router-dom";
 import { useGoogleLogin } from '@react-oauth/google';
 import { GoogleLogin } from '@react-oauth/google';
 import image from "../img/user_3177440.png"
 import { TailSpin } from "react-loader-spinner"
-
-
-
-
+import Modal from "./EmpLogModal";
 import jwt_decode from "jwt-decode"
+import useScreenSize from '../SizeHook';
+
+import { useMsal } from "@azure/msal-react";
+import { loginRequest } from "../Config";
 
 // import style from "./styles.module.css"
 
 function EmpLogin(props) {
+  const { instance } = useMsal();
+  const screenSize = useScreenSize();
 
   const [gmailuser, setGmailuser] = useState("")
   const [topErrorMessage, setTopErrorMessage] = useState("")
@@ -27,9 +32,8 @@ function EmpLogin(props) {
 
   const [showotp, setshowotp] = useState(false)
   const [Loader, setLoader] = useState(false)
-
-
   const [ipAddress, setIPAddress] = useState('')
+
 
   useEffect(() => {
     fetch('https://api.ipify.org?format=json')
@@ -70,7 +74,7 @@ function EmpLogin(props) {
             if (result.status == "success") {
               localStorage.setItem("EmpLog", JSON.stringify(btoa(token)))
               localStorage.setItem("EmpIdG", JSON.stringify(GuserId))
-              navigate("/postedjobs", { state: { gserid: GuserId } })
+              navigate("/Search-Candidate", { state: { gserid: GuserId } })
             }
           }).catch((err) => {
             alert("server issue occured")
@@ -172,7 +176,7 @@ function EmpLogin(props) {
             alert("incorrect OTP")
           }
           if (result.token) {
-            navigate("/postedjobs")
+            navigate("/Search-Candidate")
             localStorage.setItem("EmpLog", JSON.stringify(result.token))
             let empId = result.id
             localStorage.setItem("EmpIdG", JSON.stringify(empId))
@@ -187,6 +191,88 @@ function EmpLogin(props) {
     }, 1000);
     setLoader(false)
   }
+
+  const GITHUB_CLIENT_ID = 'Ov23liEVkuJU0edpK6Z0';
+  const GITHUB_CLIENT_SECRET = '63d5c5177657ddc76314a56e3f2283afbde3a99b';
+  const GITHUB_CALLBACK_URL = 'http://localhost:80/auth/github/callback';
+
+  const handleLogin = async (code) => {
+    try {
+      // Exchange the code for an access token
+      const githubOAuthURL = `https://github.com/login/oauth/authorize?client_id=${GITHUB_CLIENT_ID}&scope=user`;
+
+      const data = await fetch('https://github.com/login/oauth/access_token', {
+        method: 'POST',
+        body: {
+          client_id: GITHUB_CLIENT_ID,
+          client_secret: GITHUB_CLIENT_SECRET,
+          code,
+        },
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      }).then((response) => response.json());
+
+      const accessToken = data.access_token;
+
+      // Fetch the user's GitHub profile
+      const userProfile = await fetch('https://api.github.com/user', {
+        headers: {
+          'Authorization': `Bearer ${accessToken}`,
+          'User-Agent': 'Your-App-Name'
+        }
+      });
+
+      // Handle the user profile data (e.g., store it in your database and log the user in)
+      console.log(`Welcome, ${userProfile.data.name}!`);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const handleGitHubCallback = () => {
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    const code = urlParams.get('code');
+
+    if (code) {
+      handleLogin(code);
+    }
+  };
+
+  React.useEffect(() => {
+    handleGitHubCallback();
+  }, []);
+
+  function microsoftLogin() {
+    instance.loginPopup(loginRequest)
+      .then(async response => {
+        // console.log(response)
+        let name = response.account.name
+        let email = response.account.username
+        let isApproved = false
+        await axios.post("/EmpProfile/Glogin", { ipAddress,  email, name, isApproved })
+        .then((response) => {
+          let result = response.data
+          let token = result.token
+          let GuserId = result.id
+          if (result.status == "success") {
+            localStorage.setItem("EmpLog", JSON.stringify(btoa(token)))
+            localStorage.setItem("EmpIdG", JSON.stringify(GuserId))
+            navigate("/Search-Candidate", { state: { gserid: GuserId } })
+          }
+        
+          }).catch((err) => {
+            alert("server issue occured")
+          })
+      })
+      .catch(error => {
+        // console.log("Login error", error);
+        // alert("some thing went wrong")
+      });
+  }
+
+
   return (
     <>
       {/* <div className={styles.LoginpageWapper}> */}
@@ -213,13 +299,11 @@ function EmpLogin(props) {
       {/* <div id={styles.inputWrapper}> */}
       {/* <div style={{ marginTop: "10px", marginLeft: "37%" }}> */}
       <div className={styles.BothsignUpWrapper}>
-        <h3 className={styles.Loginpage}>Employer Login page </h3>
+        <p className={styles.Loginpage}>Employer Login page </p>
 
-
+        {/* 
         <input maxLength="10" className={styles.inputs} type="number" placeholder='enter phone Number'
           value={PhoneNumber} autoComplete="on" onChange={(e) => { setPhoneNumber(e.target.value) }} />
-        {/* {error && !email ? <p >field is missing</p> : ""} */}
-
 
         {showotp ?
           <>
@@ -243,29 +327,50 @@ function EmpLogin(props) {
             <TailSpin color=" rgb(40, 4, 99)" height={40} />
           </div>
           : ""}
-        {/* 
-        </div>
-      </div>  */}
-        <h4 className={styles.OR}>OR</h4>
+        
+        <h4 className={styles.OR}>OR</h4> */}
 
 
         <div className={styles.signUpWrapper} onClick={login} >
           <div className={styles.both}>
             <img className={styles.google} src={GoogleImage} />
-            <span className={styles.signUpwrap} >Continue with Google</span>
+            <p className={styles.signUpwrap} >Continue with Google</p>
           </div>
         </div>
 
-        <div className={styles.signUpWrapper}  >
+        <div className={styles.signUpWrapper} onClick={microsoftLogin} >
           <div className={styles.both}>
             <img className={styles.google} src={MicosoftImage} />
-            <span className={styles.signUpwrap} >Continue with Microsoft</span>
+            <p className={styles.signUpwrap} >Continue with Microsoft</p>
           </div>
         </div>
+        {/* <div className={styles.signUpWrapper}  >
+          <div className={styles.both}>
+            <img className={styles.google} src={linkedIn} />
+            <span className={styles.signUpwrap} >Continue with Linkedin</span>
+          </div>
+        </div> */}
+
+
+        {/* <div className={styles.signUpWrapper} >
+          <div className={styles.both}>
+            <img className={styles.google} src={github} />
+            <span className={styles.signUpwrap} >Continue with Github</span>
+          </div>
+        </div> */}
       </div>
+      {screenSize.width > 750 ?
+        // <div style={{ marginTop: "330px", position: "sticky", bottom: 0 }}>
+        //   <Footer />
+        // </div>
+        ""
+        :
+        <div style={{ marginTop: "50px", }}>
 
+          <Footer />
+        </div>
+      }
 
-      {/* </div> */}
 
     </>
 

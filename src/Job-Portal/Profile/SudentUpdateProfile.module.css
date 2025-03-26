@@ -1,3 +1,28 @@
+/* ------------------------Employer registration back button starts-------------------- */
+.empRegBackBtnContainer{
+    background-color: red;
+
+}
+.empRegBackButton{
+    background-color: rgb(40, 4, 99);
+    color: white;
+    border: none;
+    padding: 10px 15px 10px 15px;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-top: 10px;
+    font-weight: 500;
+    font-size: 1.0rem; 
+    margin-left: 25px;
+}
+.empRegBackButton:hover{
+    background-color: white;
+    color: rgb(40, 4, 99);
+    border: 2px solid  rgb(40, 4, 99);
+}
+
+
+/* ----------Employer registration back button ends---------------- */
 .EntireFullWrapper {
     background-color: rgb(240, 240, 241);
     padding-top: 2%;
@@ -11,7 +36,11 @@
     border-radius: 10px;
     background-color: white;
 }
-
+@media(max-width:1200px){
+    .empRegBackButton{
+        margin-left:15px;
+    }
+}
 @media (max-width:650px){
     .EntireWrapper {
         margin-left: 9%;  
@@ -36,35 +65,69 @@
 }
 
 .imageView {
-    height: 150px;
-    width: 150px;
+    height: 120px;
+    width: 120px;
     border-radius: 180%;
     /* background-color: red; */
     /* margin-top:2%; */
 }
 
 .fileView {
-    height: 150px;
-    margin-left: -150px;
-    width: 150px;
+    height: 120px;
+    width: 120px;
+    margin-left: -120px;
     border-radius: 180%;
     /* background-color: blue; */
 }
 
 .addfileDiconwrapper {
-    margin-left: -150px;
-    width: 120px;
-   
+    margin-left: -120px;
+    width: 100px;   
     /* background-color: rgb(255, 157, 127); */
 }
 
 .addfileD {
-    height: 150px;
-    width: 150px;
+    height: 120px;
+    width: 120px;
     
     border-radius: 180%;
     /* background-color: rgb(168, 168, 224); */
+}
+@media(max-width:500px){
+    .empRegBackButton{
+        margin-left:10px;
+        margin-bottom:10px;
+    }
+    
+.imageView {
+    height: 110px;
+    width: 110px;
+    border-radius: 180%;
+    /* background-color: red; */
+    /* margin-top:2%; */
+}
 
+.fileView {
+    height: 110px;
+    width: 110px;
+    margin-left: -110px;
+    border-radius: 180%;
+    /* background-color: blue; */
+}
+
+.addfileDiconwrapper {
+    margin-left: -100px;
+    width: 100px;   
+    /* background-color: rgb(255, 157, 127); */
+}
+
+.addfileD {
+    height: 110px;
+    width: 110px;
+    
+    border-radius: 180%;
+    /* background-color: rgb(168, 168, 224); */
+}
 }
 
 .addfile::-webkit-file-upload-button {
@@ -84,6 +147,9 @@
     display: flex;
     /* background-color: rgb(35, 206, 206); */
     margin-top: 20px;
+}
+.hint{
+    opacity:0.5;
 }
 
 .saveImage {
@@ -110,10 +176,16 @@
     font-size:small;
     font-weight:500;
 }
-
+.Editor{
+    margin-top: 20px;
+    margin-left: 18px;
+    width:87%
+}
 .inputWrapper {
     display: flex;
     flex-wrap: wrap;
+    /* background-color: aqua; */
+    /* height: 90%; */
 
 }
 
@@ -129,6 +201,7 @@ h4 {
     font-weight: 550;
     font-size: small;
     white-space: nowrap;
+    margin-left: 15px;
 
 }
 
@@ -151,14 +224,16 @@ h4 {
     background-color: rgb(40, 4, 99);
     color: white;
     font-weight: bold;
-    margin-left: 2.8%;
-
+    cursor: pointer;
+    /* margin-left: 2.8%; */
 }
 
 .cancel {
+    cursor: pointer;
+    
     height: 30px;
     margin: 2%;
-    margin-left: 70%;
+    /* margin-left: 70%; */
     width: 60px;
     border-radius: 5px;
     border: 1px solid;
@@ -176,7 +251,7 @@ h4 {
     width:95%;
     margin-left: 2%;
     margin-top: 2%;
-
+        
 
 }
 
@@ -191,6 +266,7 @@ h4 {
     width: 110px;
     /* background-color: red; */
     border:none;
+    z-index:999;
 }
 .EmpfileView {
     height: 100px;
@@ -247,6 +323,7 @@ h4 {
 .MobileName{
     margin-top: 10px;
     margin-bottom: 5px;
+    margin-left: 10px;
 }
 
 .Mobileinput{
@@ -254,7 +331,7 @@ h4 {
      height: 32px;
    border-radius: 5px;
      border: 1px solid rgb(40, 4, 99);
-    margin-left: 18px; 
+    margin-left: 10px; 
     margin-bottom: 5px;    
 }
 
@@ -268,11 +345,9 @@ h4 {
     font-weight: bold;
     margin-left: 5%;
     margin-bottom: 5px;
-
 }
 .MobileSave {
     margin-bottom: 5px;
-
     height: 30px;
     width: 60px;
     border-radius: 5px;
@@ -281,5 +356,4 @@ h4 {
     color: white;
     font-weight: bold;
     margin-left: 2%;
-
 }

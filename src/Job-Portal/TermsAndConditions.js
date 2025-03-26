@@ -3,9 +3,14 @@ import axios from "axios"
 import { useState, useEffect } from 'react'
 import Up from "./img/icons8-arrow-button-24.png"
 import Down from "./img/icons8-down-button-24.png"
+import Footer from './Footer/Footer'
+import useScreenSize from './SizeHook';
+
 
 
 function TermsAndCondition() {
+  const screenSize = useScreenSize();
+
     const [TermsAndCondition, setTermsAndCondition]= useState([])
 
    async function getAboutUs(){
@@ -30,15 +35,16 @@ getAboutUs()
     function goDown(){
       window.scrollTo(50,5000000)
 
-      }
+      }      
 
   return (
-    <>
-          <img style={{marginLeft:"50%"}}  onClick={()=>{goDown()}} src = {Down}/>
+    <div>
+          <img style={{marginLeft:"50%",}}  onClick={()=>{goDown()}} src = {Down}/>
      
-        <div style={{marginLeft:"20px"}}>
+        <div style={{marginLeft:"10px"}}>
+        <h2 style={{marginLeft:"1px", fontWeight:"800", marginTop:"5px"}}> Terms & Condition</h2>
+
         <p>
-          <h2>TERMS AND CONDITIONS</h2><br></br>
           WE DO NOT GUARANTEE OR OFFER ANY WARRANTY OF ANY INTERVIEW CALLS OR ASSURE ANY JOB OFFERS WITH ANY OF OUR SERVICES OR FROM ANY PROSPECTIVE EMPLOYER/ORGANIZATION WHICH DOWNLOADS THE RESUME/ INSERTION OR INFORMATION/DATA AND USES IT TO CONTACT THE USER. THE USER IS ADVISED TO BE CAUTIOUS OF CALLS/EMAILS ASKING FOR PAYMENT FROM OTHER WEBSITES THAT CLAIM TO OFFER SIMILAR SERVICES UNDER THE NAME OF ITWALKIN ”<br></br><br></br>
 
 PLEASE READ THESE TERMS AND CONDITIONS OF USE CAREFULLY. BY ACCESSING THIS WEBSITE AND ANY PAGES THEREOF, YOU AGREE TO BE BOUND BY THE TERMS AND CONDITIONS OF USE BELOW AND/OR ANY SUCH TERMS AND CONDITIONS OF USE AS ARE COMMUNICATED ON THE PAGES THEREOF. IF YOU DO NOT AGREE TO THE TERMS AND CONDITIONS OF USE BELOW AND/OR ANY SUCH TERMS AND CONDITIONS OF USE AS ARE COMMUNICATED ON THE PAGES THEREOF, DO NOT ACCESS THIS WEBBSITE, OR ANY PAGES THEREOF.<br></br><br></br>
@@ -362,12 +368,19 @@ We does not take responsibility or liability for the actions, products, content 
         </p>
         </div>
 <img style={{marginLeft:"50%"}} id="down" onClick={()=>{goUp()}} src = {Up}/>
+{screenSize.width > 750 ?
+""  
+        :
+        <Footer/>       
+}
 
-    </>
+
+
+
+    </div>
 
     // <div style={{marginLeft:"2%", marginTop:"10px"}}> {AboutUs} </div>
   )
 }
 
 export default TermsAndCondition
-

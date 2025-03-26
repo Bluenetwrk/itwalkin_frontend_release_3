@@ -2,17 +2,21 @@ import React from 'react'
 import styles from "./Allobs.module.css"
 import { useEffect, useState } from 'react'
 import axios from "axios";
+import Footer from '../Footer/Footer';
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { TailSpin, Puff } from "react-loader-spinner"
 import location from "../img/icons8-location-20.png" 
 import Swal from "sweetalert2";
 import Styles from "./myPostedjobs.module.css"
 import graduation from "../img/icons8-graduation-cap-40.png"
-
-
-
-
 import useScreenSize from '../SizeHook';
+import Arrowimage from '../img/icons8-arrow-left-48.png'
+import profileDp from "../img/user_3177440.png"
+import "./Allobs.module.css"
+import HTMLReactParser from 'html-react-parser'
+import Down from '../img/icons8-down-button-24.png'
+import Up from '../img/icons8-arrow-button-24.png'
+import CompanyLogo from '../img/company-logo.png'
 
 function Jobdetails() {
   const [jobs, setJobs] = useState([])
@@ -22,6 +26,7 @@ function Jobdetails() {
   const [isReadMore, setIsReadMore] = useState(true)
 const screenSize = useScreenSize();
 const [Loader, setLoader] = useState(false)
+const[JobSeekerLogin,setJobSeekerLogin]=useState(false);
 
   const [clickedJobId, setclickedJobId] = useState() //for single job loader
   let jobSeekerId = JSON.parse(localStorage.getItem("StudId"))
@@ -34,13 +39,16 @@ const [Loader, setLoader] = useState(false)
   let params = useParams();
 
   async function getjobs() {
+    window.scrollTo({
+      top:0,
+      // behavior:"smooth"
+    })
     const headers = { authorization: 'BlueItImpulseWalkinIn'};
-    await axios.get(`/jobpost/getjobs/${params.id}`, {headers})
+    await axios.get(`/jobpost/getjobs/${atob(params.id)}`, {headers})
       .then((res) => {
         let result = (res.data)
+        console.log(result)
         setJobs(result)
-        // console.log("result are in ", result)
-
         setjobdescription(result.jobDescription)
         setjobSeekerId(result.jobSeekerId)
       })
@@ -51,6 +59,21 @@ const [Loader, setLoader] = useState(false)
   }, [])
   function showless() {
     navigate(-1)
+  }
+
+   useEffect(() => {
+      let studentAuth = localStorage.getItem("StudLog")
+      if (studentAuth) {
+        setJobSeekerLogin(true)
+      }
+    }, [])
+
+  async function applyforJobasjobseeker(id,link) {
+    if(JobSeekerLogin)
+      window.open(`${link}`)
+    else
+     navigate("/JobSeekerLogin", { state: { Jid: id } })
+   
   }
 
   async function applyforOtherJob(Link) {
@@ -106,81 +129,85 @@ const [Loader, setLoader] = useState(false)
     }, 1000)
   }
 
+  function goUp(){
+    window.scrollTo({
+      top:0,
+      behavior:"smooth"
+    })
+  }
+  function goDown(){
+    window.scrollTo(50,5000000)
+
+    }
   return (
     <>
+     
+
+    {/* <div class={styles.jobdetailBtnContainer} style={{display:"flex"}}> */}
+      {/* <button class={styles.jobdetailBackBtn} onClick={()=>{navigate(-1)}}>Back</button> */}
+      
+                            {/* <img style={{ height:"25px", color:"grey", marginTop:"20px", marginLeft:"8%", cursor:"pointer",
+             width:"28px"}} onClick={()=>{navigate(-1)}}  src={Arrowimage} /> */}
+    {/* <p style={{marginLeft:"30%"}}><b>Full Job Description</b></p> */}
+    {/* </div> */}
+
       {screenSize.width>850 ?
 
         <>
-          <div className={styles.dUiwarpper}>
-            <ul className={styles.Hul}>
-              <li className={styles.Hli}><b>Company Name</b></li>
-              <li className={styles.Hli}><b>Job Title</b></li>
-              <li className={styles.Hli}><b>Location</b></li>
-              <li className={styles.Hli}><b>Package </b></li>
-              <li className={styles.Hli}><b>Experience Required</b></li>
-              <li className={styles.Hli}><b>Skills Required</b></li>
-              <li className={styles.Hli}><b>Posted Date</b></li>
-              <ul className={`${styles.DUIli}`}>
-                <li className={`${styles.Dli}`}><b>Job Description:</b></li>
-                <li className={`${styles.RDli} `}>
-                   {/* {jobs.jobDescription} */}
-                 {
-                jobdescription.map((descrip, di) => {
-                      return (
-                        <>
-                          {
-                            descrip.type == "unordered-list-item" ?
-            
-                              <ul style={{ listStyleType: "disc" }}>
-                                <li>
-                                  {descrip.text}
-            
-                                </li>
-                              </ul>
-            
-                              : descrip.type == "ordered-list-item" ?
-            
-                                <ol >
-                                    {descrip.text}
-            
-                                </ol>
-                                :
-                                <>
-                                  {descrip.text}
-                                  <br></br>
-                                </>            
-                          }
-                        </>
-                      )
-                    })} 
-                   
-                  <span className={styles.showLess} onClick={showless}>...show less</span></li>
-              </ul>
-            </ul>
+        <img style={{marginLeft:"50%", height: "30px"}}  onClick={()=>{goDown()}} src={Down}/>
+        <div class={styles.jobDetailContainer}>
 
-            <ul className={styles.Rul}>
-              <li className={styles.Rli}>{jobs.companyName ? jobs.companyName : <li style={{ display: "inline-block" }}>Company name</li>}</li>
-
-              <li className={styles.Rli}>{jobs.jobTitle ? jobs.jobTitle : <li style={{ display: "inline-block" }}>job Title</li>}</li>
-              <li className={styles.Rli}>{jobs.jobLocation ? jobs.jobLocation : <li style={{ display: "inline-block" }}>job Location</li>}</li>
-              <li className={styles.Rli}>{jobs.salaryRange ? jobs.salaryRange : <li style={{ display: "inline-block" }}>Salary Range</li>}</li>
-              <li className={styles.Rli}>{jobs.experiance ? jobs.experiance : <li style={{ display: "inline-block" }} >Experiance</li>}</li>
-              <li className={styles.Rli}>{jobs.skills ? jobs.skills : <li style={{ display: "inline-block" }} >Skills</li>}  </li>
-              <li className={styles.Rli}>
-                {jobs.updatedAt ? new Date(jobs.updatedAt).toLocaleString(
+        <div class={styles.jobdetailBtnContainer} style={{display:"flex"}}>
+           <button class={styles.jobdetailBackBtn} onClick={()=>{navigate(-1)}}>Back</button>
+           <button class={styles.jobdetailApplyBtn} onClick={()=>applyforJobasjobseeker(jobs._id,jobs.SourceLink)}>Apply</button>
+        </div>
+        <div class={styles.jobDetailsHeading}>
+             <div class={styles.jobDetailsImage}>
+            {/* <img className={styles.imageV} src={jobs.Logo?jobs.Logo : profileDp}/> */}
+            {/* {console.log("jobs",jobs)} */}
+              <img className={styles.jobDetailImage} src={CompanyLogo} />
+            </div>
+          
+          
+<div class={styles.jobDetailsPosterDesc}>
+<h1 style={{textAlign:"center", fontSize:"xx-large"}}>{jobs?.jobTitle?jobs.jobTitle.charAt(0).toUpperCase()+jobs.jobTitle.substring(1):"Loading...."}</h1>
+<div style={{marginLeft:"30px"}}>
+  <span>Posted by : {jobs.companyName}</span> &nbsp;|  
+  &nbsp; <span> Posted on : {new Date(jobs.createdAt).toLocaleString(
                   "en-US",
                   {
                     month: "short",
                     day: "2-digit",
                     year: "numeric",
                   }
-                ) : <li style={{ display: "inline-block" }}>Date</li>
-                }
-              </li>
+                )}</span> &nbsp; |
+  &nbsp; <span>Experience : {jobs.experiance}</span> &nbsp;|  
+  &nbsp; <span>Location : {jobs.jobLocation}</span>&nbsp; |  
+  &nbsp; <span>Job Type : {jobs.jobtype}</span>&nbsp; |  
+  &nbsp; <span>Qualification : {jobs.qualification}</span>&nbsp; |  
+  &nbsp; <span>Salary : {jobs.salaryRange}</span> 
+  
+  
+<p>Skills : {jobs.skills} </p>
+</div>
+</div>
+</div>
 
-            </ul>
 
-          </div>
+  <table className={styles.tableDesWrapper} style={{marginLeft:"6px", marginTop:"-40px", flexWrap:"wrap", width:"98.8%", borderCollapse: "collapse",border:"none"}}>         
+  
+  <tr style={{border:"none"}}>
+    <td colSpan={2} style={{border:"none"}}>
+    {
+      jobdescription? HTMLReactParser(jobdescription.toString()) :""
+     } 
+    </td>
+
+  </tr>
+  </table>
+  </div>
+  <img style={{height:"30px",marginLeft:"50%",marginBottom:"50px"}}  onClick={()=>{goUp()}} src={Up}/> 
+  
           </>
           :
           <>
@@ -188,28 +215,44 @@ const [Loader, setLoader] = useState(false)
 
 
               <>
+              <div style={{display:"flex",marginTop:"25px"}}>
+              <button class={styles.jobdetailBackBtn} onClick={()=>{navigate(-1)}}>Back</button>
+              <img style={{marginLeft:"25%", marginTop:"0px", height:"24px"}}  onClick={()=>{goDown()}} src={Down}/>
+              </div>
                 <div className={styles.JobCard} >
-                <div className={styles.JobTitleDateWrapper}>
-        <p className={styles.jobTitle} >{jobs.jobTitle}</p>
-        <p className={styles.Date}>{new Date(jobs.createdAt).toLocaleString(
+                <p className={styles.readPageDate}>{new Date(jobs.createdAt).toLocaleString(
           "en-US",
           {
             month: "short",
             day: "2-digit",
             year: "numeric",
           }
-        )} </p></div>
+        )} </p>
+                <div className={styles.JobTitleDateWrapper} style={{marginTop: "-20px"}}>
+        <p style={{ width:"100%" ,whiteSpace:"normal", marginRight: "5px" }}className={styles.jobTitle} >{jobs?.jobTitle?jobs.jobTitle.charAt(0).toUpperCase()+jobs.jobTitle.substring(1):"Loading..."}</p>
+        {/* <p className={styles.Date}>{new Date(jobs.createdAt).toLocaleString(
+          "en-US",
+          {
+            month: "short",
+            day: "2-digit",
+            year: "numeric",
+          }
+        )} </p> */}
+        </div>
 
-        <div className={styles.companyNameLocationWrapper}   >
-          <img className={styles.logo} src={jobs.Logo} />
+        <div className={styles.JobPagecompanyNameLocationWrapper}   >
+          {/* <img className={styles.logo} src={jobs.Logo} /> */}
+          <img className={styles.jobDetailImageMobile} src={CompanyLogo} />
+          <div class={styles.jobDetailTitleCompanyName} style={{marginLeft: "5px"}}>
           {!jobs.Source ?
 
           <span className={styles.companyName} >{jobs.companyName}  </span> 
           :
-  <> <a className={`${styles.skills}`} href={jobs.SourceLink} target="_blank">{jobs.Source}</a><br></br> </>
+  <> <a style={{ fontSize:"18px"}}className={`${styles.skills}`} href={jobs.SourceLink} target="_blank">{jobs.Source}</a><br></br> </>
 
 
 }  
+</div>
 
         </div>
         <  img className={styles.jobLocationImage} src={location}  /> 
@@ -217,7 +260,7 @@ const [Loader, setLoader] = useState(false)
         <span className={styles.qualificationAndExperiance}>
         <  img className={styles.graduationImage} src={graduation}  /> 
 
-          {jobs.qualification},   {jobs.experiance} Exp, {jobs.jobtype}
+          {jobs.qualification},   {jobs.experiance}Y Exp, {jobs.jobtype}
         {/* <span className={styles.jobtypeAndDate}> {job.jobtype}</span> */}
         </span><br></br> 
         <span className={styles.jobtypeAndDate}>Source</span> :
@@ -234,7 +277,7 @@ const [Loader, setLoader] = useState(false)
 
             
             <div className={styles.ApplyPackage}>
-            <p className={styles.salaryRange}><span>&#8377;</span>{jobs.salaryRange}</p>        
+            <p className={styles.salaryRange}><span>&#8377;</span>{jobs.salaryRange}L</p>        
 
 
             {
@@ -250,7 +293,8 @@ const [Loader, setLoader] = useState(false)
   // job .isApproved?
 
     :
-  <button className={styles.ApplyMobile} onClick={() => { applyforJob(jobs._id) }}>Apply
+  // <button className={styles.ApplyMobile} onClick={() => { applyforJob(jobs._id) }}>Apply
+  <button className={styles.ApplyMobile} onClick={()=>applyforJobasjobseeker(jobs._id,jobs.SourceLink)}>Apply
     <span className={styles.Loader} >{Loader && jobs._id == clickedJobId ?
       <TailSpin color="white" height={20} />
       : ""}</span></button>
@@ -266,8 +310,8 @@ const [Loader, setLoader] = useState(false)
                </div>
         // </div>
         :  jobs.SourceLink?
-        <button  className={styles.ApplyMobile} onClick={() => {
-          applyforOtherJob(jobs.SourceLink) }}>Apply</button>
+        <button  className={styles.ApplyMobile} onClick={() =>
+          applyforJobasjobseeker(jobs._id,jobs.SourceLink)}>Apply</button>
           :
       <button className={styles.ApplyMobile} onClick={() => { navigate("/JobSeekerLogin") }}><b>Apply</b></button>
       
@@ -277,57 +321,21 @@ const [Loader, setLoader] = useState(false)
                   </div>
             <p className={styles.jobDescriptionHeading}>Job Description:</p>
             <p className={styles.jobDescription}> 
-            { jobdescription.map((descrip, di) => {
-                      return (
-                        <>
-                          {
-                            descrip.type == "unordered-list-item" ?
-            
-                              <ul style={{ listStyleType: "disc" }}>
-                                <li style={{marginLeft:"-5px"}} className={styles.jobDescription}>
-                                  {descrip.text}
-            
-                                </li>
-                              </ul>
-            
-                              : descrip.type == "ordered-list-item" ?
-            
-                                <ul >
-                                  <li style={{marginLeft:"-5px"}} className={styles.jobDescription}>
-                                    {descrip.text}
-            
-                                  </li>
-                                </ul>
-                                :
-                                <>
-                                 <div className={styles.jobDescription}> {descrip.text}</div>
-                                  <br></br>
-                                </>           
-                          }
-                        </>
-                      )
-                    })}
-                   
-
-
-            <span onClick={() =>{
-              window.scrollTo({
-                top:0
-              })
-               navigate(-1)}} className={styles.showLess}>
-                      ...show less
-                    </span>
+            { 
+    jobdescription? HTMLReactParser(jobdescription.toString()) :""
+            }
             
                </p>
                 </div>
               </>
 
             </div>
-
+            <img style={{height:"24px",marginLeft:"45%",marginBottom:"40px"}}  onClick={()=>{goUp()}} src={Up}/>
           </>
 
 
               }
+                          
         </>
 
   )

@@ -45,15 +45,18 @@
     display: flex;
     margin: 0px;
     margin-left: -30px;
-
 }
-
+.ul:nth-child(even) {
+    background:rgb(242, 244, 245)
+  }
 .li {
     display: inline-block;
     padding-top: 0.5%;
     padding-bottom: 0.5%;
     width: 8%;
-    border: 1px solid rgb(9, 247, 247);
+    /* border: 1px solid rgb(9, 247, 247); */
+    border : 1px solid rgb(215, 223, 226);
+
     text-align: center;
 }
 .CompanyName{
@@ -65,7 +68,9 @@
 }
 
 .Jtitle {
-    width: 9%
+    width: 9%;
+    text-decoration: underline;
+    cursor: pointer;
 }
 .JobType {
     width: 7.5%
@@ -85,6 +90,10 @@
 }
 .Qualif {
     width: 7%
+}
+.Skills{
+    width: 13%;
+
 }
 .DeleteAction{
     width:80px

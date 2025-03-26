@@ -7,8 +7,8 @@ import profileDp from "../img/user_3177440.png"
 import Swal from "sweetalert2";
 import { Puff } from  'react-loader-spinner'
 import useScreenSize from '../SizeHook';
-
-
+import Arrowimage from '../img/icons8-arrow-left-48.png'
+import Footer from '../Footer/Footer';
 
 function CheckEmpHalfProfile() {
     
@@ -17,32 +17,19 @@ function CheckEmpHalfProfile() {
 const [PageLoader, setPageLoader] = useState(false)
 const screenSize = useScreenSize();
 
-
-const [message, setmessage] = useState("")
     
-    async function sendMessage(id){
-      await axios.put(`/EmpProfile/sendMessage/${id}`, {message})
-      .then((res)=>{
-        if(res.data){
-        alert("Message Sent Successfully")
-        }
-      }).catch((err)=>{
-        alert("some thing went wrong")
-      })
-    }
-
-
-
     let studId = JSON.parse(localStorage.getItem("StudId"))
     let params =useParams()
 
     async function getProfile() {
+        window.scrollTo({
+            top:0
+        })
   setPageLoader(true)
   const headers = { authorization: 'BlueItImpulseWalkinIn'};
-        await axios.get(`/EmpProfile/getProfile/${params.empId}`, {headers})
+        await axios.get(`/EmpProfile/getProfile/${atob(params.empId)}`, {headers})
             .then((res) => {
                 let result = res.data.result  
-                console.log(res)              
                 setProfileData([result])
   setPageLoader(false)
 
@@ -55,132 +42,18 @@ const [message, setmessage] = useState("")
         getProfile()
     }, [])
 
-    
-    function Reject(Empid , status){
-      const isReject=status
-      Swal.fire({
-        title: "Are You sure?",
-        width:"245",
-      position:"top",
-      customClass:{
-        popup:"alertIcon"
-      },
-        icon:"question",
-        showCancelButton:true
-      }).then( async (res)=>{
-        if(res.isConfirmed){
-          await axios.put(`/EmpProfile/isReject/${Empid}`,{isReject})
-          .then((res)=>{
-              getProfile()
-  
-          }).catch((err)=>{
-            alert("backend error occured")
-          })
-        }
-      })
-    }    
-  
-    function unReject(Empid , status){
-      const isReject=status
-  
-      Swal.fire({
-        title: "Are You sure?",
-        // icon:"question",
-        width:"245",
-      position:"top",
-      customClass:{
-        popup:"alertIcon"
-      },
-        showCancelButton:true
-      }).then( async (res)=>{
-        if(res.isConfirmed){
-          await axios.put(`/EmpProfile/isReject/${Empid}`,{isReject})
-          .then((res)=>{
-              getProfile()
-  
-          }).catch((err)=>{
-            alert("backend error occured")
-          })
-        }
-      })
+    function goback (e){
+    e.preventDefault();
+
     }
-
-    function Approve(Empid , status){
-        const isApproved=status
-        Swal.fire({
-          title: "Are You sure ?",
-          // icon:"question",
-          width:"245",
-      position:"top",
-      customClass:{
-        popup:"alertIcon"
-      },
-          showCancelButton:true
-        }).then( async (res)=>{
-          if(res.isConfirmed){
-            await axios.put(`/EmpProfile/setApproval/${Empid}`,{isApproved})
-            .then((res)=>{
-                getProfile()
     
-            }).catch((err)=>{
-              alert("backend error occured")
-            })
-          }
-        })
-      }    
-    
-      function DisApprove(Empid , status){
-        const isApproved=status
-    
-        Swal.fire({
-          title: "Are You sure?",
-          width:"245",
-      position:"top",
-      customClass:{
-        popup:"alertIcon"
-      },
-          // icon:"question",
-          showCancelButton:true
-        }).then( async (res)=>{
-          if(res.isConfirmed){
-            await axios.put(`/EmpProfile/setApproval/${Empid}`,{isApproved})
-            .then((res)=>{
-                getProfile()
-    
-            }).catch((err)=>{
-              alert("backend error occured")
-            })
-          }
-        })
-      }
-    
-      async function DeleteEmpProfile(id) {
-        Swal.fire({
-          title: 'Are you sure to Delete this Account?',
-          icon: 'warning',
-          showCancelButton: true,
-          confirmButtonColor: '#3085d6',
-          cancelButtonColor: '#d33',
-          confirmButtonText: 'Yes, delete it!'
-        }).then((result) => {
-          if (result.isConfirmed) {
-            axios.delete(`/EmpProfile/deleteEmployee/${id}`)
-              .then((res) => {
-                
-                navigate("/BIAddmin@AllEmployees")
-              }).catch((err) => {
-            
-    
-                alert("server error occured")
-              })
-          }
-        })
-    
-      }
-
-
     return (
         <>
+        <div style={{display:"flex"}}>
+          <img style={{ height:"25px", color:"grey", marginTop:"20px", marginLeft:"8%", cursor:"pointer",
+             width:"28px"}} onClick={(e)=>{navigate(-1); goback(e)}}  src={Arrowimage} />
+    {/* <p style={{marginLeft:"30%"}}><b>Company Details </b></p> */}
+    </div>
 
 {
 
@@ -202,11 +75,12 @@ profileData.map((item, i) => {
   }
 {screenSize.width>850?
 
-           
+           <>
 <div className={styles.uiwrapper}>
             <ul className={styles.ul}>
-                <li className={styles.li}><b>Name </b></li>
-                <li className={styles.li}><b>Company Name</b></li>
+                {/* <li className={styles.li}><b>Name </b></li> */}
+                <li className={styles.li} style={{backgroundColor:"rgb(40, 4, 99)", color:"rgb(40, 4, 99)"}}>`</li>
+                <li className={styles.li}><b>H.R Name</b></li>
                 <li className={styles.li}><b>Company Address</b></li>
                 <li className={styles.li}><b>Company Website</b></li>
                 {/* <li className={styles.li}><b>Email  Address</b></li>
@@ -231,8 +105,9 @@ profileData.map((item, i) => {
                 profileData.map((item, i) => {
                     return (
                         <ul className={styles.ulR} key={i}>
-                            <li className={`${styles.Hli}`}>{item.name?item.name:<li className={styles.Nli}>Not Updated</li>}</li>
-                       <li className={` ${styles.Hli}`}>{item.CompanyName?item.CompanyName:<li className={styles.Nli}>Not Updated</li>}</li>
+                       <li className={` ${styles.Hli}`} style={{backgroundColor:"rgb(40, 4, 99)"}}> 
+                        <div style={{color:"white", marginLeft:"-160px", fontWeight:"bold"}}>{item.CompanyName?item.CompanyName:<li className={styles.Nli}>Not Updated</li>} </div></li>
+                            <li className={`${styles.Hli}`}>{item.name?item.name:<li className={styles.Nli} >Not Updated</li>}</li>
                        <li className={` ${styles.Hli}`}>{item.CompanyAddress?item.CompanyAddress:<li className={styles.Nli}>Not Updated</li>}</li>
                        <li className={` ${styles.Hli}`}>{item.CompanyWebsite?item.CompanyWebsite:<li className={styles.Nli}>Not Updated</li>}</li>
                             {/* <li className={`${styles.Hli}`}>{item.email?item.email:<li className={styles.Nli}>Not Updated</li>}</li>
@@ -274,6 +149,8 @@ profileData.map((item, i) => {
 
             }
             </div>
+              
+        </>
             :
             <>
             <div id={styles.JobCardWrapper} >
@@ -337,10 +214,13 @@ profileData.map((item, i) => {
 })}
 
 </div>
-   
+<div style={{marginTop:"90px"}}>
+                      <Footer/>
+                    </div>
             </>
 
           }
+                          
 
         </>
     )

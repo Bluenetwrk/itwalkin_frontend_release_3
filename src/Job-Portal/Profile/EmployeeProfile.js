@@ -4,12 +4,29 @@ import { useEffect, useState } from 'react'
 import styles from "./StudentProfile.module.css"
 import Companylogo from "../img/logo.png"
 import { Puff } from  'react-loader-spinner'
-import { useNavigate } from 'react-router-dom'
 import useScreenSize from '../SizeHook';
 import image from '../img/icons8-arrow-button-24.png'
+import Arrowimage from '../img/icons8-arrow-left-48.png'
+import socketIO from 'socket.io-client';
+import Footer from '../Footer/Footer'
+import { Link, useNavigate, NavLink } from "react-router-dom";
 
 
-function EmployeeProfile() {
+function EmployeeProfile(props) {
+
+    const navLinkStyles=({isActive})=>{
+        return{
+            color: isActive? "rgb(40, 4, 99)" : "",
+            backgroundColor: isActive? "white" :""
+        }
+    }
+    // useEffect( ()=>{    
+    //     const socket = socketIO.connect(props.url,{
+    //       auth:{
+    //         token: JSON.parse(localStorage.getItem("EmpIdG"))
+    //       }
+    //     });
+    //   },[])
 
     const [profileData, setProfileData] = useState([])
 const [PageLoader, setPageLoader] = useState(false)
@@ -36,30 +53,42 @@ let navigate = useNavigate()
     useEffect(() => {
         getProfile()
     }, [])
+    function updateEmployeeProfile() {
+        navigate("/UpdateProfile")
+      }
 
 
     return (
         <>
+      
         <div style={{display:"flex"}}>
-        <button style={{ height:"25px", color:"grey", marginTop:"20px", marginLeft:"40px", cursor:"pointer", width:"50px"}} onClick={()=>{
-            navigate(-1)}} >Back</button>
-        <h3 style={{color:"rgb(40, 4, 99)", marginLeft:"40%"}}>My Profile</h3>
+        {/* <button style={{ height:"25px", color:"grey", marginTop:"20px", marginLeft:"40px", cursor:"pointer", width:"50px"}}
+         onClick={()=>{navigate(-1)}} >Back</button> */}
+            <img style={{ height:"25px", color:"grey", marginTop:"20px", marginLeft:"8%", cursor:"pointer",
+             width:"28px"}} onClick={()=>{navigate(-1)}}  src={Arrowimage} />
+        <h3 style={{color:"rgb(40, 4, 99)", marginLeft:"35%"}}>My Profile</h3>
         </div>
-
          {
-
 profileData.map((item, i) => {
     return (
-        <div key={i}>
-        <img className={styles.EmpImage} src={item.image?item.image : Companylogo}/>
+        <div key={i} style={{}}>
+        <img style={{}} className={styles.EmpImage} src={item.image?item.image : Companylogo}/>
         
         </div>
     )
 
 })
     }
+            {screenSize.width>800?
+
+profileData.length>0?<button className={styles.updateProfile} onClick={updateEmployeeProfile}>Update Profile</button>:""
+    :
+    profileData.length>0?<button className={styles.MobupdateProfile} onClick={updateEmployeeProfile}>Update Profile</button>:""
+
+            }
+
             {screenSize.width>850?
-           
+           <>
 <div className={styles.uiwrapper}>
             <ul className={styles.ul}>
                 <li className={styles.li}><b>Name </b></li>
@@ -91,10 +120,9 @@ profileData.map((item, i) => {
 
                         <ul className={styles.ulR} key={i}>
  {/* <Puff  height="200"  width="200"  color="#4fa94d"  ariaLabel="bars-loading"  wrapperStyle={{marginLeft:"70%", marginTop:"80px"}}/>  */}
-
                       {item.name?         <li className={` ${styles.Hli}`}>{item.name}</li>: <li className={` ${styles.Hli} ${styles.Nli}`}>you have not updated your Name yet</li>}
                       {item.email?         <li className={` ${styles.Hli}`}>{item.email}</li>: <li className={` ${styles.Hli} ${styles.Nli}`}>you have not updated your Email yet</li>}
-                      {item.phoneNumber?         <li className={` ${styles.Hli}`}>{item.phoneNumber}</li>: <li className={` ${styles.Hli} ${styles.Nli}`}>you have not updated your Email yet</li>}
+                      {item.phoneNumber?         <li className={` ${styles.Hli}`}>{item.phoneNumber}</li>: <li className={` ${styles.Hli} ${styles.Nli}`}>you have not updated your phone Number yet</li>}
                          {item.Aadhar?           <li className={` ${styles.Hli}`}>{item.Aadhar}</li>: <li className={` ${styles.Hli} ${styles.Nli}`}>you have not updated your Aadhar Id yet</li>}
                          {item.panCard?          <li className={` ${styles.Hli}`}>{item.panCard}</li>: <li className={` ${styles.Hli} ${styles.Nli}`}>you have not updated your pan Id yet</li>}
                          {item.CompanyName?     <li className={` ${styles.Hli}`}>{item.CompanyName}</li>: <li className={` ${styles.Hli} ${styles.Nli}`}>you have not updated  Company Name yet</li>}
@@ -117,6 +145,8 @@ profileData.map((item, i) => {
 
             }
             </div>
+
+                   </>
             :
                            
 <>
@@ -169,9 +199,13 @@ profileData.map((item, i) => {
                         })}
 
                     </div>
+                    <div style={{marginTop:"10px"}}>
+                      <Footer/>
+                    </div>
                 </>
         
 }
+
         </>
     )
 }
